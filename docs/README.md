@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-10-13 ~ 2026-10-22</span>
+      <span class="dpr-home-dashboard-kicker">2026-10-22</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 18 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 4 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>10</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>8</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>1</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>3</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-10-22 02:59:48 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-10-22 22:10:32 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,9 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>本期共筛读 18 篇论文（精读 10 篇、速读 8 篇），重点精读两篇 9.0 分研究：AI 学习助手的信息图生成与问答/辅导对话统一框架。</p>
-<p>最值得关注的方向是“AI 教学助手如何同时做好可视化讲解与对话辅导”，以及速读中 8.0 分的儿童在游戏化人机协作中的核查行为研究。</p>
-<p>普通读者可优先看这两篇精读，并在使用 AI 导师或生成式 AI 学习工具时，养成核对答案与信息来源的习惯。</p>
+<p>今日精读1篇、速读3篇，聚焦AI教育评测、离线学徒学习与AI素养落地。最值得看的是8.0分的VIRA-Bench，它专门诊断在线辅导视频中教学应变理解；另有7.0分的印度工程学生“无AI指南”求学与求职研究。普通读者可先读VIRA-Bench理解如何评估教学视频，再对照印度案例反思AI使用规范。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -80,12 +78,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">10 篇</strong>
+    <strong class="dpr-home-dashboard-count">1 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="LayerCanvas: Infographic Generation in AI Learning Assistants via Hybrid Layer-Set Diffusion">LayerCanvas: Infographic Generation in AI Learning Assistants via Hybrid Layer-Set Diffusion</span></li><li><span class="dpr-home-dashboard-paper-title" title="A Unified Response Framework for Questions and Tutoring Dialogues">A Unified Response Framework for Questions and Tutoring Dialogues</span></li><li><span class="dpr-home-dashboard-paper-title" title="HACHIMI-II: From Role-Play to Learner Behavior Modeling for Faithful Student Simulation">HACHIMI-II: From Role-Play to Learner Behavior Modeling for Faithful Student Simulation</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="VIRA-Bench: Diagnosing Pedagogical Contingency Understanding in Online Tutoring Videos">VIRA-Bench: Diagnosing Pedagogical Contingency Understanding in Online Tutoring Videos</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>10</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -93,12 +91,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">8 篇</strong>
+    <strong class="dpr-home-dashboard-count">3 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="&quot;Do You Trust It... or Check It?&quot;: Exploring Children&#x27;s Verification Behaviors in Game-Based Human-AI Collaboration">&quot;Do You Trust It... or Check It?&quot;: Exploring Children&#x27;s Verification Behaviors in Game-Based Human-AI Collaboration</span></li><li><span class="dpr-home-dashboard-paper-title" title="A Framework for Teaching the Responsible and Effective Use of Generative AI in Statistics and Data Science">A Framework for Teaching the Responsible and Effective Use of Generative AI in Statistics and Data Science</span></li><li><span class="dpr-home-dashboard-paper-title" title="Acharya 2.0: An AI Tutor for Self-Learning Subjects in Hindi">Acharya 2.0: An AI Tutor for Self-Learning Subjects in Hindi</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Offline Apprenticeship Learning for Human-Centric Environments">Offline Apprenticeship Learning for Human-Centric Environments</span></li><li><span class="dpr-home-dashboard-paper-title" title="From AI-Free Gates to AI-First Work: How Engineering Students in India Navigate University Education and Campus Placements Without AI Guidelines">From AI-Free Gates to AI-First Work: How Engineering Students in India Navigate University Education and Campus Placements Without AI Guidelines</span></li><li><span class="dpr-home-dashboard-paper-title" title="AI Security Literacy: Ecosystem-based Competency Framework and K-12 Learning Platform">AI Security Literacy: Ecosystem-based Competency Framework and K-12 Learning Platform</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>8</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>3</strong></span></div>
 </section>
 </div>
 

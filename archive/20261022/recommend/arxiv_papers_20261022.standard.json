@@ -1,0 +1,168 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-22T22:07:30.941267+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [
+    {
+      "id": "2610.29428v1",
+      "source": "arxiv",
+      "title": "VIRA-Bench: Diagnosing Pedagogical Contingency Understanding in Online Tutoring Videos",
+      "abstract": "Understanding a one-to-one tutoring video requires more than recognizing its events. A model must connect a visible teacher intervention to the learner response it elicits and to the follow-up adjusted to that response. Existing video and educational-dialogue benchmarks typically emphasize event recognition, temporal reasoning, social-state inference, or transcript-based interaction, but rarely diagnose this action-response-adjustment relation. We introduce VIRA-Bench, a focused diagnostic benchmark for short-horizon pedagogical contingency in one-to-one online tutoring. VIRA-Bench contains 1,005 tutoring clips and 1,322 multiple-choice questions with researcher evidence audit and expert verification, organized into Observable Evidence Grounding (OEG), Interaction Contingency Reasoning (ICR), and Support-Response Modeling (SRM). Across 11 models, the best reaches 61.3%, well below the 91.0% human reference on a stratified subset, and ICR generally has the lowest layer accuracy among leading models. Under controlled input manipulations, removing video most strongly degrades OEG, whereas disrupting temporal order most strongly degrades ICR. Free-response, Stem+Options, and synchronized-shuffle controls show that response format, static question cues, and video-ASR mismatch do not explain these layer-specific patterns. The results identify distinct behavioral evidence dependencies without claiming an internal architectural mechanism. VIRA-Bench provides a focused evaluation resource for multimodal dialogue grounding, pedagogical discourse, and temporal reasoning in online tutoring.",
+      "authors": [
+        "Weihang Wang",
+        "Hansu Gu",
+        "Guanming Liu",
+        "Peng Zhang",
+        "Ning Gu",
+        "Tun Lu"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-10-21T08:52:19+00:00",
+      "link": "https://arxiv.org/pdf/2610.29428v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "diagnostic benchmark for pedagogical contingency in online tutoring videos",
+      "llm_evidence_cn": "面向在线辅导视频的教学临场性诊断基准",
+      "llm_evidence": "面向在线辅导视频的教学临场性诊断基准",
+      "canonical_evidence": "面向在线辅导视频的教学临场性诊断基准",
+      "llm_tldr_en": "Introduces VIRA-Bench, a diagnostic benchmark of 1,005 one-to-one online tutoring clips and 1,322 questions to test whether models understand teacher intervention, learner response, and follow-up adjustment.",
+      "llm_tldr_cn": "现有教育视频与教学对话基准多关注事件识别或时间推理，难以诊断教师干预、学生回应与后续调整之间的因果关系。本文提出VIRA-Bench，一个面向一对一在线辅导短视频的教学临场性诊断基准，包含1005个辅导片段和1322道经专家审核的选择题。该基准要求模型将可见的教学干预与学习者反应及其后续调整联系起来。它为评估教育AI是否真正理解教学互动提供了细粒度测试工具。",
+      "llm_tldr": "现有教育视频与教学对话基准多关注事件识别或时间推理，难以诊断教师干预、学生回应与后续调整之间的因果关系。本文提出VIRA-Bench，一个面向一对一在线辅导短视频的教学临场性诊断基准，包含1005个辅导片段和1322道经专家审核的选择题。该基准要求模型将可见的教学干预与学习者反应及其后续调整联系起来。它为评估教育AI是否真正理解教学互动提供了细粒度测试工具。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.28716v1",
+      "source": "arxiv",
+      "title": "Offline Apprenticeship Learning for Human-Centric Environments",
+      "abstract": "Effective decision-making in human-centric environments such as Intelligent Tutoring Systems (ITSs) and clinical healthcare requires policies that are adaptive, data-efficient, and ethically deployable. Apprenticeship Learning (AL) infers policies directly from expert demonstrations by recovering the underlying reward structure, enabling strictly offline learning without environment interaction. This dissertation develops a progression of offline AL frameworks organized around two challenges: reward modeling and demonstration quality. For reward modeling, EM-EDM clusters demonstrations by latent reward functions and induces cluster-specific policies, and THEMES partitions trajectories into temporally coherent sub-trajectories guided by a hierarchically learned reward regulator; across one educational and three clinical datasets, THEMES outperforms flat and hierarchical AL baselines. For demonstration quality, HALIDE integrates continuous quality signals into hierarchical policy induction, enabling principled reuse of mixed-quality data under distribution shift. CCHAL further attributes quality to individual decisions via Bayesian credit assignment, dual-arm criticality scoring that contrasts expert and non-expert behavior, and a Bradley-Terry contrastive IRL objective over failure trajectories, outperforming baselines including HALIDE on three clinical EHR datasets and an ITS dataset. Finally, a real-world classroom evaluation of StuEDM, an EDM-induced policy that preserves student agency and intervenes only on disagreement, shows significant learning gains over an Expert baseline and a higher pretest-adjusted posttest score than a CQL policy trained on a far larger corpus, while overriding students less than half as often. Together, this work establishes offline AL as a practical, data-efficient, and ethically viable paradigm for human-centric environments.",
+      "authors": [
+        "Md Mirajul Islam"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-10-20T17:56:15+00:00",
+      "link": "https://arxiv.org/pdf/2610.28716v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "offline apprenticeship learning for intelligent tutoring systems",
+      "llm_evidence_cn": "面向智能辅导系统的离线学徒学习",
+      "llm_evidence": "面向智能辅导系统的离线学徒学习",
+      "canonical_evidence": "面向智能辅导系统的离线学徒学习",
+      "llm_tldr_en": "Develops offline apprenticeship learning frameworks for human-centric settings like intelligent tutoring systems, addressing reward modeling and demonstration quality without online interaction.",
+      "llm_tldr_cn": "智能辅导系统与临床医疗等以人为本环境需要自适应、数据高效且可伦理部署的决策策略，而在线交互往往不可行。本文提出一系列离线学徒学习框架，围绕奖励建模与示范质量两大挑战展开，其中EM-EDM按潜在奖励函数对示范聚类并学习分簇策略，THEMES则将轨迹划分为时序连贯的子轨迹。该博士论文通过渐进式框架在无需环境交互的情况下从专家示范中恢复奖励结构并学习策略。其贡献在于为智能辅导系统等场景提供了可离线、可部署的策略学习路径。",
+      "llm_tldr": "智能辅导系统与临床医疗等以人为本环境需要自适应、数据高效且可伦理部署的决策策略，而在线交互往往不可行。本文提出一系列离线学徒学习框架，围绕奖励建模与示范质量两大挑战展开，其中EM-EDM按潜在奖励函数对示范聚类并学习分簇策略，THEMES则将轨迹划分为时序连贯的子轨迹。该博士论文通过渐进式框架在无需环境交互的情况下从专家示范中恢复奖励结构并学习策略。其贡献在于为智能辅导系统等场景提供了可离线、可部署的策略学习路径。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2610.28859v1",
+      "source": "arxiv",
+      "title": "AI Security Literacy: Ecosystem-based Competency Framework and K-12 Learning Platform",
+      "abstract": "Adoption of artificial intelligence in K-12 schools has outpaced guidance for students, teachers, and administrators. Existing AI-literacy frameworks emphasize understanding and use; cybersecurity frameworks predate AI-specific threats, and neither defines AI security literacy as a competency domain in its own right. We propose an AI Security Literacy (AISL) framework of six dimensions spanning the school ecosystem, ground its technical dimensions in public AI-safety benchmarks and a reproducible multi-seed adversarial evaluation, and ground its attitudinal dimensions in nationally representative survey micro-data from U.S. teachers and adults. Only 34.5% of teachers report a school AI policy, and teachers see their own AI use as easing their work but students' use as complicating it; on the technical side, a reported robustness figure depends as much on the attack and the particular trained model as on the system evaluated. NeuralFortify, a browser-based K-12 platform built on real AI models, is presented as an illustrative operationalization.",
+      "authors": [
+        "Eric Yocam",
+        "Varghese Vaidyan",
+        "Paris Kalathas"
+      ],
+      "primary_category": "cs.CR",
+      "categories": [
+        "cs.CR",
+        "cs.CY"
+      ],
+      "published": "2026-10-20T19:31:37+00:00",
+      "link": "https://arxiv.org/pdf/2610.28859v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "AI literacy competency framework and K-12 learning platform",
+      "llm_evidence_cn": "AI素养能力框架与K-12学习平台",
+      "llm_evidence": "AI素养能力框架与K-12学习平台",
+      "canonical_evidence": "AI素养能力框架与K-12学习平台",
+      "llm_tldr_en": "The paper defines AI security literacy as a distinct competency domain with a six-dimension framework, grounding it in safety benchmarks, adversarial evaluations and national survey data, and delivers a K-12 learning platform.",
+      "llm_tldr_cn": "K-12学校对人工智能的采用速度已超过对学生、教师与管理者的指导，现有AI素养框架侧重理解与使用，网络安全框架又早于AI特有威胁，均未把AI安全素养视为独立能力域。作者提出涵盖六个维度的AI安全素养框架，技术维度以公开AI安全基准与可复现的多随机种子对抗评测为依据，态度维度以美国教师与成人的全国代表性调查数据为依据，并配套K-12学习平台。调查显示仅34.5%的教师报告学校有AI政策。该框架为学校AI安全教育提供了系统化能力标准与实践载体。",
+      "llm_tldr": "K-12学校对人工智能的采用速度已超过对学生、教师与管理者的指导，现有AI素养框架侧重理解与使用，网络安全框架又早于AI特有威胁，均未把AI安全素养视为独立能力域。作者提出涵盖六个维度的AI安全素养框架，技术维度以公开AI安全基准与可复现的多随机种子对抗评测为依据，态度维度以美国教师与成人的全国代表性调查数据为依据，并配套K-12学习平台。调查显示仅34.5%的教师报告学校有AI政策。该框架为学校AI安全教育提供了系统化能力标准与实践载体。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2610.29140v1",
+      "source": "arxiv",
+      "title": "From AI-Free Gates to AI-First Work: How Engineering Students in India Navigate University Education and Campus Placements Without AI Guidelines",
+      "abstract": "Engineering graduates in India enter a technology sector that is being reshaped by generative AI, yet the route into that sector runs through examinations and campus placement screens that largely exclude AI. Institutions in India have an approved intake of nearly 2.9 million seats in engineering and technology for 2026-2027, but HCI research on how students prepare for AI-mediated work has drawn mostly on Western and East Asian settings. We interviewed 23 students and recent graduates of Indian engineering and computing programmes about how they used generative AI across coursework, examinations and placements, and how they judged their own readiness for work. Using reflexive thematic analysis, we report five themes, covering AI-first workplaces and AI-free placement screens, how participants prepared for placement, how they used AI in coursework, the role of faculty authority and enforcement, and participants' concerns about their readiness for work. Drawing on signaling theory, we discuss what grades and screen scores certify once AI can help produce them, and we offer recommendations for employers, institutions and AI tool designers.",
+      "authors": [
+        "Samhitha Goutham",
+        "Ziwei Gu"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC",
+        "cs.AI"
+      ],
+      "published": "2026-10-21T03:20:51+00:00",
+      "link": "https://arxiv.org/pdf/2610.29140v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "study of engineering students using generative AI in coursework, exams and placements",
+      "llm_evidence_cn": "研究工程学生在课程、考试与求职中使用生成式AI",
+      "llm_evidence": "研究工程学生在课程、考试与求职中使用生成式AI",
+      "canonical_evidence": "研究工程学生在课程、考试与求职中使用生成式AI",
+      "llm_tldr_en": "Interviews 23 Indian engineering students and graduates on how they use generative AI across coursework, exams and campus placements without institutional guidelines, revealing a gap between AI-free assessment and AI-first workplaces.",
+      "llm_tldr_cn": "印度工程专业学生进入被生成式AI重塑的职场，但升学与招聘环节仍基本排斥AI，且院校缺乏相关使用规范。作者访谈23名在读学生与应届毕业生，考察其在课程作业、考试和校园招聘中使用生成式AI的方式，以及对自身就业准备度的判断。研究采用反身性主题分析，揭示了无AI考核与AI优先工作之间的落差，为高校制定AI使用规范与调整教学评价提供实证依据。",
+      "llm_tldr": "印度工程专业学生进入被生成式AI重塑的职场，但升学与招聘环节仍基本排斥AI，且院校缺乏相关使用规范。作者访谈23名在读学生与应届毕业生，考察其在课程作业、考试和校园招聘中使用生成式AI的方式，以及对自身就业准备度的判断。研究采用反身性主题分析，揭示了无AI考核与AI优先工作之间的落差，为高校制定AI使用规范与调整教学评价提供实证依据。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "date": "20261022",
+  "date_label": "",
+  "generated_at": "2026-10-22 22:10:32 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2610.29428v1",
+      "route": "202610/22/2610.29428v1-vira-bench-diagnosing-pedagogical-contingency-understanding-in-online-tutoring-videos",
+      "title": "VIRA-Bench: Diagnosing Pedagogical Contingency Understanding in Online Tutoring Videos",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向在线辅导视频的教学临场性诊断基准",
+      "first_seen_at": "2026-10-22 22:10:32 UTC",
+      "updated_at": "2026-10-22 22:10:32 UTC"
+    },
+    {
+      "paper_id": "2610.28716v1",
+      "route": "202610/22/2610.28716v1-offline-apprenticeship-learning-for-human-centric-environments",
+      "title": "Offline Apprenticeship Learning for Human-Centric Environments",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向智能辅导系统的离线学徒学习",
+      "first_seen_at": "2026-10-22 22:10:32 UTC",
+      "updated_at": "2026-10-22 22:10:32 UTC"
+    },
+    {
+      "paper_id": "2610.29140v1",
+      "route": "202610/22/2610.29140v1-from-ai-free-gates-to-ai-first-work-how-engineering-students-in-india-navigate-university-education-and-campus-placements-without-ai-guidelines",
+      "title": "From AI-Free Gates to AI-First Work: How Engineering Students in India Navigate University Education and Campus Placements Without AI Guidelines",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "研究工程学生在课程、考试与求职中使用生成式AI",
+      "first_seen_at": "2026-10-22 22:10:32 UTC",
+      "updated_at": "2026-10-22 22:10:32 UTC"
+    },
+    {
+      "paper_id": "2610.28859v1",
+      "route": "202610/22/2610.28859v1-ai-security-literacy-ecosystem-based-competency-framework-and-k-12-learning-platform",
+      "title": "AI Security Literacy: Ecosystem-based Competency Framework and K-12 Learning Platform",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "AI素养能力框架与K-12学习平台",
+      "first_seen_at": "2026-10-22 22:10:32 UTC",
+      "updated_at": "2026-10-22 22:10:32 UTC"
+    }
+  ]
+}
