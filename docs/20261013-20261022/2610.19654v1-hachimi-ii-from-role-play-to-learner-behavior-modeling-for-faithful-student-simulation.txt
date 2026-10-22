@@ -1,0 +1,565 @@
+Title: HACHIMI-II: From Role-Play to Learner Behavior Modeling for Faithful Student Simulation
+
+URL Source: https://arxiv.org/pdf/2610.19654v1
+
+Published Time: Thu, 15 Oct 2026 00:54:11 GMT
+
+Number of Pages: 18
+
+Markdown Content:
+## HACHIMI-II: From Role-Play to Learner Behavior Modeling for Faithful Student Simulation 
+
+Yilin Jiang 1,2 , Fei Tan 1*, Xuanyu Yin 1, Jing Leng 1, Aimin Zhou 1,3 
+
+> 1
+
+East China Normal University, Shanghai, China 
+
+> 2
+
+The Hong Kong University of Science and Technology (Guangzhou), Guangzhou, China 
+
+> 3
+
+Shanghai Innovation Institute, Shanghai, China 
+
+ftan@mail.ecnu.edu.cn 
+
+Abstract 
+
+Simulated students let researchers test tutor-ing systems and teaching strategies before real learners are available, but only if the simulation reproduces where a particular learner succeeds and fails. The common approach asks a large language model to role-play a student, but a role does not model what this learner knows or will do next, so the model’s own competence fills the gap. Simulated students perform at a level set by the model, differ little from one an-other, and seldom make the real learners’ errors. We model the learner’s behavior and recast stu-dent simulation as third-person prediction of the learner’s next action . HACHIMI-II builds a student model from the learner’s history, in-fers the learner’s state for the current item or tutor turn, and compiles it into a behavior har-ness that constrains the next action. On three item-response datasets, the Wasserstein-1 dis-tance between simulated and real student ability is 2.4–8.4 × smaller than that of the strongest baseline. On two dialogue datasets, HACHIMI-II reproduces real student errors with the same knowledge type, locus, and mechanism 1.8– 5.1 × more often than the strongest baseline, and ablations trace the gains mainly to the ex-plicit learner state. Predicting the learner makes capable models usable as simulated students. 
+
+1 Introduction 
+
+Simulated students let researchers evaluate edu-cational content and compare teaching strategies before any real learner is involved, and they sup-port the development of tutoring systems when real interaction data is scarce (Käser and Alexandron, 2024; Scarlatos et al., 2026). To serve these uses, a simulated student has to behave like the learner it stands for. It should answer some items cor-rectly, miss others, and make the errors that the real learner makes. 
+
+> *Corresponding author.
+
+Large language models can write student an-swers and dialogue turns, and the usual way to ob-tain them is role prompting, which asks the model to act as a student of a given level (Benedetto et al., 2024; Scarlatos et al., 2026). However, a role prompt names a level without modeling what this learner knows or how the learner will respond to the current item or tutor turn. An aligned model is trained to be correct and helpful (Ouyang et al., 2022; Bai et al., 2022) and already knows the con-tent that the student is supposed to lack, so it fills the gap with its own knowledge and a generic pic-ture of a student. As Figure 1 illustrates, it then either solves the problem despite the assigned role or inserts an error at a step where the learner would not fail. This failure has been described as the com-petence paradox (Yuan et al., 2026) and as expert knowledge leakage (Song et al., 2026), and we call its observable effect competence leakage . Under leakage, the ability level is set by the model, dif-ferences among learners largely disappear, and real errors are rarely reproduced. Existing remedies add learner profiles (Lu and Wang, 2024), agent memory (Xu et al., 2024), or prompt-level constraints on what the student knows. They enrich the description of the student, but the model is still asked to act as the student and still has to suppress what it knows. Evaluations of prompting-based simulators report limited fidelity to real student behavior (Scarlatos et al., 2026). In this paper, we counter competence leakage by modeling the learner’s behavior, which changes the task framing from role-play to prediction. A request to act as a weak student asks the model to suppress knowledge it has. A request to pre-dict what a particular learner will do next asks the model to use that knowledge, because the model must know the correct solution to judge where this learner will depart from it. Following this fram-ing, we propose HACHIMI-II (Figure 1). It de-scribes the learner in the third person through a arXiv:2610.19654v1 [cs.CL] 14 Oct 2026 Task: Act as a weak third-grade student and solve: 2 x + 3 = 7, find x.         
+
+> Can I ask for help? Should I make an error? Which knowledge can I use? How weak should I be?
+> Hint: Move the constant to the right. <think> 2 x+ 3 = 7, 2 x= 7 - 3 = 4, x= 2. </think>
+> Answer: OK, x should be 2.
+> <think> xshould be 2, but I’m a weak student so I should make mistakes. </think>
+> Answer: I..I’m not sure... maybe x = 3?
+
+Role-prompted simulation (baselines)   
+
+> Competence leakage:
+> solves it correctly despite the assigned role
+> Fabricated error:
+> knows x= 2, fabricates a wrong answer
+
+HACHIMI-II       
+
+> Learner evidence 𝐀 𝐀 𝐀
+> before step 𝐀 .
+> Current task or tutor turn
+> 𝐀 𝐀 𝐀 at step 𝐀 .
+> History info
+> 𝐀 𝐀 before step 𝐀 .
+> Visible learner evidence
+
+𝐀 𝐀 = 𝐀 𝐀 𝐀 , 𝐀 𝐀 𝐀 , ℎ 𝐀            
+
+> •Demographics
+> •Long-term traits
+> •Stable patterns
+> •Prior performance
+> •Diverse personas
+> •Ability distribution
+> •Behavior priors HACHIMI-1M
+> Observed learner profile
+> •Inferred traits
+> •Knowledge profile
+> •Propensity pattern
+> •Learning tendency
+> Match & Retrieve
+
+𝐀 𝐀 = 𝐀 𝐀 𝐀 𝐀 𝐀 𝐀 , ℎ 𝐀  
+
+> 1. Student Model Construction 2 & 3. Learner State Inference & Behavior Harness Compilation
+> Reachable knowledge Active error pattern Confidence state Local interaction move
+> Student Model 𝐀 𝐀
+> (Third-person)
+
+𝐀 𝐀 = 𝐀 𝐀 𝐀 , 𝐀 𝐀 𝐀 , ℎ 𝐀         
+
+> Learner state 𝐀 𝐀
+> Accessible knowledge 𝐀 𝐀
+> Reasoning depth 𝐀 𝐀
+> Error preservation 𝐀 𝐀
+> Uncertainty 𝐀 𝐀
+> Response mode 𝐀 𝐀
+> Step budget 𝐀 𝐀
+> Behavior harness 𝐀 𝐀
+
+𝐀 𝐀 = 𝐀 𝐀 𝐀             
+
+> 4. Harnessed Generation
+> Task: Act as a weak third-grade student and solve: 2 x+ 3 = 7, find x.
+> Hint: Move the constant to the right. <think> The answer is x= 2, but this learner thinks a term keeps its sign across the equals sign, so they will move the 3 without flipping it and get
+> x= 5, stated unsurely. </think>
+> Answer: I moved the 3 over, so 2 x= 7 + 3 = 10, which gives x= 5. I'm still not sure whether the sign should change when I move it across.
+> 𝐀 𝐀 : Keep the sign error
+> 𝐀 𝐀 : Low confidence
+> 𝐀 𝐀 : Basic-level knowledge
+> 𝐀 𝐀 : Shallow reasoning
+> Harnessed action:
+> Keeps the error and the confidence of this learner
+
+Figure 1: Role-prompted simulation (top left) and the four steps of HACHIMI-II on a linear equation. 
+
+student model built from observed evidence, infers the learner’s state for the current item or tutor turn, compiles that state into a behavior harness, and generates the next action within the bounds that the harness sets on knowledge, reasoning depth, errors, and commitment. HACHIMI-II takes its name from HACHIMI (Jiang et al., 2026), whose corpus of one million student personas provides its learner prior, and adds the state inference and harness stages that turn a persona into a predicted action. We evaluate HACHIMI-II against role-prompted baselines on five datasets in two formats. In item-response simulation on XES3G5M, Eedi, and ENEM, the Wasserstein-1 distance between the simulated and real distributions of per-student accu-racy is 2.4–8.4 × smaller than that of the strongest baseline, and HACHIMI-II recovers the ranking of individual students. In dialogue simulation on Eedi QATD2k and Khan/CoMTA, it reproduces real er-rors with the same knowledge type, locus, and mechanism 1.8–5.1 × more often than the strongest baseline and more than doubles the F1 of error-state prediction. It also attains the highest agreement with the real learners on all five datasets. This paper makes three contributions. First, we show that competence leakage in role-prompted simulation affects the ability level, the differences among learners, and their errors, and we recast the task as third-person prediction of the learner’s next action. Second, we propose HACHIMI-II, which models the learner’s behavior with a student model, a learner state inferred at each step, and a behavior harness compiled deterministically from that state. Third, on three item-response and two dialogue datasets, ablations show that the three components govern different parts of the simulated behavior, with the learner state as the main source of the gains. 
+
+2 Related Work 
+
+Learner modeling and student simulation. 
+
+Real learner traces are costly to collect (Choi et al., 2020; Scarlatos et al., 2026). Early simulators used hand-specified cognitive models such as models of human memory (Reddy et al., 2017), and learner models estimate proficiency through probabilistic mastery (Corbett and Anderson, 1994), item re-sponse theory (Lord, 1980), or recurrent, memory-augmented, and reinforcement-learning architec-tures (Piech et al., 2015; Zhang et al., 2017; Zhao et al., 2023). These models output correctness or mastery. The open-ended answers and dialogue turns that tutoring research needs are generated with language models. 
+
+LLM-based simulated students. Role prompt-ing asks a language model to answer as a student of a given level (Benedetto et al., 2024; Scarlatos et al., 2026), profile-conditioned methods add knowledge states, misconceptions, histories, or personas (Lu and Wang, 2024; Jiang et al., 2026), and agent-based simulators add memory, reflection, and ac-tion modules (Xu et al., 2024; Gao et al., 2025). Marquez-Carpintero et al. (2026) review these ar-chitectures. Training-based simulators fine-tune a model on student data (Qi et al., 2026) or special-ize a pooled simulator to each student (Yang et al., 2026), and Song et al. (2026) unlearn knowledge so that the model answers like a novice. Simulated stu-dents, including fine-tuned ones, still show limited behavioral fidelity beyond answer accuracy (Scar-latos et al., 2026; Xu and Zhang, 2026). HACHIMI-II needs no training and keeps the model’s knowl-edge, which it uses to predict where the learner will fail. Three lines of work are closest to ours. Wu et al. (2025) build a cognitive prototype of each student from past learning records and refine a sim-ulated solution toward the predicted performance. Yuan et al. (2026) name the competence paradox and argue that valid simulation requires an explicit specification of the student’s epistemic state. Meng and Lin (2026) condition simulated students on coarse engagement states. HACHIMI-II infers a finer state at every item and tutor turn, covering the predicted error, commitment, and help-seeking, and compiles it into constraints on the next action. Beyond answer-level ability alignment (Srivatsa et al., 2025) and teacher judgments of realism (Mar-tynova et al., 2025), we also compare the errors themselves in knowledge type, locus, and mecha-nism. 
+
+Constraints and harnesses for generation. In agent systems, a harness is an execution layer out-side the model that organizes context, tools, mem-ory, and verification (Li et al., 2026; Pan et al., 2026; Zhong and Zhu, 2026). Constrained genera-tion and language-model programming shape out-puts through explicit constraints and control flow (Gârbacea and Mei, 2025; Beurer-Kellner et al., 2023). HACHIMI-II applies this idea to behav-ior simulation. Its constraints are derived from a predicted learner state, and they restrict both the content and the form of the next action. 
+
+3 HACHIMI-II 
+
+HACHIMI-II models the learner’s behavior by pre-dicting the next observable action in the four steps shown in Figure 1. The same design serves item-response and dialogue simulation, with state and harness fields specific to each format (Appendix B). 
+
+3.1 Problem Formulation 
+
+At step t the simulator observes Vt = {cLt , c Tt , h t},where cLt is the learner evidence available before the step, cTt is the current item or tutor turn, and 
+
+ht is the visible history. The target action at is the learner’s response to one item in item-response simulation and the learner’s next turn in dialogue simulation. Generation uses only Vt. HACHIMI-II computes 
+
+mt = MPH (cLt , h t), st = S(mt, c Tt , h t),bt = B(st), at = G(Vt, m t, s t, b t),
+
+(1) where mt is the student model, PH is the HACHIMI-1M persona corpus (Jiang et al., 2026), 
+
+st is the learner state, bt is the behavior harness, and at is the generated action. M, S, and G are prompted calls to the backbone model, and B is a deterministic mapping. 
+
+3.2 Student Model 
+
+The student model mt describes who the learner is. It combines an observed profile, summarized from the learner’s visible history, with a HACHIMI-1M persona that matches this profile (Appendix A). The observed profile is the main evidence about the learner’s ability and habits, and the persona adds a prior on longer-term background such as motivation, confidence, and interaction style. The student model is written in the third person, so the backbone reasons about the learner. 
+
+3.3 Learner State Inference 
+
+The learner state st predicts how the learner will handle the current item or tutor turn. The state has four variables, shown in Figure 1 and Table 1, and each follows an established line of educational re-search. Following evidence-centered design (Mis-levy et al., 2003; Mislevy and Riconscente, 2005), the reachable knowledge lists the prerequisites of the current item that the learner has mastered. Fol-lowing the zone of proximal development (Vygot-sky, 1978; Wood et al., 1976), it also records how far the learner’s reasoning can reach and how much of the tutor’s support the learner takes up. Error analysis locates failures in the solution process and traces them to their source (Newman, 1977; Radatz, 1979), and the active error pattern accordingly pre-dicts whether the learner will err and, if so, at which State variable Harness constraint on the next action Reachable knowledge Accessible knowledge Kt and reasoning depth Rt of the action Active error pattern Error preservation Et at the predicted step Confidence state Uncertainty Ut of the answer Local interaction move Response mode Mt and step budget  
+
+> Ltof the turn
+
+Table 1: Learner state variables and the harness con-straints compiled from them, named as in Figure 1. 
+
+step and through which mechanism. Following re-search on self-regulated learning and help-seeking (Zimmerman, 2002; Panadero, 2017; Aleven et al., 2016), the confidence state records how firmly the learner commits to an answer, and the local inter-action move records whether the learner attempts the step or asks for help. 
+
+3.4 Behavior Harness Compilation 
+
+The compiler B turns the learner state into explicit constraints on the next action. It is a fixed mapping, so the same state always yields the same harness, and the generator receives concrete limits on what it may write. For example, an explanation depth of none compiles to a limit of one sentence with-out a full derivation, and a predicted error at the process-skills step compiles to a requirement that the answer contain one concrete error at that step. Table 1 summarizes the mapping, and Appendix B lists the harness fields for each format. 
+
+3.5 Harnessed Generation 
+
+The generator G receives the visible context, the student model, the state, and the harness, and writes the action. The generated action is checked against the harness and regenerated when it violates a con-straint (Appendices C and H). Table 2 follows one XES3G5M item through the four steps. The state predicts that the learner can compute the travel times but will average the two speeds, and the generated answer carries this er-ror. The real learner answered this item incorrectly, while all three baselines solved it. 
+
+4 Experimental Setup 
+
+Datasets. Table 3 lists the five datasets. The item-response datasets pair real students with items and record whether each response is correct. XES3G5M contains third-grade mathematics re-sponses in Chinese, Eedi contains multiple-choice diagnostic questions in mathematics, and ENEM        
+
+> Item. Two towns are 300 m apart. A student walks there at 10 m/min and back at 15 m/min. What is the average speed of the round trip in m/min? (Answer: 12) Evidence 30 earlier items with accuracy 0.80, and 0.43 on word problems; accuracy drops on harder items Student model Grade 3; confident on routine arithmetic; low confidence and reliance on help on unfamiliar problems Learner state Prerequisites familiar; item partly within reach; active error pattern: averages the two speeds, (10 + 15) /2 = 12 .5; low commitment; short explanation Harness One final answer after a single reasoning step, in at most three sentences Action Reasoning step: 30 minutes there, 20 minutes back, average of 10 and 15. Answer: 12.5 Outcome The real learner answered incorrectly. Direct RP, Prompt-C, and Profile-C all answer 12.
+
+Table 2: One XES3G5M item traced through the four steps of HACHIMI-II.                 
+
+> Format Dataset Instances Item response XES3G5M (Liu et al., 2023) 60 ×96 Item response Eedi (Wang et al., 2021) 480 ×107 Item response ENEM 2024 Natural Sciences (INEP 2024) 7,200 ×24 Dialogue Eedi QATD2k (Zent et al., 2025) 17,256 Dialogue Khan/CoMTA (Miller and DiCerbo, 2024) 917
+
+Table 3: Datasets. Item-response instances are students 
+
+× items, and dialogue instances are student turns. 
+
+2024 is the natural-sciences section of the Brazilian national secondary-school exam. The two dialogue datasets contain real mathematics tutoring sessions, with human tutors in Eedi QATD2k and an LLM tutor in Khan/CoMTA, and each instance is one student turn predicted from the preceding dialogue. 
+
+Item-response metrics. For each student–item pair n, the real label yn ∈ { 0, 1} records whether the student answered correctly, and the simulated label ˆyn is obtained by matching the normalized simulated answer against the answer key. Let acc i
+
+and cacc i be the real and simulated accuracy of stu-dent i over the evaluated items. We report response agreement Agree = 1
+
+> N
+
+P 
+
+> n
+
+1[yn = ˆ yn] over the N
+
+pairs, the Spearman correlation ρ between acc i and 
+
+cacc i, and the Wasserstein-1 distance (Villani, 2009) between their distributions over the S students, 
+
+W1 = 1
+
+S
+
+> S
+
+X
+
+> k=1
+
+acc (k) − cacc (k) , (2) 0.0 0.5 1.0 
+
+> Profile-C Simulated accuracy  W1=0.340
+
+XES3G5M 
+
+> W1=0.119
+
+Eedi 
+
+> W1=0.409
+
+ENEM       
+
+> 0.0 0.5 1.0 0.0 0.5 1.0
+> HACHIMI-II Simulated accuracy  W1=0.039
+> 0.0 0.5 1.0
+> Real student accuracy
+> W1=0.046
+> 0.0 0.5 1.0
+> W1=0.169
+
+Figure 2: Real and simulated accuracy per student for Profile-C and HACHIMI-II. The dashed line is y = x, and the solid line is a linear fit.                                           
+
+> Dataset Method Agree ↑W1↓ρ↑
+> XES3G5M Direct RP 0.534 0.327 0.006 Prompt-C 0.533 0.332 −0.071 Profile-C 0.526 0.340 0.220 HACHIMI-II 0.752 0.039 0.691
+> Eedi Direct RP 0.502 0.160 −0.057 Prompt-C 0.509 0.155 0.311 Profile-C 0.521 0.119 0.698 HACHIMI-II 0.606 0.046 0.703
+> ENEM Direct RP 0.473 0.432 −0.008 Prompt-C 0.475 0.426 0.303 Profile-C 0.483 0.409 0.473 HACHIMI-II 0.630 0.169 0.668
+
+Table 4: Item-response results. Best per dataset in bold. 
+
+where acc (k) and cacc (k) are the k-th smallest real and simulated accuracies. W1 measures whether the simulated population has the right ability level and spread, and ρ measures whether it orders in-dividual students correctly. Appendix F reports further metrics. 
+
+Dialogue metrics. A judge model, GPT-5.4, la-bels each real and simulated turn with the five dimensions in Table 5. It assigns a functional label fn ∈ {correct , incorrect , NA } and an er-ror indicator en ∈ {0, 1} that marks a mathe-matical error classifiable in our taxonomy. For each error it assigns three structure labels ℓn =(ℓtype  
+
+> n
+
+, ℓ locus  
+
+> n
+
+, ℓ mech  
+
+> n
+
+), namely the knowledge type from the revised Bloom taxonomy (Anderson and Krathwohl, 2001), the error locus from Newman’s error analysis (Newman, 1977), and the error mech-anism from Radatz’s classification (Radatz, 1979). The judge was selected from five candidate models               
+
+> Dimension Labels Human Judge Functional label correct; incorrect; not applicable 0.84 0.83 Error indicator yes; no 0.81 0.80 Knowledge type factual; conceptual; procedural; metacognitive 0.73 0.69 Error locus reading; comprehension; transformation; process skills; encoding 0.68 0.62 Error mechanism language difficulty; spatial information difficulty; deficient prerequisites; incorrect associations; irrelevant rules 0.66 0.60
+
+Table 5: Judge labels and agreement. Human is Fleiss’ κ
+
+among three annotators, and Judge is Cohen’s κ between GPT-5.4 and their majority label. 
+
+by its agreement with three human annotators on 200 turns per dimension, and its agreement with their majority label is within 0.06 of the agreement among the annotators on every dimension (Table 5, Appendix D). We score three aspects of the simulated turns. Functional agreement uses Cohen’s κfunc and the multiclass MCC func over fn. Error-state prediction uses the balanced accuracy BAcc err , MCC err , and 
+
+F1 err over en. Error-structure fidelity counts a real error as reproduced only when the simulated turn also errs and all three structure labels match. With the real error set E = {n : en = 1 },
+
+Rec struct = 1
+
+|E| 
+
+X
+
+> n∈E
+
+1[ˆ en = 1 ∧ ˆℓn = ℓn] (3) is the share of real errors that the simulator re-produces with matching structure. Prec struct is the corresponding share of simulated errors, and 
+
+F1 struct is their harmonic mean. Appendix D gives all definitions. 
+
+Baselines. We compare HACHIMI-II with task-adapted versions of four simulation strategies. Di-rect Role-Play (Direct RP) asks the model to re-spond as a student given only the current item or the dialogue so far (Scarlatos et al., 2026). Prompt-Constrained Simulation (Prompt-C) adds natural-language constraints on accessible knowledge, rea-soning depth, uncertainty, and error preservation. It is a prompt-level instantiation of the epistemic-state specification of Yuan et al. (2026). Profile-Conditioned Simulation (Profile-C) conditions on the learner’s history and a learner profile (Lu and Wang, 2024; Liu et al., 2024; Duan et al., 2026; Jiang et al., 2026), which in item-response simula-tion is the student model of HACHIMI-II. Agent-Style Memory Simulation (Agent-Mem), used in dialogue only, adds a learner profile and mem-ory of the visible dialogue (Xu et al., 2024; Gao et al., 2025). All methods use the same back-bone, Qwen3.5-397B, with temperature 0.2 (Ap-pendix E). 
+
+Ablations. w/o Prior builds the student model from visible evidence only, without a HACHIMI-1M persona. w/o State removes learner state in-ference. The generator receives only the student model and the task context, and the harness keeps only its output-format constraints. w/o Harness 
+
+gives the generator the student model and the in-ferred state without harness compilation. 
+
+5 Results 
+
+5.1 Item-Response Simulation 
+
+Table 4 shows that HACHIMI-II attains the highest agreement, the smallest W1, and the highest ρ on all three datasets. It gives the same outcome as the real learner on 75%, 61%, and 63% of the student– item pairs, against at most 53%, 52%, and 48% for the baselines. Its W1 is 2.4–8.4 × smaller than that of the strongest baseline on each dataset. The baselines exhibit competence leakage at the population level. Each baseline simulates one HACHIMI-II              
+
+> Agent-Mem Profile-C Prompt-C Direct RP
+> 0.32 0.21 0.48 0.16 0.83 0.17 0.82 0.15 0.84 0.16 0.83
+> Eedi QATD2k
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> Share of real-error turns
+> HACHIMI-II
+> Agent-Mem Profile-C Prompt-C Direct RP
+> 0.56 0.19 0.24 0.89 0.88 0.93 0.92
+> Khan/CoMTA
+> Error, matching structure Error, different structure No error
+
+Figure 3: Simulated outputs on turns where the real learner errs. 
+
+generic student and assigns nearly the same accu-racy to every learner, at a level set by the model and the prompt. This level sits near 0.50 on XES3G5M, where the real mean is 0.83, and near 0.82 on ENEM, where the real mean is 0.39. Direct RP sees no learner history, and its ρ stays between −0.06 
+
+and 0.01 . With the student model, Profile-C recov-ers the ordering of students on Eedi ( ρ = 0 .698 ), yet its simulated accuracies still cluster around one value ( W1 = 0 .119 ). HACHIMI-II tracks both the level and the spread of real ability. Its simulated mean accuracy is 0.828, 0.593, and 0.384 on the three datasets against real means of 0.831, 0.574, and 0.394 (Appendix G). In Figure 2, the Profile-C points stay within a narrow band, while the HACHIMI-II points follow the diagonal, and ρ of 0.67–0.70 shows that the method also recovers the ordering of individual learners. Table 6 makes the contrast concrete by splitting the students of each dataset into thirds by real ac-curacy. The baselines give the three groups almost the same simulated accuracy. On ENEM, the weak-est third answers 22% of the items correctly, and the baselines simulate these students at 78–83%. HACHIMI-II follows the real level of every group. It simulates the three ENEM groups at 15%, 39%, and 68% against real values of 22%, 39%, and 61%. The strongest and the weakest third differ by at most 0.11 for any baseline, against 0.19–0.47 for the real students and 0.18–0.53 for HACHIMI-II. 
+
+5.2 Dialogue Simulation 
+
+Table 7 reports the dialogue results. Functional agreement is dominated by the frequent turns that XES3G5M Eedi ENEM Low Middle High Low Middle High Low Middle High Real students 0.74 0.85 0.93 0.34 0.58 0.81 0.22 0.39 0.61 Direct RP 0.50 0.50 0.50 0.59 0.59 0.59 0.83 0.83 0.83 Prompt-C 0.50 0.50 0.50 0.58 0.59 0.60 0.81 0.82 0.83 Profile-C 0.49 0.49 0.49 0.47 0.54 0.58 0.78 0.80 0.82 HACHIMI-II 0.74 0.84 0.92 0.42 0.61 0.75 0.15 0.39 0.68 
+
+Table 6: Mean per-student accuracy by third of real accuracy.                                                                                        
+
+> Functional agreement Error-state prediction Error-structure fidelity Dataset Method κfunc ↑MCC func ↑BAcc err ↑MCC err ↑F1 err ↑Rec struct ↑F1 struct ↑
+> Eedi QATD2k Direct RP 0.592 0.616 0.560 0.175 0.236 0.157 0.220 Prompt-C 0.586 0.614 0.558 0.174 0.230 0.150 0.214 Profile-C 0.595 0.615 0.565 0.179 0.248 0.172 0.232 Agent-Mem 0.597 0.618 0.562 0.177 0.240 0.162 0.225 HACHIMI-II 0.659 0.673 0.738 0.509 0.561 0.315 0.339
+> Khan/CoMTA Direct RP 0.273 0.337 0.515 0.052 0.134 0.080 0.127 Prompt-C 0.274 0.345 0.512 0.045 0.117 0.067 0.110 Profile-C 0.289 0.347 0.530 0.098 0.183 0.110 0.169 Agent-Mem 0.288 0.354 0.531 0.110 0.175 0.105 0.168 HACHIMI-II 0.370 0.390 0.660 0.267 0.464 0.565 0.346
+
+Table 7: Dialogue results. Best per dataset in bold. 
+
+give a correct answer or contain no mathematics, so the methods separate most clearly on the turns where the learner errs. Figure 3 shows what each simulator produces on these turns. The baselines answer 82–93% of them without any error, which is competence leakage at the level of a single turn, while HACHIMI-II errs on 52% of them on Eedi QATD2k and 76% on Khan/CoMTA. HACHIMI-II predicts when the learner errs and reproduces the error. Its F1 err of 0.561 on Eedi QATD2k and 0.464 on Khan/CoMTA is 2.3 × and 2.5 × that of the strongest baseline. It reproduces 31.5% and 56.5% of real errors with all three structure labels matching, which is 1.8 × and 5.1 ×
+
+the rate of the strongest baseline, and its F1 struct 
+
+is 1.5 × and 2.0 × that of the strongest baseline. HACHIMI-II also attains the highest κfunc and 
+
+MCC func on both datasets, so its gains on error turns come with higher functional agreement than every baseline. Table 9 shows one Eedi QATD2k turn. The real learner fails to distribute the 3 when expanding 
+
+3( n − 4) , and all four baselines return the correct expansion. HACHIMI-II predicts this error in the learner state and writes 3n − 4, which the judge labels with the same knowledge type, locus, and mechanism as the real turn. 
+
+5.3 What Each Component Contributes 
+
+Table 8 removes one component at a time. The three components control different parts of the sim-ulated behavior. 
+
+The learner state counters competence leakage. 
+
+Without the state, the simulated population moves toward the model’s own competence. On ENEM the simulated mean accuracy rises from 0.384 to 0.802 against a real 0.394, and W1 grows 1.9–2.5 ×
+
+across the three item-response datasets, returning to the level of Profile-C on Eedi and ENEM. In dialogue, F1 struct falls from 0.339 to 0.136 on Eedi QATD2k and from 0.346 to 0.119 on Khan/-CoMTA. This variant still builds the full student model, including the persona, and still generates through separate model calls, so these gains come from the explicit prediction of the learner state. The same variant shows that functional agree-ment can be high under leakage. Its κfunc is 0.741 on Eedi QATD2k because it matches the frequent correct and non-mathematical turns, while it repro-duces 9.9% of real errors with matching structure. 
+
+The harness keeps the action consistent with the learner. Removing the harness increases W1
+
+from 0.039 to 0.056 on XES3G5M and from 0.169 to 0.257 on ENEM, and lowers κfunc on both dia-logue datasets. On Eedi QATD2k the errors gener-W1 ↓ ρ ↑ κfunc ↑ F1 struct ↑                                                  
+
+> Variant XES Eedi ENEM XES Eedi ENEM QATD2k CoMTA QATD2k CoMTA HACHIMI-II 0.039 0.046 0.169 0.691 0.703 0.668 0.659 0.370 0.339 0.346 w/o Prior 0.025 0.041 0.142 0.603 0.704 0.594 0.571 0.326 0.264 0.323 w/o State 0.074 0.116 0.409 0.664 0.742 0.539 0.741 0.382 0.136 0.119 w/o Harness 0.056 0.048 0.257 0.559 0.703 0.643 0.565 0.348 0.290 0.346
+
+Table 8: Ablation results. Appendix G reports the remaining metrics.                           
+
+> Question. A function machine subtracts 4 and then multi-plies by 3. Leo writes 3n−12 and Sophie writes 3( n−4) .Who is correct? Tutor What do you get if you multiply out the brackets? Real learner 3n-4 (incorrect; procedural, process skills, deficient prerequisites) Baselines 3n−12 (all four; correct) HACHIMI-II
+> State. Weak self-monitoring, tentative, fragment only. Predicted error. 3n−4in place of 3n−12 .Harness. One concrete error at the process-skills step, one sentence.
+> Turn. i get 3n-4 (incorrect; same labels on all three dimensions)
+
+Table 9: A real Eedi QATD2k turn (§5.2). 
+
+ated without the harness match the learner’s error less often, and F1 struct drops from 0.339 to 0.290. The harness places errors at the predicted step and keeps the rest of the turn in line with the learner. 
+
+The persona prior improves the ordering of learners. Removing the HACHIMI-1M prior lowers ρ on XES3G5M from 0.691 to 0.603 and on ENEM from 0.668 to 0.594. On Eedi QATD2k it lowers κfunc from 0.659 to 0.571 and F1 struct 
+
+from 0.339 to 0.264, and both also fall on Khan/-CoMTA. W1 alone is lower without the prior, by 0.005 to 0.027. The persona sharpens the differ-ences between weaker and stronger learners, which improves their ordering and, on XES3G5M and ENEM, also widens the spread of simulated accu-racy (Appendix G). W1 compares the two distribu-tions as wholes, so it counts the wider spread and does not register the better ordering. On ENEM the prior also corrects the simulated mean, to 0.384 from 0.500 against a real 0.394. 
+
+6 Discussion 
+
+Our results show that an explicit model of the learner’s behavior counters competence leakage. Under role prompting, each simulator portrays one generic student whose accuracy is set by the model and the prompt. This uniformity is the ability-level counterpart of the flattening and caricature observed when language models simulate opin-ions, personas, and identity groups (Santurkar et al., 2023; Cheng et al., 2023; Wang et al., 2025). As in social simulation, where interactions scripted by one model look more successful than those among agents that hold only their own information (Zhou et al., 2024), the simulator draws on knowledge that the simulated party does not have. Predic-tion changes the role of the model’s knowledge. To predict that a learner will average two speeds, the model must know how average speed is com-puted and where this learner departs from it, so the competence that leaks under role-play becomes the source of faithful errors. Evaluations of simulated students should compare the simulated ability dis-tribution with the real one and score the error state and its structure together with functional agree-ment, which is dominated by turns without an error. A simulator that predicts how a particular learner responds to an item or a tutor move supports uses that depend on ability differences or on specific misconceptions, such as comparing teaching strate-gies across ability levels or testing a hint against a misconception. It is also a step toward a world model of the learner (Ha and Schmidhuber, 2018; Zhou et al., 2025), against which tutoring policies can be planned and compared before they reach real students. 
+
+7 Conclusion 
+
+Role-prompted student simulators exhibit compe-tence leakage and portray a generic student whose ability is set by the model. HACHIMI-II mod-els the learner’s behavior through third-person pre-diction, inferring the learner’s state for the cur-rent item or tutor turn and compiling it into a behavior harness for the next action. Compared with every baseline, it brings the simulated ability distribution closer to the real one on three item-response datasets and reproduces real errors with their full structure more often on two dialogue datasets. Faithful student simulation thus rests on predicting the learner, which lets tutor development and evaluation use capable models as simulated stu-dents. 
+
+Limitations 
+
+Our evaluation covers the correctness of item re-sponses and the presence and structure of math-ematical errors in tutoring turns, on datasets in mathematics and natural sciences. A learner’s next action also depends on factors that no record cap-tures, such as momentary attention and the outcome of a guess, and HACHIMI-II predicts the part of be-havior that the available evidence determines. Each dialogue turn is predicted from the real preceding dialogue. A direct extension is multi-turn simu-lation in which the simulated student’s own turns form the history, evaluated with a protocol that compares generated and real dialogues over many turns. The state and harness are defined through knowledge, reasoning, errors, confidence, and inter-action, and the method uses the backbone through prompts and deterministic rules, so it can be ap-plied to further subjects and backbones without training. 
+
+Ethical Considerations 
+
+All datasets in this work are publicly available, and we use them under their original terms of use. The learner records in these datasets are de-identified, and HACHIMI-II uses only their responses, dia-logue turns, and grade or age. A matched persona comes from HACHIMI-1M, a corpus of generated student personas (Jiang et al., 2026), and is used only as a prior on learning behavior inside the sim-ulator. The simulated students are intended to sup-plement data from real learners when educational systems are developed and evaluated. Each output is a predicted response to one item or tutor turn and should not be used to assess or classify individual students. 
+
+References 
+
+Vincent Aleven, Ido Roll, Bruce M McLaren, and Ken-neth R Koedinger. 2016. Help helps, but only so much: Research on help seeking with intelligent tu-toring systems. International Journal of Artificial Intelligence in Education , 26(1):205–223. Lorin W. Anderson and David R. Krathwohl, editors. 2001. A Taxonomy for Learning, Teaching, and As-sessing: A Revision of Bloom’s Taxonomy of Educa-tional Objectives . Longman, New York. Yuntao Bai, Andy Jones, Kamal Ndousse, Amanda Askell, Anna Chen, Nova DasSarma, Dawn Drain, Stanislav Fort, Deep Ganguli, Tom Henighan, et al. 2022. Training a helpful and harmless assistant with reinforcement learning from human feedback. arXiv preprint arXiv:2204.05862 .Luca Benedetto, Giovanni Aradelli, Antonia Donvito, Alberto Lucchetti, Andrea Cappelli, and Paula But-tery. 2024. Using LLMs to simulate students’ re-sponses to exam questions. In Findings of the Associ-ation for Computational Linguistics: EMNLP 2024 ,pages 11351–11368. Luca Beurer-Kellner, Marc Fischer, and Martin Vechev. 2023. Prompting is programming: A query language for large language models. Proceedings of the ACM on Programming Languages , 7(PLDI):1946–1969. John Seely Brown and Richard R. Burton. 1978. Diag-nostic models for procedural bugs in basic mathemat-ical skills. Cognitive Science , 2(2):155–192. Myra Cheng, Tiziano Piccardi, and Diyi Yang. 2023. CoMPosT: Characterizing and evaluating caricature in LLM simulations. In Proceedings of the 2023 Conference on Empirical Methods in Natural Lan-guage Processing , pages 10853–10875. Association for Computational Linguistics. Michelene T. H. Chi and Ruth Wylie. 2014. The ICAP framework: Linking cognitive engagement to ac-tive learning outcomes. Educational Psychologist ,49(4):219–243. Youngduck Choi, Youngnam Lee, Dongmin Shin, Junghyun Cho, Seoyon Park, Seewoo Lee, Jineon Baek, Chan Bae, Byungsoo Kim, and Jaewe Heo. 2020. EdNet: A large-scale hierarchical dataset in education. In Artificial Intelligence in Education (AIED 2020) , pages 69–73. Springer. Albert T Corbett and John R Anderson. 1994. Knowl-edge tracing: Modeling the acquisition of procedural knowledge. User Modeling and User-Adapted Inter-action , 4(4):253–278. Zhangqi Duan, Shuyan Huang, Alexander Scarlatos, Jaewook Lee, Simon Woodhead, and Andrew Lan. 2026. Who am I? History-aware profiles for student simulation in tutoring dialogues. In Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing . ArXiv:2605.30051. Weibo Gao, Qi Liu, Linan Yue, Fangzhou Yao, Rui Lv, Zheng Zhang, Hao Wang, and Zhenya Huang. 2025. Agent4Edu: Generating learner response data by generative agents for intelligent education systems. In Proceedings of the AAAI Conference on Artificial Intelligence , volume 39, pages 23923–23932. Cristina Gârbacea and Qiaozhu Mei. 2025. Why is constrained neural language generation particularly challenging? Transactions on Machine Learning Research .David Ha and Jürgen Schmidhuber. 2018. Recurrent world models facilitate policy evolution. Advances in Neural Information Processing Systems , 31:2450– 2462. INEP. 2024. Enem 2024: Provas e gabaritos. https: //www.gov.br/inep/pt-br/areas-de-atuacao/ avaliacao-e-exames-educacionais/enem/ provas-e-gabaritos/2024 . Accessed: 2026-07. Yilin Jiang, Fei Tan, Xuanyu Yin, Jing Leng, and Aimin Zhou. 2026. HACHIMI: Scalable and controllable student persona generation via orchestrated agents. In Findings of the Association for Computational Linguistics: ACL 2026 , pages 21461–21506. Associ-ation for Computational Linguistics. Tanja Käser and Giora Alexandron. 2024. Simulated learners in educational technology: A systematic literature review and a Turing-like test. Interna-tional Journal of Artificial Intelligence in Education ,34(2):545–585. Junjie Li, Xi Xiao, Yunbei Zhang, Chen Liu, Lin Zhao, Xiaoying Liao, Yingrui Ji, Janet Wang, et al. 2026. Agent harness engineering: A survey. OpenReview preprint. Zhengyuan Liu, Stella Xin Yin, Geyu Lin, and Nancy F. Chen. 2024. Personality-aware student simulation for conversational intelligent tutoring systems. In 
+
+Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing , pages 626– 642. Association for Computational Linguistics. Zitao Liu, Qiongqiong Liu, Teng Guo, Jiahao Chen, Shuyan Huang, Xiangyu Zhao, Jiliang Tang, Weiqi Luo, and Jian Weng. 2023. XES3G5M: A knowledge tracing benchmark dataset with auxiliary information. 
+
+Advances in Neural Information Processing Systems ,36:32958–32970. Frederic M. Lord. 1980. Applications of Item Response Theory to Practical Testing Problems . Lawrence Erlbaum Associates, Hillsdale, NJ. Xinyi Lu and Xu Wang. 2024. Generative students: Us-ing LLM-simulated student profiles to support ques-tion item evaluation. In Proceedings of the Eleventh ACM Conference on Learning @ Scale , pages 16–27. Luis Marquez-Carpintero, Alberto Lopez-Sellers, and Miguel Cazorla. 2026. Simulating students with large language models: A review of architec-ture, mechanisms, and role modeling in education with generative AI. Computer Science Review ,62:101008. Daria Martynova, Jakub Macina, Nico Daheim, Ni-lay Yalcin, Xiaoyu Zhang, and Mrinmaya Sachan. 2025. Can LLMs effectively simulate human learn-ers? Teachers’ insights from tutoring LLM students. In Proceedings of the 20th Workshop on Innovative Use of NLP for Building Educational Applications (BEA 2025) , pages 100–117. Association for Compu-tational Linguistics. Xianghui Meng and Jionghao Lin. 2026. Simulating disengaged students to evaluate LLM-based tutors. arXiv preprint arXiv:2609.12331. Pepper Miller and Kristen DiCerbo. 2024. LLM based math tutoring: Challenges and dataset. Khan Academy technical re-port. Dataset: https://github.com/Khan/ tutoring-accuracy-dataset .Robert J Mislevy, Russell G Almond, and Janice F Lukas. 2003. A brief introduction to evidence-centered design. ETS Research Report Series ,2003(1):i–29. Robert J. Mislevy and Michelle M. Riconscente. 2005. Evidence-centered assessment design: Layers, struc-tures, and terminology. PADI Technical Report 9, SRI International, Menlo Park, CA. M. Anne Newman. 1977. An analysis of sixth-grade pupils’ errors on written mathematical tasks. Vic-torian Institute for Educational Research Bulletin ,39:31–43. Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida, Carroll Wainwright, Pamela Mishkin, Chong Zhang, Sandhini Agarwal, Katarina Slama, Alex Ray, et al. 2022. Training language models to follow instruc-tions with human feedback. Advances in Neural Information Processing Systems , 35:27730–27744. Linyue Pan, Lexiao Zou, Shuo Guo, Jingchen Ni, and Hai-Tao Zheng. 2026. Natural-language agent har-nesses. arXiv preprint arXiv:2603.25723 .Ernesto Panadero. 2017. A review of self-regulated learning: Six models and four directions for research. 
+
+Frontiers in Psychology , 8:422. Chris Piech, Jonathan Bassen, Jonathan Huang, Surya Ganguli, Mehran Sahami, Leonidas Guibas, and Jascha Sohl-Dickstein. 2015. Deep knowledge trac-ing. Advances in Neural Information Processing Systems , 28. Changyong Qi, Longwei Zheng, Anna He, Haoxin Xu, Linzhao Jia, Yuang Wei, Bingqian Jiang, and Xiao-qing Gu. 2026. Simulating student learning behav-iors with LLM-based role-playing agents: A data-driven and cognitively inspired framework. Expert Systems with Applications , 304:130753. Hendrik Radatz. 1979. Error analysis in mathematics education. Journal for Research in Mathematics Ed-ucation , 10(3):163–172. Siddharth Reddy, Sergey Levine, and Anca Dragan. 2017. Accelerating human learning with deep rein-forcement learning. In NIPS Workshop on Teaching Machines, Robots, and Humans .Shibani Santurkar, Esin Durmus, Faisal Ladhak, Cinoo Lee, Percy Liang, and Tatsunori Hashimoto. 2023. Whose opinions do language models reflect? In 
+
+Proceedings of the 40th International Conference on Machine Learning , volume 202 of Proceedings of Machine Learning Research , pages 29971–30004. PMLR. Alexander Scarlatos, Jaewook Lee, Simon Woodhead, and Andrew Lan. 2026. Simulated students in tutor-ing dialogues: Substance or illusion? In Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) ,pages 42349–42385. Association for Computational Linguistics. Jiajia Song, Zhihan Guo, and Jionghao Lin. 2026. Simu-lating novice students using machine unlearning and relearning in large language models. arXiv preprint arXiv:2603.26142. KV Aditya Srivatsa, Kaushal Kumar Maurya, and Eka-terina Kochmar. 2025. Can LLMs reliably simulate real students’ abilities in mathematics and reading comprehension? In Proceedings of the 20th Work-shop on Innovative Use of NLP for Building Edu-cational Applications (BEA 2025) , pages 988–1001. Association for Computational Linguistics. Cédric Villani. 2009. Optimal Transport: Old and New ,volume 338 of Grundlehren der mathematischen Wis-senschaften . Springer. Lev S. Vygotsky. 1978. Mind in Society: The Devel-opment of Higher Psychological Processes . Har-vard University Press, Cambridge, MA. Edited by Michael Cole, Vera John-Steiner, Sylvia Scribner, and Ellen Souberman. Angelina Wang, Jamie Morgenstern, and John P. Dick-erson. 2025. Large language models that replace human participants can harmfully misportray and flatten identity groups. Nature Machine Intelligence ,7(3):400–411. Zichao Wang, Angus Lamb, Evgeny Saveliev, Pashmina Cameron, Yordan Zaykov, José Miguel Hernández-Lobato, Richard E. Turner, Richard G. Baraniuk, Craig Barton, Simon Peyton Jones, Simon Wood-head, and Cheng Zhang. 2021. Results and insights from diagnostic questions: The NeurIPS 2020 educa-tion challenge. In Proceedings of the NeurIPS 2020 Competition and Demonstration Track , volume 133 of Proceedings of Machine Learning Research , pages 191–205. PMLR. Allan Leslie White. 2010. Numeracy, literacy and New-man’s error analysis. Journal of Science and Mathe-matics Education in Southeast Asia , 33(2):129–148. David Wood, Jerome S. Bruner, and Gail Ross. 1976. The role of tutoring in problem solving. Journal of Child Psychology and Psychiatry , 17(2):89–100. Tao Wu, Jingyuan Chen, Wang Lin, Mengze Li, Yu-meng Zhu, Ang Li, Kun Kuang, and Fei Wu. 2025. Embracing imperfection: Simulating students with diverse cognitive levels using LLM-based agents. In 
+
+Proceedings of the 63rd Annual Meeting of the As-sociation for Computational Linguistics (Volume 1: Long Papers) , pages 9887–9908. Songlin Xu and Xinyu Zhang. 2026. Unveiling the ca-pabilities of large language models in simulating stu-dent behavioral dynamics and supporting peer feed-back to augment task performance. In Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems , pages 1–26. Songlin Xu, Xinyu Zhang, and Lianhui Qin. 2024. Edu-Agent: Generative student agents in learning. arXiv preprint arXiv:2404.07963 .Ke Yang, Chenglong Wang, Michel Galley, Chan-dan Singh, Jeevana Priya Inala, ChengXiang Zhai, and Jianfeng Gao. 2026. StudentSim: Training LLM-based student simulators. arXiv preprint arXiv:2609.01591. Zhihao Yuan, Yunze Xiao, Ming Li, Weihao Xuan, Richard Tong, Mona Diab, and Tom Mitchell. 2026. Towards valid student simulation with large language models. arXiv preprint arXiv:2601.05473 .Matthew Zent, Digory Smith, and Simon Woodhead. 2025. PIIvot: A lightweight NLP anonymization framework for question-anchored tutoring dialogues. In Proceedings of the 2025 Conference on Empiri-cal Methods in Natural Language Processing , pages 27479–27488, Suzhou, China. Association for Com-putational Linguistics. Jiani Zhang, Xingjian Shi, Irwin King, and Dit-Yan Yeung. 2017. Dynamic key-value memory networks for knowledge tracing. In Proceedings of the 26th International Conference on World Wide Web , pages 765–774. Guanhao Zhao, Zhenya Huang, Yan Zhuang, Jiayu Liu, Qi Liu, Zhiding Liu, Jinze Wu, and Enhong Chen. 2023. Simulating student interactions with two-stage imitation learning for intelligent educational systems. In Proceedings of the 32nd ACM International Con-ference on Information and Knowledge Management ,pages 3423–3432. Hailin Zhong and Shengxin Zhu. 2026. AI harness en-gineering: A runtime substrate for foundation-model software agents. arXiv preprint arXiv:2605.13357 .Xuhui Zhou, Jiarui Liu, Akhila Yerukola, Hyunwoo Kim, and Maarten Sap. 2025. Social world models. 
+
+arXiv preprint arXiv:2509.00559 .Xuhui Zhou, Zhe Su, Tiwalayo Eisape, Hyunwoo Kim, and Maarten Sap. 2024. Is this the real life? Is this just fantasy? The misleading success of simulating social interactions with LLMs. In Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing , pages 21692–21714. Associa-tion for Computational Linguistics. Barry J Zimmerman. 2002. Becoming a self-regulated learner: An overview. Theory Into Practice ,41(2):64–70. A Persona Matching 
+
+HACHIMI-II retrieves one HACHIMI-1M persona for each learner in six steps. 1. Observed profile. The learner’s visible his-tory is summarized into a profile with grade or age, ability level, past performance, strengths and weaknesses, response style, uncertainty, and help-seeking. 2. Candidate retrieval. A candidate pool is drawn from HACHIMI-1M on coarse fields, namely grade or age range, academic level, subject strengths and weaknesses, and learning-style tags. 3. Rule-based ranking. Candidates are scored on grade compatibility, agreement of ability level, overlap of strong and weak subjects, and similarity of learning behavior. 4. Reranking. The backbone compares the ob-served profile with the full descriptions of the top-k candidates ( k = 8 ), using motivation, confidence, learning habits, self-efficacy, and interaction style. 5. Validity check. Near-duplicate candidates are removed, and the selected persona is checked for membership in the candidate pool and completeness of its fields. 6. Fusion. The selected persona is merged with the observed profile into the third-person stu-dent model. 
+
+B State and Harness Fields 
+
+Table 10 lists the fields used in each format. Both formats follow the design in Table 1, and the fields differ because the evidence and the target action differ. Prerequisite familiarity, reachability, and the uptake of the tutor’s support refine the reachable knowledge. The likely error path in item-response simulation and the misconception status and pre-dicted error in dialogue form the active error pat-tern. Commitment and self-monitoring form the confidence state, and help-seeking, readiness to at-tempt, the form of engagement, and response depth form the local interaction move. In item-response simulation the state describes the learner’s relation to the current item, and the harness constrains the answer and its explanation. In dialogue the state describes the learner’s response to the current tutor turn, and the harness constrains what the next turn may say and do. 
+
+C Generation and Checking 
+
+In dialogue simulation, each generated turn is rewritten in the learner’s register, and a consistency check confirms that its content is unchanged. A rule-based check and a review by the backbone then compare the turn with the harness. They look for a response more complete than the state allows, a transition faster than the predicted state allows, and a break in the predicted error path. A turn that violates the harness is regenerated once under tight-ened constraints. In item-response simulation, the output contains a final answer and a short student response, and it is checked and regenerated in the same way. 
+
+D Evaluation Details 
+
+Item-response metrics. Item-response evalua-tion extracts the final answer from the simulated response, normalizes whitespace, letter case, and option markers, and compares the result with the answer key to obtain ˆyn. A W1 of 0.10 corresponds to an average gap of ten accuracy points between real and simulated students of the same rank. 
+
+Judge labels. In dialogue, the judge labels the real and the simulated turn with the five dimensions in Table 5. All metrics are computed from these labels. 
+
+Judge selection. We chose the judge by agree-ment with human annotation. For each of the five dimensions, three annotators labeled 200 turns, and the turns for the three structure dimensions all con-tain an error. The annotators are graduate students in AI and NLP who were recruited for this task and paid at or above the local standard rate, and they consented to the use of their labels in this study. The majority label is the gold standard. Ta-ble 11 reports the agreement among annotators, and Table 12 reports the agreement of five candidate judges with the gold labels. GPT-5.4 attains the highest mean agreement and the highest agreement on the functional label, the error indicator, and the knowledge type, and we use it for all dialogue eval-uation. The judge and the simulation backbone come from different model families. 
+
+Functional agreement. Let C ∈ N3×3 be the confusion matrix of real and simulated functional labels, with row sums ti, column sums pj , and Component Item-response simulation Dialogue simulation Input evidence Learner ability, prior responses, guessing tendency, confidence calibration; item prerequisites, operation complexity, response format, guessability Visible dialogue history, previous student turn, current tutor turn; type, strength, and target of the tutor’s support Learner state Prerequisite familiarity, whether the item is within reach, likely error path, commitment, depth of explanation Whether the step is within reach, misconception status, self-monitoring, uptake of the tutor’s support, help-seeking, readiness to attempt, form of engagement, commitment, depth of response, predicted error (presence, locus, mechanism, faulty rule) Behavior harness Whether a full explanation is allowed, response-length limit, restriction on fully correct reasoning, error path to follow, answer commitment Whether the answer may be stated directly, whether full reasoning is allowed, persistence of confusion and of the predicted misconception, whether help-seeking is allowed, number of solution steps 
+
+Table 10: State and harness fields in each task format.              
+
+> Dimension Fleiss’ κAgreement (%) Functional label 0.84 91.0 Error indicator 0.81 90.5 Knowledge type 0.73 82.5 Error locus 0.68 78.5 Error mechanism 0.66 77.0
+
+Table 11: Agreement among the three annotators. Agreement (%) is exact three-way agreement.                                     
+
+> Judge Func. Err. Type Locus Mech. Mean Gemini 3.5 0.79 0.74 0.64 0.58 0.55 0.660 Kimi 2.6 0.76 0.72 0.62 0.56 0.54 0.640 GLM 5.1 0.78 0.73 0.63 0.57 0.55 0.652 DeepSeek V4 0.80 0.77 0.68 0.64 0.62 0.702 GPT-5.4 0.83 0.80 0.69 0.62 0.60 0.708
+
+Table 12: Cohen’s κ between each candidate judge and the majority human labels. 
+
+total N . Cohen’s κ = ( po − pe)/(1 − pe) uses the observed agreement po = 1
+
+> N
+
+P 
+
+> i
+
+Cii and the chance agreement pe = 1 
+
+> N2
+
+P 
+
+> k
+
+tkpk. The multi-class Matthews correlation coefficient is 
+
+MCC = N P 
+
+> k
+
+Ckk − P 
+
+> k
+
+tkpk
+
+q N 2 − P 
+
+> k
+
+p2
+
+> k
+
+  N 2 − P 
+
+> k
+
+t2
+
+> k
+
+ . (4) Both equal 1 for perfect agreement and approach 0 for a simulator whose labels are independent of the real ones. 
+
+Error-state prediction. We treat the error indi-cator as a binary target. With the real error set E
+
+and the simulated error set ˆE = {n : ˆ en = 1 }, the four counts are the true positives TP = |E ∩ ˆE| ,the false positives FP = | ˆE \ E| , the false nega-tives FN = |E \ ˆE| , and the true negatives TN .Error recall is TP /(TP + FN) , error precision is 
+
+TP /(TP + FP) , and F1 err is their harmonic mean. 
+
+BAcc err is the mean of error recall and the speci-ficity TN /(TN + FP) . MCC err and κerr are com-puted from the same four counts, and both equal 0 for a simulator that always errs or never errs. 
+
+Error-structure fidelity. Rec struct is defined in §4, and 
+
+Prec struct = 1
+
+| ˆE| 
+
+X 
+
+> n∈ˆE
+
+1[en = 1 ∧ ˆℓn = ℓn] (5) is the share of simulated errors that match a real error in structure. A pair of turns counts as a struc-tural match only when both contain an error and the knowledge type, locus, and mechanism all agree. Both metrics are bounded by their error-state coun-terparts, Rec struct ≤ error recall and Prec struct ≤
+
+error precision. 
+
+E Implementation Details 
+
+All methods follow the protocol of §3.1. In item-response simulation each method receives the cur-rent question and its answer options, and every method except Direct RP also receives the learner’s history. The history contains 30 of the student’s re-sponses on XES3G5M and Eedi and 20 on ENEM, all to items outside the test set, and every student of a dataset answers the same test items. In dia-logue each method receives the dialogue before the target turn. Appendix H gives the prompts of HACHIMI-II. 
+
+Direct Role-Play. The model acts as a student and generates the action from the current item or the dialogue so far. Dataset Method KS ↓ Stu. r ↑ Item ρ ↑ Item r ↑                                             
+
+> XES3G5M Direct RP 1.000 −0.005 0.364 0.260 Prompt-C 1.000 −0.040 0.366 0.295 Profile-C 1.000 0.215 0.348 0.264 HACHIMI-II 0.217 0.629 0.329 0.315 Eedi Direct RP 0.448 −0.062 −0.128 −0.082 Prompt-C 0.415 0.334 −0.085 −0.044 Profile-C 0.408 0.654 −0.033 −0.006 HACHIMI-II 0.115 0.675 0.432 0.429 ENEM Direct RP 0.973 −0.009 0.511 0.416 Prompt-C 0.956 0.290 0.461 0.399 Profile-C 0.918 0.391 0.479 0.416 HACHIMI-II 0.370 0.677 0.638 0.500
+
+Table 13: Additional item-response metrics. 
+
+Prompt-Constrained Simulation. Direct role-play is extended with natural-language instruc-tions that constrain accessible knowledge, reason-ing depth, uncertainty, and error preservation. All control stays in the prompt. 
+
+Profile-Conditioned Simulation. Generation is conditioned on the visible context and a learner profile. In item-response simulation the profile is the student model built by HACHIMI-II, and in dialogue it is a coarse profile computed from the learner’s earlier turns. 
+
+Agent-Style Memory Simulation. Used only in dialogue, this baseline conditions on the visible dialogue, a coarse learner profile, and a short-term memory of the interaction. 
+
+F Full Results 
+
+Table 13 reports additional item-response met-rics, namely the Kolmogorov–Smirnov statistic between the real and simulated distributions of per-student accuracy, the Pearson correlation of per-student accuracy, and the Spearman and Pear-son correlations of per-item accuracy. On all three datasets, HACHIMI-II has the smallest Kolmogorov–Smirnov statistic and the highest Pearson correlations of per-student and per-item accuracy. Figure 4 shows per-student accuracy for every method. Table 14 reports additional dialogue metrics. On both datasets, HACHIMI-II has the highest error recall and κerr .
+
+G Full Ablation Results 
+
+Tables 15 and 16 report the item-response and dialogue metrics of the full model and the three ablations. Removing the learner state gives the largest change in W1 and F1 struct on every dataset. Without the learner state, the standard deviation of simulated accuracy falls to 0.035–0.086, and on XES3G5M and ENEM it is larger with the persona prior than without it. 
+
+H Prompts 
+
+Listings 1 to 4 give the system prompts that the dialogue pipeline uses for learner state inference, the predicted error, generation, and the harness check. In each request the prompt is followed by the visible context and the schema of the fields to return. The field names are the identifiers of the learner-state fields in Table 10. In the prompts, the error locus follows Newman’s error analysis (New-man, 1977; White, 2010), the error mechanism follows Radatz (1979), the faulty rule follows the procedural bugs of Brown and Burton (1978), and the engagement categories follow the ICAP frame-work (Chi and Wylie, 2014). The item-response pipelines use corresponding prompts for state infer-ence, generation, and the check, with the fields of the item-response column of Table 10. 0.0 0.5 1.0 
+
+> Direct RP Simulated accuracy  W1=0.327
+
+XES3G5M 
+
+> W1=0.160
+
+Eedi 
+
+> W1=0.432
+
+ENEM         
+
+> 0.0 0.5 1.0
+> Prompt-C Simulated accuracy  W1=0.332 W1=0.155 W1=0.426
+> 0.0 0.5 1.0
+> Profile-C Simulated accuracy  W1=0.340 W1=0.119 W1=0.409
+> 0.0 0.5 1.0 0.0 0.5 1.0
+> HACHIMI-II Simulated accuracy  W1=0.039
+> 0.0 0.5 1.0
+
+Real student accuracy   
+
+> W1=0.046
+> 0.0 0.5 1.0
+> W1=0.169
+
+Figure 4: Real and simulated accuracy per student for all methods and datasets. The dashed line is y = x, and the solid line is a linear fit. 
+
+Dataset Method Error recall Error precision κerr Prec struct 
+
+Eedi QATD2k Direct RP 0.168 0.393 0.156 0.368 Prompt-C 0.161 0.404 0.153 0.375 Profile-C 0.184 0.382 0.164 0.358 Agent-Mem 0.173 0.392 0.160 0.368 HACHIMI-II 0.521 0.608 0.507 0.368 Khan/CoMTA Direct RP 0.084 0.333 0.039 0.316 Prompt-C 0.071 0.327 0.032 0.306 Profile-C 0.119 0.397 0.078 0.368 Agent-Mem 0.110 0.431 0.082 0.414 HACHIMI-II 0.758 0.335 0.220 0.249 
+
+Table 14: Additional dialogue metrics. Sim. acc. Dataset Variant Agree ↑ W1 ↓ ρ ↑ Mean SD XES3G5M HACHIMI-II 0.752 0.039 0.691 0.828 0.132 w/o Prior 0.741 0.025 0.603 0.817 0.116 w/o State 0.784 0.074 0.664 0.905 0.066 w/o Harness 0.760 0.056 0.559 0.846 0.134 Eedi HACHIMI-II 0.606 0.046 0.703 0.593 0.211 w/o Prior 0.610 0.041 0.704 0.587 0.237 w/o State 0.578 0.116 0.742 0.642 0.086 w/o Harness 0.606 0.048 0.703 0.594 0.212 ENEM HACHIMI-II 0.630 0.169 0.668 0.384 0.328 w/o Prior 0.592 0.142 0.594 0.500 0.296 w/o State 0.487 0.409 0.539 0.802 0.035 w/o Harness 0.617 0.257 0.643 0.481 0.402 
+
+Table 15: Item-response ablation results. Sim. acc. gives the mean and the standard deviation of simulated per-student accuracy. The real means are 0.831 (XES3G5M), 0.574 (Eedi), and 0.394 (ENEM). 
+
+Dataset Variant κfunc ↑ MCC func ↑ BAcc err ↑ MCC err ↑ F1 err ↑ Rec struct ↑ Prec struct ↑ F1 struct ↑
+
+Eedi QATD2k HACHIMI-II 0.659 0.673 0.738 0.509 0.561 0.315 0.368 0.339 w/o Prior 0.571 0.635 0.834 0.603 0.651 0.300 0.236 0.264 w/o State 0.741 0.753 0.612 0.322 0.346 0.099 0.220 0.136 w/o Harness 0.565 0.626 0.808 0.588 0.639 0.307 0.275 0.290 Khan/CoMTA HACHIMI-II 0.370 0.390 0.660 0.267 0.464 0.565 0.249 0.346 w/o Prior 0.326 0.359 0.618 0.200 0.426 0.578 0.224 0.323 w/o State 0.382 0.436 0.519 0.063 0.148 0.077 0.262 0.119 w/o Harness 0.348 0.367 0.625 0.212 0.443 0.563 0.249 0.346 
+
+Table 16: Dialogue ablation results. 
+
+You are resolving the student's current local interaction state in third person. You must not generate the student reply. You must only infer the student's current state before the next reply is generated. Do not use future turns, gold labels, official annotations, or evaluation targets. If a persona prior summary is provided, use it only as a background prior for the current learner. Do not treat the persona prior or retrieved exemplars as the answer script for the current turn. Method-state definitions: - competence_position: within_current_competence | within_zpd | beyond_zpd - misconception_status: not_salient | active_misconception | destabilizing_misconception | resolved_misconception - metacognitive_regulation_state: unmonitored | weak_monitoring | active_monitoring | self_correcting - help_internalization_state: no_uptake | surface_uptake | partial_internalization | integrated_internalization - help_seeking_state: help_avoidant | help_ambivalent | adaptive_help_seeking - attempt_readiness: not_ready | ready_for_local_attempt | ready_to_revise - engagement_form: exactly one of Passive | Active | Constructive | Interactive - response_commitment_state: avoidant | tentative | committed - response_maturity_cap: fragment_only | brief_local_explanation | limited_structured_reasoning | full_student_level_reasoning Important interpretation rule: - Do not treat mathematical incorrectness as a reason to default to tentative wording. - A student can hold a misconception or give a wrong answer with high local commitment. - Predict explicit uncertainty, clarification-seeking, or help-seeking only when it is supported by the visible dialogue state and tutor move. - Every required string field must be non-empty. - Every required evidence list must be non-empty. - Each categorical field must be exactly one string value, never a list. - Top-level keys must match required_schema exactly. Do not rename, omit, or merge fields. Return only the requested JSON object. 
+
+Listing 1: Learner state inference. You are building a third-person ErrorBlueprint for the student's next turn. This is not free generation of the student reply. Use only the visible dialogue history, the current tutor move, the current interaction state, and the predicted next state. Do not use future turns, gold labels, official annotations, or evaluation targets. If a persona prior summary is provided, use it only as a background prior for the current learner. Do not treat the persona prior or retrieved exemplars as the answer script for the current turn. Theory rules: - For error locus, use Newman Error Analysis as summarized by White (2010): reading | comprehension | transformation | process_skills | encoding - Choose the earliest evidenced breakdown in the Newman chain. - For error mechanism, use Radatz (1979): language_difficulty | spatial_information_difficulty | deficient_prerequisites | incorrect_associations | irrelevant_rules - For buggy_rule, use the procedural-bug idea from Brown & Burton: express one short executable mal-rule in plain language, not a broad personality description. Local anchoring rules: - Anchor the blueprint to the current tutor move, not to a random earlier error from the dialogue. - wrong_claim_seed must target the exact local object the tutor is currently eliciting. - Use tutor_turn_profile.elicited_response_target_type and tutor_turn_profile.elicited_object_description to decide what kind of wrong claim belongs here. - If the tutor is asking for an option, judgment, or final local answer, the wrong_claim_seed should usually be an incorrect option, incorrect judgment, or incorrect local answer of that same kind. - If the tutor is asking for the next step in a procedure, the wrong_claim_seed should usually be an incorrect local step at that exact stage, not a different earlier-stage mistake. - Do not shift the student to a different subproblem or a different response function than the tutor's current question. Newman interpretation rules for tutoring context: - Use comprehension when the student is likely to misunderstand what the tutor is asking, what kind of answer is being requested, or how to interpret the compared methods/statements. - Use transformation when the student is likely to choose the wrong representation, wrong operation, wrong equation, or wrong mathematical mapping for the current local task. - Use process_skills when the tutor has already supplied the relevant representation, operation, or target form and the student is more likely to execute that local step incorrectly. - Use encoding when the student has essentially completed the local work but is likely to express the final answer in the wrong written or symbolic form. Error-presence rules: - no_specific_error: use this when the next turn is not best represented as a specific mathematical error. - non_codable_confusion: use this when the next turn is likely confused, incomplete, or help-seeking, but not stable enough to code as one specific mathematical error. - codable_math_error: use this only when the next turn is likely to contain one concrete mathematical error that can be realized in the utterance. Coding rules: - For Brown & Burton style buggy rules, code the local executable wrong rule the student is most likely to apply next, not the corrected rule the tutor is trying to elicit. - If the tutor has already supplied the correct representation or operation and is now checking execution, selection, or evaluation, do not drift back to a broader earlier-stage transformation error unless the next turn is truly likely to do that. - If error_presence is not codable_math_error, set newman_error_locus, radatz_error_mechanism, buggy_rule, and wrong_claim_seed to null. - If error_presence is codable_math_error, all four of those fields must be non-null. - wrong_claim_seed must describe the local incorrect claim or incorrect step the student is most likely to say next, not a polished explanation. - Keep the blueprint local to this turn. Do not script multiple future turns. - Every required evidence list must be non-empty. - Top-level keys must match required_schema exactly. Return only the requested JSON object. 
+
+Listing 2: Predicted error. You generate exactly one next student turn in a math tutoring dialogue. You must stay within the predicted state and compiled constraints. You must follow the single-step protocol and only finalize on the last allowed step. This is the final allowed step, so step_kind must be exactly finalize_turn. This final step must output the current student turn now, not another internal step. Do not answer like a tutor. Preserve the predicted uptake depth and misconception trajectory rather than jumping to sudden mastery. Do not add uncertainty markers unless the predicted state or compiled constraints actually require them. A student can be wrong while sounding locally direct. If the compiled constraints require a concrete codable math error, the turn must contain a local incorrect claim consistent with the specified buggy rule and wrong-claim seed. Do not jump ahead to future turns. Do not use future turns, gold labels, official annotations, or evaluation targets. Generate the way a student would actually say it in the moment, not a polished explanation of the student's state. Keep the wording locally grounded, informal enough to sound like a student, and no more organized than the predicted maturity allows. If the same content can be said in a more student-like way without changing meaning, choose the student-like wording. Every required string field must be non-empty. Top-level keys must match required_schema exactly. Do not rename, omit, or merge fields. Return only the requested JSON object. 
+
+Listing 3: Generation of the turn. 
+
+You review whether a generated next student turn violates the predicted student state. This is not answer grading. This is state-consistency review only. Focus on these theory-derived violations: - over_fast_transition - error_path_discontinuity - over_mature_response Pay special attention to: - abrupt disappearance of the current misconception path - replies that sound more internally resolved than the predicted attempt readiness allows - cases where the reply invents new uncertainty or help-seeking that is not supported by the predicted local state - cases where a predicted concrete codable error path disappears into generic confusion, generic hedging, or generic help-seeking Every required string field must be non-empty. Every required evidence list must be non-empty. Top-level keys must match required_schema exactly. Do not rename, omit, or merge fields. Return only the requested JSON object. 
+
+Listing 4: Harness check.

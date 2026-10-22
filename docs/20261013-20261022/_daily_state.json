@@ -1,0 +1,313 @@
+{
+  "date": "20261013-20261022",
+  "date_label": "2026-10-13 ~ 2026-10-22",
+  "generated_at": "2026-10-22 02:51:54 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2610.18763v1",
+      "route": "20261013-20261022/2610.18763v1-layercanvas-infographic-generation-in-ai-learning-assistants-via-hybrid-layer-set-diffusion",
+      "title": "LayerCanvas: Infographic Generation in AI Learning Assistants via Hybrid Layer-Set Diffusion",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "AI学习助手生成个性化信息图辅助辅导",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.21663v1",
+      "route": "20261013-20261022/2610.21663v1-a-framework-for-teaching-the-responsible-and-effective-use-of-generative-ai-in-statistics-and-data-science",
+      "title": "A Framework for Teaching the Responsible and Effective Use of Generative AI in Statistics and Data Science",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "在数据科学教育中教授生成式AI负责任使用的框架",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.22163v1",
+      "route": "20261013-20261022/2610.22163v1-multi-sourced-ai-tutor-for-non-native-english-speaker-students",
+      "title": "Multi-sourced AI Tutor for Non-Native English Speaker Students",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向计算机教育的AI导师与双语学习支持",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.23530v1",
+      "route": "20261013-20261022/2610.23530v1-eduwild-how-teacher-configured-chatbots-fail-in-real-world-use-and-how-to-fix-them",
+      "title": "EduWild: How Teacher-Configured Chatbots Fail in Real-World Use and How to Fix Them",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "教师配置的教育聊天机器人及其真实教学失败模式",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.24498v1",
+      "route": "20261013-20261022/2610.24498v1-mave-a-multi-agent-framework-for-grounded-pedagogical-feedback-from-online-class-videos",
+      "title": "MAVE: A Multi-Agent Framework for Grounded Pedagogical Feedback from Online Class Videos",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于在线课堂视频的多智能体教学反馈",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.25192v1",
+      "route": "20261013-20261022/2610.25192v1-acharya-20-an-ai-tutor-for-self-learning-subjects-in-hindi",
+      "title": "Acharya 2.0: An AI Tutor for Self-Learning Subjects in Hindi",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向印地语自学学科的AI导师",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.26758v1",
+      "route": "20261013-20261022/2610.26758v1-ai-misconception-and-adoption-among-indonesian-k-12-teachers",
+      "title": "AI Misconception and Adoption Among Indonesian K-12 Teachers",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "调查中小学教师对AI的理解、使用与可接受性",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.27881v1",
+      "route": "20261013-20261022/2610.27881v1-evaluating-llm-generated-feedback-on-handwritten-mathematics-feedback-quality-and-subsequent-exam-performance",
+      "title": "Evaluating LLM-Generated Feedback on Handwritten Mathematics: Feedback Quality and Subsequent Exam Performance",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "大学数学中LLM生成的反馈与练习题",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.19532v1",
+      "route": "20261013-20261022/2610.19532v1-a-unified-response-framework-for-questions-and-tutoring-dialogues",
+      "title": "A Unified Response Framework for Questions and Tutoring Dialogues",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "统一建模辅导对话与学生作答的IRT框架",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.19654v1",
+      "route": "20261013-20261022/2610.19654v1-hachimi-ii-from-role-play-to-learner-behavior-modeling-for-faithful-student-simulation",
+      "title": "HACHIMI-II: From Role-Play to Learner Behavior Modeling for Faithful Student Simulation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "用于测试智能辅导系统与教学策略的模拟学生",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.21685v1",
+      "route": "20261013-20261022/2610.21685v1-mars-a-momentum-aware-adaptive-rating-system-for-personalized-assessment",
+      "title": "MARS: A Momentum-Aware Adaptive Rating System for Personalized Assessment",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过能力估计与题目推荐实现个性化学习的自适应测评系统",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.26411v1",
+      "route": "20261013-20261022/2610.26411v1-exploring-visual-access-and-proactive-ai-tutoring-for-handwritten-mathematics",
+      "title": "Exploring Visual Access and Proactive AI Tutoring for Handwritten Mathematics",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "支持手写数学学习的多模态AI辅导平台",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.27448v1",
+      "route": "20261013-20261022/2610.27448v1-bias-and-reliability-in-learning-style-inference-from-student--ai-dialogues-an-evaluation-of-gpt-4o-and-gemini-20-flash",
+      "title": "Bias and Reliability in Learning-Style Inference from Student--AI Dialogues: An Evaluation of GPT-4o and Gemini 2.0 Flash",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "从学生-AI对话推断学习风格以支持个性化教学",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.21233v1",
+      "route": "20261013-20261022/2610.21233v1-do-you-trust-it-or-check-it-exploring-childrens-verification-behaviors-in-game-based-human-ai-collaboration",
+      "title": "\"Do You Trust It... or Check It?\": Exploring Children's Verification Behaviors in Game-Based Human-AI Collaboration",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "儿童在游戏化学习中核查AI建议",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.24259v1",
+      "route": "20261013-20261022/2610.24259v1-sla-lens-from-classroom-transcripts-to-csla-informed-and-evidence-linked-l2-interaction-analytics",
+      "title": "SLA-LENS: From Classroom Transcripts to CSLA-Informed and Evidence-Linked L2 Interaction Analytics",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "LLM辅助的课堂互动转录学习分析框架",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.25560v1",
+      "route": "20261013-20261022/2610.25560v1-voice-based-ai-feedback-in-higher-education-a-field-study-on-quality-and-actionability",
+      "title": "Voice-Based AI Feedback in Higher Education: A Field Study on Quality and Actionability",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "语音对话式AI代理在高等教育中收集学生反馈",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.27248v1",
+      "route": "20261013-20261022/2610.27248v1-valiassist-scaling-llm-generated-programming-feedback-validation-by-demonstration",
+      "title": "ValiAssist: Scaling LLM-generated Programming Feedback Validation by Demonstration",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "生成式AI教学反馈与教师教学目标对齐",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.18724v1",
+      "route": "20261013-20261022/2610.18724v1-airri-towards-a-human-readable-machine-resistant-reading-interface",
+      "title": "AIRRI: Towards a Human-Readable, Machine-Resistant Reading Interface",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向教育评估的抗AI教育内容生成",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    },
+    {
+      "paper_id": "2610.26943v1",
+      "route": "20261013-20261022/2610.26943v1-mamath-bench-process-aware-and-robust-evaluation-of-multimodal-multi-agent-mathematical-reasoning",
+      "title": "MAMath-Bench: Process-Aware and Robust Evaluation of Multimodal Multi-Agent Mathematical Reasoning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向教育应用的多模态多智能体数学推理评测基准",
+      "first_seen_at": "2026-10-22 02:51:54 UTC",
+      "updated_at": "2026-10-22 02:51:54 UTC"
+    }
+  ]
+}

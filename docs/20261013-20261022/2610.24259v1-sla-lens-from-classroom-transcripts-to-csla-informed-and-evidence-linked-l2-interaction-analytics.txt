@@ -1,0 +1,641 @@
+Title: SLA-LENS: From Classroom Transcripts to CSLA-Informed and Evidence-Linked L2 Interaction Analytics
+
+URL Source: https://arxiv.org/pdf/2610.24259v1
+
+Published Time: Tue, 20 Oct 2026 00:25:33 GMT
+
+Number of Pages: 16
+
+Markdown Content:
+# SLA-LENS: From Classroom Transcripts to CSLA-Informed and Evidence-Linked L2 Interaction Analytics 
+
+Nemika Tyagi 1* † Olga Kellert 1* Phanos Kareen 1* Nelvin Licona-Guevara 11Arizona State University 
+
+{ntyagi8, olga.kellert, kphanos, nliconag}@asu.edu 
+
+Abstract 
+
+What happens after a learner makes an error, and how does the instructor’s response shape the next turn? Investigating these exchanges across classrooms requires context-sensitive annotation that is difficult to scale manually. We introduce SLA-LENS, an end-to-end LLM-assisted framework that connects classroom transcripts to structured pedagogical annota-tions and evidence-linked descriptive analyt-ics. Grounded in interactionist Second Lan-guage Acquisition (SLA) theory, its annotation schema captures second language learner er-rors, pedagogical functions, and uptake or re-pair while accounting for speaker roles, conver-sational context, and hierarchical labels. We apply the framework to 40 authentic online L2 Spanish classroom transcripts comprising over 21,000 sentence-level instances. We evaluate proprietary and open-weight LLMs, including task-specific QLoRA adaptation, using expert-reviewed gold annotations, held-out silver data, and metrics sensitive to different types of an-notation error. A deterministic reporting layer generates reproducible visualizations of partic-ipation, feedback, learner errors, uptake, and temporal interaction patterns, linked to support-ing transcript evidence. By making these pat-terns accessible and inspectable, SLA-LENS supports systematic classroom discourse re-search, pedagogical reflection, and curriculum design 1.
+
+1 Introduction 
+
+What happens after a learner makes an error: cor-rection, a hint, or a change of topic? Identifying these responses and the learner’s subsequent up-take across classroom sessions is central to under-
+
+> *
+
+Equal contribution. 
+
+> †
+
+Corresponding Author. 
+
+> 1
+
+Source code, documentation, aggregate corpus statis-tics, and illustrative outputs are available at https://github. com/N3mika/SLA-LENS . The classroom transcripts and as-sociated annotations are restricted; research access may be considered subject to institutional approval. 
+
+standing the opportunities for learning that inter-action provides. Interaction plays a central role in second-language acquisition (SLA)(Loewen et al., 2022). In classroom settings, learner production, instructor feedback, and subsequent uptake or re-pair unfold across turns, creating opportunities for language development (Gass and Mackey, 2015; Long, 1996; Schmidt, 1990; Swain, 2005). Un-derstanding these exchanges is valuable for SLA research, pedagogical reflection, and the develop-ment of language-learning technologies. Online instruction makes such interaction increasingly ob-servable. Platforms like Zoom preserve recordings, timestamps, speaker information, and automati-cally generated transcripts. Yet transcripts alone do not reveal what happened pedagogically (Loewen et al., 2022). Systematically identifying pedagogi-cal events across class transcripts requires context-sensitive discourse annotation (Demszky and Liu, 2023). Learner errors may be identifiable within individual utterances, whereas feedback and uptake must be interpreted in relation to preceding turns. The following illustrative exchange demonstrates these dependencies: 
+
+Learner [ Er:G ]: Mi hermana tengo trece años. 
+
+> English: My sister have(=error) thirteen years old.
+
+Instructor [ F:EC ]: Con “mi hermana”, usamos “tiene”, no “tengo”. 
+
+> English: With “my sister”, we use “tiene” (has), not “tengo” (have).
+
+Instructor [ F:MF ]: El verbo debe concordar con el sujeto. 
+
+> English: The verb must agree with the subject.
+
+Learner [ R:Ack ]: Okay. 
+
+> English: Okay.
+
+Learner [ R:S ]: Mi hermana tiene trece años. 
+
+> English: My sister is thirteen years old.
+
+Instructor [ F:Pr ]: Muy bien. 
+
+> English: Very good.
+
+Although annotations are assigned to individ-ual transcript rows, their interpretation often re-quires surrounding conversational context. More-over, identical expressions can serve different func-1arXiv:2610.24259v1 [cs.CL] 16 Oct 2026 Classroom 
+
+Transcriptions 
+
+Contextual LLM 
+
+Annotation  SLA-LENS Outcome 
+
+Deterministic Interactional Analytics Diagnostic-Sensitive Evaluation                   
+
+> 00:01:12 T: ¿Cómo estás hoy?
+> 00:01:15 L: Yo está bien.
+> 00:01:18 T: Tu estás bien. Hoy, yo
+> estoy muy bien también.
+> ¿Cómo dices que estás?
+> 00:01:26 L: Estoy bien.
+> • Preserve turns + timestamps
+> • Sentence-level rows
+> • Normalize instructor / learner roles
+> •Apply CSLA Annotation Schema
+> •GPT / Qwen / Llama / Gemma
+> •Target rows + neighboring context
+> •Predict labels + error_labels
+> •Confidence score and validation
+> Teacher: Se dice "estoy bien". [F:EC]
+> Learner: Estoy bien. [R:S]
+> • Subtype confusions and role violations • Expert gold + GPT
+> silver references • Hard Accuracy and hierarchical Soft Score
+
+Hard Accuracy  Soft Accuracy        
+
+> Exact ordered label matching
+> Gold: F:EC
+> Pred: F:R
+> Exact match? 0 / 1
+> Hierarchy-aware partial credit
+> Gold: F:EC
+> Pred: F:R
+> Same family? 0.70 / 1
+> •Rule-based Python aggregation
+> •Participation and learner production
+> •Feedback, prompts, errors, uptake
+> •Event distributions across lesson time
+> •Candidate interaction sequences
+
+Structured 
+
+CSLA 
+
+Representation 
+
+Sequential 
+
+Event 
+
+Distribution 
+
+Annotated Transcription 
+
+Analytical Report                   
+
+> 1¿Cómo estás? P:IQ —
+> 2Yo está bien. PR Er:G
+> 3Se dice <estoy» F:EC —
+> 4Estoy bien. R:S —
+> ID Utterance Label Error
+> SLA-LENS Classroom Diagnostic Report
+> Speaker and
+> Learner Stats
+> Evidence &
+> Sequence
+> Charts &
+> Graphs
+> Evidence-linked example:
+> F:Pr → Sentence 56 →
+> 00:02:09.860 →“Muy bien.”
+
+CSLA Annotation 
+
+Schema     
+
+> •Theory-informed SLA constructs
+> • Role-specific label constraints
+> • Hierarchical label families
+> • Context-dependent decision rules
+> • Ordered multi-label events
+> Ex codes: P:IQ · F:EC · R:S · PR
+> Example Label Families
+> Prompt: P:IQ – Information question, P: , ....
+> Feedback: F:EC – Explicit correction, F: , ....
+> Uptake: R:S – Successful repair, R: , ....
+
+Figure 1: Overview of the SLA-LENS end-to-end framework. Classroom transcripts are structured and annotated using contextual LLMs guided by a theory-informed CSLA schema. Annotation quality is assessed through diagnostic-sensitive evaluation, while a deterministic analytics layer computes descriptive interactional measures and candidate event associations. SLA-LENS produces an annotated transcript and an evidence-linked analytical report with participant-level statistics, temporal visualizations, and supporting transcript examples. 
+
+tions: Muy bien , for example, may indicate praise or regulate conversational flow. Authentic tran-scripts introduce further challenges through frag-mented speech, code-switching, transcription noise, and imbalanced annotation categories. Large lan-guage models (LLMs) offer a promising approach to contextual annotation by conditioning structured predictions on multi-turn discourse. Open-weight models additionally support task-specific adapta-tion and institutionally controlled deployment, po-tentially reducing the cost, reproducibility, and pri-vacy constraints associated with proprietary APIs (Liagkou et al., 2024; León, 2026). We investigate both proprietary and open-weight models, includ-ing task-specific fine-tuning, for SLA-informed classroom annotation. We introduce SLA-LENS , an end-to-end frame-work that transforms L2 classroom transcripts into structured annotations and evidence-linked descrip-tive analytics (Fig 1). These outputs help educa-tors and researchers locate interactional patterns for closer inspection and can inform pedagogical reflection, curriculum planning, and program de-velopment. Extending these analyses with speaker metadata and temporal records could support com-parisons of classroom participation and instruc-tional experiences across time and social groups and further support the investigation of learning progression. Our main contributions are: • SLA-LENS, an end-to-end transcript-to-analytics framework that combines con-textual LLM annotation with deterministic, evidence-linked descriptive reporting. • A theory-informed SLA annotation schema and corpus capturing classroom events in au-thentic online L2 Spanish interaction. • Open-weight model adaptation and eval-uation , including QLoRA fine-tuning and a diagnostic-sensitive evaluation framework. • A reproducible interactional reporting tool 
+
+providing evidence-based analysis for diverse research and educational applications. 
+
+2 Related Work 
+
+Interactionist SLA and the Computational Scal-ability Gap Interactionist SLA research has es-tablished the importance of negotiation of mean-ing, corrective feedback, modified output, and learner uptake in language development (Long, 1996; Swain, 2005; Gass and Mackey, 2015; Li, 2010). Studies have examined how feedback strate-gies influence learner responses and acquisition (Ellis et al., 2006; Sheen, 2010). Lyster and Ranta 2(1997) provides an influential framework linking learner production, instructor feedback, uptake, and repair, distinguishing strategies such as explicit cor-rection, recasts, clarification requests, metalinguis-tic feedback, and elicitation. Analyzing these phe-nomena requires context-sensitive discourse cod-ing. Conversation-analytic approaches provide de-tailed accounts of classroom interaction (Gardner, 2019), while quantitative observational studies rely on manually identifying and classifying relevant exchanges. Such events can be relatively sparse: across Lyster and Ranta (1997) and Panova and Lyster (2002), approximately 39 feedback moves, 20 uptake instances, and nine repairs were identi-fied per hour on average. Similarly, Loewen (2004) reported approximately 29 focus-on-form episodes per hour. These findings illustrate the substantial annotation effort required to examine interactional patterns across larger classroom corpora. 
+
+Computational and LLM-Based Approaches to SLA Computational research has supported learner corpora, grammatical-error analysis, au-tomated assessment, and feedback generation (McEnery et al., 2019), including identification of discourse features in L2 writing (Eguchi and Kyle, 2024). Educational NLP has also addressed instructional discourse analysis (Demszky and Liu, 2023), computational teacher-learner feedback in-teractions (Castro-Garcia and Kordjamshidi, 2025), and adaptive language-learning support (Beaudin et al., 2007; Turapova et al., 2025). However, these approaches primarily examine written text, instructional support, or controlled interactions rather than jointly assessing multiple SLA phe-nomena in naturally occurring classroom conver-sations. Recent work has increasingly investigated LLMs as providers of corrective feedback, expla-nations, and conversations (Crusan and Mohebbi, 2026; Dong, 2026; Pitychoutis and Spathopoulou, 2026; M. Kamelabad et al., 2026). SLA-LENS instead uses LLMs to analyze existing human in-teraction, identifying context-dependent classroom events for subsequent quantitative analysis. This introduces challenges involving diarization, tran-scription noise, rare labels, and overlapping com-municative functions. 
+
+Evidence-Linked Descriptive Reporting Learn-ing analytics research highlights the importance of interpretable educational visualizations tailored to different users and analytical goals (Schwendi-mann et al., 2017; Valle et al., 2021; Kaliisa et al.,             
+
+> Corpus statistic Count
+> Transcripts 40 Sentence rows 21,835 Approximate words 106,336 Instructor rows 14,648 Learner rows 7,187 Single-label rows 21,106 Multi-label rows 716 Feedback-positive rows 4,487 Uptake/repair-positive rows 721 Learner-error rows 2,078 Observed classroom labels 26
+> Table 1: Overview of the SLA-LENS annotated corpus. Counts are derived from GPT-generated annotations rather than independently validated gold labels.
+
+2023). Building on this perspective, SLA-LENS connects computational discourse annotation with reproducible descriptive reporting, including event distributions, temporal patterns, participant-level comparisons, and supporting transcript evidence. Separating annotation from deterministic aggre-gation allows the same structured data to support pedagogical reflection, corpus-based SLA research, and broader exploratory analyses across sessions or participant groups. These descriptive measures provide a foundation for future longitudinal inves-tigations, metadata integration, and inferential sta-tistical analysis. 
+
+3 SLA-LENS: Transcript-to-Analytics Framework 
+
+SLA-LENS is an end-to-end framework that trans-forms L2 classroom transcripts into structured SLA annotations and evidence-linked descriptive inter-actional analytics. As illustrated in Fig 1, the frame-work comprises three stages: transcript structuring, contextual LLM annotation, and deterministic ag-gregation and reporting. It produces two comple-mentary outputs: an inspectable annotated tran-script and a standalone analytical report supporting descriptive analysis of classroom interaction. 
+
+3.1 Classroom Data and Transcript Representation 
+
+Our corpus comprises 40 online L2 Spanish class-room transcripts from two instructional settings: structured classroom instruction and language-tutoring sessions. Classroom sessions are compar-atively instructor-led, with explicit learning tasks and instructional feedback, whereas tutoring ses-sions emphasize conversational practice and more open-ended learner production. The transcripts originate from online recordings and automatically 3Family Labels Role Function and example                                            
+
+> Prompt P:I, P:IQ, P:CQ Instructor Elicits learner production through instructions, information-seeking questions, or clarification questions.
+> Example: “So, the first question for today is: ¿cuál es el tema de la Unidad 7?” [Eng: “What is the topic of Unit 7?”] Prompt response PR Learner Responds to the preceding prompt.
+> Example: “El tema de la Unidad 7 es la justicia.” [Eng:“The topic of Unit 7 is justice.”] Feedback F:EC, F:R, F:CR, F:EL, F:MF, F:CC, F:Pr, F:Ack, F:NE Instructor Responds to learner production through correction, reformulation, elicitation, metalinguistic info, evaluation, or acknowledgment.
+> Example following a lexical error: “Justicia means justice.” Other instructor functions A, RN, CM, CoM Instructor Answers learner questions, reacts to content, manages classroom logistics, or regulates conversational flow.
+> Example after a learner describes a large family: “That is a big family!” Uptake /repair outcome R:S, R:IR, R:Ack, R:NR Learner Characterizes a learner response following feedback as successful repair, incomplete repair, acknowledgment, or no uptake.
+> Example following correction: “Mi hermana tiene trece años.”[Eng: “My sister is thirteen years old.”] Student prompt SP, SP:I, SP:IQ, SP:CQ Learner Initiates or extends interaction through questions, instructions, or requests for clarification.
+> Example: “¿Cómo se dice kite en español?”[Eng:“How do you say
+> kite in Spanish?”] Other learner functions CM, CoM Learner Manages classroom logistics or conversational flow.
+> Example: “I’m trying to look at your email, but I don’t see it.” Learner error Er:G, Er:L, Er:M, Er:EU Learner Marks grammatical, lexical, multiple, or contextually inappropriate English production.
+> Example: “Mi hermana tengo trece años.”
+> Intended: “My sister is thirteen years old.”
+
+Table 2: Condensed CSLA annotation schema used by SLA-LENS. Classroom-event and learner-error annotations are stored independently. Full definitions, decision rules, and examples are provided in Appendix A. 
+
+generated transcriptions, which were minimally corrected before annotation to address transcrip-tion artifacts while preserving non-target learner production, code-switching, hesitations, and incom-plete utterances. Each transcript is represented as an ordered sequence of sentence-level rows con-taining identifiers, timestamps, speaker identity, speaker role, and transcript text. Speaker roles are normalized as instructor or learner , while sur-rounding rows provide conversational context for annotation. The corpus contains 21,835 sentence rows and approximately 106K words, with instruc-tor and learner speech accounting for 67.1% and 32.9%, respectively (Table 1). The GPT-based an-notation pipeline assigns a single classroom-event label to most rows, while 3.3% contain multiple labels and 9.5% receive learner-error annotations. Label frequencies are imbalanced: P: and PR occur frequently, whereas several feedback and uptake subtypes are rare. This motivates the label-sensitive evaluation described in Section 5.2. 
+
+3.2 CSLA Annotation Schema 
+
+The CSLA annotation schema operationalizes SLA-relevant interactional phenomena into structured labels suitable for human and LLM annotation. Developed with SLA expertise, it was iteratively refined through analysis of authentic classroom transcripts and annotation disagreements. Rather than exhaustively describing classroom discourse, the schema captures observable pedagogical and interactional events that support reproducible de-scriptive analysis. Table 2 summarizes the label families, with detailed definitions, decision rules, and examples provided in Appendix A. 
+
+Two annotation dimensions. The schema sep-arates classroom events from learner errors . The 
+
+labels dimension captures communicative func-tions such as prompts, feedback, learner responses, and classroom management, while the indepen-dent error_labels dimension identifies observ-able learner-language errors. Thus, a learner re-sponse may simultaneously receive PR (learner Prompt Response) and Er:G (Grammatical Error). Error annotations are restricted to learner produc-tion and exclude apparent errors attributable to tran-scription artifacts. 
+
+Context and communicative function. Labels represent an utterance’s interactional function 4rather than its surface form. For example, repite 
+
+(‘repeat’) may constitute an instructional prompt when initiating a task or corrective feedback when responding to erroneous learner production. Simi-larly, learner production following an instructional prompt receives PR , whereas responses within feed-back sequences belong to the R family. These dis-tinctions require local conversational context even though annotations are assigned at the sentence-row level. 
+
+Priority and role constraints. Explicit priority rules resolve competing interpretations: Feedback takes precedence over other instructor functions when responding to learner production, while Up-take/Repair takes precedence over other learner functions within feedback sequences. Thus, F > 
+
+other instructor functions and R > other learner functions. Speaker-role constraints further restrict label assignments, preventing instructor-specific la-bels on learner rows and vice versa. These rules guide annotation and subsequent evaluation. 
+
+Hierarchy and multi-label events. Several la-bels belong to hierarchical families, such as F:R 
+
+(Recast) and F:EC (Explicit Correction) within Feedback. This structure supports evaluation that distinguishes within-family confusion from errors across interactional functions. Multiple labels are assigned only when a row contains independently identifiable events, with label order reflecting their occurrence. For example, Muy bien, ahora intén-talo otra vez receives F:Pr, F:EL . Multi-label annotations account for 3.3% of corpus rows. 
+
+Learner errors. The error taxonomy distin-guishes single grammatical ( Er:G ), single lexical (Er:L ), and multiple errors ( Er:M ), alongside sub-stantially English production when Spanish is con-textually expected ( Er:EU ). English use is not au-tomatically erroneous, particularly when permitted by the instructional context or used for classroom management (e.g., We can’t hear you, Professor ). Punctuation, formatting, and identifiable ASR arti-facts are excluded. 
+
+3.3 End-to-End Analysis Pipeline 
+
+SLA-LENS transforms input transcripts into the structured representation described in Section 3.1, preserving sentence-level timestamps, speaker identities, and turn information while normaliz-ing speaker roles as instructor or learner . The annotation engine processes transcript rows with surrounding conversational context and the CSLA annotation guidelines. For each target row, the LLM predicts classroom-event labels and learner 
+
+error_labels , alongside confidence and a brief rationale. Structured-output validation checks label inventories, speaker-role constraints, and sentence alignment before annotations are merged with the original transcript. GPT-4.1 serves as the reference annotation backend, while open-weight alternatives are evaluated in Section 4.1. Implementation and prompting details are provided in Appendix B. The annotated transcript serves both as an in-dependent research artifact and as input to SLA-LENS’s deterministic reporting layer. This layer computes descriptive interactional measures, in-cluding participant contributions, prompt and feed-back distributions, learner-error patterns, uptake/re-pair outcomes, and their variation across lesson time. Explicit proximity-based rules additionally identify candidate associations between prompts and responses, learner errors and feedback, and feedback and subsequent uptake. All measures are linked to supporting sentence identifiers, times-tamps, and transcript excerpts, allowing users to inspect the underlying evidence. SLA-LENS pro-duces two complementary outputs: an exportable annotated CSV and a standalone analytical report containing visualizations, participant-level sum-maries, and an annotation glossary. Table 3 sum-marizes the supported measures, while Section 6 describes the reporting interface. 
+
+4 Annotation Engine Evaluation 
+
+The reliability of SLA-LENS’s descriptive analyt-ics depends on the quality of its underlying anno-tations. We therefore evaluate the contextual an-notation engine independently of the deterministic reporting layer, examining both annotation agree-ment with expert judgments and the feasibility of replacing the proprietary backend with locally de-ployable open-weight models. 
+
+4.1 Gold and Silver Evaluation Sets 
+
+We evaluate annotation quality using two comple-mentary reference sets drawn from five transcripts held out from model adaptation (2,621 sentence-level rows). The gold set consists of one of these transcripts (653 rows), whose classroom event and learner error annotations were manually reviewed and adjudicated by three expert annotators. It serves as the primary reference for assessing agree-5Analysis di-mension Descriptive measures                
+
+> Participation Instructor and learner contributions; individ-ual learner production. Learner errors Frequency, type distribution, and learner-normalized error incidence. Pedagogical events Prompt and feedback subtype distributions; uptake/repair outcomes. Temporal pat-terns Distribution of annotated events across les-son intervals. Error →Feed-back Candidate associations between error-marked learner production and subsequent feedback. Feedback →
+> Uptake Candidate associations between instructor feedback and subsequent learner uptake/re-pair. Prompt →Re-sponse Candidate associations between instructor prompts and learner responses. Evidence Supporting sentence IDs, timestamps, speakers, and transcript excerpts.
+
+Table 3: Descriptive interactional measures supported by SLA-LENS. Sequence-based measures represent proximity-derived candidate associations rather than verified pedagogical episodes. 
+
+ment with human judgments. The silver set com-prises GPT-generated annotations for all five held-out transcripts. It provides a larger-scale measure of how closely open-weight models reproduce the reference annotation engine on unseen classroom interactions. Gold and silver results are reported separately, as agreement with automatically gener-ated silver labels does not establish agreement with expert annotations. 
+
+4.2 Models and Experimental Setup 
+
+We compare GPT-4.1, the reference annota-tion backend, against three open-weight models: Qwen3-8B, Llama-3.1-8B, and Gemma 4 12B. All models perform the same contextual annota-tion task, predicting classroom-event labels and learner error_labels from transcript rows with speaker-role information and neighboring conver-sational context. The annotation guidelines, label inventory, and output format are kept consistent across systems, with model-specific formatting ad-justments where necessary. 
+
+Open-Weight Model Adaptation. We addition-ally fine-tune Qwen3-8B using Quantized Low-Rank Adaptation (QLoRA) on the GPT-annotated training corpus. The approach combines 4-bit quan-tization with trainable low-rank adapters, enabling task-specific adaptation without updating all pre-trained parameters. Training examples preserve the structured transcript representation, conversa-      
+
+> Prediction relation Credit
+> Exact label 1.00 Correct family, wrong subtype 0.70 Correct role, wrong family 0.25 Role-incompatible prediction 0.00 Correct labels, incorrect order ×0.85
+
+Table 4: Base credits for hierarchical annotation similar-ity. Multi-label scoring additionally accounts for partial matches and unsupported labels. 
+
+tional context, and annotation targets. The result-ing model is evaluated against both expert gold annotations and held-out GPT-generated silver an-notations. The detailed training hyperparameters and inference settings are provided in Appendix C. 
+
+4.3 Evaluation Metrics 
+
+The CSLA schema is hierarchical, speaker-role-dependent, and occasionally multi-label. Strict exact-match accuracy therefore treats errors of different severity equally. We complement exact agreement with a hierarchical similarity score and targeted detection metrics for interactional phenom-ena central to SLA-LENS reporting. 
+
+Hard Accuracy. Hard Accuracy measures the proportion of rows whose predicted classroom-event labels exactly match the reference annota-tions. For multi-label rows, both label identity and ordering must agree. 
+
+Hierarchical Soft Score. We compute a row-level Soft Score that assigns partial credit accord-ing to the CSLA label hierarchy (Table 4) Exact matches receive full credit, within-family subtype errors receive partial credit, and predictions from another family compatible with the speaker role re-ceive lower credit. Role-incompatible predictions receive no credit. Multi-label cases additionally account for partially recovered labels, unsupported predictions, and incorrect label ordering. The final score is averaged across rows and scaled to 0-100. 
+
+Diagnostic-Sensitive Evaluation. We separately report detection F1 for three interactional phenom-ena important to downstream analysis. Feedback F1 measures detection of any F:* subtype, while 
+
+Uptake/Repair F1 evaluates the learner-response family ( R:S , R:IR , R:Ack , R:NR ). Error Detection F1 measures whether a learner row contains any error annotation, independently of its subtype. We additionally report Error Hard Accuracy , requir-ing exact agreement on the error_labels field. 6Model Hard Acc. Soft Score Feedback F1 Uptake F1 Error F1 Error Hard Acc.                               
+
+> GPT-4.1 76.72 84.12 87.57 76.64 81.40 96.63 Gemma 4 12B 54.30 67.20 65.10 45.80 61.70 90.80 Llama-3.1-8B 58.70 70.90 69.80 50.60 65.40 91.90 Qwen3-8B 62.40 73.80 73.50 55.20 69.10 92.80 Qwen3-8B (QLoRA) 69.80 79.60 81.20 65.40 75.80 94.90
+
+Table 5: Annotation performance against the expert-reviewed gold transcript. All values are percentages except Soft Score, which is on a 0-100 scale.                               
+
+> Model Hard Acc. Soft Score Feedback F1 Uptake F1 Error F1 Error Hard Acc.
+> Gemma 4 12B 66.80 76.40 76.20 58.70 70.30 94.20 Llama-3.1-8B 70.20 79.10 79.80 63.40 74.10 95.30 Qwen3-8B 74.10 82.20 83.60 67.90 77.80 96.10 Qwen3-8B (QLoRA) 81.30 87.10 89.20 76.50 84.10 97.20
+
+Table 6: Agreement with GPT-generated annotations on five held-out silver transcripts. Silver agreement measures reproduction of GPT annotations rather than agreement with expert judgments. 
+
+Row-level scores can also support subtype-specific analyses. Further details of these metrics are pro-vided in Appendix D. 
+
+5 Annotation Results 
+
+We evaluate the SLA-LENS annotation engine against an expert-reviewed gold transcript and five held-out silver transcripts using the metrics in Sec-tion 4.3. Gold evaluation measures agreement with human annotations, while silver evaluation mea-sures agreement with GPT-generated labels. We compare GPT-4.1 with Qwen3-8B, Llama-3.1-8B, and Gemma 4 12B, alongside Qwen3-8B adapted using quantized low-rank adaptation (QLoRA). 
+
+5.1 Overall Performance 
+
+Tables 5 and 6 summarize annotation performance against expert and silver references, respectively. On the gold set, GPT-4.1 achieves 76.72% Hard Accuracy and a hierarchical Soft Score of 84.12. Feedback detection reaches an F1 of 87.57%, while uptake/repair detection is lower at 76.64%. Er-ror detection achieves 81.40% F1, compared with 96.63% Error Hard Accuracy, reflecting the preva-lence of error-free rows. The open-weight compar-ison examines whether smaller, locally deployable models can recover the CSLA annotation structure and whether task-specific adaptation improves their performance. On the gold set, QLoRA adaptation improves Qwen3-8B Hard Accuracy from 62.40% to 69.80% (+7.40 percentage points) and Feedback F1 from 73.50% to 81.20% (+7.70 points). The adapted model also shows higher agreement with the GPT-generated silver references. 
+
+5.2 Diagnostic-Critical Label Performance 
+
+Overall accuracy can obscure performance on less frequent but analytically important events. We therefore separately evaluate Feedback, Uptake/Re-pair, and learner-error detection, which directly in-fluence SLA-LENS’s descriptive interactional mea-sures. Family-level F1 assesses event identification. GPT-4.1 identifies Feedback more reliably than Uptake/Repair, suggesting that learner-response an-notation remains a particularly challenging compo-nent. Such differences matter downstream: missed feedback can distort feedback distributions, while missed uptake can underrepresent learner responses following correction. 
+
+5.3 Annotation Error Analysis 
+
+Qualitative inspection of model–expert disagree-ments reveals challenges involving contextual in-terpretation, transcription artifacts, and annotation ambiguity. In one example, GPT classified muy bien (‘very good’) as praise, whereas all three adju-dicators classified it as a conversational flow marker (CoM): the teacher was introducing the first instruc-tional question rather than evaluating learner pro-duction. All three adjudicators also assigned Un-known to Sounds Avocado , identifying it as a tran-scription artifact, while GPT assigned a discourse category. Other cases reflect uncertainty in the ref-erence interpretation. Two adjudicators classified 
+
+sí (‘yes’) as CoM, while the third interpreted it as the teacher’s response to an implicit learner prompt. These distinctions matter for downstream report-ing: misclassifying a flow marker as praise inflates praise counts, while classifying a transcription arti-fact introduces an unsupported event. Adjudicator 7disagreement also shows that some utterances per-mit multiple plausible interpretations. Together, these cases support reporting complementary eval-uation measures and retaining transcript evidence for human inspection.                
+
+> Teacher: Before we start, do you have any ques-tions or issues—anything I can help you with?
+> Learner: No, no.
+> Teacher: Okay, perfect.
+> Teacher: Bien. (‘Good.’)
+> Teacher: Entonces. (‘So.’)
+> Teacher: Muy bien, la primera pregunta del día de hoy.
+> English: All right, the first question of the day.
+> Learner: So I don’t know how . . . I don’t know how to say it.
+> Learner: I’m sorry.
+> Teacher: Vamos! (‘Come on!’)
+> Learner: Like . . .
+> Teacher: Sí. (‘Yes.’)
+
+These analyses highlight why annotation quality cannot be summarized by exact-match accuracy alone. For SLA-LENS, the significance of a pre-diction error also depends on which interactional measure it affects. This motivates reporting hi-erarchical agreement alongside targeted detection scores and retaining the transcript-level evidence. 
+
+6 Interactional Analytics and Reporting 
+
+Beyond structured annotation, SLA-LENS gen-erates a standalone analytical report for re-searchers, educators, and other practitioners study-ing language-learning interaction. Constructed de-terministically from the annotated transcript with-out additional LLM-generated interpretation, the report provides reproducible descriptive summaries in HTML and PDF formats. 
+
+6.1 Interactional Measures 
+
+SLA-LENS organizes its analyses into three dimen-sions: (i) participation, including instructor-learner contributions and individual learner production; (ii) pedagogical events, including prompts, feed-back strategies, learner errors, and uptake/repair outcomes; and (iii) interactional sequences, iden-tifying candidate associations between learner er-rors, instructor feedback, and subsequent responses. The report presents frequency distributions, learner-level comparisons, normalized error incidence, and temporal visualizations. Sequence associations fol-low explicit conversational proximity rules and are not treated as verified pedagogical exchanges. 
+
+6.2 Evidence-Grounded Analytical Report 
+
+The standalone report presents session-level sum-mary cards showing transcript size, instructor and learner contributions, and counts of feedback, er-rors, and uptake, alongside participant information and data-quality indicators. Learner-level visual-izations compare participation, approximate word production, normalized error incidence, and error-category distributions across speakers. Additional views display pedagogical-event frequencies, les-son timelines, and candidate associations between errors, feedback, and learner responses. To sup-port interpretation, the report includes a compact CSLA label glossary and an evidence index linking annotations to sentence IDs, timestamps, speakers, and transcript excerpts. These descriptive outputs highlight patterns for investigation rather than es-tablishing learner proficiency or instructional ef-fectiveness. Appendix E presents screenshots of the report interface and learner-level analyses; the complete report is available in the supplementary repository. 
+
+7 Conclusion 
+
+We introduced SLA-LENS , an end-to-end frame-work that moves beyond transcription to make second-language classroom interaction computa-tionally observable and interpretable. Combin-ing a theory-informed annotation schema, con-textual LLM annotation, and deterministic report-ing, SLA-LENS transforms classroom transcripts into structured, evidence-linked descriptive ana-lytics. Our evaluation investigates the reliability of proprietary and open-weight annotation mod-els, including task-specific adaptation, while the reporting layer demonstrates how learner errors, feedback, uptake, participation, and temporal pat-terns can be explored at scale. Beyond support-ing pedagogical reflection, SLA-LENS provides a reproducible foundation for corpus-based SLA research and computational humanities. Future work will extend the framework toward longitu-dinal and cross-classroom comparisons, integra-tion of learner proficiency and sociolinguistic meta-data, and statistical modeling of interactional pat-terns and language development. By connecting automated discourse annotation with transparent analytical reporting, SLA-LENS offers a step to-ward more accessible, scalable, and empirically grounded analysis of language-learning interaction. The resulting evidence can help teachers reflect on 8their pedagogical practices and inform curriculum designers’ decisions about classroom activities and instructional support. 
+
+Acknowledgments 
+
+We thank Megan Michelle Smith for her valuable contributions to the development of this work and for her assistance during the research process. Her input and support helped inform aspects of the study. 
+
+Limitations 
+
+SLA-LENS is currently developed and evaluated on English–Spanish instructional interaction, limit-ing its demonstrated generalizability to other lan-guage pairs, proficiency levels, and educational settings. The corpus does not systematically in-corporate learner proficiency, demographic or so-ciolinguistic metadata, or longitudinal learner tra-jectories, preventing controlled comparisons across learner groups and direct investigation of language development. Furthermore, evaluation relies on a small subset of expert-reviewed gold transcript and LLM-generated silver annotations, which may introduce annotation bias and limit the reliability of broader performance estimates. The framework operates on sentence-level transcripts and does not explicitly identify complete interactional episodes or source-target relationships among learner errors, feedback, and repair. Sequence-based associations therefore rely on proximity heuristics rather than verified discourse links. Transcription and speaker-attribution errors may also propagate into annota-tion and reporting. Finally, the current analytics are descriptive and do not establish proficiency, learning gains, causal effects, or instructional effec-tiveness; the practical utility of the reports has not yet been validated through systematic user studies. 
+
+Ethical Considerations 
+
+SLA-LENS analyzes classroom interactions involv-ing human participants and therefore requires ap-propriate consent, privacy safeguards, and responsi-ble data handling. The study received institutional IRB approval, and all participating instructors and learners provided informed consent for recording and research use. Protecting participant anonymity is a priority throughout the workflow, including transcription, annotation, data analysis, aggrega-tion, and reporting. LLM-generated annotations may misclassify non-standard learner language, code-switching, or transcription artifacts as errors, potentially introducing biases into participant-level summaries. Accordingly, SLA-LENS provides de-scriptive, evidence-linked analyses rather than auto-mated judgments of learner proficiency or instruc-tional effectiveness, and findings should be inter-preted with human oversight. AI-assisted writing tools (e.g., ChatGPT and Grammarly) were used solely for grammatical refinement and clarity of presentation. 
+
+References            
+
+> Jennifer S. Beaudin, Stephen S. Intille, Emmanuel Munguia Tapia, Randy Rockinson, and Margaret E. Morris. 2007. Context-sensitive microlearning of foreign language vocabulary on a mobile device. In
+> Ambient Intelligence , volume 4794 of Lecture Notes in Computer Science , pages 55–72, Berlin, Heidel-berg. Springer. Juan Luis Castro-Garcia and Parisa Kordjamshidi. 2025. Modeling language learning in corrective feedback interactions. In Proceedings of the 14th Joint Con-ference on Lexical and Computational Semantics (*SEM 2025) , pages 267–279, Suzhou, China. Asso-ciation for Computational Linguistics. Deborah Crusan and Hassan Mohebbi. 2026. Edito-rial: The role of ai and chatgpt in giving corrective feedback: Panacea or unfulfilled promise. Feedback Research in Second Language , 4:1–5. Dorottya Demszky and Jing Liu. 2023. M-Powering Teachers: Natural language processing powered feed-back improves 1:1 instruction and student outcomes. In Proceedings of the Tenth ACM Conference on Learning @ Scale , pages 59–69. Association for Computing Machinery. Li Dong. 2026. When machines teach writers: Reflect-ing on genai’s role in giving corrective feedback on linguistic caf facets. Feedback Research in Second Language , 4:28–39. Masaki Eguchi and Kristopher Kyle. 2024. Building custom NLP tools to annotate discourse-functional features for second language writing research: A tutorial. Research Methods in Applied Linguistics ,3(3):100153. Rod Ellis, Shawn Loewen, and Rosemary Erlam. 2006. Implicit and explicit corrective feedback and the ac-quisition of l2 grammar. Studies in Second Language Acquisition , 28(2):339–368. Rod Gardner. 2019. Classroom interaction research: The state of the art. Research on Language and Social Interaction , 52(3):212–226. Susan M. Gass and Alison Mackey. 2015. Input, inter-action, and output in second language acquisition. In
+
+9Bill VanPatten and Jessica Williams, editors, Theo-ries in Second Language Acquisition: An Introduc-tion , 2 edition, pages 180–206. Routledge, New York, NY. Rogers Kaliisa, Ioana Jivet, and Paul Prinsloo. 2023. A checklist to guide the planning, designing, im-plementation, and evaluation of learning analytics dashboards. International Journal of Educational Technology in Higher Education , 20(1):28. Maikel León. 2026. GPT-5 and open-weight large lan-guage models: Advances in reasoning, transparency, and control. Information Systems , 136:102620. Shaofeng Li. 2010. The effectiveness of corrective feed-back in sla: A meta-analysis. Language Learning ,60(2):309–365. Vasiliki Liagkou, Evangelia Filiopoulou, George Fra-giadakis, Mara Nikolaidou, and Christos Michalake-lis. 2024. The cost perspective of adopting large language model-as-a-service. In 2024 IEEE Interna-tional Conference on Joint Cloud Computing , pages 80–83. IEEE. Shawn Loewen. 2004. Uptake in incidental focus on form in meaning-focused esl lessons. Language Learning , 54(1):153–188. Shawn Loewen, Maria Buttiler, Matt Kessler, and Daniel Trego. 2022. Conversation and transcription activities with synchronous video computer-mediated communication: A classroom investigation. System ,106:102760. Michael H. Long. 1996. The role of the linguistic environment in second language acquisition. In William C. Ritchie and Tej K. Bhatia, editors, Hand-book of Second Language Acquisition , pages 413– 468. Academic Press, San Diego, CA. Roy Lyster and Leila Ranta. 1997. Corrective feedback and learner uptake: Negotiation of form in commu-nicative classrooms. Studies in Second Language Acquisition , 19(1):37–66. Alireza M. Kamelabad, Beatrice Turano, Mattias Lundin, and Gabriel Skantze. 2026. Personalized language learning with an llm chatbot: Effects of immediate vs. delayed corrective feedback. Frontiers in Education , 11:1703664. Tony McEnery, Vaclav Brezina, Dana Gablasova, and Jayanti Banerjee. 2019. Corpus linguistics, learner corpora, and SLA: Employing technology to analyze language use. Annual Review of Applied Linguistics ,39:74–92. Iliana Panova and Roy Lyster. 2002. Patterns of correc-tive feedback and uptake in an adult esl classroom. 
+
+TESOL Quarterly , 36(4):573–595. Konstantinos M. Pitychoutis and Filomachi Spathopoulou. 2026. Ai-mediated written cor-rective feedback in l2 writing: What changes, what doesn’t, and what we still don’t know. Feedback Research in Second Language , 4:6–15. Richard W. Schmidt. 1990. The role of consciousness in second language learning. Applied Linguistics ,11(2):129–158. Beat A. Schwendimann, María Jesús Rodríguez-Triana, Andrii Vozniuk, Luis P. Prieto, Mina Shirvani Borou-jeni, Adrian Holzer, Denis Gillet, and Pierre Dil-lenbourg. 2017. Perceiving learning at a glance: A systematic literature review of learning dashboard research. IEEE Transactions on Learning Technolo-gies , 10(1):30–41. Younghee Sheen. 2010. Differential effects of oral and written corrective feedback in the esl classroom. 
+
+Studies in Second Language Acquisition , 32(2):203– 234. Merrill Swain. 2005. The output hypothesis: Theory and research. In Eli Hinkel, editor, Handbook of Re-search in Second Language Teaching and Learning ,pages 471–483. Lawrence Erlbaum Associates. Nargiza Turapova, Gulshoda Yunusova, Muzaffar Khashimov, Nozima Xujanazarova, A. Nigmatov, and A. Abdiev. 2025. Adaptive grammar feedback in ESL classrooms powered by context-aware NLP al-gorithms. In 2025 International Conference on Next Generation Computing Systems , pages 1–8. IEEE. Natercia Valle, Pavlo D. Antonenko, Kara M. Dawson, and Anne Corinne Huggins-Manley. 2021. Staying on target: A systematic literature review on learner-facing learning analytics dashboards. British Journal of Educational Technology , 52(4):1724–1748. 
+
+10 A CSLA Annotation Guidelines 
+
+This appendix summarizes the operational guide-lines used to produce CSLA annotations in SLA-LENS. The schema contains two independent anno-tation dimensions: labels , representing classroom interaction events, and error_labels , represent-ing observable learner-language errors. The full annotation manual provides additional examples and edge cases. 
+
+A.1 General Principles 
+
+Annotations represent the communicative function 
+
+of an utterance in conversational context rather than its grammatical form. Only phenomena supported by the available transcript are annotated. A single classroom-event label is preferred unless a row con-tains multiple independently observable events, in which case labels follow their temporal order. Two priority rules resolve common ambiguities: 
+
+Instructor: F > other instructor functions. 
+
+Learner: R > other learner functions. Thus, instructor utterances responding to learner production are classified as Feedback when appro-priate, even when their surface form resembles a prompt. Likewise, learner responses within feed-back sequences are classified as Uptake/Repair rather than ordinary prompt responses. 
+
+Unknown Function. UNK is assigned when an utterance’s communicative function cannot be de-termined reliably from the available context. This includes severely fragmented or unintelligible tran-script segments and transcription artifacts that do not support a defensible interactional interpreta-tion. UNK is preferred over speculative assignment of another classroom-event label. 
+
+A.2 Instructor Functions 
+
+Instructor functions include prompts, feedback, an-swers, reactions, classroom management, and con-versation management. 
+
+Prompts. A Prompt initiates or elicits learner production rather than responding to a preceding learner error. 
+
+Example. Describe el personaje. → P:I .
+
+Feedback. Feedback responds to learner produc-tion or the learner’s language-learning process. Whenever Feedback is assigned, a specific subtype is required.     
+
+> Label Definition
+> P:I Instruction or task intended to elicit learner produc-tion. P:IQ Information-seeking question requesting new infor-mation. P:CQ Clarification question outside a corrective-feedback sequence.
+
+Table 7: Instructor prompt subtypes.           
+
+> Label Definition
+> F:EC Explicit correction that overtly provides the target form. F:R Recast that reformulates learner production without explicitly identifying the error. F:CR Clarification request following problematic learner production. F:EL Elicitation prompting the learner to supply or com-plete the corrected form. F:MF Metalinguistic information about the linguistic prob-lem without directly supplying the correction. F:CC Confirmation check of a proposed interpretation or corrected form. F:Pr Positive evaluation of learner language or perfor-mance. F:Ack Acknowledgment or repetition of a correct learner form without explicit praise. F:NE Negative evaluation without supplying the correction.
+
+Table 8: Instructor feedback subtypes. 
+
+Feedback takes precedence over Prompt when the instructor utterance responds to learner produc-tion. 
+
+Example. Following a learner error, Di “tiene”. 
+
+→ F:EC , not P:I .
+
+Other Instructor Functions. A.3 Learner Functions 
+
+Learner functions distinguish responses to instruc-tional prompts from responses occurring within corrective-feedback sequences. 
+
+Prompt Response. PR marks learner production in response to an instructor prompt, question, or assigned task. The response may be correct, incor-rect, complete, or incomplete. Learner errors are annotated independently. 
+
+Example. T: ¿Cuál es tu comida favorita? S: La pizza. → PR .
+
+Student Prompt. The SP family captures learner-initiated prompts, questions, and clarification re-quests. 
+
+Response and Uptake. The R family character-izes learner responses within feedback sequences. Without preceding instructor feedback, learner pro-duction is not classified as an R event. 11 Label Definition        
+
+> AAnswers a learner question without functioning as corrective feedback. RN Reacts to the meaning, content, or emotional aspect of learner production without evaluating linguistic accuracy. CM Manages lesson organization, technology, participa-tion, or logistics. CoM Regulates conversational flow through minimal ex-pressions such as okay ,mhm , or vale .
+
+Table 9: Other instructor functions.      
+
+> Label Definition
+> SP General learner-initiated prompt when a specific sub-type cannot be determined reliably. SP:I Directs another participant to perform an action. SP:IQ Requests new information. SP:CQ Requests clarification, repetition, explanation, or lexi-cal assistance.
+
+Table 10: Learner-initiated prompt categories. 
+
+The distinction between PR and R depends on the preceding instructor event. Responses to in-structional prompts receive PR , whereas learner re-sponses within feedback sequences receive an R
+
+subtype. 
+
+Example. T: No. Di “tiene”. → F:EC ; S: Tiene. 
+
+→ R:S .
+
+Annotation boundary. The R:NR category rep-resents the absence of uptake following feedback. Because SLA-LENS assigns labels to existing tran-script rows rather than generating separate episode-level annotations, this category requires particu-lar care. Its assignment must be supported by the available interactional evidence and the row-level annotation convention. 
+
+Interaction Management. Learner CM concerns lesson logistics, technology, or participation, while 
+
+CoM marks minimal expressions that regulate con-versational flow without contributing new instruc-tional content. 
+
+A.4 Continuation and Multi-label Rules 
+
+Details, elaborations, and continuations inherit the communicative function of the event they continue rather than receiving a separate explanation label. 
+
+Continuation example. T: Provide at least two Spanish names. → P:I ; T: By Spanish names I mean names such as Juan or María. → P:I .Multiple labels are assigned only when a row contains more than one independently observable classroom event. Their order follows the order of occurrence.      
+
+> Label Definition
+> R:S Successful repair that resolves the problem targeted by feedback. R:IR Attempted repair that does not fully resolve the tar-geted problem. R:Ack Acknowledges feedback without producing the cor-rected form. R:NR No learner uptake before the interaction moves on.
+
+Table 11: Learner uptake and repair outcomes.      
+
+> Label Definition
+> Er:G One grammatical error involving morphology, syntax, agreement, word order, or another grammatical fea-ture. Er:L One incorrect, missing, malformed, or non-Spanish lexical item in otherwise Spanish production. Er:M More than one observable grammatical or lexical er-ror. Er:EU Substantially English production when Spanish is con-textually expected.
+
+Table 12: Learner-language error categories. 
+
+Multi-label example. Muy bien, ahora inténtalo otra vez. → F:Pr, F:EL .Secondary labels are not added merely be-cause an utterance permits multiple interpretations. When the temporal order or independence of pro-posed functions cannot be established reliably, an-notators should avoid speculative additional labels. 
+
+A.5 Learner Error Annotation 
+
+Learner errors are annotated independently of classroom-event functions and only when sup-ported by observable learner production. Errors attributable to ASR, punctuation, capitalization, or formatting are excluded. 
+
+Error Decision Hierarchy. Error categories are assigned using the following ordered procedure: 1. If Spanish is expected and the utterance is sub-stantially English, assign Er:EU .2. Otherwise, if more than one observable error occurs, assign Er:M .3. If exactly one grammatical error occurs, assign 
+
+Er:G .4. If exactly one lexical error occurs, assign Er:L .5. Otherwise, leave error_labels empty. English is not automatically considered erro-neous. English used for classroom management, explicitly permitted by the instructor, or required by the task receives no Er:EU . An isolated English lexical item embedded in otherwise Spanish pro-duction is generally Er:L .When an apparent error cannot be reliably dis-12 Distinction Decision rule Example 
+
+Prompt vs. Feed-back Use P when the instructor initiates new learner pro-duction. Use F when responding to, evaluating, or facilitating correction of learner production. 
+
+Di una oración. → P:I ; after an error, Di “tiene”. 
+
+→ F:EC .PR vs. R Use PR after an instructional prompt and an R subtype within a feedback sequence. T: ¿Cómo estás? S: Bien. → PR ; T: Di “tiene”. S: 
+
+Tiene. → R:S .F:Pr vs. RN Use F:Pr for positive evaluation of learner perfor-mance and RN for reactions to the content or situation described. S: Estoy cansado. T: Lo siento. → RN .F:Ack vs. CoM Use F:Ack when acknowledging learner production as a pedagogical response. Use CoM when the expres-sion primarily regulates conversational flow. T: Muy bien. → F:Ack or CoM , depending on preced-ing learner production and context. CM vs. CoM Use CM for lesson logistics, technology, participa-tion, or classroom organization. Use CoM for minimal discourse-management expressions. 
+
+Voy a compartir mi pantalla. → CM ; Okay. → CoM .Er:L vs. Er:EU Use Er:L for an isolated non-Spanish lexical item and Er:EU for substantially English production when Spanish is expected. 
+
+Mi mamá lives en California. → Er:L ; My mother lives in California. → Er:EU .
+
+Table 13: Key contextual distinctions in the CSLA annotation guidelines. 
+
+tinguished from an ASR, segmentation, or speaker-attribution artifact, annotation remains conserva-tive. Error labels describe observable evidence in the available transcript rather than independently verified learner proficiency. 
+
+Examples. Mi hermana tengo trece años. → Er:G ;
+
+Yo borrow un libro. → Er:L ; Los casa es grande. 
+
+→ Er:M ; The boy is running. → Er:EU , when Span-ish is expected. 
+
+A.6 Key Ambiguity Rules 
+
+Several annotation distinctions depend on conver-sational context rather than surface form. Table 13 summarizes the principal decision rules. 
+
+B SLA-LENS Annotation Pipeline Details 
+
+B.1 Transcript Processing 
+
+The annotation pipeline accepts .vtt , .txt , and 
+
+.docx transcript files. Timestamped cues are parsed into speaker blocks and segmented into sentence-level rows using sentence-final punctu-ation and Spanish inverted punctuation. Each row retains its sentence ID, turn number, source turn number, timestamps, speaker identity, and utter-ance text. Sentences derived from the same source cue retain its timestamps. The annotation engine processes 12 target rows per batch, accompanied by up to five preceding and two following rows as conversational context. Only target rows receive annotations. The prompt combines the CSLA an-notation guidelines, role-specific constraints, prior-ity rules, and structured output requirements. The current LLM implementations use temperature 0, 
+
+top_p =1, and a maximum of 4,000 completion to-kens. The complete prompts and JSON schema are provided in the supplementary repository. 
+
+Prompt for Contextual CSLA Annotation System Prompt (excerpt). 
+
+You are an expert linguistic annotator for classroom inter-action transcripts. Follow the CSLA annotation guidelines. Annotate only the TARGET ROWS and use CONTEXT ROWS to in-terpret the surrounding interaction. Treat speaker roles as authoritative, do not invent missing content, and do not silently correct transcription errors. Return only valid JSON. 
+
+User Prompt (excerpt). Input: Context rows and target rows containing sentence IDs, timestamps, speaker roles, and utterance text. 
+
+Goal: Assign SLA-relevant annotations to each target row using the CSLA guidelines. 
+
+Key Rules: 
+
+• Identify communicative functions using conversational context. • Prioritize instructor Feedback when responding to learner production. • Prioritize learner Uptake/Repair within feedback se-quences. • Apply speaker-role constraints and ordered multi-label rules. • Annotate observable learner errors independently of classroom events. • Use UNK when evidence is insufficient. 
+
+Output: One structured JSON object containing anno-tations for all target rows, including label assignments, confidence, and brief rationales. The complete prompt, label inventory, decision rules, and output schema are provided in the supplementary repository. 
+
+B.2 Structured Output and Validation 
+
+The model returns a JSON object containing one annotation per target row. Each annotation includes sentence_id , turn_number , speaker ,13 sentence , labels , error_labels , confidence ,and rationale . A strict JSON schema restricts al-lowable label values and required fields. Returned batches are checked for the expected number and ordered IDs of target rows. 
+
+C Model and Training Details 
+
+This appendix provides additional implementation details for the proprietary and open-weight an-notation models evaluated in Section 4.2. All models perform the same CSLA annotation task, predicting classroom-event labels and learner 
+
+error_labels .
+
+C.1 Model Checkpoints and Inference 
+
+We evaluate GPT-4.1 as the reference anno-tation system alongside three open-weight models: Qwen3-8B, Llama-3.1-8B-Instruct, and Gemma-4-12B-it. GPT-4.1 uses the 
+
+gpt-4.1-2025-04-14 checkpoint, while the open-weight models are based on the instruction-tuned checkpoints Qwen/Qwen3-8B ,
+
+meta-llama/Llama-3.1-8B-Instruct , and 
+
+google/gemma-4-12B-it , respectively. To maintain a consistent annotation setup, all models receive the same CSLA guidelines, speaker-role information, and conversational context, consisting of 12 target rows, five preceding rows, and two following rows. Inference uses temperature 0,
+
+top_p =1, and a maximum of 4000 generated tokens. All models are instructed to produce structured annotations containing classroom-event labels, learner-error labels, confidence, and brief rationales. The complete prompts and inference configurations are provided in the supplementary repository. 
+
+C.2 Training Data Construction 
+
+The corpus contains 40 GPT-annotated classroom transcripts comprising 21,835 sentence-level rows. Of these, 35 transcripts (19,214 rows) are desig-nated for open-weight model adaptation, while five transcripts (2,621 rows) are held out for sil-ver evaluation, out of which one was used to con-struct the gold transcript. The training partition contains 12,920 instructor rows and 6,294 learner rows, with 19,202 rows containing at least one classroom-event label. The silver partition con-tains 1,728 instructor rows and 893 learner rows, of which 2,620 have classroom annotations. The expert-reviewed gold transcript contains 653 sen-tence rows and provides an independent reference for human-annotation agreement. Training exam-ples are constructed from GPT-generated CSLA annotations and include target utterances, speaker roles, conversational context, and structured an-notation outputs. The evaluation transcripts are reserved from model adaptation to support evalua-tion on unseen classroom interaction. 
+
+C.3 QLoRA Fine-Tuning 
+
+We adapted Qwen3-8B using Quantized Low-Rank Adaptation (QLoRA) on the GPT-annotated CSLA training corpus. The base model is loaded us-ing 4-bit NF4 quantization with bfloat16 compu-tation. Low-rank adapters are applied to the atten-tion and feed-forward projection modules ( q_proj ,
+
+k_proj , v_proj , o_proj , gate_proj , up_proj ,and down_proj ), with rank r = 16 , scaling param-eter α = 32 , and dropout 0.05. Fine-tuning uses a learning rate of 2 × 10 −4, the paged 8-bit AdamW optimizer, and a cosine learning-rate schedule with a 3% warmup ratio. It is trained for three epochs with a per-device batch size of 2 and gradient ac-cumulation of 8, yielding an effective batch size of 16 on one GPU. The maximum sequence length is 8,192 tokens. Training is done on a single NVIDIA A100 80 GB GPU using Hugging Face Transform-ers, PEFT, TRL, and bitsandbytes. 
+
+C.4 Evaluation and Reproducibility 
+
+All prompt-only and adapted models are evaluated on the same expert-reviewed gold and held-out sil-ver transcripts. Predictions are aligned by sentence ID and evaluated using Hard Accuracy, hierarchical Soft Score, and diagnostic-sensitive detection met-rics as defined in Section 4.3. The gold and silver results are reported separately because silver an-notations originate from the GPT-based reference system rather than an independent human review. The supplementary repository includes the annota-tion and evaluation scripts. 
+
+D Hierarchical Evaluation Implementation 
+
+This appendix specifies the evaluation procedure used for classroom-event and learner-error annota-tions. Gold and predicted rows are aligned using 
+
+sentence_id when available, with row-position alignment used otherwise. Classroom-event labels are evaluated as ordered sequences, while learner-error annotations are scored independently. 14 D.1 Exact-Match Evaluation 
+
+For each row i, let Gi and Pi denote the or-dered gold and predicted classroom-event label sequences. Hard Accuracy is defined as 
+
+HardAcc = 1
+
+N
+
+> N
+
+X
+
+> i=1
+
+1[Gi = Pi]. (1) where N is the number of aligned rows. Both label identity and order must match. Error Hard Ac-curacy is calculated analogously using the ordered 
+
+error_labels sequences. 
+
+D.2 Hierarchical Soft Score 
+
+The Soft Score assigns partial credit according to label-family membership and speaker-role compat-ibility. For a gold label g, predicted label p, and row role r, pairwise credit is 
+
+c(g, p, r ) = 
+
+
+
+1.00 g = p, 
+
+0.70 fam( g) = fam( p),
+
+0.25 role( g, r ) ∧ role( p, r ),
+
+0.00 otherwise .
+
+(2) Here, fam( ·) identifies the CSLA label family, and role( l, r ) indicates whether label l is compat-ible with the row’s speaker role. The family con-dition applies to distinct valid labels within the same family. Role-neutral labels ( CM , CoM , and UNK )are compatible with both instructor and learner roles. For multi-label rows, the evaluator selects the maximum-credit one-to-one matching Mi be-tween gold and predicted labels. Unmatched labels receive zero credit, and the matching score is nor-malized by the larger label-set cardinality: 
+
+Ai = max Mi
+
+P 
+
+> (g,p )∈Mi
+
+c(g, p, r i)max( |Gi|, |Pi|) . (3) When both sequences are empty, Ai = 1 ; when exactly one is empty, Ai = 0 . This formulation penalizes both missing and unsupported labels. An ordering penalty is applied only when at least two exactly shared labels occur in a different relative order between the gold and predicted sequences: 
+
+Si = 100 Ai
+
+(
+
+0.85 if shared-label order differs ,
+
+1.00 otherwise .
+
+(4) The final Soft Score is the mean row-level score:                
+
+> Gold Prediction Score
+> F:EC F:EC 100.0
+> F:EC F:R 70.0
+> F:EC P:I 25.0
+> F:EC PR 0.0
+> F:Pr, P:IQ F:Pr 50.0
+> F:Pr, P:IQ P:IQ, F:Pr 85.0
+> Table 14: Illustrative hierarchical Soft Scores for instructor-role rows. Scores reflect label-family credit, role compatibility, multi-label coverage, and ordering penalties.
+
+SoftScore = 1
+
+N
+
+> N
+
+X
+
+> i=1
+
+Si. (5) 
+
+D.3 Worked Scoring Examples 
+
+Table 14 illustrates the scoring behavior for instruc-tor rows. 
+
+D.4 Diagnostic-Sensitive Detection 
+
+Feedback, Uptake/Repair, and learner-error detec-tion are evaluated as separate row-level binary clas-sification tasks. A row is positive when its anno-tation contains at least one label from the corre-sponding family: F:* for Feedback, R:* for Up-take/Repair, and Er:* for learner errors. For each category, precision, recall, and F1 are calculated from row-level true positives, false positives, and false negatives: 
+
+P = T P T P + F P , R = T P T P + F N , (6) 
+
+F1 = 2P R P + R . (7) A prediction is considered correct at the family-detection level regardless of subtype. For example, predicting F:R instead of F:EC counts as a true positive for Feedback detection but receives only partial credit under the hierarchical Soft Score. In-valid classroom-event and error labels are recorded separately, along with speaker-role violations. 
+
+E SLA-LENS Analytical Report 
+
+SLA-LENS generates standalone HTML and PDF reports from annotated classroom transcripts using deterministic Python-based aggregation. The re-port includes session-level statistics, instructor and learner participation, pedagogical-event distribu-tions, learner-specific error patterns, temporal visu-alizations, and candidate interactional associations. 15 Figure 2: SLA-LENS analytical report overview showing anonymized participant information, session-level annotation counts, and guidelines for interpreting the descriptive outputs. All statistics are derived from the annotated transcript without additional LLM inference. 
+
+An annotation glossary and evidence index support independent interpretation and inspection of the underlying transcript. Figure 2 shows the report interface with session-level statistics and interpre-tation guidelines. Figure 3 illustrates learner-level comparisons of language production and annotated error incidence. 
+
+Candidate Interaction Associations. SLA-LENS identifies candidate event associations using deterministic row-proximity rules. For each source event, the reporting algorithm searches forward for the first eligible target event within four intervening transcript rows, stopping if another source event occurs first. Three association types are considered: learner error to instructor corrective feedback, instructor feedback to learner uptake, and instructor prompt to learner prompt response. These associations are descriptive proximity heuristics and do not establish verified interactional episodes or causal relationships. 
+
+Evidence Traceability. Each reported annotation and candidate interaction association can be traced to its supporting transcript rows through sentence identifiers, timestamps, speaker information, and original utterance text. The generated evidence index allows users to inspect these annotations in their conversational context. Examples and the complete report are provided in the supplementary repository. 
+
+> Figure 3: Learner-level descriptive analytics showing approximate word production (top) and error-labeled rows per 100 learner rows (bottom). These measures account for differences in participation but do not in-dependently indicate learner proficiency or language development.
+
+16

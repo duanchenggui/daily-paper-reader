@@ -1,0 +1,640 @@
+Title: A Unified Response Framework for Questions and Tutoring Dialogues
+
+URL Source: https://arxiv.org/pdf/2610.19532v1
+
+Published Time: Thu, 15 Oct 2026 00:43:48 GMT
+
+Number of Pages: 22
+
+Markdown Content:
+# A Unified Response Framework for Questions and Tutoring Dialogues 
+
+Zhangqi Duan 1, Simon Woodhead 2, Maya Miller-Vedam 3, Andrew Lan 1
+
+1University of Massachusetts Amherst, 2Eedi, 3Khan Academy 
+
+{zduan, andrewlan}@cs.umass.edu ,
+
+simon.woodhead@eedi.co.uk ,
+
+mayavedam@khanacademy.org 
+
+Abstract 
+
+Existing student models in educational appli-cations largely focus on student responses to questions. However, as tutoring becomes more accessible at large scale, it is important to an-alyze dialogues between tutors and students, which may reveal fine-grained evidence on stu-dent knowledge. In this work, we propose a unified framework that models both student re-sponses to questions and tutor-posed subtasks during dialogues on a shared item response theory (IRT) scale. We first identify mathe-matical subtasks in tutoring dialogues, rewrite them into self-contained questions, and identify the correctness of student responses to these subtasks. We then develop an IRT framework that estimates question/subtask difficulty from text, tracks students’ evolving abilities across question-answering and dialogue interactions, and a novel method to leverages tutor moves be-tween consecutive subtasks to regularize their difficulty values. We evaluate our framework on two real-world math education datasets con-taining both human- and AI-tutored dialogues. Results show that our framework outperforms strong baselines on both question difficulty pre-diction and response correctness prediction. 
+
+1 Introduction 
+
+Estimating student knowledge and item characteris-tics from students’ responses to mathematical ques-tions/items is central to online learning platforms, which supports personalized practice, targeted tu-toring, and reliable assessment. There are two ma-jor types of student response modeling approaches: Item response theory (IRT) models place static stu-dent ability and question difficulty on a common scale (Rasch, 1960), while knowledge tracing (KT) models track how a student’s knowledge evolves over time across a sequence of questions (Corbett and Anderson, 1994). One key limitation of these models is that they only account for students’ re-sponse records, which may leave out fine-grained What is value of :□ 37 × □ = 25                        
+
+> (b) Tutoring Dialogue
+> Tutor Student
+> 1Hi, I don’t know how to solve this question.
+> 2How do you find a missing factor when you know the product and one factor?
+> 3I think you multiply them. Incorrect
+> 4Let’s try a simpler example. If 4 x ? = 20, what’s the missing number?
+> 5The missing number is 5. Correct
+> 6Exactly. So what calculation should we use to find the missing value?
+> 725 ÷ 37
+> 8Good. To divide by a fraction, we multiply by its reciprocal. What is the reciprocal of ?
+> 37
+> 11 Because flipping makes it equal to 1?
+> 37
+> Incorrect
+> scaffold after struggle:
+> b4 < b2
+> 10 Yes. Why does multiplying by cancel ?
+> 73
+> 37push for rigor: b10 > b8
+> Correct
+> 9?
+> 73
+> Correct
+> 12 Not quite. is not 1, but . That is why it undoes the multiplication. Now calculate .
+> 73
+> 37 × 73 = 1
+> 25 × 73
+> 13 , so the missing value is B.
+> 14 15
+> Correct
+> (a) Question KC: Fraction Division
+> 29 35
+> A
+> 135
+> 14 15
+> B
+> D635
+> C
+
+Figure 1: Student responses to tutor-posed subtasks in tutoring dialogues reveal fine-grained insights into the student’s changing knowledge, while tutor moves help infer the relative difficulty of subtasks. 
+
+information on their knowledge. For example, for multiple-choice questions, only knowing whether a student selected the correct option or which in-correct option they selected does not allow us to pinpoint their misunderstanding. Powered by generative artificial intelligence (AI), online learning platforms increasingly com-bine standalone question-answering practice with on-demand tutoring (Eedi, 2024; Khan Academy, 2023; Carnegie Learning, 2024). Tutoring dia-logues have significant potential in providing us 1arXiv:2610.19532v1 [cs.CL] 14 Oct 2026 fine-grained insights into student knowledge: a tutoring dialogue is not merely an explanation at-tached to a question; it is a sequence of smaller assessment and learning events. A tutor may ask the student to recall a fact, perform an intermedi-ate calculation, or justify a step; after observing the response, the tutor may scaffold or push the student toward more rigorous reasoning (Zhang et al., 2026). The student’s knowledge can there-fore be more accurately estimated and may change throughout the dialogue. Figure 1 illustrates this process. The original response only indicates that the student answered the fraction-division question incorrectly, whereas the dialogue reveals an initial conceptual error, success on a simpler scaffolded task, correct intermediate calculations, and a re-maining gap in justification. These tutor-posed 
+
+tasks and student responses may provide substan-tially more insights into the student’s latent knowl-edge than the original response alone. 
+
+Related Work However, existing approaches do not provide a rigorous way to analyze original question responses and tutor-posed tasks together. Prior work has explored question difficulty predic-tion from question content (Huang et al., 2017; Benedetto et al., 2021) and simulated student re-sponses (Scarlatos et al., 2025b), as well as KT in tutoring dialogues (Scarlatos et al., 2025a). More recently, Huang et al. (2026) incorporate tutor-turn difficulty and IRT into conversational KT. However, two challenges remain for jointly modeling original questions and dialogue subtasks. First, tutoring dia-logues follow personalized trajectories, resulting in subtasks that are often not shared across students and thus difficult to calibrate using traditional IRT. Second, many tutor-posed tasks implicitly refer to quantities, expressions, or reasoning steps intro-duced earlier in the problem or dialogue, making them difficult to represent as self-contained, stan-dalone questions. Together, these challenges leave open the question of how to place original ques-tions and tutor-posed tasks on the same scale and use them to track student knowledge. We provide a detailed discussion of related work in Appendix A. 
+
+Contributions In this work, we propose URF-QD (Unified Response Framework for Questions and tutoring Dialogues), a framework for jointly modeling responses to original questions and math-ematical subtasks arising in corresponding tutoring dialogues. Our contributions are threefold. First, we identify tutor turns that pose mathematical tasks and rewrite these context-dependent tasks as con-cise, self-contained questions, enabling their diffi-culties and student responses to be modeled jointly with those of original questions. Second, we intro-duce a dynamic IRT model that tracks the student’s evolving knowledge state from responses to both original questions and dialogue subtasks; impor-tantly, we introduce a novel tutor move-implied regularization term to supervise a relative ordering between consecutive subtasks. Third, we evalu-ate our framework on two real-world math educa-tion datasets containing both question-answering records and tutoring dialogues. Extensive evalu-ation shows that our framework consistently im-proves question difficulty prediction and response correctness prediction. We use human evaluation and qualitative analyses to validate and illustrate components of our framework, and present a pre-liminary example of how our framework can be used for large language model (LLM) tutor bench-marking in the Appendix. Our implementation will be made publicly available to enable future research on student assessment from dialogues. 
+
+2 Problem Formulation 
+
+We consider the setting of students working in digi-tal learning platforms, where they practice on math questions and interact with tutors when they want additional support. Our goal is to estimate a stu-dent’s ability from how they respond to both ques-tions and tutor-posed subtasks that arise naturally during tutoring dialogues. For each student j, we denote the binary-valued correctness of their response to an original ques-tion qi as yi,j ∈ { 0, 1}, where 1 corresponds to a correct response. When receiving tutoring support on question qi, the student and the tutor engage in a dialogue di,j = ( s0, t 1, s 1, ..., t M , s M ), where sm
+
+and tm denote student and tutor utterances respec-tively and M is the number of total tutor-student turn pairs. The initial student turn s0 is present when the student initiates the conversation. We focus on tutor turns that pose a mathematical subtask, i.e., when the tutor requires the student to produce a mathematically meaningful response, such as an intermediate calculation, factual recall, method selection, interpretation, or explanation. We treat student responses to these tutor-posed tasks as additional response observations. We de-tail how these tasks are identified and transformed into standalone questions in Section 3.1. 2A. Model Framework 
+
+## ...             
+
+> LLM Encoder
+> Ability Projection
+> Question Difficulty
+> Predictor
+> Difficulty
+> Ability
+> $$e_{j,k}$$
+> 1PL
+> IRT
+> Before Prediction
+> After Prediction
+> $$h_{j,k-1}$$
+> Correctness
+> Embedding
+> $$[e_{j,k} ; r_{j,k}]$$
+> $$r_{j,k}$$ Knowledge
+> Update
+> 0.15 x 0.2 = ?
+> 0.0003
+> What is 15x2?
+> 30 $$h_{j,k}$$
+> Standalone
+> Rewrite aj,k
+> bj,k
+> Prior Student State
+> Updated State
+> Original
+> Question
+> Identified
+> Subtask
+> $$x_{j,k}$$
+> $$y_{j,k}$$
+> Chronological Interactions
+> C. Training Objectives
+> Response Correctness Prediction
+> $$\\\mathcal{L}_{\mathrm{resp}} = \mathcal{L}_{\mathrm{BCE}} + \lambda \mathcal{L}_{\mathrm{order}}$$
+> Question Difficulty Prediction $$\mathcal{L}_{\mathrm{diff}} = \mathcal{L}_{\mathrm{diff-MSE}} + \mathcal{L}_{\mathrm{diff-BCE}} + \lambda \mathcal{L}_{\mathrm{order}}$$
+> Question Difficulty
+> Predictor
+> GT
+> Difficulty
+> IRT
+> fit
+> Observed Correctness
+> GT
+> Ability
+> Original Question MSE
+> B. Relative-order Regularization
+> Tutoring Dialogue
+> $$\\b_k>b_{k-1}$$ Push for rigor $$\\b_k<b_{k-1}$$ Scaffold after struggle
+> $$\\\mathcal{L}_{\mathrm{order}} = \mathcal{L}_{\mathrm{scaf}} + \mathcal{L}_{\mathrm{rigor}}$$ Hinge Loss
+> Pedagogical
+> Relation
+> Annotation
+
+$$\oplus$$ 
+
+> $$\mathcal{L}_{\text{diff-BCE}}=\operatorname{BCE}(y_{\mathrm{sub}},\hat{p}_{\mathrm{sub}})$$
+> Dialogue-subtask BCE
+> $$\\\mathcal{L}_{\mathrm{diff-MSE}} = (b_i - \tilde{b}_i)^2$$
+> $$\\ \hat{p}_{sub}=\sigma(\tilde{a}-b_{sub})$$
+
+Figure 2: Overview of URF-QD. (A) Original questions and rewritten dialogue subtasks are modeled on a shared IRT scale using text-based difficulty estimates and evolving student ability. (B) Relative-order regularization encourages scaffolded tasks to be easier and rigor-promoting tasks harder than preceding tasks. (C) Response correctness uses BCE with the regularization loss, while question difficulty uses GT-difficulty MSE, dialogue-subtask BCE, and the regularization loss. GT denotes IRT-estimated “ground-truth” question difficulties and student abilities obtained from observed student responses to original questions. 
+
+For each student j, we order all scored inter-actions chronologically and denote the resulting sequence as Hj = (( xj, 1, y j, 1), ..., (xj,T , y j,T )) ,where xj,k denotes the mathematical task associ-ated with interaction k, and yj,k ∈ { 0, 1} denotes the corresponding response correctness. An interac-tion may correspond either to an original question or to a subtask arising within a tutoring dialogue. Given the interaction history Hj,<k , our pri-mary modeling objective is to estimate p(yj,k =1|xj,k , H j,<k ), while placing student ability and the difficulties of original questions and dialogue tasks on a common IRT scale. In this way, question-answering and tutoring-dialogue interactions pro-vide complementary observations for modeling stu-dent performance. 
+
+3 Methodology 
+
+We now detail our framework for jointly modeling student performance in question-answering activi-ties and tutoring dialogues. Our key idea is to place original questions and tutor-posed dialogue sub-tasks on the same IRT parameter scale. As shown in Figure 2, our framework has three main com-ponents. First, we identify mathematical subtasks posed by tutors during dialogues and transform these context-dependent tasks into the format of standalone questions. Second, we use a dynamic IRT model to jointly model responses to original questions and transformed dialogue subtasks on a shared scale. Third, we leverage tutor peda-gogical move labels to impose difficulty ordering constraints between consecutive tutor-posed tasks, to provide additional supervision when estimating their difficulties. We note that, for simplicity, we restrict ourselves to 1PL IRT models (Hambleton and Swaminathan, 2013), which is often referred to as the Rasch model (Rasch, 1960), where each question is only characterized by a single scalar-valued difficulty parameter. Our framework can be extended to other IRT models, although diffi-culty estimation is known to be more accurate than scale/discrimination estimation for 2PL IRT mod-els (Chen and Chen, 2026). 
+
+3.1 Subtask Transformation 
+
+Tutoring dialogues contain many intermediate mathematical tasks that provide additional evi-dence of student ability. However, tutor utterances are often context-dependent and differ substantially in form from standalone assessment questions. We therefore first identify tutor turns that constitute mathematical subtasks and then rewrite each iden-tified subtask into a standalone question, allowing original questions and subtasks to be represented in a common form for subsequent modeling. 3Subtask Identification For each dialogue di,j ,we consider every tutor turn that is immediately followed by a student turn as a candidate subtask. We prompt GPT-5.4 with the complete dialogue to identify the valid mathematical subtasks: for each candidate, it determines whether the tutor turn poses an explicit mathematical task and whether the subsequent student turn attempts to answer it. We retain only candidates that satisfy both condi-tions. Following (Scarlatos et al., 2026), for each retained tutor subtask, we annotate whether the stu-dent response sm correctly answers the tutor-posed task. For each scored response, we denote this cor-rectness label as yi,j,m ∈ { 0, 1}. Turns without an applicable mathematical response are left unscored and are not used as response observations. 
+
+Standalone Question Transformation For ev-ery identified tutor subtask tm, we prompt GPT-5.4 to rewrite the tutor’s request as a concise, stan-dalone assessment question ui,j,m . Given the orig-inal problem and dialogue with the target turn marked, the model resolves contextual references and supplies only the information needed to make the question self-contained while preserving its mathematical demand. We provide further prompt details in Appendix G. For each scored subtask, we map the transformed question ui,j,m and its response label yi,j,m to the corresponding interaction k in the student’s chrono-logical history Hj : xj,k = ui,j,m , y j,k = yi,j,m .
+
+This mapping represents dialogue subtasks in the same form as original questions, enabling both in-teraction types to be modeled jointly. 
+
+3.2 URF-QD: Joint Modeling of Questions and Dialogue Subtasks 
+
+Given the chronological interaction history Hj ,which contains both original question responses and transformed dialogue subtask interactions, we model student performance using a dynamic IRT framework. We process interactions sequentially and maintain a latent student state hj,k that sum-marizes the student’s interactions up to step k. At interaction k, we first encode the current task xj,k 
+
+and estimate its difficulty. We then project the pre-ceding state hj,k −1 to a scalar ability and use a 1PL IRT model to predict the student’s response. After observing yj,k , we update the student state using the task representation and response correctness. 
+
+Task Encoder and Difficulty We encode each task xj,k using an LLM. Let Zj,k =(zj,k, 1, . . . , zj,k,L j,k ) denote the last-layer hidden state representations of the question sequences Lj,k .We obtain a fixed-dimensional task representation by mean pooling: ej,k = 1
+
+> Lj,k
+
+PLj,k  
+
+> ℓ=1
+
+zj,k,ℓ . We map this representation to a scalar difficulty us-ing a multilayer perceptron (MLP) gdiff : bj,k =
+
+gdiff (ej,k ). The task encoder and difficulty predic-tion head are shared across original questions and dialogue subtasks, placing both on the same latent difficulty scale. This text-based parameterization is particularly important for dialogue subtasks, since different students may encounter different tutor-posed tasks even when working on the same origi-nal question. Rather than assigning an independent difficulty parameter to every observed task, the model estimates difficulty from its textual content, enabling the learned difficulty function to general-ize across questions, students, and dialogues. 
+
+Dynamic Student State and Ability We rep-resent student j’s interaction history with a la-tent state hj,k that summarizes all observed task-response pairs through step k. After observing the student’s response yj,k to task xj,k , we incorporate this new evidence into the state. We first repre-sent response correctness using a learned embed-ding: rj,k = Ey(yj,k ), where Ey contains separate learnable embeddings for correct and incorrect re-sponses to both original questions and dialogue sub-tasks. We then concatenate resulting correctness embedding with task’s textual embedding. One can use any deep learning-based KT method for this dynamic update; unless otherwise noted, we defer to the deep KT (DKT) method (Piech et al., 2015). 
+
+IRT Response Model Before the student at-tempts task xj,k , we estimate their current abil-ity by projecting the preceding state to a scalar: 
+
+aj,k = ga(hj,k −1), where ga is a MLP. This pre-interaction ability is used in the IRT response model below and does not depend on the current response yj,k . After that response is observed, the updated state hj,k is used to estimate ability at inter-action k + 1 . Unlike a static IRT ability parameter, 
+
+aj,k is dynamic throughout the student’s interac-tion sequence and updated when new responses are observed. Therefore, dialogue subtask responses serve not only as correctness-prediction targets, but also as additional observations that refine future ability estimates. Given the student’s current abil-ity aj,k and the difficulty of the current task, bj,k ,we model response correctness using a 1PL logistic 4IRT model: 
+
+p(yj,k = 1 | xj,k , H j,<k ) = σ(aj,k − bj,k ),
+
+where σ(·) denotes the sigmoid function. Because original questions and dialogue subtasks share the same task encoder, difficulty head, ability projec-tion, and IRT response function, their difficulties and the student’s dynamic ability are represented on a common latent scale. 
+
+3.3 Difficulty Order Regularization 
+
+Correctness observations supervise the relationship between student ability and task difficulty, but tu-toring dialogues provide an additional source of information: the tutor’s pedagogical move can im-ply a relative difficulty ordering between consec-utive subtasks. We exploit two cases, scaffolding after struggle and pushing for rigor (Zhang et al., 2026), and use them to regularize task difficulties. 
+
+Pedagogical Move Annotation For each pair of consecutive tutor subtasks separated by a single student response, we prompt GPT-5.4 to determine whether the transition implies a tutor move that implies any relationship between the subtask dif-ficulties. The model is provided with the origi-nal problem, the raw tutoring dialogue with sub-tasks marked, eligible tutor-turn pairs, and the an-notated correctness label of the intervening student response. We withhold the student’s response to the second subtask, so that the relation is determined from the tutor’s pedagogical action rather than from whether the student subsequently succeeds or fails. We denote the set of turns that correspond to scaffolding after struggle moves as Ω1. In practice, when students respond incorrectly to tutor-posed subtasks or indicate that they do not know the an-swer, tutors often scaffold by breaking down the original subtask into smaller, simpler, more con-crete subtasks; such moves imply that bj,k < b j,k −1.Similarly, we denote the set of pushing for rigor turns as Ω2. A pair is assigned to Ω2 when the previous student response is correct and the sub-sequent tutor subtask increases the required depth of reasoning, for example by eliciting a justifica-tion, explanation, derivation, interpretation, proof, or other conceptual reasoning; such moves imply 
+
+bj,k > b j,k −1. We assign no constraint when the intervening response cannot be scored for correct-ness, when the two subtasks are unrelated, or when the second tutor turn merely repeats the task, re-quests a generic retry, continues a routine multi-step solution, or otherwise does not substantively change the cognitive demand. 
+
+Regularization For each (j, k ) ∈ Ω1, the second task should be easier than the preceding task. We define the corresponding hinge loss as 
+
+Lscaf = 1
+
+|Ω1|
+
+X
+
+> (j,k )∈Ω1
+
+max {bj,k − bj,k −1, 0}.
+
+The loss is positive when the scaffolded task is more difficult than the previous task, violating the tutor move, and zero otherwise. We define the loss for pushing for rigor moves, Lrigor , in a similar way, with bj,k and bj,k −1 reversed. We simply sum these two regularization terms together to obtain Lorder 
+
+and add it to the objectives detailed below, using them as soft penalties to encourage the difficulty encoder to learn dialogue subtask difficulties that are consistent with tutoring moves. 
+
+3.4 Prediction Targets, Training Objectives 
+
+We study two complementary prediction targets us-ing separate training objectives. Question difficulty prediction evaluates whether the shared difficulty encoder can accurately estimate the difficulty of previously unseen questions. Response correctness prediction evaluates whether original-question and dialogue-subtask responses can jointly track a stu-dent’s evolving ability and accurately predict their future performance. 
+
+Question Difficulty Prediction Here, we exam-ine whether dialogue subtasks provide additional calibration to help us estimate the difficulty of origi-nal questions. We first fit an IRT model on observed student responses and use it to obtain a “ground-truth” difficulty ˜bi for each original question qi. We then train the shared difficulty predictor to recover these difficulties, while using dialogue interactions as additional supervision. For an original question 
+
+qi, let bi denote the difficulty value predicted by the encoder given the question content as input. We su-pervise these predictions using mean squared error over the original questions available for training, as 
+
+Ldiff -MSE = 1
+
+> |Q train |
+
+P
+
+> i∈Q train
+
+
+
+bi − ˜bi
+
+2
+
+.
+
+Since dialogue subtasks do not have correspond-ing ground-truth difficulty labels, we addition-ally train on the observed student response cor-rectness to extract information on subtask diffi-culty indirectly. Let ˜aj denote the fixed reference ability of student j from the fitted IRT, and let 
+
+bi,j,m be the predicted difficulty of transformed 5dialogue subtask ui,j,m , we minimize Ldiff -BCE ,the standard binary cross-entropy (BCE) loss be-tween actual subtask response correctness labels 
+
+yi,j,m and predicted correct response probability 
+
+σ(˜ aj − bi,j,m ). We combine these loss terms as 
+
+Ldiff = Ldiff -MSE + Ldiff -BCE + λLorder , where λ
+
+is the relative-order regularization weight. 
+
+Response Correctness Prediction Here, given the interaction history Hj,<k and the current task 
+
+xj,k , we predict whether student j will respond cor-rectly to xj,k using dynamic student ability aj,k and predicted task difficulty bj,k . We define the BCE loss LBCE analogously to Ldiff −BCE and combine it with the difficulty ordering regularization term to obtain the objective of Lresp = LBCE +λLorder . In addition to contributing to the training objective, di-alogue subtask responses also update the student’s knowledge state, thereby influencing future predic-tions. This formulation enables us to investigate whether training on student responses to subtasks in dialogues provide additional, fine-grained infor-mation on their knowledge. 
+
+4 Experimental Evaluation 
+
+We now detail our experimental setup to validate the effectiveness of our framework. 
+
+4.1 Datasets 
+
+We conduct experiments on two math tutoring datasets collected by two major online learning platforms, Eedi and Khan Academy . For sim-plicity, we refer to these datasets by their respec-tive platform names. Both datasets contain stu-dent interactions with math questions, where stu-dents can initiate chat-based tutoring conversa-tions on demand at any point during the question-answering process. The Eedi dataset contains con-versations between real students and human tutors, whereas the Khan Academy dataset contains con-versations between real students and an AI tutor model. After processing, the Eedi dataset con-tains 588 students, 3, 689 questions, 1, 775 dia-logues, and 152 , 280 question-answering records, while the Khan Academy dataset contains 136 
+
+students, 3, 423 questions, 1, 800 dialogues, and 
+
+56 , 529 question-answering records. We provide additional dataset details in Appendix B. 
+
+4.2 Metrics 
+
+For question difficulty prediction, following prior work (Huang et al., 2017; Scarlatos et al., 2025b), we use the widely adopted Pearson Correlation Co-efficient (PCC) to measure the linear correlation be-tween predicted and ground-truth question difficul-ties, Spearman Rank Correlation Coefficient (SCC) to measure the correlation between predicted and ground-truth difficulty rankings among questions, Mean Squared Error (MSE) to measure squared prediction error, and Mean Absolute Error (MAE) to measure absolute prediction error. For response correctness prediction, we use Area Under the ROC Curve (AUC), accuracy, and F1 score metrics. 
+
+4.3 Baselines 
+
+We compare URF-QD against kNN Mean, Random Forest, ICL kNN, and Diff SFT (ModernBERT and Qwen3.5-4B) for question difficulty prediction. For response correctness prediction, we compare against DKT, DKT (Joint), AKT, simpleKT, and URF-QD (Orig. Question) to assess the contribu-tion of dialogue subtask responses within and be-yond our framework. We use Joint to denote train-ing on both original-question and dialogue-subtask responses and Reg. to denote relative difficulty or-der regularization. We provide detailed baseline descriptions in Appendix C.1. 
+
+4.4 Experimental Setup 
+
+We report the average performance on 5-fold cross validation. We split datasets across problems (stu-dents) for question difficulty prediction (response correctness prediction) evaluation, to evaluate gen-eralization to unseen problems (students). We use Qwen3.5-4B for URF-QD and evaluate ICL kNN using GPT-5.4. We provide full experimental de-tails in Appendix C.2. 
+
+5 Results, Analysis, and Discussion 
+
+We now detail our quantitative results on question difficulty prediction and student response correct-ness prediction, and qualitatively analyze the im-pact of regularization on both tasks. 
+
+5.1 Quantitative Results Our framework excels at question difficulty pre-diction. Table 1 reports the average performance (and standard deviation) on both datasets for ques-tion difficulty prediction. We see that URF-QD (Joint + Reg.) outperforms all baselines across all four metrics. This consistent result shows that dia-logue subtasks provide useful supervision for pre-dicting difficulty of unseen original questions, even 6Dataset Method MSE ↓ MAE ↓ PCC ↑ SCC ↑
+
+Eedi kNN Mean (SBERT) 0.445 ±0.022 0.523 ±0.022 0.268 ±0.014 0.261 ±0.023 
+
+Random Forest (SBERT) 0.379 ±0.015 0.482 ±0.024 0.359 ±0.020 0.338 ±0.029 
+
+ICL kNN (GPT-5.4) 0.548 ±0.013 0.589 ±0.026 0.360 ±0.014 0.363 ±0.016 
+
+Diff SFT (ModernBERT) 0.535 ±0.021 0.592 ±0.010 0.374 ±0.018 0.366 ±0.020 
+
+Diff SFT (Qwen3.5-4B) 0.382 ±0.016 0.482 ±0.017 0.430 ±0.012 0.414 ±0.021 
+
+URF-QD (Joint + Reg.) 0.350 ∗±0.015 0.473 ±0.016 0.458 ∗±0.015 0.447 ∗±0.017 
+
+Khan Academy kNN Mean (SBERT) 0.285 ±0.026 0.445 ±0.019 0.413 ±0.013 0.361 ±0.017 
+
+Random Forest (SBERT) 0.283 ±0.022 0.464 ±0.018 0.422 ±0.014 0.373 ±0.016 
+
+ICL kNN (GPT-5.4) 0.323 ±0.023 0.453 ±0.014 0.407 ±0.018 0.315 ±0.010 
+
+Diff SFT (ModernBERT) 0.337 ±0.019 0.454 ±0.013 0.414 ±0.023 0.379 ±0.011 
+
+Diff SFT (Qwen3.5-4B) 0.279 ±0.024 0.419 ±0.020 0.410 ±0.017 0.351 ±0.016 
+
+URF-QD (Joint + Reg.) 0.270 ±0.022 0.409 ±0.020 0.446 ∗±0.018 0.392 ±0.010 
+
+Table 1: Performance comparison of methods on question difficulty prediction across datasets. Best performance is 
+
+bolded and second best is underlined. ∗ denotes statistically significant improvement over all baselines ( p < 0.05 ). 
+
+though the subtasks themselves have no ground-truth difficulty labels. On Eedi, compared with the strongest baseline, URF-QD reduces MSE by 7.7% 
+
+and improves PCC and SCC by 6.5% and 8.0% ,respectively. On Khan Academy, URF-QD simi-larly reduces MSE and MAE, and improves PCC and SCC. The improvements over all baselines are statistically significant for MSE, PCC, and SCC on Eedi and for PCC on Khan Academy ( p < 0.05 
+
+under paired t-test). These results suggest that analyzing tutor-posed subtasks do provide us with some information on question difficulty, which can be transferred to orig-inal questions via the shared text-based difficulty encoder, once put on the same IRT scale. This finding supports our central hypothesis that tutor-ing dialogues are not merely auxiliary conversa-tional data; intermediate mathematical subtasks are important formative assessments that can directly improve question difficulty modeling. 
+
+Dialogue subtask responses improve response correctness prediction. Table 2 reports the av-erage performance (and standard deviation) on both datasets on response correctness prediction. URF-QD (Joint + Reg.) again achieves the best performance on every metric for both Eedi and Khan Academy, showing that original question and dialogue subtask responses provide complemen-tary evidence about students’ evolving knowledge. On Eedi, compared with URF-QD (Orig. Ques-tion), incorporating dialogue subtasks and relative-order regularization improves AUC and accuracy by 6.3% and 4.5% , respectively. The gains in AUC and accuracy are statistically significant over all baselines ( p < 0.05 under paired t-test). On Khan Academy, the full model also consistently improves all three metrics over its original-question-only counterpart. DKT (Joint) similarly outperforms DKT across all metrics on both datasets, further confirming that dialogue responses provide comple-mentary evidence for estimating dynamic student ability and predicting future performance. 
+
+Ablation Study. We conduct an ablation study on Eedi to assess the contribution of each frame-work component. Results show that incorporating dialogue subtasks improves both question difficulty and response correctness prediction, while relative-order regularization provides additional gains for difficulty prediction. We provide detailed ablation results and analyses in Appendix D.1. 
+
+5.2 Qualitative Results Dialogue subtasks provide fine-grained evidence of question difficulty. We now use a qualitative case study to illustrate how dialogue subtasks pro-vide additional evidence for estimating the diffi-culty of an unseen original question. Table 3 shows a mixed-number division problem that requires sev-eral mathematical operations, including converting mixed numbers, dividing fractions, and expressing the result in the requested form. The question-only Diff SFT baseline predicts a difficulty of 0.483, un-derestimating the ground-truth difficulty of 0.625 by 0.142. The related dialogue subtasks capture mathematical demands that are required to solve the original problem, with their difficulties esti-mated jointly using response evidence from other questions and dialogues. The relative-order regu-7Dataset Method AUC ↑ Acc ↑ F1 ↑
+
+Eedi DKT 0.574 ±0.018 0.544 ±0.012 0.560 ±0.013 
+
+DKT (Joint) 0.580 ±0.015 0.557 ±0.016 0.572 ±0.018 
+
+simpleKT 0.595 ±0.021 0.558 ±0.020 0.571 ±0.029 
+
+AKT 0.603 ±0.014 0.570 ±0.019 0.576 ±0.025 
+
+URF-QD (Orig. Question) 0.599 ±0.022 0.572 ±0.013 0.575 ±0.026 
+
+URF-QD (Joint + Reg.) 0.637 ∗±0.020 0.598 ∗±0.016 0.580 ±0.024 
+
+Khan Academy DKT 0.568 ±0.023 0.590 ±0.025 0.691 ±0.023 
+
+DKT (Joint) 0.571 ±0.016 0.598 ±0.019 0.697 ±0.021 
+
+simpleKT 0.586 ±0.030 0.663 ±0.014 0.775 ±0.015 
+
+AKT 0.589 ±0.021 0.626 ±0.022 0.731 ±0.024 
+
+URF-QD (Orig. Question) 0.587 ±0.028 0.665 ±0.021 0.786 ±0.022 
+
+URF-QD (Joint + Reg.) 0.598 ±0.019 0.676 ±0.022 0.798 ±0.019 
+
+Table 2: Performance comparison of methods on response correctness prediction across datasets. Best performance is bolded and second best is underlined. ∗ denotes statistically significant improvement over all baselines ( p < 0.05 ).                                           
+
+> Question: 113÷114= 1 1
+> ⋆. What should replace the star?
+> Options: (A) 15 (B) 12 (C) 16 (D) 7
+> Ground-truth difficulty 0.625
+> Difficulty source Pred. Difficulty Diff SFT (Qwen3.5-4B) 0.483
+> URF-QD (Joint + Reg.) 0.573
+> Related training dialogue-subtasks Subtask 1: How to solve 223÷2?0.487
+> Subtask 2: Convert 223to an improper frac-tion (scaffold)
+> 0.256
+> Subtask 3: Calculate 16÷580.399
+> Subtask 4: Replace the star in 2⋆
+> 5=13 50.362
+
+Table 3: Qualitative example of dialogue-subtask su-pervision supporting difficulty prediction for an unseen original question. Compared with the strongest baseline, URF-QD assigns a difficulty closer to ground truth. 
+
+larization further constrains the preceding subtask in a scaffolding pair to be harder than the scaf-folded follow-up, resulting in predicted difficulties of 0.487 for Subtask 1 and 0.256 for Subtask 2. Because the original question requires the same mixed-number division demand together with addi-tional operations, it should be more difficult than Subtask 1. The Diff SFT estimate of 0.483 is there-fore too low, whereas URF-QD predicts a diffi-culty of 0.573, reducing the absolute error to 0.052. Overall, this example shows how dialogue-subtask supervision and relative-order regularization help calibrate the difficulty of complex questions by pro-viding fine-grained evidence about their constituent mathematical demands. 
+
+6 Human Evaluation 
+
+We conduct two human evaluations on the Eedi dataset with three PhD student researchers with math tutoring experience to assess the reliability of tutor move annotations and the quality of subtask rewriting. GPT-5.4 achieves a macro-F1 of 0.754 for tutor move annotation, while 85 .5% of rewritten subtasks satisfy both dialogue-independent com-pleteness and mathematical-demand preservation. We provide additional details in Appendix E. 
+
+7 Conclusions and Future Work 
+
+In this paper, we presented URF-QD, a framework for jointly modeling original questions and tutor-posed subtasks on a shared IRT scale. The key is to transform dialogue subtasks into standalone ques-tions and leverage pedagogical relations to regular-ize their difficulty estimates. Through experiments on two real-world math learning datasets, we show that URF-QD improves both question difficulty pre-diction and response correctness prediction. In Ap-pendix F, we showcase how our framework opens up the possibility of many downstream analyses, benchmarking an LLM tutor’s ability to pose tasks at appropriate difficulty levels that maximize stu-dent learning outcomes. There are several avenues for future work. First, the shared dynamic scale could support more anal-ysis into the strategy and behavior of LLM tutors. Future work should also use the extracted insights to guide adaptive subtask posing for both human and LLM tutors. Second, future work should ex-tend URF-QD to incorporate visual elements, such as images and diagrams, that commonly appear in mathematics questions. Finally, future work should examine whether the framework general-izes to other educational domains and settings. 8Limitations 
+
+There are several limitations to our work. First, al-though we conduct experiments on two real-world math learning datasets, the Khan Academy dataset is not publicly available, and only a subset of the Eedi dataset is publicly accessible. To the best of our knowledge, there are no other readily available datasets containing both student question-answering records and corresponding tutoring di-alogues at the granularity required by our frame-work, making broader evaluation challenging. Sec-ond, since neither dataset provides ground-truth question difficulty labels, we use difficulty esti-mates obtained by fitting an IRT model to observed student responses as reference labels. These esti-mates depend on the assumptions and quality of the fitted IRT model and may not perfectly reflect the true difficulty of each question. Finally, we restrict our framework to the 1PL IRT model and binary response correctness labels, which may not fully capture the complexity of student knowledge and mathematical responses. Extending our framework to more expressive IRT models and finer-grained response evaluations is an important direction for future work. 
+
+Ethical Considerations 
+
+There are several potential societal benefits to our work. By jointly modeling student responses to original questions and tutoring dialogues, our framework can provide more fine-grained estimates of student knowledge and question difficulty, po-tentially supporting more accurate educational as-sessment and personalized learning. In particular, leveraging intermediate mathematical subtasks in tutoring dialogues may help educators better under-stand students’ learning needs and provide more targeted tutoring support. There are also several po-tential risks. Inaccurate estimates of student ability or question difficulty could lead to inappropriate learning recommendations or unfair assessments. Additionally, our framework relies on LLM-based annotations and transformations of tutoring dia-logues, which may introduce errors or biases into downstream predictions. Such biases could dis-proportionately affect students from underrepre-sented populations or with different linguistic back-grounds. Moreover, demographic information is unavailable in our datasets, limiting our ability to evaluate potential disparities across student popu-lations. We emphasize that our framework is in-tended to support, rather than replace, educators’ judgments, and further evaluation of fairness and downstream learning outcomes is necessary before deployment in real-world educational settings. 
+
+References                            
+
+> Samah AlKhuzaey, Floriana Grasso, Terry R. Payne, and Valentina Tamma. 2024. Text-based question difficulty prediction: A systematic review of auto-matic approaches. International Journal of Artificial Intelligence in Education , 34(3):862–914. Luca Benedetto. 2023. A quantitative study of nlp ap-proaches to question difficulty estimation. Preprint ,arXiv:2305.10236. Luca Benedetto, Giovanni Aradelli, Paolo Cremonesi, Andrea Cappelli, Andrea Giussani, and Roberto Tur-rin. 2021. On the application of transformers for estimating the difficulty of multiple-choice questions from text. In Proceedings of the 16th Workshop on Innovative Use of NLP for Building Educational Ap-plications , pages 147–157, Online. Association for Computational Linguistics. Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal, Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel M. Ziegler, Jeffrey Wu, Clemens Winter, and 12 others. 2020. Lan-guage models are few-shot learners. Preprint ,arXiv:2005.14165. Carnegie Learning. 2024. Livehint overview. On-line: https://support.carnegielearning. com/help-center/math/livehint/article/ livehint-overview/ .Seth Chaiklin et al. 2003. The zone of proximal de-velopment in vygotsky’s analysis of learning and in-struction. Vygotsky’s educational theory in cultural context , 1(2):39–64. Shi-Ting Chen and Jinsong Chen. 2026. From text to parameters: Predicting item parameters from em-bedding regularization with reliability and design ceilings. Preprint , arXiv:2607.07141. Albert T Corbett and John R Anderson. 1994. Knowl-edge tracing: Modeling the acquisition of procedural knowledge. User modeling and user-adapted inter-action , 4(4):253–278. Eedi. 2024. Help all your students succeed in math. Online: https://eedi.com/us .Aritra Ghosh, Neil Heffernan, and Andrew S. Lan. 2020. Context-aware attentive knowledge tracing. Preprint ,arXiv:2007.12324.
+
+9Sebastian Gombert, Lukas Menzel, Daniele Di Mitri, and Hendrik Drachsler. 2024. Predicting item diffi-culty and item response time with scalar-mixed trans-former encoder models and rational network regres-sion heads. In Proceedings of the 19th Workshop on Innovative Use of NLP for Building Educational Ap-plications (BEA 2024) , pages 483–492, Mexico City, Mexico. Association for Computational Linguistics. Ronald K Hambleton and Hariharan Swaminathan. 2013. Item response theory: Principles and applica-tions . Springer Science & Business Media. Shuyan Huang, Alexander Scarlatos, Jaewook Lee, and Andrew Lan. 2026. Interpretable difficulty-aware knowledge tracing in tutor-student dialogues. 
+
+Preprint , arXiv:2605.01097. Zhenya Huang, Qi Liu, Enhong Chen, Hongke Zhao, Mingyong Gao, Si Wei, Yu Su, and Guoping Hu. 2017. Question difficulty prediction for reading problems in standard tests. In Proceedings of the Thirty-First AAAI Conference on Artificial Intelli-gence , AAAI’17, page 1352–1359. AAAI Press. Radhika Kapoor, Sang T. Truong, Nick Haber, Maria Araceli Ruiz-Primo, and Benjamin W. Domingue. 2026. Prediction of item difficulty for reading comprehension items by creation of anno-tated item repository. Preprint , arXiv:2502.20663. Khan Academy. 2023. Supercharge your teaching ex-perience with khanmigo. Online: https://www. khanmigo.ai/ .Ekaterina Kochmar, Kaushal Kumar Maurya, Kseniia Petukhova, KV Aditya Srivatsa, Anaïs Tack, and Justin Vasselli. 2025. Findings of the BEA 2025 shared task on pedagogical ability assessment of AI-powered tutors. In Proceedings of the 20th Workshop on Innovative Use of NLP for Building Educational Applications (BEA 2025) , pages 1011–1033, Vienna, Austria. Association for Computational Linguistics. Zitao Liu, Qiongqiong Liu, Jiahao Chen, Shuyan Huang, and Weiqi Luo. 2023. simplekt: A simple but tough-to-beat baseline for knowledge tracing. Preprint ,arXiv:2302.06881. Jakub Macina, Nico Daheim, Sankalan Chowdhury, Tan-may Sinha, Manu Kapur, Iryna Gurevych, and Mrin-maya Sachan. 2023. MathDial: A dialogue tutoring dataset with rich pedagogical properties grounded in math reasoning problems. In Findings of the As-sociation for Computational Linguistics: EMNLP 2023 , pages 5602–5621, Singapore. Association for Computational Linguistics. Jakub Macina, Nico Daheim, Ido Hakimi, Manu Kapur, Iryna Gurevych, and Mrinmaya Sachan. 2025. Math-tutorbench: A benchmark for measuring open-ended pedagogical capabilities of llm tutors. In Proceed-ings of the 2025 Conference on Empirical Methods in Natural Language Processing , pages 204–221. OpenAI. 2026. Introducing GPT-5.4. Kseniia Petukhova and Ekaterina Kochmar. 2025. In-tent matters: Enhancing AI tutoring with fine-grained pedagogical intent annotation. In Proceedings of the 20th Workshop on Innovative Use of NLP for Build-ing Educational Applications (BEA 2025) , pages 860– 872, Vienna, Austria. Association for Computational Linguistics. Chris Piech, Jonathan Spencer, Jonathan Huang, Surya Ganguli, Mehran Sahami, Leonidas Guibas, and Jascha Sohl-Dickstein. 2015. Deep knowledge trac-ing. Preprint , arXiv:1506.05908. Qwen Team. 2026. Qwen3.5: Towards native multi-modal agents. G. Rasch. 1960. Probabilistic Models for Some Intelli-gence and Attainment Tests . Studies in mathematical psychology. Danmarks Paedagogiske Institut. Nils Reimers and Iryna Gurevych. 2019. Sentence-bert: Sentence embeddings using siamese bert-networks. 
+
+Preprint , arXiv:1908.10084. Alexander Scarlatos, Ryan S. Baker, and Andrew Lan. 2025a. Exploring knowledge tracing in tutor-student dialogues using llms. In Proceedings of the 15th In-ternational Learning Analytics and Knowledge Con-ference , LAK 2025, page 249–259. ACM. Alexander Scarlatos, Nigel Fernandez, Christopher Ormerod, Susan Lottridge, and Andrew Lan. 2025b. SMART: Simulated students aligned with item re-sponse theory for question difficulty prediction. In 
+
+Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing , pages 25071–25094, Suzhou, China. Association for Com-putational Linguistics. Alexander Scarlatos, Jaewook Lee, Simon Woodhead, and Andrew Lan. 2026. Simulated students in tutor-ing dialogues: Substance or illusion? In Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) ,pages 42349–42385, San Diego, California, United States. Association for Computational Linguistics. Howard Wainer, Neil J Dorans, Ronald Flaugher, Bert F Green, and Robert J Mislevy. 2000. Computerized adaptive testing: A primer . Routledge. Benjamin Warner, Antoine Chaffin, Benjamin Clavié, Orion Weller, Oskar Hallström, Said Taghadouini, Alexis Gallagher, Raja Biswas, Faisal Ladhak, Tom Aarsen, Nathan Cooper, Griffin Adams, Jeremy Howard, and Iacopo Poli. 2024. Smarter, better, faster, longer: A modern bidirectional encoder for fast, memory efficient, and long context finetuning and inference. Preprint , arXiv:2412.13663. Chun-Kit Yeung. 2019. Deep-irt: Make deep learn-ing based knowledge tracing explainable using item response theory. Preprint , arXiv:1904.11738. 
+
+10 Eric Zelikman, Wanjing Ma, Jasmine Tran, Diyi Yang, Jason Yeatman, and Nick Haber. 2023. Generating and evaluating tests for k-12 students with language model simulations: A case study on sentence reading efficiency. In Proceedings of the 2023 Conference on Empirical Methods in Natural Language Process-ing , pages 2190–2205, Singapore. Association for Computational Linguistics. Matthew Zent, Digory Smith, and Simon Woodhead. 2025. PIIvot: A lightweight NLP anonymization framework for question-anchored tutoring dialogues. In Proceedings of the 2025 Conference on Empiri-cal Methods in Natural Language Processing , pages 27479–27488, Suzhou, China. Association for Com-putational Linguistics. Albert Zhang, Alexis Ross, Kajal Patel, Julian Bernardo, Rebecca Bowie, Ana Trindade Ribeiro, Daniel Halper, Haripriya Valayaputtur, Jacob Andreas, Su-sanna Loeb, Li Lucy, Kyle Lo, and Ryan Knight. 2026. Tutormoments-preview: When help is unhelp-ful — evaluating ai tutors for productive struggle. 
+
+A Related Work 
+
+A.1 Question Difficulty Prediction and Student Response Modeling 
+
+IRT estimates student ability and item difficulty from observed responses (Rasch, 1960), but re-quires response data to calibrate unseen questions. Text-based difficulty prediction addresses this cold-start setting using linguistic features and pretrained language models (Huang et al., 2017; Benedetto et al., 2021; Gombert et al., 2024; AlKhuzaey et al., 2024). Recent work also predicts IRT parameters from item embeddings (Chen and Chen, 2026). An-other direction simulates student responses with language models (Zelikman et al., 2023), including SMART, which aligns simulated students with IRT abilities and estimates difficulty from scored syn-thetic responses (Scarlatos et al., 2025b). Unlike these item-centric methods, our framework lever-ages real student responses to tutor-posed mathe-matical subtasks as additional supervision for dif-ficulty prediction, allowing dialogue evidence to inform difficulty estimates for unseen original ques-tions. KT models students’ evolving knowledge from interaction histories, ranging from Bayesian KT (Corbett and Anderson, 1994) and DKT (Piech et al., 2015) to attention-based models such as AKT and simpleKT (Ghosh et al., 2020; Liu et al., 2023). Deep-IRT further combines neu-ral KT with interpretable IRT parameters (Yeung, 2019). These methods primarily model predefined exercise-response sequences, whereas our frame-work incorporates dialogue-derived subtasks as ad-ditional response observations and tracks students’ evolving abilities across both original questions and tutoring dialogues on a shared IRT scale. 
+
+A.2 Student Modeling in Tutoring Dialogues 
+
+Tutoring dialogues reveal student understanding through intermediate mathematical tasks and adap-tive feedback. Datasets such as MathDial (Macina et al., 2023) and QATD-2k (Zent et al., 2025) support research on tutoring strategies and ped-agogical feedback (Petukhova and Kochmar, 2025; Kochmar et al., 2025). More directly, Scarlatos et al. (2025a) explore KT in tutoring dialogues, and Huang et al. (2026) incorporate tutor-turn difficulty and IRT into conversational KT. However, these approaches focus on predicting dialogue responses rather than jointly modeling original-question and subtask difficulties to predict the difficulty of un-seen questions. Tutors also adjust task demands by scaffolding after struggle or pushing for rigor after success (Zhang et al., 2026). We use these pedagogical transitions to constrain the relative difficulty of consecutive subtasks. Together with standalone subtask rewriting, this enables tutoring dialogues to provide supervision for both question difficulty and student ability estimation. 
+
+B Additional Dataset Details 
+
+We provide additional details on the two datasets. Both datasets are fully anonymized, so demo-graphic information about individual students and tutors is not available. The Eedi dataset contains multiple-choice math question records and tutoring dialogues between real students and human tutors. After processing, the dataset contains 4, 175 sub-task instances across 1, 775 dialogues. Each ques-tion is associated with a set of “subjects”, which we use to define the knowledge components (KCs). We assign each dialogue the same KCs as its as-sociated question. Among the subtask instances, 
+
+467 correspond to scaffold after student struggle and 48 correspond to push for rigor. The Khan Academy dataset contains 4, 996 subtask instances across 1, 800 dialogues. Each question is associ-ated with a list of “skills”, which we similarly use to define the KCs for the corresponding dialogue. The dataset contains 549 cases of scaffold after stu-dent struggle and 21 cases of push for rigor. The 11 questions from both datasets span a broad range of mathematical topics, including Algebra, Geometry, and Number. 
+
+C Additional Experimental Details 
+
+We provide additional details on the baseline meth-ods and experimental implementation for repro-ducibility. 
+
+C.1 Baselines Difficulty Prediction Baselines Following prior work (AlKhuzaey et al., 2024; Benedetto, 2023; Kapoor et al., 2026), we adopt a strong fine-tuning baseline, Diff SFT , which fine-tunes a recent and capable encoder-based language model, specifi-cally ModernBERT-base (Warner et al., 2024). We use a regression setup, minimizing MSE, to directly predict question difficulties given the question’s text and metadata. We additionally train Diff SFT (Qwen3.5-4B) using the same question encoder as our framework. We then report a Random Forest 
+
+baseline, which is common for difficulty predic-tion (AlKhuzaey et al., 2024; Gombert et al., 2024), where we encode the item’s question text and meta data using SBERT model (Reimers and Gurevych, 2019), and use the resulting embeddings as input features to fit a random forest regressor to item dif-ficulty. We also use a simple yet strong baseline, 
+
+kNN Mean , that retrieves the k questions in the train set with the highest SBERT embedding co-sine similarity, and takes their mean difficulty as the predicted test item difficulty. We search over 
+
+k ∈ [1 , 5] and select the best performing value on the validation set, selecting k = 4 . Finally, we adapt an LLM prompting baseline leveraging in-context learning (ICL) (Brown et al., 2020), ICL kNN , where we prompt GPT-5.4 with k in-context examples of questions retrieved from the train set using k-Nearest Neighbors (kNN). We use the same SBERT model as above, and perform a similar hy-perparameter search, selecting k = 4 . We provide the prompt details in Appendix G. All these base-lines use only original questions and their reference difficulties, without dialogue-subtask response su-pervision or difficulty ordering regularization. 
+
+Response Prediction Baselines For student re-sponse correctness prediction, we compare against three KT baselines: DKT (Piech et al., 2015), a simple recurrent neural network-based KT method, and DKT (Joint) , which is trained on the com-bined chronological sequence of original question and dialogue subtask responses; AKT (Ghosh et al., 2020), a full attention-based KT method; and sim-pleKT (Liu et al., 2023) a simple but robust KT method. Unless marked as Joint, these baselines are trained only on original question responses. We evaluate all methods on the same held-out original-question response events. Dialogue-subtask re-sponses are incorporated as additional training ob-servations and as history for the joint models. We additionally report URF-QD (Orig. Ques-tion) , an original question-only variant of our re-sponse prediction model. It retains the same text-based difficulty estimator, sequential student state model, and IRT response function as our full frame-work, but excludes all dialogue subtask interactions and the difficulty ordering regularizer. This base-line isolates the contribution of dialogue evidence within the proposed architecture. 
+
+C.2 Implementation Details 
+
+We use Qwen3.5-4B (Qwen Team, 2026) as the frozen LLM encoder for our framework and multi-qa-mpnet-base-dot-v1 SBERT model for baselines and ablation studies. We use GPT-5.4 (OpenAI, 2026) for the prompting-based baseline (ICL kNN), mathematical subtask identification, subtask cor-rectness labeling, standalone-question transforma-tion, and pedagogical move annotation. We adopt the LLM-based correctness annotation protocol of Scarlatos et al. (2026), which demonstrated sub-stantial agreement with expert human annotations (Cohen’s κ= 0.722), comparable to human inter-annotator agreement ( κ = 0.719), providing empiri-cal support for its reliability. For question difficulty prediction, we obtain 
+
+2560 -dimensional question embeddings by mean pooling over the final-layer hidden states of the frozen LLM encoder. We use a three-layer MLP and GELU activations to predict scalar question difficulty. We train the difficulty predictor using AdamW with a fixed learning rate of 5 · 10 −3, full-batch optimization, and gradient norm clipping at 
+
+10 .0 for 120 epochs. For the ICL (kNN) baseline, we ask the model to first reason about the question’s difficulty in a chain-of-thought manner before gen-erating a numeric difficulty prediction. To obtain reference student abilities and ques-tion difficulties, we fit a 1PL IRT model using ob-served student responses to original questions. We fit the reference IRT model on all eligible original-question responses, without a train/validation/test split, including responses associated with questions 12 subsequently assigned to validation and test sets. We implement IRT fitting using SciPy with the L-BFGS-B optimization algorithm, setting the max-imum number of iterations to 500 . We apply L2 regularization to both student ability and question difficulty parameters, with a regularization strength of 1.0 for each. For response correctness prediction, we train an LSTM with a hidden-state dimension of 200 to model the evolving student state. We represent re-sponse correctness using a learned 32 -dimensional embedding, which is concatenated with the 2560 -dimensional question embedding to form a 2592 -dimensional LSTM input. Before predicting the current response, we project the preceding LSTM hidden state to a scalar student ability using a two layer MLP and a GELU activation. We train the model using AdamW with a fixed learning rate of 
+
+1·10 −3, gradient norm clipping at 10 .0, and a batch size of 64 for 10 epochs. For both prediction tasks, we set the difficulty-order regularization weight to 
+
+λ = 1 .We compute AUC using scikit-learn and Pearson and Spearman correlations using NumPy. To the best of our knowledge, the software and models used in our implementation either have open-source licenses or do not list a license. In addition, our use of these resources, including the OpenAI API, is consistent with their intended terms of use. We will ensure that the license and terms reflect the sources on which our implementation builds when we release code. We use ChatGPT to assist with writing and editing the manuscript. 
+
+D Additional Quantitative Evaluation 
+
+D.1 Additional Ablation Study 
+
+We analyze the contribution of each component of our framework on Eedi, which we choose as the representative dataset because its dialogues in-volve real human tutors and students, yielding more relative-order constraints and higher-quality tutor-ing interactions. 
+
+Question Difficulty Prediction. Table 4 reports the ablation results for question difficulty predic-tion. The original-question-only variant performs worse than the full model, showing that the de-composed subtasks provide additional information for estimating question difficulty. Removing the relative-order regularization also leads to consis-tent performance drops across all four metrics, Method MSE ↓ MAE ↓ PCC ↑ SCC ↑
+
+URF-QD (Full) 0.350 0.473 0.458 0.447 
+
+Questions Only 0.382 0.482 0.430 0.414 w/o Reg. 0.367 0.481 0.447 0.437 w/o Rewrite 0.376 0.485 0.435 0.423 SBERT (MPNet) 0.398 0.503 0.341 0.336 
+
+> Table 4: Ablation study on question difficulty prediction (Eedi). URF-QD(Full) is equivalent to URF-QD(Joint + Reg.). Questions Only excludes subtasks, which is equivalent to Diff SFT (Qwen3.5-4B); w/o Reg. keeps original question and dialogue subtasks but removes relative-order regularization; w/o Rewrite uses origi-nal tutor-posed subtasks instead of standalone rewrites; SBERT (MPNet) replaces Qwen3.5-4B encoder with a lightweight MPNet-based sentence encoder.
+
+Method AUC ↑ Acc ↑ F1 ↑
+
+URF-QD (Full) 0.637 0.598 0.580 Questions Only 0.599 0.572 0.575 w/o Order Reg. 0.640 0.597 0.586 
+
+w/o Rewrite 0.623 0.580 0.586 SBERT (MPNet) 0.625 0.590 0.573 simpleKT Backbone 0.639 0.590 0.583 
+
+> Table 5: Ablation study on response correctness pre-diction (Eedi). URF-QD(Full) is equivalent to URF-QD(Joint + Reg.). Questions Only excludes subtasks, which is equivalent to URF-QD (Orig. Question); w/o Reg. removes relative-order regularization; w/o Rewrite uses original tutor-posed subtasks; SBERT (MPNet) re-places Qwen3.5-4B encoder with a lightweight MPNet-based sentence encoder; and simpleKT Backbone re-places the default DKT-based student-state model.
+
+suggesting that explicitly modeling relative dif-ficulty helps calibrate question difficulty across the two task types when placing them on a shared scale. Using the original subtasks without rewrit-ing generally outperforms the Diff SFT baseline, improving MSE, PCC, and SCC, although MAE is slightly worse; the full model further improves over this variant across all four metrics, indicating that rewriting produces more self-contained sub-task descriptions that are more informative for dif-ficulty prediction. Finally, replacing the Qwen3.5-4B question encoder with a lightweight MPNet-based SBERT encoder leads to the largest perfor-mance drop, with MSE increasing from 0.350 to 0.398 and PCC decreasing from 0.458 to 0.341, suggesting that representations from the larger lan-guage model are more effective for question diffi-13 culty prediction. 
+
+Response Correctness Prediction. Table 5 re-ports the ablation results for response correctness prediction. Removing the subtasks and using only the original question decreases AUC from 0.637 to 0.599 and accuracy from 0.598 to 0.572, sup-porting that decomposed subtasks provide useful information beyond the original question. Unlike for question difficulty prediction, removing the relative-order regularization does not hurt response prediction. One possible explanation is that the comparatively sparse ordering constraints are di-luted by the large number of interaction records, suggesting that this regularization is more benefi-cial for difficulty estimation. Removing the rewrit-ing step leads to performance drops in AUC and accuracy, while replacing the Qwen3.5-4B encoder with a lightweight SBERT encoder also generally reduces performance, highlighting the value of self-contained subtask representations and richer seman-tic encodings. Finally, replacing DKT with sim-pleKT yields comparable results, indicating that URF-QD is not strongly dependent on a particular knowledge tracing model. 
+
+Encoder Fine-tuning. We also compare the de-fault setup, which uses Qwen3.5-4B as a frozen encoder, with jointly fine-tuning the encoder and downstream prediction modules. Fine-tuning re-duces performance on both tasks. For question difficulty prediction, MSE and MAE increase to 
+
+0.408 and 0.486 , while PCC and SCC decrease to 
+
+0.385 and 0.359 , respectively. For response correct-ness prediction, AUC, accuracy, and F1 decrease to 0.626 , 0.589 , and 0.552 , respectively. Joint fine-tuning also substantially increases training time. In this setting, keeping Qwen3.5-4B frozen is both more effective and more efficient. 
+
+D.2 Impact of Relative-Order Regularization 
+
+We further analyze the effect of the relative-order regularization strength λ. For question difficulty prediction, λ = 0 is equivalent to removing the relative-order regularization. As shown in Fig-ure 3a, λ = 0 .1 performs similarly to λ = 0 , sug-gesting that a weak regularization signal has limited effect. Performance improves as λ increases to 0.5
+
+and 1, while λ = 1 and λ = 3 achieve comparable performance across the four metrics. In contrast, increasing λ to 10 leads to a clear performance drop. A possible reason is that overly strong reg-ularization causes the training objective to focus excessively on relative difficulty ordering rather than accurately fitting the absolute difficulty labels. For response correctness prediction, Figure 3b shows that performance remains relatively stable across λ ∈ { 0, 0.1, 0.5, 1, 3}, suggesting that re-sponse prediction is not sensitive to regularization weight within a moderate range. In contrast, setting 
+
+λ = 10 substantially hurts all three metrics, likely because overly strong regularization constrains the model at the expense of optimizing the response-prediction objective. To further examine how the regularization affects learned question difficulties, we evaluate the satis-faction rate of the pedagogically implied difficulty orderings. Specifically, we calculate the proportion of subtask pairs satisfying bj,k < b j,k −1 for scaf-folding after struggle ( Ω1) and bj,k > b j,k −1 for pushing for rigor ( Ω2). As shown in Table 6, the relative-order regu-larization substantially improves the consistency between predicted difficulties and pedagogical or-dering constraints. Without regularization ( λ = 0 ), the overall satisfaction rate is only 0.699. Increas-ing λ to 1 raises this rate to 0.899, with improve-ments for both scaffolding after struggle (0.697 to 0.898) and pushing for rigor (0.756 to 0.911). This result indicates that the regularization effectively encourages the difficulty predictor to capture the relative mathematical demands reflected in tutors’ pedagogical moves. While increasing λ further improves order satis-faction, reaching 0.914 at λ = 10 , it leads to worse difficulty prediction performance, suggesting that excessive regularization may compromise absolute difficulty estimation. Overall, these results demon-strate that our proposed relative-order regulariza-tion effectively aligns learned task difficulties with the pedagogically implied difficulty orderings in tutoring dialogues, providing better-calibrated diffi-culty estimates that benefit downstream predictions when applied at a moderate strength. 
+
+E Human Evaluation Details 
+
+We conduct two human evaluations on the Eedi dataset to assess our tutor move annotations and subtask rewriting quality. Three PhD student re-searchers with mathematics tutoring experience are recruited to conduct the human evaluations. All participants voluntarily agreed to participate and received no financial compensation. Participation was free of coercion. They are informed of the 14 0 0.1 0.5 1 3 10                
+
+> Regularization factor
+> 0.350 0.353 0.355 0.358 0.360 0.363 0.365 0.368
+> MSE
+> MSE
+> 00.1 0.5 1310
+> Regularization factor
+> 0.473 0.475 0.478 0.480 0.483 0.485 0.488 0.490 0.493
+> MAE
+> MAE
+> 00.1 0.5 1310
+> Regularization factor
+> 0.446 0.448 0.450 0.452 0.454 0.456 0.458
+> PCC
+> PCC
+> 00.1 0.5 1310
+> Regularization factor
+> 0.436 0.438 0.440 0.442 0.444 0.446
+> SCC
+> SCC
+
+(a) Question difficulty prediction. 0 0.1 0.5 1 3 10           
+
+> Regularization factor
+> 0.560 0.570 0.580 0.590 0.600
+> Accuracy
+> Accuracy
+> 00.1 0.5 1310
+> Regularization factor
+> 0.610 0.615 0.620 0.625 0.630 0.635 0.640
+> AUC
+> AUC
+> 00.1 0.5 1310
+> Regularization factor
+> 0.480 0.500 0.520 0.540 0.560 0.580
+> F1
+> F1
+
+(b) Response correctness prediction. 
+
+Figure 3: Impact of the relative-order regularization strength λ on the two prediction targets. 
+
+λ Ω1 Sat. Ω2 Sat. Overall Sat. 0 0.697 0.756 0.699 0.1 0.727 0.711 0.726 0.5 0.834 0.866 0.835 1 0.898 0.911 0.899 3 0.910 0.911 0.910 10 0.912 0.956 0.914 
+
+Table 6: Difficulty order satisfaction rates under differ-ent relative-order regularization strengths λ. Ω1 and Ω2
+
+denote scaffolding after struggle and pushing for rigor, respectively. 
+
+evaluation procedures and voluntarily agreed to participate before conducting the annotations; ad-ditional demographic and geographic information is not collected. First, annotators are asked to label consecu-tive subtask pairs in 25 randomly sampled dia-logues (204 turns) as scaffolding after struggle, pushing for rigor, or other tutor moves. Inter-annotator agreement, in Fleiss’s κ, is κ = 0 .651 
+
+for scaffolding-after-struggle labels and 0.591 for push-for-rigor labels, showing moderate-to-good agreement. Against human annotations, GPT-5.4 achieves a macro-averaged positive-class F1 of 
+
+0.754 across the two target pedagogical moves, with F1 scores of 0.833 for scaffolding after strug-gle and 0.674 for pushing for rigor. In Eedi, push-ing for rigor is considerably less frequent than scaf-folding after struggle (48 vs. 467 labeled pairs). This class imbalance may partly contribute to the lower annotation agreement and F1 score for push-ing for rigor. Second, annotators are asked to evaluate 110 rewritten subtasks for dialogue-independent com-pleteness , i.e., the rewritten question being self-contained and solvable without dialogue context and mathematical-demand preservation , i.e., the rewritten question retaining the original subtask’s mathematical requirements. Annotators judge 
+
+92 .7% and 90 .0% of subtasks as satisfying the respective criteria, with 85 .5% receiving positive judgments on both criteria. Together, these evalu-ations support the reliability of LLM-based tutor move annotation and subtask rewriting. 
+
+F LLM Tutor Benchmarking 
+
+We now provide an example of how URF-QD opens door for many learning analytics tasks. In this preliminary example, we investigate how the zone of proximal development (Chaiklin et al., 2003) takes effect in tutoring dialogues: by study-ing the relationship between tutor-posed task diffi-culty and student learning outcomes, we can study what types of tasks during scaffolding are the most beneficial. Using these findings, we can create a benchmark to evaluate the pedagogical capabilities of LLMs, in terms of posing scaffolding tasks at 15 the right difficulty level to facilitate student learn-ing. Such a benchmark would complement exist-ing benchmarks such as MathTutorBench (Macina et al., 2025) and TutorMoments (Zhang et al., 2026), which do not use principled psychometric models and only rely on LLM-as-a-judge. 
+
+Task difficulty and next question correctness 
+
+We revisit the Eedi dialogues using the previ-ously fitted, five-fold student-disjoint dynamic 1PL model with a LSTM and frozen text encoder. For each dialogue, for all tutor-posed subtasks, we com-pute the average gap in the estimated student abil-ity θ and the turn difficulty b. The learning out-come measure we study is the correctness of the student’s response on the first original question re-sponse after the dialogue’s recorded start, which shares at least one KC label with the dialogue and does not have an associated dialogue. This filtering yields 553 dialogues from 327 students and 514 next question responses. We perform a simple lin-ear fit, shown in Figure 4, which reveals a positive relationship between next question response out-comes and θ − b, with slope 0.613 and a p-value of 0.001 . Therefore, empirical data suggests that larger gaps, corresponding to easier subtasks rel-ative to the student’s ability, are associated with higher subsequent response correctness. 
+
+Human versus LLM tutor tasks With this find-ing, we now perform a comparison between hu-man tutors and LLM tutors to examine how they tend to pose subtasks during the dialogue. For each subtask, we prompt GPT-5.4 with the orig-inal problem and preceding dialogue to generate an appropriate next tutoring task and a standalone rewrite. We then estimate the task’s difficulty with the trained difficulty encoder. This analysis results in 2,994 paired human tutor-LLM tutor subtask comparisons across 916 dialogues. Figure 5 visual-izes average turn-averaged θ − b for the 21 human tutors with at least 20 such comparisons done. We have an interesting finding: all but one human tutor poses easier subtasks than the LLM tutor, on aver-age. Substituting this result into the analysis above, this comparison yields an advantage for human tu-tor vs. GPT-5.4 of 1.11 percentage points, with a p-value of 0.006 . We leave the investigation of all LLMs and different pedagogical prompts to future work. 
+
+Potential usage This simple analysis shows that our framework URF-QD enables many detailed analysis into tutoring strategies; by associating each tutor-posed task with an IRT difficulty, we can leverage adaptive testing (Wainer et al., 2000) tech-niques to study the tradeoff between tutors posing tasks to pinpoint the student’s error vs. delivering targeted feedback. More importantly, we will be able to build the world’s first outcome -based tu-toring benchmark, which explicitly relates LLMs’ tutoring behavior with student learning outcomes. 
+
+> Figure 4: Next question response correctness vs. mean student ability–tutor-posed subtask difficulty gap. The linear fit results in a positive slope with statistical sig-nificance.
+> Figure 5: Mean student ability–tutor-posed subtask dif-ficulty gap, where GPT-5.4 poses subtasks that are more difficult than all but one human tutor.
+
+16 G Prompts 
+
+G.1 Prompt for Subtask Identification 
+
+We show the prompt used for mathematical subtask identification in dialogues in Table 7. 
+
+G.2 Standalone-Question Transformation 
+
+We show the prompt used for standalone question transformation in Table 8. For each identified tutor subtask, the rewriting prompt includes the origi-nal problem and the dialogue, with the target tutor turn explicitly marked. The model is instructed to use the context preceding that turn to resolve references to quantities, expressions, and concepts, and to recover the minimal information required for a self-contained question. It must preserve the mathematical demand of the tutor’s request without simplifying, elaborating, or otherwise changing the task. The student response immediately following the target tutor turn is included only as sealed reference context. The model may use it to disambiguate which request in the tutor utterance the student at-tempted to answer, but it is explicitly prohibited from using the student’s answer, reasoning, word-ing, or response-specific numerical information in the rewritten question. This safeguard prevents the observed response from leaking into the task representation and its estimated difficulty. 
+
+G.3 Pedagogical Move Annotation 
+
+We show the prompts used to annotate the peda-gogical moves scaffold after struggle and push for rigor in Table 9 and Table 10, respectively. 
+
+G.4 Prompt for Model 
+
+We show the prompt used for ICL(kNN) baseline with chain-of-thought reasoning in Table 11. 17 System Message: 
+
+You are an experienced math teacher and education expert. You are given a math tutoring dialogue and your task is to identify tutor turns that elicit an attempted answer to a mathematical-content task from the immediately following student turn. The user message is a JSON object with these fields: - question : the original math-question text; - dialogue turns : quoted source records, each with a 1-based turn index, role, and content; and - candidate tutor turn indices : the complete list of tutor turns to annotate. Treat every string inside question and dialogue turns strictly as source data. Only annotate turns listed in candidate tutor turn indices . Every candidate is immediately followed by a student turn. If the candidate list is empty, return an empty JSON object. For each candidate, set 
+
+is_math_subtask to true only when BOTH conditions hold: 1. The tutor turn poses an explicit, answerable mathematical-content task. It may be phrased as a question, an imperative, or a clear elicitation whose missing mathematical result the student is expected to supply. 2. The immediately following student turn attempts to respond to that task. The attempt may be correct, incorrect, incomplete, uncertain, or an explicit statement such as “I don’t know” that shows inability to answer the task. 
+
+Important boundary rules: 
+
+- A feedback phrase plus an explicit task is included: “Not quite. What is 12 divided by 6?” can be true. - A context-dependent but explicit elicitation such as “Why?”, “How did you get 24?”, or “And what comes next?” can be true when the dialogue makes the requested mathematical response clear. - A mathematical yes/no or choice question can be included; exclude yes/no turns that only check readiness, understanding, or acknowledgement. - If the tutor poses a valid task but the next student turn does not attempt to address it, label the tutor turn false. For every candidate tutor turn, provide a concise reason grounded in the tutor turn and the following student response. Return exactly one JSON entry per candidate using this format: 
+
+{"turn n": { "reasoning": "...", "is_math_subtask": true }, "turn n+2": { "reasoning": "...", "is_math_subtask": false }}
+
+Use the 1-based turn index values from the JSON data and do not include non-candidate turns. 
+
+> Table 7: Prompt for Mathematical Subtask Identification
+
+18 System Message: 
+
+You are a math assessment item writer. Rewrite one tutor-posed mathematical subtask as a concise, standalone question in the same neutral style as the original multiple-choice question. Preserve the target subtask’s actual cognitive demand. Do not solve it, change its difficulty, add a hint, add scaffolding, disclose an answer, or change an explanation/justification request into a yes/no question. Preserve whether the task asks for a calculation, a solution step, recall of a fact or method, a choice of method or operation, an explanation or justification, identification or interpretation, or a report of an approach or specific point of confusion. Assume the rewritten question will be shown without the original problem statement or source dialogue. Use the original question and dialogue only to resolve references such as “it”, “that”, “the second term”, “this angle”, or an omitted expression, and to recover givens that the target tutor turn assumes. Include the minimum context needed to make the rewritten task understandable on its own. Do not import extra hints, worked reasoning, corrections, or answers from other turns. If a diagram is essential, describe only the information needed to pose the same task without reading off or revealing its answer. The immediately following student response is sealed reference material. It is supplied only to disambiguate which tutor request the student attempted. Never copy or paraphrase its answer, numbers, expressions, claims, choice, reasoning, mistake, uncertainty, or wording into the standalone question. Do not use it to repair, complete, or solve the task. Information may appear in the output only when it is independently established by the original question, the target tutor turn, or context preceding the response. Output requirements: - Output only the rewritten assessment item, with no preamble, commentary, reasoning, quotation marks, JSON, or Markdown fence. - The first characters must be exactly Question: .- Do not mention a tutor, student, dialogue, conversation, turn, prior/previous statement, correctness, observed answer, following response, or rewriting. - Do not say “as discussed”, “as stated above”, “based on the previous step”, or use another backward reference. Replace it with the necessary mathematical content. - Use Answer A: , Answer B: , and so on only when the target tutor turn itself asks the student to choose among presented alternatives. - If the target asks a mathematical yes/no question without presenting answer options, keep it as a direct question and do not invent Yes/No options. - When options are genuinely required, place each option on its own line, begin with Answer A: ,continue alphabetically without gaps, preserve the actual alternatives, and never mark the correct one. - Preserve mathematical notation where useful. The final text must be a question that could be shown directly to a student without access to the source dialogue or the original problem statement. 
+
+> Table 8: Prompt for Standalone Mathematical Subtask Transformation
+
+19 System Message: 
+
+You are a math teacher, and your task is to annotate relative task difficulty in mathematics tutoring dialogues. The supplied candidate pairs have already passed three hard gates: 1. Both tutor turns are accepted mathematical subtasks. 2. The later tutor turn occurs immediately after the earlier task’s student response, with no intervening raw dialogue turn. 3. The student response to the earlier task is incorrect. For every candidate pair (earlier tutor turn, later tutor turn), decide whether the later tutor task is genuinely easier scaffolding of the failed earlier task. Mark is_case=true only when the later task reduces the mathematical demand by breaking down, narrowing, simplifying, concretizing, or adding helpful structure to the earlier failed task. The later task must be meaningfully easier than the earlier task. Mark false for a retry or paraphrase, a correction or feedback statement without an easier demand, an unrelated or new task, or ordinary progression to another step. Do not use the correctness of the later student response to decide. Do not add or remove candidates. Return one decision for every supplied pair and no others, using the exact JSON format requested in the user prompt. 
+
+User prompt: 
+
+Determine if the tutor is performing scaffolding after student struggle in two consecutive tutor turns in the dialogue: a subquestion is followed immediately in next tutor turn by a tutor task after the student’s incorrect response. For a true pair, the follow-up turn is treated as easier than the failed turn so the fixed order is difficulty(later) < difficulty(earlier). Question: Which of the following numbers is a factor of 60 and a multiple of 6? Answer A: 3 Answer B: 12 Answer C: 20 Answer D: 120 Full Raw Dialogue: Raw turn 1 (tutor): Hi Raw turn 2 (student): Hey Raw turn 3 (tutor) [ACCEPTED SUBTASK]: So remember we’re looking for a number in the 6 times table here. That also goes into 60 Raw turn 4 (student): So i think the awnser would be 3 if im correct (Student Correctness: Incorrect) Raw turn 5 (tutor) [ACCEPTED SUBTASK]: Ah that’s a factor of 60, but is it in the 6 times table? Raw turn 6 (student): ohh sorry silly me it must be 12 then Raw turn 7 (tutor): Well corrected. Yep it’s 12. Good to go? Raw turn 8 (student): thanks. yes STRUCTURALLY ELIGIBLE CANDIDATES [(3, 5)] Return exactly this JSON shape and no other text: {"pairs": ["pair": [earlier_tutor_turn ,
+
+later_tutor_turn ], "reasoning": "one sentence explanation", " is_case ": true or false] }
+
+> Table 9: Prompt for Scaffold After Struggle Annotation in Dialogue
+
+20 System Message: 
+
+You are a math teacher, and your task is to annotate relative task difficulty in mathematics tutoring dialogues. The supplied candidate pairs have already passed three hard gates: 1. Both tutor turns are accepted mathematical subtasks. 2. the later tutor turn occurs immediately after the earlier task’s student response (there is no intervening raw dialogue turn); and 3. The student response to the earlier task is correct. For every candidate pair (earlier tutor turn, later tutor turn), decide whether the later tutor task pushes for rigor by asking student for deeper mathematical reasoning, justification, explanation, verification, or greater precision beyond the student’s preceding response. Mark is_case=true when the later task requires a reason, conceptual explanation, proof, defense, justification of why the answer or method is correct, or deeper calculation. Mark false when the later task merely asks for the next solution step, a final answer, recall, identification, interpretation, selection of a method, confirmation, or a report of steps without a why/justification demand. A prompt such as "How did you get that?" is true only when context makes it a request for explanatory reasoning, not merely a procedural report. Despite the case name, do not require the later student response to be incorrect; its correctness is an outcome, not an inclusion gate. 
+
+User prompt: 
+
+Determine if the tutor is pushing for rigor in two consequtive tutor turns in the dialogue: an subquestion is followed immediately in next tutor turn by a tutor task after the student’s correct response. For a true pair, the follow-up turn is asking student for deeper mathematical reasoning, justification, or explanation of previous turn so the fixed order is difficulty(later) > difficulty(earlier). Question: Here is a function machine. What should replace the star? The examples map 3 to 12 and 7 to 28. Answer A: ×4
+
+Answer B: ÷4
+
+Answer C: +9 
+
+Answer D: +19 
+
+Full Raw Dialogue: Raw turn 1 (tutor): Hi! Raw turn 2 (student): hi Raw turn 3 (tutor)[ACCEPTED SUBTASK]: So, how could we get from 3 to 12? WHat do we need to do? Raw turn 4 (student): ×4 (Student Correctness: Correct) Raw turn 5 (tutor)[ACCEPTED SUBTASK]: Great! And then check that it also works to get from 7 to 28 Raw turn 6 (student): so would the answer be A Raw turn 7 (tutor): Yes! Well done! Bye for now STRUCTURALLY ELIGIBLE CANDIDATES [(3, 5)] Return exactly this JSON shape and no other text: {"pairs": ["pair": [earlier_tutor_turn ,
+
+later_tutor_turn ], "reasoning": "one sentence explanation", " is_case ": true or false] }
+
+> Table 10: Prompt for Push For Rigor Annotation in Dialogue
+
+21 System Message: 
+
+You are an experienced mathematics teacher. Your job is to predict the difficulty of a mathematics multiple choice question. Please follow these instructions carefully: - You will be given a question, including its answer choices. Use all of this information to predict the question’s difficulty. - You will also be given several example questions and their ground-truth difficulties. Use these to calibrate your prediction for the current question. - Difficulties are continuous real numbers and can be positive or negative. A higher value means the question is more difficult. - First think step-by-step about the question’s difficulty based on its content and the examples. - Write your output with exactly this template: "Thinking: <brief step-by-step reasoning> Difficulty: <real-valued difficulty prediction>". On the Difficulty line, output only one finite real number after the label, formatted with exactly two digits after the decimal point. 
+
+User prompt: 
+
+#### Example 1 #### Question: <nearest-neighbor question 1> —— Difficulty: <IRT difficulty 1> 
+
+. . . 
+
+#### Example 4 #### Question: <nearest-neighbor question 4> —— Difficulty: <IRT difficulty 4> #### Current Question #### Question: <question> —— 
+
+> Table 11: Prompt for ICL (kNN) difficulty prediction
+
+22

@@ -1,0 +1,149 @@
+Title: Acharya 2.0: An AI Tutor for Self-Learning Subjects in Hindi
+
+URL Source: https://arxiv.org/pdf/2610.25192v1
+
+Published Time: Tue, 20 Oct 2026 01:30:30 GMT
+
+Number of Pages: 6
+
+Markdown Content:
+# Acharya 2.0: An AI Tutor for Self-Learning Subjects in Hindi 
+
+## Shantipriya Parida 1, Debasish Dhal 2, Sonal Khosla 2,Sambit Sekhar 2, Muhammed Abdur Rahmaan Kamaldeen 21AMD Silo AI, Finland 
+
+> 2
+
+## Odia Generative AI, India 
+
+Abstract 
+
+Text processing is crucial for low-resource languages as it enables the development of tools and technologies that bridge the digital divide and provide equitable access to information and services. By empowering low-resource languages with robust text processing, we can preserve linguistic diversity, enhance education, improve communi-cation, and foster inclusivity in a rapidly digitizing world. Due to the lack of sufficient annotated datasets and lin-guistic resources, it is challenging to develop accurate and reliable language technologies for these low-resource languages. Large Language Models (LLMs) have attracted sig-nificant attention with their performance and the value they produce. However, with the ever-evolving language, adapting LLMs for a specific task is time-consuming and resource-intensive. Thus, Retrieval-Augmented Genera-tion (RAG) has overcome this limitation by augmenting LLMs with external knowledge, thereby improving their efficiency and extensive task-specific adaptation. Most applications of the RAG technique have been limited to English and has seen limited application in In-dic languages. This paper introduces the RAG-powered AI-Tutor application, Acharya 2.0 , designed to produce academic assistance to Hindi-speaking students. The client-server-based web application integrates many fea-tures to support students in accessing and interacting with educational content. 
+
+## 1 Introduction 
+
+In a predominantly digital world, text processing for low-resource languages is a critical field of research and appli-cation. With insufficient digital resources for low-resource languages, there are few robust AI systems capable of understanding and generating text, creating barriers to education, communication, and technological inclusion for these languages. In the education domain, text processing can play a transformative role by assisting in the creation of ac-cessible learning materials, real-time translation tools, and intelligent tutoring systems. By using advanced natural language processing (NLP) techniques, text pro-cessing can empower students in low-resource language communities with personalized, contextually relevant ed-ucational support [3, 11]. Intelligent tutoring systems have been shown to provide personalized assistance to students, and enhance learning efficiency. eTeacher is one such Intelligent Tutoring System (ITS) that provides personalized assistance to E-learning students. It can automatically identify a student’s learning style based on their interactions within an e-learning system through Bayesian networks. Subsequently, eTeacher utilizes the student’s profile to offer personalized guidance, suggest-ing customized courses of action to enhance the learning experience [1]. The paper by Ahuja et.al. discusses in detail the need for ITS and their recent progress [2]. Additionally, the paper identifies prospective areas for future ITS develop-ment, underscoring the significance of human-computer interaction as a promising domain that requires inter-vention by researchers. DeepTutor 1, a conversational intelligent tutor, is developed as a web application acces-sible 24/7 through a browser on any device connected to the Internet. Developing an LLM-based education system enables personalized student interactions to assess mastery levels and learning preferences. Research suggests LLMs can simulate human behavior, aiding in student modeling and providing data to improve teaching skills for students with limited interaction records. In addition, combining multimodal information provides a general intelligent educational tool [9]. The adaptability of LLMs has driven interest in au-tomating tutoring, particularly interactive mathematical question answering. Though at times, LLM responses can be inaccurate or fail to align with specific educational curricula. Retrieval-Augmented Generation (RAG) has therefore been adopted to improve the relevance and accuracy of generated responses [8]. While several ITSs exist for English, such tools remain scarce for Indic languages. Despite India’s rich linguistic diversity, the lack of educational resources in regional languages limits accessibility and inclusivity. Recognizing this need, the Indian government has promoted the use of local languages in education. Motivated by these 
+
+> 1deeptutor.org arXiv:2610.25192v1 [cs.CL] 18 Oct 2026
+
+efforts, this paper presents an AI tutor for the Hindi language that provides interaction in the form of question-answering etc. 
+
+## 2 Tools and Technologies 
+
+LLMs are powerful AI models capable of understanding and generating human-like text across diverse tasks [12]. As training them from scratch is computationally expen-sive, fine-tuning provides a more efficient alternative by adapting pre-trained models to specific domains with lower cost and faster deployment. Though, LLMs are in-creasingly being explored for educational applications [4], they often face challenges related to accuracy, relevance, and up-to-date knowledge, which can be addressed using Retrieval-Augmented Generation (RAG) [5]. RAG presents a promising approach to building an AI tutor in education. RAG uses LLMs to understand and generate contextually relevant responses to user queries, incorporating external knowledge sources thereby increas-ing response quality [8]. It also ensures that the educa-tional content remains up to date and comprehensive. Vector embeddings represent text while capturing se-mantic relationships between words, enabling models to leverage semantic similarity for better generalization, accurate predictions, and effective learning of complex linguistic patterns. Additionally, RAG provides access to an external educational knowledge base at inference time. This reduces the need to encode all curriculum knowledge into model weights and makes content updates easier. In retrieval systems, it is essential to balance “effective-ness” and “efficiency” while considering resource usage (disk/RAM/GPU) [5]. RAG Retriever plays a crucial role in enhancing LLM performance by providing relevant context or information during the generation process. It responds to the user queries or prompts and thus has a better understanding of the context. 
+
+## 3 Architecture 
+
+The overall architecture of the Acharya 2.0 web appli-cation is shown in Fig. 1. The client-server-based archi-tecture consists of several components and is integrated into a Web Application that supports its usage on both desktops and smartphones for ease of use. The major components are the retriever and LLM, upon which the system’s performance largely depends. Some of the key features of Acharya 2.0 are: 
+
+• Login through Gmail account. 
+
+• Supports Hindi subjects from classes 1 to 12 of Cen-tral Board of Secondary Education. 
+
+• User session management which stores user activi-ties. 
+
+## 4 Data Preparation 
+
+The data for the RAG Database was scraped from pub-licly available CBSE (Central Board of Secondary Ed-ucation) 2, which is the primary board of education in 
+
+> 2https://www.cbse.gov.in/
+
+Figure 1: Acharya 2.0 Architecture India. The textbooks range from classes 2 to 12, covering a variety of subjects, including Accountancy, Biology, Business Studies, Chemistry, Physics etc., ensuring the complete curriculum is covered. This was achieved by using pytesseract (ver. 0.3.10), a Python wrapper of the Tesseract-OCR engine. The extracted data was manu-ally reviewed to remove spelling and punctuation errors that may have been introduced during text extraction. Using OCR, 4.3M tokens spanning 13 distinct subjects (59 subjects across all classes) were added to the vector database. 
+
+Figure 2: RAG Text Database statistics Class 12 has 13 subjects, 222 documents, and 1.29M tokens. 
+
+## 5 Frontend 
+
+We redesigned the interface using React 3 and Tailwind CSS 4 to provide a more user-friendly experience. Google login was integrated using react-oauth 5, enabling secure authentication through Google Identity Services. We also 
+
+> 3https://react.dev/
+> 4https://tailwindcss.com/
+> 5https://www.npmjs.com/package/@react-oauth/ google
+
+added Hindi text input using Google Transliteration 6,improving accessibility and usability. Additionally, chat history support allows users to revisit previous conversa-tions and their insights. 
+
+## 6 Backend 
+
+Embeddings and Vectorstore The raw data is con-verted into embeddings after chunking, to be stored in the vector store for similarity search using the cosine sim-ilarity mechanism. We have used sentence transformers (intfloat/multilingual-e5-large-instruct transformer) to generate the embeddings and stored them in Chromadb’s persist directory (in-memory) for subsequent retrieval. 
+
+Integration and Operation The server loads the lan-guage and embedding models during startup. User au-thentication is handled through the ’/google/oauth/token’ route, which securely manages Google OAuth tokens and user information. After login, users configure their classes and subjects via the ’/setting’ route, where the corre-sponding ChromaDB collections are assigned. Queries are processed through the ’/home’ route: user input is converted into embeddings, the top three relevant docu-ments are retrieved from ChromaDB, and the retrieved context, along with the query, is passed to the language model using a prompt template to generate the response. Finally, the ’/logout’ route securely signs out the user. 
+
+LLM For Hindi LLM, we have explored i) Mistral-7b and ii) Gemma-2B fine-tuned Hindi instruction sets for using LLM for Acharya 2.0 . The Mistral-7B model 7
+
+was fine-tuned using a dataset of 80K Hindi instructions including domain knowledge covering various domains such as: art , sports , environment , history , food , music etc. The Gemma-2B 8 was fine-tuned using a large instruc-tion set of 188k by combining several instruction sets available in Hindi. The Gemma-2B was selected as the base model based on its performance in comparison with several benchmark tasks [10]. Based on the comparison of both LLMs, we have used the fine-tuned Mistral for 
+
+Acharya 2.0 integration. details about the datasets used for fine tuning 
+
+API integration The backend of our system exposes four main FastAPI endpoints. The /loginroute endpoint is used here to handle user authentication via POST requests; when an end-user tries to log in with their credentials, the API tries to verify this, if they are correct then it grants them access. 
+
+## 7 Evaluation 
+
+The performance of Acharya 2.0 has been evaluated using both automated and human evaluation methods 
+
+> 6https://developers.google.com/transliterate/v1/ getting_started
+> 7https://huggingface.co/OdiaGenAI/mistral_hindi_ 7b_base_v1
+> 8https://huggingface.co/blog/gemma
+
+Metric Mistral Gemma 
+
+BERT 
+
+Precision 0.706 0.681 Recall 0.699 0.629 F1-Score 0.698 0.652 Cosine Similarity 0.545 0.202 
+
+RAGAS 
+
+Faithfulness 0.481 0.407 Context Prec. 0.275 0.487 Answer Relevancy 0.247 0.321 Table 1: Automated evaluation scores for Mistral- and Gemma-based RAG models. covering a diverse array of topics and content. It provides a comprehensive evaluation of Acharya 2.0’s performance. All automated metrics are on a scale of 0 to 1. 
+
+7.1 Automated Evaluation 
+
+Three key metrics were used to evaluate the model’s outputs presented in Table 1. The metrics are BERT score [13], Cosine Similarity 9, and RAGAS score 10 .
+
+BERT score score compares each token of the model’s output with each token of the ground truth and generates a score. Cosine Similarity takes the cosine of the angle between the vector representation of the model’s output and ground truth. RAGAS score metric is tailor-made for the evaluation of RAG-based models. RAG Assessment provides a series of metrics, tailor-made for evaluating RAG-derived results. We’re using three such metrics: Context Precision , Answer Relevancy 
+
+and Faithfulness .
+
+7.2 Human Evaluation 
+
+We manually evaluated 50 question–answer pairs using three metrics: Readability, Correctness, and Perplexity (0–5 scale). Higher Readability and Correctness scores indicate better performance, whereas a lower Perplexity score indicates fewer hallucinations. The number of anno-tators were 3, and all of them were native-Hindi speakers who have carried out similar evaluations previously. The scores of all the 3 evaluators have been averaged. The results are shown in Figure 3. Mistral performs better than the Gemma model, in most metrics. We believe this is mostly attributed to the difference in size of both models; Mistral is a 7B model, while Gemma is a 2B model. But the Gemma tokenizer is more efficient for Indic languages and thus can embed Indic sentences with fewer tokens than the Mistral tokenizer. Further investigation is needed on this. 
+
+7.3 Strength and Weakness 
+
+Strengths: 
+
+> 9https://scikit-learn.org/stable/modules/ generated/sklearn.metrics.pairwise.cosine_ similarity.html
+> 10 https://docs.ragas.io/en/stable/concepts/ metrics/available_metrics/
+
+Figure 3: Human Evaluation scores for Mistral and Gemma-based RAG-models 
+
+• The Mistral-based RAG model works well for a broad range of questions and answers with reasonable per-formance. 
+
+• Both models have minimal inference time. 
+
+• The Mistral-based model’s strengths are in Mathe-matics and History. 
+
+Weaknesses: 
+
+• The Gemma-based RAG model produces many erro-neous and empty responses, with many characters missing from the beginning and end of words. We believe that improvements in the retriever can rectify it. 
+
+• Some responses are fully readable and devoid of hallucinations, but are factually incorrect. 
+
+## 8 Analysis 
+
+Acharya 2.0 works fairly well and achieves good eval-uation results as discussed in the previous section. It works primarily on twelve core subjects in the Indian education system, including Mathematics, Science, Hindi, History, and Geography for Classes 1 to 12. Though both the models have low inference latency, overall the Mis-tral model performs better as compared to the Gemma model. The best performance has been seen in subjects like Mathematics and History. 
+
+## 9 Conclusion 
+
+The paper presents Acharya 2.0 , an LLM-based AI Tutor developed for self-learning subjects in Hindi for high school students, freely available to use. The future work includes: i) extending Acharya to other Indic languages ii) improving retriever performance using embedding fine-tuning for RAG [6], re-ranking [7], 
+
+iii) incorporating OCR to embed the images and tables, 
+
+iv) meta-data inclusion, and v) supporting a speech-to-text engine for Hindi. 
+
+## Ethics Statement 
+
+We do not envisage any ethical concerns. The dataset used does not contain any personal or personally identifiable infor-mation; the source data is publicly available, and there are no risks or harm associated with its usage. 
+
+## References 
+
+[1] eteacher: Providing personalized assistance to e-learning students. Computers & Education , 51(4):1744–1754, 2008. [2] Neelu Jyothi Ahuja and Roohi Sille. A critical review of development of intelligent tutoring systems: Retrospect, present and prospect. International Journal of Computer Science Issues (IJCSI) , 10(4):39, 2013. [3] Yuhao Dan, Zhikai Lei, Yiyang Gu, Yong Li, Jianghao Yin, Jiaju Lin, Linhao Ye, Zhiyan Tie, Yougen Zhou, Yilei Wang, et al. Educhat: A large-scale language model-based chatbot system for intelligent education. arXiv preprint arXiv:2308.02773 , 2023. [4] Andy Extance. Chatgpt has entered the classroom: how llms could transform education. Nature , 623(7987):474– 477, 2023. [5] Paulo Finardi, Leonardo Avila, Rodrigo Castaldoni, Pe-dro Gengo, Celio Larcher, Marcos Piau, Pablo Costa, and Vinicius Carid´ a. The chronicles of rag: The re-triever, the chunk and the generator. arXiv preprint arXiv:2401.07883 , 2024. [6] Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia, Jinliu Pan, Yuxi Bi, Yi Dai, Jiawei Sun, and Haofen Wang. Retrieval-augmented generation for large language models: A survey. arXiv preprint arXiv:2312.10997 ,2023. [7] Michael Glass, Gaetano Rossiello, Md Faisal Mahbub Chowdhury, Ankita Rajaram Naik, Pengshan Cai, and Alfio Gliozzo. Re2g: Retrieve, rerank, generate. arXiv preprint arXiv:2207.06300 , 2022. [8] Zachary Levonian, Chenglu Li, Wangda Zhu, Anoushka Gade, Owen Henkel, Millie-Ellen Postle, and Wanli Xing. Retrieval-augmented generation to improve math question-answering: Trade-offs between groundedness and human preference. arXiv preprint arXiv:2310.03184 ,2023. [9] Qingyao Li, Lingyue Fu, Weiming Zhang, Xianyu Chen, Jingwei Yu, Wei Xia, Weinan Zhang, Ruiming Tang, and Yong Yu. Adapting large language models for edu-cation: Foundational capabilities, potentials, and chal-lenges. arXiv preprint arXiv:2401.08664 , 2023. [10] Shiyao Li, Xuefei Ning, Luning Wang, Tengxuan Liu, Xiangsheng Shi, Shengen Yan, Guohao Dai, Huazhong Yang, and Yu Wang. Evaluating quantized large language models. arXiv preprint arXiv:2402.18158 , 2024. [11] Vishal Soodan, Avinash Rana, Anurag Jain, and Deeksha Sharma. Ai chatbot adoption in academia: Task fit, usefulness and collegial ties. Journal of Information Technology Education: Innovations in Practice , 23:001, 2024. [12] Junjie Ye, Xuanting Chen, Nuo Xu, Can Zu, Zekai Shao, Shichun Liu, Yuhan Cui, Zeyang Zhou, Chao Gong, Yang Shen, et al. A comprehensive capability analy-sis of gpt-3 and gpt-3.5 series models. arXiv preprint arXiv:2303.10420 , 2023. [13] Tianyi Zhang, Varsha Kishore, Felix Wu, Kilian Q. Wein-berger, and Yoav Artzi. Bertscore: Evaluating text gen-eration with bert. International Conference on Learning Representations (ICLR) , 2020. A User Interface 
+
+Figure A1: Acharya 2.0 user interface. From top to bottom: (a) landing page, (b) class and subject selection, and (c) generated response.
