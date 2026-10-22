@@ -51,14 +51,14 @@
       <span class="dpr-home-dashboard-kicker">2026-10-13 ~ 2026-10-22</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 19 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 18 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>8</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>10</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>8</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-10-22 02:51:54 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-10-22 02:59:48 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>2026-10-13至10-22共筛读19篇AI教育论文，精读8篇、速读11篇，聚焦生成式AI教学与学习助手。最值得看的是两项9分工作：LayerCanvas用混合图层扩散生成信息图，以及统计与数据科学中负责任使用生成式AI的教学框架。普通读者可先读这两篇精读，再按需浏览速读中的问答辅导、学生模拟与自适应评分方向。</p>
+<p>本期共筛读 18 篇论文（精读 10 篇、速读 8 篇），重点精读两篇 9.0 分研究：AI 学习助手的信息图生成与问答/辅导对话统一框架。</p>
+<p>最值得关注的方向是“AI 教学助手如何同时做好可视化讲解与对话辅导”，以及速读中 8.0 分的儿童在游戏化人机协作中的核查行为研究。</p>
+<p>普通读者可优先看这两篇精读，并在使用 AI 导师或生成式 AI 学习工具时，养成核对答案与信息来源的习惯。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -78,12 +80,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">8 篇</strong>
+    <strong class="dpr-home-dashboard-count">10 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="LayerCanvas: Infographic Generation in AI Learning Assistants via Hybrid Layer-Set Diffusion">LayerCanvas: Infographic Generation in AI Learning Assistants via Hybrid Layer-Set Diffusion</span></li><li><span class="dpr-home-dashboard-paper-title" title="A Framework for Teaching the Responsible and Effective Use of Generative AI in Statistics and Data Science">A Framework for Teaching the Responsible and Effective Use of Generative AI in Statistics and Data Science</span></li><li><span class="dpr-home-dashboard-paper-title" title="Multi-sourced AI Tutor for Non-Native English Speaker Students">Multi-sourced AI Tutor for Non-Native English Speaker Students</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="LayerCanvas: Infographic Generation in AI Learning Assistants via Hybrid Layer-Set Diffusion">LayerCanvas: Infographic Generation in AI Learning Assistants via Hybrid Layer-Set Diffusion</span></li><li><span class="dpr-home-dashboard-paper-title" title="A Unified Response Framework for Questions and Tutoring Dialogues">A Unified Response Framework for Questions and Tutoring Dialogues</span></li><li><span class="dpr-home-dashboard-paper-title" title="HACHIMI-II: From Role-Play to Learner Behavior Modeling for Faithful Student Simulation">HACHIMI-II: From Role-Play to Learner Behavior Modeling for Faithful Student Simulation</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>8</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>10</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -91,12 +93,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">11 篇</strong>
+    <strong class="dpr-home-dashboard-count">8 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="A Unified Response Framework for Questions and Tutoring Dialogues">A Unified Response Framework for Questions and Tutoring Dialogues</span></li><li><span class="dpr-home-dashboard-paper-title" title="HACHIMI-II: From Role-Play to Learner Behavior Modeling for Faithful Student Simulation">HACHIMI-II: From Role-Play to Learner Behavior Modeling for Faithful Student Simulation</span></li><li><span class="dpr-home-dashboard-paper-title" title="MARS: A Momentum-Aware Adaptive Rating System for Personalized Assessment">MARS: A Momentum-Aware Adaptive Rating System for Personalized Assessment</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="&quot;Do You Trust It... or Check It?&quot;: Exploring Children&#x27;s Verification Behaviors in Game-Based Human-AI Collaboration">&quot;Do You Trust It... or Check It?&quot;: Exploring Children&#x27;s Verification Behaviors in Game-Based Human-AI Collaboration</span></li><li><span class="dpr-home-dashboard-paper-title" title="A Framework for Teaching the Responsible and Effective Use of Generative AI in Statistics and Data Science">A Framework for Teaching the Responsible and Effective Use of Generative AI in Statistics and Data Science</span></li><li><span class="dpr-home-dashboard-paper-title" title="Acharya 2.0: An AI Tutor for Self-Learning Subjects in Hindi">Acharya 2.0: An AI Tutor for Self-Learning Subjects in Hindi</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>11</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>8</strong></span></div>
 </section>
 </div>
 

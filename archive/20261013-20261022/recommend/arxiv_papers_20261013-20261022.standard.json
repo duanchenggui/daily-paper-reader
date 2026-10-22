@@ -1,15 +1,15 @@
 {
   "mode": "standard",
-  "generated_at": "2026-10-22T02:47:55.407896+00:00",
+  "generated_at": "2026-10-22T02:54:41.623461+00:00",
   "stats": {
     "mode": "standard",
     "tag_count": 1,
-    "deep_divecandidates": 13,
+    "deep_divecandidates": 16,
     "deep_cap": 6,
-    "deep_selected": 8,
-    "quick_candidates": 11,
+    "deep_selected": 10,
+    "quick_candidates": 8,
     "quick_skim_target": 11,
-    "quick_selected": 11
+    "quick_selected": 8
   },
   "deep_dive": [
     {
@@ -35,13 +35,13 @@
         "query:aied-oer"
       ],
       "llm_score": 9.0,
-      "llm_evidence_en": "AI learning assistants generate personalized infographics for tutoring",
-      "llm_evidence_cn": "AI学习助手生成个性化信息图辅助辅导",
-      "llm_evidence": "AI学习助手生成个性化信息图辅助辅导",
-      "canonical_evidence": "AI学习助手生成个性化信息图辅助辅导",
-      "llm_tldr_en": "Proposes LayerCanvas, a hybrid layer-set diffusion approach for generating editable, visually rich infographics in AI learning assistants, addressing the tension between SVG editability and raster richness.",
-      "llm_tldr_cn": "在线学习平台的AI助手需要个性化讲解，但自动生成兼具视觉表现、排版结构与可编辑性的信息图仍很困难。论文提出LayerCanvas，将图层集合表示与扩散模型结合，通过混合表示缓解SVG美学不足与栅格图不可编辑的矛盾。该方法面向AI学习助手中的多模态内容创作，旨在提升复杂知识的讲解效果与学习体验，为教育场景的信息图自动生成提供新路径。",
-      "llm_tldr": "在线学习平台的AI助手需要个性化讲解，但自动生成兼具视觉表现、排版结构与可编辑性的信息图仍很困难。论文提出LayerCanvas，将图层集合表示与扩散模型结合，通过混合表示缓解SVG美学不足与栅格图不可编辑的矛盾。该方法面向AI学习助手中的多模态内容创作，旨在提升复杂知识的讲解效果与学习体验，为教育场景的信息图自动生成提供新路径。",
+      "llm_evidence_en": "infographic generation for AI learning assistants in online learning platforms",
+      "llm_evidence_cn": "面向在线学习平台AI助教的信息图生成",
+      "llm_evidence": "面向在线学习平台AI助教的信息图生成",
+      "canonical_evidence": "面向在线学习平台AI助教的信息图生成",
+      "llm_tldr_en": "Proposes LayerCanvas, a hybrid layer-set diffusion approach that generates editable, well-laid-out infographics for AI learning assistants, addressing the trade-off between SVG editability and raster visual richness.",
+      "llm_tldr_cn": "在线学习平台的AI助教需要信息图来讲解复杂知识，但自动生成兼具视觉表现力、精确排版与可编辑性的信息图仍很困难。现有SVG表示保留结构与文本却缺乏美感，栅格扩散模型视觉丰富却把内容与布局压平成单张图像。作者提出LayerCanvas，以混合图层集扩散在分层表示上生成信息图，兼顾版面结构与可编辑性。该工作为AI学习助手的教学内容自动化生成提供了可行方案。",
+      "llm_tldr": "在线学习平台的AI助教需要信息图来讲解复杂知识，但自动生成兼具视觉表现力、精确排版与可编辑性的信息图仍很困难。现有SVG表示保留结构与文本却缺乏美感，栅格扩散模型视觉丰富却把内容与布局压平成单张图像。作者提出LayerCanvas，以混合图层集扩散在分层表示上生成信息图，兼顾版面结构与可编辑性。该工作为AI学习助手的教学内容自动化生成提供了可行方案。",
       "llm_tags": [
         "query:aied-oer"
       ],
@@ -51,41 +51,120 @@
       "selection_source": "fresh_fetch"
     },
     {
-      "id": "2610.21663v1",
+      "id": "2610.19532v1",
       "source": "arxiv",
-      "title": "A Framework for Teaching the Responsible and Effective Use of Generative AI in Statistics and Data Science",
-      "abstract": "The rapid rise of generative artificial intelligence (AI) following the public release of tools such as ChatGPT has begun to reshape how students engage with coding, statistical analysis, and written communication in higher education. Growing use of conversational AI systems creates opportunities for learning alongside challenges around reliability, transparency, privacy, and appropriate academic and professional practice, highlighting the need for structured education in their responsible use. This paper presents a framework for teaching the responsible and effective use of generative AI in statistics and data science. The framework is organised around four areas: Understanding, Development, Reporting, and Safety, covering conceptual foundations, practical interaction within analytical workflows, documentation and transparency, and issues including reliability, bias, privacy, and ethics. Its design draws on emerging work in AI literacy and established principles from statistics and data science education, and was further refined through workshop and conference activities and participant feedback. The framework has been implemented across multiple settings, including a massive open online course, short training sessions, and undergraduate and postgraduate skills-based teaching. We use these experiences to identify broader design considerations for educators, including the value of authentic analytical tasks, critical evaluation of generated outputs, integrated consideration of responsible practice, and flexibility as generative AI technologies continue to evolve.",
+      "title": "A Unified Response Framework for Questions and Tutoring Dialogues",
+      "abstract": "Existing student models in educational applications largely focus on student responses to questions. However, as tutoring becomes more accessible at large scale, it is important to analyze dialogues between tutors and students, which may reveal fine-grained evidence on student knowledge. In this work, we propose a unified framework that models both student responses to questions and tutor-posed subtasks during dialogues on a shared item response theory (IRT) scale. We first identify mathematical subtasks in tutoring dialogues, rewrite them into self-contained questions, and identify the correctness of student responses to these subtasks. We then develop an IRT framework that estimates question/subtask difficulty from text, tracks students' evolving abilities across question-answering and dialogue interactions, and a novel method to leverages tutor moves between consecutive subtasks to regularize their difficulty values. We evaluate our framework on two real-world math education datasets containing both human- and AI-tutored dialogues. Results show that our framework outperforms strong baselines on both question difficulty prediction and response correctness prediction.",
       "authors": [
-        "Vinny Davies",
-        "Craig Alexander",
-        "Jennifer Gaskell",
-        "Matthew Parker",
-        "Jake Lever"
+        "Zhangqi Duan",
+        "Simon Woodhead",
+        "Maya Miller-Vedam",
+        "Andrew Lan"
       ],
-      "primary_category": "stat.OT",
+      "primary_category": "cs.CL",
       "categories": [
-        "stat.OT"
+        "cs.CL",
+        "cs.CY",
+        "cs.LG"
       ],
-      "published": "2026-10-15T10:45:50+00:00",
-      "link": "https://arxiv.org/pdf/2610.21663v1",
+      "published": "2026-10-14T03:47:20+00:00",
+      "link": "https://arxiv.org/pdf/2610.19532v1",
       "tags": [
         "keyword:aied-oer",
         "query:aied-oer"
       ],
       "llm_score": 9.0,
-      "llm_evidence_en": "framework for teaching responsible and effective use of generative AI in data science education",
-      "llm_evidence_cn": "在数据科学教育中教授生成式AI负责任使用的框架",
-      "llm_evidence": "在数据科学教育中教授生成式AI负责任使用的框架",
-      "canonical_evidence": "在数据科学教育中教授生成式AI负责任使用的框架",
-      "llm_tldr_en": "Presents a teaching framework for the responsible and effective use of generative AI in statistics and data science higher education, organized around Understanding, Development, Reporting, and Safety to address reliability, transparency, and privacy challenges.",
-      "llm_tldr_cn": "针对生成式AI进入课堂后带来的可靠性、透明度与隐私等问题，本文提出一套在统计与数据科学高等教育中教授生成式AI负责任使用的教学框架。框架围绕理解、开发、报告与安全四个模块组织，指导学生将对话式AI恰当地用于编程、统计分析与写作。该工作为把生成式AI系统性融入教学提供了可操作的结构化方案。",
-      "llm_tldr": "针对生成式AI进入课堂后带来的可靠性、透明度与隐私等问题，本文提出一套在统计与数据科学高等教育中教授生成式AI负责任使用的教学框架。框架围绕理解、开发、报告与安全四个模块组织，指导学生将对话式AI恰当地用于编程、统计分析与写作。该工作为把生成式AI系统性融入教学提供了可操作的结构化方案。",
+      "llm_evidence_en": "student modeling of tutoring dialogues with item response theory",
+      "llm_evidence_cn": "基于项目反应理论的辅导对话学生建模",
+      "llm_evidence": "基于项目反应理论的辅导对话学生建模",
+      "canonical_evidence": "基于项目反应理论的辅导对话学生建模",
+      "llm_tldr_en": "Student models usually ignore tutor-student dialogues; this work identifies math subtasks in dialogues, rewrites them as self-contained questions, and models both responses and subtasks on a shared IRT scale, tracking students' evolving ability.",
+      "llm_tldr_cn": "现有教育应用中的学生模型主要关注学生对问题的作答，忽略了辅导对话中蕴含的细粒度知识证据。作者提出统一框架，先识别对话中的数学子任务并改写为自足问题，再以共享的项目反应理论量表同时建模学生作答与辅导者提出的子任务。实验显示该框架可从文本估计难度并追踪学生能力演变，把问答与辅导对话纳入同一测量体系。",
+      "llm_tldr": "现有教育应用中的学生模型主要关注学生对问题的作答，忽略了辅导对话中蕴含的细粒度知识证据。作者提出统一框架，先识别对话中的数学子任务并改写为自足问题，再以共享的项目反应理论量表同时建模学生作答与辅导者提出的子任务。实验显示该框架可从文本估计难度并追踪学生能力演变，把问答与辅导对话纳入同一测量体系。",
       "llm_tags": [
         "query:aied-oer"
       ],
       "matched_query_tag": "query:aied-oer",
-      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
-      "matched_requirement_id": "req-3",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.19654v1",
+      "source": "arxiv",
+      "title": "HACHIMI-II: From Role-Play to Learner Behavior Modeling for Faithful Student Simulation",
+      "abstract": "Simulated students let researchers test tutoring systems and teaching strategies before real learners are available, but only if the simulation reproduces where a particular learner succeeds and fails. The common approach asks a large language model to role-play a student, but a role does not model what this learner knows or will do next, so the model's own competence fills the gap. Simulated students perform at a level set by the model, differ little from one another, and seldom make the real learners' errors. We model the learner's behavior and recast student simulation as third-person prediction of the learner's next action. HACHIMI-II builds a student model from the learner's history, infers the learner's state for the current item or tutor turn, and compiles it into a behavior harness that constrains the next action. On three item-response datasets, the Wasserstein-1 distance between simulated and real student ability is 2.4--8.4$\\times$ smaller than that of the strongest baseline. On two dialogue datasets, HACHIMI-II reproduces real student errors with the same knowledge type, locus, and mechanism 1.8--5.1$\\times$ more often than the strongest baseline, and ablations trace the gains mainly to the explicit learner state. Predicting the learner makes capable models usable as simulated students.",
+      "authors": [
+        "Yilin Jiang",
+        "Fei Tan",
+        "Xuanyu Yin",
+        "Jing Leng",
+        "Aimin Zhou"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.CY",
+        "cs.LG"
+      ],
+      "published": "2026-10-14T06:24:39+00:00",
+      "link": "https://arxiv.org/pdf/2610.19654v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "learner behavior modeling for faithful student simulation in tutoring",
+      "llm_evidence_cn": "面向智能导学的学习者行为建模与学生模拟",
+      "llm_evidence": "面向智能导学的学习者行为建模与学生模拟",
+      "canonical_evidence": "面向智能导学的学习者行为建模与学生模拟",
+      "llm_tldr_en": "LLM role-play students fail to reproduce real learners' knowledge and errors; HACHIMI-II recasts simulation as predicting the learner's next action from their history, yielding faithful student models for testing tutoring systems.",
+      "llm_tldr_cn": "现有大模型角色扮演式学生模拟难以复现真实学习者的知识状态与错误模式，表现水平受模型自身能力左右。本文提出HACHIMI-II，将学生模拟重构为基于学习者历史预测其下一步行为的第三方建模任务，并从历史记录构建学生模型、推断当前题目下的学习者状态。该工作为在真实学习者缺位时测试智能导学系统与教学策略提供了更可信的模拟工具。",
+      "llm_tldr": "现有大模型角色扮演式学生模拟难以复现真实学习者的知识状态与错误模式，表现水平受模型自身能力左右。本文提出HACHIMI-II，将学生模拟重构为基于学习者历史预测其下一步行为的第三方建模任务，并从历史记录构建学生模型、推断当前题目下的学习者状态。该工作为在真实学习者缺位时测试智能导学系统与教学策略提供了更可信的模拟工具。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.21685v1",
+      "source": "arxiv",
+      "title": "MARS: A Momentum-Aware Adaptive Rating System for Personalized Assessment",
+      "abstract": "Adaptive assessment systems personalize learning by estimating learner proficiency and recommending suitable questions. However, many existing approaches rely on fixed difficulty labels, static rating updates, or black-box prediction models that provide limited control over rating stability, interpretability, and time-constrained routing. This paper proposes MARS, a Momentum-Aware Adaptive Rating System for interpretable adaptive assessment. MARS represents the question bank as a directed weighted knowledge graph and updates learner proficiency using dynamic rating sensitivity, response quality, and momentum-aware learner velocity. We also formulate a time-budgeted mark-maximization objective in which the policy selects questions within a fixed test duration under negative marking. Experiments on ASSISTments 2009 and MARS-SimExam evaluate MARS for prediction, rating stability, and adaptive routing. Results show that MARS provides smoother rating updates than Fixed Elo and achieves the highest score under time-budgeted negative-marking routing, improving the total score by 8.09 over the strongest baseline and reducing overtime violations from 50% to 5.6%. These results suggest that MARS is suitable for real-time, interpretable, and deployment-friendly adaptive assessment.",
+      "authors": [
+        "Vikrant Sahu",
+        "Khethavath Sunil Naik",
+        "Gagan Raj Gupta"
+      ],
+      "primary_category": "cs.CY",
+      "categories": [
+        "cs.CY",
+        "cs.LG"
+      ],
+      "published": "2026-10-15T11:09:49+00:00",
+      "link": "https://arxiv.org/pdf/2610.21685v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "adaptive assessment with momentum-aware learner proficiency for personalized learning",
+      "llm_evidence_cn": "面向个性化学习的动量感知自适应测评",
+      "llm_evidence": "面向个性化学习的动量感知自适应测评",
+      "canonical_evidence": "面向个性化学习的动量感知自适应测评",
+      "llm_tldr_en": "Adaptive assessment often relies on fixed difficulty and black-box updates; MARS models the question bank as a weighted knowledge graph and updates proficiency with dynamic sensitivity, response quality and momentum under a time-budgeted policy.",
+      "llm_tldr_cn": "现有自适应测评系统多依赖固定难度标签与黑箱预测，评级稳定性、可解释性和限时路由难以控制。本文提出MARS动量感知自适应评级系统，将题库表示为有向加权知识图谱，结合动态评级敏感度、作答质量与学习者速度动量更新能力估计。系统进一步在固定考试时长下求解分数最大化的选题策略。该工作提升了个性化测评的可解释性与时间约束下的实用性。",
+      "llm_tldr": "现有自适应测评系统多依赖固定难度标签与黑箱预测，评级稳定性、可解释性和限时路由难以控制。本文提出MARS动量感知自适应评级系统，将题库表示为有向加权知识图谱，结合动态评级敏感度、作答质量与学习者速度动量更新能力估计。系统进一步在固定考试时长下求解分数最大化的选题策略。该工作提升了个性化测评的可解释性与时间约束下的实用性。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "personalized learning and learner-centered educational technologies",
+      "matched_requirement_id": "req-6",
       "selection_source": "fresh_fetch"
     },
     {
@@ -111,19 +190,19 @@
         "query:aied-oer"
       ],
       "llm_score": 9.0,
-      "llm_evidence_en": "AI tutor for computing education and bilingual student support",
-      "llm_evidence_cn": "面向计算机教育的AI导师与双语学习支持",
-      "llm_evidence": "面向计算机教育的AI导师与双语学习支持",
-      "canonical_evidence": "面向计算机教育的AI导师与双语学习支持",
-      "llm_tldr_en": "For non-native English speaker students facing language barriers in computing courses, this paper builds an LLM-based AI tutor that handles foreign-language questions and gives bilingual answers plus technical glossaries, offering an educational tool to improve comprehension and access.",
-      "llm_tldr_cn": "针对非英语母语学生在计算机课程中因语言障碍而理解困难的问题，本文开发了一种基于大语言模型的通用AI导师，可接收外语提问并生成双语回答，同时自动生成技术术语表与解释。系统面向真实学习场景设计，旨在降低语言门槛、提升课程内容理解与学习可及性，体现了AI导师在教育支持中的直接应用价值。研究关注多源信息与双语术语解释的整合。",
-      "llm_tldr": "针对非英语母语学生在计算机课程中因语言障碍而理解困难的问题，本文开发了一种基于大语言模型的通用AI导师，可接收外语提问并生成双语回答，同时自动生成技术术语表与解释。系统面向真实学习场景设计，旨在降低语言门槛、提升课程内容理解与学习可及性，体现了AI导师在教育支持中的直接应用价值。研究关注多源信息与双语术语解释的整合。",
+      "llm_evidence_en": "LLM-based AI tutor answering student questions in computing education",
+      "llm_evidence_cn": "面向计算教育的LLM智能辅导系统",
+      "llm_evidence": "面向计算教育的LLM智能辅导系统",
+      "canonical_evidence": "面向计算教育的LLM智能辅导系统",
+      "llm_tldr_en": "LLMs are increasingly used as teaching tools, but non-native English speaker students face language barriers in computing courses. The authors build a multi-sourced AI tutor that handles Mandarin questions, gives bilingual answers, and generates technical glossaries, improving comprehension for international students.",
+      "llm_tldr_cn": "针对非英语母语留学生在计算机课程中因语言障碍难以理解教学内容的问题，作者开发了一套通用AI辅导系统，可接收中文提问并给出双语回答，同时自动生成术语表与解释以增强理解。系统基于大语言模型与多源知识构建，面向真实计算教育场景。该工作表明AI导师能有效缓解语言壁垒，为国际化教学提供可复用的智能辅导工具。",
+      "llm_tldr": "针对非英语母语留学生在计算机课程中因语言障碍难以理解教学内容的问题，作者开发了一套通用AI辅导系统，可接收中文提问并给出双语回答，同时自动生成术语表与解释以增强理解。系统基于大语言模型与多源知识构建，面向真实计算教育场景。该工作表明AI导师能有效缓解语言壁垒，为国际化教学提供可复用的智能辅导工具。",
       "llm_tags": [
         "query:aied-oer"
       ],
       "matched_query_tag": "query:aied-oer",
-      "matched_query_text": "AI-supported learning environments and educational tools",
-      "matched_requirement_id": "req-5",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
       "selection_source": "fresh_fetch"
     },
     {
@@ -148,13 +227,13 @@
         "query:aied-oer"
       ],
       "llm_score": 9.0,
-      "llm_evidence_en": "teacher-configured educational chatbots and real-world pedagogical failures",
-      "llm_evidence_cn": "教师配置的教育聊天机器人及其真实教学失败模式",
-      "llm_evidence": "教师配置的教育聊天机器人及其真实教学失败模式",
-      "canonical_evidence": "教师配置的教育聊天机器人及其真实教学失败模式",
-      "llm_tldr_en": "Teachers increasingly configure educational chatbots, but their real-world failures remain poorly understood. This paper introduces EduWild, a dataset of 1,726 conversations with 217 teacher-configured bots, and a 29-code taxonomy to diagnose pedagogical and workflow failures.",
-      "llm_tldr_cn": "针对教师通过自然语言配置教育聊天机器人却缺乏真实失败认识的问题，本文构建了EduWild数据集，包含217个教师配置聊天机器人的1726段对话，并配套配置指令与部署场景。作者建立涵盖事实、流程、诊断和教学四类问题的29项失败分类法，用经人工校准的大模型评判器分析，发现机器人常跳过教师要求的流程步骤、遗漏期望设定并使学习者信息过载，为改进教育聊天机器人提供依据。",
-      "llm_tldr": "针对教师通过自然语言配置教育聊天机器人却缺乏真实失败认识的问题，本文构建了EduWild数据集，包含217个教师配置聊天机器人的1726段对话，并配套配置指令与部署场景。作者建立涵盖事实、流程、诊断和教学四类问题的29项失败分类法，用经人工校准的大模型评判器分析，发现机器人常跳过教师要求的流程步骤、遗漏期望设定并使学习者信息过载，为改进教育聊天机器人提供依据。",
+      "llm_evidence_en": "teacher-configured educational chatbots and their real-world failures",
+      "llm_evidence_cn": "教师配置教育聊天机器人的真实失败分析",
+      "llm_evidence": "教师配置教育聊天机器人的真实失败分析",
+      "canonical_evidence": "教师配置教育聊天机器人的真实失败分析",
+      "llm_tldr_en": "Introduces EduWild, a dataset of 1,726 conversations with 217 teacher-configured educational chatbots and a 29-code failure taxonomy applied by a calibrated LLM judge, showing bots most often fail to follow teacher intent.",
+      "llm_tldr_cn": "教师越来越多地用自然语言指令配置教育聊天机器人，但这些机器人在真实课堂中的失效模式尚不清楚。本文构建EduWild数据集，收录217个教师配置机器人的1726段对话，并配以指令与配置信息，其中包含35个已部署机器人的900段真实用户对话。作者提出覆盖事实、流程、诊断与教学四类的29条失败分类法，并用人工校准的大模型评判器标注。结果显示最常见的是未遵循教师意图，如跳过必需流程、缺少期望设定和过度灌输信息，为教育聊天机器人的改进提供依据。",
+      "llm_tldr": "教师越来越多地用自然语言指令配置教育聊天机器人，但这些机器人在真实课堂中的失效模式尚不清楚。本文构建EduWild数据集，收录217个教师配置机器人的1726段对话，并配以指令与配置信息，其中包含35个已部署机器人的900段真实用户对话。作者提出覆盖事实、流程、诊断与教学四类的29条失败分类法，并用人工校准的大模型评判器标注。结果显示最常见的是未遵循教师意图，如跳过必需流程、缺少期望设定和过度灌输信息，为教育聊天机器人的改进提供依据。",
       "llm_tags": [
         "query:aied-oer"
       ],
@@ -187,57 +266,59 @@
         "query:aied-oer"
       ],
       "llm_score": 9.0,
-      "llm_evidence_en": "multi-agent pedagogical feedback from online class videos",
-      "llm_evidence_cn": "基于在线课堂视频的多智能体教学反馈",
-      "llm_evidence": "基于在线课堂视频的多智能体教学反馈",
-      "canonical_evidence": "基于在线课堂视频的多智能体教学反馈",
-      "llm_tldr_en": "Introduces MAVE, a multi-agent framework that links lesson goals with temporally aligned multimodal evidence from online class videos to generate grounded, actionable pedagogical feedback.",
-      "llm_tldr_cn": "在线课堂视频长且噪声大，自动教学反馈往往泛化且缺乏课堂行为证据。论文提出MAVE多智能体框架，将反馈生成分解为课程结构分析、学生反应观察等角色，把教学目标和时间对齐的多模态证据连接起来。该框架旨在生成可操作的教学改进建议，为大规模在线课堂的循证教学反馈提供方法。它通过角色分工降低长视频理解难度，并让反馈更贴近真实课堂互动。",
-      "llm_tldr": "在线课堂视频长且噪声大，自动教学反馈往往泛化且缺乏课堂行为证据。论文提出MAVE多智能体框架，将反馈生成分解为课程结构分析、学生反应观察等角色，把教学目标和时间对齐的多模态证据连接起来。该框架旨在生成可操作的教学改进建议，为大规模在线课堂的循证教学反馈提供方法。它通过角色分工降低长视频理解难度，并让反馈更贴近真实课堂互动。",
+      "llm_evidence_en": "multi-agent AI framework generating pedagogical feedback for online classes",
+      "llm_evidence_cn": "多智能体AI框架为在线课堂生成教学反馈",
+      "llm_evidence": "多智能体AI框架为在线课堂生成教学反馈",
+      "canonical_evidence": "多智能体AI框架为在线课堂生成教学反馈",
+      "llm_tldr_en": "Online-class videos are long and noisy, so automated pedagogical feedback is generic; MAVE decomposes feedback into multi-agent roles linking lesson goals to temporally aligned multimodal student-response evidence and actionable teaching moves.",
+      "llm_tldr_cn": "在线课堂视频冗长嘈杂，学生反应难以定位，自动化系统给出的教学建议往往空泛且缺乏课堂证据支撑。作者提出MAVE多智能体框架，将反馈生成拆分为课程梳理、观察等角色，把某段课的教学目标与时间对齐的多模态学生反应证据相连接。系统据此识别教学落差并转化为可执行的教学调整建议，使在线课堂的教学反馈更循证、更可规模化。",
+      "llm_tldr": "在线课堂视频冗长嘈杂，学生反应难以定位，自动化系统给出的教学建议往往空泛且缺乏课堂证据支撑。作者提出MAVE多智能体框架，将反馈生成拆分为课程梳理、观察等角色，把某段课的教学目标与时间对齐的多模态学生反应证据相连接。系统据此识别教学落差并转化为可执行的教学调整建议，使在线课堂的教学反馈更循证、更可规模化。",
       "llm_tags": [
         "query:aied-oer"
       ],
       "matched_query_tag": "query:aied-oer",
-      "matched_query_text": "research on artificial intelligence applications in education and learning",
-      "matched_requirement_id": "req-1",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
       "selection_source": "fresh_fetch"
     },
     {
-      "id": "2610.25192v1",
+      "id": "2610.26411v1",
       "source": "arxiv",
-      "title": "Acharya 2.0: An AI Tutor for Self-Learning Subjects in Hindi",
-      "abstract": "Text processing is crucial for low-resource languages as it enables the development of tools and technologies that bridge the digital divide and provide equitable access to information and services. By empowering low-resource languages with robust text processing, we can preserve linguistic diversity, enhance education, improve communi- cation, and foster inclusivity in a rapidly digitizing world. Due to the lack of sufficient annotated datasets and lin- guistic resources, it is challenging to develop accurate and reliable language technologies for these low-resource languages. Large Language Models (LLMs) have attracted sig- nificant attention with their performance and the value they produce. However, with the ever-evolving language, adapting LLMs for a specific task is time-consuming and resource-intensive. Thus, Retrieval-Augmented Genera- tion (RAG) has overcome this limitation by augmenting LLMs with external knowledge, thereby improving their efficiency and extensive task-specific adaptation. Most applications of the RAG technique have been limited to English and has seen limited application in In- dic languages. This paper introduces the RAG-powered AI-Tutor application, Acharya 2.0, designed to produce academic assistance to Hindi-speaking students. The client-server-based web application integrates many fea- tures to support students in accessing and interacting with educational content.",
+      "title": "Exploring Visual Access and Proactive AI Tutoring for Handwritten Mathematics",
+      "abstract": "Handwritten work captures mathematical reasoning that learners may not express in typed or voice-dictated messages. We built a multimodal AI tutoring platform in which a phone camera gives the tutor a live view of learners' work on paper. In a randomized online study, 117 adults solved calculus problems with Text-Reactive, Visual-Reactive, or Visual-Proactive assistance. Analysis of 2,140 tutor messages showed that visual access shifted assistance toward checking ongoing work, while proactivity enhanced error identification and directive hints. Learners valued feedback grounded in their writing; those who received proactive help rated it as supportive, and about a third wanted it more often. These findings inform when tutors should intervene and what they should address. We release the platform, prompts, and instruments, together with 255,984 timestamped images of handwritten work linked to tutoring conversations, intervention decisions, and learning outcomes, to support multimodal tutoring systems that preserve the affordances of handwritten work while providing adaptive feedback.",
       "authors": [
-        "Shantipriya Parida",
-        "Debasish Dhal",
-        "Sonal Khosla",
-        "Sambit Sekhar",
-        "Muhammed Abdur Rahmaan Kamaldeen"
+        "Nachiket Kotalwar",
+        "Conrad Borchers",
+        "Shubham Gandhi",
+        "Partha Sarathi Purkayastha",
+        "David Yaron",
+        "Carolyn P. Rosé"
       ],
-      "primary_category": "cs.CL",
+      "primary_category": "cs.CY",
       "categories": [
-        "cs.CL"
+        "cs.CY",
+        "cs.HC"
       ],
-      "published": "2026-10-18T11:24:39+00:00",
-      "link": "https://arxiv.org/pdf/2610.25192v1",
+      "published": "2026-10-19T13:46:02+00:00",
+      "link": "https://arxiv.org/pdf/2610.26411v1",
       "tags": [
         "keyword:aied-oer",
         "query:aied-oer"
       ],
       "llm_score": 9.0,
-      "llm_evidence_en": "AI tutor for self-learning subjects in Hindi",
-      "llm_evidence_cn": "面向印地语自学学科的AI导师",
-      "llm_evidence": "面向印地语自学学科的AI导师",
-      "canonical_evidence": "面向印地语自学学科的AI导师",
-      "llm_tldr_en": "Introduces Acharya 2.0, an AI tutor for self-learning subjects in Hindi, leveraging LLMs and low-resource language processing to provide equitable educational support.",
-      "llm_tldr_cn": "低资源语言缺乏高质量文本处理与教学资源，学习者难以获得公平的个性化支持。论文提出Acharya 2.0，一个面向印地语自学学科的AI导师，利用大语言模型适配低资源语言教育场景。系统旨在提供可访问的自学辅导并弥合数字鸿沟，为低资源语言AI教育工具的设计提供实践案例。研究强调通过稳健的印地语文本处理与模型适配，提升教育服务的可及性与包容性。",
-      "llm_tldr": "低资源语言缺乏高质量文本处理与教学资源，学习者难以获得公平的个性化支持。论文提出Acharya 2.0，一个面向印地语自学学科的AI导师，利用大语言模型适配低资源语言教育场景。系统旨在提供可访问的自学辅导并弥合数字鸿沟，为低资源语言AI教育工具的设计提供实践案例。研究强调通过稳健的印地语文本处理与模型适配，提升教育服务的可及性与包容性。",
+      "llm_evidence_en": "multimodal AI tutoring platform with live camera view of handwritten work",
+      "llm_evidence_cn": "带摄像头实时视觉访问的多模态AI辅导平台",
+      "llm_evidence": "带摄像头实时视觉访问的多模态AI辅导平台",
+      "canonical_evidence": "带摄像头实时视觉访问的多模态AI辅导平台",
+      "llm_tldr_en": "Handwritten work reveals reasoning that typed chat misses; the authors build a multimodal AI tutor with live camera access and run a randomized study of 117 adults comparing text-reactive, visual-reactive and visual-proactive tutoring.",
+      "llm_tldr_cn": "手写演算承载了学习者未用文字表达的数学推理，但常规对话式辅导无法获取这些信息。作者构建了多模态AI辅导平台，通过手机摄像头让导师实时看到学生在纸上的演算，并开展117名成人参与的随机在线实验，比较文本反应、视觉反应与视觉主动三种辅导方式。分析2140条辅导消息发现，视觉访问使辅导转向检查过程，主动性提升了错误识别与指令性提示。研究为辅导系统何时介入提供了实证依据。",
+      "llm_tldr": "手写演算承载了学习者未用文字表达的数学推理，但常规对话式辅导无法获取这些信息。作者构建了多模态AI辅导平台，通过手机摄像头让导师实时看到学生在纸上的演算，并开展117名成人参与的随机在线实验，比较文本反应、视觉反应与视觉主动三种辅导方式。分析2140条辅导消息发现，视觉访问使辅导转向检查过程，主动性提升了错误识别与指令性提示。研究为辅导系统何时介入提供了实证依据。",
       "llm_tags": [
         "query:aied-oer"
       ],
       "matched_query_tag": "query:aied-oer",
-      "matched_query_text": "research on artificial intelligence applications in education and learning",
-      "matched_requirement_id": "req-1",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
       "selection_source": "fresh_fetch"
     },
     {
@@ -264,13 +345,13 @@
         "query:aied-oer"
       ],
       "llm_score": 9.0,
-      "llm_evidence_en": "survey of K-12 teachers on AI understanding, use, and acceptability in learning",
-      "llm_evidence_cn": "调查中小学教师对AI的理解、使用与可接受性",
-      "llm_evidence": "调查中小学教师对AI的理解、使用与可接受性",
-      "canonical_evidence": "调查中小学教师对AI的理解、使用与可接受性",
-      "llm_tldr_en": "Surveys Indonesian K-12 teachers on their understanding, classroom use, and acceptability of AI, finding that teachers accept AI for efficiency but remain aware of risks to learning depth and academic integrity.",
-      "llm_tldr_cn": "针对印尼中小学AI教育推广中教师准备度不明的问题，本研究通过半自动主题分析调查教师对AI的理解、课堂使用方式及其对AI进学习活动可接受性的看法。结果显示教师普遍认可AI提升效率，但同时清楚其对学习深度与学术诚信的风险，揭示了政策准备与课堂准备之间的落差。该发现为教师培训与AI教育政策落地提供了实证依据。",
-      "llm_tldr": "针对印尼中小学AI教育推广中教师准备度不明的问题，本研究通过半自动主题分析调查教师对AI的理解、课堂使用方式及其对AI进学习活动可接受性的看法。结果显示教师普遍认可AI提升效率，但同时清楚其对学习深度与学术诚信的风险，揭示了政策准备与课堂准备之间的落差。该发现为教师培训与AI教育政策落地提供了实证依据。",
+      "llm_evidence_en": "survey of K-12 teachers' AI understanding, classroom use, and acceptance",
+      "llm_evidence_cn": "调查K-12教师对人工智能的理解、使用与接受度",
+      "llm_evidence": "调查K-12教师对人工智能的理解、使用与接受度",
+      "canonical_evidence": "调查K-12教师对人工智能的理解、使用与接受度",
+      "llm_tldr_en": "A survey of Indonesian K-12 teachers examines their AI understanding, classroom use, and views on AI acceptability, revealing misconceptions and a tension between efficiency gains and risks to learning depth.",
+      "llm_tldr_cn": "面对印尼地理分散、基础设施不均与2025年K-12人工智能普及政策，论文考察教师是否真正为课堂做好准备。研究通过问卷调查与半自动主题分析，分析教师对AI的理解、师生使用方式以及对AI进入学习活动的接受度，识别出常见误解与典型用例。结果显示教师普遍认可AI带来的效率，但也清楚其对学习深度与学术诚信的风险，形成政策就绪与课堂就绪之间的落差。该研究为AI教育政策落地与教师培训提供了实证依据。",
+      "llm_tldr": "面对印尼地理分散、基础设施不均与2025年K-12人工智能普及政策，论文考察教师是否真正为课堂做好准备。研究通过问卷调查与半自动主题分析，分析教师对AI的理解、师生使用方式以及对AI进入学习活动的接受度，识别出常见误解与典型用例。结果显示教师普遍认可AI带来的效率，但也清楚其对学习深度与学术诚信的风险，形成政策就绪与课堂就绪之间的落差。该研究为AI教育政策落地与教师培训提供了实证依据。",
       "llm_tags": [
         "query:aied-oer"
       ],
@@ -278,6 +359,318 @@
       "matched_query_text": "research on artificial intelligence applications in education and learning",
       "matched_requirement_id": "req-1",
       "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.27448v1",
+      "source": "arxiv",
+      "title": "Bias and Reliability in Learning-Style Inference from Student--AI Dialogues: An Evaluation of GPT-4o and Gemini 2.0 Flash",
+      "abstract": "Large Language Models (LLMs) are increasingly integrated into educational technologies for personalized support, creating opportunities for real-time learner modeling from dialogue. This study evaluates whether GPT-4o and Gemini 2.0 Flash can infer three Felder-Silverman Learning Style Model dimensions (Active-Reflective, Sensing-Intuitive, and Sequential-Global) from short, task-focused student-AI problem-solving dialogues. Using questionnaire-derived Index of Learning Styles labels from 153 undergraduate participants, we compared deterministic zero-shot and few-shot prompting under five-fold cross-validation. Although accuracy and support-weighted F1 were moderate for Sensing-Intuitive and Sequential-Global, majority-class baselines, macro-F1, balanced accuracy, and per-class recall showed that performance was often driven by dominant-label prediction rather than reliable recognition of both classes. The models substantially under-identified Intuitive and Global learners; few-shot prompting produced mixed effects and sometimes amplified majority-class bias. Active-Reflective classification remained unstable across models. These findings indicate that LLM-generated learner-style labels should be treated as uncertain, bias-prone signals rather than stable learner profiles, and that dialogue-based personalization systems require bias-aware evaluation and uncertainty-sensitive design.",
+      "authors": [
+        "Samaneh Zamanifard",
+        "Sajad Goudarzi",
+        "Andrew Robb"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-10-20T00:50:33+00:00",
+      "link": "https://arxiv.org/pdf/2610.27448v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "LLM-based learner modeling for personalized support in education",
+      "llm_evidence_cn": "基于大模型的教育个性化学习者建模",
+      "llm_evidence": "基于大模型的教育个性化学习者建模",
+      "canonical_evidence": "基于大模型的教育个性化学习者建模",
+      "llm_tldr_en": "Evaluates whether GPT-4o and Gemini 2.0 Flash can infer Felder-Silverman learning styles from short student-AI dialogues, finding only moderate accuracy and highlighting bias and reliability limits for learner modeling.",
+      "llm_tldr_cn": "针对大模型进入教育技术后需要实时学习者建模的问题，本文考察GPT-4o与Gemini 2.0 Flash能否从简短的学生与AI解题对话中推断Felder-Silverman学习风格三个维度。作者以153名本科生的学习风格量表标签为基准，在五折交叉验证下比较零样本与少样本提示。结果显示感觉直觉与顺序整体维度的准确率和F1仅处于中等水平，并存在明显偏差。研究提示基于对话的学习风格推断尚不可靠，为教育场景中的学习者建模提供了可靠性警示。",
+      "llm_tldr": "针对大模型进入教育技术后需要实时学习者建模的问题，本文考察GPT-4o与Gemini 2.0 Flash能否从简短的学生与AI解题对话中推断Felder-Silverman学习风格三个维度。作者以153名本科生的学习风格量表标签为基准，在五折交叉验证下比较零样本与少样本提示。结果显示感觉直觉与顺序整体维度的准确率和F1仅处于中等水平，并存在明显偏差。研究提示基于对话的学习风格推断尚不可靠，为教育场景中的学习者建模提供了可靠性警示。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "personalized learning and learner-centered educational technologies",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.21233v1",
+      "source": "arxiv",
+      "title": "\"Do You Trust It... or Check It?\": Exploring Children's Verification Behaviors in Game-Based Human-AI Collaboration",
+      "abstract": "Children are increasingly interacting with AI agents in learning and problem-solving contexts, where AI suggestions may appear fluent, helpful, and socially engaging. However, children may not always be able to judge whether such suggestions are accurate, incomplete, or misleading. This paper presents a game-based human-AI collaboration probe designed to examine how children verify AI suggestions during task-based interaction. The system embeds AI suggestions within a biological knowledge reasoning game and compares three Agent interaction styles: partner-like, tool-like, and dual-state Agent. Instead of treating trust as a static post-task attitude, this study focuses on children's situated verification behaviors, including acceptance, evidence checking, questioning, revision, and continued AI use. A preliminary evaluation with children aged 8-10 combined interaction logs, post-task ratings, and semi-structured interviews. The findings suggest that Agent style shaped children's engagement and response pathways: partner-like interaction tended to support direct questioning, while tool-like interaction was more associated with evidence seeking. Children generally viewed AI as useful but fallible, and their questioning behaviors varied in reasoning depth. The study contributes design insights for supporting children's critical, reflective, and evidence-based use of AI in collaborative tasks.",
+      "authors": [
+        "Shuning Liu",
+        "Yuxin Song",
+        "Hanbing Li",
+        "Ziyue Wang",
+        "Mingying Lan",
+        "Fei Lv"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-10-15T04:23:00+00:00",
+      "link": "https://arxiv.org/pdf/2610.21233v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "children verifying AI suggestions in game-based learning collaboration",
+      "llm_evidence_cn": "儿童在游戏化学习协作中核查AI建议",
+      "llm_evidence": "儿童在游戏化学习协作中核查AI建议",
+      "canonical_evidence": "儿童在游戏化学习协作中核查AI建议",
+      "llm_tldr_en": "Children increasingly learn with AI agents yet struggle to judge suggestion accuracy; a game-based human-AI collaboration probe compares partner-like, tool-like and dual-state agent styles to study children's situated verification behaviors.",
+      "llm_tldr_cn": "儿童越来越多地在学习与解题中与AI智能体互动，但往往难以判断建议是否准确、片面或具有误导性。作者设计了一款嵌入生物知识推理任务的游戏化人机协作探针，比较伙伴型、工具型和双态三种智能体交互风格。研究不把信任视为任务后的静态态度，而是考察儿童在互动过程中的即时验证行为，为设计可信的儿童教育AI提供实证依据。",
+      "llm_tldr": "儿童越来越多地在学习与解题中与AI智能体互动，但往往难以判断建议是否准确、片面或具有误导性。作者设计了一款嵌入生物知识推理任务的游戏化人机协作探针，比较伙伴型、工具型和双态三种智能体交互风格。研究不把信任视为任务后的静态态度，而是考察儿童在互动过程中的即时验证行为，为设计可信的儿童教育AI提供实证依据。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2610.18724v1",
+      "source": "arxiv",
+      "title": "AIRRI: Towards a Human-Readable, Machine-Resistant Reading Interface",
+      "abstract": "The rapid advancement of image-to-text extraction systems and large language models (LLMs) poses new challenges for educational assessment by making assignment materials easy to transcribe and solve with minimal human effort. To address this problem, we present AIRRI (Artificial Intelligence Resilient Reading Interface), a framework for generating machine-resistant educational content, a dataset of higher-education assignments for evaluation, and an initial evaluation of the human readability of AIRRI machine-resistant text designs. AIRRI employs two categories of machine-resistance techniques. First, AIRRI applies image transformations including character spacing, word spacing, line spacing, character opacity variation, stripe overlays, and image noise. Second, AIRRI applies decision-based adversarial attacks: RayS, SurFree, and ADBA. We evaluate AIRRI against three image-to-text systems: Tesseract, EasyOCR, and the transformer-based GOT-OCR2 model. Our results show that AIRRI substantially degrades automated text extraction performance. AIRRI increased character error rates for EasyOCR (6.9% to 55.9%), Tesseract (2.3% to 100.0%), and GOT-OCR2 (30.7% to 48.1%). Word error rates increased for EasyOCR (24.9% to 96.7%) and Tesseract (10.7% to 100.0%). Among the evaluated decision-based attacks, ADBA consistently produced the largest degradation in image-to-text performance, while RayS and SurFree produced more moderate reductions. EasyOCR and Tesseract were generally more susceptible to both image-based and adversarial perturbations than the transformer-based GOT-OCR2 model. Our findings suggest that AIRRI can significantly reduce the reliability of image-to-text-to-LLM workflows, increasing the effort required for AI-assisted assignment completion.",
+      "authors": [
+        "Emory Salaun",
+        "Syed Ayon",
+        "Kaleel Mahmood",
+        "Shaun Wallace"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.HC",
+        "cs.LG"
+      ],
+      "published": "2026-10-13T17:04:33+00:00",
+      "link": "https://arxiv.org/pdf/2610.18724v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "machine-resistant educational content generation for assessment integrity",
+      "llm_evidence_cn": "面向教育测评的机器抗性教育内容生成",
+      "llm_evidence": "面向教育测评的机器抗性教育内容生成",
+      "canonical_evidence": "面向教育测评的机器抗性教育内容生成",
+      "llm_tldr_en": "Image-to-text and LLMs make assignment materials easy to transcribe and solve; AIRRI generates machine-resistant educational content via spacing, opacity, stripe and noise transformations, with a dataset and human-readability evaluation.",
+      "llm_tldr_cn": "图像转文本与大模型的进步使作业材料极易被自动转录和求解，威胁教育测评的有效性。本文提出AIRRI框架，通过字符与行间距、透明度变化、条纹叠加和图像噪声等变换生成机器难以识别的教育内容，并构建高等教育作业数据集开展人工可读性评估。初步结果显示这些设计在保持人类可读的同时提升了机器识别难度。该工作为AI时代教育测评与学习材料设计提供了新思路。",
+      "llm_tldr": "图像转文本与大模型的进步使作业材料极易被自动转录和求解，威胁教育测评的有效性。本文提出AIRRI框架，通过字符与行间距、透明度变化、条纹叠加和图像噪声等变换生成机器难以识别的教育内容，并构建高等教育作业数据集开展人工可读性评估。初步结果显示这些设计在保持人类可读的同时提升了机器识别难度。该工作为AI时代教育测评与学习材料设计提供了新思路。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2610.21663v1",
+      "source": "arxiv",
+      "title": "A Framework for Teaching the Responsible and Effective Use of Generative AI in Statistics and Data Science",
+      "abstract": "The rapid rise of generative artificial intelligence (AI) following the public release of tools such as ChatGPT has begun to reshape how students engage with coding, statistical analysis, and written communication in higher education. Growing use of conversational AI systems creates opportunities for learning alongside challenges around reliability, transparency, privacy, and appropriate academic and professional practice, highlighting the need for structured education in their responsible use. This paper presents a framework for teaching the responsible and effective use of generative AI in statistics and data science. The framework is organised around four areas: Understanding, Development, Reporting, and Safety, covering conceptual foundations, practical interaction within analytical workflows, documentation and transparency, and issues including reliability, bias, privacy, and ethics. Its design draws on emerging work in AI literacy and established principles from statistics and data science education, and was further refined through workshop and conference activities and participant feedback. The framework has been implemented across multiple settings, including a massive open online course, short training sessions, and undergraduate and postgraduate skills-based teaching. We use these experiences to identify broader design considerations for educators, including the value of authentic analytical tasks, critical evaluation of generated outputs, integrated consideration of responsible practice, and flexibility as generative AI technologies continue to evolve.",
+      "authors": [
+        "Vinny Davies",
+        "Craig Alexander",
+        "Jennifer Gaskell",
+        "Matthew Parker",
+        "Jake Lever"
+      ],
+      "primary_category": "stat.OT",
+      "categories": [
+        "stat.OT"
+      ],
+      "published": "2026-10-15T10:45:50+00:00",
+      "link": "https://arxiv.org/pdf/2610.21663v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "framework for teaching responsible use of generative AI",
+      "llm_evidence_cn": "生成式AI负责任使用的教学框架",
+      "llm_evidence": "生成式AI负责任使用的教学框架",
+      "canonical_evidence": "生成式AI负责任使用的教学框架",
+      "llm_tldr_en": "As generative AI reshapes coding, statistics and writing in higher education, the paper proposes a teaching framework organized around Understanding, Development, Reporting and Safety to guide responsible AI use.",
+      "llm_tldr_cn": "面对ChatGPT等生成式AI重塑学生编程、统计分析与写作方式，并带来可靠性、透明度与隐私挑战的问题，本文提出一套教学框架，围绕理解、开发、报告与安全四个领域组织教学内容。框架明确了在统计与数据科学课程中培养学生负责任使用AI所需的能力结构与教学路径。该工作为高等教育系统性地将生成式AI纳入课程与教学内容设计提供了可操作的指导。",
+      "llm_tldr": "面对ChatGPT等生成式AI重塑学生编程、统计分析与写作方式，并带来可靠性、透明度与隐私挑战的问题，本文提出一套教学框架，围绕理解、开发、报告与安全四个领域组织教学内容。框架明确了在统计与数据科学课程中培养学生负责任使用AI所需的能力结构与教学路径。该工作为高等教育系统性地将生成式AI纳入课程与教学内容设计提供了可操作的指导。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2610.24259v1",
+      "source": "arxiv",
+      "title": "SLA-LENS: From Classroom Transcripts to CSLA-Informed and Evidence-Linked L2 Interaction Analytics",
+      "abstract": "What happens after a learner makes an error, and how does the instructor's response shape the next turn? Investigating these exchanges across classrooms requires context-sensitive annotation that is difficult to scale manually. We introduce SLA-LENS, an end-to-end LLM-assisted framework that connects classroom transcripts to structured pedagogical annotations and evidence-linked descriptive analytics. Grounded in interactionist Second Language Acquisition (SLA) theory, its annotation schema captures second language learner errors, pedagogical functions, and uptake or repair while accounting for speaker roles, conversational context, and hierarchical labels. We apply the framework to 40 authentic online L2 Spanish classroom transcripts comprising over 21,000 sentence-level instances. We evaluate proprietary and open-weight LLMs, including task-specific QLoRA adaptation, using expert-reviewed gold annotations, held-out silver data, and metrics sensitive to different types of annotation error. A deterministic reporting layer generates reproducible visualizations of participation, feedback, learner errors, uptake, and temporal interaction patterns, linked to supporting transcript evidence. By making these patterns accessible and inspectable, SLA-LENS supports systematic classroom discourse research, pedagogical reflection, and curriculum design.",
+      "authors": [
+        "Nemika Tyagi",
+        "Olga Kellert",
+        "Phanos Kareen",
+        "Nelvin Licona-Guevara"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-10-16T21:33:40+00:00",
+      "link": "https://arxiv.org/pdf/2610.24259v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "LLM-assisted learning analytics on classroom interaction",
+      "llm_evidence_cn": "课堂互动的LLM辅助学习分析",
+      "llm_evidence": "课堂互动的LLM辅助学习分析",
+      "canonical_evidence": "课堂互动的LLM辅助学习分析",
+      "llm_tldr_en": "SLA-LENS is an LLM-assisted framework that turns classroom transcripts into theory-grounded pedagogical annotations and evidence-linked analytics, applied to 40 authentic online L2 Spanish lessons.",
+      "llm_tldr_cn": "针对课堂互动中学习者错误与教师回应需要情境敏感标注、人工难以规模化的问题，作者提出SLA-LENS，一个由大语言模型辅助的端到端框架，将课堂转录转换为结构化教学标注并生成证据关联的描述性分析。该框架依据互动主义二语习得理论设计标注体系，涵盖错误、教学功能与修正等层级标签，并在40段真实在线L2西班牙语课堂转录上应用。该工作为可扩展的课堂学习分析提供了理论与数据结合的路径。",
+      "llm_tldr": "针对课堂互动中学习者错误与教师回应需要情境敏感标注、人工难以规模化的问题，作者提出SLA-LENS，一个由大语言模型辅助的端到端框架，将课堂转录转换为结构化教学标注并生成证据关联的描述性分析。该框架依据互动主义二语习得理论设计标注体系，涵盖错误、教学功能与修正等层级标签，并在40段真实在线L2西班牙语课堂转录上应用。该工作为可扩展的课堂学习分析提供了理论与数据结合的路径。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2610.25192v1",
+      "source": "arxiv",
+      "title": "Acharya 2.0: An AI Tutor for Self-Learning Subjects in Hindi",
+      "abstract": "Text processing is crucial for low-resource languages as it enables the development of tools and technologies that bridge the digital divide and provide equitable access to information and services. By empowering low-resource languages with robust text processing, we can preserve linguistic diversity, enhance education, improve communi- cation, and foster inclusivity in a rapidly digitizing world. Due to the lack of sufficient annotated datasets and lin- guistic resources, it is challenging to develop accurate and reliable language technologies for these low-resource languages. Large Language Models (LLMs) have attracted sig- nificant attention with their performance and the value they produce. However, with the ever-evolving language, adapting LLMs for a specific task is time-consuming and resource-intensive. Thus, Retrieval-Augmented Genera- tion (RAG) has overcome this limitation by augmenting LLMs with external knowledge, thereby improving their efficiency and extensive task-specific adaptation. Most applications of the RAG technique have been limited to English and has seen limited application in In- dic languages. This paper introduces the RAG-powered AI-Tutor application, Acharya 2.0, designed to produce academic assistance to Hindi-speaking students. The client-server-based web application integrates many fea- tures to support students in accessing and interacting with educational content.",
+      "authors": [
+        "Shantipriya Parida",
+        "Debasish Dhal",
+        "Sonal Khosla",
+        "Sambit Sekhar",
+        "Muhammed Abdur Rahmaan Kamaldeen"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-10-18T11:24:39+00:00",
+      "link": "https://arxiv.org/pdf/2610.25192v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "LLM-based AI tutor for Hindi self-learning",
+      "llm_evidence_cn": "面向印地语自学的AI导师工具",
+      "llm_evidence": "面向印地语自学的AI导师工具",
+      "canonical_evidence": "面向印地语自学的AI导师工具",
+      "llm_tldr_en": "Addressing scarce annotated resources for low-resource languages, the authors build Acharya 2.0, an LLM-based AI tutor for Hindi self-learning subjects, showing how LLMs can enable equitable personalized learning tools.",
+      "llm_tldr_cn": "针对低资源语言缺乏标注数据与语言资源、难以开发可靠教育技术的问题，作者提出Acharya 2.0，基于大语言模型构建面向印地语自学学科的AI导师，并对模型进行领域适配。摘要侧重系统设计与实现路径，说明如何借助LLM缓解数据稀缺并提升教育可及性。该工作为低资源语言环境下的个性化自学与教育公平提供了可复用的AI辅导工具思路。",
+      "llm_tldr": "针对低资源语言缺乏标注数据与语言资源、难以开发可靠教育技术的问题，作者提出Acharya 2.0，基于大语言模型构建面向印地语自学学科的AI导师，并对模型进行领域适配。摘要侧重系统设计与实现路径，说明如何借助LLM缓解数据稀缺并提升教育可及性。该工作为低资源语言环境下的个性化自学与教育公平提供了可复用的AI辅导工具思路。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2610.25560v1",
+      "source": "arxiv",
+      "title": "Voice-Based AI Feedback in Higher Education: A Field Study on Quality and Actionability",
+      "abstract": "Student feedback is a critical input for continuous improvement in higher education, yet traditional end-of-semester written surveys suffer from low response rates, superficial answers, satisficing, and limited actionability. Voice-based conversational AI agents can conduct structured interviews at scale, asking open-ended questions and probing follow-ups, and may capture richer qualitative feedback than written instruments. This research proposal asks what characteristics, depth, and strategic value feedback collected through voice-based conversational AI agents has in higher education, and whether such agents elicit detailed, honest, and actionable feedback that can support instructional improvement and institutional learning. Drawing on survey-mode-effects research, the Computers As Social Actors (CASA) paradigm, and dynamic capabilities theory, we develop three hypotheses on elaboration, social presence and disclosure, and actionability. A completed technical pilot at the Technical University of Munich established the feasibility of telephone-based AI interviews; the main field study is planned for the \"Advanced Leadership Communication\" course at MIT Sloan with approximately 60 students, using a convergent mixed-methods design and a four-dimensional coding framework for actionability (specificity, thematic richness, constructive orientation, contextual depth). The study extends CASA theory to evaluative educational settings, characterizes voice-based AI as a distinct feedback modality, and links micro-level feedback quality to institutional sensing capabilities.",
+      "authors": [
+        "Thilo Tamme",
+        "Leander Schilling",
+        "Anton Hantel"
+      ],
+      "primary_category": "cs.CY",
+      "categories": [
+        "cs.CY",
+        "cs.HC"
+      ],
+      "published": "2026-10-18T21:54:27+00:00",
+      "link": "https://arxiv.org/pdf/2610.25560v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "voice-based conversational AI agents collect student feedback in higher education",
+      "llm_evidence_cn": "语音对话式AI智能体在高校采集学生反馈",
+      "llm_evidence": "语音对话式AI智能体在高校采集学生反馈",
+      "canonical_evidence": "语音对话式AI智能体在高校采集学生反馈",
+      "llm_tldr_en": "End-of-semester written surveys suffer low response rates and shallow answers; this field study uses voice-based conversational AI agents to conduct structured interviews at scale and examines whether they elicit detailed, honest, actionable feedback for instructional improvement.",
+      "llm_tldr_cn": "针对期末书面评教回收率低、回答浅泛且难以落地的问题，该研究提出以语音对话式AI智能体开展结构化访谈，在大规模场景中通过开放式提问与追问采集质性反馈。实地研究考察此类反馈的特征、深度与战略价值，检验其能否获得详尽、真实且可操作的反馈，从而为教学改进与院校学习提供依据。",
+      "llm_tldr": "针对期末书面评教回收率低、回答浅泛且难以落地的问题，该研究提出以语音对话式AI智能体开展结构化访谈，在大规模场景中通过开放式提问与追问采集质性反馈。实地研究考察此类反馈的特征、深度与战略价值，检验其能否获得详尽、真实且可操作的反馈，从而为教学改进与院校学习提供依据。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2610.27248v1",
+      "source": "arxiv",
+      "title": "ValiAssist: Scaling LLM-generated Programming Feedback Validation by Demonstration",
+      "abstract": "Generative AI can create programming feedback at scale, but validating its alignment with instructors' pedagogical goals and strategies remains challenging. Instructors may struggle to fully specify validation criteria upfront, as these often emerge through inspecting concrete examples and revising misaligned feedback. We present ValiAssist, a validation-by-demonstration system that infers reusable validation logic from instructors' revisions of AI-generated feedback and allows instructors to inspect and refine that logic as it is applied across other student submissions. In a comparative study with 16 instructors, ValiAssist helped instructors create and refine validation criteria, producing feedback that better aligned with their pedagogical intent (91% vs. 57%) and more than doubling the accuracy of correcting problematic criteria (77% vs. 32%). Our findings suggest that validation by demonstration can help instructors turn judgments they know how to make on individual cases into explicit, reusable logic, while progressively clarifying where those judgments do and do not generalize.",
+      "authors": [
+        "Xiaohang Tang",
+        "Rehema Abulikemu",
+        "Peng Gao",
+        "Yan Chen"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC",
+        "cs.AI",
+        "cs.CY"
+      ],
+      "published": "2026-10-19T20:21:00+00:00",
+      "link": "https://arxiv.org/pdf/2610.27248v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "validating LLM-generated programming feedback against instructors' pedagogical goals",
+      "llm_evidence_cn": "校验大模型生成的编程反馈是否符合教师教学目标",
+      "llm_evidence": "校验大模型生成的编程反馈是否符合教师教学目标",
+      "canonical_evidence": "校验大模型生成的编程反馈是否符合教师教学目标",
+      "llm_tldr_en": "ValiAssist infers reusable validation logic from instructors' revisions of AI-generated programming feedback, letting them inspect and refine it across submissions; a study with 16 instructors shows better pedagogical alignment.",
+      "llm_tldr_cn": "生成式AI能大规模产出编程反馈，但其与教师教学目标的一致性难以校验，教师往往无法预先明确验证标准。ValiAssist提出示范式验证系统，从教师对AI反馈的修改中推断可复用的验证逻辑，并支持教师检查与细化该逻辑以应用于其他学生提交。与16位教师的对比研究显示，系统帮助教师建立并完善验证准则，产出更契合教学目标的反馈。该工作为规模化AI教育内容的质量控制提供了可操作路径。",
+      "llm_tldr": "生成式AI能大规模产出编程反馈，但其与教师教学目标的一致性难以校验，教师往往无法预先明确验证标准。ValiAssist提出示范式验证系统，从教师对AI反馈的修改中推断可复用的验证逻辑，并支持教师检查与细化该逻辑以应用于其他学生提交。与16位教师的对比研究显示，系统帮助教师建立并完善验证准则，产出更契合教学目标的反馈。该工作为规模化AI教育内容的质量控制提供了可操作路径。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
     },
     {
       "id": "2610.27881v1",
@@ -306,458 +699,20 @@
         "keyword:aied-oer",
         "query:aied-oer"
       ],
-      "llm_score": 9.0,
-      "llm_evidence_en": "LLM-generated feedback and practice exercises in university mathematics",
-      "llm_evidence_cn": "大学数学中LLM生成的反馈与练习题",
-      "llm_evidence": "大学数学中LLM生成的反馈与练习题",
-      "canonical_evidence": "大学数学中LLM生成的反馈与练习题",
-      "llm_tldr_en": "Evaluates GPT-5.1 generated feedback and practice exercises from handwritten university mathematics answers, assessing feedback quality and whether students' subsequent exam performance improves.",
-      "llm_tldr_cn": "针对大班数学作业反馈难以规模化的问题，该研究评估GPT-5.1根据手写解答生成的反馈与练习题质量，并检验其是否提升后续考试成绩。研究在英语与荷兰语两个队列的六次周测中采用交叉反馈设计，并由六名评审按六项标准评价157条反馈。结果显示练习题获得较高强评价比例，而诊断具体性和语气清晰度相对较弱，为进一步优化生成式教育反馈提供了实证依据。",
-      "llm_tldr": "针对大班数学作业反馈难以规模化的问题，该研究评估GPT-5.1根据手写解答生成的反馈与练习题质量，并检验其是否提升后续考试成绩。研究在英语与荷兰语两个队列的六次周测中采用交叉反馈设计，并由六名评审按六项标准评价157条反馈。结果显示练习题获得较高强评价比例，而诊断具体性和语气清晰度相对较弱，为进一步优化生成式教育反馈提供了实证依据。",
+      "llm_score": 8.0,
+      "llm_evidence_en": "LLM-generated feedback in university mathematics teaching",
+      "llm_evidence_cn": "生成式AI在数学教学中的反馈生成",
+      "llm_evidence": "生成式AI在数学教学中的反馈生成",
+      "canonical_evidence": "生成式AI在数学教学中的反馈生成",
+      "llm_tldr_en": "The study evaluates GPT-5.1 feedback and exercises generated from handwritten university mathematics answers using crossover weekly tests in English and Dutch cohorts; exercises scored highly but diagnostic specificity was weaker.",
+      "llm_tldr_cn": "针对生成式AI反馈质量及其对学习成效影响缺乏实证的问题，研究用GPT-5.1对手写大学数学答卷与成绩生成反馈和练习题，并在英语与荷兰语两个队列的六次周测中采用交叉反馈设计。六名评审按六项标准评估157条反馈，结果显示练习题获95.5%的强评价，而诊断具体性与清晰度语调仅约三到四成。该研究为课堂中审慎使用生成式反馈提供了实证依据。",
+      "llm_tldr": "针对生成式AI反馈质量及其对学习成效影响缺乏实证的问题，研究用GPT-5.1对手写大学数学答卷与成绩生成反馈和练习题，并在英语与荷兰语两个队列的六次周测中采用交叉反馈设计。六名评审按六项标准评估157条反馈，结果显示练习题获95.5%的强评价，而诊断具体性与清晰度语调仅约三到四成。该研究为课堂中审慎使用生成式反馈提供了实证依据。",
       "llm_tags": [
         "query:aied-oer"
       ],
       "matched_query_tag": "query:aied-oer",
       "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
       "matched_requirement_id": "req-3",
-      "selection_source": "fresh_fetch"
-    }
-  ],
-  "quick_skim": [
-    {
-      "id": "2610.19532v1",
-      "source": "arxiv",
-      "title": "A Unified Response Framework for Questions and Tutoring Dialogues",
-      "abstract": "Existing student models in educational applications largely focus on student responses to questions. However, as tutoring becomes more accessible at large scale, it is important to analyze dialogues between tutors and students, which may reveal fine-grained evidence on student knowledge. In this work, we propose a unified framework that models both student responses to questions and tutor-posed subtasks during dialogues on a shared item response theory (IRT) scale. We first identify mathematical subtasks in tutoring dialogues, rewrite them into self-contained questions, and identify the correctness of student responses to these subtasks. We then develop an IRT framework that estimates question/subtask difficulty from text, tracks students' evolving abilities across question-answering and dialogue interactions, and a novel method to leverages tutor moves between consecutive subtasks to regularize their difficulty values. We evaluate our framework on two real-world math education datasets containing both human- and AI-tutored dialogues. Results show that our framework outperforms strong baselines on both question difficulty prediction and response correctness prediction.",
-      "authors": [
-        "Zhangqi Duan",
-        "Simon Woodhead",
-        "Maya Miller-Vedam",
-        "Andrew Lan"
-      ],
-      "primary_category": "cs.CL",
-      "categories": [
-        "cs.CL",
-        "cs.CY",
-        "cs.LG"
-      ],
-      "published": "2026-10-14T03:47:20+00:00",
-      "link": "https://arxiv.org/pdf/2610.19532v1",
-      "tags": [
-        "keyword:aied-oer",
-        "query:aied-oer"
-      ],
-      "llm_score": 8.0,
-      "llm_evidence_en": "unified IRT framework modeling tutoring dialogues and student responses",
-      "llm_evidence_cn": "统一建模辅导对话与学生作答的IRT框架",
-      "llm_evidence": "统一建模辅导对话与学生作答的IRT框架",
-      "canonical_evidence": "统一建模辅导对话与学生作答的IRT框架",
-      "llm_tldr_en": "Student models mostly ignore tutor-student dialogues that reveal fine-grained knowledge. A unified framework rewrites tutor subtasks into questions and places responses on a shared IRT scale to track evolving ability.",
-      "llm_tldr_cn": "现有教育应用中的学生模型多只关注学生对问题的作答，忽略了辅导对话中蕴含的细粒度知识证据。本文提出统一框架，识别辅导对话中的数学子任务并改写为独立问题，判定学生作答正确性，再基于项目反应理论在同一难度尺度上建模问题与子任务难度并追踪学生能力变化。该框架将对话证据纳入学生建模，为大规模智能辅导中的学习分析与自适应教学提供了新方法。",
-      "llm_tldr": "现有教育应用中的学生模型多只关注学生对问题的作答，忽略了辅导对话中蕴含的细粒度知识证据。本文提出统一框架，识别辅导对话中的数学子任务并改写为独立问题，判定学生作答正确性，再基于项目反应理论在同一难度尺度上建模问题与子任务难度并追踪学生能力变化。该框架将对话证据纳入学生建模，为大规模智能辅导中的学习分析与自适应教学提供了新方法。",
-      "llm_tags": [
-        "query:aied-oer"
-      ],
-      "matched_query_tag": "query:aied-oer",
-      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
-      "matched_requirement_id": "req-8",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "8plus"
-    },
-    {
-      "id": "2610.21233v1",
-      "source": "arxiv",
-      "title": "\"Do You Trust It... or Check It?\": Exploring Children's Verification Behaviors in Game-Based Human-AI Collaboration",
-      "abstract": "Children are increasingly interacting with AI agents in learning and problem-solving contexts, where AI suggestions may appear fluent, helpful, and socially engaging. However, children may not always be able to judge whether such suggestions are accurate, incomplete, or misleading. This paper presents a game-based human-AI collaboration probe designed to examine how children verify AI suggestions during task-based interaction. The system embeds AI suggestions within a biological knowledge reasoning game and compares three Agent interaction styles: partner-like, tool-like, and dual-state Agent. Instead of treating trust as a static post-task attitude, this study focuses on children's situated verification behaviors, including acceptance, evidence checking, questioning, revision, and continued AI use. A preliminary evaluation with children aged 8-10 combined interaction logs, post-task ratings, and semi-structured interviews. The findings suggest that Agent style shaped children's engagement and response pathways: partner-like interaction tended to support direct questioning, while tool-like interaction was more associated with evidence seeking. Children generally viewed AI as useful but fallible, and their questioning behaviors varied in reasoning depth. The study contributes design insights for supporting children's critical, reflective, and evidence-based use of AI in collaborative tasks.",
-      "authors": [
-        "Shuning Liu",
-        "Yuxin Song",
-        "Hanbing Li",
-        "Ziyue Wang",
-        "Mingying Lan",
-        "Fei Lv"
-      ],
-      "primary_category": "cs.HC",
-      "categories": [
-        "cs.HC"
-      ],
-      "published": "2026-10-15T04:23:00+00:00",
-      "link": "https://arxiv.org/pdf/2610.21233v1",
-      "tags": [
-        "keyword:aied-oer",
-        "query:aied-oer"
-      ],
-      "llm_score": 7.0,
-      "llm_evidence_en": "children verify AI suggestions in game-based learning",
-      "llm_evidence_cn": "儿童在游戏化学习中核查AI建议",
-      "llm_evidence": "儿童在游戏化学习中核查AI建议",
-      "canonical_evidence": "儿童在游戏化学习中核查AI建议",
-      "llm_tldr_en": "This study examines how children verify AI suggestions during game-based learning, where fluent advice may be inaccurate. It builds a biological reasoning game and compares three agent styles, treating trust as situated verification behavior rather than a static attitude.",
-      "llm_tldr_cn": "针对儿童在学习和问题解决中难以判断AI建议是否准确的问题，本文设计了一个生物知识推理游戏，将AI建议嵌入任务交互，并比较伙伴型、工具型和双状态智能体三种交互风格。研究不把信任视为任务后的静态态度，而是观察儿童在具体情境中的核查行为，为设计更安全、更促进批判性思考的儿童AI学习环境提供依据。游戏化探针用于分析信任判断与核查策略。",
-      "llm_tldr": "针对儿童在学习和问题解决中难以判断AI建议是否准确的问题，本文设计了一个生物知识推理游戏，将AI建议嵌入任务交互，并比较伙伴型、工具型和双状态智能体三种交互风格。研究不把信任视为任务后的静态态度，而是观察儿童在具体情境中的核查行为，为设计更安全、更促进批判性思考的儿童AI学习环境提供依据。游戏化探针用于分析信任判断与核查策略。",
-      "llm_tags": [
-        "query:aied-oer"
-      ],
-      "matched_query_tag": "query:aied-oer",
-      "matched_query_text": "research on artificial intelligence applications in education and learning",
-      "matched_requirement_id": "req-1",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "7"
-    },
-    {
-      "id": "2610.18724v1",
-      "source": "arxiv",
-      "title": "AIRRI: Towards a Human-Readable, Machine-Resistant Reading Interface",
-      "abstract": "The rapid advancement of image-to-text extraction systems and large language models (LLMs) poses new challenges for educational assessment by making assignment materials easy to transcribe and solve with minimal human effort. To address this problem, we present AIRRI (Artificial Intelligence Resilient Reading Interface), a framework for generating machine-resistant educational content, a dataset of higher-education assignments for evaluation, and an initial evaluation of the human readability of AIRRI machine-resistant text designs. AIRRI employs two categories of machine-resistance techniques. First, AIRRI applies image transformations including character spacing, word spacing, line spacing, character opacity variation, stripe overlays, and image noise. Second, AIRRI applies decision-based adversarial attacks: RayS, SurFree, and ADBA. We evaluate AIRRI against three image-to-text systems: Tesseract, EasyOCR, and the transformer-based GOT-OCR2 model. Our results show that AIRRI substantially degrades automated text extraction performance. AIRRI increased character error rates for EasyOCR (6.9% to 55.9%), Tesseract (2.3% to 100.0%), and GOT-OCR2 (30.7% to 48.1%). Word error rates increased for EasyOCR (24.9% to 96.7%) and Tesseract (10.7% to 100.0%). Among the evaluated decision-based attacks, ADBA consistently produced the largest degradation in image-to-text performance, while RayS and SurFree produced more moderate reductions. EasyOCR and Tesseract were generally more susceptible to both image-based and adversarial perturbations than the transformer-based GOT-OCR2 model. Our findings suggest that AIRRI can significantly reduce the reliability of image-to-text-to-LLM workflows, increasing the effort required for AI-assisted assignment completion.",
-      "authors": [
-        "Emory Salaun",
-        "Syed Ayon",
-        "Kaleel Mahmood",
-        "Shaun Wallace"
-      ],
-      "primary_category": "cs.CV",
-      "categories": [
-        "cs.CV",
-        "cs.HC",
-        "cs.LG"
-      ],
-      "published": "2026-10-13T17:04:33+00:00",
-      "link": "https://arxiv.org/pdf/2610.18724v1",
-      "tags": [
-        "keyword:aied-oer",
-        "query:aied-oer"
-      ],
-      "llm_score": 6.0,
-      "llm_evidence_en": "AI-resilient educational content generation for assessment",
-      "llm_evidence_cn": "面向教育评估的抗AI教育内容生成",
-      "llm_evidence": "面向教育评估的抗AI教育内容生成",
-      "canonical_evidence": "面向教育评估的抗AI教育内容生成",
-      "llm_tldr_en": "Image-to-text and LLMs make educational assignments easy to transcribe and solve. AIRRI generates machine-resistant educational content via image transformations, with a dataset and human readability evaluation of designs.",
-      "llm_tldr_cn": "图像转文本与大型语言模型使作业材料易被转写和自动求解，威胁教育评估的有效性。本文提出AIRRI框架，通过字符间距、不透明度变化、条纹叠加等图像变换生成抗机器识别的教育内容，并构建高等教育作业数据集评估其人类可读性。研究初步验证了机器抗性设计在保持人可读的同时提升抗自动化求解能力，为AI时代的教育测评设计提供了新思路。",
-      "llm_tldr": "图像转文本与大型语言模型使作业材料易被转写和自动求解，威胁教育评估的有效性。本文提出AIRRI框架，通过字符间距、不透明度变化、条纹叠加等图像变换生成抗机器识别的教育内容，并构建高等教育作业数据集评估其人类可读性。研究初步验证了机器抗性设计在保持人可读的同时提升抗自动化求解能力，为AI时代的教育测评设计提供了新思路。",
-      "llm_tags": [
-        "query:aied-oer"
-      ],
-      "matched_query_tag": "query:aied-oer",
-      "matched_query_text": "research on artificial intelligence applications in education and learning",
-      "matched_requirement_id": "req-1",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "6"
-    },
-    {
-      "id": "2610.19654v1",
-      "source": "arxiv",
-      "title": "HACHIMI-II: From Role-Play to Learner Behavior Modeling for Faithful Student Simulation",
-      "abstract": "Simulated students let researchers test tutoring systems and teaching strategies before real learners are available, but only if the simulation reproduces where a particular learner succeeds and fails. The common approach asks a large language model to role-play a student, but a role does not model what this learner knows or will do next, so the model's own competence fills the gap. Simulated students perform at a level set by the model, differ little from one another, and seldom make the real learners' errors. We model the learner's behavior and recast student simulation as third-person prediction of the learner's next action. HACHIMI-II builds a student model from the learner's history, infers the learner's state for the current item or tutor turn, and compiles it into a behavior harness that constrains the next action. On three item-response datasets, the Wasserstein-1 distance between simulated and real student ability is 2.4--8.4$\\times$ smaller than that of the strongest baseline. On two dialogue datasets, HACHIMI-II reproduces real student errors with the same knowledge type, locus, and mechanism 1.8--5.1$\\times$ more often than the strongest baseline, and ablations trace the gains mainly to the explicit learner state. Predicting the learner makes capable models usable as simulated students.",
-      "authors": [
-        "Yilin Jiang",
-        "Fei Tan",
-        "Xuanyu Yin",
-        "Jing Leng",
-        "Aimin Zhou"
-      ],
-      "primary_category": "cs.CL",
-      "categories": [
-        "cs.CL",
-        "cs.AI",
-        "cs.CY",
-        "cs.LG"
-      ],
-      "published": "2026-10-14T06:24:39+00:00",
-      "link": "https://arxiv.org/pdf/2610.19654v1",
-      "tags": [
-        "keyword:aied-oer",
-        "query:aied-oer"
-      ],
-      "llm_score": 8.0,
-      "llm_evidence_en": "Simulated students for testing tutoring systems and teaching strategies",
-      "llm_evidence_cn": "用于测试智能辅导系统与教学策略的模拟学生",
-      "llm_evidence": "用于测试智能辅导系统与教学策略的模拟学生",
-      "canonical_evidence": "用于测试智能辅导系统与教学策略的模拟学生",
-      "llm_tldr_en": "LLM role-play simulated students fail to model a specific learner's knowledge. HACHIMI-II recasts student simulation as predicting the learner's next action from history, reproducing real success and failure patterns more faithfully.",
-      "llm_tldr_cn": "针对大模型角色扮演式模拟学生无法刻画特定学习者知识状态、表现千篇一律的问题，作者提出HACHIMI-II，把学生模拟重构为基于学习历史的下一步行为第三人称预测，并据此推断学习者当前作答状态。实验表明该方法能更忠实地复现真实学习者的成功与失败位置及其常见错误模式。该工作为在真实学习者到位前测试智能辅导系统与教学策略提供了更可信的模拟工具。",
-      "llm_tldr": "针对大模型角色扮演式模拟学生无法刻画特定学习者知识状态、表现千篇一律的问题，作者提出HACHIMI-II，把学生模拟重构为基于学习历史的下一步行为第三人称预测，并据此推断学习者当前作答状态。实验表明该方法能更忠实地复现真实学习者的成功与失败位置及其常见错误模式。该工作为在真实学习者到位前测试智能辅导系统与教学策略提供了更可信的模拟工具。",
-      "llm_tags": [
-        "query:aied-oer"
-      ],
-      "matched_query_tag": "query:aied-oer",
-      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
-      "matched_requirement_id": "req-8",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "8plus"
-    },
-    {
-      "id": "2610.24259v1",
-      "source": "arxiv",
-      "title": "SLA-LENS: From Classroom Transcripts to CSLA-Informed and Evidence-Linked L2 Interaction Analytics",
-      "abstract": "What happens after a learner makes an error, and how does the instructor's response shape the next turn? Investigating these exchanges across classrooms requires context-sensitive annotation that is difficult to scale manually. We introduce SLA-LENS, an end-to-end LLM-assisted framework that connects classroom transcripts to structured pedagogical annotations and evidence-linked descriptive analytics. Grounded in interactionist Second Language Acquisition (SLA) theory, its annotation schema captures second language learner errors, pedagogical functions, and uptake or repair while accounting for speaker roles, conversational context, and hierarchical labels. We apply the framework to 40 authentic online L2 Spanish classroom transcripts comprising over 21,000 sentence-level instances. We evaluate proprietary and open-weight LLMs, including task-specific QLoRA adaptation, using expert-reviewed gold annotations, held-out silver data, and metrics sensitive to different types of annotation error. A deterministic reporting layer generates reproducible visualizations of participation, feedback, learner errors, uptake, and temporal interaction patterns, linked to supporting transcript evidence. By making these patterns accessible and inspectable, SLA-LENS supports systematic classroom discourse research, pedagogical reflection, and curriculum design.",
-      "authors": [
-        "Nemika Tyagi",
-        "Olga Kellert",
-        "Phanos Kareen",
-        "Nelvin Licona-Guevara"
-      ],
-      "primary_category": "cs.CL",
-      "categories": [
-        "cs.CL"
-      ],
-      "published": "2026-10-16T21:33:40+00:00",
-      "link": "https://arxiv.org/pdf/2610.24259v1",
-      "tags": [
-        "keyword:aied-oer",
-        "query:aied-oer"
-      ],
-      "llm_score": 7.0,
-      "llm_evidence_en": "LLM-assisted learning analytics framework annotating classroom interaction transcripts",
-      "llm_evidence_cn": "LLM辅助的课堂互动转录学习分析框架",
-      "llm_evidence": "LLM辅助的课堂互动转录学习分析框架",
-      "canonical_evidence": "LLM辅助的课堂互动转录学习分析框架",
-      "llm_tldr_en": "Introduces SLA-LENS, an LLM-assisted framework that converts L2 classroom transcripts into structured pedagogical annotations and evidence-linked analytics, applied to 40 online Spanish classrooms to support scalable interaction analysis.",
-      "llm_tldr_cn": "针对课堂互动分析难以人工大规模标注的问题，本文提出SLA-LENS，一个基于大语言模型的端到端框架，将二语课堂转录文本转化为结构化的教学标注与证据关联的描述性分析。该框架以互动主义二语习得理论为支撑，可识别学习者错误、教学功能与修正行为，并在40个真实在线西班牙语课堂上验证。其贡献在于把学习分析扩展到可规模化的课堂互动诊断。",
-      "llm_tldr": "针对课堂互动分析难以人工大规模标注的问题，本文提出SLA-LENS，一个基于大语言模型的端到端框架，将二语课堂转录文本转化为结构化的教学标注与证据关联的描述性分析。该框架以互动主义二语习得理论为支撑，可识别学习者错误、教学功能与修正行为，并在40个真实在线西班牙语课堂上验证。其贡献在于把学习分析扩展到可规模化的课堂互动诊断。",
-      "llm_tags": [
-        "query:aied-oer"
-      ],
-      "matched_query_tag": "query:aied-oer",
-      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
-      "matched_requirement_id": "req-8",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "7"
-    },
-    {
-      "id": "2610.26943v1",
-      "source": "arxiv",
-      "title": "MAMath-Bench: Process-Aware and Robust Evaluation of Multimodal Multi-Agent Mathematical Reasoning",
-      "abstract": "Mathematical reasoning is a fundamental capability for educational applications of Large Language Models (LLMs), where reliable problem solving requires not only correct answers but also coherent and verifiable reasoning processes. Multi-agent systems (MASs) have shown growing potential in this domain by leveraging collaboration and verification among multiple LLM agents. However, existing evaluations primarily focus on the correctness of final answers in text-only settings, offering limited insight into multimodal reasoning capabilities, the reliability of intermediate reasoning steps, and robustness against reasoning errors. To address these limitations, we introduce MAMath-Bench, a process-aware benchmark designed to evaluate the multimodal mathematical reasoning capabilities of MASs. MAMath-Bench comprises 1,003 problems spanning 11 mathematical categories, multiple difficulty levels, and several modalities, including text, images, and audio. It features fine-grained milestone annotations to evaluate systems across three dimensions: problem-solving correctness, reasoning-process reliability, and robustness to adversarial reasoning-chain perturbations. Our evaluation yields three key findings. First, multi-agent collaboration does not consistently improve final-answer accuracy over strong single LLMs. Second, collaboration can substantially enhance the coverage of intermediate reasoning, but such gains may come at the cost of increased reasoning redundancy. Third, current systems remain vulnerable to adversarial reasoning errors, particularly those involving subtle structural perturbations. The dataset is available at https://github.com/mira-ai-lab/AgentMath.",
-      "authors": [
-        "Xinping Wang",
-        "Jie Ma",
-        "Rui Xing",
-        "Wensong Guo",
-        "Xiayi Zhang",
-        "Jianhao Deng",
-        "Zihao Zhou",
-        "Boqian Yang",
-        "Feijuan He"
-      ],
-      "primary_category": "cs.AI",
-      "categories": [
-        "cs.AI"
-      ],
-      "published": "2026-10-18T04:32:06+00:00",
-      "link": "https://arxiv.org/pdf/2610.26943v1",
-      "tags": [
-        "keyword:aied-oer",
-        "query:aied-oer"
-      ],
-      "llm_score": 6.0,
-      "llm_evidence_en": "process-aware benchmark for multimodal multi-agent math reasoning in education",
-      "llm_evidence_cn": "面向教育应用的多模态多智能体数学推理评测基准",
-      "llm_evidence": "面向教育应用的多模态多智能体数学推理评测基准",
-      "canonical_evidence": "面向教育应用的多模态多智能体数学推理评测基准",
-      "llm_tldr_en": "Existing evaluations of LLM math reasoning focus on final answers in text-only settings. MAMath-Bench is a process-aware benchmark assessing multimodal reasoning, intermediate step reliability, and robustness to errors.",
-      "llm_tldr_cn": "数学推理是大型语言模型教育应用的核心能力，但现有评测多只关注纯文本设定下的最终答案正确性，难以反映多模态推理与中间步骤的可靠性。本文提出MAMath-Bench，一个过程感知的评测基准，用于评估多智能体协作下的多模态数学推理能力、推理步骤可信度以及对推理错误的鲁棒性。该基准弥补了教育场景中过程性评价的空白，为构建更可靠的AI数学辅导与解题系统提供评测工具。",
-      "llm_tldr": "数学推理是大型语言模型教育应用的核心能力，但现有评测多只关注纯文本设定下的最终答案正确性，难以反映多模态推理与中间步骤的可靠性。本文提出MAMath-Bench，一个过程感知的评测基准，用于评估多智能体协作下的多模态数学推理能力、推理步骤可信度以及对推理错误的鲁棒性。该基准弥补了教育场景中过程性评价的空白，为构建更可靠的AI数学辅导与解题系统提供评测工具。",
-      "llm_tags": [
-        "query:aied-oer"
-      ],
-      "matched_query_tag": "query:aied-oer",
-      "matched_query_text": "research on artificial intelligence applications in education and learning",
-      "matched_requirement_id": "req-1",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "6"
-    },
-    {
-      "id": "2610.21685v1",
-      "source": "arxiv",
-      "title": "MARS: A Momentum-Aware Adaptive Rating System for Personalized Assessment",
-      "abstract": "Adaptive assessment systems personalize learning by estimating learner proficiency and recommending suitable questions. However, many existing approaches rely on fixed difficulty labels, static rating updates, or black-box prediction models that provide limited control over rating stability, interpretability, and time-constrained routing. This paper proposes MARS, a Momentum-Aware Adaptive Rating System for interpretable adaptive assessment. MARS represents the question bank as a directed weighted knowledge graph and updates learner proficiency using dynamic rating sensitivity, response quality, and momentum-aware learner velocity. We also formulate a time-budgeted mark-maximization objective in which the policy selects questions within a fixed test duration under negative marking. Experiments on ASSISTments 2009 and MARS-SimExam evaluate MARS for prediction, rating stability, and adaptive routing. Results show that MARS provides smoother rating updates than Fixed Elo and achieves the highest score under time-budgeted negative-marking routing, improving the total score by 8.09 over the strongest baseline and reducing overtime violations from 50% to 5.6%. These results suggest that MARS is suitable for real-time, interpretable, and deployment-friendly adaptive assessment.",
-      "authors": [
-        "Vikrant Sahu",
-        "Khethavath Sunil Naik",
-        "Gagan Raj Gupta"
-      ],
-      "primary_category": "cs.CY",
-      "categories": [
-        "cs.CY",
-        "cs.LG"
-      ],
-      "published": "2026-10-15T11:09:49+00:00",
-      "link": "https://arxiv.org/pdf/2610.21685v1",
-      "tags": [
-        "keyword:aied-oer",
-        "query:aied-oer"
-      ],
-      "llm_score": 8.0,
-      "llm_evidence_en": "adaptive assessment system personalizing learning via proficiency estimation and question recommendation",
-      "llm_evidence_cn": "通过能力估计与题目推荐实现个性化学习的自适应测评系统",
-      "llm_evidence": "通过能力估计与题目推荐实现个性化学习的自适应测评系统",
-      "canonical_evidence": "通过能力估计与题目推荐实现个性化学习的自适应测评系统",
-      "llm_tldr_en": "Adaptive assessment systems often rely on fixed difficulty labels or black-box models; MARS models the question bank as a weighted knowledge graph and updates learner proficiency with momentum-aware dynamic rating under a time-budgeted mark-maximization policy for interpretable personalized assessment.",
-      "llm_tldr_cn": "自适应测评系统常依赖固定难度标签或黑箱预测，缺乏对评级稳定性与可解释性的控制。本文提出MARS，将题库表示为有向加权知识图谱，结合动态评级敏感度、作答质量与学习者动量更新能力估计。系统在限定考试时间下以分数最大化为目标选择题目，实现可解释的个性化测评。该工作为自适应学习中的题目推荐与能力诊断提供了新方法。",
-      "llm_tldr": "自适应测评系统常依赖固定难度标签或黑箱预测，缺乏对评级稳定性与可解释性的控制。本文提出MARS，将题库表示为有向加权知识图谱，结合动态评级敏感度、作答质量与学习者动量更新能力估计。系统在限定考试时间下以分数最大化为目标选择题目，实现可解释的个性化测评。该工作为自适应学习中的题目推荐与能力诊断提供了新方法。",
-      "llm_tags": [
-        "query:aied-oer"
-      ],
-      "matched_query_tag": "query:aied-oer",
-      "matched_query_text": "personalized learning and learner-centered educational technologies",
-      "matched_requirement_id": "req-6",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "8plus"
-    },
-    {
-      "id": "2610.25560v1",
-      "source": "arxiv",
-      "title": "Voice-Based AI Feedback in Higher Education: A Field Study on Quality and Actionability",
-      "abstract": "Student feedback is a critical input for continuous improvement in higher education, yet traditional end-of-semester written surveys suffer from low response rates, superficial answers, satisficing, and limited actionability. Voice-based conversational AI agents can conduct structured interviews at scale, asking open-ended questions and probing follow-ups, and may capture richer qualitative feedback than written instruments. This research proposal asks what characteristics, depth, and strategic value feedback collected through voice-based conversational AI agents has in higher education, and whether such agents elicit detailed, honest, and actionable feedback that can support instructional improvement and institutional learning. Drawing on survey-mode-effects research, the Computers As Social Actors (CASA) paradigm, and dynamic capabilities theory, we develop three hypotheses on elaboration, social presence and disclosure, and actionability. A completed technical pilot at the Technical University of Munich established the feasibility of telephone-based AI interviews; the main field study is planned for the \"Advanced Leadership Communication\" course at MIT Sloan with approximately 60 students, using a convergent mixed-methods design and a four-dimensional coding framework for actionability (specificity, thematic richness, constructive orientation, contextual depth). The study extends CASA theory to evaluative educational settings, characterizes voice-based AI as a distinct feedback modality, and links micro-level feedback quality to institutional sensing capabilities.",
-      "authors": [
-        "Thilo Tamme",
-        "Leander Schilling",
-        "Anton Hantel"
-      ],
-      "primary_category": "cs.CY",
-      "categories": [
-        "cs.CY",
-        "cs.HC"
-      ],
-      "published": "2026-10-18T21:54:27+00:00",
-      "link": "https://arxiv.org/pdf/2610.25560v1",
-      "tags": [
-        "keyword:aied-oer",
-        "query:aied-oer"
-      ],
-      "llm_score": 7.0,
-      "llm_evidence_en": "voice-based conversational AI agents collecting student feedback in higher education",
-      "llm_evidence_cn": "语音对话式AI代理在高等教育中收集学生反馈",
-      "llm_evidence": "语音对话式AI代理在高等教育中收集学生反馈",
-      "canonical_evidence": "语音对话式AI代理在高等教育中收集学生反馈",
-      "llm_tldr_en": "Written end-of-semester surveys suffer low response rates and shallow, hard-to-act feedback; this field study asks whether voice-based conversational AI agents conducting structured interviews elicit richer, more actionable feedback supporting instructional improvement in higher education.",
-      "llm_tldr_cn": "传统期末书面评教问卷存在回收率低、回答流于表面、难以指导改进等问题。本文提出一项实地研究方案，探索由语音对话式人工智能代理开展结构化访谈，通过开放式提问与追问规模化收集学生反馈。研究将分析这类反馈在深度、真实性与可操作性上的特征，并评估其对教学改进与院校学习的价值。该工作为高等教育质量保障提供了一种可扩展的AI反馈收集路径。",
-      "llm_tldr": "传统期末书面评教问卷存在回收率低、回答流于表面、难以指导改进等问题。本文提出一项实地研究方案，探索由语音对话式人工智能代理开展结构化访谈，通过开放式提问与追问规模化收集学生反馈。研究将分析这类反馈在深度、真实性与可操作性上的特征，并评估其对教学改进与院校学习的价值。该工作为高等教育质量保障提供了一种可扩展的AI反馈收集路径。",
-      "llm_tags": [
-        "query:aied-oer"
-      ],
-      "matched_query_tag": "query:aied-oer",
-      "matched_query_text": "research on artificial intelligence applications in education and learning",
-      "matched_requirement_id": "req-1",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "7"
-    },
-    {
-      "id": "2610.26411v1",
-      "source": "arxiv",
-      "title": "Exploring Visual Access and Proactive AI Tutoring for Handwritten Mathematics",
-      "abstract": "Handwritten work captures mathematical reasoning that learners may not express in typed or voice-dictated messages. We built a multimodal AI tutoring platform in which a phone camera gives the tutor a live view of learners' work on paper. In a randomized online study, 117 adults solved calculus problems with Text-Reactive, Visual-Reactive, or Visual-Proactive assistance. Analysis of 2,140 tutor messages showed that visual access shifted assistance toward checking ongoing work, while proactivity enhanced error identification and directive hints. Learners valued feedback grounded in their writing; those who received proactive help rated it as supportive, and about a third wanted it more often. These findings inform when tutors should intervene and what they should address. We release the platform, prompts, and instruments, together with 255,984 timestamped images of handwritten work linked to tutoring conversations, intervention decisions, and learning outcomes, to support multimodal tutoring systems that preserve the affordances of handwritten work while providing adaptive feedback.",
-      "authors": [
-        "Nachiket Kotalwar",
-        "Conrad Borchers",
-        "Shubham Gandhi",
-        "Partha Sarathi Purkayastha",
-        "David Yaron",
-        "Carolyn P. Rosé"
-      ],
-      "primary_category": "cs.CY",
-      "categories": [
-        "cs.CY",
-        "cs.HC"
-      ],
-      "published": "2026-10-19T13:46:02+00:00",
-      "link": "https://arxiv.org/pdf/2610.26411v1",
-      "tags": [
-        "keyword:aied-oer",
-        "query:aied-oer"
-      ],
-      "llm_score": 8.0,
-      "llm_evidence_en": "multimodal AI tutoring platform supporting learners' handwritten math work",
-      "llm_evidence_cn": "支持手写数学学习的多模态AI辅导平台",
-      "llm_evidence": "支持手写数学学习的多模态AI辅导平台",
-      "canonical_evidence": "支持手写数学学习的多模态AI辅导平台",
-      "llm_tldr_en": "Handwritten work reveals math reasoning not captured by typed input. A multimodal AI tutor uses a phone camera to view learners' paper work; a 117-adult study showed visual access and proactive help improve error identification and hints.",
-      "llm_tldr_cn": "手写作答蕴含学生未必能用键入或语音表达的数学推理，现有AI辅导难以获取这些过程信息。本文构建多模态AI辅导平台，用手机摄像头让导师实时查看学生在纸上的演算，并开展117名成人参与的随机在线实验，比较文本反应、视觉反应与视觉主动三种辅导方式。分析2140条导师消息发现，视觉访问使辅导转向检查过程，主动性增强错误识别与指导性提示，学习者尤其重视基于其书写内容的反馈。",
-      "llm_tldr": "手写作答蕴含学生未必能用键入或语音表达的数学推理，现有AI辅导难以获取这些过程信息。本文构建多模态AI辅导平台，用手机摄像头让导师实时查看学生在纸上的演算，并开展117名成人参与的随机在线实验，比较文本反应、视觉反应与视觉主动三种辅导方式。分析2140条导师消息发现，视觉访问使辅导转向检查过程，主动性增强错误识别与指导性提示，学习者尤其重视基于其书写内容的反馈。",
-      "llm_tags": [
-        "query:aied-oer"
-      ],
-      "matched_query_tag": "query:aied-oer",
-      "matched_query_text": "AI-supported learning environments and educational tools",
-      "matched_requirement_id": "req-5",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "8plus"
-    },
-    {
-      "id": "2610.27248v1",
-      "source": "arxiv",
-      "title": "ValiAssist: Scaling LLM-generated Programming Feedback Validation by Demonstration",
-      "abstract": "Generative AI can create programming feedback at scale, but validating its alignment with instructors' pedagogical goals and strategies remains challenging. Instructors may struggle to fully specify validation criteria upfront, as these often emerge through inspecting concrete examples and revising misaligned feedback. We present ValiAssist, a validation-by-demonstration system that infers reusable validation logic from instructors' revisions of AI-generated feedback and allows instructors to inspect and refine that logic as it is applied across other student submissions. In a comparative study with 16 instructors, ValiAssist helped instructors create and refine validation criteria, producing feedback that better aligned with their pedagogical intent (91% vs. 57%) and more than doubling the accuracy of correcting problematic criteria (77% vs. 32%). Our findings suggest that validation by demonstration can help instructors turn judgments they know how to make on individual cases into explicit, reusable logic, while progressively clarifying where those judgments do and do not generalize.",
-      "authors": [
-        "Xiaohang Tang",
-        "Rehema Abulikemu",
-        "Peng Gao",
-        "Yan Chen"
-      ],
-      "primary_category": "cs.HC",
-      "categories": [
-        "cs.HC",
-        "cs.AI",
-        "cs.CY"
-      ],
-      "published": "2026-10-19T20:21:00+00:00",
-      "link": "https://arxiv.org/pdf/2610.27248v1",
-      "tags": [
-        "keyword:aied-oer",
-        "query:aied-oer"
-      ],
-      "llm_score": 7.0,
-      "llm_evidence_en": "generative AI feedback validation aligned with instructors' pedagogical goals",
-      "llm_evidence_cn": "生成式AI教学反馈与教师教学目标对齐",
-      "llm_evidence": "生成式AI教学反馈与教师教学目标对齐",
-      "canonical_evidence": "生成式AI教学反馈与教师教学目标对齐",
-      "llm_tldr_en": "Generative AI can produce programming feedback at scale but instructors struggle to validate it against pedagogical goals. ValiAssist infers reusable validation logic from instructor revisions; a study with 16 instructors showed better-aligned feedback.",
-      "llm_tldr_cn": "生成式人工智能虽能大规模生成编程反馈，但教师难以按教学目标对其校验。本文提出ValiAssist，通过示范从教师对AI反馈的修改中推断可复用的校验逻辑，并支持教师跨学生提交检查与精化。16名教师的对比研究表明，该系统帮助教师建立并改进校验标准，使反馈更贴合其教学策略，为生成式AI在教育中的可控应用提供了方法。",
-      "llm_tldr": "生成式人工智能虽能大规模生成编程反馈，但教师难以按教学目标对其校验。本文提出ValiAssist，通过示范从教师对AI反馈的修改中推断可复用的校验逻辑，并支持教师跨学生提交检查与精化。16名教师的对比研究表明，该系统帮助教师建立并改进校验标准，使反馈更贴合其教学策略，为生成式AI在教育中的可控应用提供了方法。",
-      "llm_tags": [
-        "query:aied-oer"
-      ],
-      "matched_query_tag": "query:aied-oer",
-      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
-      "matched_requirement_id": "req-3",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "7"
-    },
-    {
-      "id": "2610.27448v1",
-      "source": "arxiv",
-      "title": "Bias and Reliability in Learning-Style Inference from Student--AI Dialogues: An Evaluation of GPT-4o and Gemini 2.0 Flash",
-      "abstract": "Large Language Models (LLMs) are increasingly integrated into educational technologies for personalized support, creating opportunities for real-time learner modeling from dialogue. This study evaluates whether GPT-4o and Gemini 2.0 Flash can infer three Felder-Silverman Learning Style Model dimensions (Active-Reflective, Sensing-Intuitive, and Sequential-Global) from short, task-focused student-AI problem-solving dialogues. Using questionnaire-derived Index of Learning Styles labels from 153 undergraduate participants, we compared deterministic zero-shot and few-shot prompting under five-fold cross-validation. Although accuracy and support-weighted F1 were moderate for Sensing-Intuitive and Sequential-Global, majority-class baselines, macro-F1, balanced accuracy, and per-class recall showed that performance was often driven by dominant-label prediction rather than reliable recognition of both classes. The models substantially under-identified Intuitive and Global learners; few-shot prompting produced mixed effects and sometimes amplified majority-class bias. Active-Reflective classification remained unstable across models. These findings indicate that LLM-generated learner-style labels should be treated as uncertain, bias-prone signals rather than stable learner profiles, and that dialogue-based personalization systems require bias-aware evaluation and uncertainty-sensitive design.",
-      "authors": [
-        "Samaneh Zamanifard",
-        "Sajad Goudarzi",
-        "Andrew Robb"
-      ],
-      "primary_category": "cs.HC",
-      "categories": [
-        "cs.HC"
-      ],
-      "published": "2026-10-20T00:50:33+00:00",
-      "link": "https://arxiv.org/pdf/2610.27448v1",
-      "tags": [
-        "keyword:aied-oer",
-        "query:aied-oer"
-      ],
-      "llm_score": 8.0,
-      "llm_evidence_en": "LLM learner modeling for personalized educational support from student-AI dialogues",
-      "llm_evidence_cn": "从学生-AI对话推断学习风格以支持个性化教学",
-      "llm_evidence": "从学生-AI对话推断学习风格以支持个性化教学",
-      "canonical_evidence": "从学生-AI对话推断学习风格以支持个性化教学",
-      "llm_tldr_en": "Evaluates whether GPT-4o and Gemini 2.0 Flash can infer Felder-Silverman learning styles from short student-AI dialogues, finding only moderate accuracy and reliability concerns for personalized educational support.",
-      "llm_tldr_cn": "针对大语言模型被用于教育技术实时学习者建模却缺乏可靠性验证的问题，本研究评估GPT-4o与Gemini 2.0 Flash能否从简短的学生-AI解题对话推断Felder-Silverman学习风格。作者以153名本科生的学习风格量表标签为基准，比较零样本与少样本提示在五折交叉验证下的推断表现。结果显示感知-直觉与序列-全局等维度的准确率与支持加权F1仅为中等水平，提示存在偏差与可靠性不足。该工作为教育场景中LLM学习者建模的可信度与公平性评估提供了实证依据。",
-      "llm_tldr": "针对大语言模型被用于教育技术实时学习者建模却缺乏可靠性验证的问题，本研究评估GPT-4o与Gemini 2.0 Flash能否从简短的学生-AI解题对话推断Felder-Silverman学习风格。作者以153名本科生的学习风格量表标签为基准，比较零样本与少样本提示在五折交叉验证下的推断表现。结果显示感知-直觉与序列-全局等维度的准确率与支持加权F1仅为中等水平，提示存在偏差与可靠性不足。该工作为教育场景中LLM学习者建模的可信度与公平性评估提供了实证依据。",
-      "llm_tags": [
-        "query:aied-oer"
-      ],
-      "matched_query_tag": "query:aied-oer",
-      "matched_query_text": "personalized learning and learner-centered educational technologies",
-      "matched_requirement_id": "req-6",
       "selection_source": "fresh_fetch",
       "quick_tier": "8plus"
     }
