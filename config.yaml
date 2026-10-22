@@ -25,3 +25,60 @@ subscriptions:
     stage: A
     diff_threshold_pct: 15
   keyword_recall_mode: or
+  intent_profiles:
+    - tag: aied-oer
+      description: 查找人工智能教育（AIED）与开放教育资源（OER）相关论文
+      enabled: true
+      paper_sources:
+        - arxiv
+      keywords:
+        - keyword: artificial intelligence in education
+          keyword_cn: 教育中的人工智能
+          query: research on artificial intelligence applications in education and learning
+        - keyword: open educational resources
+          keyword_cn: 开放教育资源
+          query: studies about open educational resources and open education practices
+        - keyword: generative AI education
+          keyword_cn: 生成式人工智能教育
+          query: generative artificial intelligence in teaching and educational content creation
+        - keyword: open education
+          keyword_cn: 开放教育
+          query: open education practices and open access learning materials
+        - keyword: AI-supported learning
+          keyword_cn: 人工智能支持的学习
+          query: AI-supported learning environments and educational tools
+        - keyword: personalized learning
+          keyword_cn: 个性化学习
+          query: personalized learning and learner-centered educational technologies
+      intent_queries:
+        - query: Research papers about artificial intelligence in education and open educational resources.
+          query_cn: 关于教育中人工智能与开放教育资源的研究论文
+          enabled: true
+          source: manual
+          note: ''
+        - query: Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.
+          query_cn: 开放教育中智能辅导系统、学习分析与自适应学习的研究
+          enabled: true
+          source: manual
+          note: ''
+        - query: Scholarly literature on generative AI and open educational resource development in teaching and learning.
+          query_cn: 教学与学习中生成式人工智能与开放教育资源开发的学术文献
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-10-22T02:42:36.931Z'
+source_backends:
+  arxiv:
+    papers_table: arxiv_papers
+    use_vector_rpc: true
+    vector_rpc: match_arxiv_papers
+    vector_rpc_exact: match_arxiv_papers_exact
+    use_bm25_rpc: true
+    bm25_rpc: match_arxiv_papers_bm25
+    sync_table: arxiv_sync_status
+    sync_success_value: success
+    schema: public
+    kind: supabase
+    enabled: true
+    url: https://lyucdwgefyfbmaiopjbk.supabase.co
+    anon_key: sb_publishable_lX-oi64Uxyd7SIVv3_w2Uw_MTOojeKq
