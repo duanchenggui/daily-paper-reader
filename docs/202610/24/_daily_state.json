@@ -1,0 +1,121 @@
+{
+  "date": "20261024",
+  "date_label": "",
+  "generated_at": "2026-10-24 21:46:02 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2610.30599v1",
+      "route": "202610/24/2610.30599v1-impacts-of-generative-ai-skill-development-on-academic-adaptation-and-learning-outcomes-among-university-students",
+      "title": "Impacts of generative AI skill development on academic adaptation and learning outcomes among university students",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "大学生生成式AI技能发展与学习成效研究",
+      "first_seen_at": "2026-10-24 21:46:02 UTC",
+      "updated_at": "2026-10-24 21:46:02 UTC"
+    },
+    {
+      "paper_id": "2610.30580v1",
+      "route": "202610/24/2610.30580v1-dagflow-ai-agentic-synthetic-data-generation-for-personalized-statistics-learning",
+      "title": "DagFlow AI: Agentic Synthetic Data Generation for Personalized Statistics Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "智能体AI为统计学习生成个性化数据集",
+      "first_seen_at": "2026-10-24 21:46:02 UTC",
+      "updated_at": "2026-10-24 21:46:02 UTC"
+    },
+    {
+      "paper_id": "2610.30828v1",
+      "route": "202610/24/2610.30828v1-tutorcasebench-a-case-grounded-benchmark-for-evaluating-llm-tutors-in-supporting-students-with-challenging-behaviors",
+      "title": "TutorCaseBench: A Case-Grounded Benchmark for Evaluating LLM Tutors in Supporting Students with Challenging Behaviors",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向LLM智能导师教学支持能力的评估基准",
+      "first_seen_at": "2026-10-24 21:46:02 UTC",
+      "updated_at": "2026-10-24 21:46:02 UTC"
+    },
+    {
+      "paper_id": "2610.31041v1",
+      "route": "202610/24/2610.31041v1-algorithmic-drift-in-generative-adaptive-learning",
+      "title": "Algorithmic drift in generative adaptive learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "生成式自适应个性化辅导系统中的算法漂移",
+      "first_seen_at": "2026-10-24 21:46:02 UTC",
+      "updated_at": "2026-10-24 21:46:02 UTC"
+    },
+    {
+      "paper_id": "2610.31481v1",
+      "route": "202610/24/2610.31481v1-supporting-or-replacing-students-reasoning-cognitive-offloading-in-ai-assisted-proof-learning",
+      "title": "Supporting or Replacing Students' Reasoning? Cognitive Offloading in AI-Assisted Proof Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "AI聊天机器人辅助本科证明学习与认知卸载",
+      "first_seen_at": "2026-10-24 21:46:02 UTC",
+      "updated_at": "2026-10-24 21:46:02 UTC"
+    },
+    {
+      "paper_id": "2610.30195v1",
+      "route": "202610/24/2610.30195v1-measuring-undergraduate-students-reliance-on-generative-ai-during-problem-solving-scale-development-and-validation",
+      "title": "Measuring undergraduate students' reliance on generative AI during problem-solving: Scale development and validation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "测量本科生在问题解决中对生成式AI的依赖",
+      "first_seen_at": "2026-10-24 21:46:02 UTC",
+      "updated_at": "2026-10-24 21:46:02 UTC"
+    },
+    {
+      "paper_id": "2610.30822v1",
+      "route": "202610/24/2610.30822v1-tessa-a-governance-oriented-custom-gpt-for-sme-guidance-under-the-eu-ai-act-design-implementation-and-evaluation",
+      "title": "TESSA: A Governance-Oriented Custom GPT for SME Guidance under the EU AI Act: Design, Implementation, and Evaluation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向AI治理教育的定制GPT教育工具",
+      "first_seen_at": "2026-10-24 21:46:02 UTC",
+      "updated_at": "2026-10-24 21:46:02 UTC"
+    }
+  ]
+}

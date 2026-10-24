@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-10-22</span>
+      <span class="dpr-home-dashboard-kicker">2026-10-24</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 4 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 7 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>1</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>3</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>5</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>2</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-10-22 22:10:32 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-10-24 21:46:02 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日精读1篇、速读3篇，聚焦AI教育评测、离线学徒学习与AI素养落地。最值得看的是8.0分的VIRA-Bench，它专门诊断在线辅导视频中教学应变理解；另有7.0分的印度工程学生“无AI指南”求学与求职研究。普通读者可先读VIRA-Bench理解如何评估教学视频，再对照印度案例反思AI使用规范。</p>
+<p>今日精选7篇论文，精读5篇、速读2篇，聚焦生成式AI在教育中的技能培养、学习应用与治理评估。最值得关注的是生成式AI技能发展对学生学业适应与学习成效的影响（9.0分），以及面向个性化统计学习的智能体合成数据生成方案（8.0分）。普通读者可优先阅读这两篇精读文章，再结合速读中关于学生AI依赖测量与EU AI Act合规治理的内容，形成从应用到规范的完整视角。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -78,12 +78,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">1 篇</strong>
+    <strong class="dpr-home-dashboard-count">5 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="VIRA-Bench: Diagnosing Pedagogical Contingency Understanding in Online Tutoring Videos">VIRA-Bench: Diagnosing Pedagogical Contingency Understanding in Online Tutoring Videos</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Impacts of generative AI skill development on academic adaptation and learning outcomes among university students">Impacts of generative AI skill development on academic adaptation and learning outcomes among university students</span></li><li><span class="dpr-home-dashboard-paper-title" title="DagFlow AI: Agentic Synthetic Data Generation for Personalized Statistics Learning">DagFlow AI: Agentic Synthetic Data Generation for Personalized Statistics Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="TutorCaseBench: A Case-Grounded Benchmark for Evaluating LLM Tutors in Supporting Students with Challenging Behaviors">TutorCaseBench: A Case-Grounded Benchmark for Evaluating LLM Tutors in Supporting Students with Challenging Behaviors</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>5</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -91,12 +91,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">3 篇</strong>
+    <strong class="dpr-home-dashboard-count">2 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Offline Apprenticeship Learning for Human-Centric Environments">Offline Apprenticeship Learning for Human-Centric Environments</span></li><li><span class="dpr-home-dashboard-paper-title" title="From AI-Free Gates to AI-First Work: How Engineering Students in India Navigate University Education and Campus Placements Without AI Guidelines">From AI-Free Gates to AI-First Work: How Engineering Students in India Navigate University Education and Campus Placements Without AI Guidelines</span></li><li><span class="dpr-home-dashboard-paper-title" title="AI Security Literacy: Ecosystem-based Competency Framework and K-12 Learning Platform">AI Security Literacy: Ecosystem-based Competency Framework and K-12 Learning Platform</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Measuring undergraduate students&#x27; reliance on generative AI during problem-solving: Scale development and validation">Measuring undergraduate students&#x27; reliance on generative AI during problem-solving: Scale development and validation</span></li><li><span class="dpr-home-dashboard-paper-title" title="TESSA: A Governance-Oriented Custom GPT for SME Guidance under the EU AI Act: Design, Implementation, and Evaluation">TESSA: A Governance-Oriented Custom GPT for SME Guidance under the EU AI Act: Design, Implementation, and Evaluation</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>3</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>2</strong></span></div>
 </section>
 </div>
 

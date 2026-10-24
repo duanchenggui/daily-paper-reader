@@ -1,0 +1,304 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-24T21:43:06.881769+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 5,
+    "deep_cap": 6,
+    "deep_selected": 5,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2610.30599v1",
+      "source": "arxiv",
+      "title": "Impacts of generative AI skill development on academic adaptation and learning outcomes among university students",
+      "abstract": "Understanding how university students perceive the development of their generative artificial intelligence (GenAI) skills over time can clarify how GenAI use relates to learning and academic outcomes. This study examined perceived skill-development trajectories, changes in learning practices, and associated academic gains using a retrospective questionnaire with 313 analyzed responses and interviews with 18 students across subject areas. Descriptive and comparative analyses and exploratory structural equation modeling (SEM) were integrated with thematic analysis. Perceived developmental trajectories were heterogeneous: 34.2% of students reported rapid early improvement followed by a plateau, 28.4% steady improvement, and 21.1% delayed acceleration. Development was also uneven across skills, with improvement in evaluating GenAI outputs perceived as more challenging; assignments were the most frequently selected driver of skill growth. Interviews further indicated increasingly specific prompting, tailored verification, and selective delegation, although some students reported stable routines, dependence, skipped reasoning, or improvements attributable partly to better GenAI tools. Academic gains were reported more often for assignments than for examinations. The SEM indicated a positive indirect association between perceived skill growth and academic gains through adaptation of assignment processes, whereas academic gains did not clearly differ across developmental trajectory groups after multiplicity correction. The findings suggest that perceived GenAI skill development varies in both trajectory and skill domain and is associated with changes in learning practices and differentiated academic benefits.",
+      "authors": [
+        "Lei Fan",
+        "Fangxue Liu"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC",
+        "cs.AI"
+      ],
+      "published": "2026-10-22T01:58:57+00:00",
+      "link": "https://arxiv.org/pdf/2610.30599v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "study of generative AI skill development and learning outcomes among university students",
+      "llm_evidence_cn": "大学生生成式AI技能发展与学习成效研究",
+      "llm_evidence": "大学生生成式AI技能发展与学习成效研究",
+      "canonical_evidence": "大学生生成式AI技能发展与学习成效研究",
+      "llm_tldr_en": "Survey of 313 students plus 18 interviews traces how perceived GenAI skill growth relates to learning practice changes and academic gains, using SEM and thematic analysis.",
+      "llm_tldr_cn": "生成式AI在高校学习中日益普及，但学生技能发展轨迹如何影响学习方式与学业成效尚不清楚。作者以313份回溯问卷与18名学生访谈为数据，结合描述统计、结构方程模型与主题分析进行考察。结果显示技能发展轨迹异质，约三分之一学生呈快速提升后平台期，且技能变化与学习实践调整及学业收益相关。研究为高校生成式AI教学支持提供了实证依据。",
+      "llm_tldr": "生成式AI在高校学习中日益普及，但学生技能发展轨迹如何影响学习方式与学业成效尚不清楚。作者以313份回溯问卷与18名学生访谈为数据，结合描述统计、结构方程模型与主题分析进行考察。结果显示技能发展轨迹异质，约三分之一学生呈快速提升后平台期，且技能变化与学习实践调整及学业收益相关。研究为高校生成式AI教学支持提供了实证依据。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.30580v1",
+      "source": "arxiv",
+      "title": "DagFlow AI: Agentic Synthetic Data Generation for Personalized Statistics Learning",
+      "abstract": "To provide personalized learning experiences in courses that teach data analysis skills, instructors often search for datasets that appeal to a student's interests, align with specific learning objectives, and are appropriate for the student's skill level. Datasets that match all three criteria can be difficult to find. DagFlow-AI is an agentic AI data generation tool that creates realistic, synthetic datasets tailored to these criteria. Rather than mimicking existing datasets or generating observations directly, DagFlow-AI uses the broad knowledge and reasoning capabilities of large language models (LLMs) to specify the components of transparent, reproducible data-generating mechanisms from which observations are generated programmatically. We illustrate how the tool can be used to construct a realistic, synthetic dataset and describe how it aligns with both the Guidelines for Assessment and Instruction of Statistics Education (GAISE) and the Problem, Plan, Data, Analysis, and Conclusion (PPDAC) framework for teaching data analysis",
+      "authors": [
+        "David Arthur",
+        "Ranjini Grove",
+        "Zaher Kmail",
+        "Curtis Atkisson"
+      ],
+      "primary_category": "stat.OT",
+      "categories": [
+        "stat.OT"
+      ],
+      "published": "2026-10-22T01:17:37+00:00",
+      "link": "https://arxiv.org/pdf/2610.30580v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "agentic AI generating personalized datasets for statistics learning",
+      "llm_evidence_cn": "智能体AI为统计学习生成个性化数据集",
+      "llm_evidence": "智能体AI为统计学习生成个性化数据集",
+      "canonical_evidence": "智能体AI为统计学习生成个性化数据集",
+      "llm_tldr_en": "DagFlow-AI is an agentic tool that uses LLMs to specify transparent data-generating mechanisms, producing synthetic datasets personalized to student interests, objectives, and skill level.",
+      "llm_tldr_cn": "在数据分析课程中，教师难以找到同时契合学生兴趣、教学目标与技能水平的数据集。本文提出DagFlow-AI，一种智能体式数据生成工具，利用大语言模型的知识与推理能力指定透明、可复现的数据生成机制，再程序化生成观测数据。该工具无需模仿现有数据集即可产出定制化的真实感合成数据。研究为个性化统计学习提供了可扩展、可复现的教学数据资源生成方案。",
+      "llm_tldr": "在数据分析课程中，教师难以找到同时契合学生兴趣、教学目标与技能水平的数据集。本文提出DagFlow-AI，一种智能体式数据生成工具，利用大语言模型的知识与推理能力指定透明、可复现的数据生成机制，再程序化生成观测数据。该工具无需模仿现有数据集即可产出定制化的真实感合成数据。研究为个性化统计学习提供了可扩展、可复现的教学数据资源生成方案。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "personalized learning and learner-centered educational technologies",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.30828v1",
+      "source": "arxiv",
+      "title": "TutorCaseBench: A Case-Grounded Benchmark for Evaluating LLM Tutors in Supporting Students with Challenging Behaviors",
+      "abstract": "LLMs are increasingly used as AI tutors, yet existing benchmarks overlook the challenging behaviors common among students with learning and behavioral difficulties. We introduce TutorCaseBench, a benchmark that grounds AI-tutor evaluation in qualitative case studies from pedagogy, educational psychology, and special education. Our pipeline converts documented student categories into case-specific scenarios, tutor-student dialogues, and rubrics grounded in source evidence. The benchmark contains 923 dialogues across five challenge types, evaluated through open-ended response generation (1,560 items) and multiple-choice selection (2,537 items). Across 11 state-of-the-art LLMs, even the strongest model satisfies a rubric criterion in only 55.8% of open-ended cases, while models are better at selecting appropriate strategies than generating situated responses. These results reveal a gap between intervention recognition and context-specific adaptation, especially for open-weight models. All data are publicly available at https://github.com/kixlab/TutorCaseBench.",
+      "authors": [
+        "Yeon Su Park",
+        "Chanyoung Park",
+        "Tae Soo Kim",
+        "Seungju Kim",
+        "Hyunwoo Kim",
+        "Daho Jung",
+        "Jinsung Yoon",
+        "Juho Kim"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.HC"
+      ],
+      "published": "2026-10-22T06:58:46+00:00",
+      "link": "https://arxiv.org/pdf/2610.30828v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "benchmark for evaluating LLM AI tutors on student support",
+      "llm_evidence_cn": "面向LLM智能导师教学支持能力的评估基准",
+      "llm_evidence": "面向LLM智能导师教学支持能力的评估基准",
+      "canonical_evidence": "面向LLM智能导师教学支持能力的评估基准",
+      "llm_tldr_en": "Existing AI-tutor benchmarks ignore challenging student behaviors, so the authors build TutorCaseBench from pedagogical case studies, yielding 923 dialogues and showing 11 LLMs, even the best, fall short.",
+      "llm_tldr_cn": "LLM正日益被用作AI导师，但现有基准普遍忽视学习与行为困难学生常见的挑战性行为，导致评估失真。作者构建TutorCaseBench，把教育学、教育心理学与特殊教育中的质性案例转化为情境、师生对话与基于来源证据的评分细则。基准包含五类挑战共923段对话，通过开放生成1560项和多选2537项进行评估，覆盖11个先进LLM。结果显示即使最强模型也难以满足要求，说明该基准能揭示AI导师在真实教学支持上的短板，为智能导育系统评估提供依据。",
+      "llm_tldr": "LLM正日益被用作AI导师，但现有基准普遍忽视学习与行为困难学生常见的挑战性行为，导致评估失真。作者构建TutorCaseBench，把教育学、教育心理学与特殊教育中的质性案例转化为情境、师生对话与基于来源证据的评分细则。基准包含五类挑战共923段对话，通过开放生成1560项和多选2537项进行评估，覆盖11个先进LLM。结果显示即使最强模型也难以满足要求，说明该基准能揭示AI导师在真实教学支持上的短板，为智能导育系统评估提供依据。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.31041v1",
+      "source": "arxiv",
+      "title": "Algorithmic drift in generative adaptive learning",
+      "abstract": "Generative artificial intelligence promises to democratize personalized tutoring, yet the longitudinal stability of adaptive systems remains under-theorized. Current ethical discourse focuses on static bias. This paper argues that a distinct threat lies in algorithmic drift: a feedback loop in which minor, demographically asymmetric observation errors compound over time into systemic inequities. We make three contributions. First, we formalize algorithmic drift as a coupled learner--tutor dynamical system. Second, we corroborate this theory with an agent-based Monte Carlo simulation in which either a transparent online tracker or an LSTM deep-knowledge-tracing network drives an IRT-based curriculum policy. Third, we introduce the temporal fairness stabilizer (TFS), a targeted intervention that periodically re-probes learner capability, and benchmark it against standard exploration baselines with explicit group-fairness metrics and replication-level inference. Within the modeled environment, TFS closes the achievement gap where generic exploration does not, and we characterize the conditions under which it succeeds. We separate what is established analytically, what is demonstrated in simulation, and what remains to be validated with real learners. Our results reframe algorithmic fairness in education as a temporal property of a closed loop rather than a deployment-time checkbox.",
+      "authors": [
+        "Firuz Kamalov",
+        "Hana Sulieman",
+        "Ahmed El Sayed",
+        "Sivaraj R.",
+        "Nitesh Sughnani"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-22T10:19:03+00:00",
+      "link": "https://arxiv.org/pdf/2610.31041v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "algorithmic drift in generative adaptive personalized tutoring systems",
+      "llm_evidence_cn": "生成式自适应个性化辅导系统中的算法漂移",
+      "llm_evidence": "生成式自适应个性化辅导系统中的算法漂移",
+      "canonical_evidence": "生成式自适应个性化辅导系统中的算法漂移",
+      "llm_tldr_en": "Generative AI promises personalized tutoring but adaptive systems may drift over time. This paper formalizes algorithmic drift as a coupled learner-tutor dynamical system, validates it via Monte Carlo simulation, and proposes a temporal fairness stabilizer to curb compounding inequities.",
+      "llm_tldr_cn": "生成式AI有望普及个性化辅导，但自适应系统的长期稳定性缺乏理论探讨，静态偏见之外的算法漂移风险被忽视。本文将算法漂移形式化为学习者与辅导器的耦合动力系统，并用基于IRT课程策略的蒙特卡洛仿真加以验证。作者提出时间公平稳定器以抑制误差累积导致的系统性不平等，为个性化学习系统的长期公平性提供理论与方法。",
+      "llm_tldr": "生成式AI有望普及个性化辅导，但自适应系统的长期稳定性缺乏理论探讨，静态偏见之外的算法漂移风险被忽视。本文将算法漂移形式化为学习者与辅导器的耦合动力系统，并用基于IRT课程策略的蒙特卡洛仿真加以验证。作者提出时间公平稳定器以抑制误差累积导致的系统性不平等，为个性化学习系统的长期公平性提供理论与方法。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "personalized learning and learner-centered educational technologies",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.31481v1",
+      "source": "arxiv",
+      "title": "Supporting or Replacing Students' Reasoning? Cognitive Offloading in AI-Assisted Proof Learning",
+      "abstract": "We studied 153 students in an undergraduate proof-based mathematics course with staggered-access to an AI support system. Students were randomly assigned to receive an AI chatbot and a homework-feedback interface earlier or later in the course. During the period when only the early-access group had access, their homework scores were 2.56 points higher, but exam performance did not differ significantly between groups, suggesting that improved AI-supported homework performance did not translate into detectable gains on a subsequent exam. After all students received access, every additional 100 messages sent to the AI chatbot was associated with a 3.02-point lower score on the subsequent exam. A mediation analysis showed a significant indirect association linking lower baseline self-efficacy to greater chatbot use and, in turn, lower exam scores: a one-point decrease in self-efficacy corresponded to 0.62 fewer exam points through chatbot use. These findings raise concerns that students may use the chatbot to offload their cognitive reasoning. Use of the homework-feedback interface, which required students to submit their proof attempts before receiving feedback, was not negatively associated with exam performance. We recommend against using a chatbot for AI tutoring and suggest exploring a tutor embedded in the course activities.",
+      "authors": [
+        "Eason Chen",
+        "Sophia Judicke",
+        "Kayla Beigh",
+        "Xinyi Tang",
+        "Isabel Wang",
+        "Nina Yuan",
+        "Zimo Xiao",
+        "Chuangji Li",
+        "Shizhuo Li",
+        "Reed Luttmer",
+        "Shreya Singh",
+        "Maria Yampolsky",
+        "Naman Parikh",
+        "Yvonne Zhao",
+        "Meiyi Chen",
+        "Scarlett Huang",
+        "Anishka Mohanty",
+        "Gregory Johnson",
+        "John Mackey",
+        "Jionghao Lin",
+        "Ken Koedinger"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-10-22T16:06:25+00:00",
+      "link": "https://arxiv.org/pdf/2610.31481v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "AI chatbot support in undergraduate proof learning and cognitive offloading",
+      "llm_evidence_cn": "AI聊天机器人辅助本科证明学习与认知卸载",
+      "llm_evidence": "AI聊天机器人辅助本科证明学习与认知卸载",
+      "canonical_evidence": "AI聊天机器人辅助本科证明学习与认知卸载",
+      "llm_tldr_en": "A staggered-access experiment with 153 undergraduates tests whether AI support aids or replaces reasoning in proof learning; early access raised homework scores but more chatbot use predicted lower exam scores.",
+      "llm_tldr_cn": "研究关注AI辅助学习究竟促进还是替代学生推理，聚焦本科证明数学课程中的认知卸载问题。作者对153名学生实施错峰开放AI聊天机器人与作业反馈界面的随机实验，并分析使用量与考试成绩的关系。结果显示早期使用组作业成绩提高但考试无显著提升，且聊天消息越多考试分数越低。研究表明AI支持可能诱发认知卸载，需谨慎设计以保障深度学习。",
+      "llm_tldr": "研究关注AI辅助学习究竟促进还是替代学生推理，聚焦本科证明数学课程中的认知卸载问题。作者对153名学生实施错峰开放AI聊天机器人与作业反馈界面的随机实验，并分析使用量与考试成绩的关系。结果显示早期使用组作业成绩提高但考试无显著提升，且聊天消息越多考试分数越低。研究表明AI支持可能诱发认知卸载，需谨慎设计以保障深度学习。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.30195v1",
+      "source": "arxiv",
+      "title": "Measuring undergraduate students' reliance on generative AI during problem-solving: Scale development and validation",
+      "abstract": "Reliance on AI describes the behavioral patterns of when and how individuals depend on AI suggestions, and appropriate reliance patterns are necessary to achieve effective human-AI collaboration. Traditional measures often link reliance to decision-making outcomes, which may not be suitable for complex problem-solving tasks where outcomes are not binary (i.e., correct or incorrect) or immediately clear. Therefore, this study aims to develop a scale to measure undergraduate students' behaviors of using Generative AI during problem-solving tasks without directly linking them to specific outcomes. We conducted an exploratory factor analysis on 800 responses collected after students finished one problem-solving activity, which revealed four distinct factors: reflective use, cautious use, thoughtless use, and collaborative use. The overall scale has reached sufficient internal reliability (Cronbach's alpha = .84). Two confirmatory factor analyses (CFAs) were conducted to validate the factors using the remaining 730 responses from this activity and 1,173 responses from another problem-solving activity. CFA indices showed adequate model fit for data from both problem-solving tasks, suggesting that the scale can be applied to various human-AI problem-solving tasks. This study offers a validated scale to measure students' reliance behaviors in different human-AI problem-solving activities and provides implications for educators to responsively integrate Generative AI in higher education.",
+      "authors": [
+        "Chenyu Hou",
+        "Gaoxia Zhu",
+        "Vidya Sudarshan",
+        "Fun Siong Lim",
+        "Yew Soon Ong"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-10-21T07:04:56+00:00",
+      "link": "https://arxiv.org/pdf/2610.30195v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "measuring undergraduates reliance on generative AI during problem-solving",
+      "llm_evidence_cn": "测量本科生在问题解决中对生成式AI的依赖",
+      "llm_evidence": "测量本科生在问题解决中对生成式AI的依赖",
+      "canonical_evidence": "测量本科生在问题解决中对生成式AI的依赖",
+      "llm_tldr_en": "Appropriate reliance on generative AI is key to human-AI collaboration, but existing measures tie reliance to outcomes. This study develops and validates a scale capturing undergraduates' generative AI use behaviors during complex problem-solving via exploratory factor analysis.",
+      "llm_tldr_cn": "学生在问题解决中如何依赖生成式AI关乎有效的人机协作，但传统测量多将依赖与二元结果绑定，不适用于复杂任务。本研究基于800份问题解决后的问卷数据开展探索性因子分析，开发并验证了测量本科生生成式AI使用行为的量表。该工具为理解AI辅助学习中的学生行为模式提供了可用的评估手段。",
+      "llm_tldr": "学生在问题解决中如何依赖生成式AI关乎有效的人机协作，但传统测量多将依赖与二元结果绑定，不适用于复杂任务。本研究基于800份问题解决后的问卷数据开展探索性因子分析，开发并验证了测量本科生生成式AI使用行为的量表。该工具为理解AI辅助学习中的学生行为模式提供了可用的评估手段。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2610.30822v1",
+      "source": "arxiv",
+      "title": "TESSA: A Governance-Oriented Custom GPT for SME Guidance under the EU AI Act: Design, Implementation, and Evaluation",
+      "abstract": "The increasing adoption of generative AI presents new opportunities while raising AI governance and regulatory challenges, particularly for small and medium-sized enterprises (SMEs) navigating the European Union Artificial Intelligence Act (EU AI Act). To support AI governance education, this study developed TESSA, a governance-oriented educational artifact within the OpenAI Custom GPT environment. Following a design science research approach, TESSA was evaluated against baseline ChatGPT using 100 benchmark scenarios through governance alignment assessment, human expert review, and consistency testing. Preliminary LLM-assisted assessment showed governance alignment rates of 90% for TESSA and 83% for baseline ChatGPT, while independent validation by an AI regulation law practitioner yielded 71% and 70%, respectively. Human expert review indicated that both systems provided generally strong governance guidance, while TESSA maintained high consistency across repeated executions. The findings suggest that governance-oriented grounding can support structured, practical, and stable AI-assisted compliance guidance for SMEs. The study contributes (i) a governance-oriented Custom GPT artifact for AI governance education, (ii) a human-validated regulatory update mechanism, and (iii) a multidimensional evaluation framework for governance-oriented AI artifact.",
+      "authors": [
+        "Chalisa Veesommai Sillberga",
+        "Kai-Kristian Kemella",
+        "Pekka Sillberga",
+        "Katri Harjuveteläinenb",
+        "Mika Saaria",
+        "Pekka Abrahamssona"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-22T06:52:56+00:00",
+      "link": "https://arxiv.org/pdf/2610.30822v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "custom GPT educational artifact for AI governance education",
+      "llm_evidence_cn": "面向AI治理教育的定制GPT教育工具",
+      "llm_evidence": "面向AI治理教育的定制GPT教育工具",
+      "canonical_evidence": "面向AI治理教育的定制GPT教育工具",
+      "llm_tldr_en": "SMEs struggle with EU AI Act compliance, so the authors build TESSA, a governance-oriented Custom GPT educational artifact, and benchmark it against ChatGPT on 100 scenarios, reaching 90% versus 83% governance alignment.",
+      "llm_tldr_cn": "生成式AI快速普及带来治理与合规挑战，中小企业难以应对欧盟AI法案，急需可落地的AI治理教育支持。研究采用设计科学研究方法，在OpenAI定制GPT环境中开发治理导向教育工具TESSA，并以100个基准场景从治理对齐、专家评审与一致性测试三方面与基线ChatGPT对比评估。LLM辅助评估显示TESSA治理对齐率为90%，基线为83%，专家评审与一致性测试进一步验证其效果。该工作表明定制GPT可作为有效的AI治理教育工具，为合规学习提供可复用范式。",
+      "llm_tldr": "生成式AI快速普及带来治理与合规挑战，中小企业难以应对欧盟AI法案，急需可落地的AI治理教育支持。研究采用设计科学研究方法，在OpenAI定制GPT环境中开发治理导向教育工具TESSA，并以100个基准场景从治理对齐、专家评审与一致性测试三方面与基线ChatGPT对比评估。LLM辅助评估显示TESSA治理对齐率为90%，基线为83%，专家评审与一致性测试进一步验证其效果。该工作表明定制GPT可作为有效的AI治理教育工具，为合规学习提供可复用范式。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

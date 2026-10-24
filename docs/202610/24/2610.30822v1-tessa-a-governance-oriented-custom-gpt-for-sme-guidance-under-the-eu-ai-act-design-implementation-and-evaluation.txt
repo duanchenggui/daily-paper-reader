@@ -1,0 +1,224 @@
+Title: TESSA: A Governance-Oriented Custom GPT for SME Guidance under the EU AI Act: Design, Implementation, and Evaluation
+
+URL Source: https://arxiv.org/pdf/2610.30822v1
+
+Published Time: Fri, 23 Oct 2026 00:55:38 GMT
+
+Number of Pages: 19
+
+Markdown Content:
+Co-funded by the European Union TESSA: A Governance-Oriented Custom GPT for SME Guidance under the EU AI Act: Design, Implementation, and Evaluation 
+
+v0.9.7 
+
+Chalisa Veesommai Sillberg a, 1, Kai-Kristian Kemell a, 2 Pekka Sillberg a, 3, Katri Harjuveteläinen b, 4, Mika Saari a, 5, Pekka Abrahamsson a, 6 
+
+> a
+
+Tampere University, Faculty of Information Technology and Communication Sciences, Pori, Finland  
+
+> b
+
+Boutique Legal Consulting, Helsinki, Finland October 22, 2026 Notes: • This is the author’s version of the work • This is a pre-print version of an article accepted to the 17th Interna-tional Conference on Software Business (ICSOB 2026) • The final version accepted to publishing the Springer Lecture Notes in Business Information Processing (LNBIP) 
+
+> 1
+
+email: chalisa.sillberg@tuni.fi ; ORCID iD: [0000-0001-8400-7469] 
+
+> 2
+
+email: KaiKristian.Kemell@tuni.fi ; ORCID iD: [0000-0002-0225-4560] 
+
+> 3
+
+email: pekka.sillberg@tuni.fi ; ORCID iD: [0000-0003-2573-4775] 
+
+> 4
+
+email: katri.harjuvetelainen@protonmail.com ; ORCID iD: [0009-0009-2056-1562] 
+
+> 5
+
+email: mika.saari@tuni.fi ; ORCID iD: [0000-0001-7677-2355] 
+
+> 6
+
+email: pekka.abrahamsson@tuni.fi ; ORCID iD: [0000-0002-4360-2226] arXiv:2610.30822v1 [cs.AI] 22 Oct 2026 TESSA: A Governance-Oriented Custom GPT for SME Guidance under the EU AI Act: Design, Implementation, and Evaluation 
+
+Chalisa Veesommai Sillberg a Kai-Kristian Kemell a Pekka Sillberg a
+
+Katri Harjuveteläinen b Mika Saari a Pekka Abrahamsson aa Tampere University, Faculty of Information Technology and Communication Sciences, Pori, Finland  
+
+> b
+
+Boutique Legal Consulting, Helsinki, Finland 
+
+chalisa.sillberg,@tuni.fi 
+
+# Abstract 
+
+The increasing adoption of generative AI across industries created opportu-nities for innovation while introducing growing AI governance and regulatory challenges for organization. Small and medium-sized enterprises (SMEs) must navigate compliance requirements under the European Union Artifi-cial Intelligence Act (EU AI Act). Although large language models (LLMs) offer regulatory and educational support, concerns remain regarding gover-nance alignment, reliability, and the practical applicability. To address this challenge, TESSA, a governance-oriented educational artifact, was devel-oped within the OpenAI Custom GPT environment. Using a design science research approach, TESSA was evaluated through a multidimensional frame-work consisting of governance alignment assessment, human expert review, and consistency testing across 100 benchmark questions in ten thematic categories. The evaluation compared TESSA with a standard ChatGPT baseline using identical benchmark questions and assessment procedures. preliminary LLM-assisted governance alignment reached 90% for TESSA and 83% for the baseline, while independent validation by an AI regulation lawyer produced comparable rates of 71% and 70%, respectively. Human expert review indicated that both systems provided generally strong gov-ernance guidance. Consistency testing showed highly stable performance across repeated executions, with average overall consistency score of 0.969 for TESSA and 0.976 for the baseline. The findings suggest that governance-oriented grounding provides structured and practical compliance guidance while maintaining educational quality and response stability. The study con-tributes (i) a governance-oriented Custom GPT artifact for AI governance education for SMEs, (ii) a human-validated regulatory update mechanism, 1and (iii) a multidimensional evaluation framework that can support the eval-uation of governance-oriented AI artifact. 
+
+# Keywords: 
+
+European Union Artificial Intelligence Act (EU AI Act), AI Governance, Compliance Support, Design Science Research (DSR), Custom GPT 
+
+# 1 Introduction 
+
+The rapid adoption of generative AI has accelerated the integration of AI into products, services, and business processes across software businesses and other industries. Consequently, understanding and complying with AI regulations, particularly the EU AI Act, has become an important challenge. This is especially true for small and medium-sized enterprises (SMEs), which often lack dedicated legal expertise and governance resources while pursu-ing AI-driven innovation. The EU AI Act introduces a risk-based regulatory framework for AI systems and establishes obligations for providers, deploy-ers, importers, distributors, and other stakeholders [1, 2]. The regulation aims to promote trustworthy AI and protect fundamen-tal rights; however, its complexity creates challenges for SMEs, startups, researchers, and other non-legal stakeholders seeking to understand their responsibilities and compliance obligations. Existing studies have identified several challenges for SMEs seeking to comply with the EU AI Act, including limited compliance resources, lack of regulatory expertise, uncertainty regarding risk classification and regula-tory interpretation, and the need to balance compliance activities with AI system development [3, 4, 5, 6]. These challenges create a gap between regu-latory requirements and practical implementation, highlighting the need for accessible governance support tools. This gap motivated the development of TESSA, a governance-oriented educational artifact designed to translate complex regulatory requirements into practical guidance. Recent advances in large language models (LLMs) and generative AI have created new opportunities for educational, legal, and compliance sup-port applications. LLMs have increasingly served as the foundation for intel-ligent support systems across multiple domains. In legal and regulatory con-texts, systems such as Chatlaw have demonstrated the potential to provide advisory recommendations and improve access to specialized legal knowl-edge [7], and interactive legal assistants have been developed to support legal information access and non-specialists seeking legal guidance [8]. More broadly, AssistantGPT illustrates how LLM-based assistants can bridge the gap between complex system functionalities and intuitive user interaction [9], while GPTVoiceTasker represents an example of an LLM-based assistant 2designed to translate natural language requests into actionable task support [10]. However, the reliability of general-purpose LLMs remains a concern in domain-specific applications, motivating the use of domain-specific knowl-edge integration and grounding mechanisms to improve alignment, reduce hallucinations, and support trustworthy AI-assisted guidance. Despite growing research on the EU AI Act, AI governance, and LLM-based support systems, limited empirical evidence exists regarding governance-oriented educational artifacts designed to support SME compliance and AI governance learning. To address this gap, we have developed and evaluated TESSA, designed to support EU AI Act education and compliance guidance. The study addresses the following research questions (RQs): 
+
+RQ1 To what extent can TESSA support SMEs and other non-legal stake-holders in understanding and applying EU AI Act requirements? and 
+
+RQ2 How does governance-oriented grounding influence the governance align-ment, educational quality, and consistency of AI-generated compliance guidance compared with baseline ChatGPT? 
+
+This study makes the following contributions: (i) a governance-oriented grounding approach for Custom GPT systems supporting AI governance education, (ii) TESSA, a design science research artifact for SME guidance under the EU AI Act, (iii) a multidimensional evaluation framework, and (iv) an empirical comparison with baseline ChatGPT. The remainder of the paper is organized as follows. Section 2 presents the research methodology, including the TESSA system architecture, governance-oriented grounding strategy, human-validated regulatory update mechanism, and multidimensional evaluation framework. Section 3 reports the evalua-tion results. Section 4 discusses the findings, implications, and limitations of the study. Finally, Section 5 concludes the paper and outlines future research directions. 
+
+# 2 TESSA Design and Research Methodology 
+
+2.1 Research Design 
+
+This study followed the design science research methodology (DSRM) pro-posed by Peffers et al. [11] to design, develop, and evaluate the TESSA artifact. The research problem addressed the challenge faced by SMEs, start-ups, students, researchers, and other non-legal dedicated resources in understanding and operationalizing the requirements of the EU AI Act. Following the DSRM process, the study identified the practical problem of SMEs struggling with EU AI Act compliance, defined the objective of devel-oping TESSA, designed and developed the TESSA artifact within the Ope-nAI Custom GPT environment, demonstrated the artifact by applying it to 3representative EU AI Act compliance scenarios, and evaluated it through governance alignment assessment, human expert review, and consistency evaluation. This paper communicates the initial design and evaluation cy-cle, providing a foundation for future refinement. Following the DSR process, the resulting research artifact, TESSA, was designed, implemented, and evaluated to support SMEs and other non-legal stakeholders in interpreting EU AI Act requirements and translating them into practical governance-oriented actions. The evaluation investigated whether governance-oriented grounding improves the alignment, educational usefulness, and consistency of AI-assisted guidance. 
+
+2.2 TESSA System Architecture 
+
+TESSA was developed within OpenAI Custom GPT using the GPT-5 model available in January 2026. For comparison, the baseline system was the standard ChatGPT interface using the same underlying GPT-5 model with-out custom instructions, domain-specific knowledge sources, or governance-oriented grounding. TESSA supports users in interpreting EU AI Act re-quirements and translating them into practical governance-oriented actions. Figure 1 presents the deployed TESSA interface together with its overall system architecture 1. The evaluated TESSA configuration consisted of four main components: • System instructions • Published EU AI Act guidance knowledge base [1] • Use case AI List risk classification repository • Human-validated regulatory updates The architecture combines governance-oriented knowledge sources, a struc-tured grounding process, and governance-focused outputs. 
+
+2.3 Governance-Oriented Grounding 
+
+TESSA was designed using a governance-oriented grounding approach to support users in interpreting and applying the requirements of the EU AI Act. Rather than relying solely on general-purpose language model knowl-edge, the system combines governance-oriented instructions, domain-specific knowledge resources, risk classification support, and human-validated regu-latory updates. When responding to a query, TESSA identifies the relevant use case, stakeholder role, and potential AI risk classification before generating  
+
+> 1The evaluated version of TESSA is available in link redacted due to double blind review process
+
+4Figure 1: TESSA implementation and system architecture within OpenAI Custom GPT environment. governance-oriented guidance. The process follows the sequence: Question → Use Case → Role → Risk → Guidance → Output . The generated output is delivered through the structured governance guidance pattern (SGGP), pro-viding role-specific guidance, risk classification information, compliance con-siderations, plain-language explanations, and practical recommendations. This grounding approach is intended to improve governance alignment, re-duce risk of hallucination, and support actionable compliance guidance. 
+
+2.4 Human-Validated Regulatory Update Mechanism 
+
+As AI regulation and governance guidance continue to evolve, maintain-ing the currency of regulatory information represents a significant challenge for educational AI artifacts. To maintain current and validated regulatory knowledge, TESSA incorporates a human-validated regulatory update mech-anism designed to support the continuous monitoring of relevant regulatory developments while maintaining governance oversight. The update mechanism consists of two interconnected workflows. The first workflow focuses on automated information collection of candidate regulatory updates, including EU AI governance resources and academic databases, through an N8N-based automation workflow. Collected content is processed, merged, and filtered to remove duplicate entries before being stored in a structured review queue. The second workflow supports human review and controlled publication. Candidate updates are evaluated for relevance, accuracy, and consistency with the governance objectives of the system. Human reviewers assess whether the collected information should be approved or excluded from further use. Only validated updates are subse-5quently incorporated into TESSA through controlled update processes and associated repositories. 
+
+Figure 2: TESSA evaluation and maintenance framework. The figure com-bines the a) human-validated regulatory update mechanism and b) multi-dimensional evaluation framework used to assess the governance alignment, educational quality, and response consistency of TESSA across 100 bench-mark scenarios. Figure 2 a) represents the overall update mechanism. The process com-bines automated monitoring with human review to maintain the relevance of the regulatory information used by TESSA. Updates are reviewed before being incorporated into the system, providing an additional quality control step. 62.5 Multidimensional Evaluation Framework 
+
+The evaluation of TESSA followed a multidimensional framework designed to assess governance alignment, educational suitability, reproducibility, and response consistency. The framework was developed to evaluate i) the cor-rectness of the responses and ii) their usefulness for SME-oriented compli-ance education and governance support. The evaluation consisted of four primary objectives (Obj): 1. To assess whether TESSA responses aligned with the published EU AI Act guidance knowledge base [1] and official EU AI Act sources [2]. 2. To evaluate the educational suitability and governance quality of the responses. 3. To compare TESSA with baseline ChatGPT using identical bench-mark scenarios. 4. To assess response consistency across repeated executions of the same scenarios. To address these objectives, a multidimensional evaluation framework comprising four complementary dimensions was adopted: traceability vali-dation, governance alignment evaluation, human expert review, and consis-tency evaluation. As shown in Figure 2 b) the framework consists of two evaluation phases. Phase A focuses on governance alignment through i) traceability validation, ii) governance alignment evaluation, and iii) human expert review. Phase B evaluates response consistency through repeated execution of benchmark scenarios. The evaluation dimensions were informed by design science research (DSR) evaluation principles [12], trustworthy AI concepts reflected in the NIST AI Risk Management Framework [13], and structured qualitative as-sessment approaches. Governance alignment, legal alignment, educational clarity, governance suitability, and hallucination risk were assessed using a three-level rating structure adapted from QualSyst [14]. 
+
+2.5.1 Benchmark Design and Traceability Validation 
+
+The benchmark scenarios were generated through a GPT-assisted process and subsequently reviewed and curated by the first author. The objec-tive was to create realistic educational, governance, and compliance-related questions that SMEs, startups, students, researchers, and other non-legal stakeholders might ask when seeking guidance on the EU AI Act. The benchmark was organized into ten categories: (i) AI literacy, (ii) startup and student projects, (iii) risk classification, (iv) compliance duties, (v) prohibited AI practices, (vi) high-risk AI, (vii) limited-risk AI, (viii) 7minimal-risk AI, (ix) GPAI and foundation models, and (x) SME perspec-tives, each containing ten questions, resulting in a total of 100 evaluation scenarios. Following scenario generation, responses were produced using TESSA and baseline ChatGPT. The responses were then evaluated against expected outcomes developed from a published EU AI Act guidance knowl-edge base [1] and relevant official EU AI Act sources [2]. This traceability validation supported Objective 1 by assessing the alignment between re-sponses and the grounding sources. 
+
+2.5.2 Governance Alignment Evaluation 
+
+A governance alignment evaluation was conducted to assess responses aligned with expected outcomes derived from a published EU AI Act guidance knowledge base [1] and official EU AI Act sources [2], and served as the benchmark for governance alignment assessment. This evaluation primarily addressed Obj. 1 and the supporting Obj. 3 by comparing TESSA and baseline ChatGPT under identical benchmark conditions. Responses from 100 benchmark scenarios were compared with the cor-responding expected outcome. The evaluation considered governance inter-pretation, risk classification, compliance recommendations, and consistency with the reference sources. Responses were assessed using the three-level alignment scale (Yes, Partial, No) presented in Table 1. The scoring ap-proach was adapted from the QualSyst framework [14]. The evaluation consisted of two stages. First, an LLM-assisted prelimi-nary review supported the initial classification of the responses. Second, the classifications were independently reviewed and validated by an experienced AI regulation lawyer practitioner with more than five years of professional legal experience in AI and data protection. The lawyer-reviewed assess-ments were used as the final governance alignment results reported in this study. The evaluation was intended to assess alignment with predefined ed-ucational and governance expectations rather than establish definitive legal interpretations. The resulting assessments enabled systematic comparison between TESSA and baseline ChatGPT and formed one component of the multidimensional evaluation framework. 
+
+2.5.3 Human Expert Review 
+
+In addition to benchmark-based evaluation, a human expert review was conducted to assess the educational and governance quality, as well as the legal interpretation of the responses. This evaluation supported Obj. 2 of the evaluation framework by examining whether the responses were suitable for the intended users seeking guidance on the EU AI Act. The review was conducted using a structured assessment framework consisting of five dimen-sions: (i) legal alignment, (ii) educational clarity, (iii) governance suitability, 8Table 1: Multidimensional Evaluation Criteria 
+
+Category Criteria Description 
+
+1. Ground truth 
+
+Yes The response aligned with the expected outcome. Partial The response was generally aligned but incomplete, lacked important nuance, or omitted relevant governance considerations. No The response was incorrect, misleading, or substantially inconsistent with the expected outcome. 
+
+2. Human expert review 
+
+2.1 Legal alignment Strong Legally consistent and aligned with EU AI Act concepts and official sources. Acceptable Mostly aligned but contains minor ambiguity or incomplete interpre-tation. Weak Legally misleading, incorrect, or significantly inconsistent with official sources. 2.2 Educational clarity Strong Clear, accessible, and understandable for SMEs and non-legal users. Acceptable Generally understandable but may contain unclear or overly complex parts. Weak Confusing, poorly structured, or difficult for intended users to under-stand. 2.3 Governance suitability Strong Promotes resonsible and proportionate governance practices. Acceptable Generally appropriate but lacks nuance or practical guidance. Weak Inappropriate, insufficient, or potentially irresponsible governance guidance. 2.4 Hallucination risk Strong No significant unsupported or fabricated claims detected. Acceptable Minor unsupported assumptions or over-generalizations present. Weak Contains fabricated, misleading, or unsupported legal/compliance claims. 2.5 Overall Assessment Strong Reliable and appropriate for educational compliance guidance. Acceptable Mostly reliable with some limitations. Weak Insufficiently reliable or potentially misleading. 
+
+3. Consistency Evaluation 
+
+3.1 Consistency Stable Semantically consistent; no meaningful legal/governance variation. Minor variation Small detail differences; overall governance/legal meaning aligned. Major variation Contradictory classification, divergent governance, or scenario mis-match. 3.2 Hallucination drift Low Semantically consistent; no meaningful legal/governance variation. Medium Occasional unsupported or exaggerated claims. High Repeated unsupported claims, scenario misidentification, or contra-dictory reasoning. 
+
+(iv) hallucination risk, and (v) overall assessment. The detailed assessment criteria are presented in Table 1. Similar to the governance alignment evalu-ation, qualitative expert assessments were recorded using a three-level rating structure consisting of strong, acceptable, and weak. The framework was designed to assess the factual and regulatory consistency of the responses as well as their usefulness for compliance education and governance support. 9The review process consisted of two stages. First, an LLM-assisted pre-liminary assessment was reviewed by the first author, a postdoctoral re-searcher with two years of research experience in AI governance and the EU AI Act. Second, legal interpretation and governance-related assessments were independently validated by an AI regulation law practitioner with more than five years of professional legal experience in AI and data protection. 
+
+2.5.4 Consistency Evaluation 
+
+Consistency is an important quality attribute for evaluating design artifacts [12]. To assess reproducibility, each of the 100 benchmark scenarios was exe-cuted three times using both TESSA and baseline ChatGPT under identical prompting conditions, resulting a total of 600 responses. Five dimensions were evaluated: (i) risk classification consistency, ( ii) governance recommendation consistency, (iii) legal interpretation con-sistency, (iv) hallucination drift, and (v) reasoning variability. Responses were assessed using a three-level scale consisting of stable, minor variation, and major variation. Ratings were converted into numerical values (2–1–0) following adaptation of the QualSyst scoring logic [14] and aggregated into a normalized overall consistency score (OCS): 
+
+OCS = total score obtained maximum possible score (1) Higher OCS values indicate greater consistency across repeated execu-tions. Detailed assessment criteria are presented in Table 1. Benchmark prompts, responses, reviewer assessments, and consistency records were doc-umented to support traceability and reproducibility. 
+
+2.5.5 Data Collection and Analysis 
+
+Data collected across both evaluation phases included response summaries, reviewer assessments, and consistency ratings, which were analyzed using quantitative and qualitative methods to compare TESSA and baseline Chat-GPT. 
+
+# 3 Results 
+
+This section presents the empirical evaluation results obtained using the multidimensional evaluation framework described in Section 2.5. The de-sign and implementation of TESSA artifact were presented in the previous section: therefore, the following results focus on evaluating governance align-ment, human expert review, and consistency. The results compare TESSA with baseline ChatGPT using identical benchmark scenarios and evaluation procedures. 10 3.1 Governance Alignment and Traceability Results 
+
+The governance alignment evaluation assessed the extent to which responses aligned with predefined expected outcomes derived from i) a published EU AI Act guidance knowledge base [1] and ii) official EU AI Act sources [2]. A total of 100 benchmark scenarios covering ten thematic categories were evaluated using the "Yes", "Partial", and "No" alignment framework. The reported results reflect the final lawyer-validated assessment. An LLM-assisted preliminary review was initially conducted to support classi-fication, producing alignment rates of 90% for TESSA and 87% for baseline ChatGPT. The responses were subsequently reviewed and validated by an experienced AI regulation lawyer, and the validated classifications are re-ported in Table 2. Table 2: Governance Alignment Results System Yes Partial No Full Alignment (%) LLM-assisted preliminary review – TESSA 90 10 0 90 – Baseline ChatGPT 83 17 0 83 Experienced AI regulation lawyer – TESSA 71 27 2 71 – Baseline ChatGPT 70 30 0 70 TESSA achieved an overall alignment rate of 71%, compared with 70% for baseline ChatGPT. Most differences occurred in scenarios where re-sponses were generally correct but lacked governance-related nuance, stakeholder-specific obligations, or practical compliance considerations. The lawyer re-view applied a stricter interpretation of governance expectations than the preliminary LLM-assisted assessment, resulting in several responses being reclassified from full alignment to partial alignment. The findings indicate that both systems were capable of generating ed-ucational guidance related to the EU AI Act. However, TESSA demon-strated slightly stronger alignment with predefined governance expectations and source-based interpretations. The governance-oriented grounding ap-proach appeared particularly beneficial in scenarios involving stakeholder responsibilities, risk classification, and practical compliance actions. From a traceability perspective, responses generated by TESSA more consistently reflected concepts and terminology contained within the ground-ing sources. This supports Objective 1 of the evaluation framework, which sought to assess alignment with the published EU AI Act guidance knowl-edge base [1] and official EU AI Act sources [2]. 11 Table 3: Human Expert Review Results Criterion TESSA Baseline ChatGPT Strong Acceptable Weak Strong Acceptable Weak 
+
+Experienced AI regulation lawyer 
+
+– Legal Alignment 53 44 3 67 32 1– Educational Clarity 99 1 0 92 8 0– Governance Suitability 84 13 3 76 23 1– Hallucination Risk Assessment 61 36 3 78 21 1(low, medium, high) Overall Assessment 59 37 4 75 24 1
+
+AI regulation researcher 
+
+– Legal Alignment 70 30 0 83 17 0– Educational Clarity 99 1 0 99 1 0– Governance Suitability 87 13 0 83 17 0– Hallucination Risk Assessment 71 29 0 87 13 0(low, medium, high) Overall Assessment 70 30 0 83 17 0
+
+3.2 Human Expert Review Results 
+
+The human expert review evaluated responses generated by TESSA and baseline ChatGPT using the framework described in Section 2.5.3. The final results reported in this section are based on the review conducted by an experienced AI regulation lawyer, while a separate AI regulation researcher review was used to support the assessment process. Table 3 summarizes the lawyer-reviewed results. Both TESSA and the baseline ChatGPT system demonstrated strong performance across the eval-uation dimensions. Educational clarity was the strongest category for both systems. TESSA received 99 "Strong" ratings and one "Acceptable" rating, while baseline ChatGPT received 92 "Strong" ratings and eight "Acceptable" ratings. No responses were classified as "Weak" in this category, indicating that both systems consistently produced explanations that were understand-able and accessible for the intended users. The review also identified differences in emphasis between the two sys-tems. Baseline ChatGPT received higher "Strong" ratings in Legal Align-ment and Overall Assessment, whereas TESSA received higher "Strong" rat-ings in Governance Suitability. Hallucination risk was generally low for both systems. TESSA received 61 low-, 36 medium-, and 3 high-risk ratings, while the baseline ChatGPT system received 78 low-, 21 medium-, and 1 high-risk ratings. The higher proportion of low risk ratings for baseline ChatGPT indicates fewer unsup-ported assumptions or over-generalized statements. Across both systems, 12 medium- and high-risk assessments primarily reflected unsupported assump-tions, incomplete explanations, or generalized statements rather than fabri-cated legal obligations or substantially incorrect regulatory interpretations. Similarly, the first author’s review found qualitative differences in em-phasis between the two systems. Overall, the human expert review indicates that the two systems exhibited different strengths rather than one consis-tently outperforming the other. Baseline ChatGPT received higher ratings in Legal Alignment, Hallucination Risk, and Overall Assessment, whereas TESSA received higher Governance Suitability ratings, reflecting its stronger emphasis on stakeholder responsibilities and practical compliance guidance. This suggests that governance-oriented grounding influenced the focus of TESSA responses toward stakeholder responsibilities, governance consid-erations, and compliance-oriented recommendations. 
+
+3.3 Consistency Results 
+
+The consistency evaluation assessed whether repeated executions of identical benchmark scenarios produced stable governance reasoning, risk classifica-tions, and compliance recommendations. Each of the 100 benchmark sce-narios was executed three times using both TESSA and baseline ChatGPT, resulting in a total of 600 responses. Table 4 summarizes the consistency evaluation results. Both systems demonstrated a high degree of consistency across repeated executions. TESSA achieved an average OCS of 0.969, while baseline ChatGPT achieved an average OCS of 0.976. The difference be-tween the systems was negligible (∆ OCS = −0.007), indicating broadly comparable consistency performance across the benchmark dataset. Table 4: Consistency Results Metric TESSA Baseline ChatGPT Stable 98 98 Minor Variation 0 1Major Variation 2 1Average OCS 0.969 0.976 Standard Deviation OCS 0.139 0.108 OCS ≥ 0.75(%) 98 99 OCS ≥ 0.90(%) 94 96 ∆OCS (TESSA-Baseline ChatGPT) -0.007 Low Hallucination Drift (%) 98% 99% For TESSA, 98% of the scenarios were classified as "Stable" and two sce-narios as "Major Variation". For baseline ChatGPT, 98% of scenarios were classified as "Stable", one scenario as "Minor Variation", and one scenario as "Major Variation". Most variations involved differences in explanation style, 13 emphasis, or recommendation detail rather than substantial changes in le-gal interpretation, governance guidance, or risk classification. Hallucination drift remained low for both systems. TESSA achieved a low hallucination drift rate of 98%, while baseline ChatGPT achieved 99%. No evidence of systematic hallucination drift was observed across repeated executions. The few identified variations primarily reflected minor unsupported assumptions or differences in explanatory detail rather than fabricated compliance obli-gations or contradictory governance recommendations. Overall, the results indicate that both TESSA and baseline ChatGPT maintained highly consistent performance across repeated executions. The findings further suggest that the governance-oriented grounding approach implemented within TESSA did not negatively affect response consistency and was able to maintain stable governance reasoning across multiple runs. 
+
+3.4 Summary of Findings 
+
+The evaluation demonstrated that both TESSA and baseline ChatGPT were capable of providing educational guidance related to the EU AI Act. Gov-ernance alignment was comparable between the two systems. TESSA re-ceived higher Governance Suitability ratings, while baseline ChatGPT re-ceived higher Legal Alignment and Overall Assessment ratings. Educational Clarity was a particular strength of both systems, indicating that EU AI Act concepts could be communicated effectively to the intended users. Both systems also demonstrated highly consistent performance across repeated executions, achieving comparable OCS values and low hallucina-tion drift. The findings suggest that governance-oriented grounding pro-vided structured governance guidance without reducing response consis-tency. Taken together, the results provide preliminary answers to the re-search questions. For RQ1, TESSA was able to translate complex EU AI Act requirements into understandable and actionable guidance. For RQ2, governance-oriented grounding contributed to structured governance-oriented educational guidance while maintaining consistency and low hallu-cination risk. 
+
+# 4 Discussion 
+
+4.1 From Regulatory Complexity to Actionable Guidance 
+
+One objective of TESSA was to help SMEs and other non-legal stakehold-ers interpret EU AI Act requirements and translate them into practical governance actions. The evaluation results suggest that this objective was achieved. High ratings for Educational Clarity and Governance Suitability indicate that TESSA was able to provide understandable explanations while 14 supporting practical governance-oriented decision making. The governance-oriented grounding approach, which combines role identification, risk assess-ment, and domain-specific knowledge sources, appears to support the trans-formation of complex regulatory requirements into actionable guidance for resource-constrained stakeholders. 
+
+4.2 Governance-Oriented Grounding Compared with Base-line ChatGPT 
+
+The comparison with baseline ChatGPT revealed different strengths be-tween the two systems. The comparable legal performance observed in this study may reflect the increasing availability of EU AI Act knowledge in modern foundation models and other publicly available regulatory sources. Although governance alignment was comparable, between the two systems TESSA received higher Governance Suitability ratings, suggesting that governance-oriented grounding improved alignment with compliance-oriented educational objectives. In contrast, baseline ChatGPT often received higher Legal Alignment and Overall Assessment ratings, reflecting its ability to provide fluent and broadly applicable explanations. These findings suggest that the primary contribution of governance-oriented grounding is the structured presenta-tion of governance guidance rather than improving general legal knowledge. Baseline ChatGPT also performed well, suggesting that the primary con-tribution of TESSA lies in its structured governance guidance rather than exclusive access to regulatory knowledge. 
+
+4.3 Implications for SMEs and Non-Legal Stakeholders 
+
+The findings have practical implications for SMEs, students, researchers, and other non-legal stakeholders affected by the EU AI Act. TESSA may help bridge the gap between regulatory requirements and practical imple-mentation by providing structured explanations, risk-classification support, and stakeholder-specific guidance. Rather than replacing legal profession-als, systems such as TESSA can function as educational support tools that improve understanding of governance responsibilities, potential risks, and compliance considerations. 
+
+4.4 Trustworthy AI and Human-Validated Regulatory Up-dates 
+
+A key feature of TESSA is the incorporation of a human-validated regula-tory update mechanism. By combining automated monitoring of regulatory developments with human review, the mechanism supports the integration of updated information while maintaining human oversight. This approach 15 aligns with trustworthy AI principles and contributes to the reliability of governance-oriented educational guidance. 
+
+4.5 Limitations 
+
+Several limitations should be considered when interpreting the findings of this study. First, TESSA and the baseline GPT were evaluated during the same evaluation period (April-June, 2026) using the latest and same underlying model version available at the time of testing. Future model updates may influence performance and affect comparative results. Second, the Custom GPT platform did not provide direct API access for automated benchmarking. Consequently, responses were collected and evaluated man-ually, increasing evaluation effort and introducing a potential risk of record-ing errors. Third, the evaluation involved human judgment when assessing governance alignment and response quality. Part of the human expert re-view was conducted by the first author, introducing a potential source of evaluator bias. To mitigate this risk, a structured evaluation framework, an LLM-assisted preliminary review, and independent legal validation were employed. Nevertheless, some degree of subjectivity remains unavoidable. Finally, the study evaluated a single governance-oriented Custom GPT con-figuration focused on EU AI Act education and compliance support. Addi-tional studies involving other regulatory frameworks, deployment contexts, and user populations would strengthen the generalizability of the findings. 
+
+# 5 Conclusion and Future Work 
+
+In this study, we developed and evaluated TESSA to support SMEs and other non-legal stakeholders in understanding and applying the EU AI Act. Using a multidimensional evaluation framework, we compared TESSA with baseline ChatGPT across 100 benchmark scenarios. The results indicated that TESSA provided strong governance-oriented guidance, high educational clarity, and stable performance across repeated executions. The findings suggest that governance-oriented grounding can improve the practical ap-plicability of AI-generated compliance guidance while maintaining response consistency. Future work will focus on extending TESSA beyond the EU AI Act by integrating additional AI regulations and governance frameworks into a unified knowledge environment and evaluating its use in real-world settings. 
+
+Acknowledgments 
+
+This work was funded by the European Regional Development Fund and the Regional Council of Satakunta and Business Finland through the Co-Innovation project AI Champion. 16 Declaration of competing interest 
+
+The authors have no competing interests to declare that are relevant to the content of this article. 
+
+Data availability 
+
+The supplementary dataset used to evaluate TESSA is available on Zenodo at https://doi.org/10.5281/zenodo.22874463 . It contains 100 bench-mark questions across ten thematic evaluation categories, expected out-comes, TESSA and baseline ChatGPT responses, and item-level preliminary and lawyer-validated classifications. 
+
+AI Use Statement 
+
+AI tools (Quillbot/ChatGPT) were used only for grammar editing. The au-thors remain fully responsible for the scientific content, methodology, anal-ysis, interpretation, and final manuscript. 
+
+# References 
+
+[1] C. V. Sillberg, K.-K. Kemell, P. Sillberg, M. Saari, K. Harjuveteläinen, M. Waseem, and P. Abrahamsson, Navigating Compliance: Strategic Guidance for SMEs under the EU AI Act . Cham: Springer Nature Switzerland, 2026, https://doi.org/10.1007/978-3-032-15207-7, isbn :978-3-032-15207-7. doi : 10.1007/978-3-032-15207-7 
+
+[2] European Parliament and Council of the European Union, Regula-tion (EU) 2024/1689 of the european parliament and of the council of 13 june 2024 laying down harmonised rules on artificial intelli-gence , Official Journal of the European Union, Artificial Intelligence Act, 2024. [Online]. Available: https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202401689 
+
+[3] G. Duwe, T. Knoll, and K.-F. Kowalewski, “Regulating innovation: Why the european union artificial intelligence act matters for urologists-recommendations from the EAU AI working group,” European Urol-ogy , 2026, Ahead of print, issn : 0302–2838. doi : 10.1016/j.eururo. 2026.05.026 
+
+[4] R. Kilian, L. Jäck, and D. Ebel, “European AI standards–technical standardisation and implementation challenges under the EU AI Act,” 
+
+European Journal of Risk Regulation , vol. 16, no. 3, pp. 1038–1062, 2025. 17 [5] A. Naidu, “Designing an effective governance framework for AI compli-ance in smes under the EU AI Act,” International Journal of Emerging Trends in Computer Science and Information Technology , pp. 271– 277, 2025. [6] S. Stampernas and C. Lambrinoudakis, “A framework for compliance with regulation (EU) 2024/1689 for small and medium-sized enter-prises,” Journal of Cybersecurity and Privacy , vol. 5, no. 3, p. 40, 2025. [7] J. Cui, M. Ning, Z. Li, H. Li, Y. Ya, B. Chen, B. Ling, Y. Tian, and L. Yuan, “Chatlaw: A multi-agent legal assistant based on a role-aligned mixture-of-experts architecture,” Fundamental Research , 2026. [8] R. Yao, Y. Wu, T. Zhang, X. Zhang, Y. Huang, Y. Wu, J. Yang, C. Sun, F. Wang, and X. Liu, “Intelligent legal assistant: An interactive clarification system for legal question answering,” in Companion Pro-ceedings of the ACM on Web Conference 2025 , 2025, pp. 2935–2938. [9] K. B. Neszlényi, A. Milos, and A. Kiss, “AssistantGPT: Enhancing user interaction with LLM integration,” in 2024 IEEE 22nd Jubilee In-ternational Symposium on Intelligent Systems and Informatics (SISY) ,IEEE, 2024, pp. 000 619–000 624. [10] M. D. Vu, H. Wang, Z. Li, J. Chen, S. Zhao, Z. Xing, and C. Chen, 
+
+GPTVoiceTasker: LLM-powered virtual assistant for smartphone , 2024. 
+
+doi : https://doi.org/10.1145/3654777.3676356 arXiv: 2401. 14268 [cs.HC] . [Online]. Available: https://arxiv.org/abs/2401. 14268 
+
+[11] K. Peffers, T. Tuunanen, M. A. Rothenberger, and S. Chatterjee, “A design science research methodology for information systems re-search,” Journal of management information systems , vol. 24, no. 3, pp. 45–77, 2007. [12] J. Venable, J. Pries-Heje, and R. Baskerville, “FEDS: A framework for evaluation in design science research,” European journal of information systems , vol. 25, no. 1, pp. 77–89, 2016. [13] National Institute of Standards and Technology, Artificial Intelligence Risk Management Framework (AI RMF 1.0) . U.S. Department of Commerce, 2023, pp. 1–48. doi : 10.6028/NIST.AI.100-1 
+
+[14] L. M. Kmet, L. S. Cook, and R. C. Lee, Standard quality assessment criteria for evaluating primary research papers from a variety of fields .Alberta Heritage Foundation for Medical Research, 2004. 18
