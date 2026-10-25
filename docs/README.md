@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-10-24</span>
+      <span class="dpr-home-dashboard-kicker">2026-10-25</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 7 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 3 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>5</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>1</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>2</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-10-24 21:46:02 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-10-25 21:19:52 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日精选7篇论文，精读5篇、速读2篇，聚焦生成式AI在教育中的技能培养、学习应用与治理评估。最值得关注的是生成式AI技能发展对学生学业适应与学习成效的影响（9.0分），以及面向个性化统计学习的智能体合成数据生成方案（8.0分）。普通读者可优先阅读这两篇精读文章，再结合速读中关于学生AI依赖测量与EU AI Act合规治理的内容，形成从应用到规范的完整视角。</p>
+<p>今日推荐：1 篇 8.0 分精读追问 LLM 辅助数学学习中的认知卸载，2 篇 6.0 分速读补上逻辑教学回顾与元认知支架视角。</p>
+<p>最值得看的是精读文对“提交内容未展示什么”的追问，以及它与“元认知支架制造生产性摩擦”形成的对照。</p>
+<p>普通读者可先读精读文，再带着“如何不把思考全外包给 AI”的问题翻看元认知支架速读文。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -78,12 +80,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">5 篇</strong>
+    <strong class="dpr-home-dashboard-count">1 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Impacts of generative AI skill development on academic adaptation and learning outcomes among university students">Impacts of generative AI skill development on academic adaptation and learning outcomes among university students</span></li><li><span class="dpr-home-dashboard-paper-title" title="DagFlow AI: Agentic Synthetic Data Generation for Personalized Statistics Learning">DagFlow AI: Agentic Synthetic Data Generation for Personalized Statistics Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="TutorCaseBench: A Case-Grounded Benchmark for Evaluating LLM Tutors in Supporting Students with Challenging Behaviors">TutorCaseBench: A Case-Grounded Benchmark for Evaluating LLM Tutors in Supporting Students with Challenging Behaviors</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="What the submission does not show: Complexifying cognitive offloading in students&#x27; mathematical work with LLMs">What the submission does not show: Complexifying cognitive offloading in students&#x27; mathematical work with LLMs</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>5</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -94,7 +96,7 @@
     <strong class="dpr-home-dashboard-count">2 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Measuring undergraduate students&#x27; reliance on generative AI during problem-solving: Scale development and validation">Measuring undergraduate students&#x27; reliance on generative AI during problem-solving: Scale development and validation</span></li><li><span class="dpr-home-dashboard-paper-title" title="TESSA: A Governance-Oriented Custom GPT for SME Guidance under the EU AI Act: Design, Implementation, and Evaluation">TESSA: A Governance-Oriented Custom GPT for SME Guidance under the EU AI Act: Design, Implementation, and Evaluation</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Simply Logical -- The First Three Decades">Simply Logical -- The First Three Decades</span></li><li><span class="dpr-home-dashboard-paper-title" title="Metacognitive Scaffolds Create Productive Friction for AI-Assisted Knowledge Work">Metacognitive Scaffolds Create Productive Friction for AI-Assisted Knowledge Work</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>2</strong></span></div>
 </section>

@@ -1,0 +1,54 @@
+{
+  "label": "2026-10-25",
+  "date": "2026-10-25",
+  "generated_at": "2026-10-25T21:19:57",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202610/25/2610.31335v1-what-the-submission-does-not-show-complexifying-cognitive-offloading-in-students-mathematical-work-with-llms",
+      "section": "deep",
+      "title_en": "What the submission does not show: Complexifying cognitive offloading in students' mathematical work with LLMs",
+      "authors": "Igor' Kontorovich, Miriam N. Wallach",
+      "date": "2026-10-22",
+      "pdf": "https://arxiv.org/pdf/2610.31335v1",
+      "score": "8.0",
+      "evidence": "学生使用大语言模型进行数学学习与自我调节提示的实证研究",
+      "tldr": "常见担忧是学生用LLM把数学任务本该训练的工作外包出去，但判断多依赖提交结果而非过程证据。研究追踪23名线性代数学生用LLM完成三类作业，将429条提示视为自我调节事件，并比较59份聊天记录与最终解答。提示形成五种结构，主要把LLM当求解器、解释者或验证者，且任务间结构会变；多数提交接近LLM输出。结论是提交物不能可靠标记外包，需按调节空间和部分细查。",
+      "tags": "query:aied-oer",
+      "abstract_en": "A common concern is that using large language models (LLMs) lets students offload mathematical work that tasks are designed to elicit. Yet such claims often rest on outcomes (e.g., submitted solutions), rather than on evidence of students' work with LLMs. We followed 23 first-year linear algebra students as they solved three differently designed homework tasks with LLMs. Drawing on self-regulated learning and choice-affluent environments, we interpreted each of 429 prompts as a trace of a regulatory event and compared 59 chatlogs with the problem solutions the students submitted. Prompts formed five structures, casting the LLM mainly as a solver, explainer, or validator. The mix of structures shifted across the tasks, and ten of the 15 students who completed all three tasks changed their dominant structure. Most final submissions stayed close to LLM output, including those that followed exchanges in which students had explained, conjectured, and checked their own ideas. We conclude that an LLM-aided submission is not a trustworthy marker of students' offloading of the mathematical work, and that offloading needs to be examined in each regulatory space and part by part rather than as a whole.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202610/25/2610.28912v1-simply-logical----the-first-three-decades",
+      "section": "quick",
+      "title_en": "Simply Logical -- The First Three Decades",
+      "authors": "Peter Flach, Kacper Sokol, Jan Wielemaker",
+      "date": "2026-10-20",
+      "pdf": "https://arxiv.org/pdf/2610.28912v1",
+      "score": "6.0",
+      "evidence": "教材演进为全交互在线开放教育资源的历程",
+      "tldr": "论文回顾 Prolog 教材《Simply Logical》从1994年附3.5英寸软盘的纸质书，经多轮在线版本，演变为今日全交互在线版的三十年历程。作者从写作者与读者双重视角，考察技术对教材的影响。三位作者分别阐述原书教学理念、当代Web编程如何实现全交互，以及支撑该版本的多功能创作工具链。这些互补视角共同揭示了交互式Prolog教学材料的未来机会。",
+      "tags": "query:aied-oer",
+      "abstract_en": "This paper charts the evolution of the Prolog textbook Simply Logical -- Intelligent Reasoning by Example from print with runnable programmes on a 3.5-inch diskette published in 1994, via various intermediate online versions, to the fully interactive online edition available today. Our aim is to investigate -- from both the writer's and the reader's perspectives -- the potential impact of technology on educational materials. The three authors of this paper present three distinct and complementary points of view, which come together to shape an interactive online book that offers an immersive learning experience. Peter describes the philosophy behind the original book and experiences teaching from it. Jan demonstrates how contemporary web programming has enabled a fully interactive realisation of the book's philosophy. Kacper reports how different technologies can be adopted to build a versatile authoring toolkit that underpins the interactive online edition of the book. Collating these distinct yet coherent perspectives allows us to reflect on future opportunities for interactive Prolog teaching materials arising from the continuous development of web technologies. The insights we offer should be of interest to teachers of Prolog as well as those wanting to find out about the latest educational technologies.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202610/25/2610.30945v1-metacognitive-scaffolds-create-productive-friction-for-ai-assisted-knowledge-work",
+      "section": "quick",
+      "title_en": "Metacognitive Scaffolds Create Productive Friction for AI-Assisted Knowledge Work",
+      "authors": "Viktor Kewenig, Lev Tankelevitch, Sean Rintel, Advait Sarkar, Abigail Sellen",
+      "date": "2026-10-22",
+      "pdf": "https://arxiv.org/pdf/2610.30945v1",
+      "score": "6.0",
+      "evidence": "AI辅助写作中的元认知支架促进学习与迁移",
+      "tldr": "生成式AI使知识工作从直接产出转向规划、评估与编排，带来新的元认知挑战。研究通过随机组间实验测试动态元认知脚手架，支持目标设定与任务分解。结果显示脚手架提升写作质量，移除后短期迁移仍存，三天后主题回忆更好；但参与者觉得AI帮助更少、认知负担更高。这表明主观轻松可能低估支持价值，元认知脚手架构成值得设计的生产性摩擦。",
+      "tags": "query:aied-oer",
+      "abstract_en": "Generative AI imposes new metacognitive demands on knowledge workers as their work shifts from production to planning, evaluation, and orchestration. In a randomized, between-subjects experiment on AI-assisted writing (297 workers, 594 essays), we test dynamically-generated metacognitive scaffolds supporting goal specification and task decomposition. We find that scaffolds improve writing quality, with this boost persisting in short-lag transfer when scaffolds are removed. We also find evidence of improved topic recall three days later. These effects are consistent with observed changes in how people learn to prompt AI systems after exposure to scaffolding. However, scaffolded participants rate the AI as less helpful and more cognitively demanding even as they perform better, suggesting that subjective ease can understate the value of support. Our findings make the case for metacognitive scaffolds in AI-assisted knowledge work, revealing a productive friction worth designing for as workers increasingly delegate work to agentic AI.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

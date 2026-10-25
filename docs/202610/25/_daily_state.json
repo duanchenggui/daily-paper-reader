@@ -1,0 +1,57 @@
+{
+  "date": "20261025",
+  "date_label": "",
+  "generated_at": "2026-10-25 21:19:52 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2610.31335v1",
+      "route": "202610/25/2610.31335v1-what-the-submission-does-not-show-complexifying-cognitive-offloading-in-students-mathematical-work-with-llms",
+      "title": "What the submission does not show: Complexifying cognitive offloading in students' mathematical work with LLMs",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "学生使用大语言模型进行数学学习与自我调节提示的实证研究",
+      "first_seen_at": "2026-10-25 21:19:52 UTC",
+      "updated_at": "2026-10-25 21:19:52 UTC"
+    },
+    {
+      "paper_id": "2610.28912v1",
+      "route": "202610/25/2610.28912v1-simply-logical----the-first-three-decades",
+      "title": "Simply Logical -- The First Three Decades",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "教材演进为全交互在线开放教育资源的历程",
+      "first_seen_at": "2026-10-25 21:19:52 UTC",
+      "updated_at": "2026-10-25 21:19:52 UTC"
+    },
+    {
+      "paper_id": "2610.30945v1",
+      "route": "202610/25/2610.30945v1-metacognitive-scaffolds-create-productive-friction-for-ai-assisted-knowledge-work",
+      "title": "Metacognitive Scaffolds Create Productive Friction for AI-Assisted Knowledge Work",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "AI辅助写作中的元认知支架促进学习与迁移",
+      "first_seen_at": "2026-10-25 21:19:52 UTC",
+      "updated_at": "2026-10-25 21:19:52 UTC"
+    }
+  ]
+}
