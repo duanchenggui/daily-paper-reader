@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-10-25</span>
+      <span class="dpr-home-dashboard-kicker">2026-10-26</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 3 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>1</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>2</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>2</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>1</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-10-25 21:19:52 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-10-26 23:04:30 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,9 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日推荐：1 篇 8.0 分精读追问 LLM 辅助数学学习中的认知卸载，2 篇 6.0 分速读补上逻辑教学回顾与元认知支架视角。</p>
-<p>最值得看的是精读文对“提交内容未展示什么”的追问，以及它与“元认知支架制造生产性摩擦”形成的对照。</p>
-<p>普通读者可先读精读文，再带着“如何不把思考全外包给 AI”的问题翻看元认知支架速读文。</p>
+<p>今日精读 2 篇、速读 1 篇，重点聚焦 AI 教育应用与生成式 AI 监督。最值得看的是两项均获 9.0 分的 AI 教育研究：一是用智能体流水线构建技术教育“AI 工厂”，二是 GELLI 生成体验式语言学习互动；另有 7.0 分研究关注新手软件工程学生如何监督生成式 AI。普通读者可先看两篇精读文章，再结合速读文章思考如何在课堂中培养学生的 AI 审核意识。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -80,12 +78,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">1 篇</strong>
+    <strong class="dpr-home-dashboard-count">2 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="What the submission does not show: Complexifying cognitive offloading in students&#x27; mathematical work with LLMs">What the submission does not show: Complexifying cognitive offloading in students&#x27; mathematical work with LLMs</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="An AI Factory for Technology Education: An Agentic Pipeline with Closed Loop Audience Feedback">An AI Factory for Technology Education: An Agentic Pipeline with Closed Loop Audience Feedback</span></li><li><span class="dpr-home-dashboard-paper-title" title="GELLI: A Generator for Experiential Language Learning Interactions">GELLI: A Generator for Experiential Language Learning Interactions</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>2</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -93,12 +91,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">2 篇</strong>
+    <strong class="dpr-home-dashboard-count">1 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Simply Logical -- The First Three Decades">Simply Logical -- The First Three Decades</span></li><li><span class="dpr-home-dashboard-paper-title" title="Metacognitive Scaffolds Create Productive Friction for AI-Assisted Knowledge Work">Metacognitive Scaffolds Create Productive Friction for AI-Assisted Knowledge Work</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Beyond Correctness: How Novice Software Engineering Students Exercise Oversight of Generative AI">Beyond Correctness: How Novice Software Engineering Students Exercise Oversight of Generative AI</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>2</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>1</strong></span></div>
 </section>
 </div>
 

@@ -1,0 +1,132 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-26T23:01:54.165873+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 2,
+    "deep_cap": 6,
+    "deep_selected": 2,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2610.31875v1",
+      "source": "arxiv",
+      "title": "An AI Factory for Technology Education: An Agentic Pipeline with Closed Loop Audience Feedback",
+      "abstract": "Technology tools used for professional upskilling change on a timescale of weeks, and written guidance about them ages at the same pace. Large language models have made it inexpensive to draft a tutorial or a course outline, but most deployed generation systems still produce a piece of content once and never check it against what an audience actually does with it. This paper describes an agentic pipeline, organized as a typed workflow graph, that treats instructional content production as a manufacturing process with explicit checkpoints rather than a single generation call. Four node classes structure the graph: deterministic scripts, model steps bound to a fixed rubric, open-ended agent phases, and human approval gates, arranged along a forward production path and closed by a feedback cycle that rewrites generation rules from post level engagement telemetry. Production of content is split into two layers: a demand layer, built from video and community sources, that shapes topic selection and register, and an authority layer, built from official documentation, that every published claim must trace back to. Over five months of continuous operation, the deployed system published 26 documented guides at roughly 1.5 hours of operator time per week, and the feedback loop identified four measurable engagement effects that became binding rules for later runs, including a hook style that outperformed baseline by a factor of 1.83 in its first analysis window.",
+      "authors": [
+        "Josue Hernandez",
+        "Hector R. Amado-Salvatierra",
+        "Rocael Hernandez Rizzardini"
+      ],
+      "primary_category": "cs.CY",
+      "categories": [
+        "cs.CY"
+      ],
+      "published": "2026-10-22T20:07:26+00:00",
+      "link": "https://arxiv.org/pdf/2610.31875v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "agentic LLM pipeline for generating and iteratively revising instructional content",
+      "llm_evidence_cn": "用智能体流水线生成并迭代修订教学内容的AI工厂",
+      "llm_evidence": "用智能体流水线生成并迭代修订教学内容的AI工厂",
+      "canonical_evidence": "用智能体流水线生成并迭代修订教学内容的AI工厂",
+      "llm_tldr_en": "Proposes an agentic pipeline organized as a typed workflow graph that treats instructional content production as a manufacturing process with checkpoints and closed-loop audience feedback.",
+      "llm_tldr_cn": "技术工具数周即更新，使书面教程迅速过时，而现有生成系统通常一次成稿、从不检验受众实际使用情况。作者提出名为AI工厂的智能体流水线，用类型化工作流图把教学内容生产组织成含确定性脚本、评分标准约束的模型步骤、开放式智能体阶段与人工审核关口的制造流程。该结构使内容可依据闭环受众反馈反复修订与校验。其贡献在于为AI辅助技术教育内容创作提供可审计、可复用的生产范式。",
+      "llm_tldr": "技术工具数周即更新，使书面教程迅速过时，而现有生成系统通常一次成稿、从不检验受众实际使用情况。作者提出名为AI工厂的智能体流水线，用类型化工作流图把教学内容生产组织成含确定性脚本、评分标准约束的模型步骤、开放式智能体阶段与人工审核关口的制造流程。该结构使内容可依据闭环受众反馈反复修订与校验。其贡献在于为AI辅助技术教育内容创作提供可审计、可复用的生产范式。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.31987v1",
+      "source": "arxiv",
+      "title": "GELLI: A Generator for Experiential Language Learning Interactions",
+      "abstract": "Learning a second language requires extensive practice across situations personal to each learner, yet the most effective existing approaches --- narrative situations designed around specific learning goals and delivered through media --- demand substantial authoring effort, limiting practice to the scope of what was built. We present GELLI, a system that generates narrative practice worlds from a learner's goals: situated scenes with characters to converse with, support alongside the interaction, and reflection, all produced at runtime with no pre authored content. In a within-subjects study with 40 learners of Japanese, GELLI produced greater vocabulary recall and confidence than expert-authored videos targeting the same goals, with no significant difference in speaking performance. Learners turned remembered or imagined situations into experiences they could shape and learn through. Support made experimentation feel safe, while unexpected narrative developments and language suggestions gave them new possibilities to pursue beyond what they initially intended to practice.",
+      "authors": [
+        "Danilo Symonette",
+        "Alan Y. Cheng",
+        "Taiga Ikedo",
+        "Jose Manuel Rosales Juarez",
+        "Roy Pea",
+        "Parastoo Abtahi",
+        "Jane L. E",
+        "James Landay"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-10-22T23:05:32+00:00",
+      "link": "https://arxiv.org/pdf/2610.31987v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "generates personalized narrative language-learning worlds from learner goals",
+      "llm_evidence_cn": "根据学习者目标生成个性化语言学习情境",
+      "llm_evidence": "根据学习者目标生成个性化语言学习情境",
+      "canonical_evidence": "根据学习者目标生成个性化语言学习情境",
+      "llm_tldr_en": "Presents GELLI, a system that generates personalized narrative language-learning worlds from learner goals at runtime, and reports a study with 40 Japanese learners showing greater vocabulary recall and confidence than expert-authored videos.",
+      "llm_tldr_cn": "针对二语学习需要大量个性化情境练习、而叙事化教学媒体制作成本高的问题，论文提出GELLI系统，可根据学习者目标在运行时生成包含场景、对话角色、学习支持与反思的叙事练习世界。40名日语学习者的组内实验显示，GELLI在词汇回忆和信心上优于专家制作的同类视频，且无显著差异负担。该工作展示了生成式AI按需创建个性化教育内容的潜力，降低了体验式语言学习材料的创作门槛。",
+      "llm_tldr": "针对二语学习需要大量个性化情境练习、而叙事化教学媒体制作成本高的问题，论文提出GELLI系统，可根据学习者目标在运行时生成包含场景、对话角色、学习支持与反思的叙事练习世界。40名日语学习者的组内实验显示，GELLI在词汇回忆和信心上优于专家制作的同类视频，且无显著差异负担。该工作展示了生成式AI按需创建个性化教育内容的潜力，降低了体验式语言学习材料的创作门槛。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "personalized learning and learner-centered educational technologies",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.32118v1",
+      "source": "arxiv",
+      "title": "Beyond Correctness: How Novice Software Engineering Students Exercise Oversight of Generative AI",
+      "abstract": "Generative AI (GenAI) is shifting software engineering students' work from producing artefacts towards evaluating and supervising AI-generated outputs. However, little is known about what characteristics students identify in outputs when reporting interventions, or how they exercise oversight during authentic software engineering work. We analysed 962 student-AI interaction turns documented by 145 first-year software engineering students through structured AI Journals, including 172 student-declared interventions. Using a multi-dimensional coding framework, we characterised the output characteristics identified in these reported interventions, students' reasons for intervening, the actions they took, and how those actions were enacted. Fitness problems were identified in 74.4% of interventions, compared with 16.9% involving correctness problems, indicating that oversight more often concerned whether plausible AI outputs were suitable for the engineering task than whether they contained explicit errors. Among classifiable interventions, students most frequently modified generated outputs (51.0%) or refined their prompts (28.2%), with both response types commonly associated with engineering fit. Within-student analysis further showed that outputs perceived as containing minor flaws were associated with lower evaluation confidence than outputs perceived as perfect. Taken together, these findings characterise novice AI oversight as a process that extends beyond error detection to encompass both judgement of fitness for purpose and active intervention in AI-assisted engineering work.",
+      "authors": [
+        "Ali Shakiba",
+        "Thomas Chaffey"
+      ],
+      "primary_category": "cs.SE",
+      "categories": [
+        "cs.SE",
+        "cs.HC"
+      ],
+      "published": "2026-10-23T03:38:17+00:00",
+      "link": "https://arxiv.org/pdf/2610.32118v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "novice software engineering students supervising generative AI outputs in learning",
+      "llm_evidence_cn": "软件工程学生监督生成式AI输出的学习研究",
+      "llm_evidence": "软件工程学生监督生成式AI输出的学习研究",
+      "canonical_evidence": "软件工程学生监督生成式AI输出的学习研究",
+      "llm_tldr_en": "Generative AI shifts software engineering students toward supervising AI outputs, yet how they notice issues and intervene is unclear. Analyzing 962 student-AI turns and 172 interventions reveals oversight patterns, informing AI literacy education.",
+      "llm_tldr_cn": "生成式AI正把软件工程学生的工作从产出制品转向评估与监督AI输出，但学生如何识别输出特征并实施干预尚不清楚。研究分析145名一年级学生记录的962轮人机交互与172次自主干预，用多维度编码框架刻画其关注特征、干预原因与行动。结果呈现了学生在真实工程任务中的监督模式。该研究为在软件工程教育中培养学生对生成式AI的批判性监督能力提供了实证依据。",
+      "llm_tldr": "生成式AI正把软件工程学生的工作从产出制品转向评估与监督AI输出，但学生如何识别输出特征并实施干预尚不清楚。研究分析145名一年级学生记录的962轮人机交互与172次自主干预，用多维度编码框架刻画其关注特征、干预原因与行动。结果呈现了学生在真实工程任务中的监督模式。该研究为在软件工程教育中培养学生对生成式AI的批判性监督能力提供了实证依据。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

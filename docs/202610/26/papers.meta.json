@@ -1,0 +1,54 @@
+{
+  "label": "2026-10-26",
+  "date": "2026-10-26",
+  "generated_at": "2026-10-26T23:04:32",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202610/26/2610.31875v1-an-ai-factory-for-technology-education-an-agentic-pipeline-with-closed-loop-audience-feedback",
+      "section": "deep",
+      "title_en": "An AI Factory for Technology Education: An Agentic Pipeline with Closed Loop Audience Feedback",
+      "authors": "Josue Hernandez, Hector R. Amado-Salvatierra, Rocael Hernandez Rizzardini",
+      "date": "2026-10-22",
+      "pdf": "https://arxiv.org/pdf/2610.31875v1",
+      "score": "9.0",
+      "evidence": "用智能体流水线生成并迭代修订教学内容的AI工厂",
+      "tldr": "技术工具数周就更新，配套教程同样快速过时，而现有生成系统多为一次性产出，从不检验受众实际反馈。本文提出一个以类型化工作流图组织的智能体流水线，把教学内容生产视为带显式检查点的制造流程，由确定性脚本、固定评分标准的模型步骤、开放式智能体阶段和人工审批四类节点构成，并用发布后互动数据闭环改写生成规则。系统运行五个月发布26篇指南，每周仅约1.5小时人工投入，反馈环识别出4项可测量的互动效应并转为后续生成的硬性规则。",
+      "tags": "query:aied-oer",
+      "abstract_en": "Technology tools used for professional upskilling change on a timescale of weeks, and written guidance about them ages at the same pace. Large language models have made it inexpensive to draft a tutorial or a course outline, but most deployed generation systems still produce a piece of content once and never check it against what an audience actually does with it. This paper describes an agentic pipeline, organized as a typed workflow graph, that treats instructional content production as a manufacturing process with explicit checkpoints rather than a single generation call. Four node classes structure the graph: deterministic scripts, model steps bound to a fixed rubric, open-ended agent phases, and human approval gates, arranged along a forward production path and closed by a feedback cycle that rewrites generation rules from post level engagement telemetry. Production of content is split into two layers: a demand layer, built from video and community sources, that shapes topic selection and register, and an authority layer, built from official documentation, that every published claim must trace back to. Over five months of continuous operation, the deployed system published 26 documented guides at roughly 1.5 hours of operator time per week, and the feedback loop identified four measurable engagement effects that became binding rules for later runs, including a hook style that outperformed baseline by a factor of 1.83 in its first analysis window.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202610/26/2610.31987v1-gelli-a-generator-for-experiential-language-learning-interactions",
+      "section": "deep",
+      "title_en": "GELLI: A Generator for Experiential Language Learning Interactions",
+      "authors": "Danilo Symonette, Alan Y. Cheng, Taiga Ikedo, Jose Manuel Rosales Juarez, Roy Pea, Parastoo Abtahi, Jane L. E, James Landay",
+      "date": "2026-10-22",
+      "pdf": "https://arxiv.org/pdf/2610.31987v1",
+      "score": "9.0",
+      "evidence": "根据学习者目标生成个性化语言学习情境",
+      "tldr": "二语学习需要大量个性化情境练习，但现有叙事情境依赖高成本人工创作，练习范围受限。GELLI 根据学习者目标在运行时生成含角色对话、互动支持与反思的叙事练习世界，无需预置内容。40名日语学习者实验显示，其词汇回忆与信心优于同目标专家视频，口语表现无显著差异。该系统把学习者记忆或想象的情境转化为可塑造的学习体验，降低创作门槛并拓展个性化练习空间。",
+      "tags": "query:aied-oer",
+      "abstract_en": "Learning a second language requires extensive practice across situations personal to each learner, yet the most effective existing approaches --- narrative situations designed around specific learning goals and delivered through media --- demand substantial authoring effort, limiting practice to the scope of what was built. We present GELLI, a system that generates narrative practice worlds from a learner's goals: situated scenes with characters to converse with, support alongside the interaction, and reflection, all produced at runtime with no pre authored content. In a within-subjects study with 40 learners of Japanese, GELLI produced greater vocabulary recall and confidence than expert-authored videos targeting the same goals, with no significant difference in speaking performance. Learners turned remembered or imagined situations into experiences they could shape and learn through. Support made experimentation feel safe, while unexpected narrative developments and language suggestions gave them new possibilities to pursue beyond what they initially intended to practice.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202610/26/2610.32118v1-beyond-correctness-how-novice-software-engineering-students-exercise-oversight-of-generative-ai",
+      "section": "quick",
+      "title_en": "Beyond Correctness: How Novice Software Engineering Students Exercise Oversight of Generative AI",
+      "authors": "Ali Shakiba, Thomas Chaffey",
+      "date": "2026-10-23",
+      "pdf": "https://arxiv.org/pdf/2610.32118v1",
+      "score": "7.0",
+      "evidence": "软件工程学生监督生成式AI输出的学习研究",
+      "tldr": "生成式AI正把软件工程学生的工作从产出制品转向评估与监督AI输出，但新手如何识别问题并实施干预仍不清楚。研究分析145名一年级学生记录的962轮人机交互和172次学生声明的干预，用多维编码框架刻画输出特征、干预原因、行动及方式。结果显示74.4%的干预涉及适用性/工程契合问题，仅16.9%涉及正确性；学生最常修改输出（51.0%）或优化提示（28.2%）。这揭示新手AI监督超越纠错，包含适用性判断与主动干预。",
+      "tags": "query:aied-oer",
+      "abstract_en": "Generative AI (GenAI) is shifting software engineering students' work from producing artefacts towards evaluating and supervising AI-generated outputs. However, little is known about what characteristics students identify in outputs when reporting interventions, or how they exercise oversight during authentic software engineering work. We analysed 962 student-AI interaction turns documented by 145 first-year software engineering students through structured AI Journals, including 172 student-declared interventions. Using a multi-dimensional coding framework, we characterised the output characteristics identified in these reported interventions, students' reasons for intervening, the actions they took, and how those actions were enacted. Fitness problems were identified in 74.4% of interventions, compared with 16.9% involving correctness problems, indicating that oversight more often concerned whether plausible AI outputs were suitable for the engineering task than whether they contained explicit errors. Among classifiable interventions, students most frequently modified generated outputs (51.0%) or refined their prompts (28.2%), with both response types commonly associated with engineering fit. Within-student analysis further showed that outputs perceived as containing minor flaws were associated with lower evaluation confidence than outputs perceived as perfect. Taken together, these findings characterise novice AI oversight as a process that extends beyond error detection to encompass both judgement of fitness for purpose and active intervention in AI-assisted engineering work.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

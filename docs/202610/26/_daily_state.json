@@ -1,0 +1,57 @@
+{
+  "date": "20261026",
+  "date_label": "",
+  "generated_at": "2026-10-26 23:04:30 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2610.31875v1",
+      "route": "202610/26/2610.31875v1-an-ai-factory-for-technology-education-an-agentic-pipeline-with-closed-loop-audience-feedback",
+      "title": "An AI Factory for Technology Education: An Agentic Pipeline with Closed Loop Audience Feedback",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "用智能体流水线生成并迭代修订教学内容的AI工厂",
+      "first_seen_at": "2026-10-26 23:04:30 UTC",
+      "updated_at": "2026-10-26 23:04:30 UTC"
+    },
+    {
+      "paper_id": "2610.31987v1",
+      "route": "202610/26/2610.31987v1-gelli-a-generator-for-experiential-language-learning-interactions",
+      "title": "GELLI: A Generator for Experiential Language Learning Interactions",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "根据学习者目标生成个性化语言学习情境",
+      "first_seen_at": "2026-10-26 23:04:30 UTC",
+      "updated_at": "2026-10-26 23:04:30 UTC"
+    },
+    {
+      "paper_id": "2610.32118v1",
+      "route": "202610/26/2610.32118v1-beyond-correctness-how-novice-software-engineering-students-exercise-oversight-of-generative-ai",
+      "title": "Beyond Correctness: How Novice Software Engineering Students Exercise Oversight of Generative AI",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "软件工程学生监督生成式AI输出的学习研究",
+      "first_seen_at": "2026-10-26 23:04:30 UTC",
+      "updated_at": "2026-10-26 23:04:30 UTC"
+    }
+  ]
+}
