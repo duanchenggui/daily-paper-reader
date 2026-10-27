@@ -1,0 +1,274 @@
+Title: Incremental Predictive Value of LLM Tutoring Interactions for Student Performance
+
+URL Source: https://arxiv.org/pdf/2610.33488v1
+
+Published Time: Tue, 27 Oct 2026 00:29:41 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+# Incremental Predictive Value of LLM Tutoring Interactions for Student Performance 
+
+# Zeyu Dong ∗
+
+dongzeyu123@outlook.com Crestwood Preparatory College Toronto, Ontario, Canada 
+
+# Mikael Kwame Kuada 
+
+mikekuada12@gmail.com Hammond High Magnet School Hammond, Louisiana, United States 
+
+# Asa Holley Buchakjian-Tweedy 
+
+asaholleybt@gmail.com Spaulding High School Rochester, New Hampshire, United States 
+
+# Ibrahem Aljabea ∗
+
+ialjab2@lsu.edu Louisiana State University Baton Rouge, Louisiana, United States 
+
+## Abstract 
+
+We evaluate whether semester-level interaction features from a large language model tutor improve assignment-score prediction beyond constant baselines. StudyChat provides 16,851 student– assistant exchanges from two offerings of an undergraduate ar-tificial intelligence course, with outcomes matched to 175 of 203 student-semester records. Six fitted estimators and training-fold mean and median baselines share repeated nested cross-validation. After averaging each student’s held-out predictions across ten re-peats, Gradient Boosting achieves mean absolute error of 3.023 grade points, versus 3.138 for the median baseline. The paired dif-ference is −0.114, with a conditional 95% bootstrap interval of 
+
+[− 0.245 , 0.013 ]. Representation changes and a semester-specific median yield similarly small gains. In the lowest observed-score quartile, however, boosting’s error is 7.30 points, versus 8.07 for the median and 6.67 for the mean; Ridge has the lowest fitted-model error at 6.37 despite its worse overall error of 3.331. Scores con-centrate near the ceiling: 160 students (91.4%) score above 90, and the lowest quartile contributes 62.1% of boosting’s total absolute error. This retrospective comparison shows how baseline choice and error distribution affect predictive value, informing evaluation of student-support tools without establishing a learning effect. 
+
+## CCS Concepts 
+
+• Applied computing → Education ; • Computing methodolo-gies → Machine learning .
+
+## Keywords 
+
+educational data mining, learning analytics, large language models, baseline evaluation, responsible AI 
+
+## 1 Introduction 
+
+Conversational tutoring logs record how students seek help, offer-ing a possible basis for feedback and instructor support. Before such traces inform educational decisions, their predictive value must be separated from the performance of a simple baseline. When scores concentrate near the ceiling, a constant prediction can achieve small average error while poorly representing lower-scoring students. Evaluating only overall accuracy can therefore obscure the errors most relevant to a support decision. 
+
+> ∗Corresponding authors.
+
+We examine this distinction in StudyChat [16], a research release with 16,851 exchanges from two offerings of one undergraduate artificial intelligence course. Semester-level features are available for 203 student-semester records, of which 175 have assignment outcomes. Among these matched records, 160 (91.4%) score above 90. The supervised sample therefore consists of 175 outcome-bearing records, not 16,851 independent learning outcomes. StudyChat’s original assessment-specific regressions add usage and dialogue-act counts to prior assessment scores [16]. Changes in explained variance in that setting do not establish held-out pre-diction of a semester aggregate or describe how prediction errors are distributed. We address that evaluation gap through two ques-tions: do semester-level interaction summaries reduce held-out assignment-score error relative to training-fold constants, and do baseline and estimator comparisons change across observed score levels? This is a complementary analysis of the same corpus, not a test of added value beyond prior academic performance. The main finding is a contrast between small aggregate gains and uneven error. Gradient Boosting’s student-averaged mean absolute error (MAE) is 3.023 points, versus 3.138 for a median baseline, with a conditional 95% interval for the difference crossing zero. In the lowest observed-score quartile, boosting outperforms the median but not the mean baseline; Ridge has the smallest fitted-model error there despite its worse overall rank. The baseline and evaluation population both affect the apparent predictive value. The analysis provides three connected contributions: 
+
+• A repeated nested comparison of six fitted estimators and two constant baselines quantifies the incremental value of 14 interaction features. 
+
+• All-model outcome-stratum contrasts identify where ag-gregate rankings change and separate learner performance from baseline choice. 
+
+• Representation, cohort-transfer, and held-out attribution checks examine the scope of the predictive result and its interpretation. For learning analytics, these results establish evaluation require-ments before predictions guide support; no support intervention is tested. Full-semester features make this a retrospective study. Prospective evaluation requires verified assessment-relative cut-offs. Figure 1 distinguishes the supervised evaluation from the ex-ploratory descriptions of interaction patterns.                
+
+> 1arXiv:2610.33488v1 [cs.CL] 24 Oct 2026 Dong et al. StudyChat Dataset
+> Record Preparation
+> Student-Semester Aggregation
+> Record Checks and Outcome Matching
+> Statistical Analysis
+> K-Means /Ward Clustering
+> Exploratory Interaction Profiles
+> Retrospective Assignment-Score Prediction Ridge /Elastic Net
+> Random Forest /Extra Trees
+> Gradient Boosting
+> Neural Network
+> Model and Baseline Comparison (MAE, RMSE, )
+> Held-Out TreeSHAP: Gradient Boosting
+> Associations and Error Diagnostics
+> Behavioral Feature Extraction
+
+Figure 1: Study workflow. Student-semester aggregation precedes repeated nested prediction; imputation and applicable scaling are learned within training partitions. Baseline contrasts assess predictive value. Clustering and attributions are separate exploratory diagnostics, not validated learning styles or intervention rules. Small inset plots are schematic, not study results. 
+
+## 2 Related Work 
+
+AI assistance and educational outcomes. Research on AI in edu-cation spans tutoring, feedback, assessment, and learner support. Reviews describe technical adoption alongside uneven educator involvement in evaluation [24]. Kasneci et al. discuss opportunities and risks of language-model assistance, including the need for peda-gogical oversight [12]. Bastani et al. compare tutor designs with and without learning safeguards in high-school mathematics [2]. Lau and Guo interview programming instructors about their planned responses to AI coding tools [13]. These studies distinguish educa-tional practice and learning effects from the prediction of observed assignment scores addressed here. 
+
+Learning analytics and the evaluation gap. Learning analytics relates traces to educational processes and outcomes [8, 21], while educational data mining uses submissions, assessments, and activity records for prediction [19]. StudyChat supplies dialogues, generated dialogue-act labels, and normalized outcomes [16]. Its assessment-specific regressions add utterance or dialogue-act counts to a prior-score baseline and examine explained variance and coefficients. We instead compare held-out MAE for a semester-level aggregate on shared nested splits and examine errors across observed outcomes. The different target, information set, and error estimand distin-guish the two analyses; using the same corpus does not provide independent-cohort replication. 
+
+Prediction and explanation. Nested cross-validation separates parameter search from outer evaluation [5, 23]. Repeated folds remain dependent, so we distinguish descriptive fold averages from fixed-fit student-bootstrap contrasts [7]. SHAP decomposes a fitted prediction into additive contributions [15]; numerical additivity alone does not establish accuracy or educational validity. These 
+
+> 2Incremental Predictive Value of LLM Tutoring Interactions for Student Performance
+
+distinctions matter when explanations might otherwise be read as recommendations about how a student should learn. 
+
+## 3 Data and Evaluation 3.1 Cohort, Target, and Information Available 
+
+StudyChat covers COMPSCI 383 at the University of Massachusetts Amherst in Fall 2024 and Spring 2025 [16]. Joining on student and semester matches 65 of 84 Fall records and 110 of 119 Spring records to nonmissing outcomes. Of 181 grade records, six lack matching behavioral records; 28 behavioral records lack outcomes. Missing outcomes are not imputed. The target is 𝑦 𝑖 = 100 llm 𝑖 , the released points-weighted aggre-gate of assignments a1–a7, rather than an exam or overall course grade. Assignment maxima are (30 , 100 , 55 , 61 , 65 , 113 , 101 ) in Fall and (31 , 100 , 55 , 90 , 105 , 113 , 135 ) in Spring, with nominal totals 525 and 629. The inspected release metadata does not document missing/unsubmitted-item treatment. We inherit the nonmissing aggregate rather than reconstructing it. Matched scores have mean 94.77, median 96.18, and sample standard deviation 6.12; six are below 80. The pooled evaluation gives each record equal weight, with 65/175 from Fall and 110/175 from Spring. Preparation parses millisecond timestamps, aggregates student-semester records, and checks unique keys and joins; raw-exchange deduplication is not performed. The primary representation con-tains 14 operational predictors (Table 1), excluding conversation persistence ( 𝑃 /𝐶 − 1) from the original 15 features, where 𝑃 counts exchanges and 𝐶 counts chats. Identifiers and semester are not learned-model predictors. Contextual-question and writing-request ratios use GPT-4.1-generated dialogue-act annotations, stored as 
+
+clarification_ratio and solution_request_ratio . These are recorded language categories, not validated measures of motivation, metacognition, or learning styles. The example pattern matches “examples”, “e.g.”, “for instance”, “show me”, “demonstrate”, “demo”, or “sample”. Long legacy chat spans and one large tokens-per-segment value are retained and examined through sensitivity analyses. All features summarize the full observed semester. Outcomes do not enter feature construction, but activity may occur during or after target assignments. Official deadlines and grade-availability times are unavailable for a verified forecast cutoff. 
+
+## 3.2 Models and Nested Evaluation 
+
+Mean and median dummy regressors are compared with Ridge, Elas-tic Net, Random Forest [4], Extra Trees [10], Gradient Boosting [9], and a Keras multilayer perceptron (MLP). Non-neural models use scikit-learn [18]. All eight estimators share five outer folds repeated ten times (seed 42). Each outer-training partition has four shuf-fled inner folds, selecting parameters by validation MAE with seed 42 + 1000 𝑟 + 𝑓 for zero-based repeat 𝑟 and fold 𝑓 . Search uses 40 randomized candidates where applicable, all 25 Ridge values, and eight neural candidates. Each dummy predicts the mean or median outcome of its outer-training partition; held-out outcomes do not determine those predictions. Each inner-training fit and outer refit learns median imputation from its training partition. Ridge, Elastic Net, and MLP also apply log (1 + 𝑥 ) to prompt/conversation counts, depth, prompt/response 
+
+Table 1: Primary features. 𝑃 : exchanges; 𝐶 : chats; 𝑊 : prompt tokens; 𝑈 : distinct prompt tokens. Tokens match lowercase 
+
+[a-z0-9’]+ . Percentages use the 0–100 scale. 
+
+Feature Operational definition Prompt count 𝑃 exchanges. Conversation count 𝐶 distinct threads. Dialogue depth Mean maximum non-system history count per chat. Prompt length 𝑊 /𝑃 regex tokens. Vocabulary diversity 𝑈 /𝑊 .Follow-up ratio Percentage with 
+
+interactionCount >0. Contextual-question ratio Percentage labeled contextual questions. Example-pattern ratio Percentage matching example-request text. Writing-request ratio Percentage labeled writing requests. Conversation span Mean last-minus-first chat timestamp in minutes, including idle time. Response length Response tokens divided by 𝑃 .Questions per chat Prompts containing a question mark divided by 𝐶 , with at most one count per prompt. Tokens per segment Tokens per segment split on [.!?\n]+ ;at least one segment per prompt. Active days Distinct UTC dates. lengths, span, questions per chat, tokens per segment, and active days, then fit standardization. Trees retain unlogged features. In Table 2, numeric feature-sampling choices are fractions of the 14 predictors; sqrt selects their square-root count. The historical MLP uses a PyTorch backend, ReLU hidden layers, linear output, dropout after the first hidden layer, Huber loss ( 𝛿 = 3), Adam, batch size 16, and at most 500 epochs. Early stopping uses an internal 20% split, patience 35, minimum improvement 10 −4, and restored best weights. The learning rate halves after 12 stagnant epochs, down to 10 −5. Search uses one seed; outer refits average seeds 42, 43, and 44. Preprocessing is fitted before the internal early-stopping split, so those validation rows participate in fitted transformations; outer held-out rows do not. 
+
+## 3.3 Estimands and Uncertainty 
+
+For 𝑛 = 175 matched records, let ˆ 𝑦 𝑖𝑟 be record 𝑖 ’s held-out pre-diction in repeat 𝑟 . We report the error after averaging its 𝑅 = 10 predictions: ¯ˆ𝑦 𝑖 = 𝑅 −1∑︁ 
+
+> 𝑟
+
+ˆ𝑦 𝑖𝑟 , MAE student = 𝑛 −1∑︁ 
+
+> 𝑖
+
+|𝑦 𝑖 − ¯ˆ𝑦 𝑖 |. (1) This repeated-cross-validation aggregate differs from a single de-ployment fit. We also report mean fold MAE, root mean squared error (RMSE), and 𝑅 2. For training-fold constant baseline 𝑏 , the paired contrast is 
+
+Δ𝑏 = 𝑛 −1∑︁ 
+
+> 𝑖
+
+ |𝑦 𝑖 − ¯ˆ𝑦 𝑖, model | − | 𝑦 𝑖 − ¯ˆ𝑦 𝑖,𝑏 |. (2) 
+
+> 3Dong et al.
+
+Table 2: Available search specification. Random Forest and Extra Trees use 500 trees. Resolved budgets and selected parameters are saved; the full historical sampled-candidate trace and dirty source are not archived. Boosting’s search definition is available in later versioned source and agrees with selected parameters, not a certified original source snapshot. 
+
+Estimator Candidates Ridge 25 log-spaced 𝛼 values in [10 −4, 10 4].Elastic Net 20 log-spaced 𝛼 values in [10 −4, 10 ]; 𝐿 1 ratio {0.1, 0.25 , 0.5, 0.75 , 0.9, 1}.Random Forest Squared/absolute-error criterion; depth {2, 3, 4, 5, unlimited }; minimum split {4, 8, 12 , 20 }; leaf {2, 3, 5, 8, 12 };feature sampling sqrt or {0.5, 0.75 , 1}; sample fraction {0.6, 0.8, 1}.Extra Trees Squared error; same depth, split, leaf, and feature choices as Random Forest; no sample-fraction search. Gradient Boosting Squared/Huber/absolute-error loss; trees {50 , 100 , 200 , 300 }; rate {0.01 , 0.03 , 0.05 , 0.1}; depth {1, 2, 3}; leaf 
+
+{3, 5, 8, 12 }; subsample {0.6, 0.8, 1}; features sqrt or {0.5, 1}.MLP Layers (8), (16 , 8), (32 , 16 ); dropout {0, 0.1, 0.2}; 𝐿 2 {10 −4, 10 −3, 10 −2 }; rate {3 × 10 −4, 10 −3, 3 × 10 −3 }.Negative differences favor the learner. The median is the lower-error constant under both primary MAE summaries. Paired 95% percentile intervals use 5,000 student resamples; marginal MAE intervals use 2,000. Predictions stay fixed: intervals do not include retraining, tuning, comparator/model selection, or multiplicity ad-justments. The 0.5-point reduction reference is an operational re-porting convention, not a preregistered or validated educational threshold. Post-hoc outcome quartiles use pandas.qcut , right-closed with the minimum included and ties kept together. Rounded cutpoints are 94.286, 96.184, and 97.905; counts are 45, 44, 44, and 42. Within-stratum intervals use 5,000 paired resamples (seed 42), conditional on the same averaged predictions and unadjusted across mod-els/strata. 
+
+## 4 Results 4.1 Incremental Prediction 
+
+Table 3 reports the complete primary comparison. MLP has the smallest mean fold MAE (3.061), followed by boosting (3.062) and Random Forest (3.071). Their student-averaged MAEs are 3.027, 3.023, and 3.038, versus 3.138 for the median. Ridge, Elastic Net, and Extra Trees have larger point errors; all six fitted models have negative mean fold 𝑅 2.Boosting’s point reduction in student MAE is 0.1144 points. Its signed model-minus-median difference has conditional 95% inter-val [− 0.2451 , 0.0125 ]. MLP and Random Forest have point reduc-tions of 0.1107 and 0.0998 points, respectively; their intervals are 
+
+[− 0.2546 , 0.0290 ] and [− 0.2434 , 0.0428 ]. All three intervals include zero, and the point gains remain below 0.5 points. The recorded diagnostic-model rule first retains learners that beat the best dummy in fold MAE, then favors a lower-complexity family within 0.5 points of the lowest error. Boosting and Random Forest share the tree-family rank; boosting’s lower error breaks that tie, while MLP ranks as more complex. This outer-result-dependent choice makes subsequent selected-model diagnostics exploratory. The predictive claim rests on all models. 
+
+## 4.2 Baseline Dependence and Error Distribution 
+
+Boosting’s MAEs across Q1–Q4 are 7.30, 0.91, 1.04, and 2.74. The 45 Q1 students contribute 62.1% of its total absolute error. In Q1, boost-ing’s difference from the median is −0.767 [− 1.091 , −0.457 ], but the difference from the mean is +0.629 [0.294 , 0.944 ]. The mean’s lower prediction level is advantageous there despite its worse overall MAE of 3.440. Ridge has the smallest fitted-model Q1 error, 6.37, but its mean-relative difference −0.301 [− 0.694 , 0.066 ] includes zero. All six learn-ers’ Q1 intervals lie below zero against the median; none lies wholly below zero against the mean (Figure 2). Apparent improvement against one constant therefore does not alone establish added lower-tail information. Q1 is the lowest quarter of a high-scoring cohort, not a prospective risk group. For quartile 𝑞 with 𝑛 𝑞 students, let MAE 𝑞 denote its mean abso-lute error and 𝑐 𝑞 its share of total absolute error. Then MAE student =
+
+> 4
+
+∑︁ 
+
+> 𝑞 =1
+
+𝑛 𝑞 
+
+𝑛 MAE 𝑞 ,𝑐 𝑞 = 𝑛 𝑞 MAE 𝑞 
+
+𝑛 MAE student 
+
+.
+
+(3) Thus, Q1 contains 25.7% of the matched records but contributes 62.1% of boosting’s absolute error. Improving a model’s error in one stratum can be offset by larger errors elsewhere; overall MAE alone does not show that trade-off. 
+
+## 4.3 Representation and Cohort Sensitivity 
+
+Boosting student MAE is 3.024 with all 15 features and 3.021 with ro-bust duration/segmentation definitions. The latter use a 30-minute inactivity threshold, a 60-minute within-session gap cap, and code stripping in sentence segmentation while retaining the token nu-merator. Removing the three request-type ratios gives 3.070; re-moving prompt/conversation counts and active days gives 3.079; removing follow-up ratio gives 3.023. All five use 50 folds, and all intervals against their corresponding median dummies include zero. A training-fold median for each semester gives student MAE 3.134 and fold MAE 3.138. Boosting’s student-MAE difference is −0.111 
+
+[− 0.243 , 0.021 ] (5,000 paired draws, seed 42). Transfer fits preprocessing, four-fold inner tuning, and the final estimator on the source semester only. It retains candidate budgets, 
+
+> 4Incremental Predictive Value of LLM Tutoring Interactions for Student Performance
+
+Table 3: All eight estimators on 50 shared folds and 175 matched records. Student MAE scores ten-repeat-averaged predictions. Paired differences use the median dummy and conditional 95% percentile intervals. All six learner intervals include zero. All displayed metrics are rounded once from their underlying values to three decimals. 
+
+Model Fold MAE Fold RMSE Fold 𝑅 2 Student MAE Paired Δ [95% interval] Mean dummy 3.446 5.713 −0.147 3.440 +0.303 [+ 0.113 , +0.485 ]
+
+Median dummy 3.141 5.758 −0.082 3.138 —Ridge 3.356 5.578 −0.113 3.331 +0.193 [− 0.052 , +0.442 ]
+
+Elastic Net 3.383 5.601 −0.123 3.344 +0.206 [− 0.022 , +0.440 ]
+
+Random Forest 3.071 5.523 −0.023 3.038 −0.100 [− 0.243 , +0.043 ]
+
+Extra Trees 3.310 5.547 −0.106 3.282 +0.144 [− 0.083 , +0.374 ]
+
+Gradient Boosting 3.062 5.528 −0.012 3.023 −0.114 [− 0.245 , +0.013 ]
+
+Keras MLP 3.061 5.479 −0.004 3.027 −0.111 [− 0.255 , +0.029 ]−2.0 −1.5 −1.0 −0.5 0.0 0.5 1.0 
+
+Paired Q1 Δ MAE (grade points) 
+
+Ridge Elastic Net Random Forest Extra Trees Gradient Boosting Keras MLP 
+
+vs. median dummy vs. mean dummy 
+
+Figure 2: Paired Q1 contrasts for all six learners on the same 45 records. Circles compare with the median; squares compare with the mean. Lines are conditional 95% percentile intervals from 5,000 paired within-stratum draws. Negative differences favor the learner. Strata are defined after observing outcomes; intervals are not multiplicity-adjusted. Table 4: Student-averaged MAE by observed-score quartile for all estimators. Counts are 45, 44, 44, and 42; their weighted errors reproduce overall MAE. 
+
+Model Overall MAE Q1 Q2 Q3 Q4 Mean dummy 3.440 6.669 0.673 2.405 3.965 Median dummy 3.138 8.065 0.799 0.996 2.551 Ridge 3.331 6.368 0.879 1.936 4.107 Elastic Net 3.344 6.445 0.771 2.015 4.108 Random Forest 3.038 7.282 0.832 1.035 2.899 Extra Trees 3.282 6.418 0.762 1.960 3.946 Gradient Boosting 3.023 7.298 0.909 1.036 2.739 Keras MLP 3.027 7.031 0.832 1.210 2.940 direction seeds 50042/50043, and one neural search seed with three final members. Fall-to-Spring trains on 65 and tests on 110 records; reverse transfer exchanges those counts (Table 5). Boosting’s gains 
+
+Table 5: Transfer MAE within the same course. The better con-stant is the mean for Fall-to-Spring and median for Spring-to-Fall. These are point estimates. 
+
+Estimator Fall to Spring Spring to Fall Mean dummy 3.385 3.356 Median dummy 3.413 2.775 Ridge 3.331 3.046 Elastic Net 3.377 3.077 Random Forest 3.293 2.895 Extra Trees 3.346 3.101 Gradient Boosting 3.272 2.744 Keras MLP 3.342 2.879 over the better constant are 0.113 and 0.031 points. Paired uncer-tainty is unavailable because transfer prediction rows were not archived. 
+
+> 5Dong et al.
+
+Alternate-target runs retain the 175 students, 14 legacy predic-tors, 50 outer folds, and four-fold inner MAE selection with 40 can-didates where applicable. For the exam aggregate, the median MAE is 6.946 versus mean 7.098; Random Forest, Ridge, and boosting give 6.909, 6.939, and 6.958. Their paired median-relative intervals all in-clude zero: [− 0.371 , 0.304 ], [− 0.323 , 0.309 ], and [− 0.251 , 0.288 ]. For the third exam, median MAE is 8.287 versus mean 8.612; boosting, Random Forest, and Ridge give 8.387, 8.467, and 8.625, with inter-vals [− 0.024 , 0.225 ], [− 0.025 , 0.387 ], and [− 0.063 , 0.733 ]. These are full-semester retrospective checks, not prospective exam forecasts. 
+
+## 4.4 Associations and Explanation Fidelity 
+
+Four of 14 Pearson tests pass Benjamini–Hochberg 𝑞 < 0.05 [3]: contextual-question ratio ( 𝑟 = −0.329), active days (0 .248), vocabu-lary diversity ( −0.199), and conversation count (0 .197). Adjustment covers that screen only. Removing six scores below 80 changes the contextual-question correlation to −0.173; its Spearman coefficient is −0.162. Thus, a nominally prominent association is sensitive to the lower-score tail. It agrees in direction with StudyChat’s Assignment-5 result on the same corpus [16]. Dialogue depth and follow-up ratio also have absolute Spearman correlation 0.993. Table 6 reports both coefficient types and uncertainty. Tree-path-dependent TreeSHAP explains transformed held-out boosting rows as 𝑓 𝑚 (x𝑖 ) = 𝜙 0𝑚 + Í14  
+
+> 𝑗 =1
+
+𝜙 𝑖 𝑗𝑚 . Averaging each stu-dent’s ten baseline/contribution vectors preserves the decompo-sition of the averaged prediction. Refit predictions match saved values within 1 .42 × 10 −14 points; the maximum additivity residual is 5 .68 × 10 −14 . These are numerical checks on evaluated inputs, not certification of the historical source or educational validity. Mean absolute contributions lead with contextual questions (0.332 points), conversation count (0.258), and questions per chat (0.150). Yet median absolute outcome error is 1.69 and the maximum is 40.93. Precise explanation of a fitted prediction does not imply an accurate prediction, and contribution magnitudes do not identify causal learning mechanisms. Figure 3 shows all predictors rather than only the largest contri-butions. 
+
+## 4.5 Exploratory Interaction Profiles 
+
+The companion clustering analysis uses eight standardized dialogue-act percentages for all 203 records, separately from supervised predictors. K-means [14] and Ward clustering describe request mixtures. For 𝑘 = 2, . . . , 6, silhouette [20] selects six; extending to twelve selects eight, while Davies–Bouldin [6] selects ten. All evaluated partitions above six contain singletons. Subset sensitivity samples 203 indices with replacement 200 times, discards repetitions, and refits on distinct rows with fixed scaling. All original rows are assigned to the nearest refitted cen-troid; adjusted Rand index (ARI) [11] compares assignments with the full-cohort reference. Reference/subset fits use 20 initializations, versus 100 in selection. This is not a multiplicity-preserving boot-strap. At the operational median-ARI cutoff 0.60, 𝑘 = 2, 9, 10 pass. The finer two contain singletons; 𝑘 = 2 has a wide central 90% range, [0.235 , 1.000 ].The proportions are compositional [1, 17]. A separate gap analy-sis [22] selects two by the one-standard-error rule, but its uniform-reference draws do not preserve the sum constraint. For the origi-nal six groups, Welch ( 𝑝 = 0.158) and Kruskal–Wallis ( 𝑝 = 0.138) leave location evidence inconclusive; median-centered Levene ( 𝑝 =
+
+0.002783) indicates unequal dispersion. These results do not es-tablish stable learning styles or validate adaptive instruction by cluster. 
+
+## 5 Educational Implications and Scope 5.1 From Prediction to Student Support 
+
+The study supplies an empirical check before interaction traces are used to guide student support. The observed small gains provide little evidence for allocating feedback or instructor attention from this representation alone. Meanwhile, Q1 error concentration shows why population-average error is insufficient for evaluating a tool intended to assist lower-performing students. A support system should be assessed for its intended decision and population, not adopted solely because its average score error is small. For responsible use, educators should define the intended deci-sion, the information available when it is made, and the costs of missed support and unnecessary alerts before fitting a model. Those choices determine which baselines and evaluation populations are relevant. Our result concerns prediction beyond constants; prior academic performance remains an important untested compara-tor. It also does not imply that asking contextual questions harms learning. Such questions may express confusion, task requirements, productive help seeking, or annotation error. Interaction measurement is distinct from learning-process mea-surement. Counts and ratios discard dialogue order, task seman-tics, response correctness, and verified timing. The study does not directly measure motivation, emotion, or self-regulation. An educator-reviewed application could investigate these dimensions, but the present features should not be renamed as psychological constructs. Likewise, outcome-defined error heterogeneity is not a demographic fairness audit. Absence of protected-group evaluation precludes a claim of bias-free predictions. 
+
+## 5.2 Selection, Ethics, and Reproducibility 
+
+Outcome matching is 77.4% in Fall and 92.4% in Spring. A saved ex-ploratory comparison finds longer prompts among matched records: standardized mean difference 0.463, with 95% percentile interval 
+
+[0.231 , 0.672 ]. It uses 1,000 separate-group draws and standardizer √︃ 
+
+(𝑠 2 
+
+> 𝑀
+
++ 𝑠 2 
+
+> 𝑈
+
+)/ 2 from matched ( 𝑀 ) and unmatched ( 𝑈 ) group sam-ple variances. A shared PCG64 generator seeded at 0 preserves row order, draws matched before unmatched samples, and pro-cesses prompt count, conversation count, depth, then prompt length without resetting. The matched cohort differs from the behavioral sample; unavailable outcomes leave the direction of selection bias unresolved. Both offerings are from one course. Fixed-fit uncertainty excludes retraining/search variation, and intervals crossing zero are not an equivalence test. Generated act labels lack a supplied human construct-validation study. Prior knowledge and outside study or AI use are unmeasured. 
+
+> 6Incremental Predictive Value of LLM Tutoring Interactions for Student Performance
+
+Table 6: The four associations retained by the 14-test Pearson screen on 175 records. Adjusted 𝑞 values apply only to that screen. Pearson intervals use 2,000 student resamples; Spearman coefficients provide a complementary rank-based summary. Vocabulary diversity’s interval includes zero despite its adjusted parametric test, illustrating the different assumptions. 
+
+Feature Pearson 𝑟 Spearman 𝜌 Adjusted 𝑞 Interval for 𝑟 
+
+Contextual-question ratio −0.329 −0.162 0.0001 [− 0.534 , −0.106 ]
+
+Active calendar days 0.248 0.220 0.0067 [0.148 , 0.335 ]
+
+Vocabulary diversity −0.199 −0.082 0.0315 [− 0.385 , 0.003 ]
+
+Conversation count 0.197 0.250 0.0315 [0.101 , 0.282 ]0.0 0.1 0.2 0.3 0.4 
+
+Mean |SHAP| (grade points) 
+
+Contextual-question ratio Conversation count Question-bearing prompts/chat Prompt count Response length (tokens) Writing-request ratio Tokens/sentence segment Legacy conversation span Example-pattern ratio Active calendar days Prompt length (tokens) Follow-up ratio Observed dialogue depth Vocabulary diversity 
+
+Figure 3: Held-out attribution magnitudes for 14 predictors. Each bar is the mean absolute ten-repeat-averaged contribution over 175 records; conditional 95% percentile intervals use 2,000 student resamples. The ordering describes the selected boosting function under tree-path-dependent TreeSHAP and correlated inputs. 
+
+This secondary analysis uses the opt-in, de-identified research release. Source authors report consent [16]; no participants were newly recruited, contacted, or assigned an intervention. We do not claim a new institutional approval. Reporting uses aggregates rather than participant text, identifiers, or row-level outcomes. Saved predictions and resolved configuration support numerical replay of the complete eight-estimator run. The original dirty train-ing source was not archived, and the recorded commit lacks boost-ing. A completion manifest reports Keras 3.15.1, whereas a separate environment snapshot records it as unavailable. Later versioned code documents search design, not exact historical implementation. These limitations are distinct from numerical agreement with the saved outputs. Replay checks all 400 model-fold target/semester orders; raw fold values are averaged before rounding. A separate source-frozen check retained the same cohort, splits, and search budgets. In 90 minutes, both constants, Ridge, Elastic Net, and Random Forest completed 50 folds each and matched point errors and paired intervals to four decimals. Extra Trees was interrupted; boosting and cohort MLP were not reached. This partial same-cohort check does not replace the historical comparison or provide independent validation. 
+
+## 5.3 Future Work 
+
+Future evaluation should first fix prediction times before assign-ment deadlines and restrict features to information available by each cutoff. Comparing interaction summaries with prior assess-ment and course-context predictors on held-out courses would test added value beyond existing academic records. Richer representa-tions could retain dialogue sequence, task content, and response 
+
+> 7
+
+Dong et al. 
+
+correctness, accompanied by human validation of dialogue-act la-bels and evaluation of missing outcomes and retraining variation. Educators and learners should then help define actionable sup-port and acceptable error costs. A controlled study of instructor-reviewed support could assess whether earlier feedback improves subsequent unaided performance, retention, or self-regulated learn-ing. Prespecified measures of missed support, unnecessary alerts, and instructor workload would distinguish predictive improve-ments from educational benefit. None of these intervention out-comes is established by the present retrospective evaluation. 
+
+## 6 Conclusion 
+
+Semester-level StudyChat features yield small overall assignment-score gains over training-fold medians, while baseline and estimator rankings vary across observed outcomes. Boosting’s overall gain is 0.114 points with a conditional interval crossing zero; its Q1 advantage over the median reverses against the mean. All-model reporting and explicit error populations are therefore necessary to interpret incremental predictive value in this cohort. For learning analytics, the contribution is a baseline-referenced assessment of this representation and the students who carry its error. It informs the design and evaluation of support tools without demonstrat-ing a learning effect. Prospective cross-course prediction and an educator-informed intervention study are the next tests of practical educational value. 
+
+## References 
+
+[1] John Aitchison. 1982. The Statistical Analysis of Compositional Data. Journal of the Royal Statistical Society: Series B (Methodological) 44, 2 (1982), 139–160. doi:10.1111/j.2517-6161.1982.tb01195.x [2] Hamsa Bastani, Osbert Bastani, Alp Sungu, Haosen Ge, Özge Kabakcı, and Rei Mariman. 2025. Generative AI without Guardrails Can Harm Learning: Evidence from High School Mathematics. Proceedings of the National Academy of Sciences 
+
+122, 26 (2025), e2422633122. doi:10.1073/pnas.2422633122 [3] Yoav Benjamini and Yosef Hochberg. 1995. Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing. Journal of the Royal Statistical Society: Series B (Methodological) 57, 1 (1995), 289–300. doi:10.1111/j. 2517-6161.1995.tb02031.x [4] Leo Breiman. 2001. Random Forests. Machine Learning 45 (2001), 5–32. doi:10. 1023/A:1010933404324 [5] Gavin C. Cawley and Nicola L. C. Talbot. 2010. On Over-fitting in Model Selection and Subsequent Selection Bias in Performance Evaluation. Journal of Machine Learning Research 11 (2010), 2079–2107. [6] David L. Davies and Donald W. Bouldin. 1979. A Cluster Separation Measure. 
+
+IEEE Transactions on Pattern Analysis and Machine Intelligence PAMI-1, 2 (1979), 224–227. doi:10.1109/TPAMI.1979.4766909 [7] Bradley Efron. 1979. Bootstrap Methods: Another Look at the Jackknife. The Annals of Statistics 7, 1 (1979), 1–26. doi:10.1214/aos/1176344552 [8] Rebecca Ferguson. 2012. Learning Analytics: Drivers, Developments and Chal-lenges. International Journal of Technology Enhanced Learning 4, 5/6 (2012), 304–317. doi:10.1504/IJTEL.2012.051816 [9] Jerome H. Friedman. 2001. Greedy Function Approximation: A Gradient Boosting Machine. The Annals of Statistics 29, 5 (2001), 1189–1232. doi:10.1214/aos/ 1013203451 [10] Pierre Geurts, Damien Ernst, and Louis Wehenkel. 2006. Extremely Randomized Trees. Machine Learning 63, 1 (2006), 3–42. doi:10.1007/s10994-006-6226-1 [11] Lawrence Hubert and Phipps Arabie. 1985. Comparing Partitions. Journal of Classification 2 (1985), 193–218. doi:10.1007/BF01908075 [12] Enkelejda Kasneci, Kathrin Sessler, Stefan Küchemann, Maria Bannert, Daryna Dementieva, Frank Fischer, Urs Gasser, Georg Groh, Stephan Günnemann, Eyke Hüllermeier, Stephan Krusche, Gitta Kutyniok, Tilman Michaeli, Claudia Nerdel, Jürgen Pfeffer, Oleksandra Poquet, Michael Sailer, Albrecht Schmidt, Tina Seidel, Matthias Stadler, Jochen Weller, Jochen Kuhn, and Gjergji Kasneci. 2023. ChatGPT for Good? On Opportunities and Challenges of Large Language Models for Education. Learning and Individual Differences 103 (2023), 102274. doi:10.1016/j. lindif.2023.102274 [13] Sam Lau and Philip J. Guo. 2023. From “Ban It Till We Understand It” to “Re-sistance Is Futile”: How University Programming Instructors Plan to Adapt as More Students Use AI Code Generation and Explanation Tools Such as ChatGPT and GitHub Copilot. In Proceedings of the 2023 ACM Conference on International Computing Education Research V.1 . ACM, 106–121. doi:10.1145/3568813.3600138 [14] Stuart P. Lloyd. 1982. Least Squares Quantization in PCM. IEEE Transactions on Information Theory 28, 2 (1982), 129–137. doi:10.1109/TIT.1982.1056489 [15] Scott M. Lundberg and Su-In Lee. 2017. A Unified Approach to Interpreting Model Predictions. In Advances in Neural Information Processing Systems 30 .4765–4774. [16] Hunter McNichols, Fareya Ikram, and Andrew Lan. 2026. The StudyChat Dataset: Analyzing Student Dialogues With ChatGPT in an Artificial Intelligence Course. In LAK26: 16th International Learning Analytics and Knowledge Conference . ACM, 53–63. doi:10.1145/3785022.3785029 [17] Samyajoy Pal and Christian Heumann. 2022. Clustering Compositional Data Using Dirichlet Mixture Model. PLOS ONE 17, 5 (2022), e0268438. doi:10.1371/ journal.pone.0268438 [18] Fabian Pedregosa, Gaël Varoquaux, Alexandre Gramfort, Vincent Michel, Bertrand Thirion, Olivier Grisel, Mathieu Blondel, Peter Prettenhofer, Ron Weiss, Vincent Dubourg, Jake Vanderplas, Alexandre Passos, David Cournapeau, Matthieu Brucher, Matthieu Perrot, and Édouard Duchesnay. 2011. Scikit-learn: Machine Learning in Python. Journal of Machine Learning Research 12 (2011), 2825–2830. [19] Cristóbal Romero and Sebastián Ventura. 2020. Educational Data Mining and Learning Analytics: An Updated Survey. WIREs Data Mining and Knowledge Discovery 10, 3 (2020), e1355. doi:10.1002/widm.1355 [20] Peter J. Rousseeuw. 1987. Silhouettes: A Graphical Aid to the Interpretation and Validation of Cluster Analysis. J. Comput. Appl. Math. 20 (1987), 53–65. doi:10.1016/0377-0427(87)90125-7 [21] George Siemens. 2013. Learning Analytics: The Emergence of a Discipline. Amer-ican Behavioral Scientist 57, 10 (2013), 1380–1400. doi:10.1177/0002764213498851 [22] Robert Tibshirani, Guenther Walther, and Trevor Hastie. 2001. Estimating the Number of Clusters in a Data Set via the Gap Statistic. Journal of the Royal Statistical Society: Series B (Statistical Methodology) 63, 2 (2001), 411–423. doi:10. 1111/1467-9868.00293 [23] Sudhir Varma and Richard Simon. 2006. Bias in Error Estimation When Using Cross-Validation for Model Selection. BMC Bioinformatics 7 (2006), 91. doi:10. 1186/1471-2105-7-91 [24] Olaf Zawacki-Richter, Victoria I. Marín, Melissa Bond, and Franziska Gouverneur. 2019. Systematic Review of Research on Artificial Intelligence Applications in Higher Education—Where Are the Educators? International Journal of Educa-tional Technology in Higher Education 16, 1 (2019), 39. doi:10.1186/s41239-019-0171-0 8

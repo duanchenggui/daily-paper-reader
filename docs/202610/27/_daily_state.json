@@ -1,0 +1,105 @@
+{
+  "date": "20261027",
+  "date_label": "",
+  "generated_at": "2026-10-27 23:14:05 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2610.33467v1",
+      "route": "202610/27/2610.33467v1-a-personalized-and-adaptive-intelligent-tutoring-system-for-psychomotor-learning",
+      "title": "A Personalized and Adaptive Intelligent Tutoring System for Psychomotor Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "利用实时学习者状态实现个性化自适应智能辅导",
+      "first_seen_at": "2026-10-27 23:14:05 UTC",
+      "updated_at": "2026-10-27 23:14:05 UTC"
+    },
+    {
+      "paper_id": "2610.34659v1",
+      "route": "202610/27/2610.34659v1-adatutor-adaptive-tutoring-through-pedagogical-strategy-selection",
+      "title": "AdaTutor: Adaptive Tutoring through Pedagogical Strategy Selection",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "通过学习教学策略选择实现自适应辅导",
+      "first_seen_at": "2026-10-27 23:14:05 UTC",
+      "updated_at": "2026-10-27 23:14:05 UTC"
+    },
+    {
+      "paper_id": "2610.35609v1",
+      "route": "202610/27/2610.35609v1-making-reasoning-visible-configuration-aware-diagnostic-modeling-for-adaptive-scaffolding-in-structured-reasoning-tasks",
+      "title": "Making Reasoning Visible: Configuration-Aware Diagnostic Modeling for Adaptive Scaffolding in Structured Reasoning Tasks",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向自适应辅导支架的诊断建模",
+      "first_seen_at": "2026-10-27 23:14:05 UTC",
+      "updated_at": "2026-10-27 23:14:05 UTC"
+    },
+    {
+      "paper_id": "2610.33488v1",
+      "route": "202610/27/2610.33488v1-incremental-predictive-value-of-llm-tutoring-interactions-for-student-performance",
+      "title": "Incremental Predictive Value of LLM Tutoring Interactions for Student Performance",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "基于LLM辅导交互特征预测学生成绩的学习分析",
+      "first_seen_at": "2026-10-27 23:14:05 UTC",
+      "updated_at": "2026-10-27 23:14:05 UTC"
+    },
+    {
+      "paper_id": "2610.33694v1",
+      "route": "202610/27/2610.33694v1-embedding-based-educational-taxonomies",
+      "title": "Embedding-Based Educational Taxonomies",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向智能辅导系统的嵌入式教育分类体系",
+      "first_seen_at": "2026-10-27 23:14:05 UTC",
+      "updated_at": "2026-10-27 23:14:05 UTC"
+    },
+    {
+      "paper_id": "2610.33901v1",
+      "route": "202610/27/2610.33901v1-the-computational-assessment-stack-an-architecture-for-ai-native-measurement",
+      "title": "The Computational Assessment Stack: An Architecture for AI-Native Measurement",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "AI原生的自适应测评架构",
+      "first_seen_at": "2026-10-27 23:14:05 UTC",
+      "updated_at": "2026-10-27 23:14:05 UTC"
+    }
+  ]
+}

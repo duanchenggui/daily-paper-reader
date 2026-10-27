@@ -1,0 +1,599 @@
+Title: A Personalized and Adaptive Intelligent Tutoring System for Psychomotor Learning
+
+URL Source: https://arxiv.org/pdf/2610.33467v1
+
+Published Time: Tue, 27 Oct 2026 00:28:16 GMT
+
+Number of Pages: 13
+
+Markdown Content:
+> JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 1
+
+# A Personalized and Adaptive Intelligent Tutoring System for Psychomotor Learning 
+
+Madeleine S. Yuh and Neera Jain 
+
+Abstract —Intelligent tutoring systems (ITSs) have advanced learner motivation and personalization in cognitive domains, but extending these gains to psychomotor tasks remains challenging, particularly for maintaining motivation and tailoring instruction to individual learners. Existing psychomotor ITSs typically rely on learner models built before instruction or updated only once per module, leaving open the question of how an ITS should use ongoing, real-time assessments of learner cognitive state to drive finer-grained personalization. More specifically, during psychomotor learning, multiple tutoring objectives should be met, including calibrating the learner’s self-confidence to their performance, calibrating their workload according to the Yerkes-Dodson Law, and driving their skill progression towards higher learning stages. However, how to balance these tutor-ing objectives for individual learners, and how to adjust that balance as a learner progresses, remain open questions. This study proposes and evaluates an online personalization algorithm that continuously reprioritizes tutoring objectives to match the evolving needs of individual learners during training. Rather than treating tutoring objectives as equally weighted throughout instruction, the proposed actor-critic-inspired algorithm dynami-cally updates reward weights based on recent measures of learner self-confidence, workload, and performance. These personalized weights inform a multi-input, multi-output cognitive control framework that synthesizes learner-specific tutoring policies via model-based planning. The approach was evaluated in a human-subject study ( N = 40 ) using a 2D quadrotor landing task. Clustering analysis of the learned reward weights revealed distinct prioritization patterns across learners, indicating that the algorithm captures heterogeneity in learner needs and provides a principled mechanism for individualized instructional adaptation. Learners whose reward weights shifted more substantially over training tended to achieve higher final performance, and those whose weights consistently emphasized workload calibration achieved the strongest outcomes overall. These findings contribute new technical knowledge on online learner modeling and control-based personalization in psychomotor ITSs, while demonstrating how dynamically adaptive tutoring technologies can better sup-port learning by aligning instructional decisions with learners’ evolving cognitive and performance states. 
+
+Index Terms —Adaptive and intelligent educational systems, personalized e-learning, psychomotor intelligent tutoring systems, reward shaping, learner modeling, cognitive state modeling, multi-objective optimization, reinforcement learning 
+
+I. I NTRODUCTION 
+
+Intelligent tutoring systems (ITS) aim to personalize edu-cation for learners by emulating human tutors through algo-rithmic frameworks that draw on models of human learning 
+
+> Manuscript received September 18, 2026; revised XXX XX, 20XX. (Cor-responding author: Madeleine S. Yuh) Madeleine S. Yuh and Neera Jain are with the School of Mechanical Engineering, Purdue University, West Lafayette, IN, 47906, USA (e-mail: myuh@purdue.edu; neerajain@purdue.edu).
+
+and data collected from the learner [1], [2]. ITSs have been successful in closing the feedback loop by considering learner behavior in cognitive learning domains such as language acquisition, computer programming, and mathematics [3]. In particular, many of these consider increasing learner motiva-tion by supporting self-efficacy, a learner’s self-perception of their competence and achievements [4], as increased learner self-efficacy has been consistently associated with improved learning performance and heightened learner motivation [4]. While ITSs have predominantly been used for cognitive learning domains, there have been several recent developments to advance ITSs designed for psychomotor tasks. A psychomo-tor task is defined as any motor action that is dependent on conscious mental processes [5]–[7]. Recent psychomotor ITS development has largely focused on structured knowl-edge representation and the design of adaptive, self-improving tutoring systems that enhance tutor–learner interaction. Selfit [8] enables users to self-report fatigue, motivation to train, sleep quality, and stress levels before each training session. During training, users may manually record exercise failures and report whether additional repetitions could have been performed, including the number of additional repetitions. After completing a session, users can evaluate the perceived difficulty of the training session. This information is then used by Selfit to update the training curricula. Another example is GIFT, the generalized intelligent framework for tutoring [6], which updates a model of the student using historical learner information, self-reports, performance data, and sensor-derived behavioral and physiological measures. In addition to this, the framework leverages a motivation assessment tool (MAT) over longitudinal training. Together, these measurements are utilized to inform GIFT on how to adapt via tutoring strategies according to the INSPIRE (Intelligent, Nurturant, Socratic, Progressive, Indirect, Reflective, Encouraging) model of tu-toring success [9]. In prior work [10], an alternative approach is proposed, in which learner engagement and motivation are decomposed into the underlying cognitive states of self-confidence and workload. Seminal learning literature indicates that self- confidence and workload directly influence self-efficacy. Additionally, these cognitive factors are widely recognized as key determinants of human–automation interaction quality [11]–[13]. Therefore, to model evolution during learning, a Markov Decision Process (MDP) framework is used to proba-bilistically capture the dynamics of self-confidence, workload, and learning stages characterized in by the authors in prior work [14]. The action space includes assistance provided during task execution and the tone of the formative feedback delivered after each task attempt. The MDP framework enables 0000–0000/00$00.00 © 2026 IEEE arXiv:2610.33467v1 [eess.SY] 24 Oct 2026 JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 2
+
+the representation of qualitative tutoring objectives through reward function design, providing a quantitative basis for syn-thesizing instructional policies that address multiple learning objectives. Despite these advancements, existing psychomotor ITS are not fully realizing the goal of personalization, particularly when it comes to adaptation to achieve cognitive objectives. Supporting learner motivation in this setting requires online assessment of learner self-efficacy along with targeted inter-ventions that can effectively influence the learner. Although researchers have recognized the need for intelligent tutoring systems (ITSs) to adapt to human cognitive behavior in cog-nitive learning domains [1], [3], [15], [16], an open question remains: how should an ITS use these ongoing assessments to improve personalization strategies in psychomotor domains? 
+
+Currently, personalization requires an initial model of the individual student, like that provided by the aforementioned motivational assessment tool in GIFT [9] and the self-reports collected by Selfit [17]. Both are implemented before instruc-tion, or can also be implemented once per distinct module or task. However, the personalization of psychomotor ITSs could benefit from more frequent online updates to the model of student behavior , especially as psychomotor tasks increase in complexity. Furthermore, the tutoring policies employed by these psychomotor ITS should be updated according to the evolving needs of a given student by leveraging adaptive con-trol methods. This allows online updates to both the model and the policies tutoring agents use when helping the learner and would further enhance the tutoring strategies chosen by current ITSs. One example is adapting how and when information is presented by the ITS according to an individual’s learning style [18]. The contribution of this paper is an adaptive algorithm that updates the a psychomotor ITS tutoring policy via reprioriti-zation of tutoring objectives during the learning process for each learner. The actor-critic algorithm from reinforcement learning inspires the algorithm and considers both performance and cognitive states (self-confidence and mental workload) to determine how well the student and ITS interaction is meeting tutoring objectives. This is then used to solve for reward weights, in which the weights represent the prioritizations of each tutoring objective. The proposed algorithm leverages a learner model and multi-objective tutoring policy designed for psychomotor ITS described in the authors’ prior work [10], [19]. The main research questions we answer are: (RQ1) Does the algorithm give rise to distinct patterns in the tutoring objective weights across all learners? (RQ2) Do the reward weights dynamically change to adapt to the learner’s needs? 
+
+(RQ3) Is the personalization algorithm successful in prioritiz-ing the tutoring objectives learners need? Our findings show that the personalization algorithm produces distinct patterns in the tutoring objective prioritization across learners. Through statistical analysis, the algorithm is shown to appropriately prioritize tutoring objectives according to the learners’ needs. The paper is organized in the following order. The necessary preliminaries, including the chosen psychomotor task, learning metrics, and model training, are described in Section II. We then describe policy synthesis, followed by further detail on personalization in Section III. In Section IV, we describe the experiment implemented to evaluate the proposed personaliza-tion. Data processing and results are described in Section V, followed by a discussion of the results in Section VI. Finally, conclusions and comments for future work are in Section VII. II. P RELIMINARIES 
+
+In this section, we provide the necessary background for the reader. First, we describe the psychomotor task considered in this work in Section II-A, followed by the definition of two key learning metrics for the task in Section II-B. We then describe the model training approach employed to obtain a learner model capturing the dynamics of self-confidence, workload, and learning stage progression. These preliminaries are based upon existing work by the authors [10], [14], [19]. 
+
+A. Psychomotor Task: 2D quadrotor landing simulator 
+
+The psychomotor task considered in this work is a 2D quadrotor landing simulator. The learner’s objective is to safely guide the quadrotor onto a landing pad while satisfying constraints on its speed ( |v| ≤ 15 ms ) and roll angle ( |ϕ| ≤ 5◦), using the desktop simulator shown in Fig. 1a. The quadrotor’s state consists of its position ( x, y), velocity ( ˙x, ˙y), roll angle ϕ,and roll angular velocity ˙ϕ. Participants control the quadrotor through a T.Flight Hotas 4 controller, using the throttle to command thrust force, u1, and the joystick to command roll angular acceleration, u2. A landing is classified as safe if the quadrotor reaches the pad within the speed and roll angle limits and as unsafe if it reaches the pad but violates one or both of these conditions. If the quadrotor crashes before reaching the pad, the attempt is considered unsuccessful .During each trial, the participant either lands the quadrotor entirely on their own ( manual control mode, θof f ) or receives automation assistance ( shared control mode, θon ). In manual mode, the participant has full control over the quadrotor’s thrust force and roll angular acceleration inputs. Conversely, in shared control mode, the participant’s inputs are supplemented by inputs from automation consisting of a linear-quadratic regulator that tracks a reference trajectory derived from expert demonstrations, using a linear time-invariant model of the quadrotor dynamics together with a quadratic cost function that drives all quadrotor states toward zero [20]. After each landing attempt, learners receive negative, neu-tral, or positive formative feedback generated using GPT-4o [21], following the approach of Jensen et al. [22], who showed that AI-generated formative feedback can meaning-fully improve learning outcomes. The automation assistance and feedback tone are controllable inputs that the ITS can adjust before each trial of the task. 
+
+B. Online Quantification of Learning 
+
+To quantify learning in the psychomotor task online (i.e., after each trial), we employ two complementary metrics. The first is a discrete-valued metric defined in terms of psychomo-tor learning stages that is well-suited for a Markov decision process model. The second is a continuous-valued measure JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 3
+
+(a) 2D quadrotor landing simulator. (b) Quadrotor position trajectories for canonical distribu-tions of each learning stage.  
+
+> Fig. 1. The designed psychomotor task.
+
+based on a scoring function that enables gradient descent-based policy updates. We describe each metric and its utility in the overall ITS in the subsections that follow. 
+
+1) Discrete-valued Learning Stage Classification: The Dreyfus model of skill acquisition learning stages was first proposed by [23] as a means of characterizing learning pro-gression in psychomotor tasks by outlining five sequential stages of learning a skill and has evolved in the decades since. Prior work [14] developed a classifier for determining a participant’s learning stage after completing a trial of the quadrotor landing task based on trajectory data associated with task execution. Specifically, the first four stages of the five-stage learning theory model proposed by Dreyfus [23] are applied to the quadrotor landing task: novice (learning stage 1), advanced beginner (learning stage 2), intermediate (learning stage 3), and competent (learning stage 4). Features of the quadrotor dynamics as well as feasible landing types for each learning stage are summarized as follows for the reader’s benefit.  
+
+> •
+
+Learning stage 1 corresponds to the novice learner, who is still decomposing the task and developing an understanding of the overall goal. At this stage, the learner struggles to stabilize the quadrotor, and feasible landings are limited to unsuccessful or unsafe outcomes.  
+
+> •
+
+Learning stage 2 corresponds to the advanced beginner ,who begins developing strategies, identifying sub-tasks, and recognizing cues that indicate instability. The learner can now stabilize the quadrotor and complete landings, though the resulting trajectories remain inefficient and inconsistent. Feasible landings at this stage include un-successful, unsafe, and safe landings.  
+
+> •
+
+Learning stage 3 corresponds to the competent learner, who refines their strategy, prioritizes among sub-tasks, and shows increasing consistency, though still under a high attention load. The learner can control the quadro-tor and produces less variable trajectories, with feasible landings limited to unsafe and safe outcomes.  
+
+> •
+
+Learning stage 4 corresponds to the proficient learner, whose strategy has become fixed and continues to im-prove with practice, accompanied by a decreasing atten-tion load. The learner maintains control and lands the quadrotor consistently, producing efficient trajectories, with safe landings as the only feasible outcome. Each learning stage definition is quantified using a repre-sentative distribution of trajectories associated with that stage; example trajectories for each learning stage are shown in Fig. 1b. These trajectories capture the full quadrotor states of position ( x, y), velocity ( ˙x, ˙y), roll angle ϕ, and roll angular velocity ˙ϕ together with the thrust force input u1 and roll angular acceleration input u2. Each of these distributions is represented as a kernel embedding within a reproducing kernel Hilbert space, from which a learning stage classifier is built. For a detailed description of the development of the classifier, see [14]. 
+
+2) Continuous-valued Performance Score: A gamification approach is utilized to define a continuous-valued scoring function that is better suited for online policy adaptation than the discrete characterization of learning progression provided by the learning stage definitions. The total score S is given by 
+
+S = St,p + St,v + St,θ + St,M M D LS 4
+
+4 × 10 . (1) where the position score, velocity score, roll angle score, and proficiency score for each trial t are given by St,p , St,v , St,θ ,and St,M M D LS 4 , respectively. The position, velocity, and roll angle scores quantify how close the landing conditions of a learner’s performance are to the safe landing conditions. The proficiency score quantifies how similar one’s landing attempt is to those of proficient learners (learning stage 4) based on trajectory data representative of proficient learners. The individual score components are defined as follows: 
+
+St,p =
+
+
+
+100 , unsafe or safe landing 
+
+100 
+
+
+
+1 −√x2 
+
+> t+y2
+> t
+> 45 .2
+
+
+
+, unsuccessful (2) 
+
+St,v = 100 
+
+
+
+1 − 11 + e −(vt−8.5) 2.0
+
+
+
+(3) 
+
+St,θ = 126 .4 1 − 11 + e −| θk |− 20 .0) 15 .0
+
+!
+
+. (4) JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 4
+
+St,M M D LS 4 =
+
+(
+
+100 , if M M D LS 4,t  
+
+> 1.5
+
+> 1 
+
+> M M D LS 4,t
+> 1.5
+
+× 100 , else .
+
+(5) Eqns. (2)–(4) are defined using Sigmoid functions that are parameterized such that the total score of 750 out of 1000 points is indicative of someone who has successfully landed the quadrotor, albeit not in a manner that is representative of a canonically proficient learner. In Eqn. (5), M M D is the maximum mean discrepancy [24] between the landing attempt trajectory and canonical distribution representing learning stage 4 M M D LS 4,t .
+
+C. Human Learner Model 
+
+To design an optimal tutoring policy and adapt it online, we require a model of the human learner. Given that the tutoring objectives of interest rely on knowledge of the learner’s self-confidence, workload, and learning progression, we utilize a Markov decision process (MDP) model that captures stochastic transitions between these learner states. The model is based on a previously developed and validated framework [10] and is summarized here for completeness. An MDP is defined by the 5-tuple (S, A, T , R, γ ), where S denotes a finite set of states and A a finite set of actions. The transition function T
+
+represents the probability of transitioning to the next state s′
+
+given the current state s and action a. The MDP framework is particularly useful for designing a tutoring policy because tutoring objectives can be captured using the reward function 
+
+R(s, a ), which is explicitly a function of the learner’s states. The model captures the dynamics of cognitive states of self-confidence and workload, as well as a learning progression state defined by learning stage. Each state is treated as inde-pendent, allowing separate models that map the actions θ and 
+
+τ onto each state to be trained independently. Moreover, the transition probabilities for all state combinations are given by 
+
+T (s′|s, a ) = 
+
+T (s′ 
+
+> SC
+
+|sSC , a θ , a τ )T (s′ 
+
+> W
+
+|sW , a θ , a τ )T (s′ 
+
+> LS
+
+|sLS , a θ , a τ ) .
+
+(6) This independence assumption has been supported previously by [10]. The self-confidence and workload states, sSC and 
+
+sW respectively, are each discretized into three levels of low, medium and high. The discretization thresholds are set at the 33% and 66% 
+
+quantiles of the self-reported data, which is collected on a 0– 100 numerical scale; each self-report is then sorted into its corresponding discrete state based on these thresholds. The learning stage MDP instead defines three states sLS : learning stage 1 (LS 1), learning stage 2 (LS 2), and a combined category for learning stages 3 and 4 ( LS 3,4). Stages 3 and 4 are merged into a single category by design, due to the similarity of quadrotor trajectory behavior in both stages. Across all models, the action set represents the decisions available to the tutoring agent. The automation action aθ
+
+indicates whether within-trial automation assistance is off (θof f ) or on ( θon ), while the feedback tone action aτ indicates whether the feedback delivered is negative ( τneg ), neutral (τneu ), or positive ( τpos ). For the reader’s reference and convenience, we describe the model training method in Appendix A. III. T UTORING POLICY DESIGN AND ADAPTIVE 
+
+PERSONALIZATION 
+
+In order to personalize the psychomotor tutoring policy to individual learners, we need a tutoring policy structured in a way that enables adaptation, as well as the adaptation algorithm itself. In this section, we first introduce the design of a weighted reward function that captures the three tutoring objectives of interest. We then propose an algorithm for adapt-ing the weights in the reward function based on individual performance over consecutive trials. 
+
+A. Reward Function Design and Policy Training 
+
+We aim to achieve the following three tutoring objectives with a psychomotor ITS: (1) calibrating self-confidence to learning stage; (2) calibrating workload in accordance with the Yerkes-Dodson law [25]; and (3) rewarding advancement in learning stages from novice toward proficient. The first two objectives are motivated by the self-efficacy literature [26]– [29], which holds that greater self-efficacy makes learners more realistically self-aware about their progress and accom-plishments, in turn boosting performance and motivation [4], [29]. Maintaining appropriately calibrated self-confidence and workload levels are thus both components of self-efficacy. The third objective explicitly encourages progression through the learning stages. Therefore utilize a multi-objective and weighted reward function ¯R(s, a ) defined as 
+
+¯R(s, a ) = α1R1 + α2R2 + α3R3 , (7) where α1, α2, and α3 are weights reflecting the relative priority assigned to each tutoring objective, and R1, R2, and 
+
+R3 are the components of the total reward corresponding to three tutoring objectives. For brevity, detailed descriptions of 
+
+R1, R2, and R3 are provided in Appendix A. The optimal policy is computed using the Bellman optimality equations [30], [31]. The action-value function Q(s, a ) is given by 
+
+Q(s, a ) = R(s, a ) + γ X
+
+> s′∈S
+
+T (s′|s, a ) X
+
+> a′∈A
+
+Q(s′, a ′) (8) where T (s′|s, a ) and R(s, a ) correspond to Eqn. (6) and Eqn. (7), respectively. The optimal policy π(a|s) is then obtained by selecting, for each state, the action that maximizes 
+
+Q(s, a ). As discussed in the Introduction, different learners may require more emphasis on one tutoring objective based on their individual characteristics. Moreover, even for the same learner, the appropriate prioritization will change over time. This motivates the design of a reward weight adaptation scheme, discussed next. 
+
+B. Reward Weight Adaptation Algorithm 
+
+To update the reward weights online, one may initially turn to online reinforcement learning (RL) algorithms such as actor-critic [32]. However, in the case of the psychomotor ITS, the available dataset is not well-suited for online reinforcement JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 5
+
+learning. First, the data is sparse and collected in short, fixed-length episodes (e.g., the most recent t trials), which limits the ability to perform long-horizon credit assignment or reliably estimate value functions from interaction data alone. Second, the data are generated under a restricted set of previously deployed policies, resulting in limited state– action coverage and insufficient exploration for stable policy improvement. Third, learner behavior is inherently variable and non-stationary, as performance, self-confidence, and work-load evolve, violating the stationarity assumptions commonly required for RL. Finally, the human-in-the-loop nature of the system makes aggressive exploration undesirable, as frequent or suboptimal policy updates may negatively impact learning outcomes and user experience. To address these challenges, we propose a data-driven reward re-weighting approach that leverages recent observa-tions to adapt the relative importance of tutoring objectives, followed by model-based Q-iteration to compute the corre-sponding policy. This framework can be interpreted as an actor–critic-inspired architecture, in which the reward weights 
+
+α serve as high-level actor parameters that modulate the reward structure underlying policy optimization, while the objective functions (described in Sec. III-B1) computed from recent learner data provide a critic-like signal that evaluates the extent to which the tutoring objectives are satisfied. Unlike classical actor–critic methods, however, policy updates are not performed through online interaction; instead, the policy is recomputed via model-based planning under the learned reward function, resulting in a more stable and data-efficient approach. 
+
+1) Objective Function Definition: To adapt the relative prioritization of tutoring objectives, we define three objective loss functions V1, V2, V3 that correspond directly to the reward components R1, R 2, R 3. These objective functions encode the same three tutoring objectives defined in the reward function and provide a differentiable signal for adjusting the reward weights. We utilize self-reported self-confidence SR SC and self-reported workload SR W and scaled score J. Scaled score 
+
+J is the total score S (Eqn. (1)) divided by 10, such that self-reported self-confidence, self-reported workload, and scaled score are all in the range [0 , 100] . The objective functions are computed from recent trial history, specifically the last ten trials, using the empirical mean of self-reported self-confidence SR SC , empirical mean of self-reported workload 
+
+SR W , and empirical mean of scaled score J, together with the scaled score standard deviation σJ .The first objective function aligns learner self-confidence with observed performance and is defined as the squared difference of SR SC and J,
+
+V1 = (SR SC − J)2, (9) such that both over-confidence and under-confidence are pe-nalized. The second objective function promotes an inverse relationship between workload and performance. For example, as learners gain proficiency in executing the skill of landing the quadrotor, the cognitive workload should decrease. We take a similar approach to Eqn. (9) by taking a squared difference. Therefore, we define V2 as 
+
+V2 =  SR W − (100 − J)2 . (10) The third objective function aims to drive learners’ perfor-mance to exceed a desired proficiency threshold while main-taining consistent task execution across trials. It is defined using a rectified linear unit (ReLU) function-based penalty [33] for insufficient performance, combined with a variance penalty, given by 
+
+V3 = max(0 , ζ − J)2 + λσ J , (11) where ζ denotes the desired performance threshold and λ
+
+controls the strength of the variance penalty. This formulation encourages learners to maintain both high and consistent performance. 
+
+2) Reward Weight Adaptation via Gradient Descent: Rather than minimizing a weighted sum of the objective functions directly, we first convert the functions into a target priority distribution over reward components. This formulation ensures that if a given objective is not being met, its reward weight is increased , thereby increasing the influence of under-satisfied tutoring objectives in subsequent policy optimization. Specif-ically, let ˜α = [˜ α1, ˜α2, ˜α3]⊤ denote the target reward-weight distribution induced by V1, V2, and V3, where 
+
+˜αi = exp( κVi)
+
+P3 
+
+> j=1
+
+exp( κVj ) , i ∈ { 1, 2, 3}, (12) and κ > 0 is a parameter that controls how strongly the ob-jective least satisfied dominates the target distribution. Under this construction, larger values of Vi yield larger target weights 
+
+˜αi, where i denotes the tutoring objective. The learned reward weights are constrained to form a convex combination such that α1 + α2 + α3 = 1 , αi ≥ 0, and are parameterized using a softmax transformation of unconstrained parameters given by α = softmax( z).To obtain interpretable reward-weight updates, we optimize 
+
+α so that it tracks the target distribution while remaining close to a prior reward-weight distribution αprior . Therefore, the loss function used for optimizing the tutoring objective weights is 
+
+Lα = DKL (α ∥ ˜α) + β D KL (α ∥ αprior ), (13) where DKL (·) denotes the Kullback–Leibler divergence [34] and β ≥ 0 controls the strength of regularization toward the prior distribution. This formulation serves two purposes. First, the term DKL (α ∥ ˜α) drives the learned reward weights to-ward the priority distribution, ensuring that tutoring objectives that have not been met receive greater emphasis. Second, the prior regularization term discourages abrupt shifts in reward priorities to promote continuity across learner interactions. Reward-weight adaptation is completed via gradient descent applied to the unconstrained parameter vector z such that 
+
+z(k+1) = z(k) − η∇zLα(α(k)), (14) where η > 0 is the learning rate. This procedure separates tutoring objective prioritization from policy optimization. Reward weights are first adapted JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 6
+
+using recent learner data, after which the resulting reward function Rα is used within a model-based Q-iteration pro-cedure to compute the optimal action-value function Q⋆ and the corresponding tutoring policy π⋆. Algorithm 1 depicts the pseudo-code of the entire process used to optimize tutoring objective weights. 
+
+Algorithm 1 Reward weight learning followed by Q-iteration                         
+
+> Require: Recent trial data D={(SR SC,i ,SR W,i , J i)}ki=1 ; reward components
+> {R1, R 2, R 3}; discount factor γ; transition model T(s′|s, a ); prior weight vector αprior ; learning rate η, gradient steps E; performance threshold τ; variance penalty λ; temperature parameter κ; KL regularization coefficient β
+> Ensure: Learned weights α⋆, weighted reward Rα⋆, optimal action-value function
+> Q⋆, and policy π⋆
+
+1: Compute empirical summaries: 
+
+2: SR SC ← 1 
+
+> k
+> Pki=1 SR SC,i
+
+3: SR W ← 1 
+
+> k
+> Pki=1 SR W,i
+
+4: J ← 1 
+
+> k
+> Pki=1 Ji
+
+5: σJ ← Std( {Ji}ki=1 )
+
+6: Compute objective functions: 
+
+7: L1 ← (SR SC − J)2
+
+8: L2 ← (SR W − (100 − J)) 2
+
+9: L3 ← max(0 , τ − J)2 + λσ J
+
+10: Construct target weight distribution: 
+
+11: ˜αi ← exp( κLi)       
+
+> P3
+> j=1 exp( κLj),i∈ { 1,2,3}
+
+12: Initialize parameters: 
+
+13: Initialize logits z(0) ∈ R3
+
+14: for e = 0 to E − 1 do 
+
+15: α(e) ← softmax( z(e))
+
+16: Lα ← DKL (α(e)∥ ˜α) + βD KL (α(e)∥αprior )
+
+17: g ← ∇ z Lα
+
+18: z(e+1) ← z(e) − ηg 
+
+19: end for 
+
+20: α⋆ ← softmax( z(E))
+
+21: Construct weighted reward: 
+
+22: Rα⋆ (s, a ) ← α⋆     
+
+> 1R1(s, a ) + α⋆
+> 2R2(s, a ) + α⋆
+> 3R3(s, a )
+
+23: Run Q-iteration: 
+
+24: Initialize Q(0) (s, a )
+
+25: for t = 0 to T − 1 do 
+
+26: for all (s, a ) do 
+
+27: Q(t+1) (s, a ) ← Rα⋆ (s, a ) + γ P    
+
+> s′T(s′|
+> s, a ) max a′Q(t)(s′, a ′)
+
+28: end for 
+
+29: end for 
+
+30: Q⋆ ← Q(T )
+
+31: π⋆(s) ← arg max a Q⋆(s, a )
+
+32: return α⋆, R α⋆ , Q ⋆, π ⋆
+
+IV. H UMAN USER STUDY 
+
+With the proposed reward-weight adaptation algorithm and associated tutoring policy, we seek to answer the following research questions: (RQ1) Does the algorithm give rise to distinct patterns in the tutoring objective weights across all learners? (RQ2) Do the reward weights dynamically change to adapt to the learner’s needs? (RQ3) Is the personalization algorithm successful in prioritizing the tutoring objectives learners need? To do this, we design and conduct a user study in which participants learn to land the quadrotor in the 2D simulator while receiving tutoring assistance guided by Algorithm 1. 
+
+A. Experiment Procedure 
+
+Participants complete the psychomotor task described in Section II-A. A flowchart depicting the sequence of events in the experiment is shown in Fig. 2. In the first two trials, participants complete the task manually and without formative feedback, providing a measurement of baseline manual perfor-mance. The next 30 trials are divided equally into three phases, where the initial position of the quadrotor changes in each phase; the sequence of the changes in position is randomized to remove ordering effects. At the beginning of Phase 1, the reward weights are initialized uniformly for every participant, and the associated tutoring policy is synthesized. The participant then completes one practice trial in manual mode before the tutoring policy is turned on for the next 7 trials. During these 7 trials, the policy determines whether the automation assistance should be on or off ( aθ ) at each trial as well as what tone of feedback (aτ ) should be used when providing formative feedback to the participant. Recall that after each trial t, participants receive feedback on their previous landing attempt. This includes the time it took to land the quadrotor, the final speed and roll angle, and the achieved landing type. Additionally, the partici-pants receive their total score S out of 1000 points. Participants are then asked to self-report their confidence in achieving a safe landing with assistance together, as well as their perceived mental workload during the landing attempt. For the 9th and 10th trials of Phase 1, the participant again completes two trials in manual mode. At this stage, Algorithm 1 is executed to update the reward weights, after which a new tutoring policy is synthesized for each participant using the Phase 1 data. For this experiment, ζ = 85 in Eqn. (11). This value is chosen based on the experimental design in which a safe landing, with a trajectory that differs substantially from expert behavior, yields at most a score of 750 /1000 . Therefore, a threshold of 850 /1000 indicates that the learner’s trajectory is beginning to resemble that of a proficient operator. The scaling parameter κ of Eqn. (12) is set to 0.25 so that the least satisfied objective receives sufficient emphasis in the reward-weight vector. Parameter β in Eqn. (13) is set to 0.01 to allow the reward weights to adapt more rapidly to each learner’s needs. Phases 2 and 3 are conducted similarly to Phase 1, with the only change being the initial position of the quadrotor on the screen and the implemented policy being based on an updated reward-weight vector. After Phase 3 ends, the participant completes 5 trials in manual mode without formative feedback to provide a measure of their performance manually landing the quadrotor. 
+
+B. Participants 
+
+In total, 40 participants (10 male, 29 female, 1 non-binary) completed the user study with ages ranging from 18 to 70 years ( μ = 28 .8, σ = 13 .4). All participants were compensated $20/hr. The Institutional Review Board at Purdue University, USA, approved the study. 
+
+C. Apparatus 
+
+The quadrotor landing training simulator was developed on Python 3.12.0 using Pygame 2.6.1. The simulator was adapted for this study based on the platform described in [20] and uses a Thrustmaster T. Hotas 4 with joystick and throttle to control the quadrotor. JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 7 
+
+> Fig. 2. Experiment Flowchart
+
+D. Data Collection 
+
+For each participant, the collected trial-by-trial data in-cludes self-reported self-confidence, self-reported workload, and achieved total score. From this, we use data from the evaluation trials (the last five trials, all completed manually) to calculate the following metrics. Final performance is the mean score of the last five trials completed manually. Change in performance is the difference between the mean score of the last five trials and the mean score of the first two trials, which are all completed manually. The final self-reported self-confidence and workload are computed as the mean of the self-reports collected during these final five manual trials. In addition to the trial-by-trial data, for each participant, the learned reward-weight vectors α = [ α1, α 2, α 3] obtained after each phase are recorded. The reward-weight vector learned after Phase 1 and implemented during Phase 2 is denoted α(1) .Likewise, the reward-weight vectors learned after Phases 2 and 3 are denoted α(2) and α(3) , respectively. V. D ATA PROCESSING AND STATISTICAL ANALYSIS 
+
+To identify patterns in the learned reward-weight vectors determined by Algorithm 1 across all participants, we apply 
+
+k-means clustering to the learned reward-weight vectors α(i)
+
+for i = 1 , 2, 3 obtained after phases 1-3. Recall that each vector represents the relative prioritization of the reward components, and each participant contributes three reward-weight vectors, one learned after each phase of the experiment. Changes in cluster assignment between consecutive phases are interpreted as shifts in the underlying tutoring strategy. The number of clusters k is determined using silhouette analysis [35], with the elbow method [36] used for secondary verification. The silhouette method evaluates clustering quality by comparing, for each data point, its average distance to points within its assigned cluster against its distance to points in the nearest neighboring cluster. The resulting silhouette score lies in the range [−1, 1] , where higher values indicate well-separated and cohesive clusters. The optimal k is selected based on the average silhou-ette score, with preference given to the smallest k that achieves near-maximum performance (within the 95% thresh-old of the maximum performance) to balance clustering quality and model simplicity. The elbow method exam-ines the within-cluster sum of squares (WCSS), defined as Pkj=1 
+
+P 
+
+> xi∈C j
+
+∥xi −μj ∥2, as a function of k, and identifies the point at which additional clusters yield diminishing reductions in variance. This “elbow” provides a structural indication of an appropriate number of clusters and is used to verify the consistency of the silhouette-based selection. The results are shown in Fig. 3. Although the elbow method suggests k = 4 
+
+clusters and the silhouette method suggests k = 3 clusters, the discrepancy is limited to a single cluster, indicating that both methods capture a similar underlying structure. The resulting clusters are depicted in Fig. 4. We prioritize the silhouette-based selection, using k = 3 
+
+clusters, as it directly quantifies clustering quality through intra-cluster cohesion and inter-cluster separation (as opposed to the elbow method, which provides a heuristic assessment based on variance reduction and may yield less distinct transi-tion points). Cluster 1 represents prioritizing tutoring objective 1 of self-confidence calibration, cluster 2 represents prioritiz-ing tutoring objective 2 of workload calibration, and cluster 3 represents prioritizing tutoring objective 3 of progressing in learning stage. We leverage the resulting cluster centroids to determine the patterns of reward-weight vectors and categorize partic-ipants into one of four groups. From the 40 participants, nine participants have consistent reward-weight vectors that prioritize tutoring objective 1 (calibrating self-confidence). Eight participants have consistent reward-weight vectors that prioritize tutoring objective 2 (calibrating workload), and seven participants have consistent reward-weight vectors that prioritize tutoring objective 3 (rewarding forward progression in learning). Sixteen participants have reward-weight vectors that change such that the cluster to which those weights belong is different, indicating a fundamental shift in tutoring objective priority. For these participants, Table X in Appendix A lists the clusters that the reward-weight vectors α(1) and α(2) 
+
+were classified into, as well as their mean score, self-reported self-confidence, and self-reported workload in the five final evaluation trials completed manually. For brevity, we will refer to these different groups as the SC group, W group, LS group, and change group, respectively. Using these cluster-based group definitions, we perform JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 8
+
+(a) According to the silhouette tradeoff method, k = 3 
+
+has the highest silhouette value while minimizing the number of clusters. 
+
+(b) According to the elbow method, k = 4 . 
+
+> Fig. 3. k-means clustering verification.
+
+one-way ANOVA to determine whether final performance, change in performance, final self-reported self-confidence, and final self-reported workload differ across groups. The one-way ANOVA shown in Table I allows us to investigate whether there are statistically significant differences in metrics between groups of participants. This is followed by post hoc multiple-comparison tests to determine which groups differ from one another. As shown in Table I, there are significant differences                        
+
+> TABLE I SUMMARY OF ONE -WAY ANOVA RESULTS ACROSS OUTCOME VARIABLES .Variable df 1df 2F-value p-value Final Performance 336 4.1286 0.0129
+> Change in Performance 336 0.9578 0.4231 Final Self-Reported Self-Confidence 336 6.0819 0.0019
+> Final Self-Reported Workload 336 0.2877 0.8339
+
+in groups for the metrics of final performance and self-confidence. Therefore, post hoc multiple-comparison tests are conducted for both metrics. Tables II and III show the results of the multiple comparison test for final performance and final self-confidence, respectively. Each table lists the groups, their means μ, standard deviations σ, the mean difference between groups, the lower and upper confidence intervals (CI) of the differences between groups, and the significance of the comparison via p-value. For the reader’s convenience, we summarize the means and standard deviations of final performance, final self-reported self-confidence, and final self-reported workload in Table IV. VI. R ESULTS AND DISCUSSION 
+
+Here we answer and discuss the three research questions posed in this work. 
+
+A. RQ1: Does the algorithm give rise to distinct patterns in the tutoring objective weights across all learners? 
+
+Yes, distinct patterns in the tutoring objective weights across all learners are evident based on the clustering analysis presented in Section V. We first consider the case of three distinct clusters (Fig. 4a). Cluster 1 represents prioritiz-ing tutoring objective 1 of self-confidence calibration, cluster 2 represents prioritizing tutoring objective 2 of workload calibration, and cluster 3 corresponds to prioritizing tutoring objective 3, namely progression through the learning stages. In the case of four distinct clusters (Fig. 4b), we observe the same reward-weight vector patterns as those resulting from 
+
+k = 3 , with the addition of a fourth cluster which seems to more equally weight tutoring objectives 1 and 2 of self-confidence and workload calibration, respectively. In other words, this fourth cluster prioritizes cognitive state calibration more generally, relative to helping the learner progress in the learning stage. 
+
+B. RQ2: Do the reward weights dynamically change to adapt to the learner’s needs? 
+
+Yes. For some participants, the reward-weight vector changes after Phase 1, resulting in a dynamically updated tutoring policy that adapts to the learner’s needs. A partic-ipant is considered to exhibit a change in reward weighting if the reward-weight vectors learned for two consecutive phases are assigned to different clusters, as shown in Table X in Appendix A. Most participants in the change group achieve a mean final evaluation score above 750/1000 among the last five trials. This is indicative of safe landings according to the score design in Eqn. (1). The mean of the change group’s mean final evaluation scores among the last five trials is 814.39 with a standard deviation of 170.96 (Table II). Note that given the between-subjects design of the user study, we cannot explicitly determine whether a participant in the change group benefited from the updated tutoring policy relative to experiencing a JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 9
+
+(a) Resulting k = 3 clusters. (b) Resulting k = 4 clusters. 
+
+Fig. 4. k-means clustering results for the learned reward-weight vectors. Each reward-weight vector is defined by (α1, α 2, α 3), where α1 corresponds to the tutoring objective of self-confidence calibration, α2 corresponds to workload calibration, and α3 corresponds to progression through the learning stages. (a) Three-cluster solution selected using silhouette analysis. (b) Four-cluster solution obtained using the elbow method. Cluster 1 prioritizes self-confidence calibration, Cluster 2 prioritizes workload calibration, Cluster 3 prioritizes learning-stage progression, and the additional Cluster 4 in the four-cluster solution represents a balanced emphasis on self-confidence and workload calibration. The three-cluster solution was selected for subsequent analysis because it provides the best trade-off between cluster quality and model complexity. TABLE II PAIRWISE COMPARISONS FOR FINAL PERFORMANCE SCORE . S CORE IS DEFINED IN THE RANGE OF 0 TO 1000, AND A SCORE OF 750 IS REQUIRED FOR A SAFE LANDING . A SCORE OF 850 IS INDICATIVE THAT THE LEARNER ’S TRAJECTORY IS BEGINNING TO RESEMBLE THAT OF A PROFICIENT OPERATOR .Group 1 Group 2 μ1 σ1 μ2 σ2 Mean diff. Lower CI Upper CI p-value Change SC 814.39 170.96 793.27 107.95 21.121 -153.605 195.847 0.9879 Change W 814.39 170.96 933.95 35.24 -119.562 -301.143 62.018 0.3025 Change LS 814.39 170.96 651.66 235.37 162.730 -27.301 352.761 0.1155 SC W 793.27 107.95 933.95 35.24 -140.683 -344.447 63.081 0.2633 SC LS 793.27 107.95 651.66 235.37 141.610 -69.719 352.939 0.2878 W LS 933.95 35.24 651.66 235.37 282.293 65.262 499.323 0.0065 
+
+static one. However, the fact that participants in the change group did not have statistically different learning outcomes compared to the other groups (see Tables II and III) suggests that these participants benefited from the personalization. 
+
+C. RQ3: Is the proposed algorithm successful in prioritizing the tutoring objectives learners need? 
+
+The results suggest that the personalization algorithm successfully prioritizes tutoring objectives according to learner needs. This conclusion is supported by the statistical analysis described in Section V. First, we found no statis-tically significant difference among the groups for change in performance or final self-reported workload (Table I). Second, as shown in Tables II and III, pairwise comparisons between groups showed that with few exceptions, there is no statistically significant differences in final performance score or final self-reported self-confidence. This suggests that each learner benefited from the personalized tutoring policy they experienced. To further examine whether the proposed algorithm adapted the tutoring objectives correctly to each learner, we consider the analysis summarized in Table IV. Notably, the learning stage (LS) group exhibited the lowest mean final performance and the highest standard deviation of final performance among all groups, as shown in Table IV. The mean final score of 651.66 is near the midpoint of the scoring scale (500/1000), and so the LS group’s mean final self-confidence (55.29) and mean workload (52.00) are calibrated to performance according to the designed objective functions described in Eqns. (9) and (10). This is consistent with the interpretation that the LS group received reward weights prioritizing forward progression in learning, because the learning stage tutoring objective was the least met of the three objectives. 
+
+In contrast, the learners whose reward-weight vectors were biased toward workload calibration achieved the highest mean final scores and the lowest standard deviation across all groups. The W group achieved a mean final score of 933.95/1000 with a standard deviation of 35.24, indicating that learners in the W JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 10                                                                                                  
+
+> TABLE III PAIRWISE COMPARISONS FOR SELF -CONFIDENCE . S ELF -CONFIDENCE IS REPORTED ON A SCALE FROM 0TO 100. Group 1 Group 2 μ1σ1μ2σ2Mean diff. Lower CI Upper CI p-value Change SC 69.56 21.22 46.67 26.94 22.896 -1.207 46.998 0.0677 Change W69.56 21.22 88.50 13.42 -18.938 -43.985 6.110 0.1939 Change LS 69.56 21.22 55.29 21.55 14.277 -11.937 40.490 0.4675 SC W46.67 26.94 88.50 13.42 -41.833 -69.941 -13.725 0.0016
+> SC LS 46.67 26.94 55.29 21.55 -8.619 -37.771 20.533 0.8556 WLS 88.50 13.42 55.29 21.55 33.214 3.276 63.152 0.0248
+> TABLE IV MEAN AND STANDARD DEVIATIONS OF FINAL PERFORMANCE ,SELF -REPORTED SELF -CONFIDENCE ,AND SELF -REPORTED WORKLOAD .Group Mean Final Performance Final Performance Standard Deviation Mean of Final SR SC
+> Final SR SC
+> Standard Deviation Mean of Final SR W
+> Final SR W
+> Standard Deviation Change 814.39 170.96 69.56 21.22 54.75 25.69 SC 793.27 107.95 46.67 26.94 52.00 24.92 W933.95 35.24 88.50 13.42 45.75 20.70 LS 651.66 235.35 55.29 21.55 53.14 9.91
+
+group were most consistently able to achieve safe quadrotor landing trajectories consistent with learning stages 3 and 4, according to the score design in Eqn. (1). In fact, as shown in Table II, the significant pairwise comparison is between the W and LS groups, with the W group achieving a significantly higher mean final score than the LS group (the lowest and least consistent performing group). Consistent with achieving the highest performance and performance consistency in the eval-uation trials, the W group also reported the highest mean and lowest standard deviation of final self-reported self-confidence across all groups, as shown in Table IV. According to Table III, the W group achieved significantly higher final self-reported self-confidence than both the self-confidence (SC) and LS groups. However, the objective defined in Eqn. (10) targets low workload as performance increases; the W group reported a mean final workload of 45.75/100 with a standard deviation of 20.70, which is elevated relative to their high performance. 
+
+This miscalibration between workload and performance is consistent with the interpretation that the W group received a reward-weight vector prioritizing workload calibration throughout the experiment. 
+
+Finally, despite achieving the second-highest mean final performance of 793.27/1000 with a standard deviation of 107.95, indicative of unsafe and safe landings categorized in learning stages 2 and 3, the SC group reported substantially lower self-confidence than expected under calibrated condi-tions. According to Eqn. (9), a calibrated self-confidence for this level of performance would be approximately 80.00/100; however, the SC group self-reported a mean self-confidence of only 46.67/100 with a standard deviation of 26.94, the high-est standard deviation of self-reported self-confidence across all groups. For comparison, the W group, which achieved the highest mean final performance, reported a mean self-confidence of 88.50/100, closer to the value expected for the SC group given its performance level. As shown in Table III, the SC group self-reported significantly lower mean final self-confidence than the W group, further confirming this miscal-ibration. Because self-confidence was the least calibrated tutoring objective for this group, the SC group received a reward-weight vector prioritizing self-confidence calibra-tion throughout the experiment. 
+
+VII. C ONCLUSION 
+
+In this paper, we presented and evaluated an algorithm for personalizing tutoring assistance to individual learners by dynamically updating the relative prioritization of tutoring objectives within a multi-input, multi-output cognitive con-trol framework for psychomotor intelligent tutoring systems (ITSs). The three tutoring objectives considered are aligning self-confidence with performance, calibrating workload to performance, and promoting progression through psychomotor learning stages. We enable the tutoring agent to adapt to changes in a learner’s cognitive states and learning stage via an actor–critic-inspired architecture in which the reward weights serve as high-level actor parameters that shape pol-icy optimization, while tutoring objective-specific functions computed from recent learner data provide a critic-like signal. Unlike classical actor–critic methods, the policy is not updated through online interaction but instead recomputed via model-based planning under the learned reward function. Moreover, the algorithm overcomes limitations posed by the data re-quirements of traditional actor-critic reinforcement learning by using gradient descent to optimize the reward weight parameters. To evaluate the proposed adaptive tutoring algorithm, we designed and conducted a human user study. We showed, through k-means clustering, that the personalization algorithm did result in distinct patterns in the tutoring objective weights across all learners. Using these clusters, we identified which learners’ reward-weight vectors changed sufficiently to move them to a different cluster after each phase of the study. Participants whose learned reward-weight vectors changed sufficiently to transition between clusters generally achieved higher final performance than participants whose reward-weight vectors remained within the same cluster, with the exception of the workload-calibration group. JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 11 
+
+This was followed by a statistical analysis, which showed that the personalization algorithm successfully prioritized tu-toring objectives according to the observed needs of individual learners. A limitation of the results is the number of partici-pants; despite collecting data from a total of 40 participants, we could not control how many people were categorized into each cluster (and hence the groups defined based on these clusters). As a result, some groups contained relatively few participants, with the smallest groups containing only seven participants. Nevertheless, this work provides a computational framework and associated algorithms for achieving personalization during psychomotor learning and demonstrates, quantitatively, the benefits of this personalization. Possible directions for future work include a more extensive user study to further validate the efficacy of the proposed ITS, consideration of inter-dependencies between cognitive states and their influence on tutoring objectives, and personalization of the timescale on which reward weights are updated for individual learners. ACKNOWLEDGMENTS 
+
+This material is based upon work supported by the National Science Foundation under Award No. 1836952. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation. REFERENCES [1] B. P. Woolf, Building intelligent interactive tutors: Student-centered strategies for revolutionizing e-Learning . San Francisco, CA, USA: Morgan Kaufmann Publishers Inc., 2008. [2] S. Doroudi, “Mastery Learning Heuristics and Their Hidden Models,” in Artificial Intelligence in Education , ser. Lecture Notes in Computer Science, I. I. Bittencourt, M. Cukurova, K. Muldner, R. Luckin, and E. Mill´ an, Eds. Cham: Springer International Publishing, 2020, pp. 86–91. [3] E. Mousavinasab, N. Zarifsanaiey, S. R. Niakan Kalhori, M. Rakhshan, L. Keikha, and M. Ghazi Saeedi, “Intelligent tutoring systems: a sys-tematic review of characteristics, applications, and evaluation methods,” 
+
+Interactive Learning Environments , vol. 29, no. 1, pp. 142–163, jan 2021. [4] A. Bandura, Self-Efficacy: The Exercise of Control . New York, NY: W. H. Freeman, 1997. [5] J. Laine, T. Lindqvist, T. Korhonen, and K. Hakkarainen, “Systematic Review of Intelligent Tutoring Systems for Hard Skills Training in Virtual Reality Environments,” International Journal of Technology in Education and Science , vol. 6, no. 2, pp. 178–203, may 2022. [6] R. A. Sottilare and J. J. LaViola, “Extending Intelligent Tutoring beyond the desktop to the psychomotor domain,” in Proceedings of the 2015 Interservice/Industry Training, Simulation, and Education Conference (I/ITSEC) . Arlington, VA: National Training and Simulation Associa-tion, 2015. [7] O. C. Santos, “Training the Body: The Potential of AIED to Support Personalized Motor Skills Learning,” International Journal of Artificial Intelligence in Education , vol. 26, no. 2, pp. 730–755, jun 2016. [8] L.-M. Neagu, E. Rigaud, V. Guarnieri, M. Dascalu, and S. Travadel, “Selfit v2 – Challenges Encountered in Building a Psychomotor Intelli-gent Tutoring System,” in Intelligent Tutoring Systems , S. Crossley and E. Popescu, Eds. Cham: Springer International Publishing, 2022, pp. 350–361. [9] E. Lameier, L. Reinerman-Jones, G. Matthews, E. Biddle, and M. Boyce, “The Motivational Assessment Tool (MAT) Development and Valida-tion Study,” in Augmented Cognition: Intelligent Technologies , D. D. Schmorrow and C. M. Fidopiastis, Eds. Cham: Springer International Publishing, 2018, pp. 46–58. [10] M. S. Yuh and N. Jain, “Designing Cognitively-Aware Psychomotor Intelligent Tutoring Systems via Multi-Objective and Human-Centric Optimization,” in 2025 34th IEEE International Conference on Robot and Human Interactive Communication (RO-MAN) . Eindhoven, Nether-lands: IEEE, aug 2025, pp. 35–42. [11] V. Riley, “Operator reliance on automation: Theory and data,” in 
+
+Automation and human performance: Theory and applications , 1st ed., R. Parasuraman and M. Mouloua, Eds. Mahwah, NJ: CRC Press, jun 1996, pp. 19–35. [12] R. Parasuraman and M. Mouloua, Eds., Automation and human per-formance: Theory and applications , ser. Automation and human perfor-mance: Theory and applications. Hillsdale, NJ, US: Lawrence Erlbaum Associates, Inc, 1996. [13] R. Parasuraman and V. Riley, “Humans and Automation: Use, Misuse, Disuse, Abuse,” Human Factors: The Journal of the Human Factors and Ergonomics Society , vol. 39, no. 2, pp. 230–253, jun 1997. [14] M. S. Yuh, K. R. Ortiz, K. S. Sommer-Kohrt, M. Oishi, and N. Jain, “Classification of Human Learning Stages via Kernel Distribution Em-beddings,” IEEE Open Journal of Control Systems , vol. 3, pp. 102–117, 2024. [15] A. K. Er¨ umit and ˙ I. C ¸ etin, “Design framework of adaptive intelligent tutoring systems,” Education and Information Technologies , vol. 25, no. 5, pp. 4477–4500, sep 2020, accessed: 2026-06-09. [16] V. J. Shute and J. Psotka, “Intelligent Tutoring Systems: Past, present, and future,” Defense Technical Information Center, Fort Belvoir, VA, Tech. Rep., may 1994. [17] L.-M. Neagu, E. Rigaud, V. Guarnieri, S. Travadel, and M. Dascalu, “Selfit – An Intelligent Tutoring System for Psychomotor Development,” in Intelligent Tutoring Systems , ser. Lecture Notes in Computer Science, A. I. Cristea and C. Troussas, Eds. Cham: Springer International Publishing, 2021, pp. 291–295. [18] P. Phobun and J. Vicheanpanya, “Adaptive intelligent tutoring systems for e-learning systems,” Procedia - Social and Behavioral Sciences ,vol. 2, no. 2, pp. 4064–4069, jan 2010. [19] M. Yuh, “Designing Cognitively Aware Intelligent Tutoring Systems via Model-Based Cognitive Control,” 5 2026. [20] S. Byeon, D. Sun, and I. Hwang, “Skill-level-based Hybrid Shared Control for Human-Automation Systems,” in 2021 IEEE International Conference on Systems, Man, and Cybernetics (SMC) . Melbourne, Australia: IEEE, oct 2021, pp. 1507–1512. [21] OpenAI, “ChatGPT,” mar 2025. [Online]. Available: https://chatgpt.com [22] E. Jensen, S. Sankaranarayanan, and B. Hayes, “Automated Assessment and Adaptive Multimodal Formative Feedback Improves Psychomotor Skills Training Outcomes in Quadrotor Teleoperation,” in Proceedings of the 12th International Conference on Human-Agent Interaction , ser. HAI ’24. New York, NY, USA: Association for Computing Machinery, nov 2024, pp. 185–194. [23] S. E. Dreyfus, “The Five-Stage Model of Adult Skill Acquisition,” 
+
+Bulletin of Science, Technology & Society , vol. 24, no. 3, pp. 177–181, jun 2004. [24] A. Gretton, K. M. Borgwardt, M. J. Rasch, B. Sch¨ olkopf, and A. Smola, “A kernel two-sample test,” J. Mach. Learn. Res. , vol. 13, no. 1, p. 723–773, Mar. 2012. [25] R. Yerkes and J. Dodson, “The Relation of Strength of Stimulus to Rapidity of Habit Formation,” Journal of Comparative Neurology & Psychology , vol. 18, pp. 459–482, 1908. [26] R. B´ enabou and J. Tirole, “Self-Confidence and Personal Motivation,” in 
+
+Psychology, Rationality and Economic Behaviour: Challenging Standard Assumptions , ser. International Economic Association Series, B. Agarwal and A. Vercelli, Eds. London: Palgrave Macmillan UK, 2005, pp. 19– 57. [27] I.-C. Hung, K.-J. Chao, L. Lee, and N.-S. Chen, “Designing a robot teaching assistant for enhancing and sustaining learning motivation,” 
+
+Interactive Learning Environments , vol. 21, no. 2, pp. 156–171, apr 2013. [28] J. M. Keller, “Development and use of the ARCS model of instructional design,” Journal of instructional development , vol. 10, no. 3, pp. 2–10, sep 1987. [29] A. Bandura, “Self-efficacy: Toward a unifying theory of behavioral change,” Psychological Review , vol. 84, no. 2, pp. 191–215, 1977. [30] R. S. Sutton and A. G. Barto, Reinforcement learning: an introduction ,ser. Adaptive computation and machine learning. Cambridge, Mass: MIT Press, 1998. [31] A. Adhikari and J. Pitman, Data 140: Probability for Data Science .Berkeley, CA: Data Science Education Program, University of Califor-nia, Berkeley, 2022. JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 12 
+
+[32] V. Konda and J. Tsitsiklis, “Actor-critic algorithms,” in Advances in Neural Information Processing Systems , S. Solla, T. Leen, and K. M¨ uller, Eds., vol. 12. MIT Press, 1999. [33] J. Brownlee, “A Gentle Introduction to the Rectified Linear Unit (ReLU),” jan 2019. [34] S. Kullback and R. A. Leibler, “On Information and Sufficiency,” The Annals of Mathematical Statistics , vol. 22, no. 1, pp. 79–86, mar 1951. [35] P. J. Rousseeuw, “Silhouettes: A graphical aid to the interpretation and validation of cluster analysis,” Journal of Computational and Applied Mathematics , vol. 20, pp. 53–65, nov 1987. [36] GeeksforGeeks, “Elbow Method for optimal value of K in KMeans,” 2026. [Online]. Available: https://www.geeksforgeeks.org/ machine-learning/elbow-method-for-optimal-value-of-k-in-kmeans/ [37] MathWorks, “MATLAB optimization toolbox,” Natick, MA, 2026. [Online]. Available: https://www.mathworks.com/products/optimization. html 
+
+APPENDIX 
+
+Parameters for these self-confidence, workload, and learning stage MDP models were estimated by iteratively optimizing the initial and transition probabilities that maximize the likeli-hood of the observed state and action sequences. Optimization was performed with the genetic algorithm available in MAT-LAB’s Optimization Toolbox [37]. Both states and actions are recorded at each trial, and the likelihood was computed from the joint probability of the full state-action history through trial k, P(s0: k, a 1: k). Applying the chain rule together with the Markov property [30], [31] reduces this joint probability to 
+
+P(s0: k, a 1: k) = P(s0) ×
+
+> k
+
+Y
+
+> i=1
+
+P(si|ai, s i−1). (15) This expression gives the likelihood of the observed trajectory up through the final trial K, using the transition probabilities defined in Eqn. (6). A 5-fold cross-validation is implemented to train the model. The dataset was split into five randomly assigned folds, with four folds used for training and the remaining fold for testing. The procedure is repeated so that each fold serves as the test set once. The selected model achieved the highest combined log-likelihood across both the training and test partitions. For each model, the transition probabilities form a |S| × |S| × |A| array. With three states and six actions, each MDP model yields a 3 × 3 × 6 array encoding all 54 possible state transitions. As an illustration, Table V lists the transition probabilities T (SC ′|SC, θ on , τ pos ).
+
+TABLE V TRANSITIONS PROBABILITY T (SC ′|SC, a θ , a τ ) WHERE FEEDBACK TONE 
+
+τ IS POSITIVE AND ASSISTANCE θ IS BOTH OFF (LEFT ) AND ON (RIGHT ). Actions θof f , τ pos θon , τ pos 
+
+States SC ′ 
+
+> L
+
+SC ′ 
+
+> M
+
+SC ′ 
+
+> H
+
+SC ′ 
+
+> L
+
+SC ′ 
+
+> M
+
+SC ′
+
+> H
+
+SC L 0.705 0.243 0.0528 0.781 0.153 0.0660 
+
+SC M 0.207 0.632 0.161 0.176 0.725 0.0989 
+
+SC H 0.121 0.110 0.769 0.115 0.244 0.642 
+
+To confirm that the trained models were suitable for policy synthesis, their predictive accuracy was evaluated using multi-class receiver operating characteristic (ROC) analysis, com-paring the predicted self-confidence, workload, and learning-stage classifications against participants’ self-reported cogni-tive states and observed learning stages. Additional details of the validation procedure are available in [10]. Each tutoring objective is associated with a reward function grounded in established learning-science literature. The reward functions are adapted from the formulation presented in [10] and are reproduced here for completeness. 
+
+Objective 1: The reward R1(s, a ) combines two equally weighted components: a calibration term based on the automation-assistance action, R(sSC , s LS , a θ ), and a calibra-tion term based on the feedback-tone action, R(sSC , s LS , a τ )
+
+(Table VI). Both terms push the learner’s self-reported con-fidence state toward agreement with their actual learning stage. Consider R(sSC , s LS , a τ ) as an example: a learner who reports high confidence while still at learning stage 1, a case of severe overconfidence, receives a reward of 0.60 for negatively toned feedback versus only 0.20 for positively toned feedback, reflecting that corrective tone is more appropriate in this case. Similarly, leaving automation off yields a higher reward than turning it on, such that the learner is shown that they perform worse without assistance. Table VII gives the resulting combined values for R1.
+
+TABLE VI COMPONENT REWARD FUNCTIONS R(sSC , s LS , a θ ) AND 
+
+R(sSC , s LS , a τ ) USED TO CALIBRATE SELF -CONFIDENCE TO LEARNING STAGE . G REEN HIGHLIGHTING INDICATES CALIBRATED CASES , WHILE YELLOW AND RED HIGHLIGHTING INDICATE LIGHT AND SEVERE MIS -CALIBRATION , RESPECTIVELY .
+
+R(sSC , s LS , a θ ) R(sSC , s LS , a τ )
+
+sLS sSC θof f θon τneg τneu τpos 
+
+LS 1
+
+SC L 0.75 1.0 0.10 0.50 0.40 
+
+SC M 0.75 0.50 0.50 0.30 0.20 
+
+SC H 0.50 0.25 0.60 0.30 0.20 
+
+LS 2
+
+SC L 0.50 0.75 0.20 0.30 0.50 
+
+SC M 0.75 0.75 0.10 0.50 0.40 
+
+SC H 0.75 0.50 0.50 0.30 0.20 
+
+LS 3,4
+
+SC L 0.25 0.50 0.10 0.30 0.60 
+
+SC M 0.50 0.75 0.10 0.40 0.50 
+
+SC H 1.0 0.75 0.10 0.50 0.40 TABLE VII REWARD R1(s, a ) FOR CALIBRATING SELF -CONFIDENCE TO LEARNING STAGE . G REEN HIGHLIGHTS REPRESENT CASES OF CALIBRATION , AND YELLOW AND RED HIGHLIGHTS REPRESENT CASES OF LIGHT AND SEVERE MIS -CALIBRATION , RESPECTIVELY .
+
+TONE aτ : τneg τneu τpos 
+
+ASSIST aθ : θof f θon θof f θon θof f θon 
+
+LS 1
+
+SC L 0.43 0.65 0.78 1.00 0.70 0.91 
+
+SC M 0.78 0.57 0.61 0.39 0.52 0.30 
+
+SC H 0.65 0.43 0.39 0.17 0.22 0.010 
+
+LS 2
+
+SC L 0.30 0.52 0.39 0.61 0.57 0.78 
+
+SC M 0.44 0.43 0.79 0.77 0.70 0.69 
+
+SC H 0.78 0.57 0.61 0.39 0.52 0.30 
+
+LS 3,4
+
+SC L 0.010 0.22 0.17 0.39 0.43 0.65 
+
+SC M 0.22 0.43 0.48 0.70 0.57 0.78 
+
+SC H 0.65 0.43 1.00 0.78 0.91 0.70 
+
+Objective 2: The reward R2(s, a ) encourages worklload lev-els appropriate to the learner’s current stage. This is consistent JOURNAL OF L ATEX CLASS FILES, VOL. 14, NO. 8, AUGUST 2021 13 
+
+with learning stage theory from [23], which states that task-related cognitive demand declines as expertise grows. This trend is consistent with the learning-stage characterization reported in [14]. Table VIII implements this logic. At learning stages 3 and 4, low workload paired with no assistance earns the maximum reward of 1.0, reflecting that proficient learners should be able to land the drone manually with minimal cog-nitive demand. Conversely, at learning stage 1, low workload also earns 1.0, since a novice attempting a manual landing should experience an elevated workload, and the reward is highest when the workload is appropriately challenging for their current level. When the learner’s workload is high, assistance is rewarded more than its absence, since the learner likely lacks the spare mental capacity to manage the task unaided. Only the assistance action enters R2, since assistance is provided during the trial, whereas feedback is delivered only after the attempt. 
+
+TABLE VIII REWARD R2(s, a ) FOR CALIBRATING WORKLOAD . G REEN HIGHLIGHTING INDICATES CALIBRATED CASES , WHILE YELLOW AND RED HIGHLIGHTING INDICATE LIGHT AND SEVERE MIS -CALIBRATION , RESPECTIVELY .
+
+ASSIST aθ : θof f θon 
+
+LS 1
+
+WL 1.0 0.010 
+
+WM 0.60 0.40 
+
+WH 0.30 0.70 
+
+LS 2
+
+WL 0.60 0.40 
+
+WM 0.45 0.55 
+
+WH 0.40 0.60 
+
+LS 3,4
+
+WL 1.0 0.010 
+
+WM 0.70 0.30 
+
+WH 0.40 0.60 
+
+Objective 3: The reward R3(s, a ) incentivizes progression through the learning stages, as shown in Table IX. With automation off, reaching learning stage 3 or 4 earns the maximum reward of 1.0, with progressively lower rewards assigned for stages 1 and 2, encouraging the learner to advance toward expertise in manual mode. With automation on, the pattern inverts: learning stage 1 earns the maximum reward of 1.0, reflecting that a learner at this stage is most likely to benefit from assistance during the trial, while rewards decline across stages 2 through 4 as the need for assistance diminishes. As with Objective 2, only the assistance action enters R3, since it directly shapes the learner’s performance within each trial. 
+
+TABLE IX REWARD R3(s, a ) FOR ADVANCING LEARNING STAGE .
+
+ASSIST aθ : θof f θon 
+
+LS 1 0.10 1.0 
+
+LS 2 0.55 0.45 
+
+LS 3,4 1.0 0.25 
+
+All reward function components are designed to fall within the range [0 , 1] .Table X summarizes the mean self-reported self-confidence, and mean self-reported workload over the final evaluation trials for change group participants in Table X. 
+
+TABLE X CHANGE GROUP PARTICIPANTS WHOSE CLUSTER ASSIGNMENT CHANGED BETWEEN PHASES 1 AND 2. T HE PROVIDED INFORMATION INCLUDES THE ASSIGNED CLUSTER FOR PHASE 1 α(1) AND ASSIGNED CLUSTER FOR PHASE 2 α(2) AS WELL AS THE MEAN SCORE , MEAN SELF -REPORTED SELF -CONFIDENCE , AND MEAN SELF -REPORTED WORKLOAD OVER TRIALS k ∈ [33 , 37] 
+
+Part. α(1) α(2) Mean Score Mean SR SC Mean SR W
+
+1 1 2 937.6 72 80 5 1 2 786.4 67 43 7 2 1 872.0 89 610 3 2 888.6 57 54 12 3 2 574.0 71 83 16 1 2 920.2 85 54 18 1 2 941.8 81 34 19 1 2 933.8 89 44 23 3 2 921.0 80 80 24 3 1 733.6 49 20 25 1 2 925.8 86 30 28 1 2 801.4 73 80 30 3 2 924.6 75 64 32 3 2 780.0 42 79 33 3 1 294.8 10 90 39 1 2 794.6 87 35

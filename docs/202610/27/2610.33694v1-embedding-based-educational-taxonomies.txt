@@ -1,0 +1,323 @@
+Title: Embedding-Based Educational Taxonomies
+
+URL Source: https://arxiv.org/pdf/2610.33694v1
+
+Published Time: Tue, 27 Oct 2026 00:43:32 GMT
+
+Number of Pages: 17
+
+Markdown Content:
+## Embedding-Based Educational Taxonomies 
+
+Kia Karbasi 1, Kaveh Karbasi 2*, Gregory Pottie 1
+
+> 1
+
+University of California, Los Angeles 2Tempus AI, Inc. 
+
+Abstract 
+
+Educational taxonomies organize educational content, such as exercise problems, into con-cepts, which are also called skills or knowl-edge components. These taxonomies define learning objectives in educational applications such as intelligent tutoring systems. Developed through human expertise and iterative refine-ment, they also provide fundamental structure for curricula, assessment, and models of stu-dent learning. Recent advances in semantic text embeddings make it possible to construct alternative educational taxonomies computa-tionally from the content itself. In this pa-per, we investigate this possibility by cluster-ing embeddings of math questions to construct embedding-based educational taxonomies. We compare these taxonomies with the existing Common Core State Standards (CCSS)-based knowledge-component taxonomies in two AS-SISTments datasets and evaluate their utility in Deep Knowledge Tracing, a downstream task that relies on taxonomic mappings of questions to knowledge components. The embedding-based taxonomies exhibit substantial but in-complete correspondence with the existing tax-onomies, revealing both preserved and alter-native organizations of educational content. When used for knowledge tracing, they im-prove predictive performance by approximately 3–5 AUC percentage points. These results demonstrate the potential of semantic embed-dings for automatically constructing educa-tional taxonomies that both recover structure present in human-developed taxonomies and provide useful alternative representations for downstream educational modeling. 
+
+1 Introduction 
+
+Educational taxonomies organize educational con-tent, such as exercise problems, into concepts. In educational data and modeling, these concepts are 
+
+> *Tempus AI, Inc. had no role in the planning, execution, funding, or review of this work.
+
+often called skills or knowledge components (KCs). A taxonomy specifies which questions are treated as instances of related knowledge, giving educators and computer systems a common way to describe content and learning objectives. These mappings provide structure for curricula, assessment, educa-tional applications, and models of student learn-ing (Koedinger et al., 2012). Educational taxonomies are generally developed through human expertise and iterative refinement. The Common Core State Standards, for example, were developed through research, educator and ex-pert input, comparison with existing standards, and public feedback (Common Core State Standards Initiative, n.d.). Such systems encode decisions about which distinctions matter for curricula and assessment, while KC models use those distinc-tions to relate educational tasks, instruction, and student learning (Porter et al., 2011; Koedinger et al., 2012). They are therefore useful educational frameworks, not direct evidence that knowledge is organized in one uniquely correct way. These taxonomies also provide the categories that educational technologies use to organize con-tent and model student learning. Intelligent tu-toring systems connect educational materials to the concepts they are intended to teach or as-sess (Koedinger et al., 2012; Feng et al., 2009). Knowledge tracing uses sequences of questions and responses, along with the concepts assigned to those questions, to estimate student knowledge and predict later performance (Corbett and Anderson, 1995; Abdelrahman et al., 2023). Deep Knowl-edge Tracing (DKT) represents each response with its assigned KC, so earlier performance on a KC can inform later predictions (Piech et al., 2015). Systems that recommend exercises similarly use concept labels and estimates of student knowledge to select individualized practice (Ai et al., 2019). Recent advances in text embeddings make it pos-sible to organize educational content using patterns arXiv:2610.33694v1 [cs.CL] 24 Oct 2026 in the content itself. Embeddings represent ques-tion text in a numerical space where similarities in language and meaning can be compared (Reimers and Gurevych, 2019). Clustering these represen-tations groups nearby questions and assigns each question to one category (Matsuda et al., 2022). In this paper, we use semantic embeddings of math question text to induce embedding-based tax-onomies. Here, a taxonomy refers to a mapping be-tween content or questions and content categories or knowledge components. An induced taxonomy is one constructed from text embeddings. We com-pare these induced taxonomies with the original expert-developed taxonomies and test their utility in a downstream educational task that relies on question-to-KC mappings. We study questions with available text from AS-SISTments 2012 and 2017, two releases from a widely used benchmark family in knowledge trac-ing (Feng et al., 2009; Prihar et al., 2022; Abdelrah-man et al., 2023). We embed the question text, re-duce the representations with principal component analysis (PCA), and cluster them with k-means to construct taxonomies from embeddings. We first compare each taxonomy built from embeddings with the original KC taxonomy supplied with the dataset, using several measures of how the ques-tions are grouped, along with category counts. We then replace the original mapping from questions to KCs with the induced mapping and compare DKT performance using the area under the receiver operating characteristic curve (AUC). Within each dataset, we use the same student-response records, sequence order, student split, DKT model fam-ily, training procedure, Bayesian hyperparameter search, and trial budget. Because an induced tax-onomy may use a different number of categories, the number of KC labels and the number of model parameters tied to those labels may also differ. We tune DKT separately for each taxonomy, so the selected DKT hyperparameters may differ. The code and supplementary materials are available in a public GitHub repository. 1
+
+We ask three research questions: 
+
+RQ1: How closely do the induced and original KC taxonomies correspond? 
+
+RQ2: How does correspondence change as the induced taxonomy uses more categories? 
+
+RQ3: Under which taxonomy does DKT 
+
+> 1https://github.com/DKT-PROJECTS-UCLA/KC_ Clusters
+
+achieve higher AUC: the original KC taxonomy or the embedding-induced taxonomy? 
+
+2 Related Work 
+
+2.1 Educational Taxonomies and Knowledge Components 
+
+KC models connect performance on related tasks to proposed units of knowledge used in teaching and models of student learning (Koedinger et al., 2012). A mapping from questions to KCs there-fore represents a hypothesis about the knowledge required by each question. These models are de-signed for educational use; they are not direct mea-surements of how students think. Learning Fac-tors Analysis shows that student data can be used to evaluate and refine an expert KC model (Cen et al., 2006). Whereas that approach compares possible refinements using student performance, we construct alternative categories from question content. We therefore use the existing KC taxon-omy as a valuable reference, not as the only possi-ble way to group the questions. Expert-developed taxonomies reflect instructional organization; in-duced taxonomies offer complementary groupings derived from question text. Whether these group-ings align with how students organize or learn that content remains an open question. 
+
+2.2 Embedding-Based Clustering and Automated KC Discovery 
+
+Sentence embeddings represent text in a space that supports semantic comparison and cluster-ing (Reimers and Gurevych, 2019). Text similarity can suggest shared content, but it does not by it-self establish a common solution method or role in teaching. SMART uses k-means to cluster repre-sentations of instructional and assessment text in which terms are weighted by their frequency within a document and rarity across documents (TF–IDF), compares the induced categories with expert cat-egories, and evaluates the resulting mapping with an Additive Factors Model (AFM) (Matsuda et al., 2022). KCluster uses language-model-based ques-tion similarity and affinity propagation to derive KCs, compares them with an expert taxonomy, and also evaluates them with AFM (Wei et al., 2025). These are the clustering studies most closely related to our work, although neither uses ASSISTments or DKT. Moon et al. extract KCs from question text and images, group them using embeddings, and evaluate the resulting categories with several knowledge-tracing models, including DKT (Moon et al., 2025). Together, these studies show that educational cat-egories can be constructed from course and ques-tion content. Our study builds on this work by comparing induced and original taxonomies across every tested combination of PCA dimension and number of induced categories ( K), then evaluating the induced mappings in DKT. We also ask whether settings where the taxonomies match more closely tend to produce higher AUC. The core methodol-ogy was developed independently of SMART and KCluster, which we identified as closely related approaches during subsequent literature review. 
+
+2.3 Knowledge Tracing and Text-Aware Student Modeling 
+
+Knowledge tracing uses question–response histo-ries to model how student knowledge develops over time (Corbett and Anderson, 1995; Abdelrahman et al., 2023). DKT uses a recurrent neural network to predict later responses from earlier responses and their KC labels (Piech et al., 2015). For ex-ample, if two questions share a KC label, DKT can use a student’s earlier performance on that KC when predicting a later response; under our method, the same process uses the induced KC labels in-stead. Methods that use question text add question representations to student models while retaining the existing skill labels (Su et al., 2018; Liu et al., 2021). Our approach uses embeddings before DKT is trained: the embeddings define an alternative mapping from questions to categories, and DKT is then trained with the induced labels. This lets us evaluate the mapping in two ways: how closely it matches the original taxonomy and the test AUC achieved by DKT with the induced labels. 
+
+3 Method 
+
+Figure 1 illustrates knowledge tracing with an in-duced taxonomy and the corresponding relabeling used for DKT evaluation. We first derive a map-ping from questions to categories that has one level, using question text alone. We then replace the KC mapping supplied with the dataset with the induced mapping in DKT while keeping the records of stu-dent answers and their order unchanged. 
+
+3.1 Data and Building the Taxonomies 
+
+We use ASSISTments 2012 and 2017, two releases from a widely used benchmark family in knowl-edge tracing (Feng et al., 2009; Prihar et al., 2022; Abdelrahman et al., 2023), because their student interactions can be linked to question text from the ASSISTments Problem Bodies (PB) resource (AS-SISTments Project, n.d.). The full 2012 release contains 179,999 questions and 265 KCs, of which 32,792 questions and 162 KCs belong to the PB text-linked subset. The full 2017 release contains 3,162 questions and 102 KCs, of which 638 ques-tions and 68 KCs belong to the PB text-linked sub-set. These PB subsets are the text-bearing ques-tions and KCs used for our text-based analyses. The largest category in the original 2017 taxonomy, noskill, is a non-substantive placeholder covering 142 of the 638 questions (22%). We exclude AS-SISTments 2009 because its archived release is sen-sitive to preprocessing choices (Xiong et al., 2016). We refer to the dataset-provided question-to-KC mapping in each release as the original taxonomy. Table 1 summarizes the dataset sizes, the category counts tested, and the PCA and K setting reported for each dataset in the taxonomy comparison and DKT results. We convert the HTML in each problem_body to plain text, retain image descriptions, remove scripts and style information, and normalize whitespace. We construct each induced taxonomy from these cleaned question texts. The original KC labels and student responses are not used during construction. Two models embed each question, PCA reduces the vectors, and k-means assigns each question to the nearest cluster center. We evaluate eight PCA dimensions and six values of K, the number of in-duced categories, for each dataset. The tested grids (2012: 50–300; 2017: 20–150) span values below, near, and above the original PB KC counts of 162 and 68, respectively. Each taxonomy assigns one label per question and has one level, not a hierarchy. The taxonomy is constructed from the complete set of linked question texts before splitting students. Following the standard evaluation for knowledge tracing implemented in pyKT (Liu et al., 2022), we split the data by student and evaluate students held out from training. The test set therefore con-tains students not seen during training rather than previously unseen questions. Appendix A documents the permitted examples of question text, and Appendix B gives the exact embedding models, PCA dimensions, values of K,clustering settings, and procedure used to select DKT settings. Problem Bodies were accessed under the AS-SISTments terms of use for the data. The embed-(a) Deep Knowledge Tracing with the Induced Taxonomy. (b) Relabeled DKT Input Sequences.   
+
+> Question text only Embedding, PCA, and k-means
+> Original KC taxonomy Induced taxonomy
+> Structural comparison only Original KC labels are not inputs to construction.
+> Original KC sequence Induced KC sequence Same student-response records and order. The question-to-KC mapping is replaced.
+
+Figure 1: Knowledge tracing with an induced taxonomy and sequence relabeling. Panel (a) conceptually illustrates DKT tracking induced KCs; the illustrated mastery states are conceptual and do not represent measured student knowledge. Panel (b) shows the actual relabeling procedure for DKT evaluation: the original KC label in each interaction is replaced with the induced label while questions, responses, sequence order, student splits, and evaluation remain unchanged. 
+
+Dataset Total questions PB questions Total KCs PB KCs Students Responses ASSISTments 2012 179,999 32,792 265 162 23,845 978,271 ASSISTments 2017 3,162 638 102 68 1,703 237,092 
+
+Table 1: Dataset and taxonomy summary. Total counts describe the full releases; PB counts describe the Prob-lem Bodies text-linked question/KC subsets used for text-based analyses. Student and response counts de-scribe the text-linked subset used for DKT evaluation. For both datasets, we construct induced taxonomies using outputs from OpenAI’s text-embedding-3-small and text-embedding-3-large , shortened through the API’s dimensions parameter to 768 and 1,536 dimensions, respectively (OpenAI, 2026); we use the PCA dimensions {10 , 20 , 40 , 60 , 80 , 100 , 120 , 160 }, with K values {50 , 100 , 150 , 200 , 250 , 300 } for 2012 and 
+
+{20 , 40 , 60 , 80 , 100 , 150 } for 2017. PCA and k-means use a random seed of 42; k-means uses 10 initializations and at most 300 iterations. The reported (PCA, K) settings in Table 2 are (100, 300) for 2012 and (10, 100) for 2017. The PCA dimension and K are fixed before each DKT Bayesian search and are not selected by it. 
+
+ding inputs consisted only of cleaned text from the 
+
+problem_body field and excluded grade informa-tion, original KC labels, and records of student answers. Because the access terms prohibit redis-tribution of the questions, neither the paper nor the public GitHub repository reproduces the original question text. 
+
+3.2 Taxonomy Comparison 
+
+We compare questions that have both an original and an induced label using the measures summa-rized in Appendix Table 3. Homogeneity measures whether each induced category primarily contains questions from one original category, while com-pleteness measures whether each original category remains concentrated within one induced category. The remaining measures ask how similarly the two taxonomies group questions, whether pairs of ques-tions stay together, and how different the groupings are overall. Because some scores change simply when the induced taxonomy uses more categories, we interpret them together rather than treating any one score as a complete evaluation. We report in-duced category sizes separately. For the reported 2017 DKT setting, Appendix Figure 5 shows how the 25 largest original categories are distributed across the induced taxonomy. Together, these mea-sures describe how categories stay together, split, or mix across the two taxonomies. Educational usefulness requires separate evidence. 
+
+3.3 DKT Evaluation 
+
+We use DKT because it can use a student’s per-formance on one KC when predicting later an-swers (Piech et al., 2015). KC labels are part of each sequence given to DKT, so replacing the origi-nal labels tests how DKT performs with the induced taxonomy as a whole. We keep every question, re-sponse, and sequence position fixed and replace the original mapping from questions to KCs with the corresponding induced mapping. pyKT maps the resulting labels to consecutive concept iden-tifiers (Liu et al., 2022). Varying K changes the number of labels and can also change the number of model parameters tied to those labels. Figure 1b illustrates this relabeling. We run a separate Bayesian search for the origi-nal taxonomy and for each induced taxonomy de-fined by an embedding model, PCA dimension, and K. Within each dataset, all searches use the same DKT model family, candidate settings, num-ber of trials, student split, training procedure, and selection rule. We reserve 20% of students for final testing, giving an approximate 64/16/20 training, validation, and test split. Within each search, we select the completed run with the highest valida-tion AUC and report its test AUC. The embedding model, PCA dimension, and K are fixed before the search. Testing both embedding models across eight PCA dimensions and six values of K yields 96 induced taxonomies per dataset. Table 2 reports the highest test AUC across the induced taxonomies and the embedding model, PCA dimension, and 
+
+K that produced it; Figure 4 shows the grid of PCA dimensions and K values for that embedding model. Appendix B gives the exact search spaces and training settings. To test whether closer agreement between the taxonomies is related to higher AUC, we analyze the 48 settings of PCA dimension and K in each dataset. At each setting, we average each struc-tural score across the two embedding models and separately average the two test AUC values. We compute Spearman correlations, then repeat the analysis after removing rank patterns linked to PCA dimension and K. We apply the Benjamini– Hochberg correction separately to each set of 15 comparisons (Benjamini and Hochberg, 1995). Ap-pendix D reports the full procedure and coefficients; the analysis shows associations, not causal effects. 
+
+4 Results 
+
+4.1 RQ1: Comparing the Original and Induced Taxonomies 
+
+Table 2 shows much stronger agreement for AS-SISTments 2012 than for ASSISTments 2017 at the two reported settings. For 2012, homogeneity, completeness, and normalized mutual information (NMI) are .930, .717, and .809; for 2017, they are .681, .509, and .582. Neither setting yields the highest adjusted Rand index (ARI) or NMI across all tested settings, showing that the settings reported for DKT are not simply those with the closest match. The full comparison results appear in Appendix C; Appendix Table 5 gives additional comparison scores at these two settings. Appendix Figure 5 shows how the 142 questions in noskill are distributed across the induced taxonomy. Figure 2 shows that questions from large original 2012 categories are often distributed across several induced categories. These divisions may reflect finer mathematical distinctions, recurring wording or templates, or the effect of using more categories. This analysis does not show whether these divisions matter for teaching. 
+
+4.2 RQ2: Effect of the Number of Categories 
+
+Figure 3 shows how homogeneity and complete-ness change as K increases. In ASSISTments 2012, homogeneity generally rises while completeness falls: induced categories become more concen-trated, while each original KC is distributed across more induced categories. In ASSISTments 2017, both averages generally rise over the tested range, but inverse purity and pairwise recall decline, as shown in Appendix Table 6. The measures there-fore capture different effects of using more cate-gories and do not indicate improvement in every aspect of the match. 
+
+4.3 RQ3: Taxonomies and DKT Performance 
+
+Table 2 reports that the highest test AUC among the induced taxonomies exceeds the AUC with the original taxonomy in both datasets. For AS-SISTments 2012, AUC rises from .7367 with the original taxonomy to .7841, a gain of .0474. For ASSISTments 2017, it rises from .7131 to .7403, a gain of .0272. Figure 4 shows that, for 
+
+text-embedding-3-large , test AUC exceeds the original-taxonomy baseline at all 48 PCA/ K grid settings in each dataset, including settings with fewer categories than the corresponding original taxonomy within the PB subset. Before adjustment, many comparison measures correlate strongly with AUC because both vary with PCA dimension and K. After accounting for those patterns and correcting for 15 comparisons, none of the 2012 correlations remains statistically significant. In 2017, several measures of closer 87 16 165 171 117 90 187 41 66 183 243 96 821 281 89 284 48 228 144 147 142 230 207 160 Other 
+
+Induced category identifier (order has no meaning) 
+
+> Addition and Subtraction Fractions (1,226 questions) Unit Conversion Within a System (1,104 questions) Equation Solving Two or Fewer Steps (727 questions) Equation Solving More Than Two Steps (661 questions) Polynomial Factors (592 questions) Equivalent Fractions (568 questions) KC 367 (518 questions) Interior Angles Triangle (442 questions) Area Trapezoid (427 questions) Addition and Subtraction Positive Dec... (393 questions) Multiplication and Division Integers (393 questions) Simplifying Expressions positive expo... (372 questions) KC 373 (351 questions) Multiplication Fractions (347 questions) Addition and Subtraction Integers (342 questions) Calculations with Similar Figures (338 questions) Circumference (281 questions) Range (270 questions) Pattern Finding (257 questions) Multiplication and Division Positive... (252 questions) Perimeter of a Polygon (247 questions) Subtraction Whole Numbers (246 questions) Median (220 questions) Area Parallelogram (219 questions) Distributive Property (202 questions)
+
+Number of questions 
+
+> 87 16 165 171 117 90 187 41 66 183 243 96 821 281 89 284 48 228 144 147 142 230 207 160 Other
+
+Induced category identifier (order has no meaning) 
+
+> Addition and Subtraction Fractions (1,226 questions) Unit Conversion Within a System (1,104 questions) Equation Solving Two or Fewer Steps (727 questions) Equation Solving More Than Two Steps (661 questions) Polynomial Factors (592 questions) Equivalent Fractions (568 questions) KC 367 (518 questions) Interior Angles Triangle (442 questions) Area Trapezoid (427 questions) Addition and Subtraction Positive Dec... (393 questions) Multiplication and Division Integers (393 questions) Simplifying Expressions positive expo... (372 questions) KC 373 (351 questions) Multiplication Fractions (347 questions) Addition and Subtraction Integers (342 questions) Calculations with Similar Figures (338 questions) Circumference (281 questions) Range (270 questions) Pattern Finding (257 questions) Multiplication and Division Positive... (252 questions) Perimeter of a Polygon (247 questions) Subtraction Whole Numbers (246 questions) Median (220 questions) Area Parallelogram (219 questions) Distributive Property (202 questions)
+
+Share of each original category 
+
+0200 400 600 800 
+
+> Number of questions
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+> Share of the original category
+
+ASSISTments 2012: Original taxonomy categories across induced taxonomy (large embedding model, PCA dimension=100, K=300) Figure 2: Distribution of questions from the 25 largest categories in the 2012 original taxonomy across the corresponding induced taxonomy. The figure uses text-embedding-3-large , PCA = 100 , and K = 300 . The left heatmap shows question counts and the right heatmap shows the share of each original category in each induced category. We include the three induced categories containing the most questions from each original category and combine the rest as Other . The identifiers for induced categories are arbitrary labels and do not indicate an order. 
+
+Dataset Embedding PCA K Homogeneity Completeness NMI ARI AUC with original taxonomy Highest AUC with induced taxonomy ∆AUC ASSISTments 2012 3-large 100 300 .930 .717 .809 .293 .7367 .7841 +.0474 ASSISTments 2017 3-large 10 100 .681 .509 .582 .066 .7131 .7403 +.0272 
+
+Table 2: Taxonomy comparison and DKT results at the reported settings. Scores for taxonomy agreement are averaged across the two embedding models at each listed PCA dimension and K. The embedding column identifies the model used for the induced taxonomy with the highest observed test AUC. The induced value is the highest observed test AUC across the tested combinations of embedding model, PCA dimension, and K. ∆AUC is induced minus original. 
+
+agreement are associated with lower AUC, while a larger variation of information score is associated with higher AUC. Closer agreement is therefore not consistently associated with higher DKT AUC across the tested settings. These correlations do not show that differences from the original taxon-omy cause the gains. Appendix D reports the full coefficients in Table 7 and Figure 8. 
+
+5 Discussion 
+
+The original and induced KC taxonomies organize the same questions using different evidence. The stronger agreement in ASSISTments 2012 suggests that patterns in question text align more closely with the original KC structure there than in AS-SISTments 2017. In both datasets, however, origi-nal categories are split across several induced cate-gories. These splits may reflect mathematical con-tent, recurring wording, or the use of more induced categories; the current analysis cannot determine which explanation is correct. The 2017 original taxonomy’s largest category, 
+
+noskill , is a non-substantive placeholder cover-ing 142 of 638 questions (22%). Because noskill 
+
+groups questions by the absence of an assigned KC rather than shared content, a taxonomy constructed from question content has no reason to reproduce it as a single category. Appendix Figure 5 shows the induced taxonomy distributing these questions 50 100 150 200 250 300        
+
+> K (induced categories)
+> 0.4 0.6 0.8
+> Structural correspondence  ASSISTments 2012
+> 20 40 60 80 100 150
+> K (induced categories)
+> ASSISTments 2017
+> Bands span eight PCA dimensions and two embedding models (16 configurations per K); they are not confidence intervals.
+> Homogeneity Completeness Min-max band
+
+Figure 3: Mean homogeneity and completeness as the induced taxonomy uses more categories. At each K, the lines show averages over the eight PCA dimensions and two embedding models; bands show the full range across those 16 settings and are not confidence intervals. In 2012, homogeneity generally increases while completeness decreases. In 2017, both generally increase, although inverse purity and pairwise recall decline over the same K
+
+range. Appendix Figure 7 gives the full results for each embedding model and PCA dimension. 
+
+Figure 4: Change in test AUC when using the induced taxonomy instead of the original taxonomy. The figure uses 
+
+text-embedding-3-large , which produced the highest observed test AUC in both datasets. Each cell shows the change in test AUC for one PCA and K setting. The test AUC at every displayed setting exceeds the baseline with the original taxonomy. We also test text-embedding-3-small , giving 96 induced taxonomies per dataset in total. 
+
+across several categories. The original-taxonomy baseline retains noskill , so the reported AUC differ-ence compares DKT with this placeholder against DKT with the complete induced mapping. This redistribution may contribute to both the lower cor-respondence and the higher AUC observed in 2017, although the experiment does not isolate its contri-bution from the other changes in the mapping. The DKT results address a different ques-tion: how well each taxonomy supports predic-tion. The induced taxonomy with the highest observed test AUC improves test AUC by .0474 in 2012 and .0272 in 2017, and Figure 4 shows improvement across all 48 PCA and K settings for text-embedding-3-large in both datasets. These results evaluate each induced taxonomy as a whole, including its grouping of questions, number of categories, label frequencies, and model param-eters tied to its labels. They do not show which property drives the gain, and AUC measures predic-tion rather than educational value. After accounting for PCA dimension and K, closer agreement with the original taxonomy is not consistently associated with higher AUC. The negative correlations in 2017 therefore show that lower agreement is sometimes associated with higher AUC, not that disagreement is inherently beneficial. The induced taxonomies are therefore best treated as complements to systems developed by experts. Their similarities and differences can high-light categories or boundaries for expert review. Determining whether these distinctions matter for teaching or reflect how students reason requires evidence from educators, student behavior, and so-lution steps. A comparison with biological taxonomy helps clarify the idea. Biological categories are some-times reconsidered using genetic evidence along-side visible traits (San Mauro and Agorreta, 2010). In the same way, text embeddings provide another source of evidence that may support some expert categories and question others. The comparison has a clear limit: similar question text is not au-tomatically a better basis for curriculum design. Educational categories are useful when they sup-port teaching, assessment, or models of learning. 
+
+6 Future Work 
+
+Future work should extend the analysis to datasets that combine student interactions, question text, and more detailed KC structures. XES3G5M con-tains 5.5 million responses, assigns multiple KCs to some questions, and links broader skills to nar-rower ones. DBE-KT22 provides question text and student responses from a university database course, assigns up to four KCs per question, and includes relationships among KCs (Liu et al., 2023; Abdelrahman et al., 2022). These datasets would support induced taxonomies with multiple labels per question or hierarchical relations among cate-gories. The current ASSISTments datasets would remain useful for evaluating models that explicitly support these richer structures. The induced tax-onomies could also be evaluated in other tasks that use KCs, including measuring progress with prac-tice, identifying students’ relative strengths and weaknesses, and recommending the next practice question (Wang et al., 2020; Cen et al., 2006; Ai et al., 2019). 
+
+7 Conclusion 
+
+We use embeddings of question text to build ed-ucational taxonomies and compare them with the original KC taxonomies in ASSISTments 2012 and 2017. The induced taxonomies preserve much, but not all, of the original structure, with closer agreement in 2012 and consistent changes as the number of induced categories increases. In DKT, the induced taxonomy with the highest observed test AUC improves test AUC by .0474 in 2012 and .0272 in 2017, while closer agreement with the orig-inal taxonomy is not consistently associated with higher AUC across the tested settings. The central result therefore separates two questions: similarity to a taxonomy developed by experts and usefulness for prediction. Taxonomies built from embeddings offer a promising alternative for student models, but their educational value still requires review by experts and evidence from students. 
+
+8 Limitations 
+
+Our analysis covers only ASSISTments 2012 and 2017 questions with linked text. Both datasets come from the same learning platform, so the find-ings may not extend to other platforms, courses, schools, languages, or educational settings. We include only responses tied to questions with text. The procedure for building the taxonomy assigns each question to one induced category. It does not allow several KCs per question, organize KCs from broad to narrow, or model student reasoning. The induced taxonomy may organize questions by wording, templates, formatting, answer type, or source rather than by the mathematics or knowl-edge required to answer them. The comparison measures show how closely the two taxonomies group the same questions rather than their educational value. Purity and homogene-ity can rise simply with the number of categories, and overall scores do not identify which specific splits or mergers matter for instruction. We do not analyze solution steps, inspect individual category boundaries, or ask educators to judge the categories, so we cannot determine the educational value of those differences. The experiments use two models for embedding text, one clustering method, one clustering seed, and a fixed set of PCA dimensions and values of 
+
+K. The observed results may therefore depend on the tested models, clustering procedure, category count, question templates, or distribution of cluster sizes. We use PCA as the only dimensionality-reduction method; alternative reduction methods may produce different induced taxonomies. We do not directly benchmark against prior KC-discovery methods such as SMART or KCluster. We evaluate one DKT architecture. Although all taxonomies use the same records, student split, training procedure, search protocol, and trial bud-get, we tune DKT separately for each taxonomy, so the selected hyperparameters may differ. Chang-ing K also changes the number of KC labels and can change the number of model parameters tied to those labels. Without random-label baselines matched on the number and sizes of categories, the experiment cannot separate grouping by meaning from the effects of category count, how often each label appears, or model size. The reported induced AUC is the highest result across all tested combinations of embedding model, PCA dimension, and K. Because this combination is identified using test AUC, the reported gain sum-marizes the best tested result rather than a combi-nation chosen before looking at test performance. Figure 4 shows the results across the full grid. For each combination, the Bayesian search chooses DKT settings using validation AUC and does not choose the embedding model, PCA dimension, or 
+
+K. Because students rather than questions are held out, test AUC measures performance for new stu-dents on questions used to build the taxonomy, not entirely new questions. Larger K may also make induced labels behave more like coarse question identifiers, which could contribute to higher AUC. Finally, the analysis of taxonomy agreement and AUC shows an association and does not establish that changing agreement causes the AUC gains. 
+
+Acknowledgments 
+
+We thank the ASSISTments Project at Worcester Polytechnic Institute for providing the Problem Bodies data, which allowed us to link records of stu-dent responses with question text (ASSISTments Project, n.d.). 
+
+References 
+
+Ghodai Abdelrahman, Sherif Abdelfattah, Qing Wang, and Yu Lin. 2022. DBE-KT22: A knowledge tracing dataset based on online student evaluation. arXiv preprint arXiv:2208.12651 .Ghodai Abdelrahman, Qing Wang, and Bernardo Nunes. 2023. Knowledge tracing: A survey. ACM Comput-ing Surveys , 55(11):224:1–224:37. Fangzhe Ai, Yishuai Chen, Yuchun Guo, Yongxiang Zhao, Zhenzhu Wang, Guowei Fu, and Guangyan Wang. 2019. Concept-aware deep knowledge tracing and exercise recommendation in an online learning system. In Proceedings of the 12th International Conference on Educational Data Mining , pages 240– 245. International Educational Data Mining Society. ASSISTments Project. ASSISTments Problems [on-line]. n.d. Accessed August 1, 2026. Yoav Benjamini and Yosef Hochberg. 1995. Control-ling the false discovery rate: A practical and pow-erful approach to multiple testing. Journal of the Royal Statistical Society: Series B (Methodological) ,57(1):289–300. Hao Cen, Kenneth Koedinger, and Brian Junker. 2006. Learning factors analysis – a general method for cog-nitive model evaluation and improvement. In In-telligent Tutoring Systems , pages 164–175, Berlin, Heidelberg. Springer. Common Core State Standards Initiative. Development process [online]. n.d. Accessed July 31, 2026. Albert T. Corbett and John R. Anderson. 1995. Knowl-edge tracing: Modeling the acquisition of procedural knowledge. User Modeling and User-Adapted Inter-action , 4(4):253–278. Mingyu Feng, Neil Heffernan, and Kenneth Koedinger. 2009. Addressing the assessment challenge with an online system that tutors as it assesses. User Modeling and User-Adapted Interaction , 19(3):243– 266. Edward B. Fowlkes and Colin L. Mallows. 1983. Amethod for comparing two hierarchical clusterings. 
+
+Journal of the American Statistical Association ,78(383):553–569. Kenneth R. Koedinger, Albert T. Corbett, and Charles Perfetti. 2012. The knowledge–learning–instruction framework: Bridging the science–practice chasm to enhance robust student learning. Cognitive Science ,36:757–798. Qi Liu, Zhenya Huang, Yu Yin, Enhong Chen, Hui Xiong, Yu Su, and Guoping Hu. 2021. EKT: Exercise-aware knowledge tracing for student perfor-mance prediction. IEEE Transactions on Knowledge and Data Engineering , 33(1):100–115. Zitao Liu, Qiongqiong Liu, Jiahao Chen, Shuyan Huang, Jiliang Tang, and Weiqi Luo. 2022. pyKT: A Python library to benchmark deep learning based knowledge tracing models. In Advances in Neural Information Processing Systems , volume 35, pages 18542–18555. Curran Associates, Inc. Zitao Liu, Qiongqiong Liu, Teng Guo, Jiahao Chen, Shuyan Huang, Xiangyu Zhao, Jiliang Tang, Weiqi Luo, and Jian Weng. 2023. XES3G5M: A knowledge tracing benchmark dataset with auxiliary information. In Advances in Neural Information Processing Sys-tems , volume 36, pages 32958–32970. Noboru Matsuda, Jesse Wood, Raj Shrivastava, Machi Shimmei, and Norman Bier. 2022. Latent skill min-ing and labeling from courseware content. Journal of Educational Data Mining , 14(2):1–31. Marina Meil˘ a. 2007. Comparing clusterings, an in-formation based distance. Journal of Multivariate Analysis , 98(5):873–895. Hyeongdon Moon, Richard Lee Davis, Seyed Parsa Neshaei, and Pierre Dillenbourg. 2025. Using large multimodal models to extract knowledge components for knowledge tracing from multimedia question in-formation. In Proceedings of the 18th International Conference on Educational Data Mining , pages 342– 353. International Educational Data Mining Society. OpenAI. 2026. Vector embeddings. Accessed 2026-08-07. Chris Piech, Jonathan Bassen, Jonathan Huang, Surya Ganguli, Mehran Sahami, Leonidas Guibas, and Jascha Sohl-Dickstein. 2015. Deep knowledge trac-ing. In Advances in Neural Information Processing Systems , volume 28, pages 505–513. Andrew Porter, Jennifer McMaken, JeongSuk Hwang, and Rui Yang. 2011. Common core standards: The new U.S. intended curriculum. Educational Re-searcher , 40(3):103–116. Ethan Prihar, Manaal Syed, Korinn Ostrow, Stacy Shaw, Adam Sales, and Neil Heffernan. 2022. Exploring common trends in online educational experiments. Nils Reimers and Iryna Gurevych. 2019. Sentence-BERT: Sentence embeddings using siamese BERT-networks. In Proceedings of the 2019 Conference on Empirical Methods in Natural Language Process-ing and the 9th International Joint Conference on Natural Language Processing , pages 3982–3992. Andrew Rosenberg and Julia Hirschberg. 2007. V-measure: A conditional entropy-based external clus-ter evaluation measure. In Proceedings of the 2007 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning , pages 410–420. Association for Computational Linguistics. Diego San Mauro and Ana Agorreta. 2010. Molecular systematics: A synthesis of the common methods and the state of knowledge. Cellular and Molecular Biology Letters , 15(2):311–341. Yu Su, Qingwen Liu, Qi Liu, Zhenya Huang, Yu Yin, Enhong Chen, Chris Ding, Si Wei, and Guoping Hu. 2018. Exercise-enhanced sequential modeling for student performance prediction. Proceedings of the AAAI Conference on Artificial Intelligence ,32(1):2435–2443. Nguyen Xuan Vinh, Julien Epps, and James Bailey. 2010. Information theoretic measures for clusterings comparison: Variants, properties, normalization and correction for chance. Journal of Machine Learning Research , 11(95):2837–2854. Fei Wang, Qi Liu, Enhong Chen, Zhenya Huang, Yuying Chen, Yu Yin, Zai Huang, and Shijin Wang. 2020. Neural cognitive diagnosis for intelligent education systems. In Proceedings of the AAAI Conference on Artificial Intelligence , volume 34, pages 6153–6161. Yumou Wei, Paulo Carvalho, and John Stamper. 2025. KCluster: An LLM-based clustering approach to knowledge component discovery. In Proceedings of the 18th International Conference on Educational Data Mining , pages 228–240. International Educa-tional Data Mining Society. Xiaolu Xiong, Siyuan Zhao, Eric G. Van Inwegen, and Joseph E. Beck. 2016. Going deeper with deep knowledge tracing. In Proceedings of the 9th In-ternational Conference on Educational Data Mining ,pages 545–550. International Educational Data Min-ing Society. 
+
+A Question Text Inputs and Examples 
+
+Question examples. The embedding models use only the cleaned text from the problem_body field in questions.csv ; grade information and the orig-inal category labels are excluded. The grade labels range from elementary school through high school mathematics and do not necessarily match a stu-dent’s enrolled grade. Although Grades 6–8 usually correspond to U.S. middle school, the data cover a broader range. The Grade 4 and Grade 6 examples also illustrate that converting web pages to plain text can remove mathematical layout and diagrams. Images are not provided to the models. Because the access terms for Problem Bodies prohibit quoting the questions, we describe representative examples instead (ASSISTments Project, n.d.). • ASSISTments 2012, Grade 4: converting an improper fraction. • ASSISTments 2012, Grade 6: finding a square’s area from a diagram. • ASSISTments 2017, Grade 7: finding a per-centage of a whole. • ASSISTments 2017, Grade 8: using the for-mula for a cone’s volume. • ASSISTments 2012, High School Algebra: 
+
+comparing the degrees of polynomial terms. 
+
+B Taxonomy and DKT Settings 
+
+By default, OpenAI’s text-embedding-3-small 
+
+and text-embedding-3-large produce embed-dings with 1,536 and 3,072 dimensions, respec-tively. We use the API’s dimensions parame-ter to request outputs with 768 and 1,536 dimen-sions, respectively (OpenAI, 2026). Let ei denote the embedding for question i. PCA reduces it to 
+
+zi = P (ei), and k-means assigns zi to the nearest centroid: 
+
+ci = arg min 
+
+> j∈{ 1,...,K }
+
+∥zi − μj ∥22.Here, ci is the label assigned by the induced taxon-omy, K is the number of induced categories, and 
+
+μj is the centroid of cluster j. We test PCA di-mensions {10 , 20 , 40 , 60 , 80 , 100 , 120 , 160 }. We test values of K {50 , 100 , 150 , 200 , 250 , 300 } for 2012 and {20 , 40 , 60 , 80 , 100 , 150 } for 2017. PCA and k-means use a random seed of 42. For each setting, k-means uses 10 initializations and at most 300 iterations ( n_init=10 , max_iter=300 ). For response t, qt denotes the question, st its original KC label, rt whether the response is cor-rect, and c(qt) the label assigned by the induced taxonomy. We apply the relabeling 
+
+(qt, s t, r t) 7 → (qt, c (qt), r t).
+
+For 2012, we write induced labels to skill_id .For 2017, we write them as text in skill . pyKT then renumbers them as consecutive concept IDs. For the baseline that uses the original taxonomy and for every induced taxonomy, we run a separate Weights & Biases Bayesian search that maximizes validation AUC. Each induced taxonomy is defined by its dataset, embedding model, PCA dimension, and K. Within each dataset, all searches use the same candidate settings, number of trials, assign-ment of students to training, validation, and testing, training procedure, and selection rule. For 2012, the search varies emb_size over 
+
+{64 , 128 , 256 , 512 }, learning_rate over 
+
+{0.01 , 0.001 , 0.0007 , 0.0005 }, dropout over 
+
+{0.1, 0.2, 0.3, 0.5}, and seed over {42 , 84 }.For 2017, the search varies emb_size over 
+
+{64 , 96 , 128 , 192 , 256 , 384 , 512 , 768 , 1024 },
+
+learning_rate over 
+
+{0.01 , 0.001 , 0.0007 , 0.0005 , 0.002 , 0.0002 }, and 
+
+dropout over {0.01 , 0.1, 0.2, 0.3, 0.4, 0.45 , 0.5}.The 2017 search fixes seed at 42. For 2012, seed is one of the settings considered by the search; it is not used to repeat each taxonomy. Within each search, we select the completed run with the highest validation AUC and report its test AUC; the embedding model, PCA dimension, and 
+
+K remain fixed outside the search. Both the DKT/QID input format, which includes question and KC identifiers, and fold 0 are fixed across all searches. Training uses Adam with batch size 256, at most 200 epochs, and a max-imum sequence length of 200. The preprocess-ing code reserves 20% of students for testing with 
+
+random_state=1024 ; the remaining students are divided into five folds, yielding the approximate 64/16/20 training/validation/test split. Training stops after 30 epochs without a validation AUC improvement of at least .001. 
+
+C Measures for Comparing the Taxonomies 
+
+Combining eight PCA dimensions with six values of K gives 48 settings per dataset. We evaluate both embedding models at every setting, yielding 96 rows per dataset. Each analysis below states whether results for the two embedding models are reported separately or averaged. At the two reported combinations of PCA di-mension and K, the average spread in cluster size across the two embedding models is .591 for 2012 and .447 for 2017. This spread is the standard devi-ation divided by the mean; a larger value means the                
+
+> Measure What the score measures ARI Adjusted Rand index: agreement between pairs of questions, adjusted for chance; higher is closer. NMI / AMI Normalized / adjusted mutual informa-tion: how much information the two tax-onomies share; AMI adjusts for chance; higher is closer. Homogeneity Whether each induced category mostly contains questions from one original cate-gory; higher is closer. Completeness Whether questions from each original cat-egory mostly stay together in one induced category; higher is closer. V-measure Harmonic mean of homogeneity and com-pleteness; higher is closer. Macro purity Average share with the most common original label in each induced category, weighting induced categories equally; higher is closer. Global purity Share of all questions with the most com-mon original label in their induced cat-egory, giving larger induced categories more weight; higher is closer. Global / macro inverse purity How much of each original category re-mains in its largest induced category, weighting categories by size or equally; higher is closer. FM Fowlkes–Mallows: a combined score based on pairwise precision and recall; higher is closer. Pairwise P/R/ F1
+> Precision for pairs in the same induced cat-egory, recall for pairs with the same origi-nal label, and their F1; higher is closer. VI Variation of information: how different the two taxonomies are based on their in-formation content; lower is closer.
+
+Table 3: Measures used to compare the original and induced taxonomies (Rosenberg and Hirschberg, 2007; Vinh et al., 2010; Meil˘ a, 2007; Fowlkes and Mallows, 1983). Increasing K can raise some scores and lower others, so the scores should be interpreted together. Dataset Best ARI Best AMI Best V/NMI Best FM Lowest VI 2012 .490 (120, 50) .812 (160, 150) .830 (160, 150) .503 (120, 50) 1.554 (160, 150) 2017 .114 (100, 40) .371 (100, 80) .663 (120, 150) .165 (80, 20) 2.789 (120, 150) 
+
+Table 4: Best agreement scores across the 48 settings, averaged across the two embedding models. ARI is the adjusted Rand index; AMI and NMI denote adjusted and normalized mutual information, respectively; FM is Fowlkes–Mallows; and VI is variation of information. Parentheses give the PCA dimension and K. Lower VI means a closer match; higher values mean a closer match for the other measures. NMI and V-measure have the same values here and reach their highest values at the same setting. Table 6 shows these and the purity measures at the smallest and largest values of K. Figure 6 shows ARI and NMI separately for each embedding model and dataset.                                           
+
+> Dataset (PCA, K)Homog. Complete. V/NMI Global pur. Macro pur. Global inv. Macro inv. ARI AMI FM Pair F1VI 2012 (100 ,300) .930 .717 .809 .888 .898 .406 .617 .293 .776 .393 .299 1.872 2017 (10 ,100) .681 .509 .582 .530 .546 .266 .486 .066 .272 .123 .083 3.290
+
+Table 5: Structural scores at the two PCA/ K settings used for the reported DKT results. Each score is averaged across the two embedding models. “Homog.” means homogeneity, “Complete.” means completeness, “pur.” means purity, and “inv.” means inverse purity. Table 3 defines ARI, AMI, and NMI; FM means Fowlkes–Mallows. VI uses natural logarithms and is the only score for which lower values mean a closer match. V-measure and NMI have the same values here. 
+
+cluster sizes vary more. The average share of ques-tions in the largest cluster is 1.28% for 2012 and 2.51% for 2017. Neither 2012 embedding model produces a cluster with only one question; each 2017 embedding model produces one such cluster. No model places more than 3% of questions in its largest cluster. All K clusters contain at least one question. The mean cluster size is 62.45 for 2012 and 6.38 for 2017. 840 38 50 57 28 41 19 12 948 64 27 99 72 56 85 59 Other 
+
+Induced category identifier (order has no meaning) 
+
+noskill [non-substantive] (142 questions) probability (42 questions) interpreting-linear-equations (32 questions) pattern-finding (29 questions) multiplication (27 questions) reading-graph (22 questions) inducing-functions (21 questions) mean (21 questions) equation-solving (19 questions) evaluating-functions (19 questions) median (19 questions) scientific-notation (13 questions) substitution (12 questions) area (11 questions) algebraic-manipulation (10 questions) inequality-solving (10 questions) least-common-multiple (10 questions) point-plotting (10 questions) rate-with-distance-and-time (10 questions) square-root (10 questions) unit-conversion (9 questions) fraction-decimals-percents (8 questions) interpreting-numberline (8 questions) multiplying-decimals (8 questions) division (6 questions) 
+
+Number of questions 
+
+> 840 38 50 57 28 41 19 12 948 64 27 99 72 56 85 59 Other
+
+Induced category identifier (order has no meaning) 
+
+noskill [non-substantive] (142 questions) probability (42 questions) interpreting-linear-equations (32 questions) pattern-finding (29 questions) multiplication (27 questions) reading-graph (22 questions) inducing-functions (21 questions) mean (21 questions) equation-solving (19 questions) evaluating-functions (19 questions) median (19 questions) scientific-notation (13 questions) substitution (12 questions) area (11 questions) algebraic-manipulation (10 questions) inequality-solving (10 questions) least-common-multiple (10 questions) point-plotting (10 questions) rate-with-distance-and-time (10 questions) square-root (10 questions) unit-conversion (9 questions) fraction-decimals-percents (8 questions) interpreting-numberline (8 questions) multiplying-decimals (8 questions) division (6 questions) 
+
+Share of each original category 
+
+010 20 30 40 50 
+
+> Number of questions
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+> Share of the original category
+
+ASSISTments 2017: Original taxonomy categories across induced taxonomy (large embedding model, PCA dimension=10, K=100) Figure 5: Distribution of questions from the 25 largest categories in the 2017 original taxonomy across the corresponding induced taxonomy. The figure uses text-embedding-3-large , PCA = 10 , and K = 100 . The left heatmap shows question counts and the right heatmap shows the share of each original category in each induced category. We include the three induced categories containing the most questions from each original category and combine the rest as Other . Induced category identifiers are arbitrary labels and do not indicate an order. 
+
+Dataset/ K Homog. Complete. Global purity Global inverse Pair precision Pair recall VI Size spread 2012/50 .725 .821 .572 .717 .426 .516 1.854 .522 2012/300 .922 .710 .880 .392 .839 .176 1.948 .575 2017/20 .417 .484 .345 .439 .175 .146 3.460 .418 2017/150 .797 .548 .674 .270 .442 .042 2.901 .476 
+
+Table 6: Scores at the smallest and largest tested values of K. Each value is the simple average over eight PCA dimensions and both embedding models. In both datasets, increasing K raises homogeneity, global purity, and pairwise precision. It lowers global inverse purity and pairwise recall. In 2012, completeness falls and VI rises. In 2017, completeness rises and VI falls. “Homog.” means homogeneity, “Complete.” means completeness, and VI means variation of information. Size spread is the standard deviation of the induced cluster sizes divided by their mean; a larger value means that the cluster sizes differ more. (a) ASSISTments 2012 
+
+(b) ASSISTments 2017 
+
+Figure 6: ARI and NMI for every PCA dimension and value of K, shown separately for each embedding model in 2012 (a) and 2017 (b). Table 4 gives the highest values after averaging scores across the two models. In 2017, ARI and NMI reach their highest values at different settings, and, for each metric, each embedding model’s highest value differs from the highest value obtained after averaging scores across the two models. (a) ASSISTments 2012 
+
+(b) ASSISTments 2017 
+
+Figure 7: Homogeneity and completeness across values of K, shown separately for each combination of embedding model and PCA dimension in 2012 (a) and 2017 (b). In 2012, homogeneity generally rises while completeness falls. In 2017, both generally rise across the tested settings, although global inverse purity and pairwise recall fall from the smallest to the largest tested value of K, as shown in Table 6. Outlined circles mark the smallest tested K, and squares mark the largest. D Relation Between Taxonomy Agreement and AUC 
+
+To examine the relationship between taxonomy agreement and AUC, we analyze 48 matched set-tings of PCA dimension and K per dataset. At each setting, we average each structural score across the two embedding models and separately aver-age the two embedding-specific test AUC values. The 2017 AUC results include three additional set-tings, (10 , 200) , (10 , 250) , and (10 , 300) ; we ex-clude them because the taxonomy comparison has no matching scores. We use Spearman correlation to test whether closer taxonomy agreement is associated with higher test AUC. We then repeat the analysis af-ter ranking both measures and removing patterns linked to PCA dimension and K. Because we test 15 measures, we apply the Benjamini–Hochberg correction separately by dataset and separately be-fore and after this adjustment.   
+
+> Figure 8: Rank correlations between each taxonomy-agreement score and test AUC, both averaged across the two embedding models. “After” indicates that rank patterns linked to PCA dimension and Khave been removed. Cells show coefficients; Table 7 reports sig-nificance after correction.
+
+Measure 2012 before 2012 after 2017 before 2017 after ARI −.858 ∗ −.109 −.908 ∗ −.273 
+
+AMI .041 .024 .138 −.436 ∗
+
+NMI .374 ∗ .038 .816 ∗ −.418 ∗
+
+Homogeneity .906 ∗ .125 .857 ∗ −.425 ∗
+
+Completeness −.847 ∗ .097 .620 ∗ −.443 ∗
+
+V-measure .374 ∗ .038 .816 ∗ −.418 ∗
+
+Global purity .913 ∗ .150 .851 ∗ −.179 
+
+Macro purity .879 ∗ .105 .810 ∗ −.376 ∗
+
+Global inverse purity −.908 ∗ −.094 −.968 ∗ −.403 ∗
+
+Macro inverse purity −.836 ∗ .126 −.946 ∗ −.387 ∗
+
+Fowlkes–Mallows −.714 ∗ −.088 −.763 ∗ −.246 
+
+Pairwise precision .922 ∗ .246 .833 ∗ −.470 ∗
+
+Pairwise recall −.917 ∗ −.207 −.959 ∗ −.324 
+
+Pairwise F1 −.866 ∗ −.139 −.960 ∗ −.330 
+
+VI .224 .040 −.664 ∗ .446 ∗
+
+Table 7: Associations, across the 48 shared settings of PCA dimension and K in each dataset, between each taxonomy-agreement score and test AUC, both averaged across the two embedding models. “Before” is the direct Spearman correlation; “After” is the correlation after removing rank patterns linked to PCA dimension and 
+
+K. An asterisk marks p < . 05 after the Benjamini– Hochberg correction, applied separately by dataset and analysis stage. VI is a distance measure, so a positive coefficient indicates that a greater difference between the taxonomies is associated with higher test AUC.

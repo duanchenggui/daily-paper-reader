@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-10-26</span>
+      <span class="dpr-home-dashboard-kicker">2026-10-27</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 3 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 6 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>2</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>5</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>1</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-10-26 23:04:30 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-10-27 23:14:05 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日精读 2 篇、速读 1 篇，重点聚焦 AI 教育应用与生成式 AI 监督。最值得看的是两项均获 9.0 分的 AI 教育研究：一是用智能体流水线构建技术教育“AI 工厂”，二是 GELLI 生成体验式语言学习互动；另有 7.0 分研究关注新手软件工程学生如何监督生成式 AI。普通读者可先看两篇精读文章，再结合速读文章思考如何在课堂中培养学生的 AI 审核意识。</p>
+<p>今日完成6篇论文筛选与5篇精读，重点锁定个性化自适应辅导与教学策略选择两条高价值线索。最值得看的是两篇9.0分精读：心理运动学习中的个性化智能辅导系统，以及AdaTutor如何通过教学策略选择实现自适应辅导。普通读者可先读这两篇精读抓方法框架，再用6.0分的计算评估栈速读文补充AI原生测量视角。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -78,12 +78,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">2 篇</strong>
+    <strong class="dpr-home-dashboard-count">5 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="An AI Factory for Technology Education: An Agentic Pipeline with Closed Loop Audience Feedback">An AI Factory for Technology Education: An Agentic Pipeline with Closed Loop Audience Feedback</span></li><li><span class="dpr-home-dashboard-paper-title" title="GELLI: A Generator for Experiential Language Learning Interactions">GELLI: A Generator for Experiential Language Learning Interactions</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="A Personalized and Adaptive Intelligent Tutoring System for Psychomotor Learning">A Personalized and Adaptive Intelligent Tutoring System for Psychomotor Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="AdaTutor: Adaptive Tutoring through Pedagogical Strategy Selection">AdaTutor: Adaptive Tutoring through Pedagogical Strategy Selection</span></li><li><span class="dpr-home-dashboard-paper-title" title="Making Reasoning Visible: Configuration-Aware Diagnostic Modeling for Adaptive Scaffolding in Structured Reasoning Tasks">Making Reasoning Visible: Configuration-Aware Diagnostic Modeling for Adaptive Scaffolding in Structured Reasoning Tasks</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>2</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>5</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -94,7 +94,7 @@
     <strong class="dpr-home-dashboard-count">1 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Beyond Correctness: How Novice Software Engineering Students Exercise Oversight of Generative AI">Beyond Correctness: How Novice Software Engineering Students Exercise Oversight of Generative AI</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="The Computational Assessment Stack: An Architecture for AI-Native Measurement">The Computational Assessment Stack: An Architecture for AI-Native Measurement</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>1</strong></span></div>
 </section>

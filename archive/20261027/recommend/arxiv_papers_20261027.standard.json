@@ -1,0 +1,242 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-27T23:11:45.001079+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 5,
+    "deep_cap": 6,
+    "deep_selected": 5,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2610.33467v1",
+      "source": "arxiv",
+      "title": "A Personalized and Adaptive Intelligent Tutoring System for Psychomotor Learning",
+      "abstract": "Intelligent tutoring systems (ITSs) have advanced learner motivation and personalization in cognitive domains, but extending these gains to psychomotor tasks remains challenging. Existing psychomotor ITSs rely on learner models built before instruction or updated once per module, leaving open how to use real-time assessments of learner cognitive state for finer-grained personalization. Psychomotor learning involves multiple tutoring objectives, including calibrating self-confidence to performance, calibrating workload per the Yerkes-Dodson Law, and driving skill progression toward higher learning stages. How to balance these objectives for learners, and adjust that balance over time, remains open. This study proposes and evaluates an online personalization algorithm that continuously reprioritizes tutoring objectives to match learners' evolving needs. Rather than weighting objectives equally, the actor-critic-inspired algorithm dynamically updates reward weights using recent measures of self-confidence, workload, and performance. These weights inform a multi-input, multi-output cognitive control framework that synthesizes learner-specific tutoring policies via model-based planning. The approach was evaluated in a human-subject study (N = 40) with a 2D quadrotor landing task. Clustering of the learned reward weights revealed distinct prioritization patterns across learners, indicating the algorithm captures heterogeneity in learner needs. Learners whose weights shifted more substantially tended to reach higher final performance, and those whose weights consistently emphasized workload calibration achieved the strongest outcomes. These findings advance online learner modeling and control-based personalization in psychomotor ITSs, showing how adaptive tutoring can better support learning by aligning instructional decisions with learners' evolving cognitive and performance states.",
+      "authors": [
+        "Madeleine Shuhn-Tsuan Yuh",
+        "Neera Jain"
+      ],
+      "primary_category": "eess.SY",
+      "categories": [
+        "eess.SY",
+        "cs.HC"
+      ],
+      "published": "2026-10-24T05:43:40+00:00",
+      "link": "https://arxiv.org/pdf/2610.33467v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "personalized adaptive intelligent tutoring system using real-time learner state",
+      "llm_evidence_cn": "利用实时学习者状态实现个性化自适应智能辅导",
+      "llm_evidence": "利用实时学习者状态实现个性化自适应智能辅导",
+      "canonical_evidence": "利用实时学习者状态实现个性化自适应智能辅导",
+      "llm_tldr_en": "The paper proposes an online personalized adaptive tutoring system for psychomotor learning that uses real-time cognitive-state assessment to balance confidence calibration, workload, and skill progression objectives.",
+      "llm_tldr_cn": "智能辅导系统在认知领域已提升动机与个性化，但迁移到心理运动技能学习时，现有系统多依赖课前构建或每模块更新一次的学习者模型。作者提出并评估一种在线个性化自适应辅导系统，利用实时认知状态评估，在自我信心校准、按耶克斯-多德森定律调节负荷与推动技能进阶等多目标间动态平衡。研究为心理运动领域的细粒度个性化辅导提供了可行路径，拓展了智能辅导系统的应用边界。",
+      "llm_tldr": "智能辅导系统在认知领域已提升动机与个性化，但迁移到心理运动技能学习时，现有系统多依赖课前构建或每模块更新一次的学习者模型。作者提出并评估一种在线个性化自适应辅导系统，利用实时认知状态评估，在自我信心校准、按耶克斯-多德森定律调节负荷与推动技能进阶等多目标间动态平衡。研究为心理运动领域的细粒度个性化辅导提供了可行路径，拓展了智能辅导系统的应用边界。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "personalized learning and learner-centered educational technologies",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.34659v1",
+      "source": "arxiv",
+      "title": "AdaTutor: Adaptive Tutoring through Pedagogical Strategy Selection",
+      "abstract": "Effective tutoring requires determining not only what information to provide, but also which form of assistance to deliver. A tutor may address the same student error using various pedagogical strategies, adapting its approach as the interaction progresses. We introduce Comparative Pedagogical Supervision (CPS), a training framework to learn to select the optimal strategy and feedback for student learning. We evaluate CPS on math and science reasoning datasets. After five tutoring turns, CPS outperforms the strongest fixed-strategy baselines. The learned tutor transfers across datasets, and its strategy selection can also inform a separate API-based tutor.",
+      "authors": [
+        "Rajeev Bhatt Ambati",
+        "Shashank Srivastava",
+        "Snigdha Chaturvedi"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-10-26T00:44:29+00:00",
+      "link": "https://arxiv.org/pdf/2610.34659v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "adaptive tutoring via learned pedagogical strategy selection",
+      "llm_evidence_cn": "通过学习教学策略选择实现自适应辅导",
+      "llm_evidence": "通过学习教学策略选择实现自适应辅导",
+      "canonical_evidence": "通过学习教学策略选择实现自适应辅导",
+      "llm_tldr_en": "AdaTutor introduces Comparative Pedagogical Supervision to learn which tutoring strategy and feedback to give; after five turns it beats the strongest fixed-strategy baselines on math and science reasoning and transfers across datasets.",
+      "llm_tldr_cn": "有效辅导不仅要决定提供什么信息，还要决定以何种教学策略与反馈形式施助，而固定策略难以随交互演进。作者提出比较式教学监督（CPS）训练框架，学习为学生选择最优教学策略与反馈。在数学与科学推理数据集上，经过五轮辅导后CPS优于最强固定策略基线，且所学辅导器可跨数据集迁移，其策略选择还能指导独立的API辅导系统。该工作推进了自适应智能辅导系统的策略层个性化。",
+      "llm_tldr": "有效辅导不仅要决定提供什么信息，还要决定以何种教学策略与反馈形式施助，而固定策略难以随交互演进。作者提出比较式教学监督（CPS）训练框架，学习为学生选择最优教学策略与反馈。在数学与科学推理数据集上，经过五轮辅导后CPS优于最强固定策略基线，且所学辅导器可跨数据集迁移，其策略选择还能指导独立的API辅导系统。该工作推进了自适应智能辅导系统的策略层个性化。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.35609v1",
+      "source": "arxiv",
+      "title": "Making Reasoning Visible: Configuration-Aware Diagnostic Modeling for Adaptive Scaffolding in Structured Reasoning Tasks",
+      "abstract": "Modeling the latent, multi-step reasoning processes of learners is a core challenge for adaptive tutoring systems, which often rely on simple right/wrong answers rather than understanding how students think. Instantiated here for grammatical reasoning, this study introduces a diagnostic framework that makes students' step-by-step problem-solving visible by analyzing their action sequences in an interactive learning game. The framework computes five interpretable strategy dimensions (e.g., systematic error correction, random guessing), estimates coordination demand from task structure and behavioral patterns, and classifies reasoning into four distinct states. Analyzing 36,234 interactions from 234 students working on 42 morphosyntactic exercises, we found that reasoning strategies vary primarily by context rather than stable traits (intraclass correlation = 0.14), and students show high persistence in unproductive states; specifically, 74.6% of failures driven by high coordination demand (rather than simple knowledge gaps) are followed by another failure without intervention. Our early warning model predicts validation success with strong accuracy (AUC = 0.826 using strategy patterns alone; 0.902 with additional sequential context) while avoiding circular reliance on current error counts. These findings demonstrate that making latent reasoning processes visible enables earlier, more targeted scaffolding that responds to how students are thinking rather than simply whether they succeed. While demonstrated in language learning, the framework provides a generalizable, interpretable architecture for diagnosing complex, structured reasoning in any domain.",
+      "authors": [
+        "Trystan Geoffre",
+        "Zheng Yuan",
+        "Thierry Geoffre"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-10-26T15:30:52+00:00",
+      "link": "https://arxiv.org/pdf/2610.35609v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "diagnostic modeling for adaptive tutoring scaffolding",
+      "llm_evidence_cn": "面向自适应辅导支架的诊断建模",
+      "llm_evidence": "面向自适应辅导支架的诊断建模",
+      "canonical_evidence": "面向自适应辅导支架的诊断建模",
+      "llm_tldr_en": "Adaptive tutoring systems often rely on right/wrong answers rather than how students think; this paper analyzes action sequences in a grammar reasoning game to compute five interpretable strategy dimensions, estimate coordination demand and classify reasoning states, enabling configuration-aware adaptive scaffolding.",
+      "llm_tldr_cn": "自适应辅导系统常只依据对错判断，难以刻画学习者多步推理过程。本文面向语法推理任务提出诊断框架，通过分析学生在交互式学习游戏中的动作序列，计算五类可解释的策略维度（如系统性纠错、随机猜测），并结合任务结构估计协调需求，将推理划分为四种状态。基于234名学生、36234次交互的分析表明该框架可有效识别学习策略差异，使辅导系统能够依据推理配置提供自适应支架，推动学习分析与个性化教学支持。",
+      "llm_tldr": "自适应辅导系统常只依据对错判断，难以刻画学习者多步推理过程。本文面向语法推理任务提出诊断框架，通过分析学生在交互式学习游戏中的动作序列，计算五类可解释的策略维度（如系统性纠错、随机猜测），并结合任务结构估计协调需求，将推理划分为四种状态。基于234名学生、36234次交互的分析表明该框架可有效识别学习策略差异，使辅导系统能够依据推理配置提供自适应支架，推动学习分析与个性化教学支持。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.33488v1",
+      "source": "arxiv",
+      "title": "Incremental Predictive Value of LLM Tutoring Interactions for Student Performance",
+      "abstract": "We evaluate whether semester-level interaction features from a large language model tutor improve assignment-score prediction beyond constant baselines. StudyChat provides 16,851 student-assistant exchanges from two offerings of an undergraduate artificial intelligence course, with outcomes matched to 175 of 203 student-semester records. Six fitted estimators and training-fold mean and median baselines share repeated nested cross-validation. After averaging each student's held-out predictions across ten repeats, Gradient Boosting achieves mean absolute error of 3.023 grade points, versus 3.138 for the median baseline. The paired difference is -0.114, with a conditional 95% bootstrap interval of [-0.245,0.013]. Representation changes and a semester-specific median yield similarly small gains. In the lowest observed-score quartile, however, boosting's error is 7.30 points, versus 8.07 for the median and 6.67 for the mean; Ridge has the lowest fitted-model error at 6.37 despite its worse overall error of 3.331. Scores concentrate near the ceiling: 160 students (91.4%) score above 90, and the lowest quartile contributes 62.1% of boosting's total absolute error. This retrospective comparison shows how baseline choice and error distribution affect predictive value, informing evaluation of student-support tools without establishing a learning effect.",
+      "authors": [
+        "Zeyu Dong",
+        "Mikael Kwame Kuada",
+        "Asa Holley Buchakjian-Tweedy",
+        "Ibrahem Aljabea"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.CY"
+      ],
+      "published": "2026-10-24T06:34:50+00:00",
+      "link": "https://arxiv.org/pdf/2610.33488v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "learning analytics on LLM tutor interaction features predicting student performance",
+      "llm_evidence_cn": "基于LLM辅导交互特征预测学生成绩的学习分析",
+      "llm_evidence": "基于LLM辅导交互特征预测学生成绩的学习分析",
+      "canonical_evidence": "基于LLM辅导交互特征预测学生成绩的学习分析",
+      "llm_tldr_en": "Using 16,851 StudyChat exchanges from an AI course, the study tests whether LLM tutor interaction features improve assignment-score prediction; gradient boosting reaches MAE 3.023 versus 3.138 for the median baseline.",
+      "llm_tldr_cn": "已有研究尚不清楚LLM辅导中的交互特征能否在常数基线之外提升对学生成绩的预测。作者利用本科人工智能课程中StudyChat的16851条学生—助手对话，结合六种估计器与重复嵌套交叉验证开展学习分析。结果显示梯度提升平均绝对误差为3.023分，优于中位数基线的3.138分，但差异的置信区间跨零。该工作提示LLM辅导交互仅带来有限的增量预测价值，需谨慎解读其学习分析信号。",
+      "llm_tldr": "已有研究尚不清楚LLM辅导中的交互特征能否在常数基线之外提升对学生成绩的预测。作者利用本科人工智能课程中StudyChat的16851条学生—助手对话，结合六种估计器与重复嵌套交叉验证开展学习分析。结果显示梯度提升平均绝对误差为3.023分，优于中位数基线的3.138分，但差异的置信区间跨零。该工作提示LLM辅导交互仅带来有限的增量预测价值，需谨慎解读其学习分析信号。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.33694v1",
+      "source": "arxiv",
+      "title": "Embedding-Based Educational Taxonomies",
+      "abstract": "Educational taxonomies organize educational content, such as exercise problems, into concepts, which are also called skills or knowledge components. These taxonomies define learning objectives in educational applications such as intelligent tutoring systems. Developed through human expertise and iterative refinement, they also provide fundamental structure for curricula, assessment, and models of student learning. Recent advances in semantic text embeddings make it possible to construct alternative educational taxonomies computationally from the content itself. In this paper, we investigate this possibility by clustering embeddings of math questions to construct embedding-based educational taxonomies. We compare these taxonomies with the existing Common Core State Standards (CCSS)-based knowledge-component taxonomies in two ASSISTments datasets and evaluate their utility in Deep Knowledge Tracing, a downstream task that relies on taxonomic mappings of questions to knowledge components. The embedding-based taxonomies exhibit substantial but incomplete correspondence with the existing taxonomies, revealing both preserved and alternative organizations of educational content. When used for knowledge tracing, they improve predictive performance by approximately 3-5 AUC percentage points. These results demonstrate the potential of semantic embeddings for automatically constructing educational taxonomies that both recover structure present in human-developed taxonomies and provide useful alternative representations for downstream educational modeling.",
+      "authors": [
+        "Kia Karbasi",
+        "Kaveh Karbasi",
+        "Gregory Pottie"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-10-24T14:19:37+00:00",
+      "link": "https://arxiv.org/pdf/2610.33694v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Embedding-based taxonomies for intelligent tutoring systems",
+      "llm_evidence_cn": "面向智能辅导系统的嵌入式教育分类体系",
+      "llm_evidence": "面向智能辅导系统的嵌入式教育分类体系",
+      "canonical_evidence": "面向智能辅导系统的嵌入式教育分类体系",
+      "llm_tldr_en": "The paper investigates constructing educational taxonomies computationally by clustering semantic embeddings of math questions, comparing them with the Common Core standards used to define objectives in intelligent tutoring systems.",
+      "llm_tldr_cn": "教育分类体系通常依赖人工专家构建，用于定义智能辅导系统等应用的学习目标，成本高且迭代缓慢。作者探索从内容本身出发，对数学题目的语义嵌入进行聚类以自动构建教育分类体系。研究将其与基于共同核心州立标准的现有分类进行比较。结果展示了计算化构建分类体系的可行性。该工作为智能辅导与学习分析中的知识组件组织提供了新思路。",
+      "llm_tldr": "教育分类体系通常依赖人工专家构建，用于定义智能辅导系统等应用的学习目标，成本高且迭代缓慢。作者探索从内容本身出发，对数学题目的语义嵌入进行聚类以自动构建教育分类体系。研究将其与基于共同核心州立标准的现有分类进行比较。结果展示了计算化构建分类体系的可行性。该工作为智能辅导与学习分析中的知识组件组织提供了新思路。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.33901v1",
+      "source": "arxiv",
+      "title": "The Computational Assessment Stack: An Architecture for AI-Native Measurement",
+      "abstract": "Test development is shifting toward automation and agentic artificial intelligence (AI), in which autonomous systems draft items at scale, assemble test forms, administer adaptive assessments, score complex responses, and monitor test quality. As autonomous systems take on more of this work, the architecture underlying test development must change to preserve assessment quality under the new paradigm. This paper proposes the Computational Assessment Stack (CAS), a four-layer architecture for AI-native measurement where every stage of the assessment lifecycle shares a unifying computational construct representation as its base layer. This representation is a machine-readable, modular, and versioned knowledge graph. Three layers are built above it: computational content generation that builds on the knowledge graph; computational psychometrics that derives substantive structure directly from the knowledge graph; an orchestration layer in which agentic systems operationalize the stack under human governance. The paper's core contribution is architectural. Building on foundational psychometric frameworks, the CAS provides a persistent representation that unifies the four layers. Unlike the descriptive prose traditionally used to define constructs in test development, the proposed architecture renders measurement assumptions inspectable and their consequences empirically testable.",
+      "authors": [
+        "Alina A. von Davier"
+      ],
+      "primary_category": "stat.AP",
+      "categories": [
+        "stat.AP",
+        "cs.SE"
+      ],
+      "published": "2026-10-24T20:20:30+00:00",
+      "link": "https://arxiv.org/pdf/2610.33901v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "AI-native adaptive assessment architecture",
+      "llm_evidence_cn": "AI原生的自适应测评架构",
+      "llm_evidence": "AI原生的自适应测评架构",
+      "canonical_evidence": "AI原生的自适应测评架构",
+      "llm_tldr_en": "As test development shifts to agentic AI that drafts items, assembles forms and scores responses, assessment architecture must change; the paper proposes a four-layer Computational Assessment Stack sharing a versioned knowledge-graph construct representation to preserve quality across the assessment lifecycle.",
+      "llm_tldr_cn": "随着测评开发转向由智能体自主出题、组卷、施测与评分，原有架构难以保证测评质量。本文提出计算测评栈（CAS），以可机读、模块化且带版本的知识图谱作为共享构念表示的基础层，并在其上构建三层结构以贯通测评全流程。该架构面向AI原生测量，旨在统一测评生命周期各阶段的构念表达与质量控制，为自适应测评与教育测量自动化提供可复用的系统设计框架。",
+      "llm_tldr": "随着测评开发转向由智能体自主出题、组卷、施测与评分，原有架构难以保证测评质量。本文提出计算测评栈（CAS），以可机读、模块化且带版本的知识图谱作为共享构念表示的基础层，并在其上构建三层结构以贯通测评全流程。该架构面向AI原生测量，旨在统一测评生命周期各阶段的构念表达与质量控制，为自适应测评与教育测量自动化提供可复用的系统设计框架。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
