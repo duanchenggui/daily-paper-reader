@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-10-27</span>
+      <span class="dpr-home-dashboard-kicker">2026-10-28</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 6 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 5 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>5</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>4</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>1</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-10-27 23:14:05 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-10-28 23:21:24 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日完成6篇论文筛选与5篇精读，重点锁定个性化自适应辅导与教学策略选择两条高价值线索。最值得看的是两篇9.0分精读：心理运动学习中的个性化智能辅导系统，以及AdaTutor如何通过教学策略选择实现自适应辅导。普通读者可先读这两篇精读抓方法框架，再用6.0分的计算评估栈速读文补充AI原生测量视角。</p>
+<p>今日精读4篇、速读1篇，重点聚焦AI教学反馈与高校评估改革。最值得看的是两篇9.0分研究：MUSE揭示LLM导师在多解编程题上的响应缺口，Edhivo展示可扩展评估与即时反馈的AI原生平台。普通读者可优先浏览MUSE的缺口结论，再结合Edhivo思路思考如何在课程中落地即时反馈。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -78,12 +78,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">5 篇</strong>
+    <strong class="dpr-home-dashboard-count">4 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="A Personalized and Adaptive Intelligent Tutoring System for Psychomotor Learning">A Personalized and Adaptive Intelligent Tutoring System for Psychomotor Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="AdaTutor: Adaptive Tutoring through Pedagogical Strategy Selection">AdaTutor: Adaptive Tutoring through Pedagogical Strategy Selection</span></li><li><span class="dpr-home-dashboard-paper-title" title="Making Reasoning Visible: Configuration-Aware Diagnostic Modeling for Adaptive Scaffolding in Structured Reasoning Tasks">Making Reasoning Visible: Configuration-Aware Diagnostic Modeling for Adaptive Scaffolding in Structured Reasoning Tasks</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="MUSE: Revealing Responsiveness Gaps of LLM Tutors on Multiple-Solution Programming Problems">MUSE: Revealing Responsiveness Gaps of LLM Tutors on Multiple-Solution Programming Problems</span></li><li><span class="dpr-home-dashboard-paper-title" title="Edhivo: An AI-Native Platform for Scalable Assessment and Instant Feedback in Higher Education">Edhivo: An AI-Native Platform for Scalable Assessment and Instant Feedback in Higher Education</span></li><li><span class="dpr-home-dashboard-paper-title" title="Peers4U: Designing Learner-Centered Virtual Peers for Children&#x27;s Multimodal Mathematics Learning">Peers4U: Designing Learner-Centered Virtual Peers for Children&#x27;s Multimodal Mathematics Learning</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>5</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>4</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -94,7 +94,7 @@
     <strong class="dpr-home-dashboard-count">1 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="The Computational Assessment Stack: An Architecture for AI-Native Measurement">The Computational Assessment Stack: An Architecture for AI-Native Measurement</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="When AI Can Build It, What Should We Assess? Rethinking Evidence of Engineering Competence">When AI Can Build It, What Should We Assess? Rethinking Evidence of Engineering Competence</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>1</strong></span></div>
 </section>

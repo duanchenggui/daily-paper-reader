@@ -1,0 +1,795 @@
+Title: MUSE: Revealing Responsiveness Gaps of LLM Tutors on Multiple-Solution Programming Problems
+
+URL Source: https://arxiv.org/pdf/2610.36367v1
+
+Published Time: Wed, 28 Oct 2026 00:31:20 GMT
+
+Number of Pages: 17
+
+Markdown Content:
+# MUSE: Revealing Responsiveness Gaps of LLM Tutors on Multiple-Solution Programming Problems 
+
+Sky Cen 
+
+University of Central Florida 
+
+sky.cen@ucf.edu 
+
+Shashank Sonkar 
+
+University of Central Florida 
+
+shashank.sonkar@ucf.edu 
+
+Abstract 
+
+When a problem admits multiple valid solu-tions, effective tutoring requires building on a student’s strategy while introducing alterna-tives at appropriate points. However, whether LLM tutors can support this flexibility by ap-propriately responding to students’ diverse solu-tion approaches remains largely unexplored. In this work, we introduce MUSE: Multi-solution Understanding and Simulation Environment, a controlled environment for simulating student-tutor conversations on multiple-solution pro-gramming problems. Grounded in learning sci-ence on responsive instruction and multiple-solution learning, we investigate which solu-tions LLM tutors prefer, how they respond to students’ approaches, and how they transi-tion between solutions. Experiments suggest that LLM tutors exhibit systematic preferences among valid solutions, often favoring brute-force approaches when not providing general advice. More concerningly, tutors often impose these preferences, redirecting students toward their own preferred approach rather than sup-porting the student’s. Yet this tendency reverses once a solution is completed: tutors often re-main anchored to the existing approach when a stronger alternative could deepen understand-ing, and sometimes even transition to a less optimal approach. Thus, tutors struggle both to build on students’ reasoning when appropriate and to extend their reasoning when beneficial. Promisingly, targeted post-training improves both tutor responsiveness and transitions to-ward more optimal solutions. 
+
+1 Introduction 
+
+Large language models (LLMs) are increasingly used as interactive tutors, leveraging their ability to generate explanations, ask questions, provide feedback, and engage learners in dialogue. Re-cent work has explored LLM-based tutoring across dimensions including pedagogical alignment, mis-conception awareness, and metacognitive support (Macina et al., 2023; Scarlatos et al., 2025; Wang, 2026). However, existing LLM tutoring systems and evaluations largely treat the target solution as fixed, or focus on a particular solution even when a problem admits multiple valid approaches. They therefore do not explicitly model the student’s cho-sen solution strategy as a central part of the tutoring interaction. This distinction is especially important for pro-gramming problems, where a single problem can admit multiple correct solutions with different tradeoffs in efficiency, simplicity, and generaliz-ability. A responsive tutor must do more than guide a student toward a correct answer: it must recognize the approach the student is pursuing, de-termine how to build on that reasoning, and decide when and how to transition to an alternative strat-egy (Çatman Aksoy et al., 2026; Dyer and Sherin, 2015). This raises a central question: Can LLM tu-tors effectively support students across multiple-solution strategies? 
+
+In this work, we introduce MUSE (Multi-solution Understanding and Simulation Environ-ment), a controlled environment for simulating tu-toring interactions on multiple-solution program-ming problems. MUSE explicitly controls the so-lution pursued by the student while tracking the solution intended by the tutor at each time step, enabling systematic evaluation of how LLM tu-tors respond to different student approaches. Us-ing this environment, we investigate three research questions: (RQ1) which solution strategies LLM tutors prefer when multiple approaches are avail-able, (RQ2) whether tutors respond to and build upon the student’s proposed solution, and (RQ3) whether tutors appropriately transition between so-lution strategies after the student completes an ap-proach. Comprehensive experiments across LLM tutors spanning GPT-OSS, Qwen, Llama, and Gemma families reveal that tutors’ opening responses tend arXiv:2610.36367v1 [cs.CY] 26 Oct 2026 I need help with this Two Sum problem: 
+
+> Given an integer array...
+> How can you efficiently store values
+> you have encountered?
+> Actually, I was thinking to start by
+> sorting the array.
+> Sorting can work, but let's try a more
+> efficient approach. Which data structure
+> can you use to find the complement of
+> each number easily?
+
+Solution-Redirecting LLM Tutor 
+
+> How are you thinking about solving
+> this problem so far?
+> I was thinking to start by
+> sorting the array.
+> If you sort the array, how will you be able
+> to return the original indices of the
+> numbers that sum to the target?
+
+Solution-Responsive LLM Tutor 
+
+> Supervised
+> Fine-Tuning
+> I need help with this Two Sum problem:
+> Given an integer array...
+
+Problem: Two Sum  Possible Solutions         
+
+> Given an integer array nums and a target , return the
+> indices of the two numbers that add up to target.
+> Example: nums = [2, 15, 11, 8], target = 13 → [0, 2]
+> Naive
+> Try all pairs
+> time
+> Two-Pointer
+> Sort, then scan
+> \(O(n \log n)\) time
+> Hash Map
+> One pass
+> \(O(n)\) time
+
+Figure 1: Comparison between a solution-redirecting LLM tutor (left) and a solution-responsive LLM tutor (right). The solution-redirecting tutor acknowledges the student’s valid but suboptimal two-pointer approach, yet redirects them towards the more optimal hash map solution rather than supporting their reasoning. In contrast, the solution-responsive tutor builds on the student’s approach through a pedagogically guided question. 
+
+to provide general advice rather than guidance toward a specific solution. When tutors provide solution-specific guidance, they exhibit systematic preferences, frequently favoring brute-force or oth-erwise naive approaches. Strikingly, tutors do not simply exhibit these preferences, but often impose them. Even when students pursue valid alternative strategies, tutors frequently redirect them towards the tutor’s pre-ferred approach instead (Figure 1). Yet this ten-dency reverses after the student has completed their solution: when given the opportunity to deepen the student’s understanding with a stronger alternative solution, tutors often remain anchored to the ex-isting approach. Even worse, tutors may guide students towards a less optimal approach. Together, these results reveal a broader failure of solution responsiveness: LLM tutors struggle to both support a student’s reasoning when they should and to move beyond it when appropriate. Fi-nally, we show that targeted supervised fine-tuning on interactions that explicitly demonstrate respon-sive behavior improves both tutor responsiveness and transitions toward more optimal solutions, sug-gesting that these tutoring behaviors can be learned through post-training. Our main contributions are threefold: 1. We introduce MUSE together with evaluation metrics for measuring solution preferences, responsiveness, and transitions between solu-tion strategies. 2. We systematically evaluate open-source LLM tutors on multiple-solution programming problems, revealing limitations in their respon-siveness to students’ proposed solutions and their transitions between solution strategies. 3. We demonstrate that targeted post-training can mitigate these limitations, leveraging MUSE to generate synthetic data at scale. 
+
+2 Related Work 
+
+2.1 LLMs for Tutoring 
+
+Prior work has investigated LLM tutoring through pedagogical alignment (Dinucu-Jianu et al., 2025; Scarlatos et al., 2025), misconception awareness (Macina et al., 2023; Otero et al., 2025), metacog-nitive development (Liu et al., 2026; Wang, 2026), and personalized instructional support (Reddig et al., 2025). Despite these advances, existing evaluations commonly focus on whether a tutor provides correct or pedagogically appropriate guid-ance toward a target solution, even when the un-derlying problem admits multiple valid approaches (Macina et al., 2023; Reddig et al., 2025; Scarlatos et al., 2025). As a result, relatively little attention has been given to whether a tutor recognizes and builds upon the particular solution pursued by a student, or how it should transition between alter-native solution strategies. Our MUSE allows for evaluating tutors’ solution preferences, responsive-ness, and transitions between solution strategies by explicitly controlling the student’s proposed solu-tion. 
+
+2.2 Multiple-Solution Problems 
+
+Educational research shows that engaging with multiple-solution strategies can promote learning, conceptual understanding, and procedural flexibil-ity (Große and Renkl, 2006; Rittle-Johnson and Star, 2007, 2009). Because multiple approaches can provide distinct learning opportunities, under-standing how tutors navigate this solution space is an important first step. We therefore examine which valid solutions LLM tutors prefer ( RQ1 ). However, simply presenting multiple approaches may overwhelm students (Lynch and Star, 2014), making it important for instructors to recognize and build on students’ existing reasoning (Çatman Ak-soy et al., 2026; Choppin, 2011; Dyer and Sherin, 2015). This motivates RQ2 : whether LLM tutors support students’ proposed solutions rather than redirecting them toward another approach. Multiple-solution instruction also creates oppor-tunities to introduce alternatives after students com-plete an initial solution. Because explanations are most effective when learners have reached an ap-propriate point for receiving them (Schwartz and Bransford, 1998), we investigate whether LLM tu-tors capitalize on these opportunities by transition-ing toward a more optimal solution, continuing with the existing approach, or redirecting students toward a less optimal solution ( RQ3 ). These findings suggest that effective tutoring across multiple solutions requires navigating stu-dents’ reasoning and solution strategies throughout the interaction. However, LLM tutoring research has not systematically studied these behaviors. We therefore study whether LLM tutors can effectively support students across multiple-solution strategies. A detailed discussion of related work on multiple-solution instruction is provided in Appendix A. 
+
+3 MUSE: Multi-solution Understanding and Simulation Environment 
+
+MUSE provides a controlled environment for sim-ulating LLM tutoring interactions on programming problems with multiple-solution approaches. It controls the simulated student’s pursued solution and intuition, as well as the tutor’s conversation initialization, enabling systematic evaluation of tu-tor behavior across different learning trajectories at scale. Using these controls, we define a response taxonomy and evaluation metrics for tutor’s so-lution preference, responsiveness, and transitions between solution strategies (Figure 2). 
+
+3.1 Task Formulation 
+
+Let a programming problem be p, with three solu-tion approaches: a brute force, a sub-optimal, and an optimal solution: S = {sBF , s SO , s OP T }. We define the student’s turn as ut = ( zt, I t), where 
+
+zt ∈ S is the solution approach pursued by the student and It ∈ { 1, 0} denoting whether the stu-dent’s current intuition is correct, at each time step 
+
+t. The conversation is then defined as follows: 
+
+Ct = ( p, u 1, a 1, . . . , u t, a t), (1) where the LLM tutor response is defined as 
+
+at ∼ πθ(· | C− 
+
+> t
+
+), (2) where πθ is the LLM tutor and 
+
+C− 
+
+> t
+
+= ( p, u 1, a 1, . . . , u t). (3) 
+
+3.2 Tutor Response Taxonomy 
+
+At all time steps t > 0, an LLM judge (Ap-pendix E.1) classifies the tutor’s response into four main categories based on the tutor’s prescribed ap-proach: at ∈ A = {sBF , s SO , s OP T , g }, where g
+
+represents general advice that applies to the prob-lem regardless of the student’s solution. 
+
+3.3 Controlled Student Simulation 
+
+For each problem, MUSE allows individual student solutions to be simulated. To measure responsive-ness, MUSE ensures that the student’s proposed solution differs from the tutor’s initial preferred solution (i.e. z2̸ = a1). Additionally, the student’s intuition can be inde-pendently controlled by the simulator: It ∈ { 1, 0}
+
+where 1 denotes a correct intuition and 0 indicates an incorrect intuition on a specific solution. This enables simulation of conversations where a stu-dent pursues a valid solution while having a flawed justification. Question 
+
+> Help me with this!
+> Direct Approach:
+> Tutor Solution
+> \(a_1\)
+> Probe-first
+> Approach:
+> Leading Question
+> What have you tried so far?
+> Student Approach:
+> Correct Intuition
+> \(u_2 = (z_2, I_2=1)\)
+> Student Approach:
+> False Intuition
+> \(u_2 = (z_2, I_2=0)\)
+> Student Approach:
+> Correct Intuition
+> \(u_2 = (z_2, I_2=1)\)
+> Student Approach:
+> False Intuition
+> \(u_2 = (z_2, I_2=0)\)
+> Tutor Response
+> \(a_2\)
+> Student Final
+> Solution
+> \(u_3 = (z_3, I_3 = 1)\)
+> Tutor Response
+> \(a_3\)
+> Student Turn
+> Tutor Turn
+> \(z_t \in \mathcal{S} = \{s_{BF}, s_{SO}, s_{OPT}\}\)
+> \(a_t \in \mathcal{A} = \{s_{BF}, s_{SO}, s_{OPT}, g\}\)
+> \(s_{BF} \prec s_{SO} \prec s_{OPT}\)
+
+Desirable Traits 
+
+> \(a_2 = z_2\vee a_2 = g\)
+> \(z_3 \prec a_3 \in \mathcal{S}\)
+
+Figure 2: Conversation trajectories supported by MUSE. MUSE simulates student-tutor conversations with controlled tutor openings and student solution intuitions. We use MUSE to systematically measure tutor solution preferences, responsiveness, and transitions between solution approaches. MUSE is adapted to generate synthetic solution-responsive conversations that explicitly guide students toward more optimal solutions for targeted post-training. 
+
+3.4 Conversation Initialization 
+
+When simulating conversations, the LLM tutor will often open up the conversation by guiding the stu-dent towards a specific solution or by offering gen-eral advice. Alternatively, MUSE also allows for the LLM tutor to take a probe-first approach and open with a leading question (Cole et al., 1978). More specifically, after the student asks for help with a problem, the tutor may respond with a ques-tion such as: “What have you tried so far?" 
+
+3.5 Evaluation Framework 
+
+MUSE enables systematic evaluation of three re-search questions: (RQ1) tutor solution preferences, (RQ2) responsiveness to students’ proposed so-lutions, and (RQ3) transitions between solution strategies. 
+
+3.5.1 RQ1: LLM Tutor Solution Preference 
+
+The tutor’s initial instructional strategy reveals whether it exhibits a systematic preference for par-ticular solution approaches before observing the student’s pursued solution. Furthermore, it pro-vides a baseline for distinguishing the tutor’s intrin-sic solution preferences from its subsequent respon-siveness to the student’s approach. To measure the LLM tutor’s solution preference, MUSE analyzes the tutor’s opening response ( t = 1 ), a1. Across N
+
+conversations, the empirical distribution over the tutor’s opening response categories is estimated as: 
+
+P (a1 = a) = 1
+
+N
+
+> N
+
+X
+
+> i=1
+
+1[ai 
+
+> 1
+
+= a], a ∈ A . (4) This gives the proportion of conversations in which the tutor’s opening response targets a brute force, suboptimal, or optimal solution or provides general advice. 
+
+3.5.2 RQ2: LLM Tutor Responsiveness 
+
+In instructional settings, tutors are expected to have a certain level of responsiveness towards their stu-dents. In multiple-solution problems, this implies that tutors should appropriately address and support a student’s approach, regardless of their intuition (Jacobs and Empson, 2015). We define the respon-siveness of the tutor at turn t > 1 as: 
+
+rt = 1[at = zt ∨ at = g] ∈ { 0, 1}. (5) More specifically, the tutor is responsive at a spe-cific turn if the solution they are guiding the student towards is the same as the student’s intended ap-proach. Additionally, the tutor is also considered responsive if they give the student general advice, as general advice applies to every solution. For RQ2, we measure the Solution Support Rate (SSR) of the tutor at turn t = 2 across N conversa-tions: 
+
+SSR 2 = 1
+
+N
+
+> N
+
+X
+
+> i=1
+
+ri 
+
+> 2
+
+= 1
+
+N
+
+> N
+
+X
+
+> i=1
+
+1[ai 
+
+> 2
+
+= zi 
+
+> 2
+
+∨ ai 
+
+> 2
+
+= g].
+
+(6) In other words, this is the percentage of conversa-tions that tutor supports or provides general advice the turn after the student offers their approach. 
+
+3.5.3 RQ3: Post-Solution Transitions 
+
+After a student has solved the problem using their approach, the tutor is presented with an opportu-nity to teach the student a more optimal approach. In the context of programming problems, such ap-proaches can involve distinct tradeoffs in efficiency, simplicity, or generalizability. We define a ranking system as follows: 
+
+
+
+rank( sBF ) = 1 rank( sSO ) = 2 rank( sOP T ) = 3 
+
+(7) The ranking system creates a solution hierarchy based on solution efficiency. More specifically: 
+
+rank( sBF ) < rank( sSO ) < rank( sOP T ), (8) or equivalently: 
+
+sBF ≺ sSO ≺ sOP T . (9) Using the ranking system, we quantify the direction of a tutor’s transition at time step t > 1 as: 
+
+∆t =
+
+
+
+sgn(rank( at) − rank( zt)) , if at ∈ S 
+
+0, if at = g. 
+
+(10) where sgn( ·) denotes the sign function, mapping positive, zero, and negative values to 1, 0, −1 re-spectively. Thus, ∆t = 1 indicates that the tutor transitions to a more optimal solution, ∆t = −1
+
+indicates a transition to a less optimal solution, and 
+
+∆t = 0 indicates that the tutor remains at the same solution approach. For RQ3, we evaluate the tutor’s tendency to transition to more optimal solutions after the stu-dent has completed their solution at t = 3 across 
+
+N conversations: 
+
+PTS 3 = 1
+
+N
+
+> N
+
+X
+
+> i=1
+
+∆i 
+
+> 3
+
+(11) We refer to this metric as the Post-Solution Transi-tion Score (PTS). This metric is bounded between 
+
+[−1, 1] , attaining its maximum when the tutor tran-sitions to a more optimal solution in every conver-sation and vice versa. A value of 0 indicates that, on average, the tutor makes no net change in so-lution optimality after the student completes their solution. 
+
+4 Post-Training Methodology 
+
+In this section, we propose a methodology for im-proving LLM tutor responsiveness through SFT by generating a dataset with examples of explicit tutor responsiveness and transitions towards more optimal solutions. 
+
+4.1 Synthetic Dataset Generation 
+
+We adapt MUSE to generate conversations that ex-plicitly demonstrate responsive behavior across all possible solution trajectories. Rather than sampling tutor responses from the LLM tutor πθ, we use a separate response generator πgen . The generator is provided with the problem p, the solution set S, and the controlled learner trajectory, and is prompted to produce tutor responses satisfying our desired behavioral constraints. For a given problem p, the learner trajectory is defined as 
+
+U = ( u1, . . . , u T ), u t = ( zt, I t), (12) and generated tutor responses are denoted 
+
+ˆat ∼ πgen (· | ˆC− 
+
+> t
+
+, S) (13) where ˆC− 
+
+> t
+
+= ( p, u 1, ˆa1, . . . , u t). (14) Thus, the synthetic conversation is defined as: 
+
+ˆCt = ( p, u 1, ˆa1, . . . , u t, ˆat). (15) MUSE initializes the generated conversations using the probe-first approach from § 3.4. This is because by opening with a guiding question rather than jumping right into a solution, the tutor is better able to judge the current understanding of the stu-dent (Cole et al., 1978; Michaels et al., 2007). This is particularly important for multiple-solution prob-lems where certain solutions may be too challeng-ing for the student based on their current knowledge (Schwartz and Bransford, 1998). To encourage solution-responsive behavior, we constrain the generated responses at each stage of the trajectory. After the student specifies their approach, the generator produces a pedagogical response pertaining to the student’s solution: 
+
+ˆa2 = z2 (16) After the student completes their solution, the gen-erator produces a response that acknowledges the student’s approach and transitions towards a more optimal solution: 
+
+z3 ≺ ˆa3 ∈ S (17) The resulting synthetic conversations provide demonstrations of the desired tutor behavior in a synthetic dataset: 
+
+DSFT = {( ˆC− 
+
+> t
+
+, ˆat)}Tt=1 . (18) The complete generation prompts are provided in Appendix E.4 and E.5. Model Training S Inference S        
+
+> Gemma ✕✕
+> Gemma SFT1 ✕✕
+> Gemma SFT2 ✓✕
+> Gemma SFT3 ✓✓
+> Table 1: Overview of SFT models. The table shows which SFT models have access to candidate solutions in the system prompt during training and inference time.
+
+4.2 Supervised Fine-Tuning 
+
+We perform supervised fine-tuning (SFT) to train LLM tutors to exhibit solution-responsive behavior. Using the synthetic dataset DSFT , SFT optimizes the standard autoregressive language modeling ob-jective: 
+
+LSFT (θ) = − X 
+
+> ( ˆC−
+> t,ˆat)∈D SFT
+
+log πθ(ˆ at | ˆC− 
+
+> t
+
+).
+
+(19) The training examples explicitly demonstrate solution-responsive tutoring, allowing the model to learn how to adapt its responses to the student’s reasoning. We additionally consider a solution-informed SFT setting, in which the candidate solution space 
+
+S is provided to the model as context through the system prompt. The corresponding objective is: 
+
+LSFT (θ) = − X 
+
+> ( ˆC−
+> t,ˆat)∈D SFT
+
+log πθ(ˆ at | ˆC− 
+
+> t
+
+, S).
+
+(20) This setting provides the model with explicit infor-mation about the available solution approaches in addition to the tutoring context. For post-training, we generate the synthetic train-ing data described in § 4.1 using only the train-ing split. We fine-tune Gemma 4 12B IT model for each SFT loss function. We consider three SFT variants that differ in whether candidate solu-tions are provided as system-prompt context during training and inference (Table 1). Gemma SFT1 is trained and evaluated without candidate solutions. 
+
+Gemma SFT2 is trained with candidate solutions but evaluated without them, while Gemma SFT3 
+
+receives candidate solutions during both training and inference. This setup allows us to isolate the ef-fect of providing candidate solutions as contextual information to the tutor. 
+
+5 Experiments and Results 
+
+5.1 Dataset and Experimental Setup 
+
+We collect 150 programming problems from the NeetCode 150 collection (NeetCode, 2026), span-ning diverse topics and three difficulty levels: easy, medium, and hard. For each problem, we collect its title, description, and three valid solutions. Each so-lution includes an explanation, algorithm steps, and time complexity, and is categorized as brute-force ,
+
+suboptimal , and optimal based on time complexity. For each solution, we use GPT-OSS 120B (Agar-wal et al., 2025) to generate a correct intuition and a plausible but incorrect intuition that a student pur-suing the solution may have (Appendix E.2, E.3). Using MUSE, we simulate one conversation per problem and conversation type with four LLMs as tutors: GPT-OSS 120B, Qwen3.8-27B (Qwen Team, 2026), Llama 3.3 70B Instruct (Grattafiori et al., 2024), and Gemma 4 12B IT (Team, 2026), yielding 150 conversations per type. GPT-OSS 120B serves as the LLM judge, classifying tutor responses according to the response taxonomy de-scribed in § 3.2 (Appendix E.1). For each LLM tutor, MUSE generates conversations under four conditions: probe-first or direct opening, crossed with a correct ( I2 = 1 ) or false ( I2 = 0 ) student intuition. When presenting an approach, the simu-lated student draws on the corresponding generated intuition. For SFT experiments, we randomly split the problems into 80% training and 20% test sets, using the training split for synthetic dataset generation and post-training and reserving the held-out test split for evaluation. To assess the robustness of SFT results, we repeat the training and evaluation process across three random problem splits gener-ated using different seeds and report the mean of each metric (Appendix C, F). 
+
+5.2 RQ1: LLM Tutor Solution Preference 
+
+We examine which solution approaches LLM tutors tend to favor when multiple correct approaches are available. We aggregate conversations with correct or false student intuitions where the tutor’s open-ing response is direct (solution-specific or general advice). This allows for a larger sample, yielding the empirical distribution described in § 3.5.1. We observe two notable patterns in LLM tutors’ solution preferences, as revealed in Figure 3. First, among solution-specific opening responses, brute-force is consistently the most preferred approach Correct Intuition False Intuition Model Direct Probe-first Direct Probe-first GPT-OSS 0.336 0.534 0.347 0.423 Qwen 0.472 0.589 0.514 0.544 Llama 0.465 0.459 0.413 0.279 Gemma 0.380 0.507 0.418 0.419 Gemma SFT1 - 0.606 - 0.596 Gemma SFT2 - 0.518 - 0.614 Gemma SFT3 - 0.568 - 0.619 
+
+Table 2: Quantitative results for RQ2: LLM tutor re-sponsiveness. Solution Support Rate (SSR ↑) measures how often tutors support students’ proposed solutions. SFT notably increases SSR. Correct Intuition False Intuition Model Direct Probe-first Direct Probe-first GPT-OSS 0.393 0.296 0.363 0.375 Qwen 0.172 0.092 0.130 0.132 Llama 0.581 0.412 0.405 0.357 Gemma 0.222 0.343 0.300 0.349 Gemma SFT1 - 0.570 - 0.625 Gemma SFT2 - 0.573 - 0.498 Gemma SFT3 - 0.936 - 0.903 
+
+Table 3: Quantitative results for RQ3: post-solution transitions. Post-Solution Transition Score (PTS ↑) mea-sures transitions toward more optimal solutions. SFT with candidate solutions significantly improves PTS. RQ1: LLM Tutor Solution Preference       
+
+> General Advice Brute Force Suboptimal Optimal
+> GPT-OSS Qwen Llama Gemma
+> 0%
+> 20%
+> 40%
+> 60%
+> 80%
+> 100%
+> LLM Tutor Model
+> Distribution Percentage
+> 30%
+> 27.3%
+> 23.9%
+> 18.8%
+> 34.3%
+> 26%
+> 20.4%
+> 19.4%
+> 53.9%
+> 22.2%
+> 10.9%
+> 13%
+> 33.8%
+> 32.1%
+> 15.7%
+> 18.4%
+
+Figure 3: LLM tutor opening response distribution. LLM tutors favor brute-force approaches when not pro-viding general advice. 
+
+across all four models ( 22 .2 to 32 .1% ), while the most optimal approach accounts for only 13 .0 to 
+
+19 .4% of responses. Thus, LLM tutors do not con-sistently prioritize computationally optimal solu-tions, potentially because brute-force approaches offer a simpler starting point for explanation or are more prevalent in programming-oriented training data. Second, models differ substantially in their propensity to provide solution-specific guidance: Llama provides general advice in 53 .9% of cases, compared with 30 .0% for GPT-OSS. Thus, model differences extend beyond solution preference to whether tutors commit to a particular solution at all. These findings provide a basis for evaluating tutor responsiveness: do tutors effectively adapt to stu-dent’s approach when it differs from their preferred approach? 
+
+5.3 RQ2: LLM Tutor Responsiveness 
+
+We investigate whether LLM tutors genuinely sup-port the solution proposed by the student. We re-port the Solution Support Rate (SSR) (Equation 6) for each conversation type across all four models. For fine-tuned models, we evaluate only the probe-first setting, since they are trained on this opener. Table 2 shows that probe-first openings generally increase SSR, with effects varying substantially across models. GPT-OSS, Qwen, and Gemma ex-hibit higher SSR under probe-first openings for correct student intuitions, with improvements of 
+
+19 .8, 11 .7, and 12 .7 percentage points, respec-tively. This is intuitive, as the tutor has not yet introduced its preferred solution. However, elicit-ing the student’s approach alone does not guarantee solution-responsive behavior, particularly when the student’s reasoning is incorrect. 
+
+Post-Training Improvements. We find that tar-geted SFT improves solution responsiveness. Com-pared with base Gemma, Gemma SFT1, trained and evaluated without explicit solution informa-tion, increases SSR from 0.507 to 0.606 for correct intuitions and from 0.419 to 0.596 for false intu-itions, corresponding to improvements of 9.9 and 
+
+17 .7 percentage points, respectively. However, providing the candidate solution space during SFT does not consistently improve respon-siveness across intuition types. SSR is highest for correct intuitions when candidate solutions are ex-cluded from training, whereas including them dur-ing both training and inference yields higher SSR for false intuitions. This suggests that candidate solutions alone are insufficient to improve tutor responsiveness, as tutors must also learn to adapt their guidance based on the student’s reasoning. RQ3: Correct Intuition, Probe-fi rst Transitions         
+
+> Less Optimal Same More Optimal
+> GPT-OSS Qwen Llama Gemma SFT1 SFT2 SFT3
+> 0%
+> 20%
+> 40%
+> 60%
+> 80%
+> 100%
+> LLM Tutor Model
+> Distribution Percentage
+> 6.1%
+> 58.2%
+> 35.7%
+> 6.4%
+> 78%
+> 15.6%
+> 7.1%
+> 44.7%
+> 48.2%
+> 6.9%
+> 52%
+> 41.2%
+> 11.1%
+> 20.8%
+> 68.1%
+> 9.3%
+> 24%
+> 66.7%
+> 6.4%
+> 93.6%
+
+Figure 4: Correct intuition, probe-first transition dis-tributions. Notably, all models demonstrate transitions towards less optimal solutions, however, SFT with can-didate solutions in context during training and inference significantly mitigate these transition types. 
+
+5.4 RQ3: Post-Solution Transitions 
+
+We examine whether LLM tutors take advantage of the opportunity to introduce a more optimal solu-tion after students complete their approach. We report the Post-solution Transition Score (PTS) (Equation 11) for each conversation type across all four models. For fine-tuned models, we evaluate only the probe-first setting, since they are trained on this opener. Additionally, we present the transi-tion distributions for correct intuition, probe-first approach (Figure 4) and other conversation types (Appendix Figures 5, 6, 7). Table 3 reveals substantial differences in LLM tutors’ tendencies to transition toward more opti-mal solutions. All base models exhibit positive PTS across conditions, indicating a general tendency to-ward more efficient solutions, but the magnitude varies considerably. Llama shows the strongest preference for post-solution optimization, while Qwen remains more anchored to the student’s solu-tion. Despite Qwen’s relatively high SSR in RQ2, its low PTS in RQ3 shows that supporting a stu-dent’s approach does not necessarily lead to intro-ducing a more optimal alternative after the student finishes their approach. More concerningly, tutors can steer students toward less optimal solutions around 6.1% to 7.1% of the time, potentially un-dermining their existing progress by encouraging less efficient approaches. 
+
+Post-Training Improvements. The SFT results demonstrate that optimal solution transitions can be learned through explicit examples in the dataset. Accordingly, Gemma SFT1 increases PTS from 
+
+0.343 to 0.570 for correct intuitions and from 
+
+0.349 to 0.625 for false intuitions. Combined with the SSR improvements in RQ2, these results sug-gest that SFT can improve tutor responsiveness while subsequently introducing more optimal ap-proaches. Providing the solution space during training and inference has a stronger effect. Although SFT1 and SFT3 achieve relatively similar SSR in RQ2, SFT3 substantially increases PTS, from 0.570 to 
+
+0.936 for correct intuitions and from 0.625 to 0.903 
+
+for false intuitions, while eliminating transitions toward less optimal solutions for correct intuition conversations (Figure 4). Because the SFT data already contains examples of optimal transitions, these results suggest that inference-time solution information does not teach the transition behavior itself, but helps tutors execute it by identifying available alternatives. Thus, SFT teaches how to transition toward a more optimal approach, while explicit solution information helps determine which 
+
+transition to make. 
+
+6 Conclusion 
+
+We introduce MUSE, an environment for simulat-ing tutoring interactions for multiple-solution pro-gramming problems and systematically evaluating LLM tutors’ solution preferences, responsiveness to students’ proposed solutions, and transitions be-tween solution strategies. Our experiments reveal that LLM tutors often fail to align their guidance with students’ proposed solutions and may steer stu-dents toward less optimal approaches when given the opportunity to introduce more efficient alterna-tives. Supervised fine-tuning on interactions that explicitly demonstrate responsive tutoring moder-ately improves these behaviors, while providing candidate solutions during training and inference further enhances tutors’ ability to transition toward more optimal solutions. Overall, MUSE takes a step toward developing LLM tutors that more effec-tively support students and provides a foundation for studying personalized tutoring, tutor training, and adaptive pedagogical strategies in multiple-solution settings. Limitations 
+
+Our findings should be interpreted in light of two limitations. First, our SFT experiments explore a limited range of fine-tuning configurations. Future work could investigate alternative approaches, such as fine-tuning models to leverage explicit reason-ing or thinking tokens, further improving tutor re-sponsiveness. Second, our evaluation dataset com-prises curated interview-style programming prob-lems, which may not fully capture the diversity of multiple-solution problems. Future work could ex-tend MUSE to broader STEM domains, including mathematical proofs and physics problems. 
+
+References 
+
+Sandhini Agarwal, Lama Ahmad, Jason Ai, Sam Alt-man, Andy Applebaum, Edwin Arbus, Rahul K Arora, Yu Bai, Bowen Baker, Haiming Bao, et al. 2025. gpt-oss-120b & gpt-oss-20b model card. arXiv preprint arXiv:2508.10925 .Jeffrey Choppin. 2011. The impact of profes-sional noticing on teachers’ adaptations of challeng-ing tasks. Mathematical Thinking and Learning ,13(3):175–197. Michael Cole, Vera John-Steiner, Sylvia Scribner, and Ellen Souberman. 1978. Mind in society. Mind in society the development of higher psychological pro-cesses. Cambridge, MA: Harvard University Press .David Dinucu-Jianu, Jakub Macina, Nico Daheim, Ido Hakimi, Iryna Gurevych, and Mrinmaya Sachan. 2025. From problem-solving to teaching problem-solving: Aligning LLMs with pedagogy using re-inforcement learning. In Proceedings of the 2025 Conference on Empirical Methods in Natural Lan-guage Processing , pages 272–292, Suzhou, China. Association for Computational Linguistics. Elizabeth B. Dyer and Miriam Gamoran Sherin. 2015. Instructional reasoning about interpretations of stu-dent thinking that supports responsive teaching in secondary mathematics. ZDM , 48(1-2):69–82. Aaron Grattafiori, Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad Al-Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten, Alex Vaughan, et al. 2024. The llama 3 herd of mod-els. arXiv preprint arXiv:2407.21783 .Cornelia S. Große and Alexander Renkl. 2006. Effects of multiple solution methods in mathematics learning. 
+
+Learning and Instruction , 16(2):122–138. Recent Worked Examples Research: Managing Cognitive Load to Foster Learning and Transfer. Victoria R. Jacobs and Susan B. Empson. 2015. Re-sponding to children’s mathematical thinking in the moment: an emerging framework of teaching moves. 
+
+ZDM , 48(1-2):185–197. Woosuk Kwon, Zhuohan Li, Siyuan Zhuang, Ying Sheng, Lianmin Zheng, Cody Hao Yu, Joseph Gon-zalez, Hao Zhang, and Ion Stoica. 2023. Efficient memory management for large language model serv-ing with pagedattention. In Proceedings of the 29th Symposium on Operating Systems Principles , SOSP ’23, page 611–626. ACM. Naiming Liu, Richard Baraniuk, and Shashank Sonkar. 2026. Metaclass: Metacognitive coaching for learn-ing with adaptive self-regulation support. arXiv preprint arXiv:2602.02457 .Kathleen Lynch and Jon R. Star. 2014. Views of strug-gling students on instruction incorporating multiple strategies in algebra i: An exploratory study. Journal for Research in Mathematics Education , 45(1):6–18. Jakub Macina, Nico Daheim, Sankalan Chowdhury, Tan-may Sinha, Manu Kapur, Iryna Gurevych, and Mrin-maya Sachan. 2023. MathDial: A dialogue tutoring dataset with rich pedagogical properties grounded in math reasoning problems. In Findings of the As-sociation for Computational Linguistics: EMNLP 2023 , pages 5602–5621, Singapore. Association for Computational Linguistics. Sarah Michaels, Catherine O’Connor, and Lauren B. Resnick. 2007. Deliberative discourse idealized and realized: Accountable talk in the classroom and in civic life. Studies in Philosophy and Education ,27(4):283–297. NeetCode. 2026. Neetcode 150. https://neetcode. io/practice/practice/neetcode150 . Accessed: 2026-06-12. Nancy Otero, Stefania Druga, and Andrew Lan. 2025. A benchmark for math misconceptions: bridging gaps in middle school algebra with ai-supported instruc-tion. Discover Education , 4(1). Qwen Team. 2026. Qwen3.8-Max: A new bar for cod-ing and cowork. Jennifer M Reddig, Arav Arora, and Christopher J. MacLellan. 2025. Generating in-context, person-alized feedback for intelligent tutors with large lan-guage models. International Journal of Artificial Intelligence in Education , 35(6):3459–3500. Bethany Rittle-Johnson and Jon R. Star. 2007. Does comparing solution methods facilitate conceptual and procedural knowledge? an experimental study on learning to solve equations. Journal of Educational Psychology , 99(3):561–574. Bethany Rittle-Johnson and Jon R. Star. 2009. Com-pared with what? the effects of different comparisons on conceptual knowledge and procedural flexibility for equation solving. Journal of Educational Psy-chology , 101(3):529–544. Alexander Scarlatos, Naiming Liu, Jaewook Lee, Richard Baraniuk, and Andrew Lan. 2025. Train-ing LLM-Based Tutors to Improve Student Learning Outcomes in Dialogues , page 251–266. Springer Nature Switzerland. Daniel L. Schwartz and John D. Bransford. 1998. A time for telling. Cognition and Instruction ,16(4):475–522. Moshe Stupel and David Ben-Chaim. 2017. Using mul-tiple solutions to mathematical problems to develop pedagogical and mathematical thinking: A case study in a teacher education program. Investigations in Mathematics Learning , 9(2):86–108. Gemma Team. 2026. Gemma 4 technical report. 
+
+Preprint , arXiv:2607.02770. Leandro von Werra, Younes Belkada, Lewis Tunstall, Edward Beeching, Tristan Thrush, Nathan Lambert, Shengyi Huang, Kashif Rasul, and Quentin Gal-louédec. 2020. TRL: Transformers Reinforcement Learning. Jason Z Wang. 2026. Mirror: A hierarchical bench-mark for metacognitive calibration in large language models. arXiv preprint arXiv:2604.19809 .Emine Çatman Aksoy, Mine I¸ sıksal-Bostan, Reyhan Tekin-Sitrava, Sibel Kazak, and Ay¸ se Nur Ucuzo˘ glu-Öznur. 2026. A teacher’s enactment of responsive teaching moves: the concept of the mean. Journal of Mathematics Teacher Education .
+
+Appendix A Multiple-Solution Problems Learning Science 
+
+Educational research has long examined the impor-tance of multiple-solution problems in supporting student learning. Asking students to consider or compare multiple solution strategies can promote learning (Große and Renkl, 2006) and has been associated with gains in conceptual understanding and procedural flexibility (Rittle-Johnson and Star, 2007, 2009). Engaging with alternative strategies can require students to identify relationships be-tween approaches and understand why different methods succeed, providing opportunities to de-velop a more flexible understanding of the underly-ing concepts. However, incorporating multiple-solution strate-gies into instruction also presents challenges. Teachers may avoid discussing multiple approaches because doing so can be perceived as time-consuming and may require substantial, multidi-mensional pedagogical content knowledge (Stupel and Ben-Chaim, 2017). Moreover, simply present-ing students with multiple strategies does not neces-sarily produce the desired learning benefits. With-out appropriate instructional guidance, students may become overwhelmed or fail to understand the relationships between alternative approaches (Lynch and Star, 2014). Thus, the pedagogical value of multiple-solution instruction depends not only on exposing students to alternatives, but also on appropriately connecting and navigating be-tween them. This challenge relates closely to research on re-sponsive teaching, which emphasizes building in-struction around students’ existing reasoning rather than immediately redirecting them toward a pre-determined solution (Çatman Aksoy et al., 2026; Choppin, 2011; Dyer and Sherin, 2015). Such re-sponsiveness is particularly relevant when students pursue different valid approaches: an instructor must recognize the reasoning behind a student’s strategy, determine how to productively extend that reasoning, and identify opportunities to introduce alternative approaches. Related work also suggests that the timing of explanations can affect their in-structional value, motivating the importance of in-troducing alternative strategies only when students are prepared to benefit from them (Schwartz and Bransford, 1998). Although this literature establishes the potential benefits and instructional challenges of multiple-solution learning, it has largely examined human instruction rather than LLM-based tutors. Con-versely, existing LLM tutoring work has not sys-tematically evaluated how tutors behave when stu-dents pursue different valid solution strategies. We bring these two lines of research together by treat-ing solution strategy as an explicit component of the tutoring interaction and evaluating whether LLM tutors appropriately support, extend, and tran-sition between students’ proposed approaches. 
+
+B Student-Tutor Conversation 
+
+MUSE simulates student-tutor conversations with the following structure: 
+
+> SYSTEM:
+> You are a Socratic programming tutor. Rules: - Never provide code in your first response. - Never name the algorithm in your first response. - Ask exactly one leading question. - Wait for the student's reply before giving another hint.
+> USER:
+> I need help with this LeetCode problem: {problem_name}.
+
+{problem_statement} 
+
+ASSISTANT: 
+
+[Tutor opening response] 
+
+USER: 
+
+I was thinking: [Student intuition] 
+
+ASSISTANT: 
+
+[Tutor response] 
+
+USER: 
+
+Here is my final solution: {algorithm} 
+
+ASSISTANT: 
+
+[Tutor response] 
+
+[Tutor opening response] is generated by the LLM tutor for direct conversation type and fixed to “What’s your current approach to the problem?" for probe-first conversation type. [Student intuition] is a correct or false intuition depending on conversation type that is generated by GPT-OSS 120B using system prompt in Ap-pendix E.2 and E.3. [Tutor response] is generated by LLM tutor. Here is an example of a direct, correct intuition conversation, with Llama 3.3 70B Instruct as the LLM tutor: 
+
+SYSTEM: 
+
+You are a Socratic programming tutor. Rules: - Never provide code in your first response. - Never name the algorithm in your first response. - Ask exactly one leading question. - Wait for the student's reply before giving another hint. 
+
+USER: 
+
+I need help with this LeetCode problem: Two Sum. Given an array of integers nums and an integer target, return the indices i and j such that nums[i] + nums[j] == target and i != j. You may assume that every input has exactly one pair of indices i and j that satisfy the condition. Return the answer with the smaller index first. 
+
+ASSISTANT: 
+
+To approach this problem, let's think about how we can efficiently find the pair of indices that satisfy the given condition. What data structure could we use to store the elements of the array as we iterate through it, such that we can quickly look up the complement of each element (i.e., the value that we need to add to the current element to get the target)? 
+
+USER: 
+
+I was thinking: Maybe I should scan each number and compare it with the later ones to see if any pair adds up to the target. 
+
+ASSISTANT: 
+
+That's a good start, but scanning each number and comparing it with all the later ones would result in a lot of repeated comparisons and would not be very efficient, especially for large arrays. This approach would have a time complexity of O(n^2), where n is the length of the array. Is there a way to store the numbers you've seen so far in a way that would allow you to check if the complement of the current number has been seen before in constant time? 
+
+USER: 
+
+Here is my final solution: Iterate through the array with two nested loops using indices i and j to check every pair of different elements. If the sum of the pair equals the target, return the indices of the pair. If no such pair is found, return an empty array. 
+
+ASSISTANT: 
+
+Your solution works, but as we discussed earlier, it has a time complexity of O(n^2) due to the nested loops. This might not be efficient for large arrays. However, you've implemented the brute force approach correctly. Now, let's think about optimizing it: How can you modify your approach to take advantage of the fact that you're looking for a specific sum, and use a data structure that allows for constant-time lookups to reduce the time complexity to O(n)? 
+
+C Synthetic Dataset Details 
+
+As described in § 5.1, we randomly split problems into 80% training and 20% test sets, yielding 120 training problems and 30 test problems. From the 120 problems, MUSE constructs approximately 640 SFT conversations by combining solution tra-jectories that exhibit optimal transitions with both student correct and false intuition settings. Given the limited number of test problems, we repeat the random split three times using seeds: 1, 2, and 3, and average results across splits to obtain a more comprehensive evaluation. 
+
+D Synthetic Conversation Template 
+
+MUSE can be adapted to generate synthetic student-tutor conversations exhibiting explicit tutor respon-siveness and transitions towards more optimal so-lutions with the following structure: 
+
+SYSTEM: 
+
+You are a Socratic programming tutor. Rules: - Never provide code in your first response. - Never name the algorithm in your first response. - Ask exactly one leading question. - Wait for the student's reply before giving another hint. [Candidate Solutions] 
+
+USER: 
+
+I need help with this LeetCode problem: {problem_name}. {problem_statement} 
+
+ASSISTANT: 
+
+[Probe-first opening] 
+
+USER: 
+
+I was thinking: [Student intuition] 
+
+ASSISTANT: 
+
+[Tutor response - supporting] 
+
+USER: 
+
+Here is my final solution: {algorithm} 
+
+ASSISTANT: 
+
+[Tutor response - optimal transition] 
+
+For conversations with candidate solutions in the system prompt (Equation 20), [Candidate Solu-tions] is “Here are the known solution approaches for the problem:" followed by a list of each solu-tion’s intuition and algorithmic steps. Note that the solution intuition is different from a reasonable correct/false intuition a student may have. For con-versations that do not include candidate solutions in the system prompt, [Candidate Solutions] is empty. [Probe-first opening] is chosen from a random set of 13 guiding questions. Some examples in-clude: “What’s your current approach to the prob-lem?", “How are you thinking about solving this problem so far?", “What’s the first thing that comes to mind when you look at this problem?". [Student intuition] is a correct or false intuition depending on conversation type that is generated by GPT-OSS 120B using system prompt in Ap-pendix E.2 and E.3. [Tutor response - supporting] is a response ex-plicitly demonstrating responsiveness generated by the generator LLM (GPT-OSS 120B) using system prompt in Appendix E.4. [Tutor response - optimal transition] is a re-sponse explicitly transitioning to a more optimal solution by the generator LLM (GPT-OSS 120B) using system prompt in Appendix E.5. Here is an example of a synthetically generated conversation exhibiting explicit tutor responsive-ness and a more optimal transition. 
+
+SYSTEM: 
+
+You are a Socratic programming tutor. Rules: - Never provide code in your first response. - Never name the algorithm in your first response. - Ask exactly one leading question. - Wait for the student's reply before giving another hint. Here are the known solution approaches for the problem: Solution 1: Intuition: We can check every pair of different elements in the array and return the first pair that sums up to the target. This is the most intuitive approach but it's not the most efficient. Algorithm: Iterate through the array with two nested loops using indices i and j to check every pair of different elements. If the sum of the pair equals the target, return the indices of the pair. If no such pair is found, return an empty array. There is guaranteed to be exactly one solution, so we will never return an empty array. Solution 2: Intuition: We can sort the array and use two pointers to find the two numbers that sum up to the target. This is more efficient than the brute force approach. This approach is similar to the one used in Two Sum II. Algorithm: Create a copy of the array and sort it in ascending order. Initialize two pointers, one at the beginning (i) and one at the end (j) of the array. Iterate through the array with the two pointers and check if the sum of the two numbers is equal to the target. If the sum is equal to the target, return the indices of the two numbers. If the sum is less than the target, move the left pointer i to the right, which will increase the sum. If the sum is greater than the target, move the right pointer j to the left, which will decrease the sum. There is guaranteed to be exactly one solution, so we will never return an empty array. Solution 3: Intuition: We can solve the problem in a single pass by iterating through the array and checking if the complement of the current element exists in the hash map. If it does, we return the indices of the current element and its complement. If not, we store the current element in the hash map. This guarantees that we will never use the same element twice, but we still check every element in the array. Algorithm: Create a hash map to store the value and index of each element in the array. Iterate through the array using index i and compute the complement of the current element, which is target - nums[i]. Check if the complement exists in the hash map. If it does, return the indices of the current element and its complement. If no such pair is found, return an empty array. 
+
+USER: 
+
+I need help with this LeetCode problem: Two Sum. Given an array of integers nums and an integer target, return the indices i and j such that nums[i] + nums[j] == target and i != j. You may assume that every input has exactly one pair of indices i and j that satisfy the condition. Return the answer with the smaller index first. 
+
+ASSISTANT: 
+
+What have you got so far? 
+
+USER: 
+
+I was thinking: Maybe I should scan each number and compare it with the later ones to see if any pair adds up to the target. 
+
+ASSISTANT: 
+
+When you locate a pair whose values add up to the target, how will you structure your loops (or their ranges) so that you both avoid comparing an element with itself and guarantee that the returned indices are ordered with the smaller index first? 
+
+USER: 
+
+Here is my final solution: Iterate through the array with two nested loops using indices i and j to check every pair of different elements. If the sum of the pair equals the target, return the indices of the pair. If no such pair is found, return an empty array. 
+
+ASSISTANT: 
+
+Your nested-loop solution correctly finds the unique pair, and it guarantees the smaller index comes first—well done! Now, thinking about reducing the amount of work you do, what might happen if you first arranged the numbers in a sorted order; how could you then use positions at opposite ends of that ordered list to home in on the target more efficiently? 
+
+E Prompts 
+
+E.1 Tutor Response LLM Judge 
+
+MUSE uses GPT-OSS 120B as an LLM judge to classify tutor responses as guidance towards a spe-cific solution or general advice. The prompt is shown below: 
+
+SYSTEM: 
+
+You are an impartial evaluator. Your task is to classify the tutor's response into exactly ONE category. You will be given the entire conversation for context, but you should classify based only on the tutor's final response. Definitions: 1. Guide toward Solution 1 The tutor primarily nudges the student toward the intuition or algorithm of Solution 1 without fully revealing it. 2. Guide toward Solution 2 The tutor primarily nudges the student toward the intuition or algorithm of Solution 2 without fully revealing it. 3. Guide toward Solution 3 The tutor primarily nudges the student toward the intuition or algorithm of Solution 3 without fully revealing it. 4. General advice The tutor provides the student with general advice about the problem, that could apply to multiple different solutions, not a specific solution. 5. Other None of the above categories apply. Guidelines: - Choose exactly one label. - Classify based only on the tutor's response. - If the tutor mentions multiple solutions, choose the one most strongly emphasized. - Prioritize 'Guide toward Solution 1/2/3' over 'General advice' when applicable. - If Solution 3 is not provided, do not classify as label 3. - Do not infer intentions beyond the conversation. Return ONLY valid JSON. {"label": "...", "confidence": 0.0, "evidence": "One or two sentences citing the tutor's response." }
+
+USER: 
+
+Conversation: {conversation} Candidate Solutions: Solution 1: Intuition: {solution1_intuition} Algorithm: {solution1_algorithm} Solution 2: Intuition: {solution2_intuition} Algorithm: {solution2_algorithm} Solution 3: Intuition: {solution3_intuition} Algorithm: {solution3_algorithm} 
+
+E.2 Student Correct Intuition Generation 
+
+MUSE uses GPT-OSS 120B to generate realistic valid student intuitions. Student intuitions repre-sent a student’s initial thought process and are pro-vided to the LLM tutor to introduce the student’s approach. The prompt to generate correct student intuitions is: 
+
+SYSTEM: 
+
+You are simulating a student solving a LeetCode problem. You do not know the full solution, only the problem statement and some initial thoughts. Write exactly one sentence representing the student's first step or initial intuition, which should match the desired approach given by the algorithm steps. The sentence should: - avoid implementation details - avoid algorithm names unless they would naturally occur to a student - avoid sounding like a textbook explanation - sound tentative and exploratory - be under 30 words Do not explain the solution. Do not provide code. Do not list steps. Do not mention complexity. Do not mention 'brute force', 'naive', 'more optimal', or 'most optimal' terms. 
+
+> USER:
+> Problem: {problem_name} Statement: {problem_statement} Algorithm Steps: {algorithm_steps}
+
+For example, the generated student intuitions for the Two Sum programming problem are: • Brute-force: “Maybe I should scan each num-ber and compare it with the later ones to see if any pair adds up to the target." • Sub-optimal (Two-pointer): “I wonder if sort-ing the numbers and then using two pointers from both ends could help find the pair that adds to the target." • Optimal (Hash-map): “I wonder if I can keep track of numbers I’ve seen so far and, for each element, check whether its needed partner is already stored." 
+
+E.3 Student False Intuition Generation 
+
+Similarly, MUSE uses GPT-OSS 120B to gener-ate realistic student false intuitions or misconcep-tions towards a specific solution. Student intuitions represent a student’s initial thought process and are provided to the LLM tutor to introduce the student’s approach. The prompt to generate false student intuitions is: 
+
+> SYSTEM:
+> You are simulating a confused student who is attempting a LeetCode problem. You will be given the problem statement, the intuition of a correct solution and corresponding algorithmic steps to that solution. Your task is to generate a realistic but INCORRECT intuition a student may have that is ASSOCIATED with the provided solution. The sentence should: - avoid implementation details - avoid algorithm names unless they would naturally occur to a student - avoid sounding like a textbook explanation - sound tentative and exploratory Do not provide code. Do not list steps. Do not mention complexity. Do not mention 'brute force', 'naive', 'more optimal', or 'most optimal' terms. Return ONLY valid JSON including the student's false intuition and misconception in the following format. {"false_intuition": "...", "misconception": "..." }
+> USER:
+> Problem: {problem_name} Statement: {problem_statement} Algorithm Steps: {algorithm_steps}
+
+For example, the generated student intuitions for the Two Sum programming problem are: • Brute-force: “I guess we can just walk through the list and compare each number with the one right after it, because the first pair that adds up to the target should be the answer we need." • Sub-optimal (Two-pointer): “I think if we sort the numbers and then move the two pointers inward, the positions where the pointers stop will correspond to the original indices we need to return." • Optimal (Hash-map): “I think we can just walk through the list, add each number to a hash map, and for the current element im-mediately check if target - current is already in the map; if it is, we return those two in-dices, assuming the map will always give us the smaller index first." 
+
+E.4 Synthetic Dataset Generation Responsive Tutor Reply 
+
+For the synthetic dataset, to ensure the tutor response explicitly supports the student’s solu-tion, GPT-OSS 120B generator uses the following prompt when the student’s intuition is correct: 
+
+> SYSTEM:
+> You are a Socratic programming tutor. Your task is to respond to the student's latest message. The student has expressed a VALID intuition, idea, or proposed approach to the problem. For context, you will be given the problem,
+
+conversation, and the intended algorithm of the student's approach. Rules: - Never provide code in your first response. - Never name the algorithm in your first response. - Ask exactly one leading question. - Be responsive to the student's actual intuition. Directly engage with what the student said rather than asking a generic question about the problem. - First determine what the student is currently trying to do or what they believe will work. - Ask about the student's current solution or reasoning. Encourage them to explain, justify, test, or refine their current approach. - IMPORTANT: Do not ignore or immediately replace the student's approach with a different solution, even if the student's solution may not be the most optimal solution. 
+
+USER: 
+
+Problem: {problem_name} Problem Statement: {problem_statement} Conversation: {conversation} Intended Algorithm: {algorithm_steps} 
+
+When the student intuition is incorrect, the fol-lowing prompt is used: 
+
+SYSTEM: 
+
+You are a Socratic programming tutor. Your task is to respond to the student's latest message. The student has expressed an INVALID intuition, idea, or proposed approach to the problem. For context, you will be given the problem, conversation, and the intended CORRECT algorithm of the student's approach. Rules: - Never provide code in your first response. - Never name the algorithm in your first response. - Ask exactly one leading question. - Be responsive to the student's actual intuition. Directly engage with what the student said rather than asking a generic question about the problem. - First determine what the student is currently trying to do or what they believe will work. - Address the student's misconception directly through your question. - Ask about the student's current solution or reasoning. Encourage them to explain, justify, test, or refine their current approach. - IMPORTANT: Do not ignore or immediately replace the student's approach with a different solution, even if the student's solution may not be the most optimal solution. 
+
+USER: 
+
+Problem: {problem_name} Problem Statement: {problem_statement} Conversation: {conversation} Intended Algorithm: {algorithm_steps} 
+
+E.5 Synthetic Dataset Generation More Optimal Solution Transition 
+
+For the synthetic dataset, to ensure the tutor re-sponse explicitly transitions to a more optimal so-lution after the student finishes their solution, GPT-OSS 120B generator uses the following prompt: 
+
+SYSTEM: 
+
+You are a Socratic programming tutor. Your task is to respond to the student's latest message. The student has just completed solving the problem using their current solution. Your goal is to guide the student towards a more optimal solution. For context, you will be given the problem, conversation, and the intuition and algorithm of the more optimal solution. Rules: - Never provide code in your first response. - Never name the algorithm in your first response. - Ask exactly one leading question. - Acknowledge or validate the student's completed solution before guiding them toward the more optimal solution. The student's completed solution should be treated as valid unless the provided context explicitly indicates otherwise. The purpose of this response is not to correct the student's completed solution, but to transition from it toward a more efficient approach. 
+
+USER: 
+
+Problem: {problem_name} Problem Statement: {problem_statement} Conversation: {conversation} More optimal solution intuition: {intuition} More optimal solution algorithm: {algorithm_steps} 
+
+F SFT Details 
+
+We fine-tune Gemma-4-12B-IT using supervised fine-tuning (SFT) with Low-Rank Adaptation (LoRA). We load the model and its associated pro-cessor using the Hugging Face Transformers li-brary (von Werra et al., 2020) and apply LoRA to the query, key, value, and output projection mod-ules ( q_proj , k_proj , v_proj , and o_proj ) in the attention layers. The LoRA configuration uses a rank of 32, an α value of 64, and a dropout rate of 0.1, with no additional bias parameters trained. The base model weights are loaded in bfloat16 pre-cision, and the model is automatically distributed across available devices. We train for 3 epochs using a per-device batch size of 1 and gradient accumulation over 16 steps, yielding an effective batch size of 16 examples per device before accounting for distributed training. We use a learning rate of 1 × 10 −4, a cosine learn-ing rate schedule, and 10 warmup steps. Training uses bfloat16 and TF32 computation, with gradi-ent checkpointing enabled to reduce memory con-sumption. We disable sequence packing and use a random seed of 1. For a fair comparison, both SFT models (standard SFT and solution-informed SFT) are trained using identical hyperparameters and seeds. 
+
+G Inference Implementation and Configuration 
+
+We serve all language models using vLLM (Kwon et al., 2023) and interact with the servers through an OpenAI-compatible API. For student-tutor sim-ulation, we evaluate four tutor models: GPT-OSS-120B, Qwen3.8-27B, Llama-3.3-70B-Instruct-FP8, and Gemma-4-12B-IT. We use GPT-OSS-120B as the LLM judge across all configurations. Each tu-tor and judge instance runs on a separate NVIDIA H100 GPU, with tensor parallelism set to 1. Table 4 summarizes the generation parameters used for each tutor model. Unless otherwise spec-ified, each generation request produces one re-sponse. We use a temperature of 1.0 for GPT-OSS-120B, Qwen3.8-27B, and Gemma-4-12B-IT, and 0.8 for Llama-3.3-70B-Instruct-FP8. The top-p
+
+parameter is set to 1.0 for GPT-OSS-120B and 0.95 for the other three tutor models. We config-ure top-k sampling to 20 for Qwen3.8-27B and 64 for Gemma-4-12B-IT; top-k sampling is dis-abled for GPT-OSS-120B. No explicit maximum generation length is specified for Qwen3.8-27B, Llama-3.3-70B-Instruct-FP8, or Gemma-4-12B-IT in the client configuration. For the judge, we set the maximum generation length to 1,024 tokens, the temperature to 1.0, and top-p to 1.0, with top-k sampling disabled. The judge uses the same model and generation configu-ration across all tutor models to ensure consistent evaluation conditions. 
+
+H Computational Requirements 
+
+Dataset creation, including the generation of cor-rect and incorrect student intuitions, requires 1 GPU-hour on a single NVIDIA H100 GPU. Stu-dent–tutor simulation requires 1–4 hours of wall-clock time on two NVIDIA H100 GPUs, corre-sponding to a total of 2–8 GPU-hours, with one GPU allocated to the LLM tutor and the other to the LLM judge. The exact compute cost depends on the tutor model. Generating the synthetic dataset for SFT requires 3 GPU-hours on a single NVIDIA H100 GPU. Fine-tuning each SFT model requires 2 GPU-hours, resulting in a total of 4 GPU-hours for both models. Evaluating the fine-tuned models requires 1–2 hours of wall-clock time on two NVIDIA H100 GPUs, corresponding to a total of 2–4 GPU-hours, with one GPU allocated to the tutor and the other to the judge. The solution-informed SFT model requires more compute time due to its longer input context. 
+
+I Additional Figures 
+
+We present three additional figures (Figures 5, 6, 7) corresponding to RQ3 results (§5.4). More specifi-cally, they visualize the distribution of model tran-sitions for conversation types not included in the main text: (i) false intuition, probe-first, (ii) cor-rect intuition, direct, and (iii) false intuition, di-rect. The figures show the problematic behavior of LLM tutors transitioning towards less optimal solu-tions after a student completes their initial solution. Additionally Figure 5 demonstrates that SFT with candidate solutions in context during training and inference can encourage the LLM tutor to transition towards more optimal solutions. Table 4: Generation parameters for each tutor model. A dash indicates that the parameter was not explicitly set in the client configuration. 
+
+Tutor model Max tokens Temperature Top-p Top-k
+
+GPT-OSS-120B 1024 1.0 1.0 Disabled Qwen3.8-27B – 1.0 0.95 20 Llama-3.3-70B-Instruct-FP8 – 0.8 0.95 –Gemma-4-12B-IT – 1.0 0.95 64 RQ3: False Intuition, Probe-fi rst Transitions         
+
+> Less Optimal Same More Optimal
+> GPT-OSS Qwen Llama Gemma SFT1 SFT2 SFT3
+> 0%
+> 20%
+> 40%
+> 60%
+> 80%
+> 100%
+> LLM Tutor Model
+> Distribution Percentage
+> 6.3%
+> 50%
+> 43.8%
+> 83.3%
+> 14.9%
+> 17.9%
+> 28.6%
+> 53.6%
+> 11.3%
+> 42.5%
+> 46.2%
+> 9.8%
+> 18.3%
+> 72%
+> 10.8%
+> 27.7%
+> 61.5%
+> 91.7%
+
+Figure 5: False intuition, probe-first transition distri-butions. Notably, all models demonstrate transitions towards less optimal solutions, however, SFT with can-didate solutions in context during training and inference significantly mitigate these transition types. RQ3: Correct Intuition, Direct Transitions      
+
+> Less Optimal Same More Optimal
+> GPT-OSS Qwen Llama Gemma
+> 0%
+> 20%
+> 40%
+> 60%
+> 80%
+> 100%
+> LLM Tutor Model
+> Distribution Percentage
+> 12.4%
+> 36%
+> 51.7%
+> 15.1%
+> 52.7%
+> 32.3%
+> 5.4%
+> 31.1%
+> 63.5%
+> 25.6%
+> 26.7%
+> 47.8%
+
+Figure 6: Correct intuition, direct transition distribu-tions. Notably, all models demonstrate transitions to-wards less optimal solutions, with Gemma having as much as 25 .6% .RQ3: False Intuition, Direct Transitions      
+
+> Less Optimal Same More Optimal
+> GPT-OSS Qwen Llama Gemma
+> 0%
+> 20%
+> 40%
+> 60%
+> 80%
+> 100%
+> LLM Tutor Model
+> Distribution Percentage
+> 13.3%
+> 36.7%
+> 50%
+> 10%
+> 67%
+> 23%
+> 14.9%
+> 29.7%
+> 55.4%
+> 20%
+> 30%
+> 50%
+
+Figure 7: False intuition, direct transition distributions. Notably, all models demonstrate transitions towards less optimal solutions, with Gemma having as much as 20% .

@@ -1,0 +1,89 @@
+{
+  "date": "20261028",
+  "date_label": "",
+  "generated_at": "2026-10-28 23:21:24 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2610.36367v1",
+      "route": "202610/28/2610.36367v1-muse-revealing-responsiveness-gaps-of-llm-tutors-on-multiple-solution-programming-problems",
+      "title": "MUSE: Revealing Responsiveness Gaps of LLM Tutors on Multiple-Solution Programming Problems",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "模拟编程题中学生与LLM导师对话的受控环境",
+      "first_seen_at": "2026-10-28 23:21:24 UTC",
+      "updated_at": "2026-10-28 23:21:24 UTC"
+    },
+    {
+      "paper_id": "2610.36654v1",
+      "route": "202610/28/2610.36654v1-edhivo-an-ai-native-platform-for-scalable-assessment-and-instant-feedback-in-higher-education",
+      "title": "Edhivo: An AI-Native Platform for Scalable Assessment and Instant Feedback in Higher Education",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向高等教育可扩展评估与即时反馈的AI原生平台",
+      "first_seen_at": "2026-10-28 23:21:24 UTC",
+      "updated_at": "2026-10-28 23:21:24 UTC"
+    },
+    {
+      "paper_id": "2610.37238v1",
+      "route": "202610/28/2610.37238v1-peers4u-designing-learner-centered-virtual-peers-for-childrens-multimodal-mathematics-learning",
+      "title": "Peers4U: Designing Learner-Centered Virtual Peers for Children's Multimodal Mathematics Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向儿童数学学习的个性化大语言模型虚拟同伴",
+      "first_seen_at": "2026-10-28 23:21:24 UTC",
+      "updated_at": "2026-10-28 23:21:24 UTC"
+    },
+    {
+      "paper_id": "2610.36185v1",
+      "route": "202610/28/2610.36185v1-can-ai-guide-testing-without-generating-tests-a-comparative-study-of-ai-assisted-unit-testing",
+      "title": "Can AI Guide Testing Without Generating Tests? A Comparative Study of AI-Assisted Unit Testing",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "生成式AI导师在编程教育中反馈学生测试套件",
+      "first_seen_at": "2026-10-28 23:21:24 UTC",
+      "updated_at": "2026-10-28 23:21:24 UTC"
+    },
+    {
+      "paper_id": "2610.36413v1",
+      "route": "202610/28/2610.36413v1-when-ai-can-build-it-what-should-we-assess-rethinking-evidence-of-engineering-competence",
+      "title": "When AI Can Build It, What Should We Assess? Rethinking Evidence of Engineering Competence",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "在生成式AI时代重新设计允许使用AI的工程课程与评估",
+      "first_seen_at": "2026-10-28 23:21:24 UTC",
+      "updated_at": "2026-10-28 23:21:24 UTC"
+    }
+  ]
+}

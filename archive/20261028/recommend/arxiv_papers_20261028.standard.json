@@ -1,0 +1,204 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-28T23:19:15.640072+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 4,
+    "deep_cap": 6,
+    "deep_selected": 4,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2610.36367v1",
+      "source": "arxiv",
+      "title": "MUSE: Revealing Responsiveness Gaps of LLM Tutors on Multiple-Solution Programming Problems",
+      "abstract": "When a problem admits multiple valid solutions, effective tutoring requires building on a student's strategy while introducing alternatives at appropriate points. However, whether LLM tutors can support this flexibility by appropriately responding to students' diverse solution approaches remains largely unexplored. In this work, we introduce MUSE: Multi-solution Understanding and Simulation Environment, a controlled environment for simulating student-tutor conversations on multiple-solution programming problems. Grounded in learning science on responsive instruction and multiple-solution learning, we investigate which solutions LLM tutors prefer, how they respond to students' approaches, and how they transition between solutions. Experiments suggest that LLM tutors exhibit systematic preferences among valid solutions, often favoring brute-force approaches when not providing general advice. More concerningly, tutors often impose these preferences, redirecting students toward their own preferred approach rather than supporting the student's. Yet this tendency reverses once a solution is completed: tutors often remain anchored to the existing approach when a stronger alternative could deepen understanding, and sometimes even transition to a less optimal approach. Thus, tutors struggle both to build on students' reasoning when appropriate and to extend their reasoning when beneficial. Promisingly, targeted post-training improves both tutor responsiveness and transitions toward more optimal solutions.",
+      "authors": [
+        "Sky Cen",
+        "Shashank Sonkar"
+      ],
+      "primary_category": "cs.CY",
+      "categories": [
+        "cs.CY"
+      ],
+      "published": "2026-10-26T22:30:40+00:00",
+      "link": "https://arxiv.org/pdf/2610.36367v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Controlled environment simulating student-LLM tutor conversations on programming problems",
+      "llm_evidence_cn": "模拟编程题中学生与LLM导师对话的受控环境",
+      "llm_evidence": "模拟编程题中学生与LLM导师对话的受控环境",
+      "canonical_evidence": "模拟编程题中学生与LLM导师对话的受控环境",
+      "llm_tldr_en": "MUSE simulates student-tutor dialogues on multiple-solution programming problems to reveal how LLM tutors respond to diverse student strategies and where responsiveness gaps lie.",
+      "llm_tldr_cn": "当编程题存在多种正确解法时，有效辅导需在学生策略基础上适时引入替代方案，但LLM导师能否做到尚不清楚。作者构建MUSE受控环境，基于学习科学的响应式教学与多解学习理论模拟学生与导师对话。研究考察LLM导师偏好哪些解法、如何回应学生思路以及如何在解法间切换。结果揭示了LLM导师在响应性上的缺口，为改进智能辅导系统提供依据。",
+      "llm_tldr": "当编程题存在多种正确解法时，有效辅导需在学生策略基础上适时引入替代方案，但LLM导师能否做到尚不清楚。作者构建MUSE受控环境，基于学习科学的响应式教学与多解学习理论模拟学生与导师对话。研究考察LLM导师偏好哪些解法、如何回应学生思路以及如何在解法间切换。结果揭示了LLM导师在响应性上的缺口，为改进智能辅导系统提供依据。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.36654v1",
+      "source": "arxiv",
+      "title": "Edhivo: An AI-Native Platform for Scalable Assessment and Instant Feedback in Higher Education",
+      "abstract": "Scaling assessment in higher education faces two intertwined bottlenecks: the cognitive burden of authoring assessments and the inability to semantically evaluate open-ended responses, which together create a persistent feedback gap that hinders student learning outcomes. To address these challenges, we present Edhivo, an AI-native pedagogical platform that addresses both bottlenecks through a vertically integrated system for content delivery, assessment, and reporting. Edhivo employs a Dual-LLM pipeline: one model generates context-aware assessments for both multiple-choice and open-ended questions, from instructor-provided materials, while a second model performs multi-criteria, rubric-based evaluation of student responses, enabling near-instant qualitative feedback at multiple hierarchical levels. All AI interactions are source-grounded to reduce hallucination risk, and a Human-in-the-Loop review process preserves instructor authority. We demonstrate Edhivo's efficacy through a pilot deployment at Stony Brook University in a real classroom environment in 2026 spring, where it supports high-frequency assessment creation and evaluation for a cohort of 36 students throughout a full semester, significantly reducing authoring effort and feedback latency while enabling novel pedagogical designs centered on active learning.",
+      "authors": [
+        "Moraish Kapoor",
+        "Jiawei Zhou"
+      ],
+      "primary_category": "cs.CY",
+      "categories": [
+        "cs.CY"
+      ],
+      "published": "2026-10-27T05:17:06+00:00",
+      "link": "https://arxiv.org/pdf/2610.36654v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "AI-native platform for scalable assessment and instant feedback in higher education",
+      "llm_evidence_cn": "面向高等教育可扩展评估与即时反馈的AI原生平台",
+      "llm_evidence": "面向高等教育可扩展评估与即时反馈的AI原生平台",
+      "canonical_evidence": "面向高等教育可扩展评估与即时反馈的AI原生平台",
+      "llm_tldr_en": "Edhivo is an AI-native higher education platform that uses a dual-LLM pipeline to generate assessments from instructor materials and provide rubric-based evaluation and instant feedback, addressing assessment authoring and feedback bottlenecks.",
+      "llm_tldr_cn": "高等教育评估面临试题编写认知负担重和开放式回答难以语义评价的双重瓶颈，导致反馈缺口。Edhivo构建AI原生教学平台，用双大语言模型流水线从教师材料生成选择题和开放题，并对学生回答进行多标准量规评价与即时反馈。系统整合内容交付、评估和报告，旨在提升规模化评估与学习反馈效率。该工作展示了生成式AI在教育评估工具中的集成应用。",
+      "llm_tldr": "高等教育评估面临试题编写认知负担重和开放式回答难以语义评价的双重瓶颈，导致反馈缺口。Edhivo构建AI原生教学平台，用双大语言模型流水线从教师材料生成选择题和开放题，并对学生回答进行多标准量规评价与即时反馈。系统整合内容交付、评估和报告，旨在提升规模化评估与学习反馈效率。该工作展示了生成式AI在教育评估工具中的集成应用。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.37238v1",
+      "source": "arxiv",
+      "title": "Peers4U: Designing Learner-Centered Virtual Peers for Children's Multimodal Mathematics Learning",
+      "abstract": "In early mathematics, children learn abstract concepts through concrete representations, such as manipulating objects, drawing, and speaking. Learning with peers can enrich this process by exposing children to diverse strategies and enabling them to exchange ideas through interaction. We realized this potential with virtual peers in Peers4U, a multimodal learning system to enhance children's mathematical conceptual understanding. Virtual peers driven by LLMs are personalized to the learner's cognitive level and assigned multimodal solutions with inspectable processes. During learning, peers engage in mixed-initiative interactions by responding, initiating topics, and advancing discussions along a pedagogical progression. A user study with 22 children and two experts showed our learner-centered topic orchestration significantly outperformed a persona-centered baseline, and children spontaneously authored new artifacts to demonstrate inspired ideas or share their own strategies, producing significantly more solutions when grouped with more Leading Peers. We contribute design insights for multimodal, learner-centered virtual peer systems.",
+      "authors": [
+        "Zhi Zheng",
+        "Binglin Liu",
+        "Weihao Chen",
+        "Lan Luo",
+        "Yu Mei",
+        "Jie Cai",
+        "Chun Yu",
+        "Yuanchun Shi"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-10-27T13:43:18+00:00",
+      "link": "https://arxiv.org/pdf/2610.37238v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "LLM-driven virtual peers personalized to learner cognitive level for math learning",
+      "llm_evidence_cn": "面向儿童数学学习的个性化大语言模型虚拟同伴",
+      "llm_evidence": "面向儿童数学学习的个性化大语言模型虚拟同伴",
+      "canonical_evidence": "面向儿童数学学习的个性化大语言模型虚拟同伴",
+      "llm_tldr_en": "Peers4U introduces LLM-driven virtual peers personalized to children's cognitive levels for multimodal math learning, enabling mixed-initiative pedagogical interactions to improve conceptual understanding.",
+      "llm_tldr_cn": "针对儿童早期数学抽象概念学习缺少同伴互动的问题，Peers4U构建了由大语言模型驱动的虚拟同伴学习系统，按学习者认知水平个性化配置多模态解题方案，并支持可检查过程与混合主动对话。虚拟同伴能够在教学进程中回应、发起话题并推进讨论。研究展示了个性化虚拟同伴在促进儿童数学概念理解和同伴式学习中的潜力，为学习者中心的教育技术设计提供了新思路。",
+      "llm_tldr": "针对儿童早期数学抽象概念学习缺少同伴互动的问题，Peers4U构建了由大语言模型驱动的虚拟同伴学习系统，按学习者认知水平个性化配置多模态解题方案，并支持可检查过程与混合主动对话。虚拟同伴能够在教学进程中回应、发起话题并推进讨论。研究展示了个性化虚拟同伴在促进儿童数学概念理解和同伴式学习中的潜力，为学习者中心的教育技术设计提供了新思路。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "personalized learning and learner-centered educational technologies",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.36185v1",
+      "source": "arxiv",
+      "title": "Can AI Guide Testing Without Generating Tests? A Comparative Study of AI-Assisted Unit Testing",
+      "abstract": "Recent advances in generative AI have enabled assistants to generate increasingly sophisticated executable unit tests. However, novices may accept these outputs without independently identifying what to test, evaluating test-suite completeness, or verifying correctness, potentially limiting opportunities to develop essential testing skills. Although prior work has explored AI-assisted test generation and feedback-oriented programming tutors, little is known about whether AI can support novices' testing practices without generating tests for them. To investigate this, we introduce TestCompass, a generative AI tutor that provides targeted feedback on weaknesses in students' test suites without generating executable tests. In a classroom study with 18 students, we compared TestCompass with a general AI assistant across two Java unit-testing tasks, examining students' testing behaviors, test-suite quality, and subjective experiences. We found that participants using the general-purpose AI assistant produced more tests, whereas TestCompass participants spent more time developing and verifying tests themselves. However, most test-suite quality measures were comparable between conditions, and TestCompass participants achieved similar requirement coverage with significantly fewer test methods ($p=0.012$) in one task. Neither group reported short-term improvements in perceived testing knowledge or confidence. These findings suggest that feedback-oriented AI can support meaningful testing outcomes while preserving opportunities for hands-on testing practice, offering a complementary approach to AI-assisted testing education.",
+      "authors": [
+        "Zihan Fang",
+        "Ron Asoulin-Handelman",
+        "Helen Wu",
+        "Yu Huang",
+        "Gina R. Bai"
+      ],
+      "primary_category": "cs.SE",
+      "categories": [
+        "cs.SE",
+        "cs.AI"
+      ],
+      "published": "2026-10-26T19:18:29+00:00",
+      "link": "https://arxiv.org/pdf/2610.36185v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "generative AI tutor giving feedback on student test suites in programming education",
+      "llm_evidence_cn": "生成式AI导师在编程教育中反馈学生测试套件",
+      "llm_evidence": "生成式AI导师在编程教育中反馈学生测试套件",
+      "canonical_evidence": "生成式AI导师在编程教育中反馈学生测试套件",
+      "llm_tldr_en": "Introduces TestCompass, a generative AI tutor that gives targeted feedback on weaknesses in novices' test suites without writing tests, studied in a classroom comparison.",
+      "llm_tldr_cn": "论文针对生成式AI直接产出单元测试可能削弱新手独立判断与验证能力的问题，提出TestCompass这一生成式AI导师，只对学生测试套件的薄弱环节给出针对性反馈而不生成可执行测试，并在课堂环境中开展比较研究。结果显示该设计能在不代写测试的前提下支持学生的测试实践。研究为AI辅助编程教育中保留学习主动性的工具设计提供了范例。",
+      "llm_tldr": "论文针对生成式AI直接产出单元测试可能削弱新手独立判断与验证能力的问题，提出TestCompass这一生成式AI导师，只对学生测试套件的薄弱环节给出针对性反馈而不生成可执行测试，并在课堂环境中开展比较研究。结果显示该设计能在不代写测试的前提下支持学生的测试实践。研究为AI辅助编程教育中保留学习主动性的工具设计提供了范例。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.36413v1",
+      "source": "arxiv",
+      "title": "When AI Can Build It, What Should We Assess? Rethinking Evidence of Engineering Competence",
+      "abstract": "Generative AI can produce code, tests, documentation, and technical explanations that resemble artefacts traditionally used as evidence of student competence, weakening the inference from artefact quality to the engineering capability behind it. We report the redesign and first deployment of a 13-week, AI-permissive, software-intensive engineering course in which students may delegate substantial work to AI while retaining responsibility for planning, verification, review, integration, and explanation. The redesign couples an engineering accountability workflow, which structures human-AI work and preserves human decision authority, with an assessment evidence architecture comprising six complementary channels: product, process/origin, verification, explanation, reflection, and individual assurance. A collect--cross-check--escalate (CCE) reasoning logic connects these channels rather than treating any single artefact or trace as sufficient evidence of competence. By the end of Week 11, the deployment involved 87 students organised into 17 teams, with 957 individual weekly Git repositories and 34 group-project Git repositories supporting repeated assessment and engineering activity. The first deployment yielded four practical lessons: AI assistance changes where rubric criteria carry evidential weight; multiple evidence channels require deliberate cross-checking and meaningful complementarity; the evidential strength realised in practice may differ from that intended in the assessment design; and automation scales evidence collection more readily than interpretation. The contribution is a conceptually grounded, deployed design for making engineering responsibility and competence more visible when AI can perform substantial artefact production.",
+      "authors": [
+        "Ali Shakiba"
+      ],
+      "primary_category": "cs.SE",
+      "categories": [
+        "cs.SE",
+        "cs.HC"
+      ],
+      "published": "2026-10-26T23:48:18+00:00",
+      "link": "https://arxiv.org/pdf/2610.36413v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Redesigns an AI-permissive engineering course and its assessment for the generative AI era",
+      "llm_evidence_cn": "在生成式AI时代重新设计允许使用AI的工程课程与评估",
+      "llm_evidence": "在生成式AI时代重新设计允许使用AI的工程课程与评估",
+      "canonical_evidence": "在生成式AI时代重新设计允许使用AI的工程课程与评估",
+      "llm_tldr_en": "The paper reports redesigning a 13-week AI-permissive engineering course with an accountability workflow and six-channel assessment architecture to preserve valid evidence of student competence.",
+      "llm_tldr_cn": "生成式AI能生成代码、测试和文档，削弱了从作品质量推断学生工程能力的效力。作者报告了一门13周、允许使用AI的软件密集型工程课程的重新设计与首次部署。方案将工程问责流程与包含产品、过程等六个渠道的评估证据架构相结合，在允许AI委托工作的同时保留人的决策权。该工作为AI时代如何评估学生能力提供了实践框架。",
+      "llm_tldr": "生成式AI能生成代码、测试和文档，削弱了从作品质量推断学生工程能力的效力。作者报告了一门13周、允许使用AI的软件密集型工程课程的重新设计与首次部署。方案将工程问责流程与包含产品、过程等六个渠道的评估证据架构相结合，在允许AI委托工作的同时保留人的决策权。该工作为AI时代如何评估学生能力提供了实践框架。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

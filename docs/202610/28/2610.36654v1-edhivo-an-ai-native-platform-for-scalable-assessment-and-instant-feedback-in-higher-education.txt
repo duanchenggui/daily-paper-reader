@@ -1,0 +1,226 @@
+Title: Edhivo: An AI-Native Platform for Scalable Assessment and Instant Feedback in Higher Education
+
+URL Source: https://arxiv.org/pdf/2610.36654v1
+
+Published Time: Wed, 28 Oct 2026 00:47:05 GMT
+
+Number of Pages: 9
+
+Markdown Content:
+# Edhivo: An AI-Native Platform for Scalable Assessment and Instant Feedback in Higher Education 
+
+Moraish Kapoor 
+
+Stony Brook University 
+
+moraish.kapoor@stonybrook.edu 
+
+Jiawei Zhou 
+
+Stony Brook University 
+
+jiawei.zhou.1@stonybrook.edu 
+
+Abstract 
+
+Scaling assessment in higher education faces two intertwined bottlenecks: the cognitive bur-den of authoring assessments and the inability to semantically evaluate open-ended responses, which together create a persistent feedback gap that hinders student learning outcomes. To address these challenges, we present Ed-hivo, an AI-native pedagogical platform that addresses both bottlenecks through a vertically integrated system for content delivery, assess-ment, and reporting. Edhivo employs a Dual-LLM pipeline: one model generates context-aware assessments for both multiple-choice and open-ended questions, from instructor-provided materials, while a second model per-forms multi-criteria, rubric-based evaluation of student responses, enabling near-instant qual-itative feedback at multiple hierarchical lev-els. All AI interactions are source-grounded to reduce hallucination risk, and a Human-in-the-Loop review process preserves instructor authority. We demonstrate Edhivo’s efficacy through a pilot deployment at Stony Brook Uni-versity in a real classroom environment in 2026 spring, where it supports high-frequency as-sessment creation and evaluation for a cohort of 36 students throughout a full semester, sig-nificantly reducing authoring effort and feed-back latency while enabling novel pedagogical designs centered on active learning. 1
+
+1 Introduction 
+
+With the rapid expansion of enrollment in higher education, instructors face two intertwined bot-tlenecks that hinder effective learning outcomes. First, the authoring burden of creating high-quality assessments—reviewing materials, formulating questions, and drafting answer keys—is a cogni-tively demanding and time-intensive process. Sec-   
+
+> 1Edhivo platform is available at https://sbu.edhivo. com/ and is ready to use for students and instructors. A system demonstration video is available at https://www.youtube. com/watch?v=rOvfwFM-eW4 .
+
+ond, existing systems lack the semantic depth to evaluate open-ended student responses, restricting scalable assessment to shallow question types such as multiple-choice and creating a persistent feed-back gap that prevents students from correcting misconceptions while the material is fresh (Hattie and Timperley, 2007; Shute, 2008). Traditional Learning Management Systems (LMS), such as Canvas (Instructure, 2024) or Blackboard (Anthol-ogy, 2024), primarily function as administrative hubs and treat AI as a secondary plugin rather than a core pedagogical component, leaving both bot-tlenecks largely unaddressed (Black and Wiliam, 1998). Meanwhile, emerging AI-powered study aids such as NotebookLM (Google, 2024) and Turbo.ai (Turbo.ai, 2024) offer source-grounded content generation for self-study but lack instructor-led workflows, cohort reporting, and the human-in-the-loop controls required for formal classroom environments where instructors must be able to review and modify generated content. This paper introduces Edhivo, which tackles both bottlenecks through a vertically integrated, AI-native architecture. Rather than bolting AI onto an existing LMS, Edhivo places a Dual-LLM Pipeline at its core: a generation model produces context-aware MCQ and open-ended assessments from instructor-provided materials, while a sep-arate evaluation model scores responses across correctness, completeness, and relevance using instructor-defined ground truth. A Human-in-the-Loop review process preserves instructor authority, and all AI interactions remain source-grounded— constrained to uploaded course materials—to re-duce hallucination risk. We demonstrate the system’s efficacy through a pilot deployment at Stony Brook University within a real classroom environment, 2 where a novel ped-  
+
+> 2See https://joezhouai.com/llm-course-26/ for the course information.
+
+1arXiv:2610.36654v1 [cs.CY] 27 Oct 2026 Capability Canvas Kahoot NbLM Edhivo                         
+
+> AI-Native Eval. ✗✗✗✓
+> Open-Ended Grading Manual ✗✗Auto Source-Grounded ✗✗✓✓
+> Instant Feedback MCQ MCQ N/A All Cohort Analytics Basic ✗✗✓
+> Instructor Workflows ✓✗✗✓
+
+Table 1: Feature comparison of Edhivo with existing tools. NbLM = NotebookLM. 
+
+agogy of student-led assessment creation and eval-uation is designed as a center piece of the learning process. Our results indicate that Edhivo signifi-cantly eases assessment authoring, reduces feed-back latency, and lowers instructor workload. 
+
+2 Related Work 
+
+The landscape of educational technology can broadly be characterized by three categories: legacy administrative systems, synchronous en-gagement tools, and emerging AI-powered study aids (Kasneci et al., 2023). While these categories increasingly overlap, each addresses a different slice of the instructional workflow. Edhivo inte-grates and extends these functionalities into a uni-fied, AI-native classroom solution specialized for assessment-based learning. Table 1 summarizes the key capability differences, with details below. 
+
+Traditional LMS Canvas (Instructure, 2024) and Brightspace (D2L, 2024) excel at content hosting and gradebook management but treat AI as a plu-gin; their assessment models remain largely sum-mative and manual, leaving the feedback gap unad-dressed for open-ended responses. 
+
+Interactive Response Systems Kahoot (Kahoot!, 2024) and Slido (Slido, 2024) enable gamified, real-time engagement but are limited to atomic question types (primarily MCQ) and lack persistent course-content grounding for qualitative feedback. 
+
+AI-Native Study Aids NotebookLM (Google, 2024) and Turbo.ai (Turbo.ai, 2024) pioneered source-grounded AI for self-study but lack instructor-led workflows, cohort reporting, and rubric-based evaluation required for formal edu-cation. 
+
+3 System Architecture 
+
+The Edhivo architecture is structured as an AI Or-chestration Layer (Figure 1) that oversees the entire lifecycle of an assessment, from content ingestion to student reporting. 
+
+3.1 Model Selection & Prompt Engineering 
+
+We employ a strategy to use heterogeneous LLM models to optimize for both complex reasoning and system throughput: 3
+
+• Assessment Generation: We utilize Gemini 3 Flash for its 1M+ token context window, allow-ing the system to ingest high-density course ma-terials (textbooks, transcripts) without truncation. • Evaluation Engine: We deploy GLM 4.7 Flash, which demonstrates high instruction-following capabilities for multi-criteria grading tasks. To maintain a deterministic state between the AI Orchestration Layer and the user interface, we leverage each model’s native structured output ca-pabilities. Each request includes a JSON schema that specifies the data types for questions, options, and grading keys. 
+
+3.2 Assessment Generation Pipeline 
+
+The generation pipeline transforms raw course con-tent into a deployable assessment through a user-configured, parallel generation process. The in-structor (or student, in self-study mode) specifies the desired number of MCQs and open-ended ques-tions independently, and the system dispatches parallel requests to the generation model—one per question type—each governed by a dedicated prompt with targeted few-shot examples (Brown et al., 2020) to prevent cross-type prompt drift. Each request follows the prompt template 1 below, combining a role definition, the ingested course context, user-defined constraints, and high-quality exemplars. 
+
+Prompt 1: Assessment Generation Template 
+
+> [Role]: Expert Academic Question Setter. [Context]: {uploaded_context} [Constraints]: Generate {n} questions at {level} difficulty. [Format]: Strictly follow the JSON schema { schema}. [Examples]: {few_shot_examples}
+
+By enforcing strict schema adherence, the gen-erated content is immediately ready for Human-in-the-Loop review. Full prompts are provided in Appendix A. 
+
+> 3However, the detailed model choices are replaceable.
+
+2Figure 1: The Edhivo AI Orchestration Layer Architecture. 
+
+3.3 Rubric-Based Automated Evaluation Engine 
+
+Upon submission, the evaluation model performs a semantic comparison of each student response against the instructor-defined ground truth (Zheng et al., 2023; Liu et al., 2023). A Chain-of-Thought (CoT) (Wei et al., 2022) grading prompt (Prompt 2) forces the model to provide step-by-step justifica-tions across three explicit criteria—Correctness, Completeness, and Relevance—before assigning scores. This “reason-then-score” design aims to reduce grading arbitrariness and reflects calls for fine-grained, context-aware evaluation (Song et al., 2025; Zhou, 2026). 
+
+Prompt 2: Grading & Justification Prompt (Abridged) 
+
+> Task: Evaluate the [Student's Answer] against the [Reference Answer]. Evaluation Criteria: 1. Correctness (0-5): Factual alignment. 2. Completeness (0-5): Coverage of key concepts. 3. Relevance (0-5): Directness of response. Reasoning: Perform a step-by-step analysis of each criterion. Output: Return a JSON object with scores and a concise justification.
+
+4 Platform Interfaces & Analytics 
+
+4.1 Instructor Interface: Content-to-Assessment 
+
+After creating a course and enrolling students, the instructor uploads source materials and the AI Or-chestration Layer proposes an assessment. The workflow follows: Upload Content → Review Syn-thetic Questions → Revise or Override → Publish. Instructors can (1) edit or replace AI-generated questions, (2) provide additional steering prompts to guide generation, or (3) author assessments fully manually without AI assistance. Figure 2 shows the instructor review interface. 
+
+Figure 2: The instructor review page for the Content-to-Assessment workflow. 
+
+4.2 Student Interface: Real-time Feedback Loop 
+
+Students interact with a streamlined dashboard pro-viding three key capabilities: • Active Learning: Students can generate self-study assessments and “propose” questions to the instructor, crowdsourcing the question bank. • Pre/Post Assessment: The same assessment can be administered before and after learning; the score delta provides a direct measure of learning gain. • Instant Remediation: Upon submission, stu-dents receive qualitative feedback from the eval-uation engine (Section 3.3), enabling correction of misconceptions while material is fresh (Shute, 2008). 3Figure 3: A student feedback report featuring real-time insights. 
+
+Figure 3 shows the student feedback report. 
+
+4.3 Hierarchical Analytics & Reporting 
+
+The reporting engine delivers a “Pedagogical Health” snapshot at four levels of granular-ity: (1) Student-Assessment —individual scores and feedback per test; (2) Student-Course —longitudinal trends across modules; (3) Cohort-Assessment —class-wide score distributions to sur-face bottleneck concepts; and (4) Cohort-Course —macro-level progress tracking over the semester. Figure 4 shows the instructor-facing class progress report. 
+
+5 Pilot Study: Real Classroom Deployment 
+
+To evaluate its practical feasibility and pedagogi-cal utility, we conducted a pilot deployment in a real graduate-level classroom in Spring 2026. The deployment aimed to assess whether the platform could support high-frequency formative assessment with minimal feedback latency in a live instruc-tional setting. 
+
+Course Context The platform was deployed in AMS 691.01: Foundations and Frontiers of Large Language Models at Stony Brook Univer-sity, with 36 graduate students from data science, computer science, and engineering backgrounds. The course covers the evolution of large language 
+
+> Figure 4: The class progress report for the instructor.
+
+models from early Transformer architectures to modern reinforcement-learning-based systems, and includes faculty lectures, student-led research pre-sentations, and project-based components. 4
+
+Assessment-Centered Pedagogy A core instruc-tional design element was the integration of struc-tured pre-/post-assessments into student-led pre-sentations. In prior offerings, student engagement during peer presentations was uneven, and immedi-ate learning outcomes were difficult to observe. In Spring 2026, each presentation incorporated a short assessment (typically three multiple-choice ques-tions) authored by the presenting students. The class completed the assessment immediately be-fore and after the presentation. The score differ-ence between post- and pre-assessments provided a lightweight measure of immediate learning gain. On average, three such pre-/post-assessment cy-cles were conducted during each 80-minute session. Although each assessment was brief, the frequency was high and sustained throughout the semester. All assessments were formative and did not con-tribute to course grades. Implementing this design requires near-instant grading and aggregation, mak-ing automation essential. 
+
+Deployment Workflow Edhivo supported assess-ment authoring, distribution, grading, and aggrega-tion throughout the semester. Student presenters created assessments within the platform, which 
+
+> 4https://joezhouai.com/llm-course-26/
+
+4Task Phase Manual (Est.) Edhivo (AI+HITL) Time Saved          
+
+> Content Review & Drafting 30 min 10 sec –Instructor Review/Refine –5 min –Total Prep Time 30 min ∼5.2 min ∼25 min
+
+Table 2: Comparison of Assessment Generation La-tency. 
+
+were reviewed and published by the instructor. Stu-dents completed assessments in class, and results were evaluated automatically upon submission. Each assessment cycle required approximately three minutes for completion, with immediate avail-ability of individual and cohort-level analytics. The instructor dashboard displayed per-question distri-butions and pre-/post-comparisons, enabling real-time identification of conceptual bottlenecks and guiding classroom discussion. Informal qualitative feedback indicated that stu-dents perceived the process as lightweight and en-gaging, and that immediate pre-/post-comparisons reinforced attention during presentations. From the instructor’s perspective, the platform enabled sus-tained high-frequency formative assessment that would have been logistically impractical without automated evaluation. 
+
+6 Evaluation 
+
+We gather experience from our real classroom pilot study for both qualitative and quantitative evalua-tion of Edhivo. 
+
+6.1 System Performance: Quantifying Instructor Time Savings Assessment Generation Efficiency Manual as-sessment authoring is a cognitively demanding task. We estimate that an instructor takes an average of 30 minutes to review source material, formulate questions, and draft a corresponding answer key (ground truth). In contrast, Edhivo’s generation pipeline issues parallel requests to the generation model, produc-ing both MCQ and open-ended assessments in ap-proximately 10 seconds (median across pilot runs). Even when we factor in a 5-minute Human-in-the-Loop (HITL) review period for the instructor to refine the AI’s output, the net time saved remains a significant 25 minutes per assessment (Table 2). 
+
+Scalable Evaluation & Grading Manual grad-ing scales linearly with cohort size and is espe-cially burdensome for open-ended questions. Ed-hivo’s MCQ engine grades deterministically and          
+
+> Cohort Size Manual (Open-Ended) Edhivo (Grading+Audit) Net Time Saved
+> 30 Students 150 min (2.5 hrs) 75 min 1.25 hrs 200 Students 1,000 min (16.6 hrs) 500 min 8.3 hrs
+
+Table 3: Scaling of Open-Ended Evaluation Latency (assuming 5 min/student human baseline).                         
+
+> Component Tokens/Q Price/1M Cost/Question Cost/Student (10Q)
+> Input (Q + GT + Rubric + Prompt) 1,400 $0.125 $0.000175 $0.00175 Output (Justification) 200 $0.500 $0.000100 $0.00100
+> Total per Student 1,600 –$0.000275 $0.00275 Total per 30 Students –––$0.0825 Total per 200 Students –––$0.55
+
+Table 4: Unit economics of automated evaluation using GLM 4.7 Flash via OpenRouter. 
+
+instantly; for open-ended responses, the evaluation model processes the entire cohort asynchronously in approximately 15–20 seconds. Even including a human audit phase (estimated at 2.5 min/student), the platform reduces grading time by over 8 hours for a 200-student assessment (Table 3). 
+
+Cost-Efficiency Analysis At OpenRouter pric-ing for GLM 4.7 Flash, a 10-question assessment costs $0.00275 per student, meaning a 200-student cohort can be graded for under $0.55 (Table 4). 
+
+Pedagogical Alignment & Reliability Although computational efficacy and cost savings are essen-tial for institutional scalability, grading precision remains our primary architectural concern. To vali-date the pedagogical integrity of our system, we are assembling a longitudinal dataset that compares AI-determined evaluations with instructor-determined scores (Kullman et al., 2023). In the interim, the Human-in-the-Loop (HITL) audit process serves a dual purpose: 1. Safety Mechanism: It acts as a final fail-safe to prevent model hallucinations from affecting student records. 2. Active Learning Loop: It functions as a struc-tured data-collection loop. By collecting instruc-tor overrides and modifications, we can fine-tune the Evaluation Engine’s prompt strategy to better align with specific academic standards and departmental rubrics. 
+
+6.2 Student Evaluation and Pedagogical Impact 
+
+To evaluate the perceived efficacy of Edhivo, we conducted a post-pilot survey among the students at Stony Brook University. The survey was sent to 36 students in the pilot study course described in Section 5, and 30 responses were received (83.3% 50 20 40 60 80 100 
+
+> Percentage of Respondents (%) Receiving instant feedback improved my learning The Edhivo interface is easy and straightforward
+> 37% (11) 63% (19) 33% (10) 67% (20)
+> Agree Strongly Agree
+
+Figure 5: Student agreement on platform usability and learning impact. 
+
+response rate). The survey focused on two key ped-agogical dimensions: Ease of Use and the Impact of Instant Feedback. 
+
+Quantitative Analysis: Likert Distribution 
+
+The quantitative results indicate a strong consensus on the platform’s utility (see Figure 5). • Usability: 100% of participants either “Agreed” or “Strongly Agreed” that the Edhivo interface is easy and straightforward to use. • Learning Impact: 100% of students “Agreed” or “Strongly Agreed” that receiving instant feedback improved their learning experience compared to traditional multi-day grading cycles. 
+
+Qualitative Insights: The “Voice of the Student” 
+
+We collected open-ended feedback to identify spe-cific features that contributed to the student expe-rience. A thematic analysis—represented by the word cloud in Figure 6—highlights three dominant themes: User-Friendliness, Intuitiveness, and the Instant Feedback Loop. 
+
+Figure 6: Word cloud representing student sentiment and feature highlights. 
+
+These results suggest that by removing the “ad-ministrative friction” of traditional LMS interfaces and the “temporal friction” of manual grading, Ed-hivo allows students to remain in a state of ac-tive cognitive engagement with the course material (Hattie and Timperley, 2007). 
+
+7 Conclusion 
+
+We presented Edhivo, an AI-native pedagogical platform that closes the feedback gap in higher ed-ucation through a vertically integrated system for content delivery, assessment generation, and auto-mated evaluation. Our pilot deployment at Stony Brook University demonstrates significant reduc-tions in instructor workload and feedback latency at minimal infrastructure cost. Future work will focus on formal Inter-Rater Reliability analysis across larger, multi-disciplinary cohorts and expanding the platform’s applicability beyond STEM disci-plines. 
+
+Limitations 
+
+While Edhivo demonstrates significant potential in reducing the assessment authoring, management, and evaluation gaps, several limitations remain. First, the platform lacks proctoring safeguards 
+
+such as full-screen enforcement and tab-switch de-tection, which are critical for high-stakes testing. This is a common challenge in digital assessment, especially as AI advances. Second, our evaluation engine may be suscep-tible to linguistic bias; students using LLMs to draft responses might receive higher scores due to stylistic alignment between models (Zheng et al., 2023), potentially disadvantaging students with non-standard writing styles. Third, the domain-specific efficacy of the plat-form is currently centered on STEM-related sub-jects with objective ground truths. Further research is required to determine if the rubric-based logic holds for more subjective disciplines such as the humanities. Additionally, reported time savings for manual authoring (Section 6) are informal estimates from a single instructor, not controlled measurements across multiple instructors or disciplines; actual authoring times may vary with subject complexity and individual workflows. Finally, our classroom pilot was limited to a small cohort ( n = 36 ) at a single institution, and our evaluation data derives from a single course context. Future work will focus on longitudinal studies across larger, multi-disciplinary student bodies to better assess the Inter-Rater Reliability (IRR) between the AI Orchestration Layer and hu-man expert graders. 6Ethics Statement 
+
+This work involves the collection and processing of student assessment data and survey responses in an educational setting. No personally identifiable student data was collected or retained. All survey participation was voluntary, and responses were anonymized prior to analysis. We acknowledge that AI-based evaluation may introduce linguistic bias, potentially favoring re-sponses stylistically aligned with the evaluation model’s training data. This risk is discussed in the Limitations section. The HITL audit process serves as a safeguard to prevent unverified AI scores from impacting official student records. 
+
+References 
+
+Paul Black and Dylan Wiliam. 1998. Inside the black box: Raising standards through classroom assess-ment. Phi Delta Kappan , 80(2):139–148. Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, et al. 2020. Language models are few-shot learners. Advances in Neural Information Processing Systems , 33:1877–1901. John Hattie and Helen Timperley. 2007. The power of feedback. Review of Educational Research , 77(1):81– 112. Enkelejda Kasneci, Kathrin Seßler, Stefan Küchemann, Maria Bannert, Daryna Dementieva, Frank Fischer, Ute Gasser, Georg Groh, Stephan Günnemann, Eyke Hüllermeier, et al. 2023. ChatGPT for good? On op-portunities and challenges of large language models for education. Learning and Individual Differences ,103:102274. Marcus Kullman et al. 2023. A survey of AI-based automated short answer grading. arXiv preprint arXiv:2305.13211 .Yang Liu, Dan Iter, Yichong Xu, Shuohang Wang, Ruochen Xu, and Chenguang Zhu. 2023. G-Eval: NLG evaluation using GPT-4 with better human alignment. In Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing ,pages 10771–10785. Valerie J Shute. 2008. Focus on formative feedback. 
+
+Review of Educational Research , 78(1):153–189. Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, Fei Xia, Ed Chi, Quoc V Le, and Denny Zhou. 2022. Chain-of-thought prompting elicits reasoning in large language models. Advances in Neural Information Processing Systems , 35:24824– 24837. Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin, Zhuohan Li, Dacheng Li, Eric Xing, et al. 2023. Judging LLM-as-a-judge with MT-Bench and Chat-bot Arena. arXiv preprint arXiv:2306.05685 .Instructure. 2024. Canvas LMS. https://www. instructure.com/canvas .Anthology. 2024. Blackboard Learn. https://www.anthology.com/ products/teaching-and-learning/ learning-effectiveness/blackboard-learn .Google. 2024. NotebookLM. https://notebooklm. google.com .Turbo.ai. 2024. Turbo.ai: AI-powered learning plat-form. https://www.turbo.ai/ .D2L. 2024. Brightspace Learning Management System. 
+
+https://www.d2l.com/brightspace/ .Kahoot!. 2024. Kahoot! Learning Platform. https: //kahoot.com/ .Slido. 2024. Slido: Audience Interaction Platform. 
+
+https://www.slido.com/ .Mingyang Song, Zhaochen Su, Xiaoye Qu, Jiawei Zhou, and Yu Cheng. 2025. PRMBench: A fine-grained and challenging benchmark for process-level reward models. In Proceedings of the 63rd Annual Meet-ing of the Association for Computational Linguistics (Volume 1: Long Papers), pages 25299–25346, Vi-enna, Austria. Association for Computational Lin-guistics. Jiawei Zhou. 2026. Position: Scores without context? Rethinking the role of evaluation in the era of LLMs. In Proceedings of the Fifth Workshop on Generation, Evaluation and Metrics (GEM), pages 1048–1054, San Diego, California, USA. Association for Compu-tational Linguistics. 
+
+7A Full Prompts 
+
+A.1 Evaluation Prompt: Rubric-Based Grading 
+
+The following prompt is used by the evaluation engine to score student responses against instructor-defined ground truth. The prompt employs Chain-of-Thought reasoning to ensure transparent and consistent grading. 
+
+You are an expert Teaching Assistant grading an open-ended question. Your goal is to provide a fair and consistent evaluation based on a provided rubric. **Question:** {question} **Reference Answer (The ideal answer):** {ground_truth} **Student's Answer:** {given_answer} ---**Evaluation Task:** Please evaluate the student's answer against the reference answer using the following rubric . Provide your reasoning step-by-step (chain -of-thought) before giving the final output. **Rubric:** 1. Correctness (0-5 points): Is the student's answer factually correct and aligned with the reference answer? (5 = Completely correct, 0 = Completely incorrect). 2. Completeness (0-5 points): Does the answer address all key concepts and parts of the question present in the reference answer? (5 = All key concepts covered, 0 = No key concepts covered). 3. Relevance (0-5 points): Is the answer directly addressing the question asked, without irrelevant information? (5 = Perfectly relevant, 0 = Completely irrelevant). **Chain of Thought (Your reasoning):** * Correctness Analysis: [Examine factual accuracy...] * Completeness Analysis: [Identify missing concepts...] * Relevance Analysis: [Assess directness and focus...] **Final Output:** Provide your final scores and overall judgment in a JSON object. {"scores": { "correctness": <score_1>, "completeness": <score_2>, "relevance": <score_3> }, "justification": "<A concise summary of your reasoning>" }
+
+A.2 Generation Prompt: Multiple-Choice Questions 
+
+The following prompt is used to generate context-aware multiple-choice questions from instructor-provided materials. 
+
+You are an expert educational assessment creator specializing in multiple-choice questions. Your task is to generate high-quality MCQ questions that test conceptual understanding rather than rote memorization. **Source Content:** {context} **Generation Requirements:** - Number of questions: {num_questions} - Difficulty level: {difficulty_level} - Focus areas: {focus_areas} **Quality Guidelines:** 1. Test conceptual understanding and application, not just recall 2. Provide exactly 4 options (A, B, C, D) with one unambiguously correct answer 3. Design plausible distractors based on common misconceptions 4. Ensure each question is self-contained and unambiguous 5. Vary question stems (e.g., "What is...", " Which of the following...", "Why does...") **Output Format (JSON array):** [{"type": "MCQ", "text": "Question text here?", "options": ["Option A", "Option B", "Option C ", "Option D"], "correct_answer": "A", "explanation": "Brief explanation of why this is correct and why distractors are incorrect" }]**Few-Shot Example:** {"type": "MCQ", "text": "Which data structure provides O(1) average-case time complexity for insertion , deletion, and lookup operations?", "options": [ "Binary Search Tree", "Hash Table", "Linked List", "Array" ], "correct_answer": "B", "explanation": "Hash tables provide constant-time average-case performance for these operations. BSTs provide O(log n), linked lists O(n), and arrays O(n) for insertion/ deletion." }
+
+8**IMPORTANT:** Return ONLY the JSON array, no additional text, markdown, or code fences. 
+
+A.3 Generation Prompt: Open-Ended Questions 
+
+The following prompt is used to generate open-ended questions that require qualitative responses. 
+
+You are an expert educational assessment creator specializing in open-ended questions. Your task is to generate questions that elicit deeper reasoning and require students to articulate their understanding in their own words. **Source Content:** {context} **Generation Requirements:** - Number of questions: {num_questions} - Difficulty level: {difficulty_level} - Focus areas: {focus_areas} **Quality Guidelines:** 1. Design questions that require explanation, analysis, or synthesis 2. Avoid questions with single-word or yes/no answers 3. Provide a comprehensive reference answer covering all key concepts 4. Include explanation of critical points the answer must address 5. Ensure questions are specific enough to guide response scope **Output Format (JSON array):** [{"type": "TEXT", "text": "Open-ended question here?", "correct_answer": "Comprehensive reference answer demonstrating full understanding", "explanation": "Key concepts and points that must be addressed for full credit" }]**Few-Shot Example:** {"type": "TEXT", "text": "Describe the key differences between supervised and unsupervised machine learning, providing one example application for each.", "correct_answer": "Supervised learning uses labeled training data where inputs are paired with correct outputs, allowing the model to learn mappings for prediction tasks (e.g., email spam classification). Unsupervised learning works with unlabeled data to discover hidden patterns or structures without predefined outputs (e.g ., customer segmentation through clustering). The key distinction is the presence or absence of labeled training data and whether the goal is prediction versus pattern discovery.", "explanation": "Must include: (1) labeled vs unlabeled data distinction, (2) prediction vs pattern discovery goals, (3) valid example for each paradigm, (4) clear contrast between the two approaches" }**IMPORTANT:** Return ONLY the JSON array, no additional text, markdown, or code fences. 
+
+9
