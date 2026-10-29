@@ -1,0 +1,24 @@
+{
+  "label": "2026-10-29",
+  "date": "2026-10-29",
+  "generated_at": "2026-10-29T23:14:05",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202610/29/2610.36820v1-an-incremental-knowledge-graph-learner-digital-twin-for-evidence-grounded-early-warning",
+      "section": "deep",
+      "title_en": "An Incremental Knowledge-Graph Learner Digital Twin for Evidence-Grounded Early Warning",
+      "authors": "Ngoc Luyen Le, Marie-Hélène Abel, Bertrand Laforge",
+      "date": "2026-10-27",
+      "pdf": "https://arxiv.org/pdf/2610.36820v1",
+      "score": "8.0",
+      "evidence": "基于知识图谱学习者孪生的学习分析早期预警",
+      "tldr": "学习分析预警常给出风险分数，却难以说明哪些学习痕迹或评估事件支撑警报。本文提出增量式学习者数字孪生，用轻量知识图谱在时间检查点回放学习轨迹与评估记录，并通过图查询提取预测特征。基于公开基准的时间协议评估显示，图介导特征保持与原始表特征相近的预测表现，警报可物化为连接风险决策、特征归因、证据项和原始记录的证据链。该工作使预警兼具可追溯与可验证的证据化解释。",
+      "tags": "query:aied-oer",
+      "abstract_en": "Early-warning models in learning analytics can identify learners at risk of failure or withdrawal, but the resulting alerts are often only weakly connected to inspectable learning evidence. A risk score may indicate that intervention is needed without showing which traces, assessment events, or temporal patterns justify the alert. This paper introduces an incremental Learner Digital Twin for evidence-grounded early warning, implemented as a lightweight knowledge graph. The twin is updated at temporal checkpoints by replaying learning traces and assessment records, and it serves both as a feature-extraction substrate and as an explanation-grounding substrate. Predictive features are derived through graph-mediated queries, while features, attributions, alerts, evidence items, and raw records are represented as queryable graph entities. The framework is instantiated and evaluated on a public learning-analytics benchmark under a temporal protocol. The results show that graph-mediated feature extraction preserves the predictive behavior of equivalent raw-table features across model families and checkpoints. Generated alerts are materialized as evidence chains linking risk decisions to feature attributions, evidence items, and raw platform records. The study shows that early-warning prediction can be routed through a semantic and provenance-aware representation while preserving predictive performance and adding traceability, verifiability, and evidence-grounded explanation.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

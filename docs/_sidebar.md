@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-10-29 <!--dpr-date:20261029-->
+    * 精读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202610/29/2610.36820v1-an-incremental-knowledge-graph-learner-digital-twin-for-evidence-grounded-early-warning" data-sidebar-item="{&quot;title&quot;: &quot;An Incremental Knowledge-Graph Learner Digital Twin for Evidence-Grounded Early Warning&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2610.36820v1-an-incremental-knowledge-graph-learner-digital-twin-for-evidence-grounded-early-warning&quot;, &quot;score&quot;: &quot;8.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;aied-oer&quot;}], &quot;evidence&quot;: &quot;基于知识图谱学习者孪生的学习分析早期预警&quot;}">An Incremental Knowledge-Graph Learner Digital Twin for Evidence-Grounded Early Warning</a>
   * 2026-10-28 <!--dpr-date:20261028-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202610/28/2610.36367v1-muse-revealing-responsiveness-gaps-of-llm-tutors-on-multiple-solution-programming-problems" data-sidebar-item="{&quot;title&quot;: &quot;MUSE: Revealing Responsiveness Gaps of LLM Tutors on Multiple-Solution Programming Problems&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2610.36367v1-muse-revealing-responsiveness-gaps-of-llm-tutors-on-multiple-solution-programming-problems&quot;, &quot;score&quot;: &quot;9.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;aied-oer&quot;}], &quot;evidence&quot;: &quot;模拟编程题中学生与LLM导师对话的受控环境&quot;}">MUSE: Revealing Responsiveness Gaps of LLM Tutors on Multiple-Solution Programming Problems</a>

@@ -1,0 +1,53 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-29T23:11:59.094506+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 0,
+    "quick_skim_target": 11,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2610.36820v1",
+      "source": "arxiv",
+      "title": "An Incremental Knowledge-Graph Learner Digital Twin for Evidence-Grounded Early Warning",
+      "abstract": "Early-warning models in learning analytics can identify learners at risk of failure or withdrawal, but the resulting alerts are often only weakly connected to inspectable learning evidence. A risk score may indicate that intervention is needed without showing which traces, assessment events, or temporal patterns justify the alert. This paper introduces an incremental Learner Digital Twin for evidence-grounded early warning, implemented as a lightweight knowledge graph. The twin is updated at temporal checkpoints by replaying learning traces and assessment records, and it serves both as a feature-extraction substrate and as an explanation-grounding substrate. Predictive features are derived through graph-mediated queries, while features, attributions, alerts, evidence items, and raw records are represented as queryable graph entities. The framework is instantiated and evaluated on a public learning-analytics benchmark under a temporal protocol. The results show that graph-mediated feature extraction preserves the predictive behavior of equivalent raw-table features across model families and checkpoints. Generated alerts are materialized as evidence chains linking risk decisions to feature attributions, evidence items, and raw platform records. The study shows that early-warning prediction can be routed through a semantic and provenance-aware representation while preserving predictive performance and adding traceability, verifiability, and evidence-grounded explanation.",
+      "authors": [
+        "Ngoc Luyen Le",
+        "Marie-Hélène Abel",
+        "Bertrand Laforge"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-27T08:22:26+00:00",
+      "link": "https://arxiv.org/pdf/2610.36820v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "learning analytics early warning grounded in learning evidence via knowledge graph learner twin",
+      "llm_evidence_cn": "基于知识图谱学习者孪生的学习分析早期预警",
+      "llm_evidence": "基于知识图谱学习者孪生的学习分析早期预警",
+      "canonical_evidence": "基于知识图谱学习者孪生的学习分析早期预警",
+      "llm_tldr_en": "To fix alerts that lack inspectable evidence, the paper proposes an incremental Learner Digital Twin as a lightweight knowledge graph, replayed at temporal checkpoints to both extract predictive features and ground explanations for early-warning in learning analytics.",
+      "llm_tldr_cn": "学习分析中的早期预警模型虽能识别有失败或退学风险的学习者，但风险分数往往与可检查的学习证据联系薄弱，难以说明哪些学习轨迹或评估事件触发了警报。作者提出增量学习者数字孪生，以轻量知识图谱实现，按时间检查点回放学习轨迹与评估记录，既作为特征提取的基底，也作为解释依据的基底。预测特征通过图查询导出，使预警结果可追溯。该工作把学习分析与可解释性结合，服务于自适应学习支持。",
+      "llm_tldr": "学习分析中的早期预警模型虽能识别有失败或退学风险的学习者，但风险分数往往与可检查的学习证据联系薄弱，难以说明哪些学习轨迹或评估事件触发了警报。作者提出增量学习者数字孪生，以轻量知识图谱实现，按时间检查点回放学习轨迹与评估记录，既作为特征提取的基底，也作为解释依据的基底。预测特征通过图查询导出，使预警结果可追溯。该工作把学习分析与可解释性结合，服务于自适应学习支持。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}
