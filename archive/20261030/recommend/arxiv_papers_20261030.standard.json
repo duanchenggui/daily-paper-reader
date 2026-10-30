@@ -1,0 +1,353 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-30T23:15:37.871561+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 6,
+    "deep_cap": 6,
+    "deep_selected": 6,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2610.40492v1",
+      "source": "arxiv",
+      "title": "Agentic University: Collaborative Agents for Personalized Learning",
+      "abstract": "Large language models support personalized tutoring, content generation, and adaptive learning paths. However, capability development requires these resources and interactions to form a coherent learning process that evolves with the learner. A central challenge is to align goals, activities, and assessment while using learning evidence to decide what should follow. We introduce Human-Participatory Multi-Agent Organization and instantiate it in Agentic University (AU). In AU, learners participate as organization members and work with specialized agents to maintain a revisable Capability Program. The program connects personal goals, learning activities across modalities, and layered assessment, while learner feedback and performance guide subsequent support. Our evaluation shows advantages in program organization, assessment design, and revision quality. Users achieved larger mean assessment gains (12.19 versus 5.61 points on a 50-point scale) and reported stronger cognitive support. This work contributes an organizational approach to adaptive learning that makes learner participation a continuing basis for multi-agent coordination. The Agentic University project is available at \\href{https://github.com/AgenticOrgLab/AgenticUniversity.git}.",
+      "authors": [
+        "Jingru Fan",
+        "Tianle Zhou",
+        "Yunjie Zhou",
+        "Zihao He",
+        "Yixuan Zhou",
+        "Kezhao Wu",
+        "Xinyu Zheng",
+        "Xiyuan Wang",
+        "Yuheng Wang",
+        "Zhi Li",
+        "Songhua Liu",
+        "Weinan E",
+        "Chen Qian"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-10-29T17:18:07+00:00",
+      "link": "https://arxiv.org/pdf/2610.40492v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "multi-agent personalized learning organization",
+      "llm_evidence_cn": "多智能体个性化学习组织",
+      "llm_evidence": "多智能体个性化学习组织",
+      "canonical_evidence": "多智能体个性化学习组织",
+      "llm_tldr_en": "Introduces Human-Participatory Multi-Agent Organization and instantiates Agentic University, where learners work with specialized LLM agents to maintain a revisable Capability Program linking goals, activities and layered assessment.",
+      "llm_tldr_cn": "针对大模型虽能提供个性化辅导与内容生成、但难以形成随学习者演进的连贯学习过程这一问题，论文提出人类参与的多智能体组织框架，并落地为Agentic University。学习者作为组织成员与专门智能体协作维护可修订的能力计划，将个人目标、多模态学习活动与分层评估对齐。学习反馈与表现用于指导后续支持，为学习者中心的个性化学习环境提供了组织化方案。",
+      "llm_tldr": "针对大模型虽能提供个性化辅导与内容生成、但难以形成随学习者演进的连贯学习过程这一问题，论文提出人类参与的多智能体组织框架，并落地为Agentic University。学习者作为组织成员与专门智能体协作维护可修订的能力计划，将个人目标、多模态学习活动与分层评估对齐。学习反馈与表现用于指导后续支持，为学习者中心的个性化学习环境提供了组织化方案。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "personalized learning and learner-centered educational technologies",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.38950v1",
+      "source": "arxiv",
+      "title": "Student-LLM Interactions During Math Learning: Limited Epistemic Proactivity Overall, but Within-chat Change Predicts Performance Without AI",
+      "abstract": "Large language models (LLMs) are increasingly used for learning, raising a key question: can learners remain epistemically proactive, retaining responsibility for the cognitive and regulatory activities through which learning is produced while working with AI? Because this responsibility may change as interactions unfold, we examine epistemic proactivity as a developing process. We conceptualize epistemic proactivity through self-regulated learning (SRL) moves, complemented by help-seeking strategies and manifestations of epistemic vigilance. We analyzed these behaviors in 880 substantive turns from 112 secondary-school students completing open-ended mathematical-modeling practice with a general-purpose LLM (Mistral). Overall, students showed limited observable epistemic proactivity: their interactions were strongly request-dominated, with planning, monitoring, and evaluation relatively rare, although low-quality AI responses elicited more explicit evaluation. Temporal analyses qualified this picture: explicit SRL-related moves increased modestly over the chat, but help-seeking strategies became less understanding-oriented. Crucially, these temporal trajectories in help-seeking strategies predicted their post-test performance without AI beyond pre-test and aggregate patterns: students whose requests became more understanding-oriented performed better once AI assistance was removed. Thus, while students had a limited epistemic proactivity overall, its temporal development still was a critical predictor of post-test performance without AI. These results underscore the importance of examining the temporal organization of epistemic proactivity, rather than isolated prompt types, for understanding AI-supported learning. We release our fully-anonymized dataset publicly in an OSF repository.",
+      "authors": [
+        "Rania Abdelghani",
+        "Peter Kaiser",
+        "Kou Murayama"
+      ],
+      "primary_category": "cs.CY",
+      "categories": [
+        "cs.CY"
+      ],
+      "published": "2026-10-28T21:35:52+00:00",
+      "link": "https://arxiv.org/pdf/2610.38950v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "analysis of student-LLM interactions in math learning",
+      "llm_evidence_cn": "数学学习中与大模型交互的分析",
+      "llm_evidence": "数学学习中与大模型交互的分析",
+      "canonical_evidence": "数学学习中与大模型交互的分析",
+      "llm_tldr_en": "Analyzes 880 substantive turns from 112 secondary students doing math modeling with LLMs, operationalizing epistemic proactivity via self-regulated learning moves, help-seeking and vigilance, and linking within-chat change to later performance without AI.",
+      "llm_tldr_cn": "针对学习者与AI协作时能否保持对学习过程负责这一关键问题，论文将认知主动性刻画为自我调节学习动作、求助策略与认知警觉，并分析112名中学生在开放式数学建模中与LLM的880个实质对话轮次。结果显示整体认知主动性有限，但会话内部的主动性变化可预测其在无AI条件下的表现。研究提示需设计支持学生维持认知责任的教学环境与AI学习工具。",
+      "llm_tldr": "针对学习者与AI协作时能否保持对学习过程负责这一关键问题，论文将认知主动性刻画为自我调节学习动作、求助策略与认知警觉，并分析112名中学生在开放式数学建模中与LLM的880个实质对话轮次。结果显示整体认知主动性有限，但会话内部的主动性变化可预测其在无AI条件下的表现。研究提示需设计支持学生维持认知责任的教学环境与AI学习工具。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.38990v1",
+      "source": "arxiv",
+      "title": "Exploring AI Peer in Collaborative Mathematics Learning",
+      "abstract": "Artificial intelligence (AI) agents are increasingly explored as collaborative learning partners in mathematics education, yet it remains unclear what makes an AI recognizable as a peer. This study examines how domain experts perceive and interact with an adaptive LLM-based peer agent combining a Big Five-informed persona with motivational state modulation for collaborative mathematics problem solving. Through thematic analysis of expert interviews, we identify conditions shaping peer perceptions, including emotional safety, shared control, and collaborative reasoning. Participants primarily judged the AI through its social behavior rather than mathematical capabilities. The AI was perceived more as a peer when it created a non-judgmental space, engaged in tentative reasoning, displayed appropriate imperfection, and respected participants' pace. Conversely, blind agreement and over-instruction reduced trust and shifted perceptions toward a tutor role. Based on these findings, we propose human-centered design dimensions for AI peer agents to guide future peer-oriented learning systems.",
+      "authors": [
+        "Yiran Lin",
+        "Ye Deng",
+        "Ziqi Pan",
+        "Yongan Yu",
+        "Alexandra I. Cristea"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-10-28T22:13:59+00:00",
+      "link": "https://arxiv.org/pdf/2610.38990v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Adaptive LLM peer agent studied as an AI-supported collaborative mathematics learning environment",
+      "llm_evidence_cn": "将自适应大模型同伴代理用于协作数学学习环境",
+      "llm_evidence": "将自适应大模型同伴代理用于协作数学学习环境",
+      "canonical_evidence": "将自适应大模型同伴代理用于协作数学学习环境",
+      "llm_tldr_en": "Examines what makes an adaptive LLM agent recognizable as a peer in collaborative mathematics learning; expert interviews show social behavior, emotional safety, shared control and collaborative reasoning matter more than math ability.",
+      "llm_tldr_cn": "人工智能代理日益作为协作学习伙伴进入数学教育，但何种特征使AI被识别为同伴仍不清楚。研究构建结合大五人格设定与动机状态调节的自适应大模型同伴代理，并通过对领域专家的访谈进行主题分析。结果表明专家主要依据社交行为而非数学能力判断其同伴属性，情感安全、共享控制与协作推理是形成同伴感知的关键条件。研究为AI支持的协作学习环境设计提供依据，提示应优先关注社会性与情感支持。",
+      "llm_tldr": "人工智能代理日益作为协作学习伙伴进入数学教育，但何种特征使AI被识别为同伴仍不清楚。研究构建结合大五人格设定与动机状态调节的自适应大模型同伴代理，并通过对领域专家的访谈进行主题分析。结果表明专家主要依据社交行为而非数学能力判断其同伴属性，情感安全、共享控制与协作推理是形成同伴感知的关键条件。研究为AI支持的协作学习环境设计提供依据，提示应优先关注社会性与情感支持。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.39571v1",
+      "source": "arxiv",
+      "title": "Generative artificial intelligence prompting strategies among Chinese university students across academic tasks",
+      "abstract": "Generative artificial intelligence (GenAI) is increasingly embedded in university learning, yet effective human-GenAI interaction depends not only on access to these tools but also on students' ability to formulate, evaluate, and refine prompts for academic tasks. This study examined university students' perceived GenAI prompting capability and reported prompting strategies. Questionnaire data from 234 students were analyzed using descriptive statistics, measurement modelling, scenario comparisons, structural associations, and qualitative coding of optional comments. Students reported using GenAI across diverse academic activities and generally expressed confidence in their prompting capabilities, particularly in providing relevant context and refining prompts following initial outputs. However, prompting strategies showed limited sensitivity to task types: specifying output format was more strongly endorsed in a creative workshop preparation scenario than in a research-oriented assignment, whereas other matched strategies showed no adjusted differences. Students also commonly endorsed both concise instructions and providing all relevant information at the outset, suggesting that effective brevity may depend more on selecting and organizing task-relevant information than on prompt length alone. By contrast, fixed prompt templates received lower endorsement than other prompting strategies. In the adopted factor model, perceived cognition showed the clearest unique association with perceived prompting capability, while open-ended responses highlighted prompt-intent alignment as a common challenge.",
+      "authors": [
+        "Lei Fan",
+        "Fangxue Liu"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC",
+        "cs.AI"
+      ],
+      "published": "2026-10-29T08:14:21+00:00",
+      "link": "https://arxiv.org/pdf/2610.39571v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "university students generative AI prompting strategies across academic tasks",
+      "llm_evidence_cn": "大学生在不同学术任务中的生成式AI提示策略",
+      "llm_evidence": "大学生在不同学术任务中的生成式AI提示策略",
+      "canonical_evidence": "大学生在不同学术任务中的生成式AI提示策略",
+      "llm_tldr_en": "Surveys 234 Chinese university students on perceived generative AI prompting capability and strategies across academic tasks, revealing confidence and task-dependent patterns.",
+      "llm_tldr_cn": "生成式AI已进入大学学习，但有效人机互动取决于学生能否构思、评估和改写提示。作者对234名中国大学生开展问卷调查，用描述统计、测量建模、情境比较与结构关联分析其自评提示能力与策略。结果显示学生在多种学术活动中使用生成式AI且普遍自信，提示策略随任务情境变化并存在结构关联。研究刻画了提示素养的构成，为高校AI素养教育提供依据。",
+      "llm_tldr": "生成式AI已进入大学学习，但有效人机互动取决于学生能否构思、评估和改写提示。作者对234名中国大学生开展问卷调查，用描述统计、测量建模、情境比较与结构关联分析其自评提示能力与策略。结果显示学生在多种学术活动中使用生成式AI且普遍自信，提示策略随任务情境变化并存在结构关联。研究刻画了提示素养的构成，为高校AI素养教育提供依据。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.40031v1",
+      "source": "arxiv",
+      "title": "AI Cosmos: An Agentic Infra for Situated Learning",
+      "abstract": "Large language models (LLMs) can improve task performance during learning, yet these gains do not necessarily reflect learners' ability to thereafter apply the knowledge and skills independently. We present AI Cosmos, an agentic infrastructure for situated learning that organizes learning around two complementary principles: scenario-based participation and cumulative assets of practice. AI Cosmos organizes learners and role-specialized agents within learning scenarios that integrate task-relevant knowledge and, when needed, executable workbenches. An asset-memory loop preserves the processes and outcomes of practice as reusable assets with explicit provenance and dependencies. We evaluate scenario-based interaction through two preregistered randomized controlled studies examining the acquisition of legal reasoning and programming competence, holding the same underlying LLM across conditions. AI Cosmos achieves greater learning gains than a conventional LLM in legal reasoning and higher mastery of unseen programming problems than an LLM-as-Teacher baseline.",
+      "authors": [
+        "AI Cosmos Team",
+        "Jinfeng Zhou",
+        "Yuxuan Chen",
+        "Fangming Chang",
+        "Mingyu Su",
+        "Yifan Zhu",
+        "Yuan Wang",
+        "Bo Zhang",
+        "Bosi Wen",
+        "Chenhao Yuan",
+        "Chenwen Liao",
+        "Dazhi Jiang",
+        "Deyao Hong",
+        "Erle Zhu",
+        "Genrui Zhang",
+        "Guchan Li",
+        "Hongwen Gan",
+        "Huichao Bi",
+        "Jiahao Yan",
+        "Jincheng Fan",
+        "Kehan Zheng",
+        "Qinren Luo",
+        "Qiran Liu",
+        "Ruoqi Cao",
+        "Shizhi Zhang",
+        "Sihan Chen",
+        "Siyan Deng",
+        "Xuehan Zhou",
+        "Xujun Li",
+        "Yang Dang",
+        "Yanzhuo Zhu",
+        "Yu Zhang",
+        "Zheyu Chen",
+        "Hongning Wang",
+        "Manli Li"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-10-29T13:36:31+00:00",
+      "link": "https://arxiv.org/pdf/2610.40031v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Agentic infrastructure for situated learning with LLM agents",
+      "llm_evidence_cn": "基于大模型智能体的情境学习基础设施",
+      "llm_evidence": "基于大模型智能体的情境学习基础设施",
+      "canonical_evidence": "基于大模型智能体的情境学习基础设施",
+      "llm_tldr_en": "AI Cosmos is an agentic infrastructure for situated learning that organizes learners and role-specialized agents in scenarios with reusable practice assets, evaluated through preregistered randomized controlled studies.",
+      "llm_tldr_cn": "大模型虽能提升学习中的任务表现，却未必转化为独立应用知识的能力。作者提出AI Cosmos，一个面向情境学习的智能体基础设施，将学习者与角色化智能体置于学习情境中，并通过资产记忆循环沉淀可复用实践资产。两项预注册随机对照实验评估了情境化交互效果，为以实践为中心的学习环境设计提供新思路。",
+      "llm_tldr": "大模型虽能提升学习中的任务表现，却未必转化为独立应用知识的能力。作者提出AI Cosmos，一个面向情境学习的智能体基础设施，将学习者与角色化智能体置于学习情境中，并通过资产记忆循环沉淀可复用实践资产。两项预注册随机对照实验评估了情境化交互效果，为以实践为中心的学习环境设计提供新思路。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.40151v1",
+      "source": "arxiv",
+      "title": "The generative paradox: the Anti-Prompt paradigm for human capability",
+      "abstract": "Generative AI in education is usually judged by the output of human-AI teams. That focus overlooks a second outcome: what people can still understand, challenge, repair, and adapt when assistance changes or disappears. We call this tension the generative paradox and distinguish four manifestations: performance, assistance, ownership, and capability stock. We propose developmental function allocation, which complements operational function allocation and meaningful human control by treating retained human capability as a design objective alongside current joint performance. The Anti-Prompt paradigm reverses the default interaction order: when immediate generation would preempt a consequential human act, AI should first create the conditions for human construction. We distinguish the validity of a product, responsibility for its construction, and evidence of capability after support changes. Representative Anti-Prompts, a canonical interaction sequence, and stress tests spanning mathematical reasoning, experimental science, software diagnosis, and lesson design make these distinctions concrete. We conclude with falsifiable predictions about retained capability and a system-level hypothesis about the reproduction and distribution of expertise.",
+      "authors": [
+        "Margarita Trifonov Vadim E. Levit"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-29T14:35:05+00:00",
+      "link": "https://arxiv.org/pdf/2610.40151v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "generative AI in education and designing for retained human capability",
+      "llm_evidence_cn": "教育中的生成式AI与以保留人类能力为设计目标",
+      "llm_evidence": "教育中的生成式AI与以保留人类能力为设计目标",
+      "canonical_evidence": "教育中的生成式AI与以保留人类能力为设计目标",
+      "llm_tldr_en": "Argues that judging generative AI in education only by joint human-AI output misses retained human capability, and proposes an Anti-Prompt paradigm that first builds conditions for human understanding.",
+      "llm_tldr_cn": "教育中评估生成式AI通常只看人机协作产出，忽略了辅助变化或消失后人还能理解、质疑与修复什么。作者把这一张力称为生成悖论，区分表现、辅助、所有权与能力存量四种表现，并提出发展性功能分配与反提示范式。该范式反转默认交互顺序，在关键人类行动会被生成抢先时先由AI创造人类思考的条件。研究为以人类能力为核心的教育AI设计与评估提供了新框架。",
+      "llm_tldr": "教育中评估生成式AI通常只看人机协作产出，忽略了辅助变化或消失后人还能理解、质疑与修复什么。作者把这一张力称为生成悖论，区分表现、辅助、所有权与能力存量四种表现，并提出发展性功能分配与反提示范式。该范式反转默认交互顺序，在关键人类行动会被生成抢先时先由AI创造人类思考的条件。研究为以人类能力为核心的教育AI设计与评估提供了新框架。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.38910v1",
+      "source": "arxiv",
+      "title": "When Does GenAI Use Support Critical Thinking? A Cross-Cultural Structural Account of Transactive Memory with GenAI",
+      "abstract": "Whether generative AI (GenAI) use helps or hinders critical thinking remains contested, and existing accounts emphasize exposure to the tool rather than how a person structures their engagement with it. Extending Transactive Memory Systems (TMS) theory to human-AI partnerships, we test a structural account of critical thinking in GenAI-assisted academic work among 891 college students in the United States and Türkiye. Self-appraised thinking ability and confidence in the partnership shaped how much practical experience a person built up with GenAI, but neither predicted critical thinking directly. That experience mattered only through two downstream behaviors, dividing and coordinating cognitive labor with the tool, and actively reworking its output rather than accepting it as given. A multigroup comparison found this structure largely invariant, with two theoretically interpretable exceptions. This study offers a structural, TMS-based account of critical thinking in GenAI-assisted work.",
+      "authors": [
+        "Mahir Akgun",
+        "Sacip Toker"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-10-28T21:01:28+00:00",
+      "link": "https://arxiv.org/pdf/2610.38910v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "GenAI use and critical thinking in students academic work",
+      "llm_evidence_cn": "学生学业中生成式AI使用与批判性思维",
+      "llm_evidence": "学生学业中生成式AI使用与批判性思维",
+      "canonical_evidence": "学生学业中生成式AI使用与批判性思维",
+      "llm_tldr_en": "Whether GenAI helps critical thinking is contested. Extending Transactive Memory Systems to human-AI partnerships, the study surveys 891 college students in the US and Türkiye, showing structured cognitive labor division mediates the effect.",
+      "llm_tldr_cn": "生成式AI究竟促进还是阻碍批判性思维仍存争议，既有解释多关注工具暴露而非使用结构。本文把交互记忆系统理论扩展到人机协作，调查美国与土耳其891名大学生的GenAI辅助学业实践。结果显示自我评估与伙伴信任通过实践经验间接作用，而经验仅经由认知分工与协调行为影响批判性思维，为在教学中引导结构化AI使用提供了理论依据。",
+      "llm_tldr": "生成式AI究竟促进还是阻碍批判性思维仍存争议，既有解释多关注工具暴露而非使用结构。本文把交互记忆系统理论扩展到人机协作，调查美国与土耳其891名大学生的GenAI辅助学业实践。结果显示自我评估与伙伴信任通过实践经验间接作用，而经验仅经由认知分工与协调行为影响批判性思维，为在教学中引导结构化AI使用提供了理论依据。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2610.38016v1",
+      "source": "arxiv",
+      "title": "Beyond Aggregate WER: In-domain Adaptation, Learner Speech, Code-Switching, and Speaker Attribution in Online Spanish Learning Classrooms",
+      "abstract": "Automatic speech recognition (ASR) increasingly supplies transcripts for educational NLP, but aggregate word error rate (WER) can conceal errors concentrated in learner speech, multilingual turns, and speaker attribution. We compare platform-integrated, open-weight, adapted, and commercial ASR configurations on held-out sessions of online L2 Spanish interaction between L1 English learners and their instructors and tutors. Because English is the learner's shared first language, the interactions contain Spanish-only, English-only, and code-switched turns. Evaluation combines overall WER and character error rate (CER), WER disaggregated by speaker role and language context, and diarization error rate (DER). We also adapt Whisper large-v3 and MOSS-Transcribe-Diarize with LoRA using human-corrected in-domain classroom data. MOSS adaptation produced consistent improvements across speaker roles and language contexts, whereas Whisper showed smaller gains. Domain match proved more important than data volume: Larger out-of-domain bilingual and learner corpora did not outperform the smaller classroom corpus, where learner speech and code-switching are embedded in instructor--learner interaction. The open-weight MOSS adapter was competitive with commercial Muse Voice Transcribe on WER and CER and achieved lower system-provided DER on the recordings eligible for each system. Learner, English-only, and code-switched speech remained more difficult than instructor and Spanish-only speech. The findings demonstrate the value of condition-aware evaluation and interactionally matched data for bilingual educational ASR.",
+      "authors": [
+        "Olga Kellert",
+        "Samhitha Harish",
+        "Johnatan E Bonilla",
+        "Nemika Tyagi",
+        "Phanos Kareen",
+        "Nelvin Licona-Guevara"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-10-27T22:13:36+00:00",
+      "link": "https://arxiv.org/pdf/2610.38016v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "ASR evaluation for online language learning classrooms",
+      "llm_evidence_cn": "面向在线语言学习课堂的语音识别评测",
+      "llm_evidence": "面向在线语言学习课堂的语音识别评测",
+      "canonical_evidence": "面向在线语言学习课堂的语音识别评测",
+      "llm_tldr_en": "Compares platform, open-weight, adapted, and commercial ASR on online L2 Spanish classroom sessions, showing aggregate WER hides errors in learner speech, code-switching, and speaker attribution.",
+      "llm_tldr_cn": "自动语音识别日益为教育NLP提供转写，但整体词错误率会掩盖学习者语音、多语轮次与说话人归属上的错误。作者在在线二语西班牙语课堂的留出会话上比较平台内置、开放权重、领域适配与商用ASR配置，评估整体与分角色、分语言的词错误率、字符错误率及说话人分离。结果显示不同配置在语码转换与学习者语音上差异明显。研究为教育场景中的ASR选型与评测提供了更细粒度的框架。",
+      "llm_tldr": "自动语音识别日益为教育NLP提供转写，但整体词错误率会掩盖学习者语音、多语轮次与说话人归属上的错误。作者在在线二语西班牙语课堂的留出会话上比较平台内置、开放权重、领域适配与商用ASR配置，评估整体与分角色、分语言的词错误率、字符错误率及说话人分离。结果显示不同配置在语码转换与学习者语音上差异明显。研究为教育场景中的ASR选型与评测提供了更细粒度的框架。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "date": "20261030",
+  "date_label": "",
+  "generated_at": "2026-10-30 23:19:01 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2610.40492v1",
+      "route": "202610/30/2610.40492v1-agentic-university-collaborative-agents-for-personalized-learning",
+      "title": "Agentic University: Collaborative Agents for Personalized Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "多智能体个性化学习组织",
+      "first_seen_at": "2026-10-30 23:19:01 UTC",
+      "updated_at": "2026-10-30 23:19:01 UTC"
+    },
+    {
+      "paper_id": "2610.38950v1",
+      "route": "202610/30/2610.38950v1-student-llm-interactions-during-math-learning-limited-epistemic-proactivity-overall-but-within-chat-change-predicts-performance-without-ai",
+      "title": "Student-LLM Interactions During Math Learning: Limited Epistemic Proactivity Overall, but Within-chat Change Predicts Performance Without AI",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "数学学习中与大模型交互的分析",
+      "first_seen_at": "2026-10-30 23:19:01 UTC",
+      "updated_at": "2026-10-30 23:19:01 UTC"
+    },
+    {
+      "paper_id": "2610.38990v1",
+      "route": "202610/30/2610.38990v1-exploring-ai-peer-in-collaborative-mathematics-learning",
+      "title": "Exploring AI Peer in Collaborative Mathematics Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "将自适应大模型同伴代理用于协作数学学习环境",
+      "first_seen_at": "2026-10-30 23:19:01 UTC",
+      "updated_at": "2026-10-30 23:19:01 UTC"
+    },
+    {
+      "paper_id": "2610.39571v1",
+      "route": "202610/30/2610.39571v1-generative-artificial-intelligence-prompting-strategies-among-chinese-university-students-across-academic-tasks",
+      "title": "Generative artificial intelligence prompting strategies among Chinese university students across academic tasks",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "大学生在不同学术任务中的生成式AI提示策略",
+      "first_seen_at": "2026-10-30 23:19:01 UTC",
+      "updated_at": "2026-10-30 23:19:01 UTC"
+    },
+    {
+      "paper_id": "2610.40031v1",
+      "route": "202610/30/2610.40031v1-ai-cosmos-an-agentic-infra-for-situated-learning",
+      "title": "AI Cosmos: An Agentic Infra for Situated Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "基于大模型智能体的情境学习基础设施",
+      "first_seen_at": "2026-10-30 23:19:01 UTC",
+      "updated_at": "2026-10-30 23:19:01 UTC"
+    },
+    {
+      "paper_id": "2610.40151v1",
+      "route": "202610/30/2610.40151v1-the-generative-paradox-the-anti-prompt-paradigm-for-human-capability",
+      "title": "The generative paradox: the Anti-Prompt paradigm for human capability",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "教育中的生成式AI与以保留人类能力为设计目标",
+      "first_seen_at": "2026-10-30 23:19:01 UTC",
+      "updated_at": "2026-10-30 23:19:01 UTC"
+    },
+    {
+      "paper_id": "2610.38910v1",
+      "route": "202610/30/2610.38910v1-when-does-genai-use-support-critical-thinking-a-cross-cultural-structural-account-of-transactive-memory-with-genai",
+      "title": "When Does GenAI Use Support Critical Thinking? A Cross-Cultural Structural Account of Transactive Memory with GenAI",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "学生学业中生成式AI使用与批判性思维",
+      "first_seen_at": "2026-10-30 23:19:01 UTC",
+      "updated_at": "2026-10-30 23:19:01 UTC"
+    },
+    {
+      "paper_id": "2610.38016v1",
+      "route": "202610/30/2610.38016v1-beyond-aggregate-wer-in-domain-adaptation-learner-speech-code-switching-and-speaker-attribution-in-online-spanish-learning-classrooms",
+      "title": "Beyond Aggregate WER: In-domain Adaptation, Learner Speech, Code-Switching, and Speaker Attribution in Online Spanish Learning Classrooms",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向在线语言学习课堂的语音识别评测",
+      "first_seen_at": "2026-10-30 23:19:01 UTC",
+      "updated_at": "2026-10-30 23:19:01 UTC"
+    }
+  ]
+}
