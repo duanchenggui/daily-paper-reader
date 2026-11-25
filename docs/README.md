@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-11-24</span>
+      <span class="dpr-home-dashboard-kicker">2026-11-25</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 0 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 17 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>0</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-11-24 04:51:55 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-11-25 02:57:55 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日无新推荐，系统未产出可展示论文。</p>
+<p>今天筛读17篇AI教育论文，精读6篇、速读11篇，主线集中在“AI出题验证”与“评估防作弊”。最值得看的是两篇9.0分：VeriMath用人在回路生成并验证课程对齐数学题，以及生成式AI结合学习风格模型的机遇与挑战。普通读者可先读这两篇，再顺着EGS教育大模型安全框架和“AI-proofing”评估策略延伸阅读。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -78,12 +78,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">0 篇</strong>
+    <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="VeriMath: Human-in-the-Loop Generation and Verification of Curriculum-Aligned Mathematics Assessment Items">VeriMath: Human-in-the-Loop Generation and Verification of Curriculum-Aligned Mathematics Assessment Items</span></li><li><span class="dpr-home-dashboard-paper-title" title="Integrating Generative Artificial Intelligence with Learning Style Models: Opportunities, Challenges, and Future Directions">Integrating Generative Artificial Intelligence with Learning Style Models: Opportunities, Challenges, and Future Directions</span></li><li><span class="dpr-home-dashboard-paper-title" title="AI-generated support, worked examples, and script-based learning in undergraduate physics: A comparative study">AI-generated support, worked examples, and script-based learning in undergraduate physics: A comparative study</span></li></ul>
   </div>
-
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>6</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -91,12 +91,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">0 篇</strong>
+    <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Generative AI and the Crisis of Higher Education Assessments: Examining &#x27;AI-Proofing&#x27; Strategies for College-Level Assessments">Generative AI and the Crisis of Higher Education Assessments: Examining &#x27;AI-Proofing&#x27; Strategies for College-Level Assessments</span></li><li><span class="dpr-home-dashboard-paper-title" title="EGS: A Complementary Safety Framework for Educational LLMs">EGS: A Complementary Safety Framework for Educational LLMs</span></li><li><span class="dpr-home-dashboard-paper-title" title="Explain Your Code: AI-Based Examination at Class Scale">Explain Your Code: AI-Based Examination at Class Scale</span></li></ul>
   </div>
-
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>11</strong></span></div>
 </section>
 </div>
 

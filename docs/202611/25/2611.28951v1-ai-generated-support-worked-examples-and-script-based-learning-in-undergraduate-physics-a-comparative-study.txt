@@ -1,0 +1,775 @@
+Title: AI-generated support, worked examples, and script-based learning in undergraduate physics: A comparative study
+
+URL Source: https://arxiv.org/pdf/2611.28951v1
+
+Published Time: Tue, 24 Nov 2026 02:30:00 GMT
+
+Number of Pages: 45
+
+Markdown Content:
+# AI-generated support, worked examples, and script-based learning in undergraduate physics: A comparative study 
+
+## Larissa Hahn 1* , Marie Aylin Falkenberg 1, Marten Hogel¨ ucht 1,Pascal Klein 1
+
+1Physics Education Research, University of G¨ ottingen, Friedrich-Hund-Platz 1, G¨ ottingen, 37077, Germany. *Corresponding author(s). E-mail(s): larissa.hahn@uni-goettingen.de; Contributing authors: aylin.falkenberg@uni-goettingen.de; marten.hogeluecht@uni-goettingen.de; pascal.klein@uni-goettingen.de; 
+
+Abstract 
+
+Generative AI is increasingly used to support students during learning and problem solving, but its instructional value depends on how it is embedded in established learning approaches. Worked examples guide learners through the steps and reasoning of a solution; conversational AI may extend them by responding to individual questions. To isolate this added value, we compared a chatbot-delivered intelligent worked example with a matched static worked example and a lecture script. Nine recitation groups in an undergraduate elec-trodynamics course were cluster-randomized to the three conditions, and 86 students worked individually on a Gauss’s law problem. Concept-test accuracy and self-efficacy increased significantly in all conditions, but changes did not dif-fer significantly between groups ( p = .07 for concept-test accuracy and p = .38 
+
+for self-efficacy). Four weeks later, in a reduced sample with selective participa-tion and pre-existing group differences, students in the static worked-example condition scored higher than those in the script condition ( p = .004 , d = 1 .22 ), whereas the two worked-example conditions did not differ significantly. Usabil-ity, but not perceived educational value, was higher for the intelligent worked example than for the script ( p = .011 , d = 0 .88 ). In a subsequent homework assignment on Amp` ere’s law with free choice of learning material ( N = 46 ), 
+
+62 − 71% of students in each condition reported using only the static worked example, at most 8% used exclusively the intelligent one, and 15 − 31% used 
+
+1arXiv:2611.28951v1 [physics.ed-ph] 21 Nov 2026 neither. Thus, conversational delivery showed no clear additional learning ben-efit under the present conditions. More broadly, a learning format that is rated favorably need not be the one students voluntarily adopt.  
+
+> Keywords: worked examples, generative artificial intelligence, cognitive engagement, comparison conditions, physics education research, electrodynamics
+
+# 1 Introduction 
+
+Generative artificial intelligence (AI) is rapidly becoming part of higher education. Alongside widely available general-purpose chatbots, universities are beginning to pro-vide institutionally managed AI platforms and course-specific tutoring systems at larger scales. These developments create new opportunities for immediate and indi-vidualized support, but they also raise a central educational question: Under which instructional conditions does conversational AI support learning rather than merely facilitate task completion? Addressing this question requires evaluations that are grounded in established principles of learning and instruction rather than in the technical capabilities of AI systems alone. 
+
+Worked examples provide one such established instructional approach. By pre-senting a problem together with a structured solution, they can help learners identify relevant problem features, understand solution steps, and develop transfer-able problem-solving schemas (Atkinson et al., 2000; Renkl, 2014; Sweller & Cooper, 1985). Conventional static worked examples, however, provide the same guidance to all learners and cannot respond to individual questions or difficulties. Conversational AI may extend this format by allowing learners to request explanations, clarify indi-vidual steps, and access additional support when needed. An AI-supported worked example may thus combine the structured guidance of example-based learning with the responsiveness of a chatbot. Whether such conversational functionality provides additional instructional value depends critically on the comparison condition. A comparison with conventional course material, such as a lecture script, captures differences in instructional design as well as differences in AI use. In contrast, comparison with a matched static worked example that shares the same core solution structure allows the added value of conversational support to be examined more directly. This distinction is important because find-ings on educational chatbots and AI-supported tutoring remain heterogeneous and appear to depend strongly on how systems are designed and embedded in instruction (Kuhail et al., 2023; Ma et al., 2014; Wollny et al., 2021; Wu & Yu, 2024). Eval-uating AI-supported learning environments therefore requires both an appropriate non-AI comparison and outcomes that extend beyond performance, including learners’ cognitive and motivational experiences. A further challenge concerns whether students use AI-supported learning materials when their use is voluntary. The availability of an AI-based learning environment does not necessarily result in its adoption. Students may value immediate and individual-ized assistance while simultaneously expressing concerns about unreliable information, 2overreliance on AI, academic integrity, or the loss of independent problem-solving skills (Balabdaoui et al., 2024; Johnston et al., 2024). Existing research has often focused on general attitudes or intended use rather than on students’ actual choices between AI-supported and conventional learning materials in authentic course settings. Investigating both instructional effectiveness and voluntary material choice is there-fore important for understanding the practical educational potential of AI-supported learning environments. The present study addresses these issues in an undergraduate electrodynamics course, where students must coordinate conceptual, spatial, and mathematical rea-soning when solving physics problems. In a controlled intervention on Gauss’s law, students learned with an AI-supported worked example (hereafter referred to as the intelligent worked example), a static worked example, or the lecture script. The condi-tions were compared with respect to concept-test performance, self-efficacy, cognitive load, usability, and perceived educational value. In a subsequent exploratory phase on Amp` ere’s law, students could freely choose between the available learning mate-rials, and their choices were examined in relation to concerns and perceived barriers regarding AI use. By combining a controlled comparison with an investigation of vol-untary uptake, the study examines both the added instructional value of an intelligent worked example and whether students choose to use it under more authentic learning conditions. 
+
+# 2 Theoretical background 
+
+## 2.1 Worked examples in physics education 
+
+Problem solving is a central component of university physics learning. For novices, however, solving unfamiliar problems independently can impose substantial demands because they have not yet developed the knowledge structures needed to guide an efficient solution. A worked example presents a problem together with a structured solution, allowing learners to study how a solution is constructed rather than having to discover it through search. In well-structured domains such as mathematics and physics, worked examples can therefore support the initial acquisition of problem-solving skills more effectively than conventional problem solving, a finding known as the worked-example effect (Atkinson et al., 2000; Renkl, 2014; Sweller & Cooper, 1985). Cognitive load theory provides a common explanation for this effect (Sweller et al., 1998). Because working memory is limited, novices may devote substantial resources to searching for a solution procedure. Worked examples reduce such unproductive search and can direct attention toward relations between problem features, underlying principles, and solution steps. Their instructional value therefore lies not merely in providing an answer, but in making the structure and reasoning of a solution accessible for learning. Effective example study nevertheless requires learners to process this reasoning actively. Successful learners tend to generate self-explanations that connect solu-tion steps to underlying principles and anticipate how the solution will proceed (Chi et al., 1989; Renkl, 1997). In physics, productive self-explanations similarly involve 3identifying the relevant principle, explaining why it applies, and clarifying the pur-pose of mathematical operations (Gjerde et al., 2022). Simply adding explanations or prompts, however, does not reliably improve learning; their effectiveness depends on the cognitive activity they elicit (Barbieri et al., 2023; Wittwer & Renkl, 2010). The amount of guidance required also changes with learners’ developing exper-tise. Detailed worked solutions are particularly useful while problem-solving schemas are still weak, whereas the same information may become redundant as competence increases. Guidance can therefore be gradually withdrawn through completion tasks or faded worked examples (Renkl & Atkinson, 2003). This reflects the broader expertise-reversal effect, according to which instructional support that benefits novices may become unnecessary or burdensome for more knowledgeable learners (Scheiger et al., 2023). These principles are particularly relevant in physics, where problem solving requires learners to coordinate conceptual understanding, representations, and mathematical procedures. Physics education research suggests that worked examples are most useful when they make the underlying problem structure and reasoning explicit rather than merely presenting calculations (Badeau et al., 2017; Schmidt-Weigand et al., 2009). Thus, effective example-based learning depends both on promoting principle-based processing and on providing an appropriate level of guidance. 
+
+## 2.2 Supporting worked example-based learning through chatbots 
+
+A limitation of conventional static worked examples is that their explanations and prompts are fixed in advance. Large language models (LLMs) may extend this format by responding to learners’ questions, requesting explanations, and providing additional clarification when needed. Within the ICAP framework, however, deeper engagement depends on what learners actually do rather than on the interface itself: conversational support may elicit constructive or interactive processing, but does not guarantee it (Chi & Wylie, 2014). Recent studies suggest that responsive AI support can be instructionally useful, but that its benefits depend on how the support is structured. In physics education, Becker et al. (2026) found that both an AI chatbot and a structured tiered-hint system reduced cognitive load more than static textbook-style explanations, while the chatbot showed no clear advantage over structured support. This illustrates why AI-supported envi-ronments should be evaluated against meaningful instructional comparison conditions rather than against conventional materials alone. Conversational support also creates risks that are directly relevant to learning from worked examples. Learners may accept AI-generated explanations without sufficiently processing or verifying them. Krupp et al. (2024), for example, found evidence of uncritical reliance on ChatGPT-generated solutions. The ISAR model describes the possibility that AI intended to support learning instead reduces productive cognitive processing as an inversion effect (Bauer et al., 2025). In addition, fluent but scien-tifically incorrect explanations may be difficult for learners to identify (Dahlkemper et al., 2023). Educational use of LLMs therefore requires a pedagogical strategy that promotes critical engagement rather than replacing learners’ own reasoning (Kasneci 4et al., 2023). A worked example used as the basis for an AI tutor must therefore be designed to elicit thinking rather than to substitute for it. 
+
+## 2.3 Domain-specific context 
+
+Gauss’s and Amp` ere’s laws provide compact relations between electromagnetic fields and their sources and can greatly simplify field calculations when appropriate symme-tries are present. Their application, however, requires students to recognize relevant symmetries, distinguish fields from flux or circulation, identify enclosed sources, and select an appropriate integration surface or path. Research in physics education has documented persistent difficulties with these conceptual and representational demands (Campos et al., 2023; Hernandez et al., 2023; Pepper et al., 2012). These character-istics make Gauss’s and Amp` ere’s laws suitable contexts for investigating structured problem-solving support. 
+
+## 2.4 The present study and research questions 
+
+The present study compares an intelligent worked example with a corresponding static worked example and the regular lecture script. Both worked examples use the same underlying solution structure and activation questions intended to promote self-explanation. In the intelligent worked example, an LLM presents the instructor-designed solution conversationally and provides additional support by responding to students’ questions, offering further explanations, and discussing their responses to the activation questions. The comparison with the lecture script therefore examines the overall instructional value of the AI-supported worked-example format, whereas the comparison with the static worked example more specifically examines the added value of conversational support while keeping the core instructional structure constant. In a subsequent exploratory phase, students could freely choose among the available learning materials. This complements the controlled comparison with an examina-tion of whether AI-supported materials are voluntarily adopted and whether material choice is related to concerns and perceived barriers regarding AI use. 
+
+RQ1 (Group differences): How do students who learn with an intelligent worked example, a static worked example, or the lecture script differ with respect to (a) concept-test performance and learning gains immediately after the inter-vention and at follow-up? (b) changes in self-efficacy? (c) perceived cognitive load during learning? (d) perceived usability and educational value of the learning environment? 
+
+RQ2 (Material choice and AI-related concerns): Which learning materials do students choose when their use is voluntary, and how is this choice related to concerns and perceived barriers regarding AI use? 53 Methods 
+
+The following sections describe the study design and learning materials (Sect. 3.1), the sample (Sect. 3.2, Tab. 1), and the statistical methods used to address the research questions (Sect. 3.3). 
+
+## 3.1 Study and materials 
+
+The overall study procedure and measurement occasions are illustrated in Fig. 1. An overview of the instruments and data collected at each measurement occasion is provided in Tab. 2. A detailed description of the instruments is provided in Sect. 3.1.2. 
+
+3.1.1 Study design pretest intelligent worked example (IG1) static worked example (IG2) control group (CG) posttest follow-up test AI/WE (voluntary) posttest II 
+
+𝑡 0 𝑡 1 𝑡 2 𝑡 3
+
+Intervention phase: Gauß’ law Exploration phase: Amp` ere’s law exam  
+
+> Fig. 1 Overview of the study design and measurement occasions from pretest ( t0) to the assessment following the exploration phase ( t3; IG1 = intelligent worked example group, IG2 = static worked example group, CG = control group)
+
+The study was conducted in the undergraduate Experimental Physics II course at the University of G¨ ottingen, which typically introduces physics students to university-level electromagnetism in their second semester. The course combines lectures with weekly recitation sessions in which compulsory assignments are discussed. The study comprised two consecutive phases: a controlled intervention on Gauss’s law and a subsequent exploratory phase on Amp` ere’s law. Participants provided writ-ten informed consent when completing a study questionnaire or test for the first time. Self-generated pseudonymous codes were used to link responses across measurement occasions. 
+
+Intervention phase – Gauss’s law 
+
+The intervention followed a cluster-randomized pretest–posttest–follow-up design with three learning conditions and was conducted during the regular recitation sessions. Stu-dents had selected fixed recitation groups before the learning conditions were assigned. 6The nine groups were subsequently randomized to the intelligent worked-example con-dition (IG1), the static worked-example condition (IG2), or the lecture-script condition (CG), with three groups assigned to each condition while accounting for group-size differences. Each session lasted 90 minutes. Students first completed a pretest ( t0) assessing conceptual understanding of Gauss’s law and self-efficacy regarding its application. Gauss’s law had previously been introduced in the lecture. Students then worked individually and at their own pace on the same target problem, supported by the material assigned to their condition. Students in both worked-example conditions could additionally consult the lecture script. Material use was self-directed, and no additional instructional support was provided during the learning phase. Immediately afterward, students completed the posttest ( t1), including the same concept test and self-efficacy measure as at pretest, as well as measures of cognitive load, usability, and perceived educational value. Four weeks later, the concept test was administered again during the regular lecture (t2). Because participation at follow-up was independent of participation in the inter-vention, some students completed only this assessment. These students constituted a non-equivalent cross-sectional reference group and were not included in longitudinal analyses of learning gains. 
+
+Exploration phase – Amp` ere’s law 
+
+The subsequent exploration phase focused on Amp` ere’s law. Students completed a regular homework assignment requiring them to apply Amp` ere’s law and could freely choose whether to use an intelligent worked example, a static worked example, both worked examples, or neither as additional learning support. The regular lecture script remained available throughout the course and was not provided specifically for this assignment. Unlike the intervention phase, the target problem was completed outside the supervised recitation setting and submitted as part of the regular course work. After submitting the assignment, students reported which of the two worked exam-ples they had used and completed questionnaires assessing their concerns about AI use and perceived barriers to using AI-based learning support ( t3; Fig. 1). The explo-ration phase followed an observational design: students freely selected their learning materials, and neither the timing nor the intensity of material use was controlled or monitored. Information on the use of the worked examples was therefore based on students’ self-reports. 
+
+3.1.2 Measures and materials 
+
+This section describes the learning materials used during the intervention and explo-ration phases, as well as the instruments employed to assess students’ conceptual understanding, self-efficacy, cognitive load, usability and perceived educational value, and AI-related concerns and barriers. All learning materials and assessment instru-ments are provided in Appendices A and B. An overview of all scales is given in Tab. 2. 7Worked examples 
+
+Students in both intervention groups learned to apply Gauss’s law using worked exam-ples developed specifically for this study (Fig. 2 and Appendix A.1). Both versions addressed the same learning objectives and presented an identical step-by-step solu-tion for calculating the electric field of a hollow sphere using Gauss’s law. The worked examples were designed according to established principles of example-based learning (Atkinson et al., 2000; Renkl, 2014). The solution was structured into clearly separated subgoals, each accompanied by a brief conceptual explanation. Activation questions were integrated at selected points in the solution process to prompt students to reflect on the underlying physical concepts and engage in self-explanation (Chi et al., 1989). The questions were open-ended and required students to formulate an explanation in their own words. The static worked example (Fig. 2a) was provided digitally as a PDF and presented the complete worked solution in a tabular format. For the complete static worked example see Appendix A.1. The individual solution steps and corresponding concep-tual explanations were arranged sequentially, with the activation questions embedded directly at the relevant points in the table. Students worked through the material independently and answered these questions without receiving feedback or additional support. The intelligent worked example (Fig. 2b) extended the static version by integrat-ing an AI-based chatbot into the learning environment. The worked example followed the same sequence of solution steps and activation questions, but provided conversa-tional support throughout the learning process. Students could use the chatbot to ask follow-up questions, request additional explanations, and discuss their responses to the activation questions before proceeding to the next solution step. Thus, the intelligent and static worked examples were identical in terms of content, solution structure, and instructional explanations, differing only in the availability of conversational, AI-based support. The intelligent worked example was implemented using ChatAI, the institutional AI platform provided by the University of G¨ ottingen (University of G¨ ottingen, n.d.). The underlying large language model was Qwen3-30B-A3B-Instruct-2507, with a tem-perature of 0.0 and a top-p value of 0.05. The intervention was conducted between May 5 and 7, 2026. The system prompt used to guide the chatbot’s responses is provided in Appendix A.2. During the exploration phase, students had access to both an intelligent and a static worked example on calculating the magnetic field of a long solenoid using Amp` ere’s law. Both were developed according to the same instructional design principles and followed the same structure as their respective counterparts on Gauss’s law used during the intervention phase. 
+
+Concept test on Gauss’s law 
+
+Students’ conceptual understanding of Gauss’s law was assessed using a paper-and-pencil concept test. The test comprised five tasks with several subtasks, yielding 19 items in total (Appendix B.2). The tasks covered key concepts related to Gauss’s law, including the identification of suitable Gaussian surfaces, and were adapted from an 8Conceptual Steps Execution using the Example 2. Symmetry Considerations 
+
+Before calculating, it must be clear what symmetry is present and how the field vectors are oriented. A drawing is often very helpful here. 
+
+Spherically symmetric geometry: Since the charge distribution and thus the electric field are radially symmetric, and the center of the sphere can be placed at the origin of the coordinate system, the following holds: ⃗E(⃗r) = |⃗ E(r)| · ˆer
+
+> R
+> Charged hollow sphere Field vector ⃗E
+
+Question 1: How does one choose a Gaussian surface so that contributions to the flux integral are either constant or zero? (a) 2 Symmetry considerations 2.1 General reasoning steps 
+
+Before performing calculations, it is essential to determine the symmetry present and the direction of the electric field vectors. A sketch is often very helpful in this step. 
+
+2.2 Execution using the example of a hollow sphere 
+
+Spherical symmetry: Since the charge distribution and thus the electric field are radially symmetric, and the center of the sphere is placed at the origin of the coordinate system, it follows that: ⃗E(⃗r) = |⃗ E(r)| · ˆer
+
+Note: A sketch of the electric field of the uniformly charged hollow sphere can be found on the handout. 
+
+2.3 Question on symmetry considerations 
+
+I now pose a conceptual question to encourage reflection. Please think briefly about it and do not dwell too long. You can revisit this later if needed. Why does ⃗ E(⃗r) = |⃗ E(⃗r)| · ˆe r = |⃗ E(r)| · ˆer hold? Let me know when you’re ready to continue. Because the electric field is radially symmetric Good, you’ve grasped the central idea: The radial symmetry of the charge distribution causes the electric field to depend only on the distance r from the center and to be radially directed. But let’s look more closely: Why does the magnitude of the field depend only on r and not on the direction (e.g., 
+
+θ, ϕ)? What would happen if the symmetry were missing? Can you imagine how the field would have to behave at two points with the same r but different directions if the symmetry is given? Do you have any further questions? If not, write “next”. 
+
+(b) 
+
+Fig. 2 Static worked example (a) and intelligent worked example (b). In the static worked example, the activation question serves as a prompt for self-explanation, without providing feedback or further interaction. In the intelligent worked example, the same type of question can initiate a discussion with the chatbot. More generally, the intelligent worked example allows students to ask follow-up questions and receive additional support during learning. The complete static worked example is provided in Appendix A.1. The intelligent worked example is reproduced in English for illustrative purposes; the original version used in the study was in German, and the corresponding system prompt is provided in Appendix A.2 
+
+9established concept test on symmetry and Gauss’s law developed by Singh (2006). The original single-best-answer multiple-choice items were transformed into a multiple true–false format by treating each response option as an individual statement to be judged as true or false, resulting in 18 true–false items. In addition, one open-ended item required students to justify their reasoning. An example task is shown in Fig. 3. To combine the two test components into an overall score, the composite score was defined as T (κ) = T1 + κT 2, where T1 denotes the score on the 18 true–false statements, T2 the score on the explanatory item, and κ determines the relative weight of the explanatory item. The weighting parameter was specified a priori as κ = 2, such that each point awarded for the explanatory item contributed twice the weight of a correctly answered true–false statement. To examine the robustness of this prespecified weighting, a sensitivity analysis was conducted following Klein et al. (2017). Pre–post effect sizes (Cohen’s d) were calculated separately for the three groups across a range of values of κ. The analysis was not used to select the weighting parameter, but to examine where the prespecified value κ = 2 was located within the range of alternative weighting regimes and how sensitive the resulting group-specific effect sizes were to changes in κ. Cohen’s d was used specifically for this sensitivity analysis following Klein et al. (2017), whereas generalized eta squared ( η2
+
+> G
+
+) was used for the ANOVA-based analyses reported in Sect. 3.3. The results of the sensitivity analysis are shown in Fig. 4. For all subsequent analyses, response accuracy was calculated using the prespecified weighting κ = 2: response accuracy = X + 2 p
+
+24 ,
+
+where X ∈ 0, . . . , 18 denotes the number of correctly answered true–false statements and p ∈ 0, . . . , 3 the score on the explanatory item. The explanatory item therefore contributed a maximum of six points to the total score of 24, and response accuracy ranged from 0 to 1. 
+
+Self-efficacy questionnaire 
+
+Students’ self-efficacy regarding the application of Gauss’s law was assessed using a four-item questionnaire (Appendix B.3). The items were developed following the guide-lines for constructing self-efficacy scales proposed by Bandura (2006) and informed by the instrument developed by Freed et al. (2022). They addressed students’ perceived ability to understand the concept of Gauss’s law, identify suitable charge symmetries, construct appropriate Gaussian surfaces, and apply Gauss’s law to calculate electric fields. An example item is “I can assess whether the symmetry of the charge distri-bution is suitable for applying Gauss’s law.” Responses were recorded on a six-point Likert-type scale ranging from 1 ( strongly disagree ) to 6 ( strongly agree ). 
+
+Cognitive load questionnaire 
+
+Students’ perceived cognitive load during the self-learning phase was assessed using the validated cognitive load questionnaire developed by Leppink et al. (2013). The original instrument distinguishes three dimensions of cognitive load—intrinsic cognitive load (ICL), extraneous cognitive load (ECL), and germane cognitive load (GCL)—using 10 Task 4   
+
+> Consider three possible Gaussian surfaces: a sphere, a cube, and a cylinder, which extend half above and half below an infinite horizontal sheet of uniform charge density as shown below. Point A is located at the top center of each Gaussian surface. For which of the Gaussian surfaces will Gauss’s law help us to easily calculate the electric field at point A due to the sheet of charge? Consider each Gaussian surface separately and select either “Yes” or “No”:
+> AAA
+
+∞∞∞∞   
+
+> Sphere Cube Cylinder Yes No Sphere Cube Cylinder Provide a brief explanation:
+
+Fig. 3 Example task adapted from the concept test by Singh (2006), comprising three true–false statements and one explanatory item. A list of all items in the concept test is provided in Appendix B.2 
+
+three or four items per subscale. Its three-factor structure has been shown to be robust across adaptations to different disciplinary contexts (Leppink et al., 2014). For the present study, the questionnaire was adapted to the context of learning Gauss’s law and comprised nine items (Appendix B.3). Example items were “The topic ‘Calculating an electric field using Gauss’s law’ was very complex.” (ICL), “The instructions and/or explanations during the self-learning phase were, in terms of learning, very ineffective.” (ECL), and “The self-learning phase really enhanced my understanding of the topic ‘Calculating an electric field using Gauss’s law’.” (GCL). Responses were recorded on a six-point Likert-type scale ranging from 1 ( strongly disagree ) to 6 ( strongly agree ). 
+
+Questionnaire on usability and perceived educational value 
+
+Usability and perceived educational value of the learning materials were assessed using two three-item scales (Appendix B.3). The usability scale focused on the clarity, com-prehensibility, and ease of use of the learning materials. Its items were adapted from 11 0.01 0.1 1 10 100 1000 00.20.40.60.81
+
+> 𝐴 𝐵 𝐶 𝜅  = 2
+
+Weighting parameter 𝜅 
+
+> Effect size  𝑑 (𝜅 )
+
+IG1 IG2 CG Fig. 4 Test combination analysis showing the pre–post effect size (Cohen’s d) of the composite test score T = T1 + κT 2 for the intelligent worked example group (IG1), the static worked example group (IG2), and the control group (CG) as a function of the weighting parameter κ. Here, T1 denotes the score on the true–false items and T2 the score on the explanatory item. For each student, composite scores were calculated from the raw pre- and posttest scores for 100 different values of κ. The κ        
+
+> axis is logarithmic to provide sufficient resolution across the relevant range of weighting values. The vertical dashed lines indicate three reference cases: A, the composite score is dominated by the true– false items ( κ→0); B, scores from both test components receive equal unit weight ( κ= 1); and
+> C, the composite score is dominated by the explanatory item ( κ→ ∞ ). The red dashed line marks the prespecified weighting parameter κ= 2, which was used to calculate response accuracy in all subsequent analyses
+
+the System Usability Scale (SUS; Brooke, 1996) and the validated adaptation by Unver et al. (2017). An example item is “The representation format of the learning material is clear and understandable.” 
+
+Perceived educational value was assessed using three items adapted from Shellman and Turan (2006). The items addressed students’ perceptions of the usefulness of the learning materials for learning and their potential use in other physics courses. An example item is “I recommend using the learning material in other courses (e.g., Experimental Physics I) and extending it to further concepts covered in Experimental Physics II.” Responses to both scales were recorded on a six-point Likert-type scale ranging from 1 ( strongly disagree ) to 6 ( strongly agree ). 
+
+Choice of learning materials 
+
+During the exploration phase, students freely chose which of the two learning materials to use. Based on their self-reported use, they were categorized as having used the intelligent worked example, the static worked example, both worked examples, or 12 neither. As the regular course script remained available throughout the course, its use was not assessed separately. 
+
+Questionnaire on AI-related concerns and barriers 
+
+Students’ concerns about using AI were assessed using five items developed for the present study: two with reference to the perceived risk of use subscale of the TAME-ChatGPT instrument (Sallam et al., 2024), one to a study of ChatGPT use for homework assignments (Miljkovi´ c Kreˇ car et al., 2024), one to examples of flawed AI-generated physics content (Bitzenbauer, 2023), and one without reference to a pub-lished source. All items continued the stem “I am concerned that . . . ” and addressed potential effects of AI use on independent problem solving and critical thinking, as well as concerns about unnoticed errors and superficial understanding when learning physics with AI. An example item is “I am concerned that using AI may reduce my ability to solve problems independently.” 
+
+Perceived barriers to AI use were assessed using five items developed for the present study and conceptually related to perceived ease of use (Davis, 1989). The items addressed difficulties in identifying relevant information, text-heavy responses, prompt formulation, the perceived ratio of effort to benefit, and the user interface. An example item is “The AI’s responses often contain too much text and are therefore difficult to navigate.” 
+
+Responses to both scales were recorded on a seven-point Likert-type scale ranging from 1 ( strongly disagree ) to 7 ( strongly agree ). Neither scale referred specifically to the intervention or its learning materials; they were therefore intended to capture students’ general concerns about and perceived barriers to AI use rather than evaluations of the specific learning environment (Appendix B.4). 
+
+## 3.2 Sample 
+
+The analyses of the intervention phase (RQ1) were based on a core sample of 86 students who completed the intervention as well as the pretest and immediate posttest. This sample comprised 29 students in the intelligent worked-example group (IG1), 28 in the static worked-example group (IG2), and 29 in the control group (CG; see Tab. 1). No statistically significant baseline differences were observed between the three groups in age, number of semesters studied, university entrance grade, or pretest performance. For the longitudinal follow-up analyses of RQ1(a)(ii), complete data across pretest, posttest, and follow-up test were available for 57 students ( nIG1 = 21, nIG2 = 20, 
+
+nCG = 16). An additional 13 students who had not participated in the intervention completed the follow-up assessment. Because these students had neither been ran-domly assigned to a study condition nor completed the pretest and immediate posttest, they were included only as a non-equivalent cross-sectional reference group at follow-up and were excluded from analyses of individual learning gains. Thus, longitudinal analyses were based on N = 57, whereas exploratory cross-sectional comparisons at follow-up included N = 70 students. For RQ2, 46 students from the intervention sample also participated in the sub-sequent exploration phase ( nIG1 = 16, nIG2 = 13, nCG = 17). A further 6 students 13 Table 1 Sample data (intervention groups IG1 (intelligent worked example) and IG2 (static worked example), control group CG, number No., statistical significance p using one-way ANOVA). The total sample comprises students who completed the intervention phase, pre-, and posttest. Total IG1 IG2 CG p                                                                              
+
+> No. of subjects 86 a,b 29 28 29 –No. of female subjects 31 (36%) 6 (21%) 11 (39%) 14 (48%) –Mean age (in years) 20 .4±2.920 .4±2.320 .3±2.820 .6±3.50.89 No. of semesters studied 2.4±1.73.1±2.82.0±0.22.0±0.40.15 c
+> Average grade for univer-sity entrance d
+> 1.6±0.61.8±0.81.4±0.51.7±0.50.08 c
+> Pretest score Gauss’s law e0.61 ±0.19 0.58 ±0.21 0.66 ±0.15 0.59 ±0.20 0.19
+> aA subsample of N= 57 comprised students who completed all three test points ( NIG1 = 21,
+> NIG2 = 20, NCG = 16). An additional N= 13 students completed only the follow-up test.
+> bA subsample of N= 46 comprised students who also participated in the exploration phase ( NIG1 =16, NIG2 = 13, NCG = 17). An additional N= 6 students participated only in the exploration phase.
+> cWelch’s ANOVA due to violation of homogeneity of variances was performed.
+> dThe scale ranges from 1 .0 (best performance) to 4 .0. The grades are indicated by the students.
+> eThe scale ranges from 0 to 1 (best performance).
+
+participated only in the exploration phase, resulting in a total sample of N = 52 for analyses of material choice. Because of missing questionnaire responses, the available samples for analyses of AI-related concerns and perceived barriers were N = 41 and 
+
+N = 40, respectively. 
+
+## 3.3 Data analysis 
+
+All variables were linearly transformed to a common range of [0 , 1]. Distributions of the continuous measures were considered sufficiently close to normal for parametric anal-yses based on their skewness and kurtosis and the sample size. Internal consistencies of the multi-item scales are reported in Tab. 2; results involving the extraneous cogni-tive load scale, which showed comparatively low reliability ( αC = .56), are interpreted with caution. For RQ1, between-group differences at individual measurement points were exam-ined using one-way ANOVAs, and changes over time using repeated-measures and mixed-design ANOVAs. The mixed-design analyses tested time × group effects for response accuracy and self-efficacy, load type × group effects for cognitive load, and scale × group effects for usability and perceived educational value. Where appropri-ate, Tukey-adjusted pairwise comparisons were conducted. Generalized eta squared (η2
+
+> G
+
+) was reported for ANOVA-based analyses (Olejnik & Algina, 2003), and Cohen’s 
+
+d for significant pairwise differences. Individual change scores were additionally calculated for response accuracy and self-efficacy from pretest to posttest and, for response accuracy in the longitudinal follow-up sample, from posttest to follow-up. Group differences in change scores were 14 examined using one-way ANOVAs. Learning gains in response accuracy from pretest to posttest were also described using Hake’s normalized gain gH (Hake, 1998). For RQ2, material-choice groups were small and substantially unequal in size. Dif-ferences in AI-related concerns and perceived barriers among the four choice groups were therefore examined using Kruskal–Wallis tests. Students who used the intelli-gent worked example, either alone or together with the static worked example, were additionally compared with students who did not use it using Mann–Whitney U tests. Pearson correlations were used to examine associations between continuous mea-sures. Statistical tests were evaluated at α = .05. Pairwise comparisons were adjusted as described above. 
+
+Table 2 Overview of scales included for data analysis (Cronbach’s alpha αC based on the respective sample). Time point Scale #Items αC
+
+t0 (pretest) Concept test (response accuracy) a 19 0.78 Self-efficacy 4 0.87 Sociodemographics – –
+
+t1 (posttest) Concept test (response accuracy) a 19 0.78 Self-efficacy 4 0.90 Intrinsic cognitive load (ICL) 3 0.77 Extraneous cognitive load (ECL) 3 0.56 Germane cognitive load (GCL) 3 0.89 Usability 3 0.68 Perceived educational value 3 0.78 
+
+t2 (Follow-up test) Concept test (response accuracy) a 19 0.74 
+
+t3 (posttest II) Choice of learning material b – –Concerns towards AI 5 0.62 Barriers to AI use 5 0.77 
+
+> a
+
+Eighteen true–false statements and one open-ended explanatory item; αC was computed over these 19 items. In the test score the explanatory item carries the weight κ = 2 (Section 3.1.2); this weighting does not enter the reliability reported here. 
+
+> b
+
+Self-reported after the exploration phase; not a scale, so no item count and no reliability are reported. 
+
+# 4 Results 
+
+## 4.1 RQ1 – Group differences 
+
+4.1.1 Performance (a) 
+
+From pretest ( t0) to posttest ( t1), the time × group interaction was not significant (p = .07), indicating no significant differences in response accuracy changes among the intelligent worked example group (IG1), the static worked example group (IG2), 15 and the control group (CG). Across all three groups, response accuracy increased significantly over time [ F (1 , 83) = 26 .24, p < . 001, η2 
+
+> G
+
+= .07; Fig. 5]. In IG1, response accuracy increased from 0 .58 ± 0.21 to 0 .74 ± 0.19, corresponding to a large effect [F (1 , 28) = 12 .61, p = .001, η2 
+
+> G
+
+= .15]. IG2 showed a smaller but significant increase from 0 .66 ± 0.15 to 0 .72 ± 0.19 [ F (1 , 27) = 6 .74, p = .015, η2 
+
+> G
+
+= .03], corresponding to a small effect. Similarly, response accuracy in the control group increased from 0.59 ± 0.20 to 0 .67 ± 0.18, also corresponding to a small effect [ F (1 , 28) = 8 .01, p =
+
+.009, η2 
+
+> G
+
+= .04]. Tukey-adjusted pairwise comparisons of change scores revealed no significant differences between the groups. Consistent with this descriptive pattern, the normalized gain according to Hake (1998) was medium in IG1 ( gH, IG1 = .39) and small in both IG2 ( gH, IG2 = .18) and the control group ( gH, CG = .20; Fig. 5, dashed). Despite these differences in descriptive learning gains, posttest response accuracy did not differ significantly between the three groups ( p = .34). The test combination analysis (Sect. 3.1.2) further showed that pre–post effect sizes in both worked example groups increased with greater weighting of the explana-tory item, whereas the opposite pattern emerged in the control group (Fig. 4). Thus, learning gains in IG1 and IG2 were more pronounced for the explanatory component, while those in the control group were more pronounced for the true–false component. 00.20.40.60.81
+
+∗∗ ∗ ∗∗ 
+
+IG1 (𝜂 2 
+
+> 𝐺
+
+= .15) IG2 (𝜂 2 
+
+> 𝐺
+
+= .03) CG (𝜂 2 
+
+> 𝐺
+
+= .04) Response accuracy / normalized gain  𝑔 𝐻 
+
+pretest 𝑡 0 posttest 𝑡 1 normalized Hake gain 𝑡 0–𝑡 1              
+
+> Fig. 5 Comparison of students’ response accuracy and learning gain for the intelligent worked exam-ple group (IG1), the static worked example group (IG2), and the control group (CG) from pre- ( t0)to posttest ( t1;N= 86). Normalized gain gHfrom pre- to posttest according to Hake (1998) for all groups is visualized with dashed lines. Response accuracy between t0and t1is compared using one-way repeated measures ANOVA ( ∗/∗∗ statistical significance p < . 05 / p < . 01, effect size η2
+> G, error bars represent 1 SEM)
+
+16 When the follow-up test ( t2) was included, pretest–posttest scores and learning effects in the reduced sample ( N = 57) were comparable to those observed in the full sample. From posttest to follow-up, the time × group interaction was not significant (p = .13), indicating no significant differences in changes in response accuracy between the groups. However, a significant main effect of group was observed, corresponding to a medium-sized effect [ F (2 , 54) = 3 .69, p = .031, η2 
+
+> G
+
+= .12; Fig. 6]. In IG1, response accuracy decreased slightly from 0 .75 ± 0.20 at posttest to 0 .72 ± 0.16 at follow-up, although this change was not significant ( p = .16). In contrast, IG2 showed a further, albeit non-significant, increase from 0 .76 ± 0.18 to 0 .81 ± 0.13 ( p = .11), while response accuracy in the control group remained stable at 0 .65 (0 .65 ± 0.15 at posttest and 0.65 ± 0.13 at follow-up; p = 1 .00). Tukey-adjusted pairwise comparisons of change scores revealed no significant differences between the groups. While response accuracy did not differ significantly between the three groups at posttest ( p = .14), a significant group difference emerged at follow-up, with a large effect [ F (2 , 54) = 5 .76, p = .005, η2 
+
+> G
+
+= .18]. Tukey-adjusted pairwise comparisons revealed significantly higher follow-up scores in IG2 than in the control group, cor-responding to a large effect ( p = .004, d = 1 .22), whereas the remaining pairwise differences were not significant. Students who did not complete the intervention phase ( N = 13) achieved a mean follow-up score of 0 .49 ± 0.13. Including these students in the follow-up comparison resulted in an even larger overall group effect [ F (3 , 66) = 13 .79, p < . 001, η2 
+
+> G
+
+= .39]. Tukey-adjusted pairwise comparisons showed significantly higher follow-up scores for IG1 ( p < . 001, d = 1 .48), IG2 ( p < . 001, d = 2 .33), and the control group ( p = .023, 
+
+d = 1 .18) compared with students who did not complete the intervention phase, with all three differences corresponding to large effects. In addition, IG2 scored significantly higher than the control group ( p = .007, d = 1 .22), also corresponding to a large effect, whereas the remaining pairwise differences were not significant. 
+
+4.1.2 Self-efficacy (b) 
+
+For self-efficacy regarding concepts related to Gauss’s law, the time × group interaction from pretest ( t0) to posttest ( t1) was not significant ( p = .38), indicating no significant differences in changes in self-efficacy between the groups. Across all three groups, self-efficacy increased significantly over time [ F (1 , 83) = 71 .25, p < . 001, η2 
+
+> G
+
+= .16; Fig. 7]. This increase corresponded to large effects in the intelligent worked example group [ F (1 , 28) = 24 .71, p < . 001, η2 
+
+> G
+
+= .22] and the static worked example group [F (1 , 27) = 53 .13, p < . 001, η2 
+
+> G
+
+= .20], and to a medium-sized effect in the control group [ F (1 , 28) = 11 .06, p = .002, η2 
+
+> G
+
+= .10]. Tukey-adjusted pairwise comparisons of change scores likewise revealed no significant differences between the groups. Self-efficacy did not differ significantly between the groups at either pretest ( p = .79) or posttest ( p = .19). Finally, a significant large positive correlation between posttest self-efficacy and posttest response accuracy was observed only in the control group (r = .58, p = .001). 17 00.20.40.60.81 n.s. n.s n.s. IG1 IG2 CG No prior intervention Response accuracy posttest 𝑡 1 follow-up test 𝑡 2Fig. 6 Comparison of students’ response accuracy ( N = 70 including 13 students who had not completed the posttest) for the intelligent worked example group (IG1), the static worked example group (IG2) and the control group (CG) in post- ( t1) and follow-up test ( t2). Follow-up test score of students who did not complete the intervention phase is visualized (”No prior intervention”). Response accuracy between the time points ( t1, t2) is compared using one-way repeated measures ANOVA (n.s. not statistically significant, error bars represent 1 SEM) 00.20.40.60.81
+
+∗ ∗ ∗ ∗ ∗ ∗ ∗ ∗ 
+
+IG1 (𝜂 2 
+
+> 𝐺
+
+= .22) IG2 (𝜂 2 
+
+> 𝐺
+
+= .20) CG (𝜂 2 
+
+> 𝐺
+
+= .10) Scale value pretest 𝑡 0 posttest 𝑡 1
+
+Fig. 7 Comparison of students’ self-efficacy for the intelligent worked example group (IG1), the static worked example group (IG2), and the control group (CG) from pre- ( t0) to posttest ( t1; N = 86). Self-efficacy between t0 and t1 is compared using one-way repeated measures ANOVA ( ∗∗ / ∗∗∗ 
+
+statistical significance p < . 01 / p < . 001, effect size η2
+
+> G
+
+, error bars represent 1 SEM) 
+
+18 4.1.3 Perceived cognitive load (c) 
+
+For perceived cognitive load, a significant cognitive load type × group interaction was observed, with cognitive load type (intrinsic, extraneous, and germane cogni-tive load) as the within-subjects factor and group as the between-subjects factor [F (4 , 166) = 3 .15, p = .016, η2 
+
+> G
+
+= .05]. This small interaction effect was mainly reflected in the descriptive patterns of extraneous cognitive load (ECL) and germane cognitive load (GCL): IG1 reported the lowest ECL and the highest GCL, whereas the control group showed the opposite pattern, with the highest ECL and the lowest GCL (Fig. 8). When examining the cognitive load types separately, no significant overall group differences were found for intrinsic cognitive load ( p = .46), ECL ( p = .08), or GCL ( p = .06). Tukey-adjusted pairwise comparisons likewise revealed no significant differences between the groups for intrinsic cognitive load or ECL. For GCL, however, IG1 reported significantly higher values than the control group, corresponding to a medium-sized effect ( p = .046, d = .63). ICL ECL GCL 00.20.40.60.81n.s. n.s. n.s. Scale value IG1 IG2 CG    
+
+> Fig. 8 Students’ perceived cognitive load for the intelligent worked example group (IG1), the static worked example group (IG2), and the control group (CG; N= 86). Extraneous cognitive load (ECL), intrinsic cognitive load (ICL), and germane cognitive load (GCL) are compared between the groups using one-way ANOVAs with group as the between-subject factor (n.s. not statistically significant, error bars represent 1 SEM)
+
+4.1.4 Usability and perceived educational value (d) 
+
+For usability and perceived educational value, the scale × group interaction was not significant ( p = .67). Across both scales, however, a significant group effect was observed, corresponding to a medium-sized effect [ F (2 , 82) = 5 .49, p = .006, η2 
+
+> G
+
+= .12; Fig. 9]. When examining the two scales separately, usability differed significantly between the groups, with a medium-sized overall effect [ F (2 , 82) = 5 .0, p = .009, 19 η2 
+
+> G
+
+= .11]. Tukey-adjusted pairwise comparisons revealed significantly higher usability in IG1 than in the control group, corresponding to a large effect ( p = .011, d = .88), whereas the remaining pairwise differences were not significant. Perceived educational value did not differ significantly between the groups ( p = .07), and none of the Tukey-adjusted pairwise comparisons were significant. Finally, usability and perceived educational value were moderately positively correlated ( r = .42, p < . 001). Usability (𝜂 2          
+
+> 𝐺 =.11) Perceived educational value 00.20.40.60.81
+> ∗ ∗ n.s. Scale value IG1 IG2 CG
+> Fig. 9 Indicated usability and students’ perceived educational value of the learning environment for the intelligent worked example group (IG1), the static worked example group (IG2), and the control group (CG; N= 86). Usability and perceived educational value are compared between the groups using one-way ANOVAs with group as the between-subject factor ( ∗∗ / n.s. statistical significance
+> p < . 01 / not significant, effect size η2
+> G, error bars represent 1 SEM)
+
+## 4.2 RQ2 – Choice of learning materials and AI-related concerns and barriers 
+
+During the exploration phase on Amp` ere’s law, students were free to choose which learning materials they wanted to use. Overall, more than half of the students chose exclusively the static worked example (60%; Fig. 10). This pattern was observed across IG1 (63%), IG2 (62%), and CG (71%). In contrast, students who had not participated in the intervention phase chose the static worked example considerably less often (17%). The proportion of students who used the intelligent worked example, either exclu-sively or together with the static worked example, was relatively low across the three groups. It did not exceed 10%, except in IG2, where 15% of students used both worked examples and an additional 8% used only the intelligent worked example. Notably, none of the students in IG1 chose only the intelligent worked example. In contrast, students who had not participated in the intervention phase selected the intelligent worked example more frequently, with 33% choosing this option. The proportion of 20 students who used neither worked example ranged from 15% in IG2 to 31% in IG1 and was 33% among students who had not participated in the intervention phase. Total IG1 IG2 CG No prior intervention 00.20.40.60.81Intervention phase: Gauß’ law Exploration phase: Amp` ere’s law Intelligent WE used Static WE used Neither WE used   
+
+> Fig. 10 Learning material choice during the exploration phase ( N= 52). The stacked bars show the relative proportions of students who used the intelligent worked example, the static worked example, both worked examples, or neither of them. The figure shows students’ choice behavior during the exploration phase on Amp` ere’s law, differentiated by their assignment during the preceding intervention phase on Gauss’s law (intelligent worked example group IG1, static worked example group IG2, and control group CG). Students who did not participate in the intervention phase are shown separately (”No prior intervention”). Within each group, the segments sum to 1
+
+Students reported relatively high agreement with AI-related concerns, with a mean scale value of 0 .63 ± 0.16 (Fig. 11). By contrast, perceived barriers to AI use were less pronounced, with a mean scale value of 0 .38 ± 0.17. The strongest concern was that using AI may reduce students’ ability to solve problems independently, which showed the highest item mean (0 .78 ± 0.22). Concerns and barriers were not significantly correlated ( r = .19, p = .23). AI-related concerns did not differ significantly between students who chose the intelligent worked example and those who did not ( p = .53), nor across the four choice groups: intelligent worked example, static worked example, both worked examples, or neither worked example ( p = .36). A similar pattern was found for perceived barriers to AI use. Neither the comparison between students who chose the intelligent worked example and those who did not ( p = .34), nor the comparison across the four choice groups ( p = .79), revealed significant differences. 
+
+# 5 Discussion 
+
+The present study examined intelligent worked examples from two complementary perspectives: their instructional value under assigned learning conditions and their voluntary adoption when students could choose their learning support. Across the three conditions, students improved their conceptual understanding and self-efficacy, 21 Concerns Barriers 00.20.40.60.81Scale value (a) 0 0.2 0.4 0.6 0.8 1      
+
+> C5 I may understand physical concepts only superfi-cially or incorrectly when AI explains them to me.
+> C4 AI may include physically incorrect intermediate steps in derivations.
+> C3 AI may produce errors in physics calculations that I do not recognize.
+> C2 my critical thinking may decline if I use AI regu-larly.
+> C1 using AI may reduce my ability to solve problems independently.
+> I am concerned that ...
+> Scale value
+
+(b) 
+
+Fig. 11 AI-related concerns ( N = 41) and barriers ( N = 40) reported by students. (a) Mean scale values for AI-related concerns and barriers, with error bars representing 1 SEM. (b) Item-level results for the five-item concerns scale. For each item, mean values are shown with error bars representing 1 SEM; the dashed line indicates the overall mean of the concerns scale 
+
+but the intelligent worked example did not produce a clear additional learning benefit over the corresponding static worked example. At the same time, the AI-supported format was experienced favorably, particularly with respect to usability. When use became voluntary, however, students predominantly selected the static worked exam-ple and rarely chose the intelligent version. Taken together, the findings distinguish three aspects that are often conflated when evaluating AI-supported learning envi-ronments: whether they support learning, how learners experience them, and whether learners choose to use them. 
+
+## 5.1 RQ1 – Group differences 
+
+Across all three conditions, response accuracy increased significantly from pretest to posttest. This indicates that students developed their understanding of Gauss’s law during the instructional phase, but the absence of a significant time × group inter-action shows that the magnitude of this improvement did not differ reliably between the intelligent worked example, the static worked example, and the lecture script. Similarly, self-efficacy increased substantially across conditions without significant dif-ferences in change between groups. Thus, the present data do not support a general advantage of either worked-example condition in immediate learning or self-efficacy. This general learning effect should not be attributed exclusively to the learning materials. The pretest and immediate posttest contained the same items and were separated by only about 45 minutes, and no randomized condition without tuto-rial participation was included. Learning may therefore also reflect engagement with the target problem, repeated testing, the preceding lecture, or other features of the tutorial. The substantially lower follow-up performance of students who had not par-ticipated in the intervention is consistent with a benefit associated with participation in the tutorial phase, but this non-equivalent reference group does not permit a causal estimate of such an effect. 22 5.1.1 Patterns associated with worked-example-based support 
+
+Although the worked-example conditions did not produce significantly larger imme-diate learning gains, some findings are consistent with differences in how students processed the learning materials. In the test combination analysis, pre–post effect sizes in both worked-example groups increased as greater weight was assigned to the explanatory component, whereas the opposite pattern was observed in the lecture-script condition. This pattern is consistent with the possibility that the worked examples placed greater emphasis on explanatory reasoning. Both examples combined an explicit solution structure with conceptual explanations and activation prompts intended to elicit self-explanation, instructional features that have been associated with productive example study (Atkinson et al., 2000; Chi et al., 1989; Renkl, 2014; Sweller & Cooper, 1985). The present analysis does not establish a differential effect on conceptual reasoning, but it suggests that the nature of the observed gains may have differed across instructional formats. The cognitive-load measures provide a similarly tentative indication of differences in the learning experience. A significant load type × group interaction was observed, with the intelligent worked-example condition showing the lowest descriptive extrane-ous cognitive load and the highest germane cognitive load, whereas the lecture-script condition showed the reverse ordering. The separate overall group effects for intrinsic, extraneous, and germane cognitive load were not significant, although germane cog-nitive load was significantly higher in the intelligent worked-example condition than in the script condition. This pattern is compatible with the cognitive-load rationale underlying worked examples: structured guidance may reduce unproductive search and allow more cognitive resources to be directed toward learning-relevant processing (Renkl, 2014; Sweller & Cooper, 1985; Sweller et al., 1998). However, this interpreta-tion remains tentative, particularly because the extraneous cognitive load scale showed comparatively low internal consistency. Students’ evaluations of the learning environments provide clearer evidence that the instructional formats differed in their perceived usability. The intelligent worked example was rated significantly more usable than the lecture script, with a large pairwise effect. Perceived educational value showed the same descriptive ordering but did not differ significantly between groups. Thus, the strongest evidence favoring the AI-supported worked example over conventional script-based support concerns the user experience rather than immediate learning performance. The delayed assessment adds a further, but more difficult to interpret, pattern. At follow-up, students in the static worked-example condition scored significantly higher than those in the lecture-script condition, whereas the intelligent and static worked-example groups did not differ significantly. This finding is compatible with the possibility that structured example study supported more durable learning. It does not, however, establish such an effect. Changes from posttest to follow-up did not differ significantly between groups, participation in the follow-up was selective, and the longitudinal sample was reduced from 86 to 57 students. Moreover, the ordering of the groups observed at follow-up was already partly visible at pretest within this reduced subsample. Pre-existing differences, selective attrition, subsequent self-study, 23 and other course-related learning experiences therefore provide plausible alternative explanations. Overall, the comparison with the lecture script suggests that structured worked-example support may influence how students engage with and experience physics problem solving even when this does not translate into a uniform advantage in imme-diate test performance. The findings are consistent with established worked-example theory, but they do not demonstrate that worked examples produced larger learning gains than conventional course material under the present conditions. 
+
+5.1.2 Limited evidence for added value beyond the static worked example 
+
+The comparison between the intelligent and static worked examples provides the more stringent test of the additional value of generative AI. Both materials shared the same solution structure, instructional explanations, and activation prompts; the intelligent version additionally offered conversational support. In terms of the ISAR framework, this comparison therefore most closely reflects an augmentation of an established instructional format rather than a wholesale redefinition of the learning activity (Bauer et al., 2025). Descriptively, the intelligent worked-example group showed the largest pre–post increase in response accuracy and the highest normalized gain. However, the time ×
+
+group interaction did not reach statistical significance, change scores did not differ significantly between the intelligent and static worked-example groups, and posttest performance was comparable. In addition, the static worked-example group entered the intervention with a descriptively higher pretest score, leaving less room for nor-malized improvement. The larger gain in the intelligent condition should therefore be interpreted as a descriptive pattern rather than evidence that conversational AI produced greater learning. The test combination analysis points in the same direction. Greater weighting of the explanatory component increased the pre–post effect size in both worked-example groups. The pattern distinguishing worked-example learning from script-based learn-ing was therefore already present in the absence of conversational AI. This suggests that structured solution steps, conceptual explanations, and activation prompts may account for part of the observed emphasis on explanatory reasoning, while the present data do not isolate an additional AI-specific contribution. Similarly, self-efficacy increased strongly in both worked-example groups, but neither the change nor the posttest level differed significantly between them. Conver-sational support therefore did not produce a detectable additional effect on students’ confidence in applying Gauss’s law. The learning-process measures provide somewhat more favorable, although still inconclusive, indications. The intelligent worked-example condition showed the most favorable descriptive cognitive-load profile, and adding conversational functionality did not appear to impose an obvious usability cost. On the contrary, the intelligent worked example received the highest descriptive usability ratings and was rated significantly more usable than the lecture script. Yet the intelligent and static worked examples 24 did not differ significantly in the separate cognitive-load measures or perceived edu-cational value. These findings are consistent with previous evidence that responsive AI support can be integrated into physics learning without necessarily outperforming well-structured non-AI support (Becker et al., 2026). The central conclusion from RQ1 is therefore not that conversational AI improved learning beyond the static worked example. Rather, the intelligent worked example provided a usable and favorably experienced form of support without a detectable addi-tional learning advantage under the present conditions. This distinction is important because the instructional value of generative AI cannot be inferred simply from favor-able user evaluations or from comparison with less structured conventional materials. A well-designed non-AI alternative provides a considerably more stringent benchmark. 
+
+## 5.2 RQ2 – Choice of learning materials and AI-related concerns 
+
+RQ2 shifts the perspective from assigned learning conditions to voluntary material choice. This distinction is important because a learning environment can provide useful instructional opportunities without becoming the resource students prefer when they independently decide how to complete a course-related task. 
+
+5.2.1 Favorable usability does not translate into voluntary uptake 
+
+The most striking finding from the exploration phase is the limited voluntary uptake of the intelligent worked example. During the intervention, the AI-supported format had received high usability ratings and showed several favorable descriptive patterns. Nevertheless, when students later selected support for an Amp` ere’s-law homework problem, the static worked example was used by a majority of students, whereas the intelligent worked example was selected only rarely. None of the students originally assigned to the intelligent worked-example condition reported using it exclusively during the exploration phase. This discrepancy indicates that favorable experiences under assigned conditions do not necessarily predict voluntary adoption. Similar patterns have been reported for other educational AI systems. For example, only a minority of students used an optional LLM-based tutor when it was made available in a large computer science course (Bassner et al., 2024). The present findings extend this observation by showing that limited uptake may persist even after students have previously encountered and positively evaluated an AI-supported learning environment. One plausible explanation concerns the immediate purpose of material use. Dur-ing the exploration phase, students were completing a graded homework problem. The static worked example provided direct access to a complete and structured solution path. The intelligent worked example, in contrast, invited additional interaction and required engagement with activation questions. When the immediate goal is efficient task completion, students may prefer a resource that provides the required informa-tion with minimal interaction, even if a conversational environment offers additional opportunities for elaboration and individualized support. This interpretation would reconcile the low voluntary uptake with the favorable usability observed during the intervention. Features that are instructionally intended 25 to elicit productive cognitive activity may also require time and effort. Students’ choice of learning support may therefore reflect not only perceived educational value but also the perceived relation between effort and utility in the immediate task context. This possibility was not directly measured in the present study and should therefore be regarded as an interpretation for future investigation. The frequent selection of the static worked example consequently highlights the importance of comparing generative AI not only with conventional instruction but also with strong non-AI alternatives. Additional conversational functionality may provide useful learning opportunities without necessarily making a resource more attractive for voluntary use. 
+
+5.2.2 AI-related concerns and perceived barriers provide limited explanation for material choice 
+
+Students nevertheless expressed meaningful concerns about AI-supported learning. The strongest concern was that AI use might reduce their ability to solve prob-lems independently, an issue that is particularly relevant in university physics, where independent problem solving represents an important educational objective. Similar concerns about dependence on generative AI and the possible erosion of skills have been reported elsewhere (Sallam et al., 2024). These concerns, however, did not systematically correspond to students’ material choices. Students who used the intelligent worked example did not report significantly different concern levels from those who did not, and no significant differences emerged among the four material-choice groups. Perceived barriers were lower overall and like-wise showed no relationship with material choice. Together with the high usability ratings from the intervention phase, this provides little indication that practical dif-ficulties in using the AI-supported environment were the main reason for its limited uptake. Concerns and perceived barriers were also only weakly related to one another. This suggests that reservations about the consequences of AI-supported learning and difficulties associated with using an AI system represent different aspects of stu-dents’ perceptions. A student may find an AI-supported learning environment easy to use while nevertheless questioning whether reliance on it is beneficial for developing independent competence. The absence of a clear relationship between the measured attitudes and material choice suggests that additional factors may be important. These may include the immediate task goal, prior experience with generative AI, AI literacy, or students’ ability to recognize when conversational support is useful. Because these characteristics were not assessed, their role remains an open question. More broadly, the findings indicate that voluntary adoption of AI-supported learning cannot be explained solely by general attitudes toward AI or by perceived usability. 
+
+## 5.3 Limitations 
+
+Several limitations constrain the interpretation of the findings. First, although recita-tion groups were randomly assigned to the three conditions, students had selected 26 these groups beforehand, and the analyses did not account for dependencies within recitation groups. With only three clusters per condition and fewer than 30 students in each group, pre-existing differences cannot be excluded despite the absence of sta-tistically significant baseline differences. Causal interpretations of group differences should therefore remain cautious. Second, the study did not capture students’ actual use of the learning materials. No process or interaction-log data were available to determine how intensively students engaged with the worked examples, activation prompts, or chatbot, or to evaluate the AI-generated responses themselves. The study therefore assesses the effect of making different forms of support available rather than the effects of particular patterns of use. Third, interpretation of the follow-up results is limited by selective participation and the uncontrolled four-week interval. The longitudinal sample decreased from N =86 to N = 57, and group differences visible at follow-up were already partly present at pretest within this reduced sample. The additional students who completed only the follow-up constituted a non-equivalent reference group. Consequently, the observed follow-up differences cannot be interpreted as delayed causal effects of the intervention. Finally, the exploration phase was observational and based on relatively small and unequal groups. Material use was self-reported, and AI-related concerns and perceived barriers were measured only after students had selected and used the materials. These measures therefore cannot be interpreted as predictors of material choice. Together with the use of multiple outcomes and the moderate sample size, these limitations suggest that individual significant findings should be interpreted as part of the overall pattern rather than in isolation. 
+
+# 6 Conclusion 
+
+This study examined the instructional value and voluntary uptake of an intelligent worked example in undergraduate electrodynamics by comparing it with a corre-sponding static worked example and the regular lecture script. Students in all three conditions improved their conceptual understanding of Gauss’s law and self-efficacy, but these changes did not differ significantly between groups. The intelligent worked example showed favorable patterns in perceived cognitive load and was rated highly usable, yet it did not produce a statistically detectable learning advantage over the static worked example. Differences observed at the four-week follow-up cannot be attributed confidently to the intervention because of selective participation and pre-existing differences within the reduced sample. A different picture emerged when students could choose their learning support. Most selected the static worked example, whereas the intelligent worked example was used only rarely. Thus, favorable experiences with an AI-supported learning environment did not translate directly into voluntary adoption. Although students expressed substantial concerns about possible consequences of AI use for independent problem solving, these concerns, as well as perceived barriers, were not significantly associated with material choice. Instructional effectiveness, perceived usability, and voluntary uptake should therefore be treated as distinct dimensions when evaluating AI-supported learning environments. 27 The three-group design further illustrates why the educational value of genera-tive AI should be assessed not only against conventional course materials but also against strong non-AI alternatives that preserve the underlying instructional design. Under the present conditions, conversational AI provided a usable additional layer of support, but its incremental educational value beyond a well-designed static worked example remained uncertain. Future research should therefore move beyond asking whether AI-supported learning is generally effective and examine how learners actually use conversational support, under which task conditions it provides benefits beyond established instructional approaches, and what determines whether students choose to use it. 
+
+Acknowledgements. We gratefully acknowledge all students who participated in and supported this study. We also thank the student assistants who contributed to the data curation process. Furthermore, we extend our gratitude to the GAIA project team at the University of G¨ ottingen for their valuable support. 
+
+# Statements and Declarations 
+
+## Funding 
+
+This work was supported by the Stiftung Innovation in der Hochschullehre (Founda-tion for Innovation in Higher Education) through the project GAIA – Individualized Learning Pathways through Artificial Intelligence at the University of G¨ ottingen (grant number 1001-1450). 
+
+## Competing interests 
+
+The authors declare no competing interests. 
+
+## Ethics approval and consent to participate 
+
+The study was conducted in accordance with the applicable ethical and data protec-tion standards of the University of G¨ ottingen. Data were collected in pseudonymized form, and the procedures for data collection and storage were coordinated with the university’s data protection officer. The AI-supported intervention was implemented using ChatAI, the institutional AI platform provided by the University of G¨ ottingen. According to the platform provider, data transmitted to the language models, includ-ing prompts and message content, are not stored on its systems. Before participating, all students were informed about the study’s objectives, data collection and storage procedures, and the voluntary nature of participation. Informed consent was obtained from all participants prior to data collection. 
+
+## Consent for publication 
+
+The manuscript does not contain any personally identifiable information about individ-ual participants. All results are reported in aggregated or anonymized form. Therefore, no additional consent for publication was required. 28 Data availability 
+
+The datasets generated and analyzed during the current study are not publicly available due to data protection and participant privacy considerations. However, de-identified data may be made available by the corresponding author upon reasonable request, provided that the proposed use complies with applicable data protection requirements. 
+
+## Materials availability 
+
+The instructional materials and assessment instruments documented in the Appen-dices are provided as part of this manuscript. Additional materials used during the study may be made available upon reasonable request. 
+
+## Author contribution 
+
+L. H.: conceptualization, methodology, formal analysis, investigation, data cura-tion, writing—original draft, writing—review and editing, visualization. M. A. F.: methodology, investigation, data curation, writing—review and editing. M. H.: writing—original draft, visualization. P. K.: conceptualization, methodology, writ-ing—review and editing, supervision, funding acquisition. 29 Example: Gauss’s Law 
+
+Objective 
+
+Learn how to calculate the electric field of a given charge distribution using Gauss’s law. 
+
+Overview of the Method 
+
+Gauss’s law is a method for calculating electric fields, which is particularly suitable when the charge distribution exhibits high symmetry – namely spherical symmetry, cylindrical symmetry, or planar symmetry. Then, by cleverly choosing a Gaussian surface (e.g. sphere, cylinder, prism), the field can be calculated easily without having to perform complex integrations. Gauss’s law states: ΨE = ∮
+
+> S
+
+⃗ E · d⃗A = Qin 
+
+> ε0
+
+Where: • ΨE is the electric flux • ∮ 
+
+> S
+
+is the integral over a closed surface S (Gaussian surface) •⃗ E is the electric field • d⃗A is an infinitesimal surface element of the closed surface S
+
+• Qin is the total charge of a charge distribution that is enclosed by the Gaussian surface • ε0 is the electric field constant (vacuum permittivity) The law describes the electric flux ΨE through a closed surface S. The cause of the flux and the associated electric field ⃗ E is a charge distribution σ with the total charge Qin .The total charge Qin is completely enclosed by the surface S.This method is suitable when the Gaussian surface can be chosen, due to the high symme-try of the electric field, such that the E-field vectors and the surface vectors are parallel. Then the scalar product ⃗ E · d⃗A simplifies to the product of the magnitudes, and the integral in Gauss’s law can be easily determined. 
+
+Note: The enclosing Gaussian surface is not a real surface, but is chosen as a construct so that symmetries can be exploited and the charge under investigation is completely enclosed. This was shown in the lecture for a point charge. The Gaussian surface was chosen as a spherical surface around the point charge. 
+
+1Appendix A Instructional materials 
+
+## A.1 Worked Example 
+
+The following presents an English translation of the worked example on Gauss’s law, originally written in German. It was designed based on principles of example-based learning, with the solution divided into clearly separated subgoals and brief conceptual explanations (Atkinson et al., 2000; Renkl, 2014). Open-ended activation questions were embedded at key points to encourage students to reflect on the underlying physics and engage in self-explanation. 30 Experimental Physics II – SoSe 2026 Model Example Gauss’s Law 
+
+Application Example 
+
+A hollow sphere with radius R is homogeneously charged with constant surface charge density σ. Determine the electric field ⃗ E(⃗r ) outside the sphere r ≥ R.
+
+Conceptual Steps Execution using the Example 1: Physical Situation Analysis 
+
+What is given? What is to be deter-mined? 
+
+Given: • Sphere with radius R • homogeneous charge distribution on the sphere’s surface with total charge Qin = 4 πR 2σ
+
+To be determined: •⃗ E for r ≥ R
+
+2. Symmetry Considerations 
+
+Before calculating, it must be clear what symmetry is present and how the field vectors are oriented. A drawing is often very helpful here. 
+
+Spherically symmetric geometry: Since the charge distribution and thus the elec-tric field are radially symmetric, and the center of the sphere can be placed at the origin of the coordinate system, the fol-lowing holds: ⃗E(⃗r ) = |⃗E(r)| · ˆer
+
+Question 1: How does one choose a Gaussian surface so that contributions to the flux integral are either constant or zero? 2Experimental Physics II – SoSe 2026 Model Example Gauss’s Law 
+
+Conceptual Steps Execution using the Example 3. Selection of the Solution Method 
+
+Gauss’s law is particularly suitable when the charge distribution exhibits high sym-metry and the magnitude of the electric field is constant on a surface. Advantage: No complex integration is necessary. This is because, for high symmetry, the Gaus-sian surface can be chosen such that the E-field vectors and the surface vectors are parallel. In this case, the scalar product simplifies to the product of the magni-tudes, and the integral is easy to deter-mine. 
+
+The E-field vectors all point radially out-ward (or inward) and the magnitude of the E-field |⃗E(r)| is constant on spherical surfaces. Therefore, Gauss’s law is used: 
+
+ΨE =
+
+∮
+
+> S
+
+⃗ E · d⃗A = Qin 
+
+ε0
+
+4. Choice of the Gaussian Surface 
+
+In order to easily calculate an E-field us-ing Gauss’s law, the Gaussian surface must be chosen such that the E-field vec-tors and the surface vectors are parallel. This means the Gaussian surface must be symmetric with respect to the charge distribution and the field lines must pass through it perpendicularly. 
+
+Suitable Gaussian surface: • Sphere with radius r and spherical surface S = 4 πr 2
+
+• r ≥ R
+
+• The sphere is concentric with the charged hollow sphere (i.e. the cen-ters coincide). 
+
+Question 2: Can Gauss’s law also be usefully applied when the E-field vectors ⃗E and the surface vectors of the Gaussian surface d⃗A are perpendicular to each other? 3Experimental Physics II – SoSe 2026 Model Example Gauss’s Law 
+
+5. Simplification of the Integral 
+
+Since the E-field vectors and the surface vectors are parallel, the scalar product simplifies to the product of the magni-tudes. Since the magnitude of the electric field is constant on the Gaussian surface, it can be taken out of the integral. 
+
+ΨE =
+
+∮
+
+> S
+
+⃗ E(⃗r ) · d⃗A 
+
+simplifies to: 
+
+ΨE =
+
+∮
+
+> S
+
+|⃗E(r)| | d⃗A |
+
+The magnitude of the electric field can be taken out of the integral: 
+
+ΨE = |⃗E(r)|
+
+∮
+
+> S
+
+|d⃗A |
+
+6. Calculation of the Integral 
+
+The integral can be easily determined, since it corresponds to the Gaussian sur-face. 
+
+In this example, the integral thus corre-sponds precisely to the surface area of the sphere with radius r ≥ R, which is known: S = 4 πr 2.This gives: 
+
+∮
+
+> S
+
+|d⃗A | = 4 πr 2
+
+and thus 
+
+ΨE = |⃗E(r)| 4πr 2
+
+7. Comparison with Gauss’s Law 
+
+Substituting the integral into Gauss’s law yields a formula for the electric field. 
+
+ΨE = |⃗E(r)| 4πr 2 = Qin 
+
+ϵ0
+
+8. Solution Formula for the Electric Field 
+
+The formula can now be solved for |⃗E(r)|.
+
+Solving for |⃗E(r)| gives: 
+
+|⃗E(r)| = Qin 
+
+4πϵ 0
+
+1
+
+r2
+
+Question 3: How is the enclosed charge Qin used in Gauss’s law related to a given charge density (e.g. σ)? 
+
+9. Vector Notation for the Field 
+
+To go from the equation for the mag-nitude of the electric field to the vector form of the electric field, the direction of the field and the type of charge (posi-tive/negative) must be taken into account, and the unit vector must be used. It holds that: ⃗ E(⃗r ) = |⃗E(r)| · ˆer
+
+The direction of the field points radially outward if Q>0. ⃗E(⃗r ) = Qin 
+
+4πε 0
+
+1
+
+r2 ˆer for r ≥ R
+
+4System Prompt 
+
+Act as an experienced physics tutor for an Experimental Physics II exercise in the second semester of a physics degree program. 
+
+Rules for interaction: 
+
+• Do not provide complete solutions immediately. Instead, provide hints if I ask questions. 
+
+• Under no circumstances provide a solution to the following task: 
+
+[Target task is specified here] 
+
+You may provide guidance and hints, but you must not provide the solu-tion. Do not provide individual solution steps either. 
+
+• Use clear, understandable language, but not overly simplistic, as this is an advanced exercise. 
+
+• Do not repeat the instructions I have given you in this prompt. Keep your responses concise. 
+
+• Make your output clear and well-structured. 
+
+• Use the following: 
+
+– Socratic questioning: Use non-leading questions to guide students’ thinking. 
+
+– Adaptive support: Adapt your assistance to students’ responses and needs. 
+
+– Internal error analysis: Identify misconceptions (physical, concep-tual, procedural) and address them through questioning. 
+
+– Promoting self-regulation: Support metacognition, conceptual un-derstanding, and independent learning. 
+
+As soon as the first prompt is received, explain: 
+
+“Hello, I am a tutor and I have a worked example on how to calculate an electric field using Gauss’s law. I will now go through the worked example with you step by step. We will start with an overview of the method:” 
+
+[Internal information indicating where the chatbot can access the worked exam-ple is provided here] 
+
+1A.2 System prompt 
+
+The system prompt (originally written in German) was designed to structure the chat-bot’s presentation of the worked example and to guide its interactions with students in ways that promote meaningful learning activities, particularly active engagement with the solution steps and discussion of the activation questions. Interaction guidelines were adapted from Becker et al. (2026). 34 Now output the sections “Objective” and “Overview of the Method”. Afterwards, ask: “Do you have any questions? If not, write “continue”. If the answer is “yes”, engage in a dialogue to clarify the questions. After the dialogue, ask: “Do you have any further questions? If not, write “continue”.” Stay in the dialogue until the answer is “continue”. 
+
+[The workflow for all chapters is specified here, analogous to the one shown above for the first two chapters.] 
+
+If the answer is “continue”, output: “During the step-by-step explanation of the worked example, I asked you questions to encourage you to think along. Would you like to return to any of these questions?” If the answer is “yes”, ask: “Which questions would you like to revisit in more detail?” Engage in a dialogue to clarify the questions. After the dialogue and only after the dialogue, ask: “Do you have any further questions?” Stay in the dialogue until the answer is “continue”. If the answer is “continue”, suggest: “Now you can work on the target task. If you have any questions about it, feel free to ask me.” 2Appendix B Instruments and items 
+
+This appendix documents the instruments and scales reported in this article. All ques-tionnaire items were administered in German. Most of them are based on validated scales and items, then translated into German and adapted to the topic and to the learning materials. For each scale, the German wording is given together with an English version and the reference of the published items on which the item is based. Items that the main text quotes are given in the wording used there; every other English version is a translation prepared for this appendix. Items without a published source are marked with a dash in the reference column. For the concept test, only the topic or the subconcept the tasks address is given (Section B.2). Scale scores are means over the items a person answered, computed after rescaling the responses to the interval [0 , 1]. 
+
+## B.1 Overview of instruments 
+
+Tab. B1 lists the instruments and scales reported in this article by time point, together with their sources and the number of items. The concept test is described in Sect. B.2 (Tab. B2), the questionnaire scales of the pretest and posttest in Sect. B.3 (Tabs. B3– B5), and the scales administered at posttest II in Sect. B.4 (Tab. B6). 
+
+Table B1 Overview of the instruments reported in this article. The table extends Tab. 2 by the sources of the instruments and by a pointer to the table in which the items are given.                                                         
+
+> Time point Scale Source #Items Listed in
+> t0(pretest) Concept test (response accuracy) Singh (2006) 19 Tab. B2 Self-efficacy Bandura (2006); Freed et al. (2022) 4Tab. B3
+> t1(posttest) Concept test (response accuracy) Singh (2006) 19 Tab. B2 Self-efficacy Bandura (2006); Freed et al. (2022) 4Tab. B3 Intrinsic cognitive load (ICL) Leppink et al. (2013) 3Tab. B4 Extraneous cognitive load (ECL) Leppink et al. (2013) 3Tab. B4 Germane cognitive load (GCL) Leppink et al. (2013) 3Tab. B4 Usability Brooke (1996); Unver et al. (2017) 3Tab. B5 Perceived educational value Shellman and Turan (2006) 3Tab. B5
+> t2(follow-up test) Concept test (response accuracy) Singh (2006) 19 Tab. B2
+> t3(posttest II) Choice of learning material –––Concerns towards AI Sallam et al. (2024); Miljkovi´ c Kreˇ car et al. (2024); Bitzenbauer (2023) 5Tab. B6 Barriers to AI use Davis (1989) 5Tab. B6
+
+36 B.2 Concept test on Gauss’s law (intervention phase) 
+
+The concept test comprised five tasks with eighteen true–false statements in total and one open-ended explanatory item. All true–false statements were taken and adapted from items of the concept test on symmetry and Gauss’s law by Singh (2006). Tab. B2 identifies the original problem for each task; task 4 as an example is shown in Fig. 3.                           
+
+> Table B2 Structure of the concept test on Gauss’s law. Problem numbers refer to the instrument published by Singh (2006). Task Concept assessed Format aStatements Ref. b
+> 1Necessary properties of a Gaussian sur-face TF 5Problem 5 2Conditions for the practical applicability of Gauss’s law TF 3Problem 6 3Symmetry of the charge distribution TF 3Problem 10 4Choice of asuitable Gaussian surface, with justification TF, O 3 + 1 cProblem 11 5Admissible Gaussian surfaces for a given configuration TF 4Problem 22
+> aTask format: TF = true–false statements presented as a multiple true–false task, O = open response format (written justification).
+> bSingh (2006). The transformation into the multiple true–false format differed by task: for task 1 the five response options of the original single-best-answer item were converted into individual statements; for tasks 2, 3, and 5 the sub-statements of the original “choose all” items were used; and for task 4 the choice of surface and the justification, which the original combines within its response options, were separated into true–false statements and an open item.
+> cThe open-ended explanatory item, scored from 0 to 3.
+
+B.2.1 Coding of the open-ended explanatory item 
+
+The open-ended item is an adaptation created for this study (Tab. B2, note b) and is therefore not covered by the correction key published by Singh (2006). Four codes (0 to 3) were used. Two of the authors of this article coded the responses independently and agreed on a consensus code through discussion. 
+
+B.2.2 Differences between the pre-, the post- and the follow-up test version 
+
+Tasks and format of the test were identical across pre-, post-, and follow-up test. The pretest version contained six additional boxes labeled “Ich kann diese Aufgabe nicht sinnvoll beantworten.” (I cannot give a meaningful answer to this task ): one after each of tasks 1, 2, 3, and 5, and separate boxes for the true–false part and the explanatory part of task 4. These boxes were not part of the post- and follow-up test versions and did not enter the score: statements that no meaningful answer could be given were scored as incorrect, i.e. zero. Tasks left unanswered were scored zero as well. The introduction of the test differed as well: the pretest added “Es ist nicht schlimm, 
+
+37 wenn noch nicht alle Aufgaben gel¨ ost werden k¨ onnen” (it does not matter if not all tasks can be solved yet ), whereas the post- and the follow-up test asked them to answer the five tasks bestm¨ oglich (as well as possible ). 
+
+## B.3 Questionnaire scales at pretest and posttest (intervention phase) 
+
+The items of the scales administered at pretest and posttest are given in Tabs. B3 (self-efficacy), B4 (cognitive load), and B5 (usability and perceived educational value). Question stems and items are reproduced verbatim. In the questionnaires, each stem was followed by the same instruction to rate the items on the response scale; that sentence is omitted from the stems reproduced here. 
+
+Table B3 Self-efficacy items. Items SE1 to SE3 were identical at pretest and posttest. Six-point response scale with labeled endpoints, trifft ¨ uberhaupt nicht zu (1) and trifft vollst¨ andig zu (6). 
+
+Item Wording (German original) English wording Ref. a
+
+Question stem, pretest: “Wie sch¨ atzen Sie Ihr Wissen zum Thema ,,Berechnung von elektrischen Feldern mithilfe des Gaußschen Gesetzes“ ein.” 
+
+Question stem, posttest: “Hat Ihnen die ¨Ubung geholfen, das Gaußsche Gesetz besser zu verstehen?” SE1 Ich verstehe das Konzept des Gaußschen Gesetzes. I understand the concept of Gauss’s law. (BAN, FRE) SE2 Ich kann beurteilen, ob die Symmetrie der Ladungsverteilung f¨ ur die Verwen-dung des Gaußschen Gesetzes geeignet ist. I can assess whether the symme-try of the charge distribution is suitable for applying Gauss’s law. (BAN, FRE) SE3 Ich kann eine geeignete Gaußfl¨ ache f¨ ur eine gegebene Ladungsverteilung kon-struieren. I can construct a suitable Gaus-sian surface for a given charge distribution. (BAN, FRE) SE4 (pre) Ich habe das Gef¨ uhl, dass ich das Gaußsche Gesetz zur Berechnung von elektrischen Feldern f¨ ur g¨ angige Beispiele anwenden kann. I feel that I can apply Gauss’s law to calculate electric fields for com-mon examples. (BAN, FRE) SE4 (post) Nach der Bearbeitung der ¨Ubungsauf-gaben habe ich das Gef¨ uhl, dass ich das Gaußsche Gesetz zur Berechnung von elektrischen Feldern g¨ angiger Beispiele anwenden kann. After working on the exercises, I feel that I can apply Gauss’s law to calculate electric fields of com-mon examples. (BAN, FRE) 
+
+> a
+
+BAN Bandura (2006) (guidelines for constructing self-efficacy scales), FRE Freed et al. (2022) (astron-omy self-efficacy instrument). The items were developed following the guidelines of BAN and informed by FRE (indicated in parentheses as items were not following any of the source items as a template). 
+
+## B.4 Questionnaire scales at posttest II (exploration phase) 
+
+Both scales were administered after students had submitted the homework assignment of the exploration phase (Sect. 3.1). The items were developed for this study; where an item draws on a published scale, that scale is identified in Tab. B6. The five concerns items reported at item level are those shown in Fig. 11(b). The barrier items are conceptually related to the construct of perceived ease of use (Davis, 1989) without reproducing its scale. 38 Table B4 Cognitive load items. Question stem: “Wie sehr mussten Sie sich anstrengen?” Six-point response scale with labeled endpoints, trifft ¨ uberhaupt nicht zu (1) and trifft vollst¨ andig zu (6). 
+
+Item Wording (German original) English wording Ref. a
+
+ICL1 Das Thema ,,Berechnung eines elek-trischen Feldes mithilfe des Gaußschen Gesetzes“ war sehr komplex. The topic ‘Calculating an electric field using Gauss’s law’ was very complex. LPP 1 ICL2 Die behandelten Formeln zum Thema ,,Berechnung eines elektrischen Feldes mithilfe des Gaußschen Gesetzes“ emp-fand ich als sehr komplex. I perceived the formulas covered on the topic ‘Calculating an elec-tric field using Gauss’s law’ as very complex. LPP 2 ICL3 Die Konzepte und Definitionen zum Thema ,,Berechnung eines elektrischen Feldes mithilfe des Gaußschen Gesetzes“ waren sehr komplex. The concepts and definitions on the topic ‘Calculating an electric field using Gauss’s law’ were very com-plex. LPP 3 b
+
+ECL1 Die Anweisungen und/oder Erkl¨ arungen w¨ ahrend der Selbstlernphase waren sehr unklar. The instructions and/or explana-tions during the self-learning phase were very unclear. LPP 4 ECL2 Die Anweisungen und/oder Erkl¨ arungen waren hinsichtlich des Lernens sehr unwirksam. The instructions and/or explana-tions during the self-learning phase were, in terms of learning, very inef-fective. LPP 5 ECL3 Die Anweisungen und/oder Erkl¨ arungen enthielten unklare Sprache. The instructions and/or explana-tions contained unclear language. LPP 6 b
+
+GCL1 Die Selbstlernphase hat mein Verst¨ andnis zum Thema ,,Berech-nung eines elektrischen Feldes mithilfe des Gaußschen Gesetzes“ deutlich verbessert. The self-learning phase really enhanced my understanding of the topic ‘Calculating an electric field using Gauss’s law’. LPP 7 GCL2 Die Selbstlernphase hat mein Verst¨ andnis der behandelten Formeln zum Thema ,,Berechnung eines elek-trischen Feldes mithilfe des Gaußschen Gesetzes“ deutlich verbessert. The self-learning phase really enhanced my understanding of the formulas covered on the topic ‘Calculating an electric field using Gauss’s law’. LPP 9 GCL3 Die Selbstlernphase hat mein Verst¨ andnis der Konzepte und Def-initionen zum Thema ,,Berechnung eines elektrischen Feldes mithilfe des Gaußschen Gesetzes“ deutlich verbessert. The self-learning phase really enhanced my understanding of the concepts and definitions on the topic ‘Calculating an electric field using Gauss’s law’. LPP 10 
+
+> a
+
+LPP Leppink et al. (2013); the number gives the corresponding item of that instrument, whose germane load subscale comprises four items, three of which were adapted here. ECL items entered the scale without reversal, so that higher values indicate higher extraneous load. 
+
+> b
+
+Items depart from the source item: ICL3 omits the phrase “that I perceived as” (LPP 3), and ECL3 states that the instructions and/or explanations contained unclear language rather than that they were “full of” unclear language (LPP 6). 
+
+39 Table B5 Items on usability and perceived educational value. Question stem: “Bitte geben Sie nachfolgend Auskunft ¨ uber die Handhabung und Nutzung der Hilfsmittel, die Sie in der Selbstlernphase nutzen sollten/konnten.” Six-point response scale with labeled endpoints, trifft ¨uberhaupt nicht zu (1) and trifft vollst¨ andig zu (6). 
+
+Item Wording (German original) English wording Ref. a
+
+Usability 
+
+U1 r Ich ben¨ otige mehr als die angebotene Unterst¨ utzung, um die Hilfsmittel in der Selbstlernphase nutzen zu k¨ onnen. I need more than the support offered to be able to use the learn-ing material in the self-learning phase. SUS 4 U2 r Ich ben¨ otige ein umfassendes Vorwissen, um die Hilfsmittel nutzen zu k¨ onnen. I need extensive prior knowledge to be able to use the learning material. SUS 10 U3 Die Darstellungsform der Hilfsmittel ist verst¨ andlich und klar. The representation format of the learning material is clear and understandable. UNV 3 
+
+Perceived educational value 
+
+E1 Die Hilfsmittel konnten mein Verst¨ andnis des Gaußschen Gesetzes zur Berechnung elektrischer Felder verbessern. The learning material was able to improve my understanding of Gauss’s law for calculating electric fields. SHE 1 E2 Die Nutzung der Hilfsmittel hat mir Spaß gemacht. I enjoyed using the learning mate-rial. SHE 7 E3 Ich empfehle, die Hilfsmittel auch in anderen Lehrveranstaltungen (z.B. Ex-perimentalphysik I) einzusetzen / auf weitere Konzepte der Vorlesung (Experi-mentalphysik II) auszuweiten. I recommend using the learn-ing material in other courses (e.g., Experimental Physics I) and extending it to further concepts covered in Experimental Physics II. SHE 10 
+
+> a
+
+SUS Brooke (1996), UNV Unver et al. (2017), SHE Shellman and Turan (2006); the number gives the corresponding item of that instrument. 
+
+> r
+
+Reverse-coded. 
+
+40 Table B6 Items on AI-related concerns and barriers. Seven-point response scale with all steps labeled, from stimme ¨ uberhaupt nicht zu (1) to stimme voll und ganz zu (7); the additional option 
+
+Keine Antwort was treated as missing. 
+
+Item Wording (German original) English wording Ref. a
+
+Concerns Question stem: “Bitte geben Sie an, wie sehr Sie den folgenden Aussagen zustimmen.” Displayed below the stem: “Ich mache mir Sorgen, . . . ” C1 . . . dass durch die Nutzung von KI meine F¨ ahigkeit zum eigenst¨ andigen Problem-l¨ osen nachl¨ asst. I am concerned that using AI may reduce my ability to solve problems independently. (MIL) C2 . . . dass mein kritisches Denken nachl¨ asst, wenn ich KI regelm¨ aßig nutze. I am concerned that my critical thinking may decline if I use AI reg-ularly. SAL C3 . . . dass KI bei physikalischen Rech-nungen Fehler produziert, die ich nicht erkenne. I am concerned that AI may pro-duce errors in physics calculations that I do not recognize. (SAL) C4 . . . dass KI bei Herleitungen physikalisch inkorrekte Zwischenschritte einbaut. I am concerned that AI may include physically incorrect intermediate steps in derivations. (BIT) C5 . . . dass ich physikalische Konzepte nur oberfl¨ achlich oder falsch verstehe, wenn KI sie mir erkl¨ art. I am concerned that I may under-stand physical concepts only super-ficially or incorrectly when AI explains them to me. –
+
+Barriers Question stem: “Bitte geben Sie an, wie sehr Sie den folgenden Aussagen zur praktischen Nutzung von KI in Ihrem Physikstudium zustimmen.” B1 Bei der Nutzung von KI f¨ allt es mir schwer, aus der Menge an Informationen die gesuchte herauszufiltern. When using AI, I find it difficult to filter out the information I am look-ing for from the amount of informa-tion provided. (DAV) B2 Die Antworten der KI sind mir h¨ aufig zu textlastig und un¨ ubersichtlich. The AI’s responses often contain too much text and are therefore dif-ficult to navigate. (DAV) B3 Es f¨ allt mir schwer, einen Prompt so zu formulieren, dass ich die gesuchte Infor-mation erhalte. I find it difficult to formulate aprompt in such a way that I obtain the information I am looking for. (DAV) B4 Der Aufwand, KI sinnvoll einzusetzen, steht f¨ ur mich oft nicht im Verh¨ altnis zum Ertrag. For me, the effort required to use AI meaningfully is often out of pro-portion to the benefit. (DAV) B5 Die Benutzeroberfl¨ ache der KI-Werkzeuge erschwert mir den ¨Uberblick ¨ uber die ver-f¨ ugbaren Informationen. The user interface of AI tools makes it difficult for me to keep track of the available information. (DAV) 
+
+> a
+
+SAL Sallam et al. (2024) (TAME-ChatGPT; items in Appendix A1, p. 15), MIL Miljkovi´ c Kreˇ car et al. (2024) (items in Appendix A, p. 59), BIT Bitzenbauer (2023) (pp. 4–5), DAV Davis (1989) (perceived ease of use; items in Tab. 2, p. 324). An abbreviation without parentheses indicates that the item was adapted from a specific item of that instrument; an abbreviation in parentheses indicates an item that draws on a content facet or a construction principle of that reference without following any of its items as a template; – indicates an item developed without reference to a published source. Within SAL, C2 was adapted from item 12 of the usage scale (subscale “perceived risk of use”). For the items marked with parentheses, the reference identifies the item or passage the item draws on: C1 the statement on students relying on ChatGPT instead of working on their assignments themselves (MIL, p. 59), C3 the risk item on the reliability of the information provided (SAL), and C4 the examples of flawed AI-generated physics content discussed in BIT (pp. 4–5); B1 to B5 follow the construction principle of the perceived ease of use scale without using its items. 
+
+41 References 
+
+Atkinson, R. K., Derry, S. J., Renkl, A., & Wortham, D. (2000). Learning from examples: Instructional principles from the worked examples research. Review of Educational Research , 70 (2), 181–214. https : / / doi . org / 10 . 3102 / 00346543070002181 Badeau, R., White, D. R., Ibrahim, B., Ding, L., & Heckler, A. F. (2017). What works with worked examples: Extending self-explanation and analogical comparison to synthesis problems. Physical Review Physics Education Research , 13 (2), 020112. https://doi.org/10.1103/PhysRevPhysEducRes.13.020112 Balabdaoui, F., Dittmann-Domenichini, N., Grosse, H., Schlienger, C., & Kortemeyer, G. (2024). A survey on students’ use of AI at a technical university. Discover Education , 3, 51. https://doi.org/10.1007/s44217-024-00136-4 Bandura, A. (2006). Guide for constructing self-efficacy scales. In F. Pajares & T. Urdan (Eds.), Self-efficacy beliefs of adolescents (5th ed., pp. 307–337). Information Age Publishing. Barbieri, C. A., Miller-Cotto, D., Clerjuste, S. N., & Chawla, K. (2023). A meta-analysis of the worked examples effect on mathematics performance. Educa-tional Psychology Review , 35 (1), 11. https://doi.org/10.1007/s10648- 023-09745-1 Bassner, P., Frankford, E., & Krusche, S. (2024). Iris: An AI-driven virtual tutor for computer science education. Proceedings of the 29th ACM Conference on Innovation and Technology in Computer Science Education (ITiCSE 2024) ,394–400. https://doi.org/10.1145/3649217.3653543 Bauer, E., Greiff, S., Graesser, A. C., Scheiter, K., & Sailer, M. (2025). Looking beyond the hype: Understanding the effects of AI on learning. Educational Psychology Review , 37 , 45. https://doi.org/10.1007/s10648-025-10020-8 Becker, E., W¨ unsche, J., Veith, J., Schrader, J., & Bitzenbauer, P. (2026). Comparing AI chatbot, tiered, and textual support in physics problem solving: Effects on cognitive load and affective-motivational outcomes. Physical Review Physics Education Research , 22 , 020139. https://doi.org/10.1103/nvf1-zrq8 Bitzenbauer, P. (2023). ChatGPT in physics education: A pilot study on easy-to-implement activities. Contemporary Educational Technology , 15 (3), ep430. https://doi.org/10.30935/cedtech/13176 Brooke, J. (1996). SUS: A ’quick and dirty’ usability scale. In P. W. Jordan, B. Thomas, B. A. Weerdmeester, & I. L. McClelland (Eds.), Usability evaluation in industry (pp. 189–194). Taylor & Francis. Campos, E., Hernandez, E., Barniol, P., & Zavala, G. (2023). Analysis and comparison of students’ conceptual understanding of symmetry arguments in Gauss’s and Ampere’s laws. Physical Review Physics Education Research , 19 (1), 010103. https://doi.org/10.1103/PhysRevPhysEducRes.19.010103 Chi, M. T. H., Bassok, M., Lewis, M. W., Reimann, P., & Glaser, R. (1989). Self-explanations: How students study and use examples in learning to solve problems. Cognitive Science , 13 (2), 145–182. https : / / doi . org / 10 . 1207 / s15516709cog1302 1 42 Chi, M. T. H., & Wylie, R. (2014). The ICAP framework: Linking cognitive engage-ment to active learning outcomes. Educational Psychologist , 49 (4), 219–243. https://doi.org/10.1080/00461520.2014.965823 Dahlkemper, M. N., Lahme, S. Z., & Klein, P. (2023). How do physics students eval-uate artificial intelligence responses on comprehension questions? A study on the perceived scientific accuracy and linguistic quality of ChatGPT. Physical Review Physics Education Research , 19 (1), 010142. https://doi.org/10.1103/ PhysRevPhysEducRes.19.010142 Davis, F. D. (1989). Perceived usefulness, perceived ease of use, and user acceptance of information technology. MIS Quarterly , 13 (3), 319–340. https://doi.org/ 10.2307/249008 Freed, R., McKinnon, D., Fitzgerald, M., & Norris, C. M. (2022). Development and val-idation of an astronomy self-efficacy instrument for understanding and doing. 
+
+Physical Review Physics Education Research , 18 (1), 010117. https://doi.org/ 10.1103/PhysRevPhysEducRes.18.010117 Gjerde, V., Paulsen, V. H., Holst, B., & Kolstø, S. D. (2022). Problem solving in basic physics: Effective self-explanations based on four elements with support from retrieval practice. Physical Review Physics Education Research , 18 (1), 010136. https://doi.org/10.1103/PhysRevPhysEducRes.18.010136 Hake, R. R. (1998). Interactive-engagement versus traditional methods: A six-thousand-student survey of mechanics test data for introductory physics courses. American Journal of Physics , 66 (1), 64–74. https://doi.org/10.1119/ 1.18809 Hernandez, E., Campos, E., Barniol, P., & Zavala, G. (2023). Students’ concep-tual understanding of electric flux and magnetic circulation. Physical Review Physics Education Research , 19 (1), 013102. https : / / doi . org / 10 . 1103 / PhysRevPhysEducRes.19.013102 Johnston, H., Wells, R. F., Shanks, E. M., Boey, T., & Parsons, B. N. (2024). Stu-dent perspectives on the use of generative artificial intelligence technologies in higher education. International Journal for Educational Integrity , 20 , 2. https://doi.org/10.1007/s40979-024-00149-4 Kasneci, E., Seßler, K., K¨ uchemann, S., Bannert, M., Dementieva, D., Fischer, F., Gasser, U., Groh, G., G¨ unnemann, S., H¨ ullermeier, E., Krusche, S., Kutyniok, G., Michaeli, T., Nerdel, C., Pfeffer, J., Poquet, O., Sailer, M., Schmidt, A., Seidel, T., . . . Kasneci, G. (2023). ChatGPT for good? On opportunities and challenges of Large Language Models for education. Learning and Individual Differences , 103 , 102274. https://doi.org/10.1016/j.lindif.2023.102274 Klein, P., M¨ uller, A., & Kuhn, J. (2017). Assessment of representational competence in kinematics. Physical Review Physics Education Research , 13 (1), 010132. https://doi.org/10.1103/PhysRevPhysEducRes.13.010132 Krupp, L., Steinert, S., Kiefer-Emmanouilidis, M., Avila, K. E., Lukowicz, P., Kuhn, J., K¨ uchemann, S., & Karolus, J. (2024). Unreflected acceptance–investigating the negative consequences of ChatGPT-assisted problem solving in physics 43 education. HHAI 2024: Hybrid Human AI Systems for the Social Good, Fron-tiers in Artificial Intelligence and Applications , 386 , 199–212. https://doi. org/10.3233/FAIA240195 Kuhail, M. A., Alturki, N., Alramlawi, S., & Alhejori, K. (2023). Interacting with educational chatbots: A systematic review. Education and Information Tech-nologies , 28 , 973–1018. https : / / doi . org / 10 . 1007 / s10639 - 022 - 11177 -3Leppink, J., Paas, F. G. W. C., van Gog, T., van der Vleuten, C. P. M., & van Merri¨ enboer, J. J. G. (2014). Effects of pairs of problems and examples on task performance and different types of cognitive load. Learning and Instruction ,
+
+30 , 32–42. https://doi.org/10.1016/j.learninstruc.2013.12.001 Leppink, J., Paas, F. G. W. C., van der Vleuten, C. P. M., van Gog, T., & van Merri¨ enboer, J. J. G. (2013). Development of an instrument for measuring different types of cognitive load. Behavior Research Methods , 45 (4), 1058– 1072. https://doi.org/10.3758/s13428-013-0334-1 Ma, W., Adesope, O. O., Nesbit, J. C., & Liu, Q. (2014). Intelligent tutoring systems and learning outcomes: A meta-analysis. Journal of Educational Psychology ,
+
+106 (4), 901–918. https://doi.org/10.1037/a0037123 Miljkovi´ c Kreˇ car, I., Kolega, M., & Jurˇ cec, L. (2024). Perception of ChatGPT usage for homework assignments: Students’ and professors’ perspectives. IAFOR Journal of Education: Technology in Education , 12 (2), 33–60. https://doi. org/10.22492/ije.12.2.02 Olejnik, S., & Algina, J. (2003). Generalized eta and omega squared statistics: Mea-sures of effect size for some common research designs. Psychological Methods ,
+
+8 (4), 434–447. https://doi.org/10.1037/1082-989X.8.4.434 Pepper, R. E., Chasteen, S. V., Pollock, S. J., & Perkins, K. K. (2012). Observations on student difficulties with mathematics in upper-division electricity and mag-netism. Physical Review Special Topics - Physics Education Research , 8 (1), 010111. https://doi.org/10.1103/PhysRevSTPER.8.010111 Renkl, A. (1997). Learning from worked-out examples: A study on individual dif-ferences. Cognitive Science , 21 (1), 1–29. https : / / doi . org / 10 . 1207 / s15516709cog2101 1 Renkl, A. (2014). Toward an instructionally oriented theory of example-based learning. 
+
+Cognitive Science , 38 (1), 1–37. https://doi.org/10.1111/cogs.12086 Renkl, A., & Atkinson, R. K. (2003). Structuring the transition from example study to problem solving in cognitive skill acquisition: A cognitive load perspec-tive. Educational Psychologist , 38 (1), 15–22. https : / / doi . org / 10 . 1207 / S15326985EP3801 3 Sallam, M., Elsayed, W., Al-Shorbagy, M., Barakat, M., El Khatib, S., Ghach, W., Alwan, N., Hallit, S., & Malaeb, D. (2024). ChatGPT usage and attitudes are driven by perceptions of usefulness, ease of use, risks, and psycho-social impact: A study among university students in the UAE. Frontiers in Education , 9, 1414758. https://doi.org/10.3389/feduc.2024.1414758 44 Scheiger, P., Cartarius, H., & Nawrodt, R. (2023). Why and how to implement worked examples in upper division theoretical physics. American Journal of Physics ,
+
+91 (10), 764–766. https://doi.org/10.1119/5.0105612 Schmidt-Weigand, F., H¨ anze, M., & Wodzinski, R. (2009). Complex problem solving and worked examples: The role of prompting strategic behavior and fading-in solution steps. Zeitschrift f¨ ur P¨ adagogische Psychologie , 23 (2), 129–138. https://doi.org/10.1024/1010-0652.23.2.129 Shellman, S. M., & Turan, K. (2006). Do simulations enhance student learning? An empirical evaluation of an IR simulation. Journal of Political Science Education , 2 (1), 19–32. https://doi.org/10.1080/15512160500484168 Singh, C. (2006). Student understanding of symmetry and Gauss’s law of electricity. 
+
+American Journal of Physics , 74 (10), 923–936. https://doi.org/10.1119/1. 2238883 Sweller, J., & Cooper, G. A. (1985). The use of worked examples as a substitute for problem solving in learning algebra. Cognition and Instruction , 2 (1), 59–89. https://doi.org/10.1207/s1532690xci0201 3 Sweller, J., van Merri¨ enboer, J. J. G., & Paas, F. G. W. C. (1998). Cognitive archi-tecture and instructional design. Educational Psychology Review , 10 (3), 251– 296. https://doi.org/10.1023/A:1022193728205 University of G¨ ottingen. (n.d.). ChatAI . Retrieved November 21, 2026, from https: //www.uni-goettingen.de/de/686446.html Unver, V., Basak, T., Watts, P., Gaioso, V., Moss, J., Tastan, S., Iyigun, E., & Tosun, N. (2017). The reliability and validity of three questionnaires: The stu-dent satisfaction and self-confidence in learning scale, simulation design scale, and educational practices questionnaire. Contemporary Nurse , 53 (1), 60–74. https://doi.org/10.1080/10376178.2017.1282319 Wittwer, J., & Renkl, A. (2010). How effective are instructional explanations in example-based learning? a meta-analytic review. Educational Psychology Review , 22 (4), 393–409. https://doi.org/10.1007/s10648-010-9136-5 Wollny, S., Schneider, J., Di Mitri, D., Weidlich, J., Rittberger, M., & Drachsler, H. (2021). Are we there yet? a systematic literature review on chatbots in education. Frontiers in Artificial Intelligence , 4, 654924. https://doi.org/10. 3389/frai.2021.654924 Wu, R., & Yu, Z. (2024). Do AI chatbots improve students’ learning outcomes? evi-dence from a meta-analysis. British Journal of Educational Technology , 55 (1), 10–33. https://doi.org/10.1111/bjet.13334 45

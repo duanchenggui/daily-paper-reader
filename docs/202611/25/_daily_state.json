@@ -1,0 +1,281 @@
+{
+  "date": "20261125",
+  "date_label": "",
+  "generated_at": "2026-11-25 02:57:55 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2611.23456v1",
+      "route": "202611/25/2611.23456v1-verimath-human-in-the-loop-generation-and-verification-of-curriculum-aligned-mathematics-assessment-items",
+      "title": "VeriMath: Human-in-the-Loop Generation and Verification of Curriculum-Aligned Mathematics Assessment Items",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "人在回路生成与校验课程对齐的测评题",
+      "first_seen_at": "2026-11-25 02:57:55 UTC",
+      "updated_at": "2026-11-25 02:57:55 UTC"
+    },
+    {
+      "paper_id": "2611.27868v1",
+      "route": "202611/25/2611.27868v1-integrating-generative-artificial-intelligence-with-learning-style-models-opportunities-challenges-and-future-directions",
+      "title": "Integrating Generative Artificial Intelligence with Learning Style Models: Opportunities, Challenges, and Future Directions",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "生成式AI结合学习风格模型支持个性化学习",
+      "first_seen_at": "2026-11-25 02:57:55 UTC",
+      "updated_at": "2026-11-25 02:57:55 UTC"
+    },
+    {
+      "paper_id": "2611.28951v1",
+      "route": "202611/25/2611.28951v1-ai-generated-support-worked-examples-and-script-based-learning-in-undergraduate-physics-a-comparative-study",
+      "title": "AI-generated support, worked examples, and script-based learning in undergraduate physics: A comparative study",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "以聊天机器人智能例题作为物理学习支持工具",
+      "first_seen_at": "2026-11-25 02:57:55 UTC",
+      "updated_at": "2026-11-25 02:57:55 UTC"
+    },
+    {
+      "paper_id": "2611.21208v1",
+      "route": "202611/25/2611.21208v1-validating-llm-based-essay-scorers-a-comparative-analysis-in-critical-online-reasoning-in-medical-education",
+      "title": "Validating LLM-Based Essay Scorers: A Comparative Analysis in Critical Online Reasoning in Medical Education",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "医学教育评估中基于大模型的自动作文评分",
+      "first_seen_at": "2026-11-25 02:57:55 UTC",
+      "updated_at": "2026-11-25 02:57:55 UTC"
+    },
+    {
+      "paper_id": "2611.21306v1",
+      "route": "202611/25/2611.21306v1-share-your-screen-and-talk-to-gemini-how-young-learners-interact-with-multimodal-genai-while-solving-scratch-tasks",
+      "title": "Share your Screen and Talk to Gemini: How Young Learners Interact with Multimodal GenAI While Solving Scratch Tasks",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "多模态生成式AI导师支持Scratch学习",
+      "first_seen_at": "2026-11-25 02:57:55 UTC",
+      "updated_at": "2026-11-25 02:57:55 UTC"
+    },
+    {
+      "paper_id": "2611.21422v1",
+      "route": "202611/25/2611.21422v1-rubric-based-aes-with-llm-ensembles-scoring-of-student-responses-in-critical-online-reasoning-using-ensembles-of-llms",
+      "title": "Rubric-Based AES with LLM Ensembles: Scoring of Student Responses in Critical Online Reasoning Using Ensembles of LLMs",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "用大模型集成对教育中学生回答进行自动作文评分",
+      "first_seen_at": "2026-11-25 02:57:55 UTC",
+      "updated_at": "2026-11-25 02:57:55 UTC"
+    },
+    {
+      "paper_id": "2611.21476v1",
+      "route": "202611/25/2611.21476v1-generative-ai-and-the-crisis-of-higher-education-assessments-examining-ai-proofing-strategies-for-college-level-assessments",
+      "title": "Generative AI and the Crisis of Higher Education Assessments: Examining 'AI-Proofing' Strategies for College-Level Assessments",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "生成式AI对高校评价的挑战与防AI策略",
+      "first_seen_at": "2026-11-25 02:57:55 UTC",
+      "updated_at": "2026-11-25 02:57:55 UTC"
+    },
+    {
+      "paper_id": "2611.22203v1",
+      "route": "202611/25/2611.22203v1-egs-a-complementary-safety-framework-for-educational-llms",
+      "title": "EGS: A Complementary Safety Framework for Educational LLMs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向个性化教育的教育大模型安全框架",
+      "first_seen_at": "2026-11-25 02:57:55 UTC",
+      "updated_at": "2026-11-25 02:57:55 UTC"
+    },
+    {
+      "paper_id": "2611.26836v1",
+      "route": "202611/25/2611.26836v1-explain-your-code-ai-based-examination-at-class-scale",
+      "title": "Explain Your Code: AI-Based Examination at Class Scale",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "AI智能体在班级规模上考查学生对代码的理解",
+      "first_seen_at": "2026-11-25 02:57:55 UTC",
+      "updated_at": "2026-11-25 02:57:55 UTC"
+    },
+    {
+      "paper_id": "2611.26894v1",
+      "route": "202611/25/2611.26894v1-lecture-board-readability-as-an-ai-measurable-predictor-of-perceived-teaching-clarity",
+      "title": "Lecture Board Readability as an AI-Measurable Predictor of Perceived Teaching Clarity",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "用视觉语言模型评估板书以分析教学清晰度",
+      "first_seen_at": "2026-11-25 02:57:55 UTC",
+      "updated_at": "2026-11-25 02:57:55 UTC"
+    },
+    {
+      "paper_id": "2611.27533v1",
+      "route": "202611/25/2611.27533v1-standard-anchored-delegation-in-teachers-use-of-generative-ai",
+      "title": "Standard-Anchored Delegation in Teachers' Use of Generative AI",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "教师将备课与批改任务委托给生成式AI",
+      "first_seen_at": "2026-11-25 02:57:55 UTC",
+      "updated_at": "2026-11-25 02:57:55 UTC"
+    },
+    {
+      "paper_id": "2611.20803v1",
+      "route": "202611/25/2611.20803v1-what-do-digital-traces-predict-task-effects-student-differences-and-critical-online-reasoning",
+      "title": "What Do Digital Traces Predict? Task Effects, Student Differences, and Critical Online Reasoning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "利用数字测评痕迹预测学生表现的学习分析",
+      "first_seen_at": "2026-11-25 02:57:55 UTC",
+      "updated_at": "2026-11-25 02:57:55 UTC"
+    },
+    {
+      "paper_id": "2611.22740v1",
+      "route": "202611/25/2611.22740v1-ai-as-anchor-how-interview-sequencing-relates-to-the-appropriation-of-synthetic-stakeholder-voices-in-design-education",
+      "title": "AI as Anchor: How Interview Sequencing Relates to the Appropriation of Synthetic Stakeholder Voices in Design Education",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "设计教育实地研究中采用大模型模拟的利益相关者",
+      "first_seen_at": "2026-11-25 02:57:55 UTC",
+      "updated_at": "2026-11-25 02:57:55 UTC"
+    },
+    {
+      "paper_id": "2611.23058v1",
+      "route": "202611/25/2611.23058v1-wip-exploring-student-created-ai-agents-and-instructional-videos-to-foster-engagement-in-computing-education",
+      "title": "WIP: Exploring Student-Created AI Agents and Instructional Videos to Foster Engagement in Computing Education",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "计算教育中学生自创对话式AI代理",
+      "first_seen_at": "2026-11-25 02:57:55 UTC",
+      "updated_at": "2026-11-25 02:57:55 UTC"
+    },
+    {
+      "paper_id": "2611.23618v1",
+      "route": "202611/25/2611.23618v1-miscalibrated-ai-improves-human-calibration-an-alignment-problem-for-ai-assisted-decision-education",
+      "title": "Miscalibrated AI improves human calibration: An alignment problem for AI-assisted Decision education",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "利用AI概率输出开展AI辅助决策教育以培养校准能力",
+      "first_seen_at": "2026-11-25 02:57:55 UTC",
+      "updated_at": "2026-11-25 02:57:55 UTC"
+    },
+    {
+      "paper_id": "2611.25169v1",
+      "route": "202611/25/2611.25169v1-open-response-explorer-a-structured-collaborative-writing-system-for-peer-informed-open-response-assignments",
+      "title": "Open Response Explorer: a Structured Collaborative Writing System for Peer-Informed Open-Response Assignments",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "支持学生同伴互学的开放式回答协作写作界面",
+      "first_seen_at": "2026-11-25 02:57:55 UTC",
+      "updated_at": "2026-11-25 02:57:55 UTC"
+    },
+    {
+      "paper_id": "2611.30182v1",
+      "route": "202611/25/2611.30182v1-cosima-cookbook-a-community-driven-resource-for-ocean-and-sea-ice-modelling-science",
+      "title": "COSIMA Cookbook: a community-driven resource for ocean and sea-ice modelling science",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向海洋与海冰模式分析的开放教育资源",
+      "first_seen_at": "2026-11-25 02:57:55 UTC",
+      "updated_at": "2026-11-25 02:57:55 UTC"
+    }
+  ]
+}

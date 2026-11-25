@@ -1,0 +1,724 @@
+Title: 2611.27868v1.pdf
+
+URL Source: https://arxiv.org/pdf/2611.27868v1
+
+Published Time: Mon, 23 Nov 2026 03:12:36 GMT
+
+Number of Pages: 32
+
+Markdown Content:
+Integrating Generative Artificial Intelligence with Learning Style Models: Opportunities, Challenges, and Future Directions 
+
+Malithi Nawarathne *, Prasanna Haddela, Nuwan Kodagoda 
+
+Faculty of Computing, Sri Lanka Institute of Information Technology, Sri Lanka 
+
+Abstract - Generative Artificial Intelligence (Generative AI) has emerged as a powerful tool for transforming learning. This review examines how Generative AI can be integrated with established learning style models (VARK, Kolb, Felder-Silverman, and Honey & Mumford) to support student engagement in large online classes. Following PRISMA 2020 guidelines, we searched Scopus, IEEE Xplore, and Google Scholar (2015–2026) and included 41 studies that met the eligibility criteria. The review maps Generative AI capabilities to learning style preferences, synthesizes existing implementations, highlights benefits and challenges, and proposes pathways for future research and practice. Despite ongoing debates regarding the empirical validity of learning styles, Generative AI enables flexible, multimodal, and real-time adaptation. This study offers practical insights for educators and developers seeking to build more effective, learner centered learning systems. 
+
+Keywords – Generative AI, Learning styles, Personalized learning, Student engagement. 
+
+1. Introduction 
+
+The recent emergence of Generative Artificial Intelligence (Generative AI) has unlocked powerful capabilities that are transforming education (Baidoo-Anu & Ansah, 2023; Murtaza et al., 2024; Pesovski et al., 2024). Generative AI now supports intelligent course design, real-time assessment, tutoring, interactive content generation, and adaptive learning experiences (Bender, 2024; Biswas, 2023; Chan & Lee, 2023; Pesovski et al., 2024; Sharma & Yadav, 2022; Yu & Guo, 2023). In particular, Generative AI excels at delivering immediate, scalable, and personalized learning by dynamically generating tailored content, feedback, and learning pathways based on individual learner data (Abdullah et al., 2024; Chiu, 2023; Hashmi et al., 2024; Oseremi Onesi-Ozigagun et al., 2024; Randver, 2025). 
+
+Traditional teaching methods, however, continue to deliver instruction to all students at the same pace and in the same format. This one-size-fits-all approach struggles to accommodate individual differences in learning styles, preferences, prior knowledge, and needs. Personalized learning addresses this limitation by tailoring educational experiences to each learner’s unique profile, thereby enhancing motivation, engagement, efficiency, and overall satisfaction (Ambele et al., 2022; Asthana et al., 2023; Grant & Basye, 2014; Keefe, 2007; Shemshack & Spector, 2020). The integration of Generative AI further strengthens personalization by enabling immediate, context-aware feedback and adaptive content delivery (Chiu, 2023; Oseremi Onesi-Ozigagun et al., 2024). 
+
+Despite growing interest, researchers have highlighted that substantial work remains to fully realize personalized learning at scale (Asthana et al., 2023; Chiu, 2023). Established learning style models such as VARK, Kolb, Felder-Silverman, and Honey & Mumford offer practical frameworks for understanding learner differences and guiding personalization efforts. 
+
+Nevertheless, despite rapid Generative AI adoption in education, no comprehensive synthesis currently exists that systematically links Generative AI capabilities with these established learning style frameworks for large-scale online personalization. This review addresses that critical gap by examining how Generative AI can be effectively integrated with learning style models to support scalable, learner-centered education. We now turn to why personalized delivery via learning styles is both necessary and underexplored, where this review was guided by the following research questions: 1. How can Generative AI capabilities be mapped to established learning style models (VARK, Kolb, Felder-Silverman, and Honey & Mumford)? 
+
+2. What implementations of Generative AI integrated with learning style models currently exist? 
+
+3. What are the benefits, challenges, and limitations of this integration? 
+
+4. What future directions should be pursued for research and practice? 
+
+This study followed a systematic review approach to identify and analyze research at the intersection of Generative AI and learning styles for application in large online classes. We searched major databases, including Scopus, IEEE Xplore, and Google Scholar, using combinations of keywords of “Generative AI”, “learning styles”, “virtual assistants”, “teaching assistants”, and “personalized learning”. Hence, studies were included if they met the following requirements, 
+
+1. Articles that were peer-reviewed journal articles, or conference papers published in English. 
+
+2. Articles focused on the application or integration of Generative with at least one established learning style model (VARK, Kolb, Felder-Silverman, Honey & Mumford). 
+
+3. Articles that addressed personalization, adaptive learning, teaching assistants, and virtual assistants in educational contexts. 
+
+4. Articles that were published between 1 st of January 2015, and 31 st of March 2026. Figure 1: Prisma diagram related to the study 
+
+2. Learning Styles 
+
+Learning styles are preferred methods for processing information (Alzain et al., 2018; Khanal et al., 2014). Aligning teaching with styles improves outcomes, engagement, and efficiency (Abdullah et al., 2024; Budiyanto et al., 2017; Mahmoud Hawa & Tılfarlıoğlu, 2019). Further, aligning teaching with preferred styles moves beyond “one-size-fits-all” approaches, enhancing efficiency, problem-solving, and long-term achievement (Abdullah et al., 2024; Budiyanto et al., 2017). It addresses individual differences, boosts motivation, and is crucial as class sizes grow and technology evolves (Alhathli et al., 2017; Mahmoud Hawa & Tılfarlıoğlu, 2019). 
+
+However, although the concept of learning styles has faced significant criticism for lacking robust empirical evidence (Newton & Salvi, 2020; Pashler et al., 2008), it continues to inform practical research in adaptive and AI-driven education (Castro et al., 2025; Nunez et al., 2026; Randver, 2025; Ren et al., 2026, p. 2026; Troussas et al., 2025). Recent studies argue that, despite theoretical debates, learning styles frameworks enable dynamic personalization in technology-mediated environments, where Generative AI can generate multimodal content to accommodate preferences without rigid matching (Chandrasekera et al., 2024; Cohen, 2023; Fernando & Premadasa, 2024; Nunez et al., 2026; Oseremi Onesi-Ozigagun et al., 2024; Ren et al., 2026). Rather than framing Generative AI's objective as matching a predefined style, we emphasize its capacity for multimodal flexibility. By offering the same content in multiple formats at once, Generative AI allows students to select what works best for their particular context, avoiding the rigidity of forcing all learners into a single stylistic mode. 
+
+Therefore, this review was conducted with the aim of cautioning against over-reliance on styles as fixed traits while exploring Generative AI's potential to leverage them for flexible, engaging adaptation in large online classes. Hence, we have used Table 1, which compares several established learning style models in terms of their strengths and limitations, providing a foundation for evaluating the enhancements of Generative AI. While some emphasize sensory modalities (VARK), others focus on cognitive processing (FSLSM), experiential cycles (Kolb), or behavioral tendencies (Honey & Mumford). Table 1 – Learning style models comparison 
+
+Model  Core Dimensions 
+
+Learning Focus 
+
+Strengths  Criticisms / Limitations 
+
+VARK  Visual, Auditory, Read/Write, Kinesthetic 
+
+Sensory preferences 
+
+Improves understanding, desire, and engagement (Othman &Amiruddin, 2010); simple model (Rinekso, 2021); aids faster skill acquisition, positive attitude, and knowledge grasp (Sockanathan & Tajuddin, 2024). 
+
+Relies on self-reports (Oladele, 2024); may not capture the full complexity of preferences (Tomić et al., 2023). 
+
+FSLSM  Active/Reflective, Sensing/Intuitive, Visual/Verbal, Sequential/Global 
+
+Cognitive preferences 
+
+Provides complete descriptions, categorizing styles into detailed groups, unlike simpler (Hu et al., 2021). 
+
+Assumes preferences directly lead to behaviors (Felder & Spurlin, 2005). 
+
+Kolb  Concrete Experience, Reflective Observation, Abstract conceptualization, Active Experimentation 
+
+Learning as an experience cycle 
+
+Cycle enables feedback for new actions/evaluations (Almeida &Mendes, 2010); improves movement across cycle for better effectiveness (Kolb & others, 2007). 
+
+Oversimplifies process (Villanueva, 2020); lacks social/cultural context (McLeod, 2017). 
+
+Honey & Mumford 
+
+Activist, Reflector, Theorist, Pragmatist 
+
+Learning preferences derived from Kolb 
+
+Probes attitudes/behaviors for personal/organizational development (Trifirò & Laing, 2021); offers insights into 
+
+Lacks statistical pedagogical impact (Idowu, 2024) (Idowu, 2024).; low information engagement/ (Idowu, 2024). 
+
+> validity/reliability (Duff & Duffy, 2002).
+
+As summarized in Table 1, each learning style model offers a different approach but also has limitations. Therefore, the comparative analysis shows that, with respect to each model, different personalization options can be offered as AI-based tools and technologies advance. A promising aid for operationalizing this integration is the use of virtual assistants and intelligent tutoring systems. The following section examines how virtual assistants have evolved from traditional AI-based tools to Generative AI powered systems and how they can effectively incorporate learning style models to deliver scalable personalized learning experiences in large online environments. 
+
+3. Teaching Virtual Assistants from Past to Present 
+
+Virtual assistants have functioned in organizing the study process, managing time, increasing motivation, and engagement in the study process (Gubareva & Lopes, 2020), (Pereira et al., 2022). These tools with the usage of AI, can provide personal assistance to students in the form of feedback, suggestions, scaffolding, and information retrieval. Before the introduction of Generative AI, many virtual teaching assistants were created with the use of AI based tools and technologies (Benedetto et al., 2019; Escotet, 2023; Essel et al., 2022; Liu et al., 2024; Mekni et al., 2020). However, the learning process can greatly benefit from Generative AI's integration of real-time feedback, adaptive material distribution, and powerful analytics. 
+
+Hence, studies on personalization and adaptive learning highlight Generative AI's role in tailored content, feedback, and engagement (Chan & Hu, 2023; Chen et al., 2023; Liu et al., 2024; Michel-Villarreal et al., 2023; Mittal et al., 2024; Wang et al., 2024). While these studies offer important findings and information, they also have several limitations in implementing personalized learning solutions via learning styles that can adapt according to changing student preferences. In order to provide personalized, flexible solutions, this combination pinpoints the necessity for research that combines Generative AI with pedagogical approaches. These systems can adapt to the demands of students in real time feedback. Summarizing these studies highlights both the progress made and the gaps that remain, particularly in how Generative AI can extend or improve upon earlier approaches. Tables 2,3,4,5 depict existing learning systems and virtual assistants that have been built using AI and ML technologies. 
+
+Table 2 – Existing work done using FSLSM with AI-ML and Generative AI technologies 
+
+Research  Contribution  Technologies/ Instruments used 
+
+(Zagulova et al., 2019)  Linked FSLSM styles to performance, recommending personalized e-learning. 
+
+Index of learning style questionnaire 
+
+(Tzenios, 2020)  Used unsupervised machine learning techniques for health education grouping. 
+
+K-Means clustering 
+
+(Sihombing et al., 2020) 
+
+Applied FSLSM to develop personalized e-learning content. 
+
+ADDIE modelling 
+
+(Sensuse et al., 2020)  Conducted a literature review to show findings and recommendations to build an adaptive e-Learning system based on FSLSM. 
+
+Systematic literature review 
+
+(Supangat & Mohd Zainuri, 2020) 
+
+Tailored content using FSLSM.  Index of learning style questionnaire 
+
+(Boussaha & Drissi, 2021) 
+
+Proposed collaborative coaching using the FSLSM model. 
+
+Index of learning style questionnaire (Rishard et al., 2022)  Developed “Adaptivo” that provides a personalized learning experience to the learners based on their learning style and knowledge level. 
+
+Index of learning style questionnaire, 
+
+K-Means clustering, Random Forest, SVM, Decision Tree, and Logistic Regression 
+
+(Saputra et al., 2023)  Used SVM and improved the prediction accuracy of student learning styles 
+
+Support Vector Machine (SVM) algorithm 
+
+(Zagulova et al., 2023)  Discussed the possibility of using FSLSM for distance personalized learning. 
+
+Hypothesis testing 
+
+(Andriani, 2023)  Correlated styles to online achievements through FSLSM. 
+
+Index of learning style questionnaire 
+
+(Hussain et al., 2024)  Combined deep learning with sentiment analysis by combining automated learning style recognition using FSLSM. 
+
+Fuzzy logic 
+
+(Baihaqi et al., 2024)  Formulated a novel predictive framework based on for identification of student learning styles. 
+
+Artificial Neural Network (ANN) 
+
+(Randver, 2025)  Used FSLSM to prove that personalized learning improves student engagement, problem solving skills, and fosters metacognitive awareness. 
+
+Conceptual / Empirical study 
+
+(Lhafra & Abdoun, 2025) 
+
+Used clustering with the FSLSM to provide effective adaptive e-learning. 
+
+K-means (Fernando &Premadasa, 2024) 
+
+Combined FSLSM with Generative AI to prove that fine-tuning education experiences, can allow personalization. 
+
+Fuzzy inference system (FIS) 
+
+(Vaccaro Jr et al., 2024) 
+
+Explored how LLMs can adapt science texts considering the learning preferences of middle school students using FSLSM. 
+
+GPT-4 
+
+Table 3 – Existing work done using VARK model with AI-ML and Generative AI technologies 
+
+Research  Contribution  Technologies/ Instruments used 
+
+(Peter et al., 2009)  Demonstrated the use of the VARK model in adaptive e-learning to provide personalized materials tailored to learners' styles. 
+
+Semantic web technologies that include XML, RDF 
+
+(Sayed et al., 2020)  Used reinforcement learning with the VARK in predicting learning styles. 
+
+Multitask deep Q-learning, Bloom’s taxonomy 
+
+(Rao & Arunachalam, 2021) 
+
+Used ensemble methods with the VARK model to predict learning styles. 
+
+J48, SVM, Naive Bayes and Random forest 
+
+(Pardamean et al., 2022) 
+
+Developed and measured the impact of an AI based learning style prediction model in an online learning portal for primary school students. 
+
+Matrix factorization 
+
+(Altamimi et al., 2022)  Used the VARK model to make learning styles predictions comparing regression and classification techniques. 
+
+Regression models and classification models 
+
+(Vanegas et al., 2024)  Designed a virtual course that adapts to different learning styles according to the 
+
+Surveys and interviews VARK model and evaluates students' academic performance and satisfaction. 
+
+(Abomelha &Newbury, 2024) 
+
+Used the VARK model to build arecommendation system to identify learning styles that provided apersonalized learning experience to students. 
+
+Fuzzy logic 
+
+(Nguyen et al., 2024)  Experimented on personalizing course content and learning activity model tailored for online courses based on students' learning styles using VARK. 
+
+Support vector machine 
+
+(Chandrasekera et al., 2024) 
+
+Investigated how Generative AI (Generative AI) can accommodate the various learning preferences defined in the VARK model (Visual, Auditory, Reading/Writing, and Kinesthetic) in design education 
+
+Technology acceptance (TAM) 
+
+(Oseremi Onesi-Ozigagun et al., 2024) 
+
+Experimented on how Generative AI can transform education by integrating the VARK model. 
+
+Conceptual / Empirical study 
+
+(Gunawan et al., 2024)  Explored on identifying factors in ChatGPT that could improve the learning process using the VARK learning style preferences 
+
+Systematic literature review 
+
+(Hashmi et al., 2024)  Investigated the impacts of Generative AI on confidence and frustration levels in programming among business students. 
+
+ChatGPT-4, K-Means Table 4 – Existing work done using Kolb’s model with AI-ML and Generative AI technologies 
+
+Research  Contribution  Technologies/ Instruments used 
+
+(Rasheed & Wahid, 2021) 
+
+Kolb’s model was used to detect learning styles using classification techniques. 
+
+Decision trees, Support Vector Machines, K-Nearest Neighbour, Naïve Bayes, Linear Discriminant Analysis, Random Forest, and Logistic Regression 
+
+(Sanjabi & Montazer, 2020) 
+
+Applied personalization to e-learning environments using Kolb's model, finding that tailored learning improved academic performance and satisfaction. 
+
+Kolb’s questionnaire 
+
+(Waladi et al., 2023)  Identify students having similar traits using Kolb model and proposed an intelligent adaptive learning system. 
+
+K-means, artificial neural network, decision tree 
+
+(Chaimae et al., 2024)  Employed the Kolb’s model to study learning styles considering both balanced and imbalanced datasets. 
+
+KNN 
+
+(Sun & Deng, 2024)  Researched the use of ChatGPT to enhance experiential learning among college students using Kolb's Experiential Learning Model. 
+
+ChatGPT 
+
+(Özdemir et al., 2024)  Assessed the effectiveness of Generative AI tools in determining learning styles of students using Kolb’s model 
+
+Kolb Learning Style Inventor, ChatGPT, Gemini, and Copilot 
+
+(Salinas-Navarro et al., 2024a) 
+
+Tested on the integration of ChatGPT with experiential learning introduced by 
+
+ChatGPT 3.5 Kolb to conduct feasible evaluations in applications of higher education. 
+
+(Salinas-Navarro et al., 2024b) 
+
+Explored the use of Generative AI in developing learning activities using experiential learning for practical assessments. 
+
+ChatGPT 3.5 
+
+(Luo et al., 2024)  Incorporated Kolb’s experiential learning model along with LLMs to experiment on its usage to promote deep and high order cognitive skills. 
+
+Conceptual / Empirical study 
+
+Table 5 – Existing work done using the Honey and Mumford model with AI-ML and Generative AI technologies 
+
+Research  Contribution  Technologies/ Instruments used 
+
+(Sangvigit et al., 2012) 
+
+Examined the correlation between Honey and Mumford learning styles and students’ preferences for online learning media using data stored in an LMS. 
+
+Learning Style Questionnaire of Honey & Mumford 
+
+(Morozevich et al., 2022) 
+
+Used Honey and Mumford’s method of determining activity styles to develop a model for personalized learning paths using machine learning methods. 
+
+Matrix factorization and neural networks 
+
+(Lang, 2023)  Conducted a study to prove that student behavior on a LMS can be predicted using the Honey & Mumford Learning Styles Model questionnaire. 
+
+Learning Style Questionnaire of Honey & Mumford 
+
+Descriptive statistical analysis and hierarchical clustering (Weijers et al., 2024)  Investigated the integration of Honey and Mumford's learning styles with LLMs to improve teaching effectiveness 
+
+> GPT-4
+
+Considering the existing work that has been done, it is evident that Felder-Silverman and VARK models have been used widely to propose solutions with the aid of AI related technologies. Kolb’s model has been used mainly with the experiential learning concept in research works. Honey and Mumford model, however, has been used at a rare level. 
+
+Further, the evidence in tables 2, 3, 4, and 5 illustrates that while AI and ML techniques such as clustering, predictive modeling, and adaptive systems have successfully incorporated learning style models, FSLSM, VARK, Kolb, and Honey and Mumford, these implementations are often limited to static matching of learners to predefined content. Generative AI, by contrast, allows real-time adaptation, multimodal output, and conversational interaction, which can overcome the rigidity of earlier systems. Thus, the integration of Generative AI with these models represents a natural evolution beyond past personalization strategies. 
+
+4. Generative AI and Learning Style Models  
+
+> 4.1. Mapping Generative AI Tools to Learning Style Models
+
+As observed in existing work, more studies could be conducted in mapping the learning styles with Generative AI tools to provide solutions. Building on the theoretical foundations of learning styles and the capabilities of Generative AI, the following mappings illustrate how specific content can be aligned with learner preferences. Unlike descriptive models, these mappings provide actionable insights for educators seeking to operationalize personalization in practice. Tables 6-9 outline that Generative AI can be used to map the learning styles. 
+
+The VARK model, which emphasizes sensory preferences (visual, auditory, read/write, and kinesthetic), has seen increasing attempts at integration with GenAI. Studies show that GenAI tools can effectively accommodate these modalities through multimodal generation (Chandrasekera et al., 2024; Gunawan et al., 2024; Hashmi et al., 2024; Oseremi Onesi-Ozigagun et al., 2024). 
+
+Table 6 – Mapping VARK model with Generative AI tools based on evidence presented by (Chandrasekera et al., 2024; Gunawan et al., 2024; Hashmi et al., 2024; Oseremi Onesi-Ozigagun et al., 2024) 
+
+Learning style mode 
+
+Preferred learning tools and materials 
+
+Mapping with Generative AI Tools 
+
+Learning benefit 
+
+Visual  Graphs, charts, color coding, visualizations 
+
+Stable Diffusion for info graphics, flowcharts, and visual concept maps 
+
+These tools help clarify abstract topics by creating visual anchors that support spatial reasoning 
+
+Auditory  Discussion groups  LLMs with text-to-speech for narrated explanations or simulated conversations 
+
+This supports students who process best through listening and verbal engagement 
+
+Reading  Focusing techniques in writing, demonstrations, role-playing, open-ended questions 
+
+LLMs for detailed summaries, notes, quizzes, textual explanations 
+
+Promotes students who prefer reading to engage with materials that will improve their comprehension skills Kinesthetic  Interaction with objects, internships, field trips, simulations, games 
+
+LLMs for scenarios/simulations, interactive step-by-step guides 
+
+Generate interactive step-by-step guides for physical tasks or projects 
+
+Multimodal  Lectures, notes, summaries, exams, presentations 
+
+LLMs for text; Stable Diffusion for visuals; speech-to-text for audio; virtual labs/scenarios 
+
+Supports students to learn via multimodal modes 
+
+GenAI’s strength lies in its ability to provide real-time adaptation across all eight dimensions of the Felder-Silverman model as researched by (Fernando & Premadasa, 2024; Vaccaro Jr et al., 2024). 
+
+Table 7 – Mapping model with FSLSM Generative AI tools based on evidence presented by (Fernando & Premadasa, 2024; Vaccaro Jr et al., 2024) 
+
+Learning style mode 
+
+Preferred learning tools and materials 
+
+Mapping with Generative AI Tools 
+
+Learning benefit 
+
+Active  Exercises, discussion links  LLMs for real-time simulations, group problem-solving, interactive quizzes 
+
+Encourages application through active engagement 
+
+Reflective  References, PDFs, PPTs  LLMs for personalized reflection prompts, explanations, feedback 
+
+Promotes critical thinking and quiet information processing 
+
+Sensory  Practical materials  LLMs for real-life case studies, virtual labs simulating industry tasks. 
+
+Support experiential learning Intuitive  Advanced topics, references, assignments, topic list, video, 
+
+forum, PPTs, PDF 
+
+LLMs for underlying theories, advanced prompts, conceptual discussions/maps 
+
+Encourages exploration of studies 
+
+Visual  Graphics and visualizations animations, video 
+
+Stable Diffusion for illustrations, slide-based content 
+
+Clarifies abstracts via visual anchors for spatial reasoning 
+
+Verbal  Textual materials, audio Solved exercises after the content 
+
+LLMs with speech synthesis for narrated lectures, example explanations, dialogues 
+
+Promotes conversational learning 
+
+Global  Chapter summary and navigation, case analysis activities 
+
+LLMs for thematic guides, narrative summaries, concept networks 
+
+Provides interconnected content for holistic views 
+
+Sequential  Solved exercises and videos after the content 
+
+Generative AI for stepwise paths, progressive assessments, and sequenced delivery 
+
+Allows methodical thinking 
+
+Recent studies show promising applications, particularly in using LLMs to support the learning cycle of Kolb’s model (Luo et al., 2024; Özdemir et al., 2024; Salinas-Navarro et al., 2024a, 2024b; Sun & Deng, 2024). GenAI tools can generate personalized scenarios for concrete experience, reflection prompts for reflective observation, theoretical explanations for abstract conceptualization, and interactive simulations for active experimentation. This integration helps overcome the limitations of traditional Kolb-based systems by enabling dynamic, real-time movement through the experiential cycle. Table 8 – Mapping Kolb’s model with Generative AI tools based on evidence presented by (Luo et al., 2024; Özdemir et al., 2024; Salinas-Navarro et al., 2024a, 2024b; Sun & Deng, 2024) 
+
+Learning style mode 
+
+Preferred learning tools and materials 
+
+Mapping with Generative AI Tools 
+
+Learning benefit 
+
+Diverging  Brainstorming, internet based interactive exercises online discussing 
+
+LLMs for brainstorming prompts, alternative perspectives, simulated peer discussions 
+
+Encourage creativity through multiple options and problem reframing 
+
+Assimilating  Reading lectures, exploring analytical models, step-by-step tutorials, online reading 
+
+LLMs for summarizing articles, structured tutorials, analytical comparison charts. 
+
+Helps learners build structured understanding from abstract material 
+
+Converging  Interactive activities, trial/error learning, theoretical tutorials, online reading, experiments 
+
+Generative AI for problem-solving scenarios, real-life decision-making/troubleshooting simulations 
+
+Allows students to engage with work that are in an interactive manner 
+
+Accommodating  Simulations, observations, examples, laboratories, online discussions, team tasks 
+
+VR/AR tools, Generative AI-generated instructions, group projects 
+
+Support trial and error learning and action driven discovery 
+
+Although less frequently studied compared to the other models, Honey and Mumford’s learning styles (Activist, Reflector, Theorist, Pragmatist) show strong potential for GenAI integration. Weijers et al. (2024) explored the use of LLMs with this model to improve teaching effectiveness, demonstrating how GenAI can support activists through gamified and interactive activities, reflectors through journaling prompts, theorists through conceptual explanations, and pragmatists through applied case studies and practical scenarios. 
+
+Table 9 – Mapping Honey and Mumford model with Generative AI tools based on evidence presented by 
+
+(Weijers et al., 2024) 
+
+Learning style mode 
+
+Preferred learning tools and materials 
+
+Mapping with Generative AI Tools 
+
+Learning benefit 
+
+Activist  Brainstorming, problem-solving, group discussions, puzzles, competitions, lectures/reading 
+
+Fine-tuned LLMs for gamified modules, timed challenges, and live group activities 
+
+Promote high interaction and engagement 
+
+Reflector  Paired discussions, self-analysis/personality questionnaires, observing activities, feedback, coaching, interviews 
+
+LLMs for journaling prompts, scenario reviews, comparative responses 
+
+Enables formative feedback and simulated peer evaluation 
+
+Theorist  Group discussions, reading lists  LLMs for reading lists, model definitions, concept maps, explanatory essays, comparison tasks 
+
+Promotes group work and cooperation 
+
+Pragmatist  Case studies, problem-solving, discussions 
+
+LLMs for case studies, task-oriented scenarios, applied exercises 
+
+Tailors examples for immediate relevance 
+
+As seen across the four learning style models, Generative AI tools exhibit the flexibility to support diverse learner preferences using adaptive content. This approach not only empowers educators to diversify their teaching strategies but also lays the groundwork for building intelligent virtual assistants or tutoring systems capable of tailoring the delivery of content in real time with personalization. 
+
+Hence, building on VARK, Felder-Silverman, Kolb, and Honey & Mumford models, this study proposes on aligning each style with suitable Generative AI tools. Such adaptive delivery can not only increase engagement and satisfaction but also foster deeper learning, particularly in online educational settings. Importantly, this personalized alignment creates new opportunities to reduce cognitive overload and empower students to take ownership of their learning process.  
+
+> 4.2. Enhancing the learning experience in large classes through Generative AI personalization
+
+However, while learning style-based personalization offers significant pedagogical value, it addresses only part of the broader personalization challenge. To realize the full potential of Generative AI, it is critical to extend the scope beyond predefined typologies and toward a more holistic, context-sensitive view of learner diversity. While learning styles serve as an important first layer in personalizing education, modern learners exhibit more complex, evolving needs that go beyond sensory and cognitive preferences. Personalization in education must also accommodate factors such as student engagement, motivation, student isolation, providing student feedback, student-teacher interaction, and diverse knowledge levels. Hence, beyond aligning content with individual learning styles, Generative AI offers unique affordances for enriching the broader learning experience. This section explores several pedagogical dimensions, ranging from emotional engagement to individualized feedback, through which Generative AI can deepen personalization in education.  
+
+> 4.2.1. Student engagement and motivation
+
+Engagement and motivation are often compromised in online learning due to passive instruction and a lack of personalization. Learning styles, when supported by Generative AI, can reignite engagement by presenting content in formats students naturally respond to. Generative AI enhances this by dynamically adapting the format and interactivity level, using reinforcement learning, feedback signals from learners’ inputs to keep them motivated and involved (Baidoo-Anu & Ansah, 2023; Chan & Lee, 2023).  
+
+> 4.2.2. Emotional state and cognitive load
+
+Online learners often experience emotional fatigue, confusion, or anxiety, particularly when instruction does not align with their preferences. Generative AI can monitor sentiment and adapt instruction not only to how learners prefer to learn, but also to how they're feeling while learning. AI generated real world simulations and storytelling tasks can build emotional resonance. LLMs can adjust tone, simplify content complexity, and provide emotionally reassuring feedback based on observed learner frustration (Baidoo-Anu & Ansah, 2023; Boussaha & Drissi, 2021). Through natural language understanding, Generative AI can act as a responsive tutor, identifying confusion or stress signals and adapting content or pacing accordingly.  
+
+> 4.2.3. Reducing student isolation and strengthening interaction
+
+Large online classrooms often lead to student anonymity and a sense of disconnection. Generative AI, integrated with learning style insights, can foster personalized interaction and reduce isolation. Generative AI tools can also simulate group work experiences, design peer-mirroring, or recommend tailored discussion prompts to foster community for learners who might otherwise remain disengaged (Hashmi et al., 2024). Generative AI tools tailored using learning style inputs, can serve as simulated conversational partners (Baidoo-Anu & Ansah, 2023; Hashmi et al., 2024; Pesovski et al., 2024). This human like interaction restores some of the relational elements missing from traditional online learning environments, thereby increasing perceived support and reducing social isolation. 4.2.4. Personalized feedback providing 
+
+Feedback is critical to learning, yet in large-scale virtual settings, it is often delayed or generic. Generative AI tools can deliver immediate, personalized feedback that aligns with a student's preferred mode of processing (Chan & Lee, 2023, 2023; Michel-Villarreal et al., 2023). It can tailor its explanations to match student preferences. Tools such as ChatGPT, Gemini, have already proved to assist students track their goals and generate personalized visual learning analytics dashboards tailored to their learning style (Randver, 2025). Such alignment ensures feedback is not only timely but also cognitively resonant and reinforces student growth more effectively.  
+
+> 4.2.5. Supporting diverse knowledge levels
+
+In large classrooms, the spread of prior knowledge and competencies is wide. Generative AI, informed by learning style models, can dynamically adjust task difficulty and presentation. Through diagnostic quizzes or AI driven knowledge graphs, students can be categorized not only by level but also by preferred learning mode, enabling tailored learning paths that scale effectively across hundreds or thousands of students (Chan & Lee, 2023; Michel-Villarreal et al., 2023; Mittal et al., 2024; Pesovski et al., 2024).  
+
+> 4.2.6. Enhancing student-teacher interaction
+
+While Generative AI is often used by students, it can also personalize support for teachers, using learning style data to help instructors monitor which students are disengaged or struggling and how best to intervene (Chan & Lee, 2023). Teachers could receive Generative AI generated recommendations on grouping students with complementary learning styles for collaborative projects. Analytics dashboards can highlight mismatches between student preferences and performance, prompting pedagogical adjustments. This allows educators to maintain apersonalized presence at scale, closing the feedback loop and enhancing the human element of online teaching. 
+
+5. Conclusion 
+
+Considering the propositions discussed in this section, it is evident that introducing personalized learning with the integration of Generative AI tools is a plausible solution that can assist students to learn contentedly. The integration of learning styles with Generative AI has shown great potential in transforming the education field. Generative AI can overcome the limitations introduced in existing traditional and online learning techniques as discussed in this study. Most importantly, the Generative AI’s ability to adapt to present circumstances and provide fast responses can allow the students and educators carry out their tasks efficiently. While this study highlights the potential of Generative AI in supporting personalized learning through established learning style frameworks, it is important to acknowledge certain limitations and ethical considerations. Learning style theories have been a topic that has received attention due to critics arguing about oversimplification. Ethical considerations should also be taken into account in the usage of Generative AI related tools, as the research might involve working with sensitive data. Further research should therefore be conducted while addressing the ethical considerations that would result in virtual learning environments, balancing automation with pedagogical intents. In conclusion, the combination of learning styles with Generative AI represents a huge step forward in personalized education. The path ahead is not without its challenges, but the potential will reward empowered learners and educators to perform their duties efficiently. This review hence lays a solid roadmap that can be considered for the development of systems that can adopt Generative AI and learning styles. Conflicts of interest declaration 
+
+All authors declare that they have no conflicts of interest 
+
+Declaration of AI Use 
+
+During the preparation of this work, the authors used Grok 4 to paraphrase and improve readability of sections. The authors reviewed, edited, and take full responsibility for the content. 
+
+References 
+
+Abdullah, G., Arifin, A., Saro’i, M., & Uhai, S. (2024). Assessing the Influence of Learning Styles, Instructional Strategies, and Assessment Methods on Student Engagement in College-Level Science Courses. 
+
+International Education Trend Issues , 2(2), 142–150. https://doi.org/10.56442/ieti.v2i2.466 
+
+Abomelha, F., & Newbury, P. (2024). A VARK learning style-based Recommendation System for Adaptive E-learning. Annals of Computer Science and Information Systems , 41 , 1–8. 
+
+Alhathli, M., Masthoff, J., & Siddharthan, A. (2017). Should Learning Material’s Selection be Adapted to Learning Style and Personality? Adjunct Publication of the 25th Conference on User Modeling, Adaptation and Personalization , 275–280. https://doi.org/10.1145/3099023.3099079 
+
+Almeida, P., & Mendes, R. (2010). Learning style preferences across disciplines. International Journal of Diversity in Organizations, Communities, and Nations , 10 (2), 285. 
+
+Altamimi, A. M., Azzeh, M., & Albashayreh, M. (2022). Predicting students’ learning styles using regression techniques. arXiv Preprint arXiv:2209.12691 .
+
+Alzain, A., Clark, S., Ireson, G., & Jwaid, A. (2018). Adaptive Education based on Learning Styles: Are Learning Style Instruments Precise Enough? International Journal of Emerging Technologies in Learning (iJET) ,
+
+13 (09), 41. https://doi.org/10.3991/ijet.v13i09.8554 
+
+Ambele, R. M., Kaijage, S. F., Dida, M. A., Trojer, L., & M. Kyando, N. (2022). A review of the Development Trend of Personalized learning Technologies and its Applications. International Journal of Advances in Scientific Research and Engineering , 08 (11), 75–91. https://doi.org/10.31695/IJASRE.2022.8.11.9 Andriani, A. (2023). The Correlation between the Felder-Silverman Learning Style Model (FSLSM) and Students‟ Final Achievement Test in Online Learning Environment (A Correlation Study at The Ninth-Grade of MTs An-najah in Academic Year 2020/ 2021). [B.S. thesis]. Jakarta: FITK UIN Syarif Hidayatullah Jakarta. 
+
+Asthana, S., Arif, T., & Thompson, K. C. (2023). Field experiences and reflections on using LLMs to generate comprehensive lecture metadata .
+
+Baidoo-Anu, D., & Ansah, L. O. (2023). Education in the Era of Generative Artificial Intelligence (AI): Understanding the Potential Benefits of ChatGPT in Promoting Teaching and Learning .
+
+Baihaqi, W. M., Saputro, R. E., Utomo, F. S., & Sarmini, S. (2024). Novel Predictive Framework for Student Learning Styles Based on Felder-Silverman and Machine Learning Model. Journal of Applied Data Sciences , 5(4), 1726–1737. 
+
+Bender, S. M. (2024). Awareness of Artificial Intelligence as an Essential Digital Literacy: ChatGPT and Gen-AI in the Classroom. Changing English , 31 (2), 161–174. https://doi.org/10.1080/1358684X.2024.2309995 
+
+Benedetto, L., Cremonesi, P., & Parenti, M. (2019). A Virtual Teaching Assistant for Personalized Learning 
+
+(arXiv:1902.09289). arXiv. http://arxiv.org/abs/1902.09289 
+
+Biswas, S. (2023). ChatGPT and the Future of Medical Writing. Radiology , 307 (2), e223312. https://doi.org/10.1148/radiol.223312 
+
+Boussaha, K., & Drissi, S. (2021). Collaborative Tutoring System Adaptive for Tutor’s Learning Styles based on Felder Silverman Model. CSEDU (2) , 200–207. 
+
+Budiyanto, U., Hartati, S., Azhari, S. N., & Mardapi, D. (2017). Intelligent System E-Learning Modeling According to Learning Styles and Level of Ability of Students. In A. Mohamed, M. W. Berry, & B. W. Yap (Eds.), 
+
+Soft Computing in Data Science (Vol. 788, pp. 278–290). Springer Singapore. https://doi.org/10.1007/978-981-10-7242-0_24 
+
+Castro, V., Nascimento, A. K. de O., Zheldibayeva, R., Searsmith, D., Saini, A., Cope, B., & Kalantzis, M. (2025). Implementation of a Generative AI Assistant in K-12 Education: The CyberScholar Initiative. arXiv Preprint arXiv:2502.19422 .
+
+Chaimae, W., Mohammed, L. S., Maha, K., Mohamed, K., & Said, B. (2024). KNN Classification of Kolb Learning Styles: A Comparative Study on Balanced and Unbalanced Datasets. E-Learning and Smart Engineering Systems (ELSES 2023) , 43–49. Chan, C. K. Y., & Hu, W. (2023). Students’ voices on generative AI: Perceptions, benefits, and challenges in higher education. International Journal of Educational Technology in Higher Education , 20 (1), 43. 
+
+Chan, C. K. Y., & Lee, K. K. W. (2023). The AI generation gap: Are Gen Z students more interested in adopting generative AI such as ChatGPT in teaching and learning than their Gen X and millennial generation teachers? Smart Learning Environments , 10 (1), 60. https://doi.org/10.1186/s40561-023-00269-3 
+
+Chandrasekera, T., Hosseini, Z., Perera, U., & Bazhaw Hyscher, A. (2024). Generative artificial intelligence tools for diverse learning styles in design education. International Journal of Architectural Computing ,14780771241287345. 
+
+Chen, B., Zhu, X., & others. (2023). Integrating generative AI in knowledge building. Computers and Education: Artificial Intelligence , 5, 100184. 
+
+Chiu, T. K. F. (2023). Systematic literature review on opportunities, challenges, and future research recommendations of artificial intelligence in education. Computers and Education .
+
+Cohen, J. A. (2023). The purposeful use of Kolb’s learning styles in online learning design. Development and Learning in Organizations: An International Journal , 37 (4), 1–4. 
+
+Duff, A., & Duffy, T. (2002). Psychometric properties of honey & Mumford’s learning styles questionnaire (LSQ). 
+
+Personality and Individual Differences , 33 (1), 147–163. 
+
+Escotet, M. Á. (2023). The optimistic future of Artificial Intelligence in higher education. Prospects , 1–10. 
+
+Essel, H. B., Vlachopoulos, D., Tachie-Menson, A., Johnson, E. E., & Baah, P. K. (2022). The impact of a virtual teaching assistant (chatbot) on students’ learning in Ghanaian higher education. International Journal of Educational Technology in Higher Education , 19 (1), 57. 
+
+Felder, R. M., & Spurlin, J. (2005). Applications, reliability and validity of the index of learning styles. 
+
+International Journal of Engineering Education , 21 (1), 103–112. 
+
+Fernando, P. A., & Premadasa, S. (2024). Use of Game-Based Activities in Predicting the Sequential/Global Learning Dimension in the Felder-Silverman Model for Primary Schoolers. Global Learning Dimension in the Felder-Silverman Model for Primary Schoolers .
+
+Grant, P., & Basye, D. (2014). Personalized learning: A guide for engaging students with technology (First edition). International Society for Technology in Education. Gubareva, R., & Lopes, R. P. (2020). Virtual Assistants for Learning: A Systematic Literature Review. CSEDU (1) ,97–103. 
+
+Gunawan, M., Maia, M., Klein, S., & others. (2024). ChatGPT and VARK Model in Education: A Systematic Literature Review. 2024 International Conference on Information Management and Technology (ICIMTech) , 1–6. 
+
+Hashmi, N., Li, Z., Parise, S., & Shankaranarayanan, G. (2024). Generative AI’s impact on programming students: Frustration and confidence across learning styles. Issues in Information Systems , 25 (3). 
+
+Hu, J., Peng, Y., Chen, X., & Yu, H. (2021). Differentiating the learning styles of college students in different disciplines in a college English blended learning setting. PLOS ONE , 16 (5), e0251545. https://doi.org/10.1371/journal.pone.0251545 
+
+Hussain, T., Yu, L., Asim, M., Ahmed, A., & Wani, M. A. (2024). Enhancing E-Learning Adaptability with Automated Learning Style Identification and Sentiment Analysis: A Hybrid Deep Learning Approach for Smart Education. Information , 15 (5), 277. 
+
+Idowu, E. (2024). Assessment and Evaluation of Learning Styles: A Review of Instruments and Methods .
+
+Keefe, J. W. (2007). What is Personalization? Phi Delta Kappan , 89 (3), 217–223. https://doi.org/10.1177/003172170708900312 
+
+Khanal, L., Shah, S., & Koirala, S. (2014). Exploration of preferred learning styles in medical education using VARK modal. Russian Open Medical Journal , 3(3), 0305. https://doi.org/10.15275/rusomj.2014.0305 
+
+Kolb, D. A. & others. (2007). The Kolb learning style inventory . Hay Resources Direct Boston, MA. 
+
+Lang, M. (2023). Learning Styles and On-Line Learning Analytics: An Analysis of Student Behaviour Based on the Honey and Mumford Model. International Conference on Human-Computer Interaction , 154–166. 
+
+Lhafra, F. Z., & Abdoun, O. (2025). A comparative study of learning style model using machine learning for an adaptive E-learning. Multimedia Tools and Applications , 1–20. 
+
+Liu, X., Pankiewicz, M., Gupta, T., Huang, Z., & Baker, R. S. (2024). A Step Towards Adaptive Online Learning: Exploring the Role of GPT as Virtual Teaching Assistants in Online Education. Manuscript under Review .
+
+Luo, Y., Cheong-Iao, P., & Chang, S. (2024). Enhancing Exploratory Learning through Exploratory Search with the Emergence of Large Language Models. arXiv Preprint arXiv:2408.08894 .Mahmoud Hawa, H., & Tılfarlıoğlu, F. Y. (2019). Students’ Learning Styles, Self-efficacy and its Correlation with their Social Interaction. Advances in Language and Literary Studies , 10 (4), 42. https://doi.org/10.7575/aiac.alls.v.10n.4p.42 
+
+McLeod, S. (2017). Kolb’s learning styles and experiential learning cycle. Simply Psychology , 5.
+
+Mekni, M., Baani, Z., & Sulieman, D. (2020). A smart virtual assistant for students. Proceedings of the 3rd International Conference on Applications of Intelligent Systems , 1–6. 
+
+Michel-Villarreal, R., Vilalta-Perdomo, E., Salinas-Navarro, D. E., Thierry-Aguilera, R., & Gerardou, F. S. (2023). Challenges and opportunities of generative AI for higher education as explained by ChatGPT. Education Sciences , 13 (9), 856. 
+
+Mittal, U., Sai, S., Chamola, V., & others. (2024). A comprehensive review on generative ai for education. IEEE Access .
+
+Morozevich, E. S., Korotkikh, V. S., & Kuznetsova, Y. A. (2022). The development of a model for a personalized learning path using machine learning methods. Бизнес-Информатика , 16 (2 (eng)), 21–35. 
+
+Murtaza, D. A., Fadare, S. A., Mocsir, O. M., Fadare, C., Natividad, L. R., Rafique, T., Akhtar, N., Shaheen, D. J., & Taj, R. (2024). From Theory To Practice: Harnessing Ai For Enhanced Teaching-Learning Dynamics .
+
+Newton, P. M., & Salvi, A. (2020). How common is belief in the learning styles neuromyth, and does it matter? A pragmatic systematic review. Frontiers in Education , 5, 602451. 
+
+Nguyen, H.-H., Do Trung, K., Duc, L. N., Hoang, L. D., Ba, P. T., & Nguyen, V. A. (2024). A model to create a personalized online course based on the student’s learning styles. Education and Information Technologies ,
+
+29 (1), 571–593. 
+
+Nunez, N. A., Fernández-Concha, R., & Cornejo-Meza, G. (2026). One size does not fit all: Customizing teaching and learning strategies with Generative AI. Frontiers in Education , 11 , 1699228. 
+
+Oladele, O. K. (2024). Challenges And Limitation Of Implementing Learning Style Theory .
+
+Oseremi Onesi-Ozigagun, Yinka James Ololade, Nsisong Louis Eyo-Udo, & Damilola Oluwaseun Ogundipe. (2024). REVOLUTIONIZING EDUCATION THROUGH AI: A COMPREHENSIVE REVIEW OF ENHANCING LEARNING EXPERIENCES. International Journal of Applied Research in Social Sciences , 6(4), 589–607. https://doi.org/10.51594/ijarss.v6i4.1011 Othman, N., & Amiruddin, M. H. (2010). Different Perspectives of Learning Styles from VARK Model. Procedia -Social and Behavioral Sciences , 7, 652–660. https://doi.org/10.1016/j.sbspro.2010.10.088 
+
+Özdemir, F. S., Bengü, H., & Turan, E. (2024). ARTIFICIAL IN℡LIGENCE IN ACCOUNTING EDUCATION: IDENTIFYING LEARNING STYLES AND ASSESSING INDIVIDUAL DIFFERENCES. Niğde Ömer Halisdemir Üniversitesi Sosyal Bilimler Enstitüsü Dergisi , 6(2), 417–436. 
+
+Pardamean, B., Suparyanto, T., Cenggoro, T. W., Sudigyo, D., & Anugrahana, A. (2022). AI-based learning style prediction in online learning for primary education. Ieee Access , 10 , 35725–35735. 
+
+Pashler, H., McDaniel, M., Rohrer, D., & Bjork, R. (2008). Learning styles: Concepts and evidence. Psychological Science in the Public Interest , 9(3), 105–119. 
+
+Pereira, R., Reis, A., Barroso, J., Sousa, J., & Pinto, T. (2022). Virtual assistants applications in education. 
+
+International Conference on Technology and Innovation in Learning, Teaching and Education , 468–480. 
+
+Pesovski, I., Santos, R., Henriques, R., & Trajkovik, V. (2024). Generative AI for Customizable Learning Experiences. Sustainability , 16 (7), 3034. https://doi.org/10.3390/su16073034 
+
+Peter, S. E., Bacon, E., & Dastbaz, M. (2009). Learning styles, Personalisation and Adaptable e-Learning .
+
+Randver, L. (2025). Impact of Personalized Learning Pathways Based on Felder-Silverman Learning Styles on Students’ Metacognitive Regulation Skills in Estonia. Research and Advances in Education , 4(3), 10–19. 
+
+Rao, C. S., & Arunachalam, A. (2021). Ensemble based learning style identification using VARK. 
+
+Rasheed, F., & Wahid, A. (2021). Learning style detection in E-learning systems using machine learning techniques. 
+
+Expert Systems with Applications , 174 , 114774. https://doi.org/10.1016/j.eswa.2021.114774 
+
+Ren, Y., Wong, W. L., Barrot, J., & Zhang, L. J. (2026). Learning Styles, Engagement and Anxiety in AI-Mediated Writing: A Multimodal Feedback Study. International Journal of Applied Linguistics .
+
+Rinekso, A. B. (2021). Pros and Cons of Learning Style: An Implication for English Language Teachers. Acuity: Journal of English Language Pedagogy, Literature and Culture , 6(1), 12–23. 
+
+Rishard, M., Jayasekara, S., Ekanayake, E., Wickramathilake, K., Reyal, S., Manathunga, K., & Wickramarathne, J. (2022). Adaptivo: A personalized adaptive e-learning system based on learning styles and prior knowledge. 
+
+2022 Seventh International Conference on Informatics and Computing (ICIC) , 1–9. Salinas-Navarro, D. E., Vilalta-Perdomo, E., Michel-Villarreal, R., & Montesinos, L. (2024a). Designing experiential learning activities with generative artificial intelligence tools for authentic assessment. 
+
+Interactive Technology and Smart Education .
+
+Salinas-Navarro, D. E., Vilalta-Perdomo, E., Michel-Villarreal, R., & Montesinos, L. (2024b). Using Generative Artificial Intelligence Tools to Explain and Enhance Experiential Learning for Authentic Assessment. 
+
+Education Sciences , 14 (1), 83. https://doi.org/10.3390/educsci14010083 
+
+Sangvigit, P., Mungsing, S., & Theeraroungchaisri, A. (2012). Correlation of Honey & Mumford Learning Styles and Online Learning media preference . 3.
+
+Sanjabi, T., & Montazer, G. A. (2020). Personalization of E-Learning Environment Using the Kolb’s Learning Style Model. 2020 6th International Conference on Web Research (ICWR) , 89–92. https://doi.org/10.1109/ICWR49608.2020.9122314 
+
+Saputra, J. P. B., Prabowo, H., Gaol, F. L., & Hertono, G. F. (2023). Identifying student learning styles using support vector machine in the Felder-Silverman learning style model. 2023 15th International Congress on Advanced Applied Informatics Winter (IIAI-AAI-Winter) , 149–154. 
+
+Sayed, W. S., Gamal, M., Abdelrazek, M., & El-Tantawy, S. (2020). Towards a learning style and knowledge level-based adaptive personalized platform for an effective and advanced learning for school students. Recent Advances in Engineering Mathematics and Physics: Proceedings of the International Conference RAEMP 2019 , 261–273. 
+
+Sensuse, D. I., Hasani, L. M., & Bagustari, B. (2020). Personalization Strategies Based on Felder-Silverman Learning Styles and Its Impact on Learning: A Literature Review. 2020 3rd International Conference on Computer and Informatics Engineering (IC2IE) , 293–298. https://doi.org/10.1109/IC2IE50715.2020.9274670 
+
+Sharma, S., & Yadav, R. (2022). Chat GPT – A Technological Remedy or Challenge for Education System. Global Journal of Enterprise Information System , 14 (4). 
+
+Shemshack, A., & Spector, J. M. (2020). A systematic literature review of personalized learning terms. Smart Learning Environments , 7(1), 33. https://doi.org/10.1186/s40561-020-00140-9 Sihombing, J. H., Laksitowening, K. A., & Darwiyanto, E. (2020). Personalized E-Learning Content Based On Felder-Silverman Learning Style Model. 2020 8th International Conference on Information and Communication Technology (ICoICT) , 1–6. https://doi.org/10.1109/ICoICT49345.2020.9166452 
+
+Sockanathan, S., & Tajuddin, J. M. (2024). Exploring the Application of the VARK Model to Enhance Student Engagement in the Classroom: A Case Study within the American Degree Transfer Program at Sunway University .
+
+Sun, R., & Deng, X. (2024). Using ChatGPT to Enhance Experiential Learning of College Students .
+
+Supangat, S., & Mohd Zainuri, B. S. (2020). Development of e-learning system using felder and silverman’s index of learning styles model. Development of E-Learning System Using Felder and Silverman’s Index of Learning Styles Model , 9(5), 8554–8561. 
+
+Tomić, D., Rastovski, D., & Ćurić, M. (2023). Exploring the VARK model: A review of the validity and reliability of the questionnaire and its relationship to learning outcomes. 12th International Scientific Symposium REGION, ENTREPRENEURSHIP, DEVELOPMENT, 2023 , 780–795. 
+
+Trifirò, C. E. V., & Laing, G. K. (2021). Learning Styles and Cognitive Traits in an On-Line Learning System. E-Journal of Business Education and Scholarship of Teaching , 15 (3), 36–47. 
+
+Troussas, C., Krouska, A., Mylonas, P., & Sgouropoulou, C. (2025). A Fuzzy-Neural Model for Personalized Learning Recommendations Grounded in Experiential Learning Theory. Information , 16 (5), 339. 
+
+Tzenios, N. (2020). Clustering Students for Personalized Health Education Based on Learning Styles .
+
+Vaccaro Jr, M., Friday, M., & Zaghi, A. (2024). Evaluating the capability of large language models to personalize science texts for diverse middle-school-age learners. arXiv Preprint arXiv:2408.05204 .
+
+Vanegas, C. V., Puerta, J. E. A., Ceballos, M. N., & Sánchez, J. M. M. (2024). Personalized learning: An adaptive approach based on the VARK model to improve distance education. Revista de Gestão Social e Ambiental ,
+
+18 (12), 1–17. 
+
+Villanueva, F. (2020). The Use of Kolb’s Learning Styles Inventory (LSI) in School Settings. BU Journal of Graduate Studies in Education , 12 (1), 42–45. 
+
+Waladi, C., Khaldi, M., & Lamarti Sefian, M. (2023). Machine Learning Approach for an Adaptive E-Learning System Based on Kolb Learning Styles. International Journal of Emerging Technologies in Learning (iJET) , 18 (12), 4–15. https://doi.org/10.3991/ijet.v18i12.39327 Wang, S., Xu, T., Li, H., Zhang, C., Liang, J., Tang, J., Yu, P. S., & Wen, Q. (2024). Large Language Models for Education: A Survey and Outlook (arXiv:2403.18105). arXiv. http://arxiv.org/abs/2403.18105 
+
+Weijers, R., De Castilho, G. F., Godbout, J.-F., Rabbany, R., & Pelrine, K. (2024). Quantifying learning-style adaptation in effectiveness of LLM teaching. Proceedings of the 1st Workshop on Personalization of Generative AI Systems (PERSONALIZE 2024) , 112–118. 
+
+Yu, H., & Guo, Y. (2023). Generative artificial intelligence empowers educational reform: Current status, issues, and prospects. Frontiers in Education , 8, 1183162. https://doi.org/10.3389/feduc.2023.1183162 
+
+Zagulova, D., Boltunova, V., Katalnikova, S., Prokofyeva, N., & Synytsya, K. (2019). Personalized E-Learning: Relation Between Felder– Silverman Model and Academic Performance. Applied Computer Systems ,
+
+24 (1), 25–31. https://doi.org/10.2478/acss-2019-0004 
+
+Zagulova, D., Prokofyeva, N., Yulia, K., Ziborova, V., Katalnikova, S., & Popova, Y. (2023). Personalization of Distance Learning: Using PLS-SEM for Analyzing the Possibility of Differentiating Students with the Felder-Silverman Learning Style Model. Procedia Computer Science , 225 , 3077–3085.

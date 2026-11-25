@@ -1,0 +1,433 @@
+Title: Share your Screen and Talk to Gemini: How Young Learners Interact with Multimodal GenAI While Solving Scratch Tasks
+
+URL Source: https://arxiv.org/pdf/2611.21306v1
+
+Published Time: Tue, 17 Nov 2026 05:57:55 GMT
+
+Number of Pages: 11
+
+Markdown Content:
+# Share your Screen and Talk to Gemini: How Young Learners Interact with Multimodal GenAI While Solving Scratch Tasks 
+
+# Sven Jacobs 
+
+University of Siegen Siegen, Germany sven.jacobs@uni-siegen.de 
+
+# Lukas Berning 
+
+University of Siegen Siegen, Germany lukas.berning@student.uni-siegen.de 
+
+# Natalie Kiesler 
+
+Nuremberg Tech Nuremberg, Germany natalie.kiesler@th-nuernberg.de 
+
+## Abstract 
+
+Children using Scratch to learn programming can struggle with text-heavy, lengthy explanations and hints during debugging. Ver-bal interactions based on screen sharing or camera data may be an interesting alternative for supporting learners. We therefore explore the quality, use, and perceptions of fifth- and sixth-graders’ verbal interactions with a GenAI tutor. The goal is to investigate the quality and use of the multimodal GenAI tutor in the given context. First of all, a pilot study of eight tasks conducted without students helped inform the process of the tutor’s classroom evalua-tion. The classroom study was realized after fifth- and sixth-graders had participated in six Scratch classroom lessons. Then 23 students were introduced to the tutor, worked on the eight tasks with the GenAI tutor, and completed a questionnaire. The analysis of the pilot and classroom study shows that the tutor’s responses were intelligible and actionable, and no single turn revealed a complete solution. However, the tutor missed existing errors in 61.5% of 603 error-related classroom turns, compared to 15.7% in the pilot study. Children’s voice prompts were brief and mostly responded to the tutor. Although a video had explained that responses could be incor-rect, 39.1% of the children trusted the tutor’s answers to always be correct. These findings have implications for educators and learners using multimodal GenAI tutors, as they need to be aware that an intelligible and human-like voice does not ensure correct support. For developers, our results suggest that screen sharing alone does not ensure responses that match the program state. 
+
+## CCS Concepts 
+
+• Social and professional topics → Computing education .
+
+## Keywords 
+
+Scratch, GenAI, multimodal, voice, tutoring, computing education 
+
+ACM Reference Format: 
+
+Sven Jacobs, Lukas Berning, and Natalie Kiesler. 2026. Share your Screen and Talk to Gemini: How Young Learners Interact with Multimodal GenAI While Solving Scratch Tasks. In Proceedings of The 21th WiPSCE Conference on Primary and Secondary Computing Education Research (WiPSCE ’27). 
+
+ACM, New York, NY, USA, 11 pages. https://doi.org/XXXXXXX.XXXXXXX  
+
+> WiPSCE ’27, Ljubljana, Slovenia
+> © 2026 Copyright held by the owner/author(s). Publication rights licensed to ACM. This is the author’s version of the work. It is posted here for your personal use. Not for redistribution. The definitive Version of Record was published in Proceedings of The 21th WiPSCE Conference on Primary and Secondary Computing Education Research (WiPSCE ’27) , https://doi.org/XXXXXXX.XXXXXXX.
+
+## 1 Introduction 
+
+In Scratch, children can learn to program by assembling visual blocks and creating animations, games, and stories [35]. When a program behaves unexpectedly, learners need to connect that behavior to the block(s) that produced it. In the classroom, providing individual debugging support is difficult when many learners need help at the same time. Teachers in lower secondary school describe this situation as the “hands-up problem” [11]. GenAI can offer on-demand assistance for programming [33], but research in higher education also identifies risks involving incorrect information and over-reliance [2, 32, 33]. At the same time, scoping reviews of GenAI in computing education report a research gap at the secondary level [1, 31, 46], and an overly positive narrative [23]. Research on young Scratch learners (aged 6-12) has explored hints [15] and GenAI-based guidance [5, 9]. However, text-based conversations with GenAI require learners to read explanations and type questions, while working with task instructions and block labels. This sometimes leads to children not reading hints precisely or not at all [16]. These findings lead us to consider alternatives to text-heavy assistance. Verbal interactions may be an alternative to reduce literacy barriers [5] (i.e., reduce reading and writing demands so pre- and early readers can succeed [7]). Multimodal generative artificial intelligence (GenAI) models can combine verbal and visual context from screen sharing or cameras and respond with text or audio with low latency [14]. These models could support learning across subjects and digital or physical settings without requiring integration into a specific learning application. Our goal is to investigate the quality and use of a GenAI tutor with screen sharing during Scratch lessons in grades 5 and 6. We use the term GenAI tutor to refer to Gemini 2.5 Flash Native Audio Preview in Google AI Studio, instructed through a system prompt to support children with Scratch tasks without revealing the solution. Children interact with the tutor by voice while sharing their Scratch browser tab. Our exploratory study combines an expert pilot with an analysis of classroom recordings and questionnaire responses from 23 children. We address the following research questions: RQ1 How can the GenAI tutor’s verbal responses be characterized while supporting a child with a Scratch task? 
+
+RQ2 How do fifth- and sixth-graders interact with the GenAI tutor while working on Scratch tasks? 
+
+RQ3 How do children perceive the GenAI tutor as a dialogue partner in terms of instructional support, trust in its responses, and verbal communication? 
+
+The present study contributes (1) an evaluation scheme adapted to verbal interactions with screen-sharing data as context, (2) a classroom analysis of tutor responses and children’s interactions, and (3) insights into children’s experiences and perspectives. arXiv:2611.21306v1 [cs.AI] 16 Nov 2026 WiPSCE ’27, February 03 – 05, 2027, Ljubljana, Slovenia Jacobs, Berning, Kiesler 
+
+## 2 Related Work 
+
+Program Analysis and Feedback in Scratch. Related research on Scratch programs analyzes learners’ Scratch programs and uses the resulting data to inform automatically provided feedback. For example, LitterBox detects well-known bug patterns and explains them to learners [10]. Whisker tests program behavior against spec-ifications [45], and NuzzleBug [6], as another example, serves as an interactive debugger. Even though these and other tools may help identify problems in a program, their educational value depends (among other things) on how the resulting feedback guides learners’ next steps. Using LitterBox [10] and Whisker [45] for Scratchlog analysis, Greifenstein et al. [15] investigated the content of hints (as a form of feedback) with 36 children (aged 7-12) from 10 pro-gramming courses. The children were asked to debug six Scratch programs using different types of hints. The study found that pro-cedural hints naming the bug’s location led to the most successful program repairs. Likewise, children rated the bug location as the most helpful information within the hint. In other related work, Greifenstein et al. [16] found that children attending a block-based robot-programming course valued having the choice between text and image hints. Some of them even preferred pictures, as they could avoid reading. Greifenstein et al. [16] note that textual hints, unlike pictures, can easily be delivered as verbal, i.e., audio output. Scratch Copilot [9] supports children’s ideation, implementation, and debugging through a text chat. In a study with 18 children (aged 7-12), it answered an estimated 70% of queries successfully. Ten children wished it could observe their screen to better understand their questions or to nudge them when they were doing something wrong. Druga and Ko [9] conclude that such assistants need better context awareness and recommend flexible multimodal inputs and outputs. Addressing this need for context, Si et al. [43] introduce VisionScratch, which combines Scratch project code with videos of program execution to diagnose bugs and generate repairs. Because some issues manifest only in the final rendered gameplay video, the videos serve as additional context for a GenAI model. The system applies targeted code changes and checks them by executing the modified project. Its evaluation on ten faulty projects focuses on correct bug identification and valid fixes. Children’s interactions with such tutoring support were not evaluated by Si et al. [43]. Overall, these studies motivate exploring alternatives to textual presentation (e.g., video and audio) of information and interactions in learning environments involving Scratch. 
+
+Multimodal Interaction in Programming Education. Ever since the advent of GenAI, there are several new ways to assist learners [33], for example, through chatbots [25, 38, 40] and feedback tools [3, 20, 21] using text. Multimodal interactions with GenAI have only recently been explored in programming education and learn-ing environments. Riegel et al. [36] studied text and speech-to-text input in the Prompt Programming web platform [30]. University students solved Prompt Problems by prompting GPT-4o-mini via voice or text to generate code, which they could run against prede-fined tests. Spoken prompts were automatically transcribed. Most students used and preferred text. One reason may have been the brevity of the prompts, which university students could write down fast. Another reason may have been due to speech recognition issues with the speech-to-text model used. In another study with elementary school students (grades 1-2), speech recognition also remained error-prone in noisy conditions even after fine-tuning the AI model on children’s voices [26]. Related work [22] further examined how novice programmers (aged 14-15) interacted via voiced prompts with a real-time GenAI voice tutor during programming tasks. They provided the model (gpt-4o-realtime-preview-2024-10-01 ) with current code and compiler output as context. Students primarily used the tutor for debugging. However, 28.6% (119/416) of the feedback outputs were incorrect, especially when the tutor attempted to verbalize code [22]. Similarly, Hou et al. [17] studied novices in higher education solv-ing a Parsons puzzle and a programming task using a platform with live screen sharing and audio interaction. They used the Google AI Studio platform with a multimodal model ( gemini-2.5-flash-preview-native-audio-dialog ). Participants valued the contin-uous availability of context. Yet, they also wanted time to formulate questions, push-to-talk input, and the possibility to interrupt the tutor as additional features [17]. Context seems to matter for voice agents even beyond program-ming. In cooking tasks, an AI agent without context produced irrel-evant responses and misinterpreted requests, whereas a context-aware agent led to more fluent interaction with more complex requests [18]. Si et al. [43] argue similarly for programs in Scratch: As correctness in Scratch is visually displayed, a video stream is required as context. 
+
+Multimodal Tutoring for Scratch. Within Scratch, ChatScratch [5] provides verbal interaction through a cascaded pipeline of speech recognition (Whisper), a large language model (GPT-4), and speech synthesis. The assistant answers children’s spoken questions by highlighting block categories and inserting block templates into the editor. Meowcrophone [12] lets children with motor disabilities edit Scratch programs through voice commands. Beyond these two systems, we could not find work that offers audio-based interac-tion within Scratch. At the same time, neither of these systems is a tutor with access to the child’s current workspace and stage. VisionScratch [43] and EcoScratch [44] use the visual program state, but without any verbal interactions. In contrast to cascaded pipelines, native-audio models process spoken input and generate spoken output within a single model [37]. Via Google’s Live API, Gemini 2.5 Flash Native Audio additionally accepts screen frames, and users can interrupt it at any time [14]. Such models have rarely been studied as real-time voice tutors for Python [22] and with screen sharing in higher education [17], but not yet in Scratch or younger learners. Therefore, the present work explores the response quality of a native-audio model with access to children’s Scratch screens, as well as the interactions and experiences of children in grades 5 and 6. 
+
+## 3 Methodology 
+
+We conducted an exploratory study of a multimodal GenAI tutor comprising a pilot and a classroom evaluation. In the pilot evalua-tion, we examined tutor responses to typical programming errors in Scratch projects. The findings informed the classroom evaluation. In the classroom evaluation, fifth- and sixth-graders worked indi-vidually on Scratch tasks with the tutor using speech and screen How Young Learners Interact with Multimodal GenAI While Solving Scratch Tasks WiPSCE ’27, February 03 – 05, 2027, Ljubljana, Slovenia 
+
+sharing. In the following, we will introduce the tutor’s setup before elaborating on the pilot and classroom study. Specifically, to address RQ1, we used qualitative content analysis to study the characteristics of tutor responses from both phases, considering the surrounding dialogue and Scratch screen recording. For RQ2, we analyzed the classroom recordings to characterize children’s voiced prompts. To address RQ3, we calculated counts and percentages from a questionnaire on perceived instructional support, trust in the tutor’s responses, and spoken communication. For the classroom evaluation, we followed the local regulatory re-quirements for conducting research in schools, which are as follows. School leadership provided written informed permission. Parents gave written informed consent to participation and could withdraw consent at any time. Consent covered audio and screen record-ings, transmission of speech and screen content to the Google service, and analysis and publication of pseudonymized data. We also asked all children for their consent and allowed them to stop participating at any time. The recordings contain only participating children and the teacher (who is also the second author), with no non-participants present. 
+
+## 3.1 GenAI Tutor Setup 
+
+We used Gemini 2.5 Flash Native Audio Preview in Google AI Studio [13] in a browser (Google Chrome) for the pilot study in November 2025 and the classroom study during December 2025. As we could only use the latest version of the model within Google AI Studio, the pilot study used gemini-2.5-flash-native-audio-preview-09-2025 . For the subsequent classroom study, we used 
+
+gemini-2.5-flash-nativeaudio-preview-12-2025 . The model receives voice prompts via microphone input and additional visual context (Scratch browser tab) via screen-share input (see Figure 1). 
+
+Figure 1: Google AI Studio Screen Sharing 
+
+We instructed the model via a system prompt to support a fifth-grade learner without revealing the solution (see Figure 2). We further included the task description in the prompt and printed it out on paper for the children. This decision was based on the laptop’s 14-inch screen, which did not leave enough space to open the task description and Scratch at the same time. With students navigating between tabs, the model may otherwise not have “seen” the task description. We prepared all prompts on each laptop before the sessions. All prompts only differ in the task description and are available in our supplementary data repository [19].    
+
+> # Role You are a friendly computer science teacher and Scratch expert. # Instruction Support the fifth-grade learner with the Scratch task without revealing the solution. # Student’s task The student is working on the following task on the Scratch website [41]: Task 1: Walk in a square:
+> •Program the cat to walk in a square when the green flag is clicked.
+> •Important: To make the movement visible, the cat must wait briefly after each step.
+> •At the end, it should be back exactly where it started and facing the same direction as at the beginning.
+
+Figure 2: System prompt for Task 1, translated from German. 
+
+## 3.2 Pilot Study 
+
+Before giving children access to the GenAI tool, we systematically tested it with eight tasks including subtasks. Four computer science teachers at the given school reviewed the tasks and provided verbal feedback. Based on that, we used multiple subtasks (e.g., 2.1, 2.2, and 2.3) instead of a single task. Based on their suggestions, we also moved the fourth task (originally the second) to the end. Teach-ers expected most children to complete Task 1 and parts of Task 2 within one lesson. Together, the designed worksheet included eight (sub-)tasks. All complete task descriptions and links to the original AppCamps material are available in our supplementary data repository [19]. Task 1 asked children to make the Scratch cat walk a square, pause after each movement, and return to its initial position and direction.             
+
+> Task 2was amaze-cleaning game with three subtasks (adapted from AppCamps materials). Children first made a starfish controllable with the ar-row keys (2.1). They then set its starting position to the lower-left and added a sound and a position reset on wall contact (2.2). Finally, they implemented banana-peel collection, including hiding the collected sprite, playing a sound, and increasing a score initialized to zero (2.3).
+> Task 3 involved catching falling raindrops (adapted from AppCamps materi-als). Its subtasks addressed horizontal mouse-controlled movement of a water-spider sprite and score initialization (3.1), repeated falling from random hori-zontal positions (3.2), and collision detection with sound and scoring (3.3).
+> Task 4 required making two sprites greet each other in sequence.
+> 1
+
+Figure 3: Tasks and subtasks for the evaluation 
+
+The second author taught the participating classes part-time and was also a computer science education student. For testing purposes, they identified three typical student errors for each of the eight tasks or subtasks based on their experience in these classes. Then each error was manually inserted into a Scratch project, and the 24 error cases were examined by the second author. To test the setting, a new verbal conversation was started for each error case using a studio microphone in a quiet room. Hence, the pilot comprised 124 tutor turns ( 𝑀 = 5.2 per dialog). Each dialog opened with a neutral description of the student’s error. The researcher asked follow-up questions about the error location without stating the solution, as a learner might do, until successful task completion. For all 24 cases, this stopping point was reached. WiPSCE ’27, February 03 – 05, 2027, Ljubljana, Slovenia Jacobs, Berning, Kiesler 
+
+The analysis of the pilot data followed the same method as in the classroom study, so the method is reported once in the meth-ods section. The pilot’s evaluation is reported in detail in Table 1, along with the classroom study’s results. The findings show that the tone was never offensive and never revealed the full answer. Nevertheless, some results were concerning. For example, in 15.3% (19/124) of turns, the tutor made a factual error. In 15.7% (8/51) of error-related responses, the tutor did not address an existing error, and in 4.8% (6/124) of responses, it diagnosed a non-existent error. These results led us to carefully reflect on our responsibility towards school children, and whether it was responsible to deploy the GenAI tutor at all. Our primary concern was the children’s wellbeing: a tutor that overlooks errors, invents non-existent ones, or points to the wrong location could confuse or discourage young learners. After weighing these risks, we decided to proceed only with safeguards. The tutor was used for a limited period (approx. 45 minutes), under continuous teacher supervision, and only after the children watched a video explaining the tutor can make mistakes. 
+
+## 3.3 Data Collection: Classroom Evaluation 
+
+In the following, we describe the data collection as part of the classroom evaluation. We introduce the overall process before and during the data collection and present the questionnaire used to gather children’s perceptions. We used the same Scratch tasks as in the pilot. Both the tasks and questionnaire are available in our supplementary data repository [19]. Consent was provided by all required stakeholders, as described above. 
+
+3.3.1 Preparation and Sampling. In preparation for the classroom study, each class participated in six 60-minute Scratch lessons taught in a team consisting of the second author and another Com-puter Science (CS) teacher. For both the grade 5 and grade 6 classes, these six Scratch lessons were the first programming lessons. All previous CS lessons had been unplugged (without computers) and covered topics other than programming. These six Scratch lessons were based on the Scratch intro and AppCamps materials, in which the children always had access to a reference solution, and most exercises were solved together. Children were then assessed via questions about these Scratch projects. We provide more details about these six lessons in our supplementary data repository [19]. Twenty-three children attending Realschule, a lower secondary school type in Germany’s tiered school system (grades 5–10, ISCED level 2), participated: six children from each of two grade 5 classes and two grade 6 classes. 12 identified as boys and 11 as girls, aged 9 to 13 years (mean age, 𝑀 = 11 .3). Participation was voluntary. The number of participants was also limited by the available lap-tops, the school’s internet connection, and the overall noise during data collection. When more than six children were present, we ran-domly selected six. The four classroom sessions took place during December 2025. Children interacted with the tutor by voice while sharing the Scratch browser tab on 14-inch laptops we provided. They wore headsets (Logitech 960) with microphones and sat at distributed positions around the classroom to reduce interference between conversations. We recorded the screen, audio input, and output with Open Broadcaster Software (OBS). 
+
+3.3.2 Classroom Protocol. The second author and teacher con-ducted all four sessions during 60-minute computer science lessons (one for each class, six children at a time). A different teacher taught the non-participating children in a different room. That means only the six students and the instructing teacher were together in one and the same room during the study. The procedure was as follows: (1) Introduction (10 minutes): Children received an explanation of Google AI Studio and watched a video, which demonstrated the tutor’s operation. It explained that responses could be incorrect, as observed in the pilot. The video and English subtitles are available in our supplementary data repository [19]. The teacher also encouraged children to question uncertain responses and to raise a hand when they had problems. (2) Task phase (45 minutes): Children worked individually on the worksheet with the tutor (see 3.1). The teacher restarted the tutor when necessary and occasionally provided content-related help. Children rarely talked to each other. (3) Questionnaire (5 minutes) 
+
+We recorded the laptop screens and the children’s and tutor’s speech with the Open Broadcaster Software (OBS). Classroom recordings lasted 38 to 53 minutes. We transcribed the recordings locally using the open-weight whisper-large-v3-turbo speech recog-nition model [34] and synchronized the speaker-labeled, times-tamped transcripts with the screen recordings in MAXQDA [24]. We checked and corrected every transcript against the recordings, retaining fillers, repetitions, and incomplete utterances. 
+
+3.3.3 Questionnaire. To address RQ3, we developed a study-specific questionnaire informed by the Partner Modelling Questionnaire (PMQ) [8, 42]. For our young participants, we created a shorter, statement-based format with simple wording and symbolic smileys. The reduced length, simplified wording, and symbols were intended to limit reading and response demands for fifth- and sixth-graders. Figure 5 shows all questions (Q1–Q10) and response options. The questionnaire comprised ten German-language statements rated on a five-category scale with labels and smileys: not at all true 
+
+(1, very sad smiley), rather not true (2, sad smiley), in between (3, neutral smiley), rather true (4, happy smiley), and exactly true (5, very happy smiley). The questionnaire overlaps conceptually with selected aspects of the PMQ but does not reproduce its item content or three-factor structure. The full questionnaire is available in our supplementary data repository [19]. 
+
+## 3.4 Data Analysis 
+
+We conducted a qualitative content analysis with a deductive coding framework [28]. We adapted the framework from prior evaluation schemes and refined it by coding the pilot and classroom recordings. We applied the revised coding rules to both datasets. The initial coding scheme combined categories from Maurya et al. [27] for the GenAI tutor turns (RQ1) and categories from Scholl et al. [39] (with the voice adaptation by Jacobs and Kiesler [22]) for children’s verbalized prompts (RQ2). The final scheme comprised twelve tutor-related response categories (see Table 1) and codes on children’s prompts (see Table 2). The first and second authors met twelve times for about two hours between February and June 2026 to jointly code approx. 20% of the material (app. 3,300 out of 16,656 code assignments, which corresponds to approx. 600 out of 2989 coding How Young Learners Interact with Multimodal GenAI While Solving Scratch Tasks WiPSCE ’27, February 03 – 05, 2027, Ljubljana, Slovenia 
+
+units). We also compared assignments, resolved disagreements by consensus, and refined the coding scheme. The second author applied the final coding scheme to the full sample. We treated one turn within the dialogue between child and GenAI tutor as coding unit, which was assigned multiple codes. Because a turn can only be assessed in relation to what it responds to (e.g., an answer in relation to the preceding question), the con-text unit always included the immediately preceding turn. When this was insufficient to make an unambiguous coding decision, we consulted earlier turns in the same dialogue and the corresponding sections of the screen recording as additional context. We also counted the number of words in each coded segment in the corrected German transcripts, excluding speaker labels and including fillers and repetitions. 
+
+3.4.1 Tutor Responses (RQ1). A tutor turn is defined by the tutor starting to “speak” until it ends or is interrupted. Within the 1,506 tutor segments, we identified four non-overlapping groups: 1,170 task-related content turns, 181 early-interrupted turns, 139 small-talk turns, and 16 other turns. Each of the 1,170 task-related content turns was assigned one label for each of the twelve dimensions (see Table 1), resulting in multiple labels per turn. We did not fur-ther code the 181 early-interrupted turns because the tutor was interrupted too early to make any sense of its answer. It means the tutor’s intent was not understandable because the turn was too short (i.e., interrupted too early). For the 1,170 task-related turns, we retained Maurya et al.’s [27] eight dimension concepts but adapted ( †) and expanded ( ‡) their categories. We operationalized all definitions for Scratch and spo-ken interaction. For example, mistake identification and coherence 
+
+incorporate the visible program state. We added subcategories for false-positive diagnoses, false locations, and turns without an error under discussion. Unlike the original partial-guidance category, which includes incorrect or incomplete guidance, our scheme sepa-rates incorrect guidance from incomplete or irrelevant guidance. It also distinguishes correct guidance with and without a next-step hint. Human-likeness asks whether the response sounds natural rather than robotic or artificial. In addition, we added four dimen-sions: factual correctness , elicitation of student input , auditory quality ,and overall impression informed by related work [22]. 
+
+3.4.2 Children’s Interactions (RQ2). We adapted the categories from related work [22, 39] to describe children’s turns, i.e., their voiced prompts, in the dialog with the GenAI tutor (see Table 2). Voice prompt categories distinguish standalone queries (STA), follow-ups to the child’s own prompt (PRE), responses to the tutor (RES), and corrections (COR). Categories reflecting issues comprise de-bugging (DE), block selection and assembly (CG, originally code generation [39]), next steps (PP, originally pair programming [22]), 
+
+problem understanding (PU), and conceptual understanding (CU). We counted solution requests (SR), requests to work alone or pause 
+
+(WAF), and small talk (ST) separately. In addition, we coded whether children were talking in parallel with the tutor or interrupted the tutor. We also coded unintended voice inputs (e.g., thinking aloud or background noise). To report which task the students worked on, we added codes for each task, i.e., task markers. We calculated how many turns overlap with each task marker and how many students worked on each task. 
+
+3.4.3 Questionnaire (RQ3). For the paper questionnaires, we digi-tized all responses and calculated counts and percentages per item. 
+
+## 4 Results 
+
+Although 24 students participated in the classroom evaluation, we excluded one fifth-grade child’s session (recordings and question-naire) because it contained only non-task-related interactions with the tutor. We thus analyzed 23 recordings and the corresponding 23 questionnaires. All data were pseudonymized using class and laptop number. Task markers indicated when students worked on each task: Task 1 was processed in 23 sessions, Task 2.1 in 19 sessions, and Task 2.2 in 1 session. No session progressed beyond Task 2.2. Task 1 accounted for 62.6% (732/1,170) of content turns, and subtask 2.1 for 35.5% (415/1,170). In the following, we present the analysis of the tutor’s responses, children’s interactions, and questionnaire responses to answer the three research questions. 
+
+## 4.1 RQ1: Characteristics of Tutor Responses 
+
+To address RQ1, we analyzed 1,170 GenAI tutor turns from the classroom study across twelve dimensions. Table 1 reports the complete category definitions, anchor examples, and frequency distributions. It further reports the analysis of 124 GenAI tutor turns from the pilot study. 
+
+4.1.1 Mistake Identification and Location. We report the Yes , To some extent , and No /No location subcategories of the mistake iden-tification and mistake location categories related to the 603 error-related tutor turns in the classroom, excluding the 567 content turns labeled No mistake present . The excluded category covers turns without an error present or currently discussed. Within these error-related turns, full identification accounted for 25.0% (151/603), whereas missed errors accounted for 61.5% (371/603). Missed errors occurred in all but one session. Per session, their share of error-related turns ranged from 0.0% (0/15) to 82.4% (42/51) ( 𝑀 = 55 .2%, 
+
+𝑆𝐷 = 21 .8) and was at least 50% in 15 of 23 sessions. The session with no errors missed contained 11 false positives instead. The tutor named a specific error location in 21.1% (127/603) and a false location in 13.6% (82/603). Across all content turns in the classroom, diagnoses of nonexistent errors, coded as False positive , accounted for 4.1% (48/1,170). As shown in Figure 4, the GenAI tutor repeat-edly does not recognize an error. At the same time, these turns can be factually correct. For example, the tutor may just focus on something else (see Figure 4, turn 7). 
+
+4.1.2 Guidance and Revealing of the Answer. For providing guidance ,60.0% (702/1,170) of classroom turns offered correct, relevant sup-port. Incorrect instructions occurred in 19.7% (231/1,170), compared to 7.3% (9/124) in the pilot. Correct guidance included a next-step hint in 28.5% (334/1,170) of classroom turns. This differs from reveal-ing of the answer , which denotes a complete task solution within a turn. Although this never occurred, it does not mean the tutor did not provide a complete solution over a series of turns. 
+
+4.1.3 Actionability, Coherence, and Elicitation. For actionability ,95.8% (1,121/1,170) of classroom turns referred to a next action or reflection. Coherence with the preceding utterance or action was rated positively in 80.3% (939/1,170), compared with 100.0% (124/124) in the pilot. Regarding the code elicitation of student input ,WiPSCE ’27, February 03 – 05, 2027, Ljubljana, Slovenia Jacobs, Berning, Kiesler 
+
+Table 1: Tutor-response codes, definitions, and frequencies (RQ1) 
+
+Code and definition Anchor example (translated) Pilot 
+
+𝑁 = 124 
+
+Classroom 
+
+𝑁 = 1,170 
+
+Mistake identification † - Has the tutor identified/recognized a mistake in a student’s response? 
+
+Yes : Correctly identifies the error under discussion. “You set ‘right’ to 270 degrees. That is the angle for left.” 31 (25.0%) 151 (12.9%) 
+
+To some extent : Suggests an error only vaguely or implicitly. “Not quite. [...] Is it facing the same direction as at the start?” 6 (4.8%) 33 (2.8%) 
+
+No (Mistake not recognized) : Misses an existing error. “Now the blocks are nested correctly.” [But they are not nested correctly.] 8 (6.5%) 371 (31.7%) 
+
+False positive ‡: Diagnoses a nonexistent error. “You used the "set x to" block [...] you need the "change x by" block from the blue "Motion" category instead. ” [Child already used the "change x by" block.] 6 (4.8%) 48 (4.1%) 
+
+No mistake present ‡: No error is present or currently discussed. “That is the block that sends the cat to a specific position.” 73 (58.9%) 567 (48.5%) 
+
+Mistake location - Does the tutor’s response accurately point to a genuine mistake and its location? 
+
+Yes : Names the erroneous block or parameter. “You took the ‘repeat forever’ block, but a square only has four sides.” 13 (10.5%) 127 (10.9%) 
+
+To some extent : Names only a broad region, category, or sprite. “Have a look in the ‘Motion’ category.” 19 (15.3%) 28 (2.4%) 
+
+No Location †: Does not locate the error. [Child: Is it 300 degrees?] “Almost. A full turn is 360 degrees.” 1 (0.8%) 366 (31.3%) 
+
+False Location ‡: Points to the wrong location. “Take a close look at how the "move 10 steps" block can be inserted into the repeat loop. ” [The "move 10 steps" block was already correct.] 18 (14.5%) 82 (7.0%) 
+
+No mistake present ‡: No error location applies. “Great! 90 degrees is perfect for the corners.” 73 (58.9%) 567 (48.5%) 
+
+Revealing of the answer - Does the tutor reveal the final answer (whether correct or not)? 
+
+Yes (correct) : Unpromptedly supplies the correct complete solution. [No occurrence in either phase.] 0 (0.0%) 0 (0.0%) 
+
+Yes (incorrect) : Provides an incorrect complete task solution. [No occurrence in either phase.] 0 (0.0%) 0 (0.0%) 
+
+No : Does not provide a complete task solution. “A square has four sides of equal length.” 124 (100.0%) 1,170 (100.0%) 
+
+Providing guidance - Does the tutor offer correct and relevant guidance, such as an explanation, elaboration, hint, examples, and so on? 
+
+Yes (without next-step hint) †: Correct and relevant, but without concrete next-step hint. “‘Move 10 steps’ moves the cat forward. Where would you have to insert this block so the cat also moves after each turn?” 48 (38.7%) 368 (31.5%) 
+
+Yes (with next-step hint) †: Correct and relevant next-step hint. “Drag the ‘change x by 10’ block under ‘when right arrow key pressed’.” 28 (22.6%) 334 (28.5%) 
+
+To some extent †: Incomplete or redundant. Irrelevant or visually misleading guidance. [Child asks which start block to use.] “To start the program, just click the green flag [...]” 16 (12.9%) 220 (18.8%) 
+
+Incorrect ‡: Gives a factually incorrect instruction. “For the ‘down arrow’, the block ‘point in direction minus 90’ goes underneath.” [Minus 90 points left.] 9 (7.3%) 231 (19.7%) 
+
+No : Offers no didactic guidance. “It walks a bit, waits briefly, and turns. That is already great.” 23 (18.5%) 17 (1.5%) 
+
+Actionability - Is it clear from the tutor’s feedback what the student should do next? 
+
+Yes : Makes the next action or reflection clear. “Just click the word ‘space’ in the yellow block.” 99 (79.8%) 1,121 (95.8%) 
+
+To some extent : Suggests action but leaves the next step unclear. “Think about the task. The cat should end up exactly where it started.” 0 (0.0%) 11 (0.9%) 
+
+No : Does not suggest action or closes the interaction. “You have already taken the ‘when green flag clicked’ block.” 25 (20.2%) 38 (3.2%) 
+
+Coherence † - Is the tutor’s response logically consistent with the student’s previous responses? 
+
+Yes : Fits the student’s preceding utterance or action. [Child: But it does not go up.] “[...] You need ‘change y by 10’ to move it up.” 124 (100.0%) 939 (80.3%) 
+
+To some extent : Stays on topic but partly misreads the context. [Child: How do I make the starfish go straight?] “Ah, so you mean the speed.” 0 (0.0%) 165 (14.1%) 
+
+No : Is unrelated or ignores the current contribution. [Child: Should I write six times there?] “You mean changing the 15 degrees to 90? That would be great.” 0 (0.0%) 66 (5.6%) 
+
+Tutor tone - Is the tutor’s response encouraging, neutral, or offensive? 
+
+Encouraging : Explicitly praises, supports, or empathizes. “You mean changing the 15 degrees to 90? That would be great.” 60 (48.4%) 592 (50.6%) 
+
+Neutral : Uses an unmarked, factual tone. “Which direction would be correct for the up arrow?” 64 (51.6%) 578 (49.4%) 
+
+Offensive : Is impatient, belittling, or frustrating. [No occurrence in either phase.] 0 (0.0%) 0 (0.0%) 
+
+Human-likeness † - Does the tutor’s response sound natural rather than robotic or artificial? 
+
+Yes : Sounds natural, fluent, and conversational. “Did you place the ‘when green flag clicked’ block at the very top?” 123 (99.2%) 1,145 (97.9%) 
+
+To some extent : Grammatically correct, but stiff, formulaic, repetitive, or containing minor language artifacts. “Then insert the block ... Then insert the ‘wait 1 second’ block [...]” 1 (0.8%) 25 (2.1%) 
+
+No : Sounds robotic or exposes system-role artifacts. [No occurrence in either phase.] 0 (0.0%) 0 (0.0%) 
+
+Factual correctness ‡ - Is the tutor’s response factually correct based on given context? 
+
+Yes : All factual statements are correct. “Look in the Events category. Those are the yellow blocks.” 99 (79.8%) 747 (63.8%) 
+
+To some extent : Is imprecise or misleading through omission. [Task 1: Walk a square.] “It must go straight four times.” [Turning omitted.] 6 (4.8%) 224 (19.1%) 
+
+No : Makes a central factual error. “You need the ‘repeat 4’ block from the blue blocks.” [Control is orange.] 19 (15.3%) 199 (17.0%) 
+
+Elicitation of student input/answer ‡ - Does the tutor’s response prompt the student to think and contribute, e.g., by asking a question? 
+
+Yes : Asks an open question. “What does the cat have to do to turn the corner and walk the next side?” 50 (40.3%) 642 (54.9%) 
+
+To some extent : Asks a simple closed or yes/no check. “Have a look at the block that says ‘when key pressed’. Can you find it?” 42 (33.9%) 205 (17.5%) 
+
+No : Does not elicit an answer. “For the down arrow you need a minus [...]” 32 (25.8%) 323 (27.6%) 
+
+Auditory quality ‡ - Is the tutor’s spoken response clearly understandable and free of disturbing speech artifacts? 
+
+Intelligible : Intelligible, clear speech without disturbing artifacts. “Hello, you want the cat to walk a square, right?” 123 (99.2%) 1,151 (98.4%) 
+
+Mostly intelligible : Intelligible despite minor speech artifacts. “Whi... Which block tells the program to start [...]?” [Stutter.] 1 (0.8%) 17 (1.5%) 
+
+Unintelligible : Is unintelligible, severely disrupted, or choppy. “Would you like to start with that ... start, to program the upward movement?” [Stutter, not understandable.] 0 (0.0%) 2 (0.2%) 
+
+Overall impression ‡ - Taken as a whole, does the tutor’s response support the student’s progress? (from an external perspective) 
+
+Helpful : Correctly and helpfully supports progress. “For ‘left arrow’ the direction should be minus 90 so the starfish goes left.” 95 (76.6%) 622 (53.2%) 
+
+Acceptable : Is neither clearly helpful nor obstructive. [Child: When I click left, it does not go left.] “Ah, I see.” 8 (6.5%) 155 (13.2%) 
+
+Unhelpful : Misleads, confuses, or obstructs progress. [Child: It did not work at all.] “Wonderful! Now we have programmed the square.” 21 (16.9%) 393 (33.6%) 
+
+Note. Cells show 𝑛 (%) within each dimension; each content turn receives exactly one category per dimension. Mistake-turn percentages in the text use a subset. Dimensions are c.f. related work [22, 27] unless † adapted or ‡ added. Examples are translated excerpts from originally coded classroom turns; brackets mark omissions or editorial context. The anchor examples only describe the transcript and can only partially describe what is available in the full screen recordings. How Young Learners Interact with Multimodal GenAI While Solving Scratch Tasks WiPSCE ’27, February 03 – 05, 2027, Ljubljana, Slovenia 
+
+Table 2: Codes related to children’s interactions, prompts, definitions, and frequencies (RQ2) 
+
+Code and definition Anchor example (translated) 𝑛 (%)* 
+
+Voice prompt (exactly one per coding segment if not unintended voice input or small talk) n=1,216 
+
+STA: Standalone query : Initial or independent request without reference to prior dialog. “What if it is supposed to go up?” 52 (4.3%) 
+
+PRE: Follow-up to own prompt : Builds on the child’s preceding request. “Can you help me improve it? [Follows the child’s own ‘It is not finished yet’.]” 6 (0.5%) 
+
+RES: Response to tutor : Responds to a tutor question, instruction, or remark. “Should I type 100 now? [After the tutor suggests 100 steps.]” 1,104 (90.8%) 
+
+COR: Correction : Corrects the tutor’s content, tone, or pace. “No, it is not there. It says ‘turn 15 degrees’ and below it ‘move 10 steps’.” 54 (4.4%) 
+
+Issue or problem-solving step addressed in voice prompt (zero or more per voice prompt) n=403 
+
+DE: Debugging : Describes, locates, or attempts to fix unexpected behavior. “Why does my game not start?” 147 (36.5%) 
+
+CG: Block selection and assembly : Requests a block, structure, or assembly instruction. “Which block would I need from Motion ... how many steps should I put in there?” 156 (38.7%) 
+
+PP: Next step : Asks unspecifically for the next small development step. “What comes next?” 101 (25.1%) 
+
+PU: Problem understanding : Seeks clarification of the task or its requirements. “AI, is the task already finished like this?” 11 (2.7%) 
+
+CU: Conceptual understanding : Asks about a general programming concept. [No occurrence.] 0 (0.0%) 
+
+Other addressed in voice prompt (zero or one per voice prompt) 
+
+WAF: Work alone first / pause : Requests independent work time or a pause in tutor speech. “One moment. This takes a bit.” 54 
+
+SR: Solution request : Explicitly requests a complete solution. “Could you tell me every single step, every single block I need?” 12 
+
+Small talk (excluded from voice prompts) 
+
+Greeting : Opens or closes a social exchange. “Hello, can you see me? ... Hey.” 45 
+
+Social interaction : Converses socially rather than about the task. “Do you have a father? Do you have a family?” 100 
+
+Insult : Addresses the tutor derogatorily. “Gemini. I don’t like you.” 14 
+
+Other language : Requests or uses another language socially. “Can you speak Turkish?” 8
+
+Other task : Raises a task outside the programming activity. “How much is 400 divided by 5 plus 11 times 14 plus 100?” 6
+
+Praise : Expresses appreciation of the tutor. “Oh. Gemini, you are very smart.” 3
+
+Singing : Sings or hums. “[Child sings:] Lelalalelu” 2
+
+Interaction markers 
+
+Interrupts the tutor : Speaks before the tutor finishes and cuts off its speech. “Four times. [Cuts off the tutor’s sentence.]” 220 
+
+Parallel talk : Speaks simultaneously while the tutor continues. “Wait, wait. [Spoken while the tutor continues.]” 96 
+
+Unintended voice input (excluded from voice prompts) 
+
+Talking to someone else : Child addresses a peer or teacher rather than the tutor. “[To other person:] When I tell it that it does not run right, it says that is great.” 40 
+
+Thinking aloud : Child verbalizes thoughts without addressing the tutor. “But now I get it a bit. It is not that hard. Yes. [Said to oneself.]” 29 
+
+Another speaker : The microphone picks up someone other than the child. “[Teacher to the class:] If something breaks, just raise your hand.” 13 
+
+Background noise : Picks up ambient sound. [Transcript marker: background noise.] 7
+
+Note. Adapted from [39] and [22]. *Percentages use all voice prompts (n=1,216) or the voice prompts that address at least one issue (n=403). 
+
+54.9% (642/1,170) of GenAI turns in the classroom contained open questions, and 27.6% (323/1,170) did not elicit a human response. 
+
+4.1.4 Spoken Delivery. Human-likeness and auditory quality re-ceived positive ratings in 97.9% (1,145/1,170) and 98.4% (1,151/1,170) of classroom turns, respectively. The tutor tone was encouraging in 50.6% (592/1,170), with the remaining turns rated neutral. Neither phase contained any offensive turns. 
+
+4.1.5 Factual Correctness and Overall Impression. The high ratings for spoken delivery contrasted with the factual correctness ratings: all statements were coded as factually correct in 63.8% (747/1,170) of classroom turns and 79.8% (99/124) of pilot turns. Factual errors by the tutor occurred in both phases: in 17.0% (199/1,170) of classroom turns, and in 15.3% (19/124) of pilot turns. Per session, the share of factually correct turns ranged from 46.4% (13/28) to 93.5% (29/31) (𝑀 = 65 .5%, 𝑆𝐷 = 14 .1). The overall impression was labeled as helpful in 53.2% (622/1,170) of cases. In comparison, during the pilot study, overall impressions of tutor turns were labeled helpful in 76.6% (95/124) of cases. 
+
+## 4.2 RQ2: Children’s Interactions with the Tutor 
+
+To address RQ2, we analyzed the 1,216 voice prompts from the children addressing the tutor, which included small talk, visual references, turn-taking, and unintended voice input. Table 2 reports the interaction scheme with definitions, examples, and frequencies. 
+
+4.2.1 Follow-up Interactions and Issues Addressed. Most of the voice prompts were responses to the tutor (RES): 90.8% (1,104/1,216) answered a question, instruction, or followed-up based on a re-mark of the tutor. Children rarely started a new exchange them-selves. Standalone queries (STA) accounted for 4.3% (52/1,216) and 
+
+follow-ups to their own prompt (PRE) for 0.5% (6/1,216). In 4.4% (54/1,216), children corrected the tutor’s content, tone, or pace (COR). Children’s voice prompts were short ( 𝑀𝑑𝑛 = 6 words, 
+
+𝑀 = 8.7, 𝑆𝐷 = 10 .4): 29.2% (355/1,216) comprised at most three words, and “yes” was the most frequent prompt. In contrast, the tutor’s content turns comprised about four times as many words (𝑀𝑑𝑛 = 34 words, 𝑀 = 34 .5, 𝑆𝐷 = 12 .2). One third of the voice prompts, 33.1% (403/1,216), addressed a specific issue or problem-solving step. Requests for block selection and assembly (CG) accounted for 38.7% (156/403) of these prompts and debugging (DE) for 36.5% (147/403). Unspecific requests for the 
+
+next step (PP) followed with 25.1% (101/403). Questions about the task itself (PU) were rare, 2.7% (11/403), and questions about a gen-eral programming concept (CU) did not occur. In addition, twelve prompts requested the complete solution (SR), and 54 prompts asked to work alone or to pause the tutor (WAF). Corrections and pause requests also served to control the pace of the exchange, for WiPSCE ’27, February 03 – 05, 2027, Ljubljana, Slovenia Jacobs, Berning, Kiesler AI tutor · 1                                 
+
+> Great. You can see the cat move a little and then turn. To make it go around the whole square, you need to connect the move 10 steps block to the turn 90 degrees block inside the loop. Have you tried that yet?
+> S0
+> when clicked move 10 steps turn 90 degrees move 10 steps repeat 4
+> Child · 2
+> Uh. Yes.
+> AI tutor · 3 correct ·mistake identified
+> Very good. Now the blocks are nested correctly.
+> Note: Ambiguous “Yes” is taken as “done”; the loop in S0 is empty.
+> Child · 4 interrupts ·corrects pace
+> Wait. No.
+> AI tutor · 5 correct ·mistake identified
+> The blocks are now nested correctly. What’s the next thing you—
+> Child · 6 interrupts ·corrects pace
+> Wait. No, wait. No, wait. Can’t you wait?
+> Child changes both move values from 10 to 20.
+> S1
+> when clicked move 20 steps turn 90 degrees move 20 steps repeat 4
+> AI tutor · 7 correct ·mistake identified
+> You’ve changed the step size to 20. That’s a good idea. What happens when you run the program now?
+> 1
+
+Figure 4: Example Dialogue Between Child and GenAI Tutor 
+
+example, “I am not finished” (COR) and “No. Could you please be quiet? Thank you” (WAF). 
+
+4.2.2 Small Talk and Visual References. Children’s turns were coded as small talk (ST) in 178 cases: 45 were greetings and 100 social con-versations, for example about the GenAI tutor’s family. 14 insults occurred, 8 contributions were in or about another language, and 11 other contributions comprised other tasks, praise, and singing. 
+
+4.2.3 Turn-taking and Unintended Input. Children interrupted the tutor 220 times and spoke 96 times while the tutor continued. The microphone also captured 89 utterances that we interpret as unin-tended voice inputs, because they were not addressed to the GenAI tutor. For example, children were talking to a peer or the teacher (40), thought out loud (29), another person was speaking (13), or Q1: Th e AI immediately noticed what was wrong in my program 2 3 11 5 2                                             
+
+> Q2: Th e AI told me exactly where to make a change 28526
+> Q3: Th e AI talked about what I saw on my screen 4837
+> Q4: A ft er the response, I immediately knew what to do next 46652
+> Q5: Th e AI helped me understand the error myself and did not just tell me the solution 39452
+> Q6: I trusted the AI's answers to always be correct 42836
+> Q7: I noticed that the AI sometimes talked nonsense or made mistakes 54725
+> Q8: I could clearly understand the voice 6313
+> Q9: Th e AI sounded friendly and patient 23413
+> Q10: Th e AI talked to me like a real person 3676
+> 1 Not at all true 4 Rather true 2 Rather not true 5 Exactly true 3 In between
+
+Figure 5: Children’s ratings of tutor support, trust, and spo-ken interaction ( 𝑛 = 23 ). 
+
+it was background noise (7). We excluded these unintended inputs from the voice prompts. 
+
+## 4.3 RQ3: Children’s Reported Experiences 
+
+To address RQ3, we analyzed the 23 questionnaires of the same stu-dents who completed the introduction and task phase. All children answered every rating item. Figure 5 shows their statements (trans-lated from German) and response distributions. In the following, we treat rather true (4) and exactly true (5) as agreement and not at all true (1) and rather not true (2) as disagreement with a statement. 
+
+4.3.1 Perceived Support and Trust. In Q1–Q5, we asked about the GenAI tutor’s perceived support. Agreement with the five pre-sented statements ranged from 30.4% (7/23) to 43.5% (10/23). Chil-dren agreed most often, 43.5% (10/23), that the tutor talked about what they saw on their screen (Q3). The statement that the tutor immediately noticed what was wrong in the program (Q1) received agreement from 30.4% (7/23), while eleven children chose in be-tween . Responses to whether the tutor told them exactly where to make a change (Q2) were split: 34.8% (8/23) agreed, and ten children disagreed, eight of them choosing rather not true . For the question about immediately knowing what to do next after a tutor’s response (Q4), agreement was 30.4% (7/23) and disagreement 43.5% (10/23). Disagreement was highest for Q5. Twelve children rejected the statement that the tutor helped them understand the error them-selves, compared to 30.4% (7/23) who agreed. Trust ratings were divided as well. Of the children, 39.1% (9/23) trusted the tutor’s answers to always be correct (Q6), six disagreed, and eight chose 
+
+in between . Fewer children, 30.4% (7/23), reported noticing that the tutor sometimes talked nonsense or made mistakes (Q7), whereas nine disagreed with this statement. How Young Learners Interact with Multimodal GenAI While Solving Scratch Tasks WiPSCE ’27, February 03 – 05, 2027, Ljubljana, Slovenia 
+
+4.3.2 Spoken Interaction. Children agreed more often with the three statements about spoken delivery (Q8–Q10) than with those about support and trust (Q1–Q7). Clear understanding of the gen-erated voice output (Q8) reached 69.6% (16/23) agreement, and no child selected not at all true for this item. A friendly and patient voice (Q9) received the highest level of agreement among all items, at 73.9% (17/23). Agreement that the tutor talked like a real person (Q10) was 56.5% (13/23), with four children disagreeing. 
+
+4.3.3 Task Difficulty. Overall, the children rated tasks 1, 2.1, and 2.2 together as moderately difficult (15/23), while four rated them as easy and four as difficult. 
+
+## 5 Discussion 
+
+Intelligible, but Unreliable Tutor. The tutor missed an existing error in 61.5% (371/603) of error-related turns in the classroom study (compared to 15.7% (8/51) in the pilot). At the same time, 95.8% (1,121/1,170) of its turns were actionable, and no single turn revealed a complete solution. The GenAI tutor named a specific error location in only 21.1% (127/603) of error-related turns and a false location in 13.6% (82/603). This seems unfortunate, given that children in a Scratch debugging study identified the bug location as crucial for helpful hints [15]. Figure 4 also shows how the GenAI tutor can fail: after the child answers “yes”, the tutor confirms a nesting that is missing on the screen. Nonetheless, 98.4% (1,151/1,170) of the tutor’s turns were intelligible, and only one child could not clearly understand the voice. Yet, this is a precondition for using speech to lower reading and writing demands [5, 16]. Only 30.4% (7/23) of children agreed that the tutor helped them understand an error, and 53.2% (622/1,170) of turns were judged helpful (overall impression). Although a video had explained that responses could be incorrect, 39.1% (9/23) of the children trusted the tutor’s answers to always be correct, and only 30.4% (7/23) reported noticing mistakes. Similarly, ninth graders rated a voice tutor relatively high on competence, although 28.6% (119/416) of its feedback was incorrect [22]. 
+
+Short Voiced Prompts from Young Learners. Children’s verbal-ized prompts were brief: 29.2% (355/1,216) comprised at most three words, and “yes” was the most frequent one (RQ2). Most prompts, 90.8% (1,104/1,216), were responses (RES) to the tutor, and only 4.3% (52/1,216) were standalone queries (STA). One reason may be the GenAI tutor, which included an open question in 54.9% (642/1,170) of its responses or a simple closed question in 17.5% (205/1,170) of its responses. An additional factor could be the children’s ability to put what they need into words. The six preparatory Scratch lessons were their first programming lessons, so their CS vocabulary for naming blocks or describing errors was likely limited. Age may also contribute, although we did not assess language skills. In her review of help-seeking in children, Nelson-Le Gall [29] notes that young children often indicate verbally that they have understood when they have not. Instead, they may express their lack of understanding nonverbally. The GenAI tutor used in this study does not capture nonverbal expressions. Therefore, some “yes” responses may not indicate understanding or may be misleading (as in Figure 4). Children also have to learn which context a GenAI tool needs. In the text chat of Scratch Copilot, the assistant often misunderstood vague questions such as “Make it bigger?” about an on-screen character [9]. Similarly, children aged 7-12 learned over time how to phrase questions to a Google Home device [4]. Screen sharing could make such references resolvable, but only if the tutor correctly perceives the program state. 
+
+Screen Sharing Without Program State. The gap between pilot and classroom has several possible explanations. In the pilot, an adult described one inserted error at a time through a studio micro-phone (subsection 3.1). In the classroom, children answered briefly, interrupted the tutor, and the microphone captured unintended speech, conditions that impaired speech recognition in another spoken tutor for children [26]. Because the model is a black box, we cannot determine whether its errors originated from the screen frames, the children’s speech, or something else. 
+
+## 6 Threats to Validity 
+
+Some limitations should be noted when interpreting our results. For example, the study involved children from four classes at one school, using German and one tutor setup. Voluntary participation and space limitations may have biased the sample. Moreover, prior Scratch instruction does not establish equal individual knowledge or competency. Teacher assistance and peer conversations may also have affected the interactions. Another aspect is that the main coder (and second author) taught the classes, conducted the pilot, and ran the classroom sessions. These overlapping roles may have influenced judgments and led to bias. The first author independently coded four sessions and reviewed the remaining assignments, and both authors resolved disagreements by consensus. However, no inter-rater agreement estimate is available. It should further be noted that the analysis describes turns nested within sessions rather than independent observations of distinct errors, i.e., several ratings can concern one and the same unresolved error (e.g., Figure 4). Finally, the questionnaire only captured retrospective experiences of the lesson, including technical difficulties. 
+
+## 7 Conclusions 
+
+We studied a multimodal GenAI tutor (Gemini 2.5 Flash Native Audio Preview in Google AI Studio) with screen sharing in Scratch lessons of grades 5 and 6, combining an expert pilot, a content anal-ysis of 1,170 tutor turns and 1,216 voice prompts from 23 children in a classroom, and a questionnaire. Regarding RQ1, the tutor’s responses were intelligible and actionable, and no single turn re-vealed a complete solution, but they missed existing errors in 61.5% (371/603) of error-related turns, far more often than in the pilot, and often did not locate them. For RQ2, children’s voice prompts were brief and mostly responded to the tutor. Children regulated the pace through pause requests and interruptions. Concerning RQ3, children rated the voice more favorably than the content, and many trusted answers that were not always correct. The present study contributes (1) an evaluation scheme adapted to verbal interactions with screen-sharing data as context, (2) a classroom analysis show-ing that screen access did not ensure tutor responses matching the program state in our setting, and (3) insights into children’s experiences and perspectives. Future work should develop custom multimodal GenAI tutor variants with access to the project state and benchmark multimodal GenAI under authentic classroom con-ditions. WiPSCE ’27, February 03 – 05, 2027, Ljubljana, Slovenia Jacobs, Berning, Kiesler 
+
+## References 
+
+[1] Erik Barendsen, Violetta Lonati, Keith Quille, Rukiye Altin, Monica Divitini, Sara Hooshangi, Oscar Karnalim, Natalie Kiesler, Madison Melton, Calkin Suero Mon-tero, and Anna Morpurgo. 2025. Teaching and Learning AI in K-12 Informatics Education. In 2024 Working Group Reports on 1st ACM Virtual Global Computing Education Conference (USA) (SIGCSE Virtual–WGR 2024) . ACM, New York, NY, USA, 15–40. doi:10.1145/3708550.3730560 [2] Seth Bernstein, Ashfin Rahman, Nadia Sharifi, Ariunjargal Terbish, and Stephen MacNeil. 2025. Beyond the Benefits: A Systematic Review of the Harms and Consequences of Generative AI in Computing Education. In Proceedings of the 25th Koli Calling International Conference on Computing Education Research (Koli, Finland) (Koli Calling ’25) . ACM, New York, NY, USA, Article 7, 18 pages. doi:10. 1145/3769994.3770036 [3] Anastasiia Birillo, Elizaveta Artser, Anna Potriasaeva, Ilya Vlasov, Katsiaryna Dzialets, Yaroslav Golubev, Igor Gerasimov, Hieke Keuning, and Timofey Bryksin. 2024. One Step at a Time: Combining LLMs and Static Analysis to Generate Next-Step Hints for Programming Tasks. In Proceedings of the 24th Koli Calling International Conference on Computing Education Research . ACM, Koli Finland, 1–12. doi:10.1145/3699538.3699556 [4] Laura Butler and Louise Starkey. 2024. OK Google, Help Me Learn: An Exploratory Study of Voice-Activated Artificial Intelligence in the Classroom. Technology, Pedagogy and Education 33, 2 (2024), 135–148. doi:10.1080/1475939X.2024.2311779 [5] Liuqing Chen, Shuhong Xiao, Yunnong Chen, Yaxuan Song, Ruoyu Wu, and Lingyun Sun. 2024. ChatScratch: An AI-Augmented System Toward Autonomous Visual Programming Learning for Children Aged 6-12. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI ’24) . ACM, New York, NY, USA, 19 pages. doi:10.1145/3613904.3642229 [6] Adina Deiner and Gordon Fraser. 2024. NuzzleBug: Debugging Block-Based Programs in Scratch. In Proceedings of the IEEE/ACM 46th International Conference on Software Engineering (ICSE ’24) . ACM, New York, NY, USA, 1–13. doi:10.1145/ 3597503.3623331 [7] Griffin Dietz, Nadin Tamer, Carina Ly, Jimmy K Le, and James A. Landay. 2023. Visual StoryCoder: A Multimodal Programming Environment for Children’s Creation of Stories. In Proceedings of the 2023 CHI Conference on Human Factors in Computing Systems (CHI ’23) . ACM, New York, NY, USA, 1–16. doi:10.1145/ 3544548.3580981 [8] Philip R. Doyle, Iona Gessinger, Justin Edwards, Leigh Clark, Odile Dumbleton, Diego Garaialde, Daniel Rough, Anna Bleakley, Holly P. Branigan, and Benjamin R. Cowan. 2025. The Partner Modelling Questionnaire: A Validated Self-Report Measure of Perceptions toward Machines as Dialogue Partners. ACM Trans. Comput.-Hum. Interact. 32, 4, Article 39 (Aug. 2025), 33 pages. doi:10.1145/3729170 [9] Stefania Druga and Amy J. Ko. 2025. Scratch Copilot: Supporting Youth Creative Coding with AI. In Proceedings of the 24th Interaction Design and Children Confer-ence (IDC ’25) . ACM, New York, NY, USA, 140–153. doi:10.1145/3713043.3727051 [10] Gordon Fraser, Ute Heuer, Nina Korber, Florian Obermuller, and Ewald Was-meier. 2021. LitterBox: A Linter for Scratch Programs. In 2021 IEEE/ACM 43rd International Conference on Software Engineering: Software Engineering Educa-tion and Training (ICSE-SEET) . IEEE, Madrid, ES, 183–188. doi:10.1109/ICSE-SEET52601.2021.00028 [11] Laurie Gale and Sue Sentance. 2026. The Hands-Up Problem and How to Deal With It: Secondary School Teachers’ Experiences of Debugging in the Classroom. 
+
+Informatics in Education 25, 1 (March 2026), 109–136. doi:10.15388/infedu.2504. 011 [12] Elias Goller, Gordon Fraser, and Isabella Graßl. 2026. Voice-Controlled Scratch for Children with (Motor) Disabilities. In Proceedings of the 31st ACM Conference on Innovation and Technology in Computer Science Education V. 1 (ITiCSE 2026) .ACM, New York, NY, USA, 142–148. doi:10.1145/3803400.3809355 [13] Google. [n. d.]. Google AI Studio. https://aistudio.google.com. Accessed: Sep-tember 23, 2026. [14] Google. 2025. Gemini Live API overview (Gemini API documentation). https: //ai.google.dev/gemini-api/docs/live-api. Accessed 2026-09-06. [15] Luisa Greifenstein, Markus Brune, Tobias Fuchs, Ute Heuer, and Gordon Fraser. 2023. Impact of Hint Content on Performance and Learning: A Study with Primary School Children in a Scratch Course. In Proceedings of the 18th WiPSCE Conference on Primary and Secondary Computing Education Research . ACM, Cambridge United Kingdom, 1–10. doi:10.1145/3605468.3605498 [16] Luisa Greifenstein, Ute Heuer, and Gordon Fraser. 2023. Programmierfeedback für Kinder: Text oder Bild? – Eine Mixed-Methods-Studie in einem Roboter-Kurs. In INFOS 2023 - Informatikunterricht zwischen Aktualität und Zeitlosigkeit .Gesellschaft für Informatik e.V., 197–206. doi:10.18420/infos2023-018 [17] Xinying Hou, Ruiwei Xiao, Runlong Ye, Michael Liut, and John Stamper. 2026. Exploring Student Choice and the Use of Multimodal Generative AI in Program-ming Learning. In Proceedings of the 57th ACM Technical Symposium on Computer Science Education V. 1 (SIGCSE TS 2026) . ACM, New York, NY, USA, 470–476. doi:10.1145/3770762.3772548 [18] Razan Jaber, Sabrina Zhong, Sanna Kuoppamäki, Aida Hosseini, Iona Gessinger, Duncan P Brumby, Benjamin R. Cowan, and Donald Mcmillan. 2024. Cooking With Agents: Designing Context-aware Voice Interaction. In Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems (CHI ’24) . ACM, New York, NY, USA, 1–13. doi:10.1145/3613904.3642183 [19] Sven Jacobs. 2026. Data: Share your Screen and Talk to Gemini: How Young Learners Interact with Multimodal GenAI While Solving Scratch Tasks. https: //doi.org/10.5281/zenodo.24274661 [20] Sven Jacobs, Jan Haas, and Natalie Kiesler. 2025. Student Engagement with GenAI’s Tutoring Feedback: A Mixed Methods Study. In Proceedings of the 25th Koli Calling International Conference on Computing Education Research (Koli Calling ’25) . ACM, New York, NY, USA, 1–12. doi:10.1145/3769994.3770034 [21] Sven Jacobs, Maurice Kempf, and Natalie Kiesler. 2025. That’s Not the Feedback I Need! - Student Engagement with GenAI Feedback in the Tutor Kai. In Proceedings of the 2025 Conference on UK and Ireland Computing Education Research (UKICER) (UKICER ’25) . ACM, New York, NY, USA, 1–7. doi:10.1145/3754508.3754512 [22] Sven Jacobs and Natalie Kiesler. 2025. GenAI Voice Mode in Programming Education. In Proceedings of the 25th Koli Calling International Conference on Computing Education Research (Koli Calling ’25) . ACM, New York, NY, USA, 8 pages. doi:10.1145/3769994.3770001 [23] Tobias Kohn, Tobias Antensteiner, Carolin Hahnel, Bettina M. J. Kern, Hieke Keuning, Elias Kia, Natalie Kiesler, Dennis Komm, Eva Marinus, Jaromir Savelka, Adish Singla, Jacqueline Staub, and Annika Vielsack. 2026. The Reasons for Studying Generative AI: A Review of Narratives and Stances in the Computing Education Research Community. In Proceedings of the 26th Koli Calling Interna-tional Conference on Computing Education Research (Koli, Finland) (Koli Calling ’26) . Association for Computing Machinery, New York, NY, USA, Article 24, 18 pages. doi:10.1145/3856208.3856233 [24] Udo Kuckartz and Stefan Rädiker. 2019. Analyzing Qualitative Data with MAXQDA: Text, Audio, and Video . Springer International Publishing, Cham. doi:10.1007/978-3-030-15671-8 [25] Rongxin Liu, Julianna Zhao, Benjamin Xu, Christopher Perez, Yuliia Zhukovets, and David J. Malan. 2025. Improving AI in CS50: Leveraging Human Feedback for Better Learning. In Proceedings of the 56th ACM Technical Symposium on Computer Science Education V. 1 (Pittsburgh, PA, USA) (SIGCSETS 2025) . ACM, New York, NY, USA, 715–721. doi:10.1145/3641554.3701945 [26] Zhengyuan Liu, Geyu Lin, Hui Li Tan, Huayun Zhang, Yanfeng Lu, Xiaoxue Gao, Stella Xin Yin, Sun He, Hock Huan Goh, Lung Hsiang Wong, and Nancy F. Chen. 2025. SingaKids: A Multilingual Multimodal Dialogic Tutor for Language Learning. In Proceedings of the 63rd Annual Meeting of the Association for Com-putational Linguistics (Volume 6: Industry Track) , Georg Rehm and Yunyao Li (Eds.). Association for Computational Linguistics, Vienna, Austria, 1244–1253. doi:10.18653/v1/2025.acl-industry.86 [27] Kaushal Kumar Maurya, KV Aditya Srivatsa, Kseniia Petukhova, and Ekaterina Kochmar. 2025. Unifying AI Tutor Evaluation: An Evaluation Taxonomy for Pedagogical Ability Assessment of LLM-Powered AI Tutors. In Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers) . Association for Computational Linguistics, Albuquerque, New Mexico, 1234–1251. doi:10.18653/v1/2025.naacl-long.57 [28] Philipp Mayring. 2022. Qualitative Inhaltsanalyse: Grundlagen und Techniken (13 ed.). Beltz, Weinheim. [29] Sharon Nelson-Le Gall. 1981. Help-seeking: An understudied problem-solving skill in children. Developmental Review 1, 3 (Sept. 1981), 224–246. doi:10.1016/ 0273-2297(81)90019-8 [30] Victor-Alexandru Pădurean, Paul Denny, Alkis Gotovos, and Adish Singla. 2025. Prompt Programming: A Platform for Dialogue-based Computational Problem Solving with Generative AI Models. In Proceedings of the 30th ACM Conference on Innovation and Technology in Computer Science Education V. 1 (Nijmegen, Netherlands) (ITiCSE 2025) . ACM, New York, NY, USA, 458–464. doi:10.1145/ 3724363.3729094 [31] Carrie Anne Philbin and Sue Sentance. 2025. Student Use and Teacher Practice: A Scoping Review of Generative AI in Computing Education Using PICRAT. In Proceedings of the 2025 Conference on UK and Ireland Computing Education Research . ACM, Edinburgh United Kingdom, 1–7. doi:10.1145/3754508.3754513 [32] James Prather, Paul Denny, Juho Leinonen, Brett A. Becker, Ibrahim Albluwi, Michelle Craig, Hieke Keuning, Natalie Kiesler, Tobias Kohn, Andrew Luxton-Reilly, Stephen MacNeil, Andrew Petersen, Raymond Pettit, Brent N. Reeves, and Jaromir Savelka. 2023. The Robots Are Here: Navigating the Generative AI Revolution in Computing Education. In Proceedings of the 2023 Working Group Reports on Innovation and Technology in Computer Science Education (Turku, Finland) (ITiCSE-WGR ’23) . Association for Computing Machinery, New York, NY, USA, 108–159. doi:10.1145/3623762.3633499 [33] James Prather, Juho Leinonen, Natalie Kiesler, Jamie Gorson Benario, Sam Lau, Stephen MacNeil, Narges Norouzi, Simone Opel, Vee Pettit, Leo Porter, Brent N. Reeves, Jaromir Savelka, David H. Smith, Sven Strickroth, and Daniel Zingaro. 2025. Beyond the Hype: A Comprehensive Review of Current Trends in Genera-tive AI Research, Teaching Practices, and Tools. In 2024 Working Group Reports on Innovation and Technology in Computer Science Education . ACM, New York, NY, USA, 300–338. doi:10.1145/3689187.3709614 How Young Learners Interact with Multimodal GenAI While Solving Scratch Tasks WiPSCE ’27, February 03 – 05, 2027, Ljubljana, Slovenia 
+
+[34] Alec Radford, Jong Wook Kim, Tao Xu, Greg Brockman, Christine McLeavey, and Ilya Sutskever. 2022. Robust Speech Recognition via Large-Scale Weak Supervision. doi:10.48550/arXiv.2212.04356 [35] Mitchel Resnick, John Maloney, Andrés Monroy-Hernández, Natalie Rusk, Evelyn Eastmond, Karen Brennan, Amon Millner, Eric Rosenbaum, Jay Silver, Brian Silverman, and Yasmin Kafai. 2009. Scratch: programming for all. Commun. ACM 
+
+52, 11 (Nov. 2009), 60–67. doi:10.1145/1592761.1592779 [36] Kaitlin Riegel, Yan Cathy Hua, Paul Denny, Victor-Alexandru Pădurean, Juho Leinonen, James Prather, and Adish Singla. 2026. Say What? Examining Text and Voice Input Modalities for Prompt-Based Programming in Computing Education. In Proceedings of the 31st ACM Conference on Innovation and Technology in Com-puter Science Education V. 1 (ITiCSE 2026) . ACM, New York, NY, USA, 252–258. doi:10.1145/3803400.3809397 [37] Shubham Saboo and Zack Akil. 2025. How to Use Gemini Live API Native Audio in Vertex AI. Google Cloud Blog, https://cloud.google.com/blog/topics/developers-practitioners/how-to-use-gemini-live-api-native-audio-in-vertex-ai. Accessed 2026-09-22. [38] Andreas Scholl and Natalie Kiesler. 2025. Students’ Feedback Requests and Interactions with the SCRIPT Chatbot: Do They Get What They Ask For? doi:10. 48550/arXiv.2507.17258 [39] Andreas Scholl, Daniel Schiffner, and Natalie Kiesler. 2024. Analyzing Chat Protocols of Novice Programmers Solving Introductory Programming Tasks with ChatGPT. In Proceedings of DELFI 2024 (Lecture Notes in Informatics, Vol. P-356) ,Sandra Schulz and Natalie Kiesler (Eds.). Gesellschaft für Informatik e.V., Bonn, 63–79. doi:10.18420/delfi2024_05 [40] Andreas Scholl, Daniel Schiffner, and Natalie Kiesler. 2025. Students’ Use of ChatGPT in an Introductory Programming Course: A Deep Dive into Chat Pro-tocols and the Student Perspective. eleed - e-learning and education (June 2025). https://www.eleed.de/eleed/article/view/248 [41] Scratch. [n. d.]. Scratch. https://scratch.mit.edu. Accessed: September 23, 2026. [42] Katie Seaborn, Iona Gessinger, Suzuka Yoshida, Benjamin R. Cowan, and Philip R. Doyle. 2024. Cross-Cultural Validation of Partner Models for Voice User Interfaces. In Proceedings of the 6th ACM Conference on Conversational User Interfaces (CUI ’24) . ACM, New York, NY, USA, 1–10. doi:10.1145/3640794.3665537 [43] Yuan Si, Daming Li, Hanyuan Shi, and Jialu Zhang. 2026. VisionScratch: LLM-Based Automated Feedback Generation using Code-Produced Videos for Scratch Programs. Proceedings of the ACM on Software Engineering 3, FSE, Article FSE156 (2026), 24 pages. doi:10.1145/3808163 [44] Yuan Si, Ming Wang, Daming Li, Hanyuan Shi, and Jialu Zhang. 2026. Eco-Scratch: Cost-Effective Multimodal Repair for Scratch Using Execution Feedback. arXiv:2603.29624 [cs.SE] doi:10.48550/arXiv.2603.29624 [45] Andreas Stahlbauer, Marvin Kreis, and Gordon Fraser. 2019. Testing scratch programs automatically. In Proceedings of the 2019 27th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering . ACM, Tallinn Estonia, 165–175. doi:10.1145/3338906. 3338910 [46] Irene Stone. 2024. Exploring Human-Centered Approaches in Generative AI and Introductory Programming Research: A Scoping Review. In Proceedings of the 2024 Conference on United Kingdom & Ireland Computing Education Research .ACM, Manchester United Kingdom, 1–7. doi:10.1145/3689535.3689553

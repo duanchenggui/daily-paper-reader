@@ -1,0 +1,350 @@
+Title: Validating LLM-Based Essay Scorers: A Comparative Analysis in Critical Online Reasoning in Medical Education
+
+URL Source: https://arxiv.org/pdf/2611.21208v1
+
+Published Time: Tue, 17 Nov 2026 05:48:08 GMT
+
+Number of Pages: 24
+
+Markdown Content:
+# Validating LLM-Based Essay Scorers: A Comparative Analysis in Critical Online Reasoning in Medical Education 
+
+# Daniel Baumartz, Alexander Mehler, Mevl¨ ut Bagci, Maxim Konca 
+
+# Goethe University Frankfurt, Germany 
+
+# {baumartz, mehler, bagci, konca }@em.uni-frankfurt.de 
+
+# Abstract 
+
+# Background 
+
+Automated essay scorers (AES) based on large language models (LLMs) promise human-level accuracy. However, training, fine-tuning, and evaluating LLMs for specific assessment tasks is costly. In particular, the question arises whether these AES should be trained for specific domains or whether models based on generic LLMs might be sufficient. Human annotations, by contrast, are often more valid but far more expensive. 
+
+# Objective 
+
+This study evaluates whether ensembles of AES systems based on general-purpose LLMs can approximate human ratings of medical-education writing tasks by leveraging encoded linguistic and conceptual knowledge. The goal is to assess whether general-purpose models are applicable for assisting or potentially replacing human annotation in this domain. 
+
+# Methods 
+
+We experiment with 11 AES systems and 8 different LLMs and evaluate 668 student responses to 12 tasks, using 2 076 evaluations by 7 human annotators. These ratings are aggregated to create consistent performance levels that can be used as target classes for classifiers trained on AES outputs. 
+
+# Results and Conclusions 
+
+Our results show that learner classes based on human ratings can be accurately reconstructed using a linear SVM trained on a small set of AES features. A single classifier generalized well across tasks and domains, with reasoning and content features being most predictive. This suggests that out-of-the-box LLMs, even without domain-specific fine-tuning, can support automatic essay grading in medical education. While individual AES systems are insuffi-cient alone, their combination approximates human evaluators, pointing to a reduced need for manual scoring or its supplementation with automated methods. 
+
+# Lay Summary 
+
+# What is currently known about this topic? 
+
+• Automated essay scoring (AES) systems based on large language models (LLMs) are increasingly seen as alter-natives to human scoring. 
+
+• Training and fine-tuning LLM-based AES is expensive and time-consuming, suggesting the need for general-purpose LLMs in AES. 
+
+# What does this paper add? 
+
+• Using real-world scoring data from student responses in medical education, we evaluate eleven AES systems in combination with eight LLMs to test whether general-purpose LLMs are sufficient for domain-specific AES. 
+
+• We show that a small and inexpensive classifier that is trained on the outputs of these LLMs and AES systems is able to replace human raters. 1arXiv:2611.21208v1 [cs.CL] 16 Nov 2026 Implications for practice/or policy 
+
+• Learner classes defined by aggregated human ratings can be nearly perfectly reconstructed using a classifier trained on a small set of AES-based features. 
+
+• Our approach of combining multiple AES systems reduces potential bias and reliance on single models. 
+
+• LLMs that are not fine-tuned with domain-specific knowledge still contain enough information to enable auto-matic essay grading in the medical domain. 
+
+• Our results suggest that the need for manual scoring can be reduced and that scoring could become an automat-able task. AES systems can significantly accelerate the grading process and partially replace human ratings. 
+
+# Keywords 
+
+Medical Education, Automated Essay Scoring, Scoring Methods, Natural Language Processing, Supervised Machine Learning, Large Language Models 
+
+# 1 Introduction 
+
+Large Language Models (LLMs) have accelerated the automation of scoring student essays [38, 43, 28, 41]. Automated Essay Scorers (AES) [42] now operate mostly end-to-end [47, 30, 51, 45], using unprocessed text from statements and task descriptions to generate output values, such as grades and confidence scores. Due to the large amount of data used to train LLMs, AES have substantial potential for cross-domain use [23]. This flexibility raises the question of whether cross-domain AES can approximate domain-specific expert ratings and thereby reduce the need for specialised human judgments. The present study examines this question using data from the Critical Online Reasoning in Higher Education (CORE) project on critical online reasoning in medical education. CORE investigates students’ critical online reasoning [24] when completing tasks that require the use of online sources [35, 21]. It conceptualises online reasoning as comprising three interrelated facets: online information ac-quisition (OIA), critical information evaluation (CIE), and reasoning with evidence, argumentation, and synthesis 
+
+(REAS) [34, 36]. According to this model, students search for, assess, and integrate information into their argu-mentation, ultimately incorporating it into their written task responses. As part of CORE, students of medicine and physics were instructed to investigate medical topics online and compose written statements summarizing their findings. These statements operationalise the REAS facet. In their tasks, the students work on four medical scenarios within the medical part of CORE: middle ear , respiration , circulation , and eye . Each of these topics is divided into three tasks targeting fundamental , practical , and transdisciplinary reasoning, resulting in 12 scored student responses. A gold-standard rating was established by trained doctoral students in medical education, who evaluated the students’ written responses based on 160 assignment-specific criteria. Using all these criteria, we aggregated the an-notators’ ratings to assign each student response to a specific performance class. Each student, as the sole author of a response, was uniquely assigned to one class per task, producing task-specific partitions of the set of students. We con-sidered two variants of this partition: a binary division distinguishing low and high performers, and a ternary division 
+
+including medium performance. Within this framework, our objects of observation are students’ written responses to REAS tasks from the CORE project. The AES-generated scores constitute observed indicators derived from these responses. We test whether performance classes, representing an operationalization of the underlying construct as derived from human annotation, can be reconstructed from these indicators. Successful reconstruction would indicate that the AES captures distinctions similar to those made by human raters. Treating this as a classification task allows us to adapt AES to the medical domain via Machine Learning (ML). Our expectation is that the classifier should map student responses as accurately as possible onto the human-derived performance classes. If the classifier fails to do so, the scoring outputs of the underlying AES cannot be regarded as valid indicators of text quality, at least in the context of CORE .Rather than evaluating AES individually, we combine their outputs to capture complementary strengths, yielding higher-dimensional feature representations that give ML access to a wider range of predictive signals. Our hypothesis is as follows: 
+
+H1 AES systems using LLMs trained on large cross-domain corpora and used without domain-specific fine-tuning encode linguistic and conceptual knowledge that enables them to approximate human assessments of student writing according to domain-specific criteria in medical education. In other words, high agreement with human ratings on medical-education tasks can be achieved without domain-specific fine-tuning. To test H1, we evaluate the performance of eleven AES configured with eight LLMs. We systematically experiment with 74 combinations of these configurations, which we release as open-source components within the Docker Unified UIMA Interface (DUUI) NLP framework [26]. The framework is distributed under the open-source AGPL-3.0 software license, while derived research data including de-identified text embeddings and instance-level class labels are made available under the CC BY-NC 4.0 license. 21.1 Related Work 
+
+We review LLM-based AES (see [33, 27] for overviews). We begin with medical-domain approaches. Gierl et al. [17] investigate how AES support medical assessment through scoring consistency, efficiency, and timely feedback. They found that AES achieve human-level agreement, indicating their potential for scoring constructed responses. Sreedhar et al. [43] compare ChatGPT with faculty raters in formative medical assessments and report substantial agreement with high inter-rater reliability across rubric dimensions. Their results suggest that LLMs can assist educators by providing consistent and scalable feedback on student performance. Elshama [13] stress that medical-education assessments must align with instructional objectives and use valid, reliable tools to evaluate knowledge, skills, and attitudes. They emphasise the need for clear reporting and the effective use of results to support ongoing curriculum improvement. Colbert-Getz et al. [8] propose a practical rubric for assessing usefulness in medical education, covering topics such as equivalence, the educational effect, the catalytic effect, evidence of validity, and acceptability. These approaches show the relevance of AES for the medical field. AES have also been studied outside the medical field. This comprises domain-independent approaches intended to generalise across fields. The ESSAJUDGE [44] benchmark systematically evaluates the impact of LLMs on essay scoring by assessing 18 models. The authors propose a method to capture linguistic patterns and contextual cues across lexical, sentence, and discourse levels. Another study on automated essay scoring is T-MES [49]. It addresses two key limitations of multi-trait scoring: the lack of trait-specific representations and the neglect of relationships between traits. T-MES uses a mixture-of-experts framework to generate trait-specific representations and introduces regularization schemes that enhance cross-trait collaboration and scoring diversity. TOREE [57] is a benchmark for evaluating topic relevance in student essays. Their two-step framework, which combines supervised fine-tuning and preference learning, improves both relevance scoring and feedback generation. It emphasises the importance of topic adherence, which is often overlooked in AES. Wang et al. [50] apply reinforcement learning to AES, modeling scoring as a rating-scheme-guided decision sequence that achieves more consistent agreement with human raters. Their approach, which models essay scoring as a sequential decision process and incorporates rating schema information, achieves more consistent agreement with human raters than traditional supervised methods. Goura et al. [18] present an enhanced AES that integrates classical and neural features, refining the feature-extraction and modeling pipeline to better capture key dimensions of student writing. Their work contributes to the wider AES landscape by refining the feature extraction and modelling pipeline to accommodate the different aspects of student writing. Bashendy et al. [1] advance Arabic AES by introducing a trait-annotated dataset that evaluates essay dimensions, including relevance, organization, vocabulary, style, development, and grammar. Yoo et al. [55] present DREsS, a large-scale rubric-based AES dataset for EFL writing that captures content, organization, and language-use traits, enabling models that align more closely with human grading standards. Gaudeau [15] moves away from using a single gold standard label. She proposes to learn from individual raters to account for rater variability and provide confidence estimates. Chakravarty et al. [5] model AES reliability as a classification task, treating score-release decisions as predictions. Li and Ng [27] critically review the field of AES, arguing that recent research focuses on making small improvements to standard datasets. They urge the community to broaden its horizons towards understanding, generalisation across different prompts, richer trait annotations, and educational impact in the real world. Most existing work develops new AES and evaluates them on gold-standard data, with some efforts focused on benchmarking LLMs. To address the gaps in these approaches, we adopt a more robust, integrative method. Using real-world assessment data with human ratings, we present a classification approach that integrates multiple AES and LLMs for greater generalizability. Specifically, we combine 11 AES described in subsection 2.1. 
+
+# 2 Methods 
+
+To test H1, we evaluate 11 AES on 668 manually rated student responses from the four CORE medical education assessments. We compare the AES in Table 1 and subsection 2.1, which output one to six scores each, yielding 35 features in total. Two systems are transformer-based [46], and nine are LLM-based. To systematically evaluate the latter, we conduct experiments with the eight LLMs of Table 3. This allows us to compare how model families and parameter sizes affect grading. See Figure 1) for an overview of the experiment workflow which is described in the remainder of this section. We use 2 076 ratings of 668 student statements from seven annotators and report inter-annotator reliability for each of the 12 CORE task-context combinations, both individually and combined, in Table 4. As the ratings have not yet been validated, we evaluate them extensively using multiple metrics and test different binning strategies to mitigate inconsistencies. The rating criteria fall into two categories: 1. Four general criteria apply across all CORE assessments, including medical tasks: coherence of the statement; number of sources cited with and without clear reference; and a control item indicating whether the task was answered as instructed. 2. 160 task-specific criteria , which vary by domain, task, and context, for example whether the student named at least one necessary examination. When we calculate the agreement using Krippendorff’s alpha across all tasks combined, we observe moderate and average values of 64% (nominal difference function) and 69% (interval) [3, 4]. The interclass correlation coefficients 3Model Essay Scorer Tool # Output Features LLM-based prompting Reference 
+
+ES1 engessay-grading-ml 6 transformer-based Sun and Wang [46] 
+
+ES2 ielts-essay-scoring 5 transformer-based Sun and Wang [46] 
+
+ES3 llmaesslow-scorer 4 yes Xiao et al. [52] 
+
+ES4 aes-asap-mts-scorer 4 yes Lee et al. [25] 
+
+ES5 aag-scorer 1 yes Yeung et al. [54] 
+
+ES6 aes-asap-vanilla-scorer 1 yes Lee et al. [25] 
+
+ES7 be-grading-scorer 1 yes Yousef et al. [56] 
+
+ES8 grading-like-human-scorer 4 yes Xie et al. [53] 
+
+ES9 llmaes-scorer-zeroshot 4 yes Xiao et al. [52] 
+
+ES10 grading-medical-education 1 yes Gr´ evisse [20] 
+
+ES11 aes-toefel11-mts-scorer 4 yes Lee et al. [25] Table 1: AES used in this study, along with their output features and whether or not they utilize an LLM. 
+
+Tool Feature Category Prompt Prompt Type F1 ES1 cohesion Language - -F2 ES1 vocabulary Language - -F3 ES1 syntax Language - -F4 ES1 phraseology Language - -F5 ES1 grammar Language - -F6 ES1 conventions Language - -F7 ES2 Task Achievement Content - -F8 ES2 Vocabulary Language - -F9 ES2 Coherence and Cohesion Structure - -F10 ES2 Grammar Language - -F11 ES2 Overall Overall - -F12 ES3 LLMAESSlow-ContentScore Content P1 Prompt: “true rubrics” F13 ES3 LLMAESSlow-LanguageScore Language P1 Prompt: “true rubrics” F14 ES3 LLMAESSlow-StructureScore Structure P1 Prompt: “true rubrics” F15 ES3 LLMAESSlow-OverallScore Overall P1 Prompt: “true rubrics” F16 ES4 Position and Thesis Clarity Content P2F1 Type: “MTS”; Trait:“1”; Rubric:“1” F17 ES4 Supporting Details and Evidence Content P2F2 Type: “MTS”; Trait:“1”; Rubric:“2” F18 ES4 Organization and Structure Structure P2F3 Type: “MTS”; Trait:“1”; Rubric:“3” F19 ES4 Style, Language, and Audience Language P2F4 Type: “MTS”; Trait:“1”; Rubric:“4” Awareness F20 ES5 AAGScore Overall P3 Category:“AGG” F21 ES6 Vanilla Overall P4 Type:“Vanilla”; Prompt ID: “1” F22 ES7 BeGradingScore Overall P5 Category:“Scoring” F23 ES8 GLH-ScoringScore Overall P6 Category:“Scoring”&“Reflection” F24 ES8 GLH-ScoringConfidence Confidence P6 Category:“Scoring”&“Reflection” F25 ES8 GLH-ReflectionScore Reflection P6 Category:“Scoring”&“Reflection” F26 ES8 GLH-ReflectionConfidence Confidence P6 Category:“Scoring”&“Reflection” F27 ES9 LLMAESS-ContentScore Content P7 Category:“zeroshot”; Rubric: “1” F28 ES9 LLMAESS-LanguageScore Language P7 Category:“zeroshot”; Rubric: “1” F29 ES9 LLMAESS-StructureScore Structure P7 Category:“zeroshot”; Rubric: “1” F30 ES9 LLMAESS-OverallScore Overall P7 Category:“zeroshot”; Rubric: “1” F31 ES10 MedScore Overall P8 Grading medical education F32 ES11 Task Response Content P9F1 Type: “TOEFEL11”; Trait:“1”; Rubric:“1” F33 ES11 Coherence and Cohesion Structure P9F2 Type: “TOEFEL11”; Trait:“1”; Rubric:“2” F34 ES11 Lexical Resource Language P9F3 Type: “TOEFEL11”; Trait:“1”; Rubric:“3” F35 ES11 Grammatical Range and Accuracy Language P9F4 Type: “TOEFEL11”; Trait:“1”; Rubric:“4” 
+
+Table 2: Overview of the essay scorer outputs and utilized prompts that we used as features in our classification. 4LLM Parameters Reference LL3 Llama 3.2 3b Grattafiori et al. [19] LQ8 Qwen 3 8b Qwen Team [40] LQ14 Qwen 3 14b Qwen Team [40] LQ32 Qwen 3 32b Qwen Team [40] LG20 GPT-OSS 20b OpenAI [37] LG120 GPT-OSS 120b OpenAI [37] LD70 DeepSeek R1 70b DeepSeek-AI [10] LD671 DeepSeek 3.1 671b DeepSeek-AI [9] Table 3: Overview of the LLMs evaluated in this study. Manual Rating 
+
+> LLM1 LLM2
+> ...
+> LLM8
+
+LLMs 
+
+> ES1 ES2
+> ...
+> ES11
+
+Essay Scorer 
+
+> F1 F2
+> ...
+> F203
+
+Features 
+
+> Tasks & Statements
+
+AAAA
+
+> Evolutionary Search Classifier SHAP Analysis Distribution Analysis Binning 2/3 classes Performance Prediction
+
+Figure 1: Analysis pipeline from LLM-based automatic essay scoring to student-performance prediction using a classifier trained on human-graded essays and feature selection via an evolutionary algorithm. 
+
+Task # Criteria # Answers # Rater Kα n Kα i Cα l Cα p ICC(3,k) 
+
+Respiration F 20 59 3 0.54 0.57 0.84 0.84 0.84 Respiration P 19 45 3 0.64 0.69 0.88 0.88 0.88 Respiration T 12 45 3 0.45 0.73 0.91 0.91 0.91 Eye F 19 52 3 0.69 0.75 0.90 0.90 0.90 Eye P 15 50 4 0.59 0.64 0.88 0.88 0.88 Eye T 14 49 4 0.68 0.74 0.92 0.92 0.92 Circulation F 19 58 3 0.59 0.61 0.81 0.82 0.81 Circulation P 23 49 3 0.65 0.67 0.86 0.87 0.86 Circulation T 11 50 2 0.62 0.84 0.92 0.92 0.92 Middle Ear F 20 76 5 0.64 0.64 0.87 0.88 0.87 Middle Ear P 23 88 5 0.69 0.72 0.92 0.93 0.92 Middle Ear T 13 47 3 0.57 0.82 0.93 0.93 0.93 Table 4: Overview of the number of criteria, student responses and raters per CORE assessment task (F: Fundamental; P: Practical; T = Transdisciplinary), and the inter-annotator agreement calculated using mean Krippendorff’s and Cronbach’s alpha and intraclass correlation ( Kα n: Krippendorff’s alpha nominal; Kα i: Krippendorff’s alpha interval; 
+
+Cα l: Cronbach’s alpha listwise; Cα p: Cronbach’s alpha pairwise). 5range from 81% to 93%, indicating excellent inter-rater reliability [6, 48]. Similarly, Cronbach’s alpha estimates good to excellent 82% to 93% consistency when calculated using pairwise, and 81% to 93% using listwise deletion [16, 48]. Instead of using individual raters or single criteria, we aggregate all rater- and criterion-level information into a single performance class . Thus, we assign one performance score to every student response. This is done in five steps: 1. We exclude responses for which raters did not confirm that the student engaged seriously with the assignment. 2. The raw ratings are normalised to 0 to 1, with 1 representing the more positive criterion value (e.g. corresponding to the “yes” answer in a Boolean “yes or no” criterion). 3. We compute the mean of the normalised criteria scores for each rater, reducing all criteria to a single score in which higher values indicate better performance. 4. Because the preliminary ratings have not been consolidated into a gold score, we average the criteria scores from all raters for each response, yielding a single score per student response. 5. Using KBinsDiscretizer of scikit-learn [39], we then bin the scores into two or three intervals using uniform and quantile strategies. We generate four performance measures for each student response: binary separation into high and low performance classes, and ternary separation into high, medium, and low performance classes. Both splits use either a uniform or quantile strategy: the uniform split divides the score range evenly, while the quantile split assigns an equal number of students to each bin. This allows the levels of the performance classes to be chosen independently of the underlying rating criteria and scheme. Next, we consider the automatic assignment of students to performance classes, that is, the reproduction of the latter two separations, as a classification task. Specifically, the task is to predict the performance classes of students based on features of their responses that are not annotated by human experts, but by the AES evaluated here. We treat the AES outputs as features and train a linear SVM (scikit-learn’s LinearSVC ) to predict the performance classes. All 668 responses are treated as instances of a single classification task; we train a classifier across all assessments rather than task-specific models. We use evolutionary feature selection [14] to identify the AES features that contribute most to classifier performance. We use a stratified, shuffled split of 10 folds, with a train/test size of 80/20% and let the search work with a population of 5000 for 100 generations. In this way, the search deploys an evolutionary algorithm that will select and remove features, trains a classifier based on these feature selection subset, measures the performance by means of Macro F1 scores and finally produces an optimal set of features that yields the highest performance. We limit the number of features that the search may select to analyze how classifier performance varies with feature count and use the following groups of features: 1. FG1 All features comprising all AES/LLM combinations for a total of 203 features. 2. FG2 Per-LLM features , that is, the outputs of each individual LLM together with two non-LLM tools. We examine eight combinations, with 35 features each. 3. FG3 Per-family features by grouping LLMs by family: Two DeepSeek and two GPT-OSS models (59 features each), and three Qwen-based models (83 features). Using these features, we train SVM classifiers to predict student performance classes from the AES scores of the written responses. 
+
+# 2.1 Essay Scorer 
+
+We describe the two transformer- and nine LLM-based AES evaluated in this study (see Table 2 for an overview and their outputs): 1. ES1 , ES2 [46] are transformer-based systems. engessay-grading-ml [46] is a transformer-based system that produces six language-proficiency scores to assess cohesion, syntactic structure, and grammatical accuracy. It is a fine-tuned RoBERTa model trained on the ELLIPSE corpus, which was manually scored by expert raters. 
+
+ielts-essay-scoring is also transformer-based; trained on the IELTS corpus of exam essays [46], it grades aspects such as task achievement and grammar and provides a composite score. 2. ES3 , ES9 [52] grade essays in two ways: (1) the LLM produces numerical scores and (2) generates score justifications. This yields four outputs: three category scores (content, language, structure) and an overall score formed by their sum. We apply this approach via llmaesslow-scorer and llmaes-scorer-zeroshot .3. ES5 Prompt engineering enables AES optimization without fine-tuning, as shown by Yeung et al. [54], who use zero-shot learning to develop Automated Assignment Grading (aag-scorer ); it provides scores from 1–10 with explanatory feedback. 64. ES10 grading-medical-education [20] uses zero-shot prompting on undergraduate medical-education data. The prompt uses the LLM to provide a grade based on the given question and the student’s response. There are no specific instructions or information about the medicine domain, except that the LLM is instructed to act as “medical teacher” in the system prompt. In our study, we replaced this term with the more generalised term “teacher”, meaning the prompt could also be used in other fields. The other prompts in our list of tools are also indifferent to the applied domain. 5. ES8 grading-like-human-scorer [53] uses a zero-shot approach in which the LLM grades an essay, then reconsiders its decision, yielding a primary and a reflected score along with confidence values. 6. ES4 , ES6 , ES11 The Multi-Trait Specialisation (MTS) framework [25] uses zero-shot prompting to gener-ate rubric-based criteria and score writing traits, evaluated on TOEFL11 and ASAP and compared with a vanilla overall-score setup. We use MTS via aes-asap-mts-scorer (ES4 ) and aes-toefel11-mts-scorer (ES11 ), and the vanilla prompt via aes-asap-vanilla-scorer (ES6 ). MTS yields four trait scores (clarity, task response, organization, grammar); the vanilla method outputs a single score. 7. ES7 be-grading-score [56] is a fine-tuned LLM to grade programming assignments. As with ES10 , we remove programming elements and replace code with essay . We include ES7 via its prompt setup, but do not fine-tune on any data. All these systems are either zero-shot across multiple LLMs or transformer-based, enabling domain-independent use and ensuring comparable AES results in our study. 
+
+# 2.2 Ethical Considerations 
+
+The study uses written statements produced by participants in an educational setting, as well as rating data generated by human raters. As part of a multicenter research project, this study was first approved by the ethics committee of LMU (approval reference no. 23-0688). We received the dataset in anonymised form as part of an existing educational assessment in the context of the CORE project. Although we had access to the original written texts, all personally identifiable information had been removed before we received the data. 
+
+# 3 Results 
+
+In subsection 3.1, we present the results for H1, evaluating how well AES outputs predict student performance and how closely these predictions align with expert assessments in medical education. Since feature selection was optimised via evolutionary search, subsection 3.2 analyses feature contributions and the role of each AES. 
+
+# 3.1 Classification Results 
+
+We start with experimenting with FG1 (section 2). Our results show that a linear SVM trained on AES outputs can predict the performance classes of student responses. We report the average Macro F1 for each of the 10 splits of the evolutionary search in Figure 2. When trained on the combined outputs of all LLM-based AES, the classifier reaches Macro F1 of 92% (quantile binning) and 91% (uniform) for the binary classification task. For the three-class task, it achieves Macro F1 of 83% (quantile) and 89% (uniform). Across all settings, about half of the 203 features are sufficient to achieve this result. Even with 20-30 features, the classifier still achieves comparable scores. A simple linear SVM can use small AES-based feature vectors to achieve nearly perfect classification ( > 90%), so H1 is not falsified: despite their general information and knowledge bases, LLM-based AES produce features that almost fully reconstruct expert-derived performance classes. This result is achieved without extensive hyperparameter tuning. We show detailed results for FG2 and FG3 (again based on linear SVMs): Performance by LLM family (FG3) is shown in Figures 3 to 6 and performance for each of the eight LLMs (FG2) is reported in Figures 7 and 8. We observe a lower Macro F1 in these settings, but the differences between LLM families remain small. GPT-OSS and DeepSeek perform about 15% worse than Qwen in the three-class uniform variant and about 5%-10% worse in the remaining three variants. The Qwen LLM family performs best across all variants, both when using all 83 Qwen features and when restricted to 60 features, outperforming GPT-OSS and DeepSeek (59 features each). This suggests that feature count is not the primary factor driving these results. In the eight single-model settings (35 features each), the classifier achieves Macro F1 of 72%-76% (quantile) and 49%-63% (uniform) for the binary task, and 56%-61% (quantile) and 47%-56% (uniform) for the three-class task. Combining the features of multiple models within the same LLM family improves performance over the best individual model across all binnings (see Figure 9). This improvement is not merely due to having more features, as gains persist even when training is limited to 30-40 features. Figure 10 shows the effect of LLM parameter size on Macro F1 after evolutionary search, revealing no relationship between model size and performance across all class configurations: LLM size is not a significant factor in our classification scenario. Table 5 reports Macro F1 for each task. Although trained on all medical tasks jointly, the classifier generalises well and predicts performance classes with high accuracy, indicating minimal task dependence and showing that AES features generalise across diverse medical tasks. 7Figure 2: Results of the classifier performance, optimised using an evolutionary search using the features of all LLMs as input. The y-axis shows the optimised Macro F1 score averaged over the 10 folds as well as the average number of selected features. The x-axis displays the upper number of features that the search algorithm was allowed to select. Task 2-quantile 2-uniform 3-quantile 3-uniform Middle Ear 0.90 0.95 0.80 0.83 Respiration 0.92 0.90 0.82 0.87 Eye 0.90 0.84 0.81 0.85 Circulation 0.95 0.92 0.87 0.93 Table 5: Mean Macro F1 scores of the classifier performance after optimization using evolutionary search with feature inputs from all LLMs, broken down by CORE assessment task (first column). 
+
+# 3.2 Feature Importance Analysis 
+
+To compare the class distributions of the individual features, we used a non-parametric approach, combining a rank-based effect size with a distribution-free significance test. We focus on the binary quantile binning strategy for the 8Figure 3: Results of the 2-quantile binning variant classification optimised using an evolutionary search for the LLM-family groups. The images show the optimised mean Macro F1 score over 10 folds as well as the average number of selected features. performance classes in this analysis. For each feature f , the difference between the two classes ( high and low ) was quantified using Cliff’s delta δf [7] and its statistical significance assessed with a two-sided Mann–Whitney U test [32]. For samples {xi}mi=1 from class high and {yj }nj=1 from class low , Cliff’s delta was computed as 
+
+δf = 1
+
+mn 
+
+> m
+
+X
+
+> i=1
+> n
+
+X
+
+> j=1
+
+I(xi > y j ) − I(xi < y j ) = Pr( X > Y ) − Pr( X < Y ),
+
+with δf ∈ [−1, 1]. Positive values of Cliff’s delta indicate that the feature has a tendency to be larger in class low ,while negative values indicate larger values in class high . For the Mann–Whitney test, all m + n observations were ranked jointly (averaging ranks in case of ties), allowing for unequal sample sizes between classes. Let Rx denote the sum of ranks of the m observations from class high . The test statistic was then computed as 
+
+U = Rx − m(m + 1) 2 ,
+
+which equals the number of pairwise comparisons where a value from class high exceeds one from class low , plus half of the ties. The corresponding two-sided p-value, pf , was obtained under the null hypothesis of equal distributions, using either the exact or asymptotic null distribution depending on sample size and the presence of ties. To control for multiple testing across all features, the Benjamini–Hochberg (BH) false discovery rate (FDR) procedure [2] was applied at level q = 0 .05. Volcano plots were used to summarise the results (see Figure 11 for results on all models, and Figure 12, Figure 13, Figure 14 showing per-model results), with each feature represented by a point at coordinates ( x, y ) = ( δf , − log 10 (pf )). The x-axis encodes the magnitude and direction of the effect, while the y-axis reflects the strength of evidence against the null hypothesis. Points farther from x = 0 indicate larger effect sizes, and points higher on the y-axis correspond to smaller p-values. Horizontal dashed lines mark the nominal significance threshold ( p = 0 .05) and the BH-adjusted FDR threshold ( p⋆). 9Figure 4: Results of the 2-uniform binning variant classification optimised using an evolutionary search for the LLM-family groups. The images show the optimised mean Macro F1 score over 10 folds as well as the average number of selected features. In addition to the distribution analysis, we conducted a feature importance analysis using SHAP (SHapley Additive exPlanations) [31]. The SHAP beeswarm plots visualise the global feature importance derived from the predictive model (linear SVM), showing how each feature contributes to the model output for the two focus classes ( low and 
+
+high ), see Figure 16 and Figure 17. In each beeswarm plot, the features are ordered by their overall mean absolute SHAP value, with individual points representing samples. The horizontal axis indicates the SHAP value, that is, the direction and magnitude of each feature’s contribution to the prediction of the target class. Colour coding is used to represent feature values. Blue and red represent low and high values, respectively. Features positioned further to the right exert a stronger positive influence on the probability of the focus class, while features shifted left reduce it. For the high class, the SHAP distributions indicate that approximately half of the top features have higher values (red points) associated with positive SHAP contributions, increasing the model’s decision function, that is shifting the prediction toward the high class. The corresponding SHAP plot for the low class (Figure 16) is essentially its mirror image. The remaining features show the inverse pattern, with red points concentrated at negative SHAP values, implying that higher feature values reduce the likelihood of the high outcome. Notably, the same feature annotated by different LLMs can display opposite associations. For example, AAGScore from LG120 (GPT-OSS:120b) and 
+
+LQ14 (Qwen3:14b) show opposite SHAP patterns despite similar univariate distributions – the high class tends to receive higher scores from both (see Figure 15). This reflects multicollinearity – with overlapping predictors, the local (conditional) contribution of a feature can become negative even when its marginal association with the outcome is positive, because the attribution (and, in linear models, the coefficient sign) captures a partial effect after accounting for correlated covariates. Consequently, a feature positively correlated with the target can receive a negative coefficient if it overlaps with other predictors that track the same outcome direction. Linear models redistribute weights across correlated signals, so the raw correlation sign need not match the learned partial effect. As shown in Figure 19, several feature clusters exhibit moderate to strong intercorrelations. This is consistent with the fact that the automatic essay scoring systems are all intended to assess related aspects of overall writing quality (e.g., coherence, grammatical accuracy, and content organisation), and thus their scores are expected to be positively associated. However, because 10 Figure 5: Results of the 3-quantile binning variant classification optimised using an evolutionary search for the LLM-family groups. The images show the optimised mean Macro F1 score over 10 folds as well as the average number of selected features. 11 Figure 6: Results of the 3-uniform binning variant classification optimised using an evolutionary search for the LLM-family groups. The images show the optimised mean Macro F1 score over 10 folds as well as the average number of selected features. each system operationalises writing quality differently and introduces its own measurement noise, we do not expect perfect agreement between them. The largest cluster of features in this study, located in the upper-left quadrant of the heatmap, comprises 41 features with a mean within-cluster Pearson correlation of 0.66, indicating substantial internal consistency. In contrast, the model confidence scores are approximately uncorrelated with the other features (mean Pearson correlation = –0.06), suggesting that scoring uncertainty captures information distinct from the linguistic and rubric-based measures. Together, the volcano and SHAP analyses point to a consistent pattern: features related to computational correct-ness and explanatory clarity ( AAGScore ) and to content accuracy and completeness ( MedScore ), that is, features tied to content and reasoning rather than surface form , most strongly separate the high performance class from the others. The volcano plots quantify these as statistically significant distributional differences, whereas the SHAP beeswarm plots show how the model integrates these mixed signals, amplifying coherent features while balancing contrasting con-tributions from different language-model sources. Figure 18 further supports robustness of AAGScore and MedScore :across ten cross-validation splits, both features are repeatedly selected (8-9 times) and exhibit high mean relative SHAP importance, underscoring their stable contribution to the model’s predictions. Because the medical-education tasks from the CORE project target the REAS facet of reasoning and argumentation, our results indicate that the AES features most strongly capture reasoning- and content-related signals when predicting high-performing responses. This alignment with REAS suggests that our classifier reflects task-relevant constructs rather than superficial writing traits. We can see an indication of the REAS-related nature of our AES-based classification here, which ultimately indicates some validity of our approach. 
+
+# 4 Discussion 
+
+Our experiments show that a classifier trained on feature ensembles from multiple AES can reproduce student per-formance levels as defined by aggregated human ratings. This approach avoids reliance on a single scoring model and 12 Figure 7: Results of the 2-quantile binning variant classification optimised using an evolutionary search for the 2 DeepSeek- and the 2 GPT-OSS-LLMs. The images show the optimised mean Macro F1 score over 10 folds as well as the average number of selected features. instead integrates complementary information across AES. Because the classifier operates on feature vectors rather than predefined score scales, it can accommodate different performance-class configurations. We illustrate this using four class variants, analysing the differences in performance classes on a relative and absolute scale using the quantile and uniform binning strategy. Across all settings, our classifier achieves high Macro F1 scores with only about 15% of the available features (see Figure 2), demonstrating that accurate predictions do not require the full feature set. Although the AES outputs strongly correlate (see Figure 19) and the results of the different LLMs are mostly comparable (see Figures 7 and 8), combining the features of different tools and LLMs increases the performance in all cases. The distribution analysis shows that the most predictive features differ across LLMs, and that 7 of the 11 AES contribute at least one top-ranked feature. We also observe that LLM parameter size does not affect performance. This highlights the influence of prompt design in AES and shows that our classifier can partially compensate for weaker individual LLMs by leveraging complementary information across models. This is evident in the higher F1 scores of these groups and in the list of the most important features by SHAP values, in which all LLMs are among the top 10%. 13 Figure 8: Results of the 2-quantile binning variant classification optimised using an evolutionary search for the 3 Qwen-LLMs and Llama. The images show the optimised mean Macro F1 score over 10 folds as well as the average number of selected features. The SHAP analysis shows the frequent occurrence of MedScore , which indicates a certain level of specialization in the field. This raises the question of whether our findings can be transferred to other domains. However, as noted in subsection 2.1, the only domain-specific term in the ES10 system prompt was medical teacher . We replaced it with the more general hypernym teacher to remove the explicit medical cue. Across all binning variants, the MedScore 
+
+feature was selected in every of the 10 evolutionary-search splits and appeared in the top features of four to five LLMs on average. Using only the MedScore feature type (one feature per LLM, yielding eight input features), the classifier reaches 68% Macro F1. This is lower than the 80% achieved when the evolutionary search was allowed to select up to 10 features across all LLMs. In contrast, removing the MedScore feature, yielding 195 input features, does not reduce performance: the classifier still achieves about 91% Macro F1. These findings suggest that the output features of ES10 can be replaced with features from other non-domain-specific AES. Although our approach is designed to be domain-independent and uses AES not specialised for medicine, our evaluation demonstrates generalization only across different medical assessment tasks. Thus, future research should examine this generalizability in more detail. Our findings also show that manually created gold data is still necessary to improve prediction accuracy and 14 Figure 9: Barplot showing the mean Macro F1 scores of the classification performance after optimization, comparing the results of the feature selection by single LLM vs. LLM-families. 
+
+Figure 10: Scatterplot of LLM parameter size (in billions of parameters) versus mean Macro F1 after evolutionary search. Point size indicates the maximum number of features permitted in the search. to assess AES reliability. This issue is particularly relevant given the growing use of LLMs by students to support their writing. To examine whether AES can reliably grade responses that may contain LLM-generated content, we applied four LLM-detection tools [22, 12, 29, 11] to all student texts. Figure 20 shows a strong disagreement among the detectors regarding whether the student responses were LLM-generated. In light of these contradictory results, we must assume that the answers were written by humans. However, further analysis of AES behaviour regarding LLM-generated texts is required and should be another focus of future research. Although manually rated examples remain necessary, our results show that neither expensive LLM fine-tuning nor few-shot prompting is required, which keeps prompts short and reduces complexity. High output quality and efficient performance are especially important for real-time scoring during the writing process, where timely, personalised feedback becomes feasible. Because feature generation with LLMs is slow and costly, adopting smaller and faster models could further improve efficiency. In any event and consistent with the SHAP and distribution analyses, neither of the transformer-based AES examined here contributed strongly to the classification performance. Our results do not falsify H1: The AES and LLMs examined here provide features that allow a classifier to approximate aggregated expert ratings of student texts. Under the conditions of the CORE data setting (section 1), 15 Figure 11: Volcano plot comparing distributions for all models. The x-axis shows Cliff’s delta ( δ ∈ [−1, 1]), where 
+
+δ > 0 favours class low and δ < 0 favours high . The y-axis shows − log 10 two-sided Mann–Whitney p-values (higher indicates stronger evidence). The dashed line marks p = 0 .05; the FDR line marks q = 0 .05 [2]. 
+
+Figure 12: Volcano plot for LLAMA (top left) and Qwen models (same method as Figure 11). 
+
+Figure 13: Volcano plot for GPT models (same method as Figure 11). 16 Figure 14: Volcano plot for DeepSeek models (same method as Figure 11). 
+
+Figure 15: Kernel density estimates (KDEs) for two performance classes (low, high). 
+
+Figure 16: Global feature importance for low performance class (quantile binning). 17 Figure 17: Global feature importance for high performance class (quantile binning). 
+
+Figure 18: Feature stability and importance across models. The x-axis encodes the number of cross-validation splits (out of 10 total), where the feature is selected by the evolutionary search; the y-axis encodes the magnitude of SHAP importance, the colours indicate the direction (blue - negative, red positive). 18 1.00 
+
+> 0.75
+> 0.50
+> 0.25
+> 0.00 0.25 0.50 0.75 1.00
+
+Figure 19: Pearson correlation matrix of feature vectors. The colour scale indicates pairwise linear correlations between features (1 = strong positive, -1 = strong negative, 0 = no linear relationship). 
+
+Figure 20: Histogram of 4 LLM-detection tools showing the probabilities of proband statements being LLM-generated based on the averaged per-sentence probability. 19 the combined AES feature ensemble supports classification performance that is not attainable with any single AES alone. This suggests that an ensemble-based approach can generalise to similar text-based assessment tasks and may reduce, though not replace, the need for human rating. Our main methodological insight is threefold: 1. performance relies on an optimised combination of AES, not on any single system; 2. a simple linear SVM suffices to exploit these features; and 3. domain-specific medical tuning is not required: general-purpose LLMs are sufficient .The targeted annotation performance is therefore within reach using the machine learning approach we have tested. Whether this also applies to related areas of medical education and other fields, such as economics and physics, is a question for future research. 
+
+# 5 Conclusion 
+
+We evaluated LLM-based AES systems in the context of medical education, using student responses from critical online reasoning tasks. Our findings show that combining features from multiple AES systems enables training a classifier that closely approximates expert ratings. The approach is modular and accommodates different performance class configurations without requiring prompt modifications or fine-tuning of the underlying LLMs. Learner classes, defined by aggregated human ratings, could be reconstructed with high accuracy using a simple linear support vector machine (SVM) trained on a small set of AES-based features. The classifier’s performance was consistent across domains and tasks, demonstrating strong generalizability. Features related to reasoning and content were the most predictive, while domain-specificity played a minor role. This suggests that out-of-the-box LLMs, even without domain-specific fine-tuning, contain sufficient information for automatic essay grading in medical education. However, individual AES systems alone are insufficient; only their combination yields accurate predictions approximating human evaluators. These findings point to a reduced need for manual scoring: automated scoring could partially replace or effectively support human evaluation. However, manually rated examples remain essential for training and evaluating the classi-fier, and zero-shot AES prompts likewise require empirical validation. Future work will investigate the generalizability of our approach to other domains and incorporate a broader range of scoring models. 
+
+# Conflict of Interest 
+
+The authors declare no potential conflict of interests. 
+
+# Acknowledgments 
+
+This work was supported by the research group Critical Online Reasoning in Higher Education (CORE, FOR 5404, grant number 462702138) sub-projects B05 and C08, and the Infrastructure Priority Programme New Data Spaces for the Social Sciences (SPP 2431, grant number 539634240) sub-project ENTAILab, both funded by the German Research Foundation (DFG). 
+
+# References 
+
+1. Bashendy M, Albatarni S, Eltanbouly S, Zahran E, Elhuseyin H, Elsayed T, Massoud W, and Bouamor H. QAES: First Publicly-Available Trait-Specific Annotations for Automated Scoring of Arabic Essays. Proceedings of the Second Arabic Natural Language Processing Conference . Ed. by Habash N, Bouamor H, Eskander R, Tomeh N, Abu Farha I, Abdelali A, Touileb S, Hamed I, Onaizan Y, Alhafni B, Antoun W, Khalifa S, Haddad H, Zitouni I, AlKhamissi B, Almatham R, and Mrini K. Bangkok, Thailand: Association for Computational Linguistics, 2024 Aug :337–51. doi : 10.18653/v1/2024.arabicnlp-1.28 . Available from: https://aclanthology.org/2024. arabicnlp-1.28/ 
+
+2. Benjamini Y and Hochberg Y. Controlling the false discovery rate: a practical and powerful approach to multiple testing. Journal of the Royal statistical society: series B (Methodological) 1995; 57:289–300 3. Carletta J. Assessing Agreement on Classification Tasks: The Kappa Statistic. Computational Linguistics 1996; 22. Ed. by Hirschberg J:249–54. Available from: https://aclanthology.org/J96-2004/ 
+
+4. Castro S. Fast Krippendorff: Fast computation of Krippendorff’s alpha agreement measure. https://github. com/pln-fing-udelar/fast-krippendorff . 2017 20 5. Chakravarty A, Brenchley M, Breakspear T, Lewin I, and Huang Y. Enhancing Marker Scoring Accuracy through Ordinal Confidence Modelling in Educational Assessments. Proceedings of the 63rd Annual Meeting of the As-sociation for Computational Linguistics (Volume 6: Industry Track) . Association for Computational Linguistics, 2025 :1498–507. doi : 10.18653/v1/2025.acl-industry.106 . Available from: http://dx.doi.org/10.18653/ v1/2025.acl-industry.106 
+
+6. Cicchetti DV and Sparrow SA. Developing criteria for establishing interrater reliability of specific items: Appli-cations to assessment of adaptive behavior. American Journal of Mental Deficiency 1981; 86:127–37 7. Cliff N. Dominance Statistics: Ordinal Analyses to Answer Ordinal Questions. Psychological Bulletin 1993; 114:494–509. doi : 10.1037/0033-2909.114.3.494 
+
+8. Colbert-Getz JM, Ryan M, Hennessey E, Lindeman BM, Pitts B, Rutherford KA, Schwengel D, Sozio SM, George J, and Jung J. Measuring Assessment Quality With an Assessment Utility Rubric for Medical Education. MedEdPORTAL: The Journal of Teaching and Learning Resources 2017 May; 13:10588. doi : 10.15766/mep_ 2374-8265.10588 . Available from: https://doi.org/10.15766/mep_2374-8265.10588 
+
+9. DeepSeek-AI. DeepSeek-V3 Technical Report. 2024. arXiv: 2412 . 19437 [cs.CL] . Available from: https : //arxiv.org/abs/2412.19437 
+
+10. DeepSeek-AI. DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning. 2025. arXiv: 2501.12948 [cs.CL] . Available from: https://arxiv.org/abs/2501.12948 
+
+11. Drayson G, Yilmaz E, and Lampos V. Machine-generated text detection prevents language model collapse. 2025. arXiv: 2502.15654 [cs.CL] . Available from: https://arxiv.org/abs/2502.15654 
+
+12. Dugan L, Hwang A, Trhl´ ık F, Zhu A, Ludan JM, Xu H, Ippolito D, and Callison-Burch C. RAID: A Shared Benchmark for Robust Evaluation of Machine-Generated Text Detectors. Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) . Bangkok, Thailand: Association for Computational Linguistics, 2024 Aug :12463–92. Available from: https://aclanthology.org/2024.acl-long.674 
+
+13. Elshama SS. How to use and apply assessment tools in medical education? Iberoamerican Journal of Medicine 2020; 2. Epub 25 Dec 2023. doi : 10.5281/zenodo.3978444 . Available from: https://scielo.isciii.es/ scielo.php?script=sci_arttext&pid=S2695-50752020000400015 
+
+14. Fortin FA, De Rainville FM, Gardner MA, Parizeau M, and Gagn´ e C. DEAP: Evolutionary Algorithms Made Easy. Journal of Machine Learning Research 2012; 13:2171–5 15. Gaudeau G. Beyond the Gold Standard in Analytic Automated Essay Scoring. Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 4: Student Research Workshop) . Ed. by Zhao J, Wang M, and Liu Z. Vienna, Austria: Association for Computational Linguistics, 2025 Jul :18–39. doi :
+
+10.18653/v1/2025.acl-srw.2 . Available from: https://aclanthology.org/2025.acl-srw.2/ 
+
+16. George D and Mallery P. IBM SPSS Statistics 23 Step by Step: A Simple Guide and Reference. 14th ed. New York: Routledge, 2016 17. Gierl MJ, Latifi S, Lai H, Boulais AP, and De Champlain A. Automated essay scoring and the future of educa-tional assessment in medical education. Medical Education 2014 Oct; 48:950–62. doi : 10.1111/medu.12517 .Available from: https://doi.org/10.1111/medu.12517 
+
+18. Goura VP, Moulesh M, Madhusudanarao N, and Gao XZ. An efficient and enhancement of recent approaches to build an automated essay scoring system. Procedia Computer Science 2022; 215. 4th International Con-ference on Innovative Data Communication Technology and Application:442–51. doi : https://doi.org/10. 1016/j.procs.2022.12.046 . Available from: https://www.sciencedirect.com/science/article/pii/ S1877050922021172 
+
+19. Grattafiori A et al. The Llama 3 Herd of Models. 2024. arXiv: 2407.21783 [cs.AI] . Available from: https: //arxiv.org/abs/2407.21783 
+
+20. Gr´ evisse C. LLM-based automatic short answer grading in undergraduate medical education. BMC Medical Education 2024 Sep 27; 24:1060. doi : 10.1186/s12909-024-06026-5 . Available from: https://doi.org/10. 1186/s12909-024-06026-5 
+
+21. Hartig J, Drake P, Illmann J, K¨ ohler C, Kohmer A, and Stroganova A. Rating procedures to evaluate generic critical online reasoning in an open Internet environment. Zeitschrift f¨ ur Erziehungswissenschaft 2026; 29:19–44. 
+
+doi : 10.1007/s11618-025-01365-5 
+
+22. Hu X, Chen PY, and Ho TY. RADAR: Robust AI-Text Detection via Adversarial Learning. Advances in Neural Information Processing Systems . Ed. by Oh A, Naumann T, Globerson A, Saenko K, Hardt M, and Levine S. Vol. 36. Curran Associates, Inc., 2023 :15077–95. Available from: https://proceedings.neurips.cc/paper_ files/paper/2023/file/30e15e5941ae0cdab7ef58cc8d59a4ca-Paper-Conference.pdf 
+
+21 23. Jiang Z, Gao T, Yin Y, Liu M, Yu H, Cheng Z, and Gu Q. Improving Domain Generalization for Prompt-Aware Essay Scoring via Disentangled Representation Learning. Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) . Ed. by Rogers A, Boyd-Graber J, and Okazaki N. Toronto, Canada: Association for Computational Linguistics, 2023 Jul :12456–70. doi : 10.18653/ v1/2023.acl-long.696 . Available from: https://aclanthology.org/2023.acl-long.696/ 
+
+24. Kosmyna N, Hauptmann E, Yuan YT, Situ J, Liao XH, Beresnitzky AV, Braunstein I, and Maes P. Your Brain on ChatGPT: Accumulation of Cognitive Debt when Using an AI Assistant for Essay Writing Task. 2025. arXiv: 
+
+2506.08872 [cs.AI] . Available from: https://arxiv.org/abs/2506.08872 
+
+25. Lee S, Cai Y, Meng D, Wang Z, and Wu Y. Unleashing Large Language Models’ Proficiency in Zero-shot Essay Scoring. Findings of the Association for Computational Linguistics: EMNLP 2024 . Ed. by Al-Onaizan Y, Bansal M, and Chen YN. Miami, Florida, USA: Association for Computational Linguistics, 2024 Nov :181–98. doi :
+
+10 . 18653 / v1 / 2024 . findings - emnlp . 10 . Available from: https : / / aclanthology . org / 2024 . findings -emnlp.10/ 
+
+26. Leonhardt A, Abrami G, Baumartz D, and Mehler A. Unlocking the Heterogeneous Landscape of Big Data NLP with DUUI. Findings of the Association for Computational Linguistics: EMNLP 2023 . Ed. by Bouamor H, Pino J, and Bali K. Singapore: Association for Computational Linguistics, 2023 :385–99. Available from: 
+
+https://aclanthology.org/2023.findings-emnlp.29 
+
+27. Li S and Ng V. Automated Essay Scoring: A Reflection on the State of the Art. Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing . Ed. by Al-Onaizan Y, Bansal M, and Chen YN. Miami, Florida, USA: Association for Computational Linguistics, 2024 Nov :17876–88. doi : 10.18653/v1/2024.emnlp-main.991 . Available from: https://aclanthology.org/2024.emnlp-main.991/ 
+
+28. Li W and Liu H. Applying large language models for automated essay scoring for non-native Japanese. Humanities and Social Sciences Communications 2024 Jun; 11:723. doi : 10.1057/s41599-024-03209-9 . Available from: 
+
+https://doi.org/10.1057/s41599-024-03209-9 
+
+29. Li Y, Li Q, Cui L, Bi W, Wang Z, Wang L, Yang L, Shi S, and Zhang Y. MAGE: Machine-generated Text Detection in the Wild. Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) . Ed. by Ku LW, Martins A, and Srikumar V. Bangkok, Thailand: Association for Computational Linguistics, 2024 Aug :36–53. doi : 10.18653/v1/2024.acl-long.3 . Available from: https: //aclanthology.org/2024.acl-long.3/ 
+
+30. Liew PY and Tan IKT. On Automated Essay Grading using Large Language Models. Proceedings of the 2024 8th International Conference on Computer Science and Artificial Intelligence . CSAI ’24. Association for Computing Machinery, 2025 :204–11. doi : 10.1145/3709026 .3709030 . Available from: https:// doi.org/10 .1145/ 3709026.3709030 
+
+31. Lundberg SM and Lee SI. A Unified Approach to Interpreting Model Predictions. Advances in Neural Information Processing Systems . Ed. by Guyon I, Luxburg UV, Bengio S, Wallach H, Fergus R, Vishwanathan S, and Garnett R. Vol. 30. Curran Associates, Inc., 2017. Available from: https://proceedings.neurips.cc/paper_files/ paper/2017/file/8a20a8621978632d76c43dfd28b67767-Paper.pdf 
+
+32. Mann HB and Whitney DR. On a Test of Whether One of Two Random Variables Is Stochastically Larger Than the Other. The Annals of Mathematical Statistics 1947; 18:50–60. doi : 10.1214/aoms/1177730491 
+
+33. Misgna H, On BW, Lee I, and Choi GS. A survey on deep learning-based automated essay scoring and feedback generation. Artificial Intelligence Review 2024; 58:36. doi : 10.1007/s10462- 024- 11017- 5 . Available from: 
+
+https://doi.org/10.1007/s10462-024-11017-5 
+
+34. Molerov D, Zlatkin-Troitschanskaia O, Nagel MT, Br¨ uckner S, Schmidt S, and Shavelson RJ. Assessing Univer-sity Students’ Critical Online Reasoning Ability: A Conceptual and Assessment Framework With Preliminary Evidence. Frontiers in Education 2020; Volume 5 - 2020. doi : 10.3389/feduc.2020.577843 . Available from: 
+
+https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2020.577843 
+
+35. Nagel MT and Zlatkin-Troitschanskaia O. The competence to deal critically with online information among economics education students and teacher trainees in economics: implications for teacher training. Empirical Research in Vocational Education and Training 2025; 17:11. doi : 10.1186/s40461- 025- 00186- 4 . Available from: https://doi.org/10.1186/s40461-025-00186-4 
+
+36. Nagel MT, Zlatkin-Troitschanskaia O, and Fischer J. Validation of newly developed tasks for the assessment of generic Critical Online Reasoning (COR) of university students and graduates. Frontiers in Education 2022; 7:914857. doi : 10.3389/feduc.2022.914857 
+
+37. OpenAI. gpt-oss-120b & gpt-oss-20b Model Card. 2025. arXiv: 2508.10925 [cs.CL] . Available from: https: //arxiv.org/abs/2508.10925 
+
+38. Pack A, Barrett A, and Escalante J. Large language models and automated essay scoring of English lan-guage learner writing: Insights into validity and reliability. Computers and Education: Artificial Intelligence 2024; 6:100234. doi : https : / / doi . org / 10 . 1016 / j . caeai . 2024 . 100234 . Available from: https : / / www . sciencedirect.com/science/article/pii/S2666920X24000353 
+
+22 39. Pedregosa F, Varoquaux G, Gramfort A, Michel V, Thirion B, Grisel O, Blondel M, Prettenhofer P, Weiss R, Dubourg V, Vanderplas J, Passos A, Cournapeau D, Brucher M, Perrot M, and Duchesnay E. Scikit-learn: Machine Learning in Python. Journal of Machine Learning Research 2011; 12:2825–30 40. Qwen Team. Qwen3 Technical Report. 2025. arXiv: 2505.09388 [cs.CL] . Available from: https://arxiv. org/abs/2505.09388 
+
+41. Seßler K, F¨ urstenberg M, B¨ uhler B, and Kasneci E. Can AI grade your essays? A comparative analysis of large language models and teacher ratings in multidimensional essay scoring. Proceedings of the 15th International Learning Analytics and Knowledge Conference . LAK ’25. Association for Computing Machinery, 2025 :462–72. 
+
+doi : 10.1145/3706468.3706527 . Available from: https://doi.org/10.1145/3706468.3706527 
+
+42. Shermis MD and Burstein JC. Automated essay scoring: A cross-disciplinary perspective. Routledge, 2003 43. Sreedhar R, Chang L, Gangopadhyaya A, Shiels PW, Loza J, Chi E, Gabel E, and Park YS. Comparing Scoring Consistency of Large Language Models with Faculty for Formative Assessments in Medical Education. Journal of General Internal Medicine 2025 Jan; 40. Epub 2024 Oct 14:127–34. doi : 10.1007/s11606-024-09050-9 
+
+44. Su J, Yan Y, Fu F, Han Z, Ye J, Liu X, Huo J, Zhou H, and Hu X. EssayJudge: A Multi-Granular Benchmark for Assessing Automated Essay Scoring Capabilities of Multimodal Large Language Models. Findings of the Association for Computational Linguistics: ACL 2025 . Ed. by Che W, Nabende J, Shutova E, and Pilehvar MT. Vienna, Austria: Association for Computational Linguistics, 2025 Jul :6363–89. doi : 10 . 18653 / v1 / 2025 . findings-acl.329 . Available from: https://aclanthology.org/2025.findings-acl.329/ 
+
+45. Su J, Yan Y, Gao Z, Zhang H, Liu X, and Hu X. CAFES: A Collaborative Multi-Agent Framework for Multi-Granular Multimodal Essay Scoring. 2025. arXiv: 2505.13965 [cs.CL] . Available from: https://arxiv.org/ abs/2505.13965 
+
+46. Sun K and Wang R. Automatic Essay Multi-dimensional Scoring with Fine-tuning and Multiple Regression. 2024. arXiv: 2406.01198 [cs.CL] . Available from: https://arxiv.org/abs/2406.01198 
+
+47. Tate TP, Steiss J, Bailey D, Graham S, Moon Y, Ritchie D, Tseng W, and Warschauer M. Can AI provide useful holistic essay scoring? Computers and Education: Artificial Intelligence 2024; 7:100255. doi : https : //doi.org/10.1016/j.caeai.2024.100255 . Available from: https://www.sciencedirect.com/science/ article/pii/S2666920X24000584 
+
+48. Vallat R. Pingouin: statistics in Python. Journal of Open Source Software 2018 Nov; 3:1026. doi : 10.21105/ joss.01026 
+
+49. Wang J and Liu J. T-MES: Trait-Aware Mix-of-Experts Representation Learning for Multi-trait Essay Scoring. 
+
+Proceedings of the 31st International Conference on Computational Linguistics . Ed. by Rambow O, Wanner L, Apidianaki M, Al-Khalifa H, Eugenio BD, and Schockaert S. Abu Dhabi, UAE: Association for Computational Linguistics, 2025 Jan :1224–36. Available from: https://aclanthology.org/2025.coling-main.81/ 
+
+50. Wang Y, Wei Z, Zhou Y, and Huang X. Automatic Essay Scoring Incorporating Rating Schema via Reinforcement Learning. Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing . Ed. by Riloff E, Chiang D, Hockenmaier J, and Tsujii J. Brussels, Belgium: Association for Computational Linguistics, 2018 :791–7. doi : 10.18653/v1/D18-1090 . Available from: https://aclanthology.org/D18-1090/ 
+
+51. Wang Y, Ding Z, Wu X, Sun S, Liu N, and Zhai X. AutoSCORE: Enhancing Automated Scoring with Multi-Agent Large Language Models via Structured Component Recognition. 2025. arXiv: 2509 . 21910 [cs.CL] .Available from: https://arxiv.org/abs/2509.21910 
+
+52. Xiao C, Ma W, Song Q, Xu SX, Zhang K, Wang Y, and Fu Q. Human-AI Collaborative Essay Scoring: A Dual-Process Framework with LLMs. Proceedings of the 15th International Learning Analytics and Knowledge Conference . LAK ’25. Association for Computing Machinery, 2025 :293–305. doi : 10.1145/3706468.3706507 .Available from: https://doi.org/10.1145/3706468.3706507 
+
+53. Xie W, Niu J, Xue CJ, and Guan N. Grade Like a Human: Rethinking Automated Assessment with Large Language Models. 2024. arXiv: 2405.19694 [cs.AI] . Available from: https://arxiv.org/abs/2405.19694 
+
+54. Yeung C, Yu J, Cheung KC, Wong TW, Chan CM, Wong KC, and Fujii K. A Zero-Shot LLM Framework for Automated Assignment Grading in Introductory Higher Education Courses. Artificial Intelligence in Education. Posters and Late Breaking Results, Workshops and Tutorials, Industry and Innovation Tracks, Practitioners, Doctoral Consortium, Blue Sky, and WideAIED . Ed. by Cristea AI, Walker E, Lu Y, Santos OC, and Isotani S. Cham: Springer Nature Switzerland, 2025 :19–27 55. Yoo H, Han J, Ahn SY, and Oh A. DREsS: Dataset for Rubric-based Essay Scoring on EFL Writing. Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) . Ed. by Che W, Nabende J, Shutova E, and Pilehvar MT. Vienna, Austria: Association for Computational Linguistics, 2025 Jul :13439–54. doi : 10.18653/v1/2025.acl-long.659 . Available from: https://aclanthology.org/ 2025.acl-long.659/ 
+
+23 56. Yousef M, Mohamed K, Medhat W, Mohamed EH, Khoriba G, and Arafa T. BeGrading: large language models for enhanced feedback in programming education. Neural Computing and Applications 2025 Jan 1; 37:1027–40. 
+
+doi : 10.1007/s00521-024-10449-y . Available from: https://doi.org/10.1007/s00521-024-10449-y 
+
+57. Zhuang X, Wu H, Shen X, Yu P, Yi G, Chen X, Hu T, Chen Y, Ren Y, Zhang Y, Song Y, Liu B, and Lan M. TOREE: Evaluating Topic Relevance of Student Essays for Chinese Primary and Middle School Education. 
+
+Findings of the Association for Computational Linguistics: ACL 2024 . Ed. by Ku LW, Martins A, and Srikumar V. Bangkok, Thailand: Association for Computational Linguistics, 2024 Aug :5749–65. doi : 10.18653/v1/ 2024.findings-acl.342 . Available from: https://aclanthology.org/2024.findings-acl.342/ 
+
+24

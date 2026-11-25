@@ -1,0 +1,1289 @@
+Title: Miscalibrated AI improves human calibration: An alignment problem for AI-assisted Decision education
+
+URL Source: https://arxiv.org/pdf/2611.23618v1
+
+Published Time: Thu, 19 Nov 2026 01:34:25 GMT
+
+Number of Pages: 36
+
+Markdown Content:
+# MISCALIBRATED AI IMPROVES HUMAN CALIBRATION : A NALIGNMENT PROBLEM FOR AI-ASSISTED DECISION EDUCATION 
+
+PREPRINT 
+
+Phillip C. Hegeman *1,2 , Eeshan Hasan 3, Eungik Lee 4, Andrew Caplin 5, and  Jennifer S. Trueblood † 1,2 1Department of Psychological and Brain Sciences, Indiana University Bloomington, IN, USA 
+
+> 2
+
+Cognitive Science Program, Indiana University Bloomington, IN, USA 
+
+> 3
+
+Department of Psychology, The Ohio State University, OH, USA 
+
+> 4
+
+Federal Reserve Bank of New York, NY, USA 
+
+> 5
+
+Department of Economics, New York University, NY, USA November 19, 2026 
+
+## ABSTRACT 
+
+Using artificial intelligence (AI) well requires probabilistic thinking, and central to it is calibra-tion : expressing certainty that matches one’s actual accuracy. Calibration is a decision skill, but a notoriously difficult one to teach. Because AI systems typically generate a probability alongside every prediction, observing these probabilities may help humans learn to provide better calibrated judgments. This is one form of what we call AI-assisted decision education — using AI to teach the judgment skills that decision-making requires — of which learning by observation, as here, is among the simplest forms. In a preregistered experiment, novice participants (N = 300) judged the probability that images of white blood cells were cancerous, before and after exposure to a highly accurate (94%) convolutional neural network. A single model was shown in three ways, holding accuracy fixed while varying the certainty it expressed: its original probabilities, which were conservative and poorly calibrated for the model’s accuracy; a recalibrated version, well calibrated for the model and correspondingly certain; or categorical predictions carrying no probability information. When later tested without the AI, only the original, conservative display improved participants’ calibration. It did so by reducing over-extremity, without a condition-specific improvement in discrimination. Notably, the display that taught best was the one miscalibrated for the model. AI-assisted decision education therefore faces an alignment problem: the signal that best describes a model, need not be the signal that best supports the learner. 
+
+Keywords calibration · subjective probability judgment · human–AI interaction · uncertainty communication ·
+
+human–AI alignment 
+
+## 1 Introduction 
+
+As artificial intelligence (AI) systems are increasingly used to provide decision support in high-stakes domains, it is more critical than ever to ensure that people have the skills to appropriately express, interpret, and integrate uncertainty from many sources [Steyvers and Kumar, 2024]. Central among these skills is probability calibration . Better-calibrated individuals rely on AI assistance more selectively and appropriately, yielding superior collaborative performance [Ma et al., 2024], and they benefit more from AI assistance compared to their solo performance. This is especially true for those with high calibration but low initial ability, who may have the most to gain from AI assistance [Caplin et al., 2025]. Calibration also matters upstream of AI deployment: well-calibrated probability judgments from human annotators improve the quality of training data and, in turn, the accuracy and alignment of the AI systems trained on them [Epping et al., 2026a,b]. Improving human calibration - not just accuracy - is therefore a high priority for 
+
+> ∗
+
+pchegeman@gmail.com 
+
+> †
+
+Direct correspondence to jennifer.s.trueblood@gmail.com arXiv:2611.23618v1 [cs.HC] 17 Nov 2026 Miscalibrated AI improves human calibration PREPRINT 
+
+effective AI development and human-AI collaboration. Deciding when to defer to a model and when to override it—the appropriate reliance that is widely treated as a core competency of AI literacy [Ma et al., 2024, Long and Magerko, 2020]—is itself a probabilistic judgment, and so rests on calibration. Probabilistic thinking is in this sense an important target for decision education, and one whose value rises as more decisions are made with AI. A judge is perfectly calibrated if, across all instances where they assign probability p, the outcome occurs p percent of the time [Lichtenstein et al., 1982]. Human judgments are frequently miscalibrated, most commonly exhibiting over-extremity: assigning probabilities more certain (closer to 0 and 1) than their ability to discriminate between true states warrants [Griffin and Brenner, 2004]. Calibration is challenging for AI systems as well, which often require post-processing or fine-tuning to produce reasonably calibrated judgments [Guo et al., 2017]. In this paper, we test whether AI can help humans learn to provide better calibrated judgments. AI models commonly produce probabilities—an image classifier computes the probability of category membership, a large language model the probability of each possible next token—which carry information about the relationship between an input and the AI’s uncertainty, offering insight into underlying difficulty or typicality. If AI uncertainty is made available to a human learner, they might detect these regularities and use them to improve their own calibration. This could circumvent key limitations of prior calibration training, which has been dominated by multifaceted interventions combining expert instruction with personalized feedback [Lichtenstein and Fischhoff, 1980, Stone and Opel, 2000, Sharp et al., 1988, Kelly and Mandel, 2024, Stone et al., 2023]. Such training is difficult to scale: it requires expert pedagogy, often spans multiple sessions [Moore et al., 2017, Gruetzemacher et al., 2024], and needs many trials—often 100 or more—to estimate an individual’s miscalibration before feedback can be offered [Kumar et al., 2019]. AI probabilities, by contrast, provide a trial-by-trial signal at essentially no marginal cost, and transmit a different kind of information than the trial-by-trial signals that have failed in the past: neither outcome feedback nor proper scoring rules improve calibration [Baranski and Petrusic, 1994, Martin and Mandel, 2025]. An AI probability is a model of uncertainty—the degree of certainty expressed by another capable agent, stimulus by stimulus. We call this possibility AI-assisted decision education : using AI not to improve a particular decision, but to teach the judgment skills that decision-making requires — whether through adaptive instruction or, as here, mere exposure to an AI’s expressed uncertainty. Research on AI-assisted decision making asks how well people decide while the AI is present, and how its displayed confidence should be designed to support decisions [Vodrahalli et al., 2022, Corvelo Benz and Gomez Rodriguez, 2023]. Recent work extends this to humans who learn from an AI over repeated interactions, raising the prospect of assistants designed for long-run learning as well as immediate performance [Noti et al., 2025]. Whether such exposure improves people’s unaided judgments once the AI is withdrawn remains largely untested. Calibration is a demanding test case, given its resistance to conventional training. There is, however, a fundamental tension in using AI probabilities to teach calibration: the output best calibrated for the model may not be the output that best teaches the learner . A highly accurate, well-calibrated AI must be quite extreme. Consider an AI classifying images of white blood cells as blasts—immature cells, evidence of cancer when abnormally concentrated—or non-blasts. If it is correct in the vast majority of cases ( > 90% ), well-calibrated output requires high certainty on most trials; at the limit, a perfectly accurate AI’s calibrated judgments would be exactly 0% and 100%, functionally equivalent to outcome feedback, which is ineffective for teaching calibration [Baranski and Petrusic, 1994, Martin and Mandel, 2025]. Worse, for novices already prone to over-extremity, a highly certain AI could reinforce that tendency: Li et al. [2025] found that AI-assisted decision making persistently shifted self-confidence toward the AI’s mean confidence, worsening calibration for the initially over-confident majority. Patterns relating stimulus features to certainty may also be easier to learn among more variable predictions spanning the full probability range. In short, model calibration and learner calibration are distinct design targets, and they can conflict. This tension is an alignment problem at the human–AI interface. An AI’s probability output is a statement about the model—how certain it is, given its own accuracy—and simultaneously an intervention on the human who receives it. Alignment concerns this second function: it is a property of the communicated signal relative to the person who uses it, and is distinct from calibration, the signal’s fidelity to the model’s accuracy. Because the purpose of AI assistance is to serve the human [Hadfield-Menell et al., 2016], the signal best calibrated to the model need not be the one that best serves the human. For decision making, that signal is tuned to the decision being made now, with the AI present; for decision education, the target is the human’s unaided judgment later, once the AI is gone. This is the alignment problem we examine. This project investigates (a) whether exposure to AI probabilities facilitates learning of probability calibration in human novices, (b) whether any improvements in calibration coincide with improvements in accuracy and judgment informativeness, and (c) whether learning differs by the calibration and extremity of the AI’s output. Participants judge the probability that images of white blood cells are blasts (versus non-blasts), with AI predictions provided by a convolutional neural net (CNN) fine-tuned on human-annotated data from this task [Epping et al., 2026b]. The design’s key feature is that a single underlying AI, highly accurate ( ∼94%), was displayed to participants in one of three ways 2Miscalibrated AI improves human calibration PREPRINT 
+
+that varied the uncertainty profile while holding accuracy fixed: its original probability output, which—because the model was trained on recalibrated human judgments and so expresses a human-like level of certainty rather than one matched to its own accuracy—is conservative and thus poorly calibrated relative to its accuracy; a recalibrated version of the same output, well calibrated for the model and correspondingly certain; or categorical predictions, a baseline stripped of probability information. After an initial training phase making subjective probability judgments with trial-by-trial ground-truth feedback, participants practiced with AI predictions displayed after each trial, and were then tested without feedback or AI. Our results show that participants exposed to the original, conservative AI—the display miscalibrated for the model’s own ability—learned to respond with less over-extremity, thereby substantially improving their own calibration. AI-assisted decision education is therefore possible. Importantly, the display that taught best was the one poorly calibrated for the model itself. Thus, probability displays optimized for model calibration are not necessarily optimized for human learning. 
+
+## 2 Results 
+
+In a preregistered experiment, novice participants (N=300) were given an opportunity to study examples of blast (cancer) and non-blast white blood cells before judging the probability that white blood cells were blast across three phases: (1) training with ground truth feedback, (2) practice with AI exposure, and (3) test without feedback or AI (Figure 1). Participants were given brief instruction in probabilistic judgment and were told that half of the cells in each phase would be blast. Performance in Phase 3 was incentivized by a $4 bonus with probability determined by their Brier score. AI predictions, coming from a highly accurate (94%) convolutional neural network (CNN) trained on probability judgments from skilled annotators in Epping et al. [2026b], varied by condition: original (poorly calibrated, frequently conservative) probabilities, recalibrated (well-calibrated, frequently certain) probabilities, or categorical predictions. Distributions of the output of each AI variant across all 300 stimuli can be seen in Figures 1 and S1. Our analyses compare behavior in pre-AI Phase 1 training (100 trials per participant) to post-AI Phase 3 testing (120 first judgments of non-repeated stimuli). We used Bayesian multilevel linear and logistic regressions with weakly informative or uninformative priors, with by-participant and by-stimulus random effects where appropriate. 
+
+2.1 Performance Metrics 
+
+Our central result concerns calibration, so we begin with reliability , a component of the Brier score measuring calibration error, where 0 indicates perfect calibration [Murphy, 1973]. All three conditions began with mean reliability ∼.065 in Phase 1: maximum a posteriori estimate (MAP) = .067 (95% highest density interval, HDI = [.056, .077]) for categorical, .063 ([.051, .073]) for original, and .062 ([.051, .073]) for recalibrated. Reliability was essentially unchanged in Phase 3 for categorical and recalibrated, but improved for original, dropping -.020 ([-.030, -.011]) to .041 ([.030, .053]). For context, the original AI output these participants observed had a reliability of .036, so their Phase 3 calibration approached, but did not reach, that of the display they saw. The original condition improved credibly more than both categorical (difference-in-differences, DiD O−C = -.021, [-.034, -.008]) and recalibrated (DiD O−R = -.026, [-.039, -.013]), which did not credibly differ from each other (DiD R−C = .005, [-.008, .018]). These metrics and their changes are shown in Figure 2. The same pattern holds for expected calibration error, which decreased only in the original condition (-.046, [-.063, -.030]) and credibly more than in categorical (DiD O−C = -.048, [-.072, -.025]); see Supplement. To interpret this calibration gain, we ask whether it was accompanied by improved ability to distinguish blast from non-blast. Resolution , another Brier component, is a skill metric ranging from 0 (no discrimination) to .25 (perfect discrimination). All conditions began similarly, though perhaps slightly lower in categorical: .047 (95% HDI = [.040, .056]) for categorical, .058 ([.049, .066]) for original, and .059 ([.050, .067]) for recalibrated. As with reliability, resolution improved credibly only within the original condition (+.010, [.004, .017]). However, this change did not credibly differ from categorical (DiD O−C = .006, [-.003, .014]) or recalibrated (DiD O−R = .008, [-.001, .017]), nor did recalibrated differ from categorical (DiD R−C = -.002, [-.011, .007]); all intervals include 0. We also examined classification (“binarized”) accuracy, treating judgments > . 5 as “blast”, < . 5 as “non-blast”, and exactly .5 as a random choice. All conditions began at or just under 70% in Phase 1: .673 (95% HDI = [.648, .700]) for categorical, .703 ([.673, .729]) for original, and .692 ([.662, .718]) for recalibrated. All three improved by Phase 3: +.026 ([.005, .044]), +.038 ([.016, .058]), and +.030 ([.010, .049]) respectively, with no evidence of between-condition differences (all 95% HDIs include 0). The calibration advantage of the original condition therefore cannot be attributed to a condition-specific gain in classification ability. These results indicate that calibration only improved for the condition exposed to the worse-calibrated original AI probabilities, and that this improvement was accompanied by little-to-no relative gain in discrimination. To get a better 3Miscalibrated AI improves human calibration PREPRINT What is the probability that the cell is a blast? 
+
+20% 
+
+45%        
+
+> Phase 1: Training with ground-truth feedback trial-by-trial
+> Phase 3: Testing without feedback
+> Phase 2: Practice with AI exposure trial-by-trial
+> 65%
+> 16%
+> 37% individually recalibrate
+> aggregate & recalibrate the average
+> fi ne-tune CNN to predict number 0-1
+
+.43 
+
+B.  Experimental  Procedure 
+
+A.  Model  Training  
+
+> crowdsource judgments
+
+.32  .35  .58 
+
+.43  
+
+> What is the likelihood that this is a blast cell? CNN
+
+# } 180 trials 
+
+> performance (Brier score) determines chance for bonus $4
+
+P( ) = 1 − BS  B S = 1
+
+NN
+
+∑
+
+> t
+
+(pt − yt)2         
+
+> Brier score de fi nition
+> is the response probability blast on trial ,
+> when the cell is blast, when the cell is non-blast
+> pt ∈ [0,1] t
+> yt = 1 yt = 0
+> skilled annotators
+> True cell type: blast
+
+56% 
+
+> What is the probability that the cell is a blast?
+
+.76               
+
+> CNN
+> What is the probability that the cell is a blast?
+> Condition is randomly assigned for each participant
+> Condition: categorical AI
+> Condition: original AI
+> Condition: recalibrated AI
+> AI prediction: blast
+> non-blast blast AI prediction
+> 0% 50% 100% AI prediction
+> AI prediction: 76%
+> AI prediction: 98%
+> 0% 50% 100% AI prediction
+> present output as discrete classi fi cation
+> present output
+> as probability blast
+> recalibrate output & present
+> as probability blast
+> 100 trials
+> 100 trials
+
+Figure 1: Study design. A, AI training procedure from Epping et al. [2026b]: skilled annotators on the DiagnosUs platform provided subjective probabilities that cells were blast, which were aggregated, recalibrated, and used as fine-tuning labels for a convolutional neural network (CNN). B, The three experimental phases. After familiarization with blast and non-blast cells, participants (1) train with trial-by-trial ground-truth feedback, (2) practice with AI predictions shown after every trial, and (3) test without feedback, determining their bonus probability. 
+
+sense of what might be occurring, we look at the distributions of responses themselves. As can be seen in Figure S1, individuals in all conditions began with a tendency to respond with high degrees of certainty, with almost half of responses being ≤ .1 or ≥ .9. For participants exposed to the categorical and recalibrated AI, this tendency persists into Phase 3, essentially unchanged. However, participants exposed to the original AI grow more conservative in Phase 3, responding with probabilities in the most extreme bins in less than 40% of trials (though, still more frequently than any other bin). This change brings the pooled response distribution of the original AI condition closer in line with the conservatism of the original AI model to which they were exposed. It is important to note that the response distributions for individual participants vary considerably, with some using near uniform distributions and others consistently selecting responses from a small set of highly certain probabilities. Moreover, the analysis of reliability only summarizes calibration performance without indicating what systematic errors participants are making to produce this level of miscalibration. In order to characterize response and calibration errors while accounting for individual variability, we turn to the linear in log-odds model. 
+
+2.2 Calibration errors 
+
+To identify the precise relationship between probability judgments and relative frequencies—and moreover, how 
+
+this relationship changes to produce improved calibration—we turn to the linear in log-odds model. The linear in log-odds (LLO) model is, in essence, a model-based calibration curve, modeling the "true" probability that a cell is blast as a function of a given subjective probability that it is blast [Turner et al., 2014]. In doing so, it characterizes calibration errors along two dimensions: over-/under-extremity (parameter α), and over-/under-prediction (parameter 
+
+β). α < 1 indicates over-extremity, where subjective probabilities tend to be more certain (closer to 0 and 1) than the 4Miscalibrated AI improves human calibration PREPRINT categorical original recalibrated 1 3 1 3 1 30.00 0.05 0.10 0.15 0.20 Phase Reliability Reliability (lower is better)                                 
+
+> A
+> categorical original recalibrated 1313130.00 0.05 0.10 0.15 Phase Resolution Resolution (higher is better)
+> B
+> categorical original recalibrated 13131350% 60% 70% 80% 90% Phase Accuracy Accuracy
+> C
+> recalibrated original categorical −0.03 −0.02 −0.01 0.00 +0.01 Change in reliability Condition Change in reliability from Phase 1 to Phase 3
+> D
+> −0.005 0.000 +0.005 +0.010 +0.015 Change in resolution Change in resolution from Phase 1 to Phase 3
+> E
+> 0% +2% +4% +6% Change in accuracy Change in accuracy from Phase 1 to Phase 3
+> F
+> orig. − recal. recal. − cat. orig. − cat. −0.04 −0.02 0.00 +0.02 Difference in change in reliability Comparison  Differences in change between conditions
+> G
+> −0.01 0.00 +0.01 Difference in change in resolution Differences in change between conditions
+> H
+> −2.5% 0.0% +2.5% Difference in change in accuracy Differences in change between conditions
+> I
+
+Figure 2: Summary performance metrics. A–C, Posterior expected reliability (calibration error), resolution (discrimi-nation), and binarized accuracy for each condition and phase, shown as maximum a posteriori (MAP) estimate and 95% HDI; grey points are per-participant MAP estimates. D–F, Expected change in each metric from Phase 1 to 3, with MAP, 50% HDI (thick) and 95% HDI (thin). G–I, Expected between-condition difference in that change. corresponding actual relative outcome frequencies. α > 1 indicates under-extremity, where subjective probabilities tend to be less certain (closer to .5) than the corresponding relative outcome frequencies. Over- and under-prediction, indicated by β < 0 and β > 0, are tendencies for subjective probabilities across the entire [0,1] range to be higher or lower than relative outcome frequencies, respectively. In this case, over-prediction is a sort of systematic bias favoring the probability of blast, and vice versa. Perfect calibration would be indicated by α = 1 and β = 0 .Estimates of both parameters, and their changes across phases and conditions, are shown in Figure 3. All conditions begin with considerable over-extremity in Phase 1: mean α = 0.285 (95% HDI = [0.224, 0.355]) for categorical, 0.291 (95% HDI = [0.235, 0.344]) for original, 0.275 (95% HDI = [0.224, 0.326]) for recalibrated. This over-extremity was substantially reduced for the original AI condition, with an increase in α of +0.260 (95% HDI = [0.195, 0.327]) to an expected value of α = 0.547 (95% HDI = [0.457, 0.644]) in Phase 3. There is a small but credible increase in average α for the categorical condition (+0.045, 95% HDI = [0.011, 0.085]), though there is minimal evidence that this change differs from that in the recalibrated condition (DiD R−C = -0.044, 95% HDI = [-0.096, 0.002]). By contrast, α
+
+increased considerably more in the original condition than in the categorical (DiD O−C = 0.214, 95% HDI = [0.137, 0.289]) and the recalibrated conditions (DiD O−R = 0.256, 95% HDI = [0.186, 0.333]). All conditions also exhibited a slight tendency to under-predict the probability that cells were blast in Phase 1: mean 
+
+β = 0.069 (95% HDI = [0.014, 0.117]) for categorical, 0.126 (95% HDI = [0.075, 0.181]) for original, and 0.076 (95% HDI = [0.020, 0.134]) for recalibrated. This under-prediction largely disappeared by Phase 3 for all conditions, with the 95% HDIs for each condition’s Phase 3 mean β including 0. There is some evidence of differences between conditions in the change in β, especially between the original and categorical conditions (DiD O−C = -0.125, 95% HDI = [-0.217, -0.022]). However, this difference may partly reflect where the conditions began rather than what they learned. The original AI condition started with a higher mean Phase 1 β than the recalibrated condition, by 0.057 (95% HDI = [-0.013, 0.136]), and so had further to move before reaching β = 0 . Regardless, taken together with the response distributions in Fig. S1B, which show a high propensity for extreme, certain responses, it is clear that over-extremity is the dominant tendency driving the extent of miscalibration. 5Miscalibrated AI improves human calibration PREPRINT categorical original recalibrated 1 3 1 3 1 30.0 0.5 1.0 1.5 Phase                                        
+
+> ⍺
+> Over-/under-extremity (LLO ⍺)
+> B
+> categorical original recalibrated 131313-0.25 0.00 0.25 Phase
+> β
+> Over-/under-prediction (LLO β)
+> C
+> recalibrated original categorical 0.0 +0.1 +0.2 +0.3 Change in ⍺
+> (Phase 3 - Phase 1) Condition Change in ⍺
+> from Phase 1 to Phase 3
+> D
+> -0.25 -0.20 -0.15 -0.10 -0.05 0.00 Change in β
+> (Phase 3 - Phase 1) Change in β
+> from Phase 1 to Phase 3
+> E
+> orig. −recal. recal. −cat. orig. −cat. -0.1 0.0 +0.1 +0.2 +0.3 Difference in change in ⍺
+> Comparison  Differences in change between conditions
+> F
+> -0.2 -0.1 0.0 Difference in change in β
+> Differences in change between conditions
+> GA
+> under-pred. over-pred. under-extr. over-extr.
+> recalibrated original categorical 0.00 0.25 0.50 0.75 1.00 0.00 0.25 0.50 0.75 1.00 0.00 0.25 0.50 0.75 1.00 0.00 0.25 0.50 0.75 1.00 Subjective probability judgment Probability cell is blast Phase 1 Phase 3 Average LLO calibration curves
+
+Figure 3: LLO model of calibration errors. A, LLO-based average calibration curves per condition and phase, showing MAP estimate and 95% HDI of the expected probability a cell is blast given the subjective probability. B,C, Expected 
+
+α (over-/under-extremity) and β (over-/under-prediction) per condition and phase; grey points are per-participant MAP estimates. D,E, Expected change in α and β from Phase 1 to 3, with MAP, 50% HDI (thick) and 95% HDI (thin). F,G, 
+
+Expected between-condition difference in that change. 
+
+2.3 Blackwell Informativeness 
+
+The reduction in over-extremity we observe for the original AI condition can be achieved in roughly two ways. (1) Individuals apply a global adjustment, shifting all judgments to be more conservative so that overall certainty better matches their ability to discriminate. (2) Individuals apportion certainty differentially across cells , so that expressed certainty tracks the difficulty of individual stimuli. The two differ in what participants would have learned: the first requires only a uniform shift in the level of certainty, whereas the second requires a stimulus-level mapping from cells to uncertainty. The minimal evidence of relative gains in resolution or accuracy for the original AI condition suggests that (1) plays a considerable role. Neither resolution nor accuracy can fully adjudicate between the accounts. Binarized accuracy records only which side of .5 a judgment falls on, so a participant could learn which cells are difficult and express that in graded confidence without altering any classification. Resolution does speak to both accounts, but it is an incomplete test: it captures only the spread of the distribution, and only from binned judgments. Two sets of judgments with identical resolution can even support opposite decisions at different intervention thresholds (see Supplement). Distinguishing the accounts thus calls for a criterion defined over the entire distribution rather than a summary of it. We therefore compare the Blackwell informativeness of recalibrated Phase 3 and Phase 1 judgments, a criterion defined over full judgment distributions. For any decision-maker, well-calibrated judgments that are a mean-preserving spread 
+
+of another set are weakly preferable to it [Blackwell, 1951]; if Phase 3 is a mean-preserving spread of Phase 1, Phase 3 judgments are Blackwell more informative , supporting universally better decisions. Recalibration is what makes this comparison diagnostic. A purely global adjustment is undone by the recalibration step: if a participant shrinks every judgment toward .5 by a common transformation, fitting the LLO model recovers that transformation and returns the original recalibrated values. Account (1) therefore predicts no change in Blackwell informativeness by construction, so any gain in spread that survives recalibration must reflect a reallocation of certainty across stimuli, which is account (2). 6Miscalibrated AI improves human calibration PREPRINT categorical original recalibrated 0 0.25 0.5 0.75 1 0 0.25 0.5 0.75 1 0 0.25 0.5 0.75 101234Density Distributions of recalibrated judgments                   
+
+> A
+> categorical original recalibrated 00.25 0.5 0.75 100.25 0.5 0.75 100.25 0.5 0.75 10.0 0.1 0.2 0.3 0.4 0.5 Recalibrated judgment Sum area under CDF Cumulative area under CDFs of recalibrated judgments
+> B
+> Phase 1 Phase 3 AI
+
+Figure 4: Blackwell informativeness via mean-preserving spread of recalibrated judgments. A, Pooled distributions of recalibrated judgments per condition in Phases 1 and 3, with recalibrated AI output for reference. Recalibrated probabilities are Bayesian LLO model MAP predictions of the “true” probability a cell is blast. B, Cumulative area under the CDF of the distributions in panel A, as a function of recalibrated probability ˜x. One distribution is a mean-preserving spread of another, and hence Blackwell more informative, if and only if its cumulative CDF is above the other for all 
+
+˜x ∈ (0 , 1) (spread) and equal at ˜x = 1 (mean-preserving). This yields a clear prediction. Because stimulus-specific uncertainty information was available only in the two probability conditions, learning to apportion certainty more discriminately should produce gains in Blackwell informativeness in the original and recalibrated conditions relative to categorical. Fig. 4A shows the pooled distributions of recalibrated judgments for each phase and condition. All means are approximately equal ( ≈ .5), and the Phase 3 distribution is slightly more dispersed than Phase 1 in all three conditions, with marginally greater density near 0 and 1. The extent of this spread is minimal, especially compared with the AI’s recalibrated output, whose density is concentrated near the extremes. That all three conditions shifted slightly in the same direction is consistent with the general improvement in binarized accuracy across conditions, which would produce a small, uniform gain in informativeness irrespective of the AI display. The mean-preserving spread is evaluated more precisely in Fig. 4B, which plots the cumulative area under each empirical CDF. Phase 3 judgments are a mean-preserving spread of Phase 1 judgments if and only if the Phase 1 and Phase 3 lines end with the same y value (i.e., mean-preserving) and the Phase 3 line is above the Phase 1 line for all other points (i.e., spread). Fig. 4B shows this to be the case, but only barely, and there are no obvious differences between conditions. By contrast, the AI line lies far above both. That gap is itself instructive: participants in the original condition took on much of the AI’s level of certainty, without learning to better apportion certainty across cells. We therefore find no indication of stimulus-level learning: the gain in informativeness is slight and no greater in the two probability conditions, which carried stimulus-specific uncertainty information, than in the categorical condition, which carried none. We note that the criterion is evaluated graphically and the analysis is therefore descriptive rather than inferential. Its value is as converging evidence: the resolution and accuracy analyses likewise show no condition-specific gain in discrimination, and together this is the pattern a global rescaling of certainty would produce. The conceptual and formal basis for this approach is given in the Supplement. 
+
+## 3 Discussion 
+
+We asked whether exposure to an AI’s probability output can teach novices to express better-calibrated uncertainty, and, if so, whether the output that is best calibrated for the model is also the output that best teaches the learner . The 7Miscalibrated AI improves human calibration PREPRINT 
+
+answer to the first question is yes, indicating the feasibility of AI-assisted decision education: simply observing a model’s probabilities, with no instruction and no adaptation to the individual, improved a skill that has resisted far more elaborate training. The answer to the second question is no. Only the original, conservative AI—the variant whose probabilities were poorly calibrated relative to the model’s own accuracy—improved participants’ calibration. The recalibrated variant, which was well calibrated for the model, produced no such improvement, and neither did the categorical baseline. The improvement was specifically a reduction in over-extremity . Participants in every condition began over-extreme, expressing more certainty than their discrimination warranted [Griffin and Brenner, 2004], and only exposure to the conservative AI lessened this tendency, with the linear-in-log-odds slope α moving toward one. It brought no relative 
+
+gain in discrimination: resolution and binarized accuracy improved similarly across all three conditions, and the gain in Blackwell informativeness was no larger in the two probability conditions than in the categorical baseline, which carried no uncertainty information at all. Thus, participants did not acquire the metacognitive skill of learning which 
+
+cells warrant more certainty. What transferred was a general level of certainty rather than a mapping from cells to certainty, consistent with evidence that people’s confidence drifts toward that of an AI they work with [Li et al., 2025]. This also clarifies why the conservative display helped while the certain one did not: novices were already over-extreme, so a highly certain AI—however well calibrated for its own accuracy—offered no corrective example, whereas the conservative AI modeled a degree of uncertainty close to what their performance warranted. The benefit therefore lies in the match between display and learner. These results connect several literatures. AI probability output is a scalable alternative to conventional calibration training [Lichtenstein and Fischhoff, 1980, Stone et al., 2023], conveying trial-by-trial uncertainty rather than summary feedback—though it may afford only global adjustment without improving the mapping between stimuli and certainty [Keren, 1991]. Our findings also complement work on human-aligned AI confidence, which shows that decision-makers integrate AI predictions most effectively when the AI’s confidence aligns with their own [Corvelo Benz and Gomez Rodriguez, 2023, 2025]: we provide a learning counterpart, in which an AI whose certainty sits below that of an over-extreme learner draws that learner toward better calibration. Practically, this implies that AI confidence displays may need to be calibrated not only to the model’s empirical accuracy but to the learner’s current state: a display can be miscalibrated for the AI and still teach a novice well if it models uncertainty appropriate for the learner. For highly accurate systems, whose well-calibrated outputs are necessarily concentrated near zero and one [Guo et al., 2017], deliberately tempered displays may better support learning, creating a tension between optimizing for the model and for the person. Notably, AI-assisted decisions can be more accurate when the AI is made more extreme, eliciting greater trust [Vodrahalli et al., 2022]—so what is optimal for human–AI collaboration may be the opposite of what is best for human learning. Several limitations apply. We studied a single perceptual task with novices recruited online, so generalization to other domains and to trained experts remains to be established; the three displays came from a single model at one accuracy level, and whether the pattern holds for less accurate or differently distributed models is unknown. Learning was assessed within the same session, so we cannot speak to durability or transfer. These point to natural extensions: displays might be adapted to each learner, tempering the AI’s certainty to their current ability, and tested across domains, expertise levels, and longer retention intervals. Our paradigm was also deliberately passive—participants judged, then observed—which makes it the minimal form of AI-assisted decision education. That minimal form moved calibration but not condition-specific discrimination, suggesting that adaptive instruction, in which an AI responds to a learner’s particular errors, may be required for stimulus-level learning. In short, exposure to miscalibrated AI probability output taught novices to hold beliefs that better matched reality. AI-assisted decision education is therefore feasible, but it inherits an alignment problem of its own: the probability that faithfully represents a model, and the signal that best teaches need not coincide. This does not license covertly misreporting model uncertainty. It implies instead that a model’s calibrated probability and a pedagogical assistance signal are distinct design objects: the former should remain available and accurately disclosed, while any transformation of the latter should be explicit, purpose-specific, and governed. Attending to that distinction may be essential to designing AI that helps improve human probabilistic thinking. 
+
+## 4 Methods 
+
+4.1 Use of generative AI 
+
+Claude Opus 4.8 and 5 (Anthropic) were used as writing assistants to edit the manuscript. They were not used to generate, analyze, or interpret data, and are not authors. The authors reviewed and verified all text. 8Miscalibrated AI improves human calibration PREPRINT 
+
+4.2 Experimental Methods 
+
+After familiarization with blast and non-blast images, participants completed three phases of probability judgments: Phase 1 with ground-truth feedback after each judgment, Phase 2 with AI predictions according to assigned condition (categorical, original, or recalibrated), and Phase 3 with no feedback and a performance-based bonus. Comparing Phases 1 and 3 assesses the impact of AI exposure. 
+
+4.2.1 Participants 
+
+Data was collected from N = 300 participants after exclusions, 100 for each of three between-subjects conditions differing in the kind of AI output they observed in Phase 2 of the experiment: 1. original probability output of an overly conservative AI 2. recalibrated probability output of the same AI, now well-calibrated 3. categorical predictions from the same AI, serving as a control condition providing binary classifications (i.e., blast, non-blast) Sample size was based on a previous, similar experiment in which ground-truth feedback and AI predictions were presented together after every training trial rather than in separate phases. That experiment produced credible effects of AI variant with N = 100 per condition despite divided attention, so we expected the present design to yield effects at least as large and adopted the same sample size. Participants were U.S. residents recruited through Cloud Research, completing the study online via Amazon Mechanical Turk (MTurk). Participants were paid $3.00, plus a $4.00 bonus with chance equal to 1 minus their mean squared error (Brier score) on trials in the final testing phase (Phase 3). All procedures were approved by the Indiana University Human Research Protection Program Institutional Review Board (Protocol #24488), and all participants provided informed consent before beginning the study. The study was preregistered on the Open Science Framework (https://osf.io/jckpb/overview?view_only=93b1cf3ce2e047e591fca6a129d553d9 ). A total of 327 participants were recruited and completed the experiment. 27 were excluded according to the preregistered criteria (i.e., failing either of two attention check questions or pasting responses for all text response fields), leaving a final sample of N = 300 , with 100 participants in each condition. The attention check questions were "Have you ever used a computer?" ("yes" or "no"), and "I work 14 months in a year." ("true" or "false"). Although we detected 48 participants pasting a text response at least once over the course of the experiment, 44 of them did so on less than four trials, and none pasted on more than 41% of trials with text fields, so no participants were excluded based on that criterion. Participants ranged in age from 18 to 77 years ( M = 41 .4, SD = 11 .9; 57.67% women, 41.33% men, 0.33% other, 0.67% prefer not to say; 76% White, 11% Black or African American, 7% Asian, 1% Native American or Pacific Islander, 3% multiple races selected, 1% other, 1% prefer not to say; 9.33% Hispanic or Latino, 87.33% non-Hispanic or Latino, 3.33% other). The analyses of reliability, resolution, binarized accuracy, and the linear in log-odds model were preregistered. The Blackwell informativeness analysis was not preregistered and is exploratory. 
+
+4.2.2 Materials 
+
+Stimuli consisted of 300 digital images of Wright-stained white blood cells taken from anonymized patient peripheral blood smears at Vanderbilt University Medical Center, as described in Trueblood et al. [2018]. The images were acquired using a CellaVision DM96 automated digital cell morphology instrument (CellaVision AB, Lund, Sweden). Ground truth was the unanimous classification of three hematopathology faculty at Vanderbilt University Medical Center, who also rated the typicality of each image on a 1–5 scale; averaged typicality ratings were used to assign images to five difficulty categories from very easy to very hard [Epping et al., 2026a]. Further detail on classification and typicality rating is given in Trueblood et al. [2018] and in the Supplement. For decision training and testing, the present experiment used the subset of 300 images from this larger stimulus bank that were used for machine-learning model training and testing in Epping et al. [2026b]. The remaining 249 images from the original stimulus set were not used as experimental stimuli here because they were used for crowdsourced label recalibration in that prior work; they were, however, used for stimulus familiarization. We selected one of the CNNs trained on the 300-image subset in Epping et al. [2026b] to generate the AI predictions presented to participants. 9Miscalibrated AI improves human calibration PREPRINT 
+
+White blood cell classification provides a useful perceptual learning task because the stimuli are visually complex and vary in difficulty. Blast and non-blast cells differ along multiple morphological dimensions, and the non-blast category is heterogeneous because it includes multiple mature cell types. This complexity makes the task well suited for studying subjective probability judgments and calibration. 
+
+4.2.3 AI model and output variants 
+
+The AI predictions used in this study are from one of the CNNs trained and tested in Epping et al. [2026b]. CNNs tested by Epping et al. varied in how their training data was derived from crowdsourced judgments from skilled annotators. After pre-training on the ImageNet database, the particular CNN we used was fine-tuned to predict the crowdsourced mean subjective probability that a white blood cell is a blast. Crowdsourced labels were created by recalibrating individual judgments, averaging by stimulus, and recalibrating the aggregate, which reduced noise and bias and allowed the CNN to learn continuous, human-like uncertainty rather than discrete labels. The selected model was the most accurate of those investigated by Epping et al. [2026b] ( ∼94%) while remaining aligned with expert judgments [Hasan et al., 2024], but at a cost to calibration: its probability output is overly conservative. Note that, despite there being equal numbers of blast and non-blast, the AI predicted that 53.7% of the stimuli were blast (using a decision threshold of .5). Given the model’s high accuracy, a more appropriate calibration would have produced more certain outputs, closer to 0 and 1. We therefore recalibrated the model outputs using a linear-in-log-odds (LLO) model, which models the empirical log-odds of an outcome as a linear function of the probability judgment in log-odds and thus provides a monotonic correction of systematic miscalibration [Turner et al., 2014]. This created an equally accurate but appropriately certain AI variant. The same approach was used to recalibrate crowdsourced judgments in Epping et al. [2026b], and is described further below. The LLO transformation was restricted to correct only over- or under-extremity, altering certainty without shifting the decision boundary. The original and recalibrated variants therefore had identical classification accuracy ( ∼94%) but differed in apparent certainty. Because the original CNN was primarily under-extreme, recalibration made its outputs more certain, with probabilities ≤ .1 or ≥ .9 on over 80% of stimuli (Fig. S1), reducing reliability from .036 to .005. Finally, we created the categorical AI variant by binarizing the original model output probabilities, treating 50% as a decision threshold such that probabilities > . 5 become classifications of "blast" and probabilities < . 5 become classifications of "non-blast". 
+
+4.2.4 Procedure 
+
+The experiment was built using jsPsych [De Leeuw et al., 2023] and hosted on Pavlovia [Open Science Tools]. The primary experimental task was to provide a subjective probability that the white blood cell present in a given image was a blast cell (as opposed to a non-blast cell). Because participants were expected to be novices, they began by observing 40 examples (20 blast, 20 non-blast), sampled from the set of 249 images in proportion to the overall difficulty distribution and not seen again. Participants were then introduced to the probability judgment task, and the bonus rule was explained qualitatively: greater certainty would improve their chances if correct but sharply worsen them if wrong. Familiarization and instruction details are given in the Supplement. Participants then completed Phase 1, a training phase of 100 trials (50 blast, 50 non-blast) in randomized order. They were informed that cells were equally likely to be blast or non-blast. On each trial, participants viewed a cell image and entered a probability between 0% and 100% that it was a blast, after which the true cell type was displayed alongside their response. Responses and feedback were self-paced. Aggregate performance feedback, in the form of the bonus probability they would have earned, was shown after every 50 trials. Of the 100 trials, 20 came from a common set repeated in every phase (10 blast, 10 non-blast, balanced across difficulty), with the remaining 80 sampled without replacement per participant in proportion to the difficulty distribution. Details are given in the Supplement. Participants were then introduced to the AI, described as trained to classify cells as blast or non-blast with an accuracy of about 94%, and told that they would see its predictions instead of the true cell type in Phase 2. Phase 2 comprised 100 trials (50 blast, 50 non-blast) structured as in Phase 1, again with aggregate feedback every 50 trials and the same 20 repeated common stimuli. After each judgment, participants saw the image, their own judgment, and the AI prediction, shown as either a probability rounded to the nearest percent or a categorical classification, depending on condition. Finally, participants completed Phase 3, a testing phase of 180 trials in randomized order with no feedback of any kind. Of these, 20 were the repeated common set, 120 (60 blast, 60 non-blast) were sampled without replacement in proportion to the difficulty distribution, and 40 were repeats drawn from those 120, used for intra-rater reliability baselines. Stimuli sampled for one phase were removed from the pool for later phases. 10 Miscalibrated AI improves human calibration PREPRINT 
+
+After Phase 3, participants completed an exploratory survey on the perceptual attributes underlying their judgments [Tsutsui et al., 2023], their everyday use of AI, and demographics; these responses are not analyzed here. Participants were then told whether they had won the bonus, which 77% did. Mean completion time was 56.5 minutes (median 48.2, SD 32.1). 
+
+4.3 Analytical Methods 
+
+All analyses share a common approach: comparing Phase 1 to Phase 3 gives the expected change in a variable of interest before and after AI exposure, and comparing those changes across conditions, as in a difference-in-differences analysis, accounts for baseline differences and provides the primary test of whether AI variants produced distinct shifts. Only first judgments of each stimulus were used, giving 100 Phase 1 and 120 Phase 3 trials per participant. All of the models described below were fit with Markov Chain Monte Carlo (MCMC) in Stan [Stan Development Team, 2025] using the CmdStanR [Gabry et al., 2025] and brms [Bürkner, 2018] packages in R (v4.4.0). Each model was run using 8 chains with 1,000 tuning iterations and 8,000 post-tuning iterations, for a total of 64,000 post-tuning iterations. Convergence was assessed using ˆR ( ˆR < 1.01 indicates convergence) and bulk and tail effective sample size (ESS). Across all models, all parameters and estimands had ˆR < 1.002 , and ESS values were well above conventional thresholds. Weakly informative or uninformative priors were used. Full diagnostics and priors are reported in the Supplement. 
+
+4.3.1 Reliability and Resolution (Calibration Error and Discrimination) 
+
+We assess judgment quality via the Brier score decomposition into uncertainty, reliability, and resolution [Murphy, 1973], which separates how well judgments are calibrated from how well they distinguish blast from non-blast cells. We focus on reliability and resolution, as uncertainty depends only on the overall frequency of blast cells, fixed at 50% throughout. Details on interpreting reliability and resolution are provided in the Supplement. 
+
+Reliability is a measure of calibration error: the mean squared difference between subjective probabilities and the actual relative frequencies among trials where that probability is given. Let xj ∈ [0 , 1] denote the judgment on stimulus (cell) 
+
+j, with true cell type yj = 1 for blast and yj = 0 for non-blast; reliability summarizes the correspondence between xj
+
+and the observed Pobs (yj = 1 | xj ). Perfect calibration gives a reliability of 0, and the worst possible value of 1 occurs when judgments are completely certain but always wrong. 
+
+Resolution measures how well judgments distinguish blast from non-blast cells relative to the overall relative frequency: the mean squared difference between the overall frequency ¯y and the actual frequencies for different judgments 
+
+Pobs (yj = 1 | xj ). With ¯y = .5 as in our experiment, resolution ranges from 0, for an individual responding 50% to every cell and thus providing no information beyond the base rate, to .25, earned when blast and non-blast cells are judged with mutually exclusive probabilities. For each participant and phase, judgments were divided into five equal-width bins, and within each bin we computed the mean judgment and observed blast frequency. Reliability and resolution were then computed as weighted mean squared differences, with weights proportional to bin counts. Because participants often round to multiples of 5% or 10%, bin assignment can depend on whether boundaries are left- or right-inclusive; we therefore averaged metrics across both definitions. After calculating the reliability and resolution for each participant in Phase 1 and Phase 3 separately, we model each as the outcome in their own Bayesian linear multilevel (mixed-effects) regression. The models include condition and phase as predictors and allow intercepts to vary by participant to account for individual differences in performance that carry across phases. These and all later variable effects are modeled as being normally distributed. Once a model has been fit, we summarize the posterior by computing the quantity of interest for each posterior sample and reporting its maximum a posteriori (MAP) estimate and 95% highest density interval (HDI). We did this for the mean predicted metric for each condition at each phase, its change from Phase 1 to Phase 3, and the difference between conditions in that change. This emphasizes estimands that directly address our research questions rather than regression coefficients, which can be difficult to interpret in complex models [Arel-Bundock, 2026]. Parameter estimates are provided in the Supplement. 
+
+4.3.2 Binarized accuracy 
+
+Next, we analyzed binarized accuracy. Probability judgments were coded as “blast” for xj > . 5, “non-blast” for 
+
+xj < . 5, and randomly assigned for xj = .5. Judgments were then classified as correct or incorrect based on the true cell type and analyzed using a Bayesian multilevel logistic regression with condition, phase, cell type, and all 11 Miscalibrated AI improves human calibration PREPRINT 
+
+interactions as predictors. This model tests whether accuracy changed from Phase 1 to Phase 3, whether this change differed by condition, and whether effects varied for blast versus non-blast cells. Correlated random effects were included for participants and stimuli; the full specification is given in the Supplement. After fitting the accuracy model, we calculated estimands parallel to those for reliability and resolution. Predictions of overall (balanced) accuracy were obtained by averaging the separate blast and non-blast predictions within each posterior sample before computing MAP estimates and HDIs. 
+
+4.3.3 Characterization of calibration errors 
+
+Reliability captures the overall degree of miscalibration but not its form: whether judgments are more or less certain than warranted ( over-/under-extremity [Griffin and Brenner, 2004]), or systematically too high or too low ( over-/under-prediction ). To distinguish these, we used the linear in log-odds (LLO) model [Turner et al., 2014, Epping et al., 2026a, Tversky and Fox, 1995, Gonzalez and Wu, 1999]. When we analyzed calibration via reliability, we looked at the relationship between judgments xj and observed relative frequencies Pobs (yj = 1 | xj ). The LLO model imposes a particular functional form to the same general relationship. As the name suggests, the LLO model consists of a linear relation between the log-odds of a binary ground truth outcome P (yj = 1) and the logit of the subjective probability judgment xj :logit (PLLO (yj = 1 | xj )) = αlogit (xj ) + β (1) The parameters α, β ∈ (−∞ , ∞) capture the systematic calibration errors described above. α captures over-/under-extremity : α > 1 indicates under-extremity, where participants express less certainty than warranted; α < 1 indicates over-extremity, where they express more certainty than warranted; and α = 1 indicates no extremity bias. The limiting cases as α → 0 and below 0 are described in the Supplement. The parameter β captures over-/under-prediction , with values of β > 0 indicating a tendency to under-predict the probability that a cell is blast, and β < 0 indicating a tendency to over-predict the probability that a cell is blast. An absence of over-/under-prediction bias would be reflected by β = 0 .The LLO model can be understood as a model-based calibration curve: solving Equation (1) for PLLO (yj = 1 | xj )
+
+gives the probability that a cell is blast as a function of the subjective judgment (see Supplement). We also use this model to characterize the (mis)calibration of the original AI output and to construct the recalibrated AI output, as described above. Because the LLO model has the form of a logistic regression with the logit of the subjective probability as a predictor, we fit it as a Bayesian multilevel logistic regression with true cell type as the outcome and condition, phase, logit judgment, and their interactions as predictors, allowing α and β and their change across phases to vary by participant. The full model specification is given in the Supplement. 
+
+4.3.4 Blackwell Informativeness of Recalibrated Subjective Probabilities 
+
+Resolution summarizes the full distribution of observed relative frequencies by a single number, its spread. To evaluate that distribution as a whole, we employ the Blackwell informativeness framework. Blackwell [1951] shows that a decision-maker who maximizes expected utility, whose overall expected utility is therefore a convex function of beliefs, will always prefer well-calibrated judgments that are more dispersed—that is, a mean-preserving spread . The conceptual motivation and formal treatment are given in the Supplement. Our analysis is as follows: (a) recalibrate probability judgments for each individual in each phase, then (b) compare the full distributions to determine whether, and to what degree, Phase 3 recalibrated judgments are a mean-preserving spread of Phase 1 recalibrated judgments in each condition. If this is true, then the judgments at Phase 3 are said to be 
+
+Blackwell more informative than the judgments at Phase 1, supporting better decisions for all payoff functions. If no such relationship holds, then there is no context-free ranking of judgments: some decision payoff structures may favor Phase 1 judgments, while others may favor Phase 3. We derive recalibrated judgments ˜xij for each stimulus j judged by participant i from the hierarchical LLO model predictions, ˜xij = PLLO (yj = 1 | i, x ij ), which provide a continuous rather than binned recalibration and reduce the influence of outliers through partial pooling. We then overlay the pooled distributions of MAP recalibrated judgments for Phases 1 and 3 in each condition, together with the recalibrated AI output for reference. As a more precise test, we plot the cumulative area under each distribution’s empirical CDF against ˜xij : Phase 3 judgments are a mean-preserving spread of Phase 1 judgments if and only if the two distributions share the same value at ˜xj = 1 and Phase 3 exceeds Phase 1 for all ˜xj ∈ (0 , 1) . The full procedure is given in the Supplement. 12 Miscalibrated AI improves human calibration PREPRINT 
+
+The conceptual motivation for using recalibrated judgments, and the formal treatment underlying the Blackwell comparison, are provided in the Supplement. 
+
+## 5 Funding 
+
+A.C. and J.S.T. were funded by the Alfred P. Sloan Foundation. 
+
+## References 
+
+Mark Steyvers and Aakriti Kumar. Three Challenges for AI-Assisted Decision-Making. Perspectives on Psychological Science , 19(5):722–734, 2024. doi:10.1177/17456916231181102. URL https://journals.sagepub.com/doi/ 10.1177/17456916231181102 .Shuai Ma, Xinru Wang, Ying Lei, Chuhan Shi, Ming Yin, and Xiaojuan Ma. “Are You Really Sure?” Under-standing the Effects of Human Self-Confidence Calibration in AI-Assisted Decision Making. In Proceedings of the CHI Conference on Human Factors in Computing Systems , pages 1–20, Honolulu HI USA, 2024. ACM. doi:10.1145/3613904.3642671. URL https://dl.acm.org/doi/10.1145/3613904.3642671 .Andrew Caplin, David Deming, Shangwen Li, Daniel Martin, Philip Marx, Ben Weidmann, and Kadachi Jiada Ye. The ABCs of Who Benefits from Working with AI: Ability, Beliefs, and Calibration. Management Science , page mnsc.2024.08994, 2025. doi:10.1287/mnsc.2024.08994. URL https://pubsonline.informs.org/doi/10. 1287/mnsc.2024.08994 .Gunnar P. Epping, Andrew Caplin, Erik Duhaime, William R. Holmes, Daniel Martin, and Jennifer S. Trueblood. Improving crowdsourcing for AI through cognitive-inspired data engineering. Behavior Research Methods , 58(10): 283, 2026a. ISSN 1554-3528. doi:10.3758/s13428-026-03160-4. URL https://link.springer.com/10.3758/ s13428-026-03160-4 .Gunnar P Epping, Andrew Caplin, Erik Duhaime, William R Holmes, Daniel Martin, and Jennifer S True-blood. Harnessing human uncertainty to train more accurate and aligned ai systems. Decision Analysis , 2026b. doi:https://doi.org/10.1287/deca.2025.0395. Duri Long and Brian Magerko. What is AI literacy? Competencies and design considerations. In Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems , pages 1–16, Honolulu, HI, USA, 2020. ACM. doi:10.1145/3313831.3376727. Sarah Lichtenstein, Baruch Fischhoff, and Lawrence D. Phillips. Calibration of probabilities: The state of the art to 1980. In Daniel Kahneman, Paul Slovic, and Amos Tversky, editors, Judgment under Uncertainty , pages 306–334. Cambridge University Press, 1 edition, 1982. doi:10.1017/CBO9780511809477.023. URL https: //www.cambridge.org/core/product/identifier/CBO9780511809477A036/type/book_part .Dale Griffin and Lyle Brenner. Perspectives on Probability Judgment Calibration. In Derek J. Koehler and Nigel Harvey, editors, Blackwell Handbook of Judgment and Decision Making , pages 177–199. Wiley, 1 edition, 2004. doi:10.1002/9780470752937.ch9. URL https://onlinelibrary.wiley.com/doi/10.1002/9780470752937. ch9 .Chuan Guo, Geoff Pleiss, Yu Sun, and Kilian Q. Weinberger. On calibration of modern neural networks. In Doina Precup and Yee Whye Teh, editors, Proceedings of the 34th International Conference on Machine Learning , volume 70 of 
+
+Proceedings of Machine Learning Research , pages 1321–1330. PMLR, 2017. URL https://proceedings.mlr. press/v70/guo17a.html .Sarah Lichtenstein and Baruch Fischhoff. Training for calibration. Organizational Behavior and Human Performance , 26 (2):149–171, 1980. doi:10.1016/0030-5073(80)90052-5. URL https://linkinghub.elsevier.com/retrieve/ pii/0030507380900525 .Eric R. Stone and Ryan B. Opel. Training to Improve Calibration and Discrimination: The Effects of Per-formance and Environmental Feedback. Organizational Behavior and Human Decision Processes , 83(2): 282–309, 2000. doi:10.1006/obhd.2000.2910. URL https://linkinghub.elsevier.com/retrieve/pii/ S0749597800929108 .Glen L Sharp, Brian L Cutler, and Steven D Penrod. Performance feedback improves the resolution of confidence judgments. Organizational Behavior and Human Decision Processes , 42(3):271–283, 1988. doi:10.1016/0749-5978(88)90001-5. URL https://linkinghub.elsevier.com/retrieve/pii/0749597888900015 .Megan O. Kelly and David R. Mandel. The effect of calibration training on the calibration of intelligence an-alysts’ judgments. Applied Cognitive Psychology , 38(5):e4236, 2024. doi:10.1002/acp.4236. URL https: //onlinelibrary.wiley.com/doi/10.1002/acp.4236 .13 Miscalibrated AI improves human calibration PREPRINT 
+
+Eric R. Stone, Jason Luu, Cory K. Costello, and Annie H. Somerville. Automated calibration training for fore-casters. Journal of Behavioral Decision Making , 36(4):e2334, 2023. doi:10.1002/bdm.2334. URL https: //onlinelibrary.wiley.com/doi/10.1002/bdm.2334 .Don A. Moore, Samuel A. Swift, Angela Minster, Barbara Mellers, Lyle Ungar, Philip Tetlock, Heather H. J. Yang, and Elizabeth R. Tenney. Confidence Calibration in a Multiyear Geopolitical Forecasting Competition. Management Science , 63(11):3552–3565, 2017. doi:10.1287/mnsc.2016.2525. URL https://pubsonline.informs.org/ doi/10.1287/mnsc.2016.2525 .Ross Gruetzemacher, Kang Bok Lee, and David Paradice. Calibration training for improving probabilistic judgments using an interactive app. FUTURES & FORESIGHT SCIENCE , 6(2):e177, 2024. doi:10.1002/ffo2.177. URL 
+
+https://onlinelibrary.wiley.com/doi/10.1002/ffo2.177 .Ananya Kumar, Percy S Liang, and Tengyu Ma. Verified uncertainty calibration. In H. Wallach, H. Larochelle, A. Beygelzimer, F. d’Alché-Buc, E. Fox, and R. Garnett, editors, Advances in Neural Information Processing Systems ,volume 32. Curran Associates, Inc., 2019. URL https://proceedings.neurips.cc/paper_files/paper/ 2019/file/f8c0c968632845cd133308b1a494967f-Paper.pdf .Joseph V. Baranski and William M. Petrusic. The calibration and resolution of confidence in perceptual judgments. 
+
+Perception & Psychophysics , 55(4):412–428, 1994. doi:10.3758/BF03205299. URL http://link.springer. com/10.3758/BF03205299 .Matthew Martin and David R. Mandel. Calibration Feedback With the Practical Scoring Rule Does Not Improve Calibration of Confidence. FUTURES & FORESIGHT SCIENCE , 7(1):e199, 2025. doi:10.1002/ffo2.199. URL 
+
+https://onlinelibrary.wiley.com/doi/10.1002/ffo2.199 .Kailas Vodrahalli, Tobias Gerstenberg, and James Y Zou. Uncalibrated models can improve human-AI collaboration. In S. Koyejo, S. Mohamed, A. Agarwal, D. Belgrave, K. Cho, and A. Oh, editors, Advances in Neural Information Processing Systems , volume 35, pages 4004–4016. Curran Associates, Inc., 2022. URL https://proceedings.neurips.cc/paper_files/paper/2022/file/ 1968ea7d985aa377e3a610b05fc79be0-Paper-Conference.pdf .Nina L. Corvelo Benz and Manuel Gomez Rodriguez. Human-aligned calibration for AI-assisted decision making. In 
+
+Thirty-Seventh Conference on Neural Information Processing Systems , 2023. URL https://openreview.net/ forum?id=GfITbjrIOd .Gali Noti, Kate Donahue, Jon Kleinberg, and Sigal Oren. AI-assisted decision making with human learning. In 
+
+Proceedings of the 26th ACM Conference on Economics and Computation (EC ’25) , Stanford, CA, USA, 2025. ACM. doi:10.1145/3736252.3742492. Jingshu Li, Yitian Yang, Q. Vera Liao, Junti Zhang, and Yi-Chieh Lee. As Confidence Aligns: Understanding the Effect of AI Confidence on Human Self-confidence in Human-AI Decision Making. In Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems , pages 1–16, Yokohama Japan, 2025. ACM. doi:10.1145/3706598.3713336. URL https://dl.acm.org/doi/10.1145/3706598.3713336 .Dylan Hadfield-Menell, Stuart J. Russell, Pieter Abbeel, and Anca D. Dragan. Cooperative inverse reinforcement learning. In Advances in Neural Information Processing Systems , volume 29, pages 3909–3917. Curran Associates, Inc., 2016. Allan H. Murphy. A New Vector Partition of the Probability Score. Journal of Applied Meteorology , 12(4):595–600, 1973. doi:10.1175/1520-0450(1973)012<0595:ANVPOT>2.0.CO;2. URL http://journals.ametsoc.org/doi/ 10.1175/1520-0450(1973)012<0595:ANVPOT>2.0.CO;2 .Brandon M. Turner, Mark Steyvers, Edgar C. Merkle, David V. Budescu, and Thomas S. Wallsten. Forecast aggregation via recalibration. Machine Learning , 95(3):261–289, 2014. doi:10.1007/s10994-013-5401-4. URL http://link. springer.com/10.1007/s10994-013-5401-4 .David Blackwell. Comparison of Experiments. In Jerzy Neyman, editor, Proceedings of the Second Berke-ley Symposium on Mathematical Statistics and Probability , pages 93–102. University of California Press, 1951. doi:10.1525/9780520411586-009. URL https://www.degruyter.com/document/doi/10.1525/ 9780520411586-009/html .Gideon Keren. Calibration and probability judgements: Conceptual and methodological issues. Acta Psycholog-ica , 77(3):217–273, 1991. doi:10.1016/0001-6918(91)90036-Y. URL https://linkinghub.elsevier.com/ retrieve/pii/000169189190036Y .Nina L. Corvelo Benz and Manuel Gomez Rodriguez. Human-alignment influences the utility of AI-assisted decision making. Scientific Reports , 15(1):29154, 2025. doi:10.1038/s41598-025-12205-1. URL https://www.nature. com/articles/s41598-025-12205-1 .14 Miscalibrated AI improves human calibration PREPRINT 
+
+Jennifer S. Trueblood, William R. Holmes, Adam C. Seegmiller, Jonathan Douds, Margaret Compton, Eszter Szentirmai, Megan Woodruff, Wenrui Huang, Charles Stratton, and Quentin Eichbaum. The impact of speed and bias on the cogni-tive processes of experts and novices in medical image decision-making. Cognitive Research: Principles and Implica-tions , 3(1):28, 2018. doi:10.1186/s41235-018-0119-2. URL https://doi.org/10.1186/s41235-018-0119-2 .Eeshan Hasan, Quentin Eichbaum, Adam C Seegmiller, Charles Stratton, and Jennifer S Trueblood. Harnessing the wisdom of the confident crowd in medical image decision-making. Decision , 11(1):127, 2024. Joshua R De Leeuw, Rebecca A Gilbert, and Björn Luchterhandt. jspsych: Enabling an open-source collaborative ecosystem of behavioral experiments. Journal of Open Source Software , 8(85):5351, 2023. doi:10.21105/joss.05351. Open Science Tools. Pavlovia. https://pavlovia.org . URL https://pavlovia.org .Satoshi Tsutsui, Winnie Pang, and Bihan Wen. WBCAtt: A White Blood Cell Dataset Annotated with Detailed Morphological Attributes, 2023. URL http://arxiv.org/abs/2306.13531 .Stan Development Team. Stan Reference Manual, 2025. URL https://mc-stan.org .Jonah Gabry, Rok ˇ Cešnovar, Andrew Johnson, and Steve Bronder. Cmdstanr: R Interface to ’CmdStan’, 2025. URL 
+
+https://mc-stan.org/cmdstanr/ .Paul-Christian Bürkner. Advanced Bayesian Multilevel Modeling with the R Package brms. The R Journal , 10(1):395, 2018. doi:10.32614/RJ-2018-017. URL https://journal.r-project.org/archive/2018/RJ-2018-017/ index.html .Vincent Arel-Bundock. Model to Meaning: How to Interpret Statistical Models with R and Python . CHAPMAN & HALL CRC, S.l., 2026. doi:10.1201/9781003560333. Amos Tversky and Craig R. Fox. Weighing risk and uncertainty. Psychological Review , 102(2):269–283, 1995. doi:10.1037/0033-295X.102.2.269. URL https://doi.apa.org/doi/10.1037/0033-295X.102.2.269 .Richard Gonzalez and George Wu. On the Shape of the Probability Weighting Function. Cognitive Psychology , 38 (1):129–166, 1999. doi:10.1006/cogp.1998.0710. URL https://linkinghub.elsevier.com/retrieve/pii/ S0010028598907101 .15 Supplemental Materials: Miscalibrated AI improves human calibration: An alignment problem for AI-assisted decision education 
+
+## Phillip C. Hegeman, Eeshan Hasan, Eungik Lee, Andrew Caplin, and Jennifer S. Trueblood 
+
+Department of Psychological and Brain Sciences and Cognitive Science Program, Indiana University Bloomington Department of Psychology, The Ohio State University Federal Reserve Bank of New York Department of Economics, New York University Miscalibrated AI improves human calibration PREPRINT 
+
+S1 Distributions of Judgments 2S2 Model Specifications and Prior Distributions 2
+
+S2.1 Reliability, Resolution, and Expected Calibration Error Models . . . . . . . . . . . . . . . . . . . . . 2S2.2 Binarized Accuracy Model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3S2.3 LLO Calibration Model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+S3 Performance metric models 5
+
+S3.1 Reliability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5S3.2 Resolution . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6S3.3 Binarized accuracy . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7S3.4 Expected Calibration Error (ECE) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+S4 Linear in Log Odds (LLO) model 10 
+
+S4.1 Over-/under-extremity ( α) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10 S4.2 Over-/under-prediction ( β) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10 S4.3 Model in GLM parameterization . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11 
+
+S5 Extended Methods 12 
+
+S5.1 Experimental Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12 S5.2 Analytical Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12 
+
+S6 Recalibrated Elicited Beliefs and the Blackwell Ordering 13 
+
+S6.1 From Calibration to Recalibrated Elicited Beliefs . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13 S6.2 Why Equal Resolution Need Not Mean Equal Decision Value . . . . . . . . . . . . . . . . . . . . . . 14 S6.3 Connection to Blackwell Comparisons . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15 
+
+S7 Formal Treatment of Recalibrated Elicited Beliefs, Resolution, and Decision Value 15 
+
+S7.1 Recalibrated elicited beliefs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15 S7.2 Finite-bin Brier decomposition . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16 S7.3 Threshold decision value in medical classification . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16 S7.4 Blackwell comparisons and convex order . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17 S7.5 Same resolution, opposite threshold rankings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17 S7.6 Empirical construction of recalibrated elicited beliefs . . . . . . . . . . . . . . . . . . . . . . . . . . 18 S7.7 Algorithmic summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19 1Miscalibrated AI improves human calibration PREPRINT 
+
+## S1 Distributions of Judgments 0% 10% 20% 30% 40% 50% Proportion of responses  Categorical AI predictions non−blast blast 
+
+A     
+
+> Original AI probability output (poorly calibrated, under−extreme) 0.0 0.2 0.4 0.6 0.8 1.0
+
+AI prediction Recalibrated AI probability output (well−calibrated) 0.0 0.2 0.4 0.6 0.8 1.0 Phase 3 (after AI exposure) Condition: categorical AI Phase 3 (after AI exposure) Condition: original AI Phase 3 (after AI exposure) Condition: recalibrated AI 0% 10% 20% 30% 0% 10% 20% 30% Proportion of responses Phase 1 (before AI exposure) Condition: categorical AI Phase 1 (before AI exposure) Condition: original AI Phase 1 (before AI exposure) Condition: recalibrated AI 0.0 0.2 0.4 0.6 0.8 1.0 0.0 0.2 0.4 0.6 0.8 1.0 0.0 0.2 0.4 0.6 0.8 1.0 Subjective probability judgment Participant responses by phase and condition (pooled) 
+
+B
+
+AI predictions 
+
+Figure S1: Distributions of judgments from AI and human participants. A, AI output presented in each of the three conditions: categorical (using .5 as the boundary), original AI output, and post-hoc recalibrated AI output. B, Pooled participant responses in Phases 1 and 3 (before and after AI exposure) for each AI exposure condition. 
+
+## S2 Model Specifications and Prior Distributions 
+
+All models were fit with brms [Bürkner, 2017] via the cmdstanr backend [Gabry et al., 2025]. In the tables below, N (μ, σ ) denotes a normal distribution with mean μ and standard deviation σ; Half-t(ν, σ ) a half-t
+
+distribution (absolute value of a Student’s t distribution centered at 0) with degrees of freedom ν and scale σ; Exp( λ)
+
+an exponential distribution with rate λ; and LKJ( η) the Lewandowski–Kurowicka–Joe prior on correlation matrices. Condition is dummy-coded with the categorical AI condition as the reference; phase is dummy-coded with Phase 1 as the reference. 
+
+S2.1 Reliability, Resolution, and Expected Calibration Error Models 
+
+The three subject-level metrics were each modeled with a Bayesian linear mixed-effects regression of identical structure. 2Miscalibrated AI improves human calibration PREPRINT 
+
+Let participant i belong to condition ci ∈ { categorical , original , recalibrated }, and let p ∈ { 1, 3} denote the phase of the study (pre-AI training or post-AI testing). Define dummy-coded predictors: 
+
+Oi =
+
+1, for ci = original 
+
+0, otherwise 
+
+Ri =
+
+1, for ci = recalibrated 
+
+0, otherwise 
+
+Pp =
+
+1, for phase p = 3 (i.e., post-AI testing) 
+
+0, otherwise (i.e., pre-AI training) Then, for each participant i, denote the performance metric value (e.g., reliability) in phase p by yip . The model predicting yip is as follows: 
+
+yip ∼ N (μip , σ )
+
+μip = β0 + β1Oi + β2Ri + β3Pp + β4OiPp + β5RiPp + ui
+
+ui ∼ N (0 , σ participants )
+
+Priors in all three models were the same except for the intercept β0, which represented baseline performance of the reference categorical condition during Phase 1. Weakly informative intercept priors were centered at values consistent with slightly above chance average performance (.25 for reliability, 0 for resolution, .5 for ECE). Priors on baseline condition-differences are narrow, reflecting expectation of negligible pre-existing group differences under random assignment. Priors on all other effects are broad with respect to the scale of the data. 
+
+β0 ∼
+
+
+
+N (0 .2, 0.3) for reliability 
+
+N (0 .125 , 0.15) for resolution 
+
+N (0 .4, 0.4) for ECE 
+
+β1, β 2 ∼ N (0 , 0.025) 
+
+β3, β 4, β 5 ∼ N (0 , 0.1) 
+
+σparticipants ∼ Exp(2) 
+
+σ ∼ Half-t(3 , 2.5) 
+
+S2.2 Binarized Accuracy Model 
+
+Binary accuracy was modeled via Bayesian multilevel logistic regression. Keeping the same notation from the previous section, further denote correct ipt ∈ { 0, 1} as the correctness of trial t involving participant i judging stimulus st of cell type k ∈ { blast , non-blast }, in phase p. The model predicting correct ipt is as follows: 
+
+correct ipt ∼ Bernoulli( πipt )logit( πipt ) = β0 + β1Oi + β2Ri + β3Pp + β4OiPp + β5RiPp + ui|ci + vst|k
+
+Participant-level random effects are estimated separately within each condition and include correlated intercepts and Phase 3 slopes: 
+
+ u0, u ph3 
+
+  
+
+> i;c
+
+∼ Normal  0, Σ(part) 
+
+> c
+
+, c ∈ { cat ., orig ., recal .}.
+
+Stimulus-level random effects are estimated separately within each cell type and include correlated intercepts and slopes for condition, phase, and their interaction: 
+
+vs; k ∼ Normal  0, Σ(stim) 
+
+> k
+
+, k ∈ { blast , non -blast }.
+
+Priors are given in Supplementary Table S1. 3Miscalibrated AI improves human calibration PREPRINT 
+
+Table S1: Prior distributions for the classification accuracy model. All random-effect SD parameters share a single prior regardless of group or slope. 
+
+Parameter Prior 
+
+Fixed effects 
+
+Intercept N (0 .4, 0.5) 
+
+Cond. orig. (vs cat.) N (0 , 0.3) 
+
+Cond. recal. (vs cat.) N (0 , 0.3) 
+
+Phase 3 (vs 1) N (0 , 1) 
+
+Cond. orig. × Phase 3 N (0 , 1) 
+
+Cond. recal. × Phase 3 N (0 , 1) 
+
+Random effect SDs 
+
+Group: participant (in categorical AI cond.) Exp(2) 
+
+Group: participant (in original AI cond.) Exp(2) 
+
+Group: participant (in recalibrated AI cond.) Exp(2) 
+
+Group: stimulus (non-blast) Exp(2) 
+
+Group: stimulus (blast) Exp(2) 
+
+Correlation matrices 
+
+Group: participant (all conditions) LKJ(1) 
+
+Group: stimulus (all cell types) LKJ(1) 
+
+Note. Each Group: participant SD prior covers two within-condition parameters (intercept SD and Phase 3 slope SD). Each Group: stimulus SD prior covers six within-cell-type parameters: the intercept, both condition-dummy slopes, the Phase 3 slope, and both condition × Phase 3 interaction slopes. LKJ(1) is the uniform distribution over all positive-definite correlation matrices of the appropriate dimension ( brms default). 
+
+S2.3 LLO Calibration Model 
+
+The LLO model uses Bayesian multilevel logistic regression with binary cell type as the outcome. Let yt ∈ { 0, 1} denote ground-truth cell type for trial t, and ℓt = logit( xt) the logit-transformed subjective probability judgment. The linear predictor decomposes into terms determining β (over-/under-prediction) and terms determining α (over-/under-extremity), each modulated by condition and phase: 
+
+yt ∼ Bernoulli( πt)logit( πt) = β0 + β1Corig. ,i + β2Crecal. ,i + β3P3,i + β4(Corig. ,i P3,i ) + β5(Crecal. ,i P3,i )
+
+| {z } 
+
+> determines β
+
++ β6 + β7Corig. ,i + β8Crecal. ,i + β9P3,i + β10 (Corig. ,i P3,i ) + β11 (Crecal. ,i P3,i ) ℓt
+
+| {z } 
+
+> determines α
+
++ u(part)  
+
+> i;ci
+
+Participant-level random effects are estimated separately within each condition and include correlated intercepts and slopes for phase, logit judgment, and their interaction: 
+
+ u0, u ph3 , u ℓ, u ph3 ×ℓ
+
+  
+
+> i;c
+
+∼ Normal  0, Σ(part) 
+
+> c
+
+, c ∈ { cat ., orig ., recal .}.
+
+Priors are given in Supplementary Table S2. 
+
+4Miscalibrated AI improves human calibration PREPRINT 
+
+Table S2: Prior distributions for the LLO calibration model. Fixed effects are organized by their role in determining β
+
+(over-/under-prediction; non-ℓt terms) or α (over-/under-extremity; ℓt terms). 
+
+Parameter Prior 
+
+Fixed effects— β (over-/under-prediction) parameters 
+
+Intercept N (0 , 1) 
+
+Cond. orig. (vs cat.) N (0 , 0.3) 
+
+Cond. recal. (vs cat.) N (0 , 0.3) 
+
+Phase 3 (vs 1) N (0 , 1) 
+
+Cond. orig. × Phase 3 N (0 , 1) 
+
+Cond. recal. × Phase 3 N (0 , 1) 
+
+Fixed effects— α (over-/under-extremity) parameters 
+
+Logit judgment N (0 .8, 1) 
+
+Cond. orig. × Logit judgment N (0 , 0.3) 
+
+Cond. recal. × Logit judgment N (0 , 0.3) 
+
+Phase 3 × Logit judgment N (0 , 1) 
+
+Cond. orig. × Phase 3 × Logit judgment N (0 , 1) 
+
+Cond. recal. × Phase 3 × Logit judgment N (0 , 1) 
+
+Random effect SDs 
+
+Group: participant (in categorical AI cond.) Exp(2) 
+
+Group: participant (in original AI cond.) Exp(2) 
+
+Group: participant (in recalibrated AI cond.) Exp(2) 
+
+Correlation matrices 
+
+Group: participant (all conditions) LKJ(1)               
+
+> Note. The logit judgment parameter ( β6above) corresponds to baseline αin the categorical AI condition at Phase 1 and is centered at 0.80 rather than 1.00 (perfect calibration), reflecting the well-established empirical tendency toward over-extremity in probability judgments. Each Group: participant SD prior covers all four within-condition slopes (intercept, Phase 3, logit judgment, and Phase 3
+> ×logit judgment). LKJ(1) is the uniform distribution over all positive-definite correlation matrices of the appropriate dimension (brms default).
+
+## S3 Performance metric models 
+
+S3.1 Reliability 
+
+Condition Phase MAP 95% HDI ˆR Bulk-ESS Tail-ESS categorical 1 0.067 [.056, .077] 1.000 28347 40393 categorical 3 0.067 [.056, .078] 1.000 33447 44745 original 1 0.063 [.051, .073] 1.000 35709 47090 original 3 0.041 [.030, .053] 1.000 36571 48995 recalibrated 1 0.062 [.051, .073] 1.000 36457 47322 recalibrated 3 0.068 [.056, .078] 1.000 37223 49287 Table S3: Posterior expected value of a participants’ reliability (i.e., Brier score decomposition measure of calibration error) for each condition in each phase. 5Miscalibrated AI improves human calibration PREPRINT 
+
+Condition MAP 95% HDI ˆR Bulk-ESS Tail-ESS categorical 0.000 [-.009, .009] 1.000 79992 52492 original -0.020 [-.030, -.011] 1.000 81302 55565 recalibrated 0.005 [-.004, .014] 1.000 81817 54005 Table S4: Posterior expected change in reliability for each condition from Phase 1 to 3. Comparison MAP 95% HDI ˆR Bulk-ESS Tail-ESS original - categorical -0.021 [-.034, -.008] 1.000 86288 56141 recalibrated - categorical 0.005 [-.008, .018] 1.000 86938 55048 original - recalibrated -0.026 [-.039, -.013] 1.000 100666 42918 Table S5: Posterior expected difference between conditions in the change in reliability from Phase 1 to Phase 3. Parameter MAP 95% HDI ˆR Bulk-ESS Tail-ESS 
+
+Fixed Effects βs
+
+Intercept 0.067 [.056, .077] 1.000 28347 40393 Cond. orig. (vs cat.) -0.006 [-.019, .010] 1.000 30713 39691 Cond. recal. (vs cat.) -0.004 [-.019, .011] 1.000 29971 42149 Phase 3 (vs 1) 0.000 [-.009, .009] 1.000 79992 52492 Cond. orig. (vs cat.) × Phase 3 (vs 1) -0.021 [-.034, -.008] 1.000 86288 56141 Cond. recal. (vs cat.) × Phase 3 (vs 1) 0.005 [-.008, .018] 1.000 86938 55048 
+
+Residual SD 
+
+Sigma 0.033 [.030, .036] 1.000 31246 47067 
+
+Random Effect SDs Group: participant 
+
+Intercept 0.046 [.042, .051] 1.000 21449 38219 Table S6: Population-level parameters from linear mixed-effects model of participant reliability. 
+
+S3.2 Resolution 
+
+Condition Phase MAP 95% HDI ˆR Bulk-ESS Tail-ESS categorical 1 0.047 [.040, .056] 1.000 14618 27748 categorical 3 0.052 [.044, .061] 1.000 16317 30373 original 1 0.058 [.049, .066] 1.000 17747 32562 original 3 0.068 [.060, .077] 1.000 18043 31776 recalibrated 1 0.059 [.050, .067] 1.000 17964 32200 recalibrated 3 0.061 [.053, .070] 1.000 18081 32889 Table S7: Posterior expected value of a participants’ resolution (i.e., Brier score decomposition measure of discrimina-tion) for each condition in each phase. Condition MAP 95% HDI ˆR Bulk-ESS Tail-ESS categorical 0.005 [-.002, .011] 1.000 72541 53553 original 0.010 [.004, .017] 1.000 82487 55296 recalibrated 0.002 [-.004, .008] 1.000 84679 54921 Table S8: Posterior expected change in resolution for each condition from Phase 1 to 3. 6Miscalibrated AI improves human calibration PREPRINT 
+
+Comparison MAP 95% HDI ˆR Bulk-ESS Tail-ESS original - categorical 0.006 [-.003, .014] 1.000 79050 54610 recalibrated - categorical -0.002 [-.011, .007] 1.000 81954 55193 original - recalibrated 0.008 [-.001, .017] 1.001 113523 41582 Table S9: Posterior expected difference between conditions in the change in resolution from Phase 1 to Phase 3. Parameter MAP 95% HDI ˆR Bulk-ESS Tail-ESS 
+
+Fixed Effects βs
+
+Intercept 0.047 [.040, .056] 1.000 14618 27748 Cond. orig. (vs cat.) 0.010 [-.001, .022] 1.000 15649 28012 Cond. recal. (vs cat.) 0.011 [-.001, .023] 1.000 15298 28817 Phase 3 (vs 1) 0.005 [-.002, .011] 1.000 72541 53553 Cond. orig. (vs cat.) × Phase 3 (vs 1) 0.006 [-.003, .014] 1.000 79050 54610 Cond. recal. (vs cat.) × Phase 3 (vs 1) -0.002 [-.011, .007] 1.000 81954 55193 
+
+Residual SD 
+
+Sigma 0.023 [.021, .024] 1.000 30767 43215 
+
+Random Effect SDs Group: participant 
+
+Intercept 0.038 [.034, .042] 1.000 17138 31836 Table S10: Population-level parameters from linear mixed-effects model of participant resolution. 
+
+S3.3 Binarized accuracy 
+
+Condition Phase MAP 95% HDI ˆR Bulk-ESS Tail-ESS categorical 1 0.673 [.648, .700] 1.001 10797 21238 categorical 3 0.699 [.671, .728] 1.001 12897 26354 original 1 0.703 [.673, .729] 1.000 12045 23355 original 3 0.739 [.712, .765] 1.000 15817 29611 recalibrated 1 0.692 [.662, .718] 1.001 10646 20899 recalibrated 3 0.722 [.690, .750] 1.001 12885 27559 Table S11: Posterior expected value of a participants’ binarized accuracy (i.e., trial-level probability of judging a cell to have a > 50% probability of being blast when it is blast or a < 50% probability of being blast when it is non-blast) for each condition in each phase. Condition MAP 95% HDI ˆR Bulk-ESS Tail-ESS categorical 0.026 [.005, .044] 1.000 27714 39887 original 0.038 [.016, .058] 1.000 19297 38747 recalibrated 0.030 [.010, .049] 1.000 37565 47778 Table S12: Posterior expected change in binarized accuracy for each condition from Phase 1 to 3. Comparison MAP 95% HDI ˆR Bulk-ESS Tail-ESS original - categorical 0.011 [-.015, .040] 1.000 21378 38083 recalibrated - categorical 0.005 [-.021, .030] 1.000 34499 45348 original - recalibrated 0.007 [-.020, .034] 1.000 34359 48932 Table S13: Posterior expected difference between conditions in the change in accuracy from Phase 1 to Phase 3. 7Miscalibrated AI improves human calibration PREPRINT 
+
+Parameter MAP 95% HDI ˆR Bulk-ESS Tail-ESS 
+
+Fixed Effects βs
+
+Intercept 0.722 [.609, .845] 1.001 10797 21238 Cond. orig. (vs cat.) 0.127 [-.031, .282] 1.001 11563 22656 Cond. recal. (vs cat.) 0.078 [-.081, .230] 1.000 11688 23313 Phase 3 (vs 1) 0.110 [.024, .208] 1.000 28071 40544 Cond. orig. (vs cat.) × Phase 3 (vs 1) 0.063 [-.067, .202] 1.000 21763 40318 Cond. recal. (vs cat.) × Phase 3 (vs 1) 0.028 [-.097, .149] 1.000 34997 45671 
+
+Random Effect SDs Group: stimulus (blast) 
+
+Intercept 0.366 [.311, .433] 1.000 21790 38839 Cond. orig. (vs cat.) 0.140 [.001, .230] 1.001 9685 15725 Cond. recal. (vs cat.) 0.002 [.000, .115] 1.000 19070 29723 Phase 3 (vs 1) 0.007 [.000, .155] 1.001 8381 18297 Cond. orig. (vs cat.) × Phase 3 (vs 1) 0.181 [.000, .305] 1.001 7134 12317 Cond. recal. (vs cat.) × Phase 3 (vs 1) 0.121 [.000, .251] 1.001 9468 20040 
+
+Group: stimulus (non-blast) 
+
+Intercept 0.702 [.612, .806] 1.000 14577 28710 Cond. orig. (vs cat.) 0.158 [.000, .279] 1.002 5695 11412 Cond. recal. (vs cat.) 0.016 [.000, .172] 1.001 5864 17647 Phase 3 (vs 1) 0.281 [.194, .374] 1.000 14145 31243 Cond. orig. (vs cat.) × Phase 3 (vs 1) 0.197 [.000, .383] 1.001 5484 14688 Cond. recal. (vs cat.) × Phase 3 (vs 1) 0.000 [.000, .203] 1.001 16515 29000 
+
+Group: participant (in categorical AI condition) 
+
+Intercept 0.485 [.408, .578] 1.000 22248 37146 Phase 3 (vs 1) 0.311 [.224, .400] 1.000 20781 32329 
+
+Group: participant (in original AI condition) 
+
+Intercept 0.562 [.479, .666] 1.000 18481 34549 Phase 3 (vs 1) 0.307 [.218, .401] 1.000 20897 31982 
+
+Group: participant (in recalibrated AI condition) 
+
+Intercept 0.572 [.487, .677] 1.000 17632 31744 Phase 3 (vs 1) 0.289 [.198, .383] 1.000 18399 28135 Table S14: Population-level parameters from logistic mixed-effects model of participant probability of correct response, binarized about 50%. Note: of the correlations between random effects, the following were credibly nonzero, or close to such: • The random intercept of non-blast stimuli and the random effect of phase being Phase 3 had a positive correlation (MAP = 0.626 (95% HDI = [0.312, 0.856])). This means that non-blast stimuli which were more likely to be correctly classified in Phase 1 (the reference phase) also saw a greater improvement in likelihood of correct classification by Phase 3 • The random intercept of a subject in the original AI condition and the random effect of phase being Phase 3 had some evidence, though inconclusive, of a negative correlation (MAP = -.246 (95% HDI = [-.505, .061])). This means that there is some evidence that original condition participants who were better in Phase 1 saw less improvement (or more deterioration) by Phase 3. Put another way, this would mean that greater improvement tended to came from those with lesser initial performance. 
+
+8Miscalibrated AI improves human calibration PREPRINT 
+
+S3.4 Expected Calibration Error (ECE) 
+
+Condition Phase MAP 95% HDI ˆR Bulk-ESS Tail-ESS categorical 1 0.214 [.195, .233] 1.000 30675 40121 categorical 3 0.215 [.195, .236] 1.000 34907 42787 original 1 0.206 [.186, .226] 1.000 36432 44836 original 3 0.159 [.139, .180] 1.000 36258 46536 recalibrated 1 0.208 [.189, .228] 1.000 37470 48716 recalibrated 3 0.216 [.195, .236] 1.000 38595 49492 Table S15: Posterior expected value of a participants’ expected calibration error (ECE) (i.e., a measure of the average absolute calibration error) for each condition in each phase. Condition MAP 95% HDI ˆR Bulk-ESS Tail-ESS categorical 0.001 [-.015, .018] 1.000 71913 50778 original -0.046 [-.063, -.030] 1.000 79664 53360 recalibrated 0.007 [-.010, .024] 1.000 82407 53217 Table S16: Posterior expected change in ECE for each condition from Phase 1 to 3. Comparison MAP 95% HDI ˆR Bulk-ESS Tail-ESS original - categorical -0.048 [-.072, -.025] 1.000 75313 54364 recalibrated - categorical 0.006 [-.017, .029] 1.000 77471 55129 original - recalibrated -0.055 [-.077, -.030] 1.000 95632 43835 Table S17: Posterior expected difference between conditions in the change in ECE from Phase 1 to Phase 3. Parameter MAP 95% HDI ˆR Bulk-ESS Tail-ESS 
+
+Fixed Effects βs
+
+Intercept 0.214 [.195, .233] 1.000 30675 40121 Cond. orig. (vs cat.) -0.007 [-.033, .017] 1.000 33855 42155 Cond. recal. (vs cat.) -0.006 [-.031, .019] 1.000 35015 44746 Phase 3 (vs 1) 0.001 [-.015, .018] 1.000 71913 50778 Cond. orig. (vs cat.) × Phase 3 (vs 1) -0.048 [-.072, -.025] 1.000 75313 54364 Cond. recal. (vs cat.) × Phase 3 (vs 1) 0.006 [-.017, .029] 1.000 77471 55129 
+
+Residual SD 
+
+Sigma 0.061 [.057, .067] 1.000 29442 43152 
+
+Random Effect SDs Group: participant 
+
+Intercept 0.090 [.081, .099] 1.000 20880 33985 Table S18: Population-level parameters from linear mixed-effects model of participant expected calibration error (ECE). 9Miscalibrated AI improves human calibration PREPRINT 
+
+## S4 Linear in Log Odds (LLO) model 
+
+S4.1 Over-/under-extremity ( α)
+
+Condition Phase MAP 95% HDI ˆR Bulk-ESS Tail-ESS categorical 1 0.285 [.224, .355] 1.000 19583 31561 categorical 3 0.333 [.257, .419] 1.000 19062 30615 original 1 0.291 [.235, .344] 1.000 40871 43783 original 3 0.547 [.457, .644] 1.000 37083 42475 recalibrated 1 0.275 [.224, .326] 1.000 46084 45363 recalibrated 3 0.276 [.227, .325] 1.000 50027 48149 Table S19: Posterior expected value of a participants’ over-/under-extremity ( α) for each condition in each phase. Values of α < 1 indicate over-extremity, with α = 0 indicating that judgments have no diagnostic value. Values of 
+
+α > 1 indicate under-extremity of judgments. Condition MAP 95% HDI ˆR Bulk-ESS Tail-ESS categorical 0.045 [.011, .085] 1.000 30856 37119 original 0.260 [.195, .327] 1.000 42106 44870 recalibrated 0.002 [-.030, .034] 1.000 54429 53145 Table S20: Posterior expected change in α for each condition from Phase 1 to 3. Comparison MAP 95% HDI ˆR Bulk-ESS Tail-ESS original - categorical 0.214 [.137, .289] 1.000 34117 41982 recalibrated - categorical -0.044 [-.096, .002] 1.000 33719 41698 original - recalibrated 0.256 [.186, .333] 1.000 44296 47017 Table S21: Posterior expected difference between conditions in the change in α from Phase 1 to Phase 3. 
+
+S4.2 Over-/under-prediction ( β)
+
+Condition Phase MAP 95% HDI ˆR Bulk-ESS Tail-ESS categorical 1 0.069 [.014, .117] 1.000 32350 43608 categorical 3 0.023 [-.029, .076] 1.000 55751 52433 original 1 0.126 [.075, .181] 1.000 58707 53305 original 3 -0.034 [-.102, .032] 1.000 46595 51762 recalibrated 1 0.076 [.020, .134] 1.000 50872 54046 recalibrated 3 -0.007 [-.068, .054] 1.000 53618 56207 Table S22: Posterior expected value of a participants’ over-/under-prediction ( β) for each condition in each phase. Values of β < 0 indicate over-prediction, where subjective judgments of the probability of cells being blast are too high with respect to corresponding relative frequencies. Values of β > 0 indicate under-prediction, where subjective probabilities are too low. 10 Miscalibrated AI improves human calibration PREPRINT 
+
+Condition MAP 95% HDI ˆR Bulk-ESS Tail-ESS categorical -0.040 [-.103, .018] 1.000 40633 48023 original -0.161 [-.238, -.086] 1.000 52322 54858 recalibrated -0.084 [-.150, -.017] 1.000 64345 55299 Table S23: Posterior expected change in β for each condition from Phase 1 to 3. Comparison MAP 95% HDI ˆR Bulk-ESS Tail-ESS original - categorical -0.125 [-.217, -.022] 1.000 40466 48028 recalibrated - categorical -0.039 [-.130, .049] 1.000 41768 50125 original - recalibrated -0.076 [-.182, .021] 1.000 62861 52167 Table S24: Posterior expected difference between conditions in the change in β from Phase 1 to Phase 3. 
+
+S4.3 Model in GLM parameterization 
+
+Parameter MAP 95% HDI ˆR Bulk-ESS Tail-ESS 
+
+Fixed Effect βs
+
+Intercept 0.069 [.014, .117] 1.000 32350 43608 Cond. orig. (vs cat.) 0.057 [-.013, .136] 1.000 34491 44656 Cond. recal. (vs cat.) 0.010 [-.067, .087] 1.000 33444 45235 Logit judgment 0.285 [.224, .355] 1.000 19583 31561 Phase 3 (vs 1) -0.040 [-.103, .018] 1.000 40634 48023 Cond. orig. (vs cat.) × Logit judgment -0.003 [-.084, .086] 1.000 21811 33980 Cond. orig. (vs cat.) × Phase 3 (vs 1) -0.125 [-.217, -.022] 1.000 40467 48028 Cond. recal. (vs cat.) × Logit judgment -0.018 [-.097, .070] 1.000 22801 35082 Cond. recal. (vs cat.) × Phase 3 (vs 1) -0.039 [-.130, .049] 1.000 41768 50125 Phase 3 (vs 1) × Logit judgment 0.045 [.011, .085] 1.000 30856 37119 Cond. orig. (vs cat.) × Phase 3 (vs 1) × Logit judgment 0.214 [.137, .289] 1.000 34117 41982 Cond. recal. (vs cat.) × Phase 3 (vs 1) × Logit judgment -0.044 [-.096, .002] 1.000 33719 41698 
+
+Random Effect SDs Group: participant (in categorical AI condition) 
+
+Intercept 0.142 [.081, .197] 1.001 19213 24832 Logit judgment 0.314 [.258, .379] 1.000 25663 42156 Phase 3 (vs 1) 0.002 [.000, .111] 1.001 11709 30004 Phase 3 (vs 1) × Logit judgment 0.110 [.068, .162] 1.000 27246 37479 
+
+Group: participant (in original AI condition) 
+
+Intercept 0.137 [.076, .198] 1.000 27706 33786 Logit judgment 0.253 [.206, .311] 1.000 25807 41085 Phase 3 (vs 1) 0.204 [.119, .295] 1.001 11640 25464 Phase 3 (vs 1) × Logit judgment 0.263 [.214, .331] 1.000 35441 45976 
+
+Group: participant (in recalibrated AI condition) 
+
+Intercept 0.172 [.109, .237] 1.000 26271 34149 Logit judgment 0.234 [.192, .280] 1.000 29230 44042 Phase 3 (vs 1) 0.109 [.008, .195] 1.002 4978 3554 Phase 3 (vs 1) × Logit judgment 0.096 [.066, .137] 1.000 18958 32672 Table S25: Population-level parameters from logistic mixed-effects LLO model. 
+
+11 Miscalibrated AI improves human calibration PREPRINT 
+
+## S5 Extended Methods 
+
+S5.1 Experimental Methods S5.1.1 Stimulus classification and typicality ratings 
+
+For the full 549-image set, three hematopathology faculty from the Department of Pathology, Microbiology and Immunology at Vanderbilt University Medical Center independently classified each image as “blast” or “non-blast” and rated how typical each image was of its type on a scale from 1 to 5. The 549-image set includes only images for which all three experts agreed on the blast/non-blast classification. This consensus classification was used as the ground truth cell type. The average of the expert typicality ratings was used to assign images to five difficulty categories: very easy, easy, medium, hard, and very hard [Epping et al., 2026]. 
+
+S5.1.2 Familiarization and task introduction 
+
+Because participants were generally expected to be novices without previous experience with white blood cell morphology, they began by observing 40 examples of white blood cell images (20 blast, 20 non-blast) after an overview of the study. For each participant, examples were pseudo-randomly sampled without replacement in proportion to the overall distribution of difficulty, and were not seen again for the duration of the experiment. Participants saw 4 examples at a time, 2 non-blast on the left and 2 blast on the right, and could observe each set for as long as desired. Next, participants were introduced to the task of assigning subjective probability judgments to each cell, corresponding to their degree of certainty in the cell being blast or non-blast. At this time, we also qualitatively explained how their chance of winning the $4.00 bonus would be determined by performance in Phase 3, such that judgments with greater certainty would increase chances if they were correct, but would dramatically worsen chances if they were wrong. 
+
+S5.1.3 Trial structure and instructions 
+
+In each of the 100 Phase 1 trials, participants were shown the image of the cell in the center of the screen, below which they provided a number between 0% and 100% in a text box, answering the question “What is the probability the cell is a Blast?”. After responding, participants were shown the true cell type (e.g., “True cell type: Non-Blast ”), while simultaneously being shown their response and the cell image. There was no constraint on the time an individual could take to submit their response, or to observe the feedback screen. After clicking “Next”, the next trial began. After 50 trials, participants saw a break screen where they were informed of the probability they would have had to win the $4.00 if this had been Phase 3 (as determined by their average Brier score). This chance was recalculated for the second set of 50 trials and shown again at the end of Phase 1, providing a kind of aggregate performance feedback in addition to the trial-by-trial feedback. Before Phase 2, participants were introduced to the AI model, and told that the AI had been “trained to classify cells as blast or non-blast” and “has an accuracy of about 94% on images of cells similar to the ones you will see”. We told the participants that after each judgment in Phase 2, they would see the AI’s predictions instead of the true cell type, suggesting (but not explicitly directing) “You may use this information to help as you learn to make better probability judgments of your own”. After making each judgment, participants were shown the image, their own judgment, and the AI prediction as either a probability rounded to the nearest percent (e.g., “AI prediction: 86% probability of being a Blast”) or a classification (e.g., “AI prediction: Blast”), depending on the condition. In Phase 3, participants were given a chance to take a break after every 45 trials, without receiving feedback on their chance to win the bonus. 
+
+S5.1.4 Post-experiment survey 
+
+After completing Phase 3, participants answered a survey about the perceptual attributes they used to make their judgments, the weight of these attributes in the judgment process, and whether the AI exposure helped them learn how to distinguish blast from non-blast. Some of these questions were open-ended, while others systematically investigated the use of specific morphological attributes defined in previous literature [Tsutsui et al., 2023]. Participants also answered questions about their everyday use of AI, and demographics. These questions were included for exploratory purposes and are not analyzed in this paper. Finally, participants were told whether they won the $4.00 bonus and given the opportunity to view the specifics of the bonus probability calculation via Brier score. 
+
+S5.2 Analytical Methods S5.2.1 MCMC convergence diagnostics 
+
+Across all models, all parameter and estimand ˆR < 1.002 . For parameters, the minimum bulk-ESS was 5,483 and the minimum tail-ESS was 9,146 . For fixed effect estimands, the minimum bulk-ESS was 10 ,646 and the minimum tail-ESS was 20 ,899 .
+
+S5.2.2 Interpretation of reliability and resolution 
+
+Perfect calibration would result in reliability equal to 0, achieved by an individual providing subjective probabilities which perfectly match the corresponding relative frequencies of blast cells among those judgments. Perfect reliability can arise in multiple ways, 
+
+12 Miscalibrated AI improves human calibration PREPRINT 
+
+including always giving correct 0% or 100% judgments, always responding 50% when blasts occur on 50% of trials, or providing well-calibrated probabilities between these extremes. A score of 1 is the worst possible value and occurs when judgments are completely certain but always wrong, such as assigning every blast cell a 0% probability of being a blast. For resolution, suppose that ¯y = .5 as it is in our experiment. Despite perfect calibration, an individual responding 50% for every cell earns a resolution of 0, the minimum possible value, reflecting that their judgments provide no useful information beyond the overall frequency. At best, resolution is equal to the uncertainty , or variance of the true cell type, which is .5(1 − .5) = .25 for our experiment. This is earned when blast and non-blast cells are judged with mutually exclusive probabilities. One could achieve this in conjunction with perfect reliability by assigning all blast cells 100% and all non-blast cells 0%. However, they could also achieve this by assigning every blast cell a probability > 50% and every non-blast cell a probability < 50% , or by answering every cell incorrectly but with complete confidence—though this comes at a cost to reliability. 
+
+S5.2.3 Binarized accuracy: random-effects structure 
+
+For the binarized accuracy model, we allowed intercepts and effects of phase, cell type, and their interaction to vary by participant, and for these effects to be correlated among participants. We also allowed intercepts and effects of condition, phase, and their interaction to vary by stimulus, and to be correlated among stimuli, capturing systematic differences in stimulus difficulty and learnability within different conditions. 
+
+S5.2.4 LLO model: limiting values, calibration curve, and random effects 
+
+As α increases above 1, probability judgments become increasingly under-extreme. As α → 0, judgments become increasingly over-extreme, until α = 0 where they become entirely undiagnostic of the true category of a cell, corresponding to resolution of 0. Below 0, α indicates that judgments are diagnostically inverted, with non-blast cells getting higher subjective probabilities of being blast, and vice versa. One way to think of the LLO is as a model-based calibration curve, a commonly used visualization of probability calibration errors. Solving the linear form for PLLO (yj = 1 | xj ) gives the probability that a cell is a blast as a function of subjective probability judgments: 
+
+PLLO (yj = 1 | xj ) = 11 + e−(α logit (xj )+β) (S1) Plotting this function alongside actual probability judgments shows how the LLO model is capable of capturing systematic errors. For the LLO model, the value of β for each condition and phase is obtained from the overall intercept and the main effects of condition and phase along with their interaction, while the value of α is obtained from all terms interacting with the logit judgment predictor. We allowed baseline α and β and their change from Phase 1 to Phase 3 to vary among participants via by-participant varying intercepts, effects of phase and logit judgment, their interaction, and correlations among these effects. 
+
+## S6 Recalibrated Elicited Beliefs and the Blackwell Ordering 
+
+This section provides the conceptual background for the Blackwell informativeness analysis reported in the main text. We first motivate the distribution of recalibrated elicited beliefs as the object of interest, then show why the Brier resolution term alone can fail to capture decision-relevant differences between sets of judgments, and finally connect this reasoning to the Blackwell ordering. The formal treatment—including proofs, the Brier decomposition, and the procedure for constructing recalibrated beliefs from data—is given in the section titled “Formal Treatment of Recalibrated Elicited Beliefs, Resolution, and Decision Value”. 
+
+S6.1 From Calibration to Recalibrated Elicited Beliefs 
+
+The standard approach in the psychology of probability judgment evaluates elicited beliefs using proper scoring rules, especially the Brier score, and its decomposition into reliability, resolution, and uncertainty. This decomposition is useful because it separates miscalibration from the extent to which judgments distinguish cases with different outcome frequencies. In this paper, we build directly on that tradition, but use it to motivate a richer object of analysis: the distribution of recalibrated elicited beliefs .To see the idea, consider our medical image classification task. Let Y = 1 denote that an image contains a blast cell and Y = 0 
+
+denote that it does not. A participant reports an elicited belief p that Y = 1 . Suppose reports are grouped into bins indexed by k. In bin k, let pk denote the participant’s reported probability, wk the fraction of observations in that bin, and qk the actual frequency of blast cells among images in that bin. Thus pk is what the participant says, while qk is what that report empirically means. The Brier decomposition already uses both objects. The reliability term compares pk to qk , measuring miscalibration. The resolution term measures how much the qk ’s vary around the base rate. Thus the standard decomposition implicitly replaces raw reports with their empirical meanings. We call these empirical meanings recalibrated elicited beliefs :
+
+˜pk = qk .
+
+This transformation is important because raw reports combine two distinct features of judgment: what information the participant has extracted from the image, and how the participant maps that information onto the probability scale. Recalibration separates these. 
+
+13 Miscalibrated AI improves human calibration PREPRINT 
+
+If a participant reports .80 on a set of images that contain blast cells only 60% of the time, then for downstream decision purposes that report functions as a posterior probability of .60 , not .80 .The standard Brier resolution term summarizes the recalibrated elicited beliefs by a single number: 
+
+Resolution = X
+
+> k
+
+wk (qk − ¯y)2,
+
+where ¯y = P 
+
+> k
+
+wk qk is the base rate. This is simply the variance of the recalibrated elicited beliefs. That statistic is useful, but it is not the full object. The full object is the distribution of the recalibrated beliefs {˜pk , w k }.This distinction matters in medical classification because decisions are threshold-based. A clinician may escalate, biopsy, treat, or withhold intervention depending on whether the posterior probability of malignancy exceeds a clinically relevant threshold. Such thresholds reflect the relative costs of false positives and false negatives, the risks of intervention, and the consequences of delay. Therefore, the value of a learning system depends not only on how dispersed its beliefs are, but on where its recalibrated beliefs lie relative to the relevant decision thresholds. Our empirical analysis therefore uses recalibrated elicited beliefs for two reasons. First, they place participants on a common empirical probability scale, separating information from miscalibration. Second, their distribution is the object needed to assess what participants have learned in a decision-relevant sense. Brier resolution is one summary of this distribution; it is not a substitute for the distribution itself. 
+
+S6.2 Why Equal Resolution Need Not Mean Equal Decision Value 
+
+A simple example illustrates why the distribution of recalibrated elicited beliefs contains information that Brier resolution alone discards. The example is stated in the language of the medical image task. Consider two perfectly calibrated learning systems for classifying whether an image contains a blast cell. Because both systems are perfectly calibrated, raw elicited beliefs and recalibrated elicited beliefs coincide. System A produces three possible posterior probabilities: Bin pk wk qk
+
+1 0 1/6 02 1/2 2/3 1/23 1 1/6 1
+
+System B produces two possible posterior probabilities. Let 
+
+a = 12 − 1
+
+√12 , b = 12 + 1
+
+√12 .
+
+Then Bin pk wk qk
+
+1 a 1/2 a
+
+2 b 1/2 b
+
+Both systems have base rate 
+
+¯y = 12 .
+
+Both are perfectly calibrated, since pk = qk in every bin. They also have identical Brier resolution: 
+
+Res A = 16 (0 − 1/2) 2 + 23 (1 /2 − 1/2) 2 + 16 (1 − 1/2) 2 = 112 ,
+
+and 
+
+Res B = 12 (a − 1/2) 2 + 12 (b − 1/2) 2 = 112 .
+
+Thus, by calibration and resolution, the two systems are tied. Now consider threshold-based clinical value. Suppose the value of a posterior belief q at threshold t is 
+
+vt(q) = ( q − t)+,
+
+where (x)+ = max {x, 0}. This represents the gain from having posterior probability above the intervention threshold. The ex ante value of a system is therefore 
+
+Vt = X
+
+> k
+
+wk (qk − t)+.
+
+For a low intervention threshold, t = 1 /4,
+
+V1/4(A) = 16 (0 − 1/4) + + 23 (1 /2 − 1/4) + 16 (1 − 1/4) = 724 ,
+
+14 Miscalibrated AI improves human calibration PREPRINT 
+
+whereas 
+
+V1/4(B) = 12 (a − 1/4) + + 12 (b − 1/4) = 18 + 12√12 .
+
+Numerically, 
+
+V1/4(A) ≈ .2917 , V1/4(B) ≈ .2693 .
+
+Thus System A is better for this low-threshold decision. For a higher intervention threshold, t = 1 /2,
+
+V1/2(A) = 16 (0 − 1/2) + + 23 (1 /2 − 1/2) + + 16 (1 − 1/2) = 112 ,
+
+whereas 
+
+V1/2(B) = 12 (a − 1/2) + + 12 (b − 1/2) = 12√12 .
+
+Numerically, 
+
+V1/2(A) ≈ .0833 , V1/2(B) ≈ .1443 .
+
+Thus System B is better for this higher-threshold decision. The example shows that two systems can be perfectly calibrated and have identical Brier resolution while differing in decision value. One system is better for low-threshold decisions; the other is better for high-threshold decisions. The difference lies in the placement of posterior mass relative to the decision threshold, not in overall variance around the base rate. This motivates our use of the full distribution of recalibrated elicited beliefs. Resolution is a useful descriptive statistic, but it cannot determine which learning system is more valuable across decision contexts. 
+
+S6.3 Connection to Blackwell Comparisons 
+
+The preceding example also clarifies the role of Blackwell comparisons. Blackwell’s criterion asks when one information structure is more valuable than another for every possible decision problem. In a two-state setting, this is equivalent to comparing the full distributions of posterior beliefs by convex order. The implication is straightforward. If one distribution of recalibrated elicited beliefs Blackwell-dominates another, then it supports weakly better decisions for all payoff functions. If no such dominance holds, then there is no context-free ranking: different decision problems may favor different systems. This is not a limitation of the approach. It is the correct conclusion. In medical classification, the practical value of learning depends on the intervention threshold. When the threshold changes, the relative value of different posterior distributions can change as well. The empirical task is therefore not to force all learning systems into a single scalar ranking, but to recover the distribution of recalibrated elicited beliefs and examine how that distribution supports decisions across relevant thresholds. The procedure implementing this comparison, and the resulting comparison of Phase 1 and Phase 3 judgments across the three conditions, are reported in the main text. The formal basis for the framework described above—including the calibration property of recalibrated beliefs, the Brier decomposition, the connection to threshold-based decisions and the Blackwell/convex order, and the procedure for constructing recalibrated beliefs from data—is given in the following section. 
+
+## S7 Formal Treatment of Recalibrated Elicited Beliefs, Resolution, and Decision Value 
+
+This section provides the formal basis for our use of recalibrated elicited beliefs. The argument has five steps. First, recalibrated elicited beliefs place raw reports on an empirical probability scale. Second, the Brier decomposition shows that the standard resolution term is the variance of these recalibrated beliefs. Third, medical classification decisions are naturally threshold-based. Fourth, in a two-state setting, Blackwell comparisons correspond to convex-order comparisons of posterior distributions. Fifth, the empirical distribution of recalibrated elicited beliefs can be computed directly from observed reports and outcomes. 
+
+S7.1 Recalibrated elicited beliefs 
+
+Let Y ∈ { 0, 1} denote the true outcome and let p denote an elicited belief that Y = 1 . Define the recalibrated elicited belief associated with report p as 
+
+˜p = P(Y = 1 | p).
+
+In finite bins, if report pk is used on a set of observations in which the event occurs with frequency qk , then 
+
+˜pk = qk .
+
+Proposition 1. The recalibrated elicited belief ˜p is calibrated: 
+
+P(Y = 1 | ˜p) = ˜ p. 
+
+15 Miscalibrated AI improves human calibration PREPRINT 
+
+Proof. By definition, ˜p = P(Y = 1 | p). Conditioning on ˜p groups together reports with the same empirical event frequency. Therefore the event frequency conditional on ˜p is ˜p itself. Raw elicited beliefs p describe what participants report. Recalibrated elicited beliefs ˜p describe the empirical posterior probabilities induced by those reports. Thus recalibration separates the information encoded in a participant’s judgments from distortions in the participant’s use of the probability scale. 
+
+S7.2 Finite-bin Brier decomposition 
+
+Suppose reports take finitely many values or bins p1, . . . , p K . Let wk be the fraction of observations in bin k, and let 
+
+qk = P(Y = 1 | p = pk )
+
+be the event frequency in that bin. Let 
+
+¯y = X
+
+> k
+
+wk qk
+
+be the overall event frequency. The expected Brier score is X
+
+> k
+
+wk
+
+qk (pk − 1) 2 + (1 − qk )p2
+
+> k
+
+ .
+
+For each bin, 
+
+qk (pk − 1) 2 + (1 − qk )p2 
+
+> k
+
+= p2 
+
+> k
+
+− 2pk qk + qk .
+
+Adding and subtracting q2 
+
+> k
+
+gives 
+
+p2 
+
+> k
+
+− 2pk qk + qk = ( pk − qk )2 + qk (1 − qk ).
+
+Therefore, 
+
+Brier = X
+
+> k
+
+wk (pk − qk )2 + X
+
+> k
+
+wk qk (1 − qk ).
+
+Since X
+
+> k
+
+wk qk (1 − qk ) = ¯ y(1 − ¯y) − X
+
+> k
+
+wk (qk − ¯y)2,
+
+we obtain 
+
+Brier = X
+
+> k
+
+wk (pk − qk )2
+
+| {z }
+
+> Reliability
+
+− X
+
+> k
+
+wk (qk − ¯y)2
+
+| {z }
+
+> Resolution
+
++ ¯ y(1 − ¯y)
+
+| {z }
+
+> Uncertainty
+
+.
+
+Proposition 2. The Brier resolution term is the variance of recalibrated elicited beliefs: 
+
+Resolution = X
+
+> k
+
+wk (qk − ¯y)2 = Var(˜ p).
+
+Proof. In finite bins, the recalibrated elicited belief in bin k is ˜pk = qk and the bin weight is wk . Since ¯y = P 
+
+> k
+
+wk qk , the variance of ˜p is X
+
+> k
+
+wk (˜ pk − ¯y)2 = X
+
+> k
+
+wk (qk − ¯y)2.
+
+Resolution is therefore a single second-moment summary of the distribution of recalibrated elicited beliefs. It is useful, but it is not the full distribution. 
+
+S7.3 Threshold decision value in medical classification 
+
+Let θ ∈ { 0, 1} denote the true state, where θ = 1 corresponds to a clinically relevant positive case, such as an image containing a blast cell. Let 
+
+p = P(θ = 1) 
+
+denote the posterior probability assigned to the positive state. Consider two actions: 
+
+a0 = no intervention , a1 = intervention .
+
+For a threshold t ∈ [0 , 1] , define payoffs by 
+
+ut(a0, θ ) = 0 for both θ ∈ { 0, 1},
+
+16 Miscalibrated AI improves human calibration PREPRINT 
+
+and 
+
+ut(a1, 1) = 1 − t, ut(a1, 0) = −t. 
+
+At posterior belief p, the expected payoff from intervention is 
+
+p(1 − t) + (1 − p)( −t) = p − t, 
+
+while the payoff from no intervention is 0. Therefore the optimal value at posterior p is 
+
+vt(p) = max {0, p − t} = ( p − t)+.
+
+For a distribution μ of recalibrated elicited beliefs, the ex ante value of threshold decision problem t is 
+
+Vt(μ) = 
+
+Z
+
+(p − t)+ dμ (p).
+
+In finite bins this becomes 
+
+Vt = X
+
+> k
+
+wk (qk − t)+.
+
+Thus, decision value depends on where the distribution of recalibrated elicited beliefs lies relative to the threshold t. Different clinical thresholds can favor different posterior distributions, even when those distributions have the same mean and variance. 
+
+S7.4 Blackwell comparisons and convex order 
+
+Let μ and ν be two distributions of posterior beliefs on [0 , 1] with the same mean. We say that ν dominates μ in convex order, written 
+
+μ ⪯cx ν, 
+
+if Z
+
+ϕ(p) dμ (p) ≤
+
+Z
+
+ϕ(p) dν (p)
+
+for every convex function ϕ : [0 , 1] → R.In a two-state environment, this convex-order comparison is equivalent to the Blackwell comparison of the corresponding information structures: the more informative structure induces the posterior distribution that is larger in convex order. For posterior distributions with the same mean, convex order is equivalently characterized by the threshold, or hinge, functions 
+
+(p − t)+.
+
+That is, 
+
+μ ⪯cx ν
+
+if and only if Z
+
+(p − t)+ dμ (p) ≤
+
+Z
+
+(p − t)+ dν (p) for all t ∈ [0 , 1] .
+
+In finite support form, this condition is 
+
+X
+
+> i
+
+ai(pi − t)+ ≤ X
+
+> j
+
+bj (qj − t)+ for all t ∈ [0 , 1] .
+
+This characterization is especially useful here because the hinge function is exactly the threshold decision value derived above. If one distribution of recalibrated elicited beliefs dominates another in convex order, it yields weakly higher value for every threshold decision problem. If the hinge inequalities cross, then neither system is uniformly more informative: one may be better for some treatment thresholds, while the other may be better for others. 
+
+S7.5 Same resolution, opposite threshold rankings 
+
+The following example shows why Brier resolution alone cannot determine decision value. Let 
+
+μA = 16 δ0 + 23 δ1/2 + 16 δ1
+
+and 
+
+μB = 12 δ1/2−1/√12 + 12 δ1/2+1 /√12 .
+
+Here δx denotes a point mass at x.Both distributions have mean 1/2. Distribution μA has variance 
+
+16 (0 − 1/2) 2 + 23 (1 /2 − 1/2) 2 + 16 (1 − 1/2) 2 = 112 .
+
+17 Miscalibrated AI improves human calibration PREPRINT 
+
+Distribution μB has variance 
+
+12
+
+
+
+1/2 − 1/√12 − 1/2
+
+2
+
++ 12
+
+
+
+1/2 + 1 /√12 − 1/2
+
+2
+
+= 112 .
+
+Thus the two distributions have the same Brier resolution. However, their threshold values differ. For t = 1 /4,
+
+Z
+
+(p − 1/4) + dμ A(p) = 16 (0 − 1/4) + + 23 (1 /2 − 1/4) + 16 (1 − 1/4) = 724 ,
+
+while Z
+
+(p − 1/4) + dμ B (p) = 12 (1 /2 − 1/√12 − 1/4) + + 12 (1 /2 + 1 /√12 − 1/4) = 18 + 12√12 .
+
+Since 724 > 18 + 12√12 ,μA yields higher value at threshold t = 1 /4.For t = 1 /2, Z
+
+(p − 1/2) + dμ A(p) = 16 (1 − 1/2) = 112 ,
+
+while Z
+
+(p − 1/2) + dμ B (p) = 12 (1 /2 + 1 /√12 − 1/2) = 12√12 .
+
+Since 112 < 12√12 ,μB yields higher value at threshold t = 1 /2.Thus two posterior distributions can have the same mean and the same variance, and hence the same Brier resolution, while reversing their rankings across threshold decision problems. This is why resolution does not determine decision value. The relevant object is the full distribution of recalibrated elicited beliefs. 
+
+S7.6 Empirical construction of recalibrated elicited beliefs 
+
+We now describe the in-principle computational procedure for constructing the empirical distribution of recalibrated elicited beliefs. Suppose the data consist of observations indexed by i = 1 , . . . , N . For each observation, we observe: 
+
+(pi, Y i),
+
+where pi ∈ [0 , 1] is the raw elicited belief and Yi ∈ { 0, 1} is the true outcome. Choose a partition of the unit interval into bins 
+
+B1, . . . , B K .
+
+For each bin Bk , define 
+
+nk = # {i : pi ∈ Bk },
+
+and 
+
+wk = nk
+
+N .
+
+The empirical event frequency in bin k is 
+
+qk = 1
+
+nk
+
+X
+
+> i:pi∈Bk
+
+Yi,
+
+provided nk > 0. The recalibrated elicited belief associated with bin k is 
+
+˜pk = qk .
+
+The empirical distribution of recalibrated elicited beliefs is therefore 
+
+bμ˜p = {(˜ pk , w k ) : k = 1 , . . . , K, n k > 0}.
+
+This construction can be applied separately by experimental condition, phase, participant group, or individual participant, depending on sample size. For example, if g indexes an experimental condition, then 
+
+qkg = 1
+
+nkg 
+
+X 
+
+> i:pi∈Bk, i ∈g
+
+Yi, wkg = nkg 
+
+Ng
+
+.
+
+18 Miscalibrated AI improves human calibration PREPRINT 
+
+The condition-specific distribution of recalibrated elicited beliefs is 
+
+bμ˜p,g = {(qkg , w kg ) : k = 1 , . . . , K, n kg > 0}.
+
+Once bμ˜p,g is constructed, the Brier resolution for condition g is 
+
+\Resolution g = X
+
+> k
+
+wkg (qkg − ¯yg )2,
+
+where 
+
+¯yg = X
+
+> k
+
+wkg qkg .
+
+The threshold value curve for condition g is 
+
+bVg (t) = X
+
+> k
+
+wkg (qkg − t)+.
+
+Plotting bVg (t) over thresholds t ∈ [0 , 1] shows which condition yields greater decision value at each threshold. If 
+
+bVg (t) ≥ bVh(t) for all t ∈ [0 , 1] ,
+
+then condition g dominates condition h in the empirical hinge-function sense. If the curves cross, then neither condition is uniformly more decision-relevant; different thresholds favor different conditions. In discrete empirical applications, it is enough to evaluate the hinge inequalities on the finite set of observed recalibrated belief values and the endpoints: 
+
+t ∈ { 0, 1} ∪ { qkg : nkg > 0} ∪ { qkh : nkh > 0}.
+
+Between these points, the threshold value functions are linear. 
+
+S7.7 Algorithmic summary 
+
+The empirical procedure can be summarized as follows. 1. Choose the comparison level. Decide whether recalibrated elicited beliefs will be constructed by condition, phase, participant group, or individual participant. 2. Bin raw elicited beliefs. Partition [0 , 1] into bins B1, . . . , B K . The same binning rule should be used across compared groups. 3. Compute empirical meanings. For each group g and bin k, compute the empirical event frequency 
+
+qkg = 1
+
+nkg 
+
+X 
+
+> i:pi∈Bk, i ∈g
+
+Yi.
+
+4. Construct recalibrated EB distributions. Form 
+
+bμ˜p,g = {(qkg , w kg ) : nkg > 0}.
+
+5. Compute Brier components. Reliability, resolution, and uncertainty can be computed as 
+
+\Reliability g = X
+
+> k
+
+wkg (pkg − qkg )2,
+
+\Resolution g = X
+
+> k
+
+wkg (qkg − ¯yg )2,
+
+and \Uncertainty g = ¯ yg (1 − ¯yg ),
+
+where pkg is the representative reported probability for bin k in group g.6. Compute threshold value curves. For each group g, compute 
+
+bVg (t) = X
+
+> k
+
+wkg (qkg − t)+
+
+over a grid of thresholds t ∈ [0 , 1] .7. Compare groups. If one group has weakly larger bVg (t) at every threshold, it is empirically more valuable across all threshold decision problems. If the curves cross, the comparison is threshold-dependent. 8. Report interpretation. Resolution describes the variance of recalibrated elicited beliefs. The threshold value curve describes how the full distribution of recalibrated elicited beliefs supports medical decisions across thresholds. This procedure makes explicit the distinction between standard Brier-based summaries and the decision-relevant distributional object used in the paper. 
+
+19 Miscalibrated AI improves human calibration PREPRINT 
+
+## References 
+
+Paul-Christian Bürkner. brms: An R package for Bayesian multilevel models using Stan. Journal of Statistical Software , 80(1):1–28, 2017. doi:10.18637/jss.v080.i01. URL http://www.jstatsoft.org/v80/i01/ .Jonah Gabry, Rok ˇ Cešnovar, Andrew Johnson, and Steve Bronder. Cmdstanr: R Interface to ’CmdStan’, 2025. URL https: //mc-stan.org/cmdstanr/ .Gunnar P. Epping, Andrew Caplin, Erik Duhaime, William R. Holmes, Daniel Martin, and Jennifer S. Trueblood. Improving crowdsourcing for AI through cognitive-inspired data engineering. Behavior Research Methods , 58(10):283, 2026. ISSN 1554-3528. doi:10.3758/s13428-026-03160-4. URL https://link.springer.com/10.3758/s13428-026-03160-4 .Satoshi Tsutsui, Winnie Pang, and Bihan Wen. WBCAtt: A White Blood Cell Dataset Annotated with Detailed Morphological Attributes, 2023. URL http://arxiv.org/abs/2306.13531 .
+
+20

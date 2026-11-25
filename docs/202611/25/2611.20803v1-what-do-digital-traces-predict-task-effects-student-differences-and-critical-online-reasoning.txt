@@ -1,0 +1,847 @@
+Title: What Do Digital Traces Predict? Task Effects, Student Differences, and Critical Online Reasoning
+
+URL Source: https://arxiv.org/pdf/2611.20803v1
+
+Published Time: Tue, 17 Nov 2026 05:04:59 GMT
+
+Number of Pages: 31
+
+Markdown Content:
+# What Do Digital Traces Predict? Task Effects, Student Differences, and Critical Online Reasoning 
+
+## Maxim Konca * Alexander Mehler 
+
+Institute of Informatics and Mathematics, Goethe University, Frankfurt am Main, Germany Manuscript submitted for publication 
+
+Abstract 
+
+Digital assessment traces are increasingly used to predict student performance, often evaluated by correlating predicted and observed scores pooled across tasks. However, such correlations may reflect between-task differences rather than performance differences among students within tasks. To investigate this, we analyzed up to 527 browsing sessions from 424 university students completing open-Internet Critical Online Reasoning tasks and assessed the cross-task stability of their ratings. We evaluated the same out-of-fold predictions within and across tasks, compared three validation tiers up to leave-one-task-out, and tested incremental predictive contributions of consultation order and relational structure against matched permutation and randomization controls. None of the twelve prespecified primary tests was significant: on held-out tasks, consulted-page features showed no significant association with relative student performance, nor did observed order or relational structure add predictive value. Pooling observations across tasks substantially increased correlations, particularly for factual correctness, whose scores showed limited evidence of stable between-student differences across tasks. However, sentence embeddings yielded modest positive correlations with generic response quality on held-out tasks, without establishing added predictive value from observed order or relational structure. Our findings show that pooled predictive correlations may not reflect within-task student differences, highlighting the need for within-task evaluation and criterion generalizability audits. 
+
+Keywords: Critical Online Reasoning, trace data, predictive modeling, model evaluation, generalizability, task specificity. 
+
+# 1 Introduction 
+
+Digital assessment environments (see Katz, 2007, for an early example; Sparks et al., 2016, and Van Damme & Zahner, 2022, for reviews; and Tenison & Sparks, 2023, for a recent study) capture both student outcomes, such as written responses, and process data, including search queries in internet-based information problem-solving tasks, accessed resources, and interaction sequences. The competence assessed here is broadly critical thinking, understood as purposeful, self-regulatory judgment involving interpretation, analysis, evaluation, inference, and justification of the grounds for judgment (Facione, 1990, p. 3). Applied to online information literacy, critical thinking becomes Critical Online Reasoning (COR): searching, selecting, evaluating, and reasoning from online information to reach justified conclusions (Molerov et al., 2020). Critical thinking, as addressed by COR research, is typically measured as a latent construct inferred from process observables (e.g., page visits, dwell times, scrolling, and page transitions) and product observables (e.g., linguistic features of written responses) collected during assessment tasks. To infer COR from product variables, this approach uses rater scores of written responses as indicators of task-specific performance, which serves as an intermediary construct related to COR. The problem is that a data-driven predictor may correlate highly with these scores by exploiting task-specific rather than task-independent information. The challenge is therefore to demonstrate generalization first to unseen but related tasks and ultimately to unrelated tasks, while establishing construct validity. This article addresses the first challenge by modeling COR-related task-specific performance across related tasks using both process and product observables. In doing so, it revisits a longstanding problem in performance assessment research. Generalizability Theory conceptualizes observed performance scores as arising from samples of tasks, occasions, raters, and measurement methods, with the intended scope of generalization determining which sources of variation constitute measurement error (Brennan, 2001; Cronbach et al., 1972). In a study of elementary-level mathematics and science performance assessments, Shavelson et al. (1993) found that task-sampling variability contributed substantially more to measurement error than rater-sampling variability. This finding highlights the importance of accounting for task-specific variation when predicting 
+
+> *Corresponding author: konca@em.uni-frankfurt.de
+
+1arXiv:2611.20803v1 [cs.CL] 16 Nov 2026 COR-related performance. Although task-specific performance is informative, a single-task score need not reflect a stable, task-general student characteristic. In particular, student-by-task interaction variance constitutes measurement error when generalizing student performance across tasks. A parallel problem arises in predictive learning analytics. Across nine university courses, Gaˇ sevi´ c et al. (2016) found that predictive performance and predictor relevance varied between course-specific and generalized models, demonstrating that ignoring instructional contexts can distort estimated associations between learning-management-system features and academic success. Similarly, the present study examines predictive generalization across assessment tasks using both process and product observables. Specifically, it investigates whether these observables contain task-independent predictive information. These two research traditions motivate a more stringent question than whether process or product observables correlate with observed rater scores. Predictive modeling must distinguish task-context information from information that differentiates students performing the same task (within-task predictive validity). It must also establish the incremental predictive value of each observable type and clarify what these observables represent. Crucially, it must determine whether within-task predictive relationships generalize to unseen tasks (cross-task predictive generalizability). More specifically, outcome scores derive from ratings of written responses, while both process- and product-related observables serve as predictors. We audit the performance criteria and evaluate predictive generalization at three levels: observation, student, and task. For process-related observables, we focus on consulted content pages, excluding search-results pages, which constitute approximately one-third of the captured pages; a sensitivity analysis includes the full browsing record. Using written-response features as the baseline, we assess the incremental predictive value of consulted-page content, order-invariant features, consultation order, and graph-based page relations. All models use matched observations for comparability. Permutation and randomization controls, along with neural ablations, test whether temporal and relational structures add predictive information beyond page content. In sum, our contribution is not to demonstrate task-sampling variability or limited predictive generalizability, both of which are already recognized challenges. Rather, we connect these problems in COR-related performance assessment by testing whether models based on process observables and product observables differentiate students within tasks (within-task predictive performance) and generalize to unseen tasks (cross-task predictive generalizability), while examining how much pooled associations reflect task differences. We further test whether structured process representations add predictive value beyond content representations ( C ), using matched null representations as controls. The study addresses the following research questions on within-task prediction and cross-task generalizability: RQ1 Product: To what extent do linguistic features of written responses, not explicitly included in the rating criteria, predict COR-related performance as measured by rater scores? RQ2 Process content: To what extent do linguistic features of consulted documents predict COR-related performance? RQ3 Process sequence: Does consultation order add predictive information beyond the unordered set of consulted documents? RQ4 Process network: Do graph-based representations of information-seeking trajectories add predictive information beyond document content and consultation order? RQ5 Generalizability: To what extent do models evaluated under RQ1–RQ4 transfer to unseen tasks? 
+
+# 2 Related work 
+
+The assessed construct. COR was conceptualized as a construct and assessment framework for university students (Molerov et al., 2020). Generic COR tasks were subsequently validated using several methods, including generalizability theory (Nagel & Zlatkin-Troitschanskaia, 2025; Nagel et al., 2022). Nagel et al. (2022) found that person and person-by-task variance dominated task and rater effects, interpreting both as meaningful performance variation consistent with the assessment design. Because variance components depend on the sampled students, tasks, raters, and scoring procedures, we re-estimate them here. Student-by-task interaction variance may reflect meaningful task-specific performance differences but limits the interpretation of scores or predictions as indicators of task-general competence. Hartig et al. (2026) document the rating procedure for generic COR tasks involving online information acquisition, evidence-based reasoning, and synthesis. We use existing aggregate ratings and audit their underlying criteria rather than developing new ones. 
+
+Comprehension across multiple documents. Reading across multiple sources to answer questions is conceptualized as an interaction among reader, task, and texts rather than a reader attribute alone (List & Alexander, 2019; Rouet & Britt, 2011). The MD-TRACE model reflects this perspective and is particularly relevant to COR assessment because it treats task-model construction and evaluation of the resulting product as core processes (Rouet & Britt, 2011). COR-related performance scores 2are expected to be task dependent because tasks differ in their requirements, students’ interpretations and responses, and the criteria used to evaluate performance. The variance decomposition in Section 4.2 quantifies this variation without necessarily implying deficiencies in the rating rubric. 
+
+Process observables as performance predictors. Predicting performance from process observables is well established in learning analytics, with growing emphasis on interaction sequences rather than isolated events. Yu et al. (2025) mined event sequences from 49 undergraduates completing a flipped-learning mathematics task, identifying six patterns correlated with post-test performance ( |r| ≥ 0.2), five involving multiple events and three negatively correlated. However, these predictors were selected and evaluated on the same sample, without permutation controls. Thus, the findings link sequence features to performance but do not establish the predictive contribution of event order itself. Our study tests this contribution. In the COR setting of Molerov et al. (2020), Schmidt et al. (2020) collected eye-tracking and event-log data from 32 undergraduates completing a single COR task. They used process mining to characterize information seeking and latent class analysis to identify two student profiles differing in process characteristics and rated task performance. We likewise examine information seeking but focus on content-document visits and transitions, incorporating a content model absent from Schmidt et al. (2020). 
+
+Aggregation and transfer across tasks. Pooled task correlations may differ from within-task correlations because they also reflect between-task variation. Thus, a high pooled correlation may reflect within-task differences, between-task differences, or both, without reliably distinguishing students performing the same task. This distinction also matters for prediction from process observables. Gaˇ sevi´ c et al. (2016) found that the same LMS feature could correlate positively or negatively with success depending on the course, and that significance differed between pooled and within-course models. These findings show that pooled predictive performance does not necessarily identify features predictive within or across contexts. A complementary methodological concern is the statistical reliability of predictive model comparisons. Reviewing 87 predictive modeling experiments in MOOCs, Gardner and Brooks (2018) found that 52 lacked significance tests for model comparisons and none corrected for multiple testing. A later review of 39 studies and 82 models of course-specific academic success found that performance was most often evaluated using accuracy alone (Arizmendi et al., 2023). Neither review examines the distinction between within-task and between-task predictive associations central to this study. The portability of predictive models across educational contexts remains a concern in learning analytics. A review of 70 studies using log data from open-ended science and engineering environments identified task design, construct definition, feature extraction, and model validation as barriers to generalizability (Wang et al., 2023). More recently, Xu et al. (2026) trained models at one institution and tested them at another using standardized behavioral features from a shared online textbook, keeping the learning platform, content, and feature definitions relatively stable while varying the institutional context. Our study examines complementary generalization: the assessment instrument and feature definitions remain fixed, while each of four tasks and its students are excluded from training in turn. This design tests whether predictive performance persists when the evaluation task and its students are excluded from training. 
+
+# 3 Materials and Methods 
+
+## 3.1 Data reconstruction and analysis populations 
+
+We analyze student performance on four Critical Online Reasoning (COR) assessment tasks requiring students to consult online information and prepare written responses. Each student-task observation comprises a written response and process observables recorded during task completion. The four tasks, drawn from Hartig et al. (2026), examine health risks from cell-phone towers (FM), mosquito-bite treatment with heat sticks (HS), Tetra Pak recyclability (TP), and poisoning from a traditional German dish (GS). Page visits were reconstructed from page-opening logs and assigned to individual students and tasks. We extracted linguistic features from process and product texts using Coh-Metrix (Graesser et al., 2004; McNamara et al., 2014). We chose Coh-Metrix for its established use in linguistic analysis, cross-linguistic applicability, and standardized feature set, avoiding an exhaustive comparison of alternative models. As the tasks and most texts were in German, we computed the Coh-Metrix features using German-language text processing, excluding non-German texts and those shorter than 50 words under an inherited minimum-content rule before constructing either feature representation. Reconstruction rules, URL matching, classifiers, item mapping, model settings, and ablation designs are documented in the Supplement. 
+
+Page sets. Visited pages were classified by URL as either search engine results pages (SERPs) or content pages, the latter being a pragmatic rather than a comprehensive genre category. Page set A = C ∪ S comprises all pages retained after preprocessing, partitioned into content pages ( C) and SERPs ( S), with C ∩ S = /0. Page sets determine which pages are 3considered, whereas analysis populations comprise the student-task observations eligible for analysis within each page set. 1
+
+A student-task observation is eligible for a given page set if at least two pages meet the feature-extraction requirements. As RQ2–RQ4 focus on consulted documents, C was designated the primary page set if two prespecified criteria were met: at least 30 eligible observations per task and at most 25% two-page trajectories. Section 4.1 reports whether these criteria were met. 
+
+Ratings and annotations. The study uses observed rater scores assigned by trained student raters using the generic-COR rating procedure (Hartig et al., 2026). The primary analyses use the supplied criterion-level aggregate scores; neither the rating procedure nor the original aggregation was modified. Topic, genre, and emotion labels were assigned during data preparation using the classifiers documented in the supplement. 
+
+## 3.2 Performance outcomes and criterion audit 
+
+The four tasks share a rating rubric with generic criteria worded identically across tasks and task-specific factual-correctness criteria. After rescaling the selected criteria to [0, 1], we formed three unweighted composites: Domain-Independent Response Quality (DIRQ ; general linguistic and formal quality), the mean of response fulfillment, source referencing, and COHerence 
+
+(COH ; semantic connectedness and conceptual consistency of the response); Task-Specific Factual Correctness (TaSFC ; factual correctness relative to task requirements), the mean of the task’s factual-correctness criteria; and Overall , the mean of all selected criteria. Reliability and agreement coefficients describe the ratings but do not weight the composites. The primary outcomes are DIRQ , TaSFC , and COH . COH , the only single criterion among them, is analyzed separately although it enters 
+
+DIRQ , so the two analyses are not independent. Response fulfillment and source referencing are analyzed as exploratory components of DIRQ .Secondary outcomes include the unstandardized Overall composite and within-task standardized DIRQ , TaSFC , and Overall scores. Standardized scores are defined as zit = ( xit − μt )/σt , with mean μt and standard deviation σt computed from all valid ratings for task t, independently of the modeling cohort. Retrospective standardization equalizes task means and standard deviations but does not ensure equivalent score interpretations across tasks. The rating-only audit uses the 644 of 664 rated responses that have valid DIRQ , TaSFC , and COH scores to assess cross-task rank-order consistency and estimate variance components attributable to students, student-by-task interactions, raters, and rater-by-task interactions. Of the 144 students observed on two tasks, 136 had valid scores for both. Each variance component is tested using a likelihood-ratio test comparing the fitted model with a reduced model omitting that component. Projected dependability coefficients are reported without confidence intervals and interpreted solely as guidance for assessment design. 
+
+## 3.3 Predictor feature representations for RQ1–RQ4 
+
+Visited pages (process-related observables) and written responses (product-related) are each represented using two feature sources. The primary feature source provides 17 cohesion, lexical, and syntactic indices derived from a German adaptation of Coh-Metrix (Graesser et al., 2004), expressed as rates, incidences, or means rather than raw counts. Features were screened for missingness, variance, and length sensitivity independently of rater scores and fixed before predictive modeling. Screening excluded word, sentence, and paragraph counts and mean sentence and paragraph lengths, retaining only mean word length in letters as a descriptive index. The second feature source uses 384-dimensional sentence embeddings from paraphrase-multilingual-MiniLM-L12-v2 (Reimers & Gurevych, 2019, 2020) for sensitivity analysis. All embeddings were retrieved from a single frozen, content-addressed cache. The indices are listed in Table S13. For student-task observation i and page set U ∈ { A, C, S}, let nU 
+
+> i
+
+denote the number of associated pages and xU 
+
+> i j
+
+the feature vector of the j-th page. The unordered page representation of i for U is the element-wise mean of these vectors and is invariant to permutations of page order: 
+
+cU 
+
+> i
+
+= 1
+
+nU
+
+> inU
+> i
+
+# ∑
+
+> j=1
+
+xU
+
+> i j
+
+. (1) Primary analyses use the content-page set U ← C; sensitivity analyses use the all-page set U ← A.To represent process-related observables beyond page content, cU 
+
+> i
+
+is concatenated with up to 34 order-invariant visit descriptors vU 
+
+> i
+
+, yielding [cU 
+
+> i
+
+, vU 
+
+> i
+
+]. These include log-transformed visit and unique-URL counts, revisit rates, and visit proportions by page topic, genre, and emotion, with missing labels treated as separate categories. Preprocessing parameters are fitted only on training folds, while visit descriptors are computed separately for each page set. Including vU 
+
+> i
+
+in the baseline limits the attribution of order-sensitive and relational gains to differences in session size or annotation composition. 
+
+> 1We use “page set” to avoid confusion with the universe of admissible observations in generalizability theory (Brennan, 2001; Cronbach et al., 1972).
+
+4RQ2 focuses on cU 
+
+> i
+
+without vU 
+
+> i
+
+to isolate the predictive contribution of consulted page content from additional visit descriptors. An exploratory comparison of [cU 
+
+> i
+
+, vU 
+
+> i
+
+] with cU 
+
+> i
+
+assesses whether visit descriptors provide incremental predictive information beyond aggregated page content. For RQ3, visit order is encoded by 16 features oU 
+
+> i
+
+capturing trajectory positions, displacement, efficiency, and directional consistency in the space of the first four principal components of the page vectors. The control ˜ oU 
+
+> i
+
+is obtained by averaging these features over 32 random permutations of the visit sequence, while keeping cU 
+
+> i
+
+and vU 
+
+> i
+
+fixed. For RQ4, page relations are encoded by 22 features gU 
+
+> i
+
+capturing annotation agreement, cosine similarity between page pairs, weighted node degrees, and two normalized graph-Laplacian measures. The control ˜ gU 
+
+> i
+
+is obtained by averaging the relation features over 32 random joint permutations of the annotation labels and similarity matrix, while keeping the page vectors, temporal adjacency, and observed visit order fixed. These permutations preserve annotation-label and pairwise-similarity distributions while disrupting their alignment with the observed consultation path. In sum, for student-task observation i and page set U, we distinguish four types of feature vectors: content-related ( cU 
+
+> i
+
+), order-invariant visit-related ( vU 
+
+> i
+
+), order-sensitive visit-related ( oU 
+
+> i
+
+), and relational ( gU 
+
+> i
+
+). We denote the corresponding representation levels by C , V , O, and G , respectively, and introduce W for the representation of students’ written responses. 
+
+## 3.4 Estimators, validation tiers, and scoring 
+
+For fixed-length features, we use random forest regression (Breiman, 2001) as the primary estimator, with radial basis function support vector regression and partial least squares regression for sensitivity analyses, all with fixed hyperparameters and without tuning. As exploratory RQ3 and RQ4 benchmarks, we fit a single-layer gated recurrent unit (GRU) (Cho et al., 2014) and a message-passing graph network (Gilmer et al., 2017), with matched order and relation ablations. We fit neural models to predict DIRQ , TaSFC , and COH from sequences or graphs of page vectors xU
+
+> i j
+
+, using three random seeds. All predictor transformations, including imputation, scaling, principal components, annotation levels, and representation adapters, are fitted only on the respective training partition. Task standardization transforms targets, not predictors, and its constants include evaluation data, so standardized outcomes are retrospective targets unavailable in prospective prediction. We use three evaluation tiers (T1–T3) with increasingly restrictive train-test separation and fixed split manifests based on page set A, shared across outcomes, representations, estimators, and feature sources. 
+
+Tier T1, observation-level. We partition student-task observations into five task-stratified folds and repeat this procedure five times. Observations from the same students and tasks may occur in both training and test sets. 
+
+Tier T2, student-grouped. We use five-fold, task-stratified, student-grouped cross-validation with five repetitions, ensuring student-disjoint train-test splits while retaining all tasks in training. 
+
+Tier T3, task holdout. We hold out each task in turn, excluding all observations from its students from training, thereby evaluating transfer to an unseen task with student-disjoint splits. T2 prevents student overlap between training and test sets, following blocked cross-validation principles for hierarchical and repeated-measures data (Roberts et al., 2017). T3 retains student-level separation while training on three tasks and testing exclusively on the fourth. Treating each task as a distinct domain, the training and test sets are domain-disjoint, corresponding to the domain-generalization setting described by Koh et al. (2021). As all four tasks belong to the same study, T3 provides retrospective leave-one-task-out transfer evaluation (RQ5) rather than prospective or independent external validation. Across all tiers, our primary metric is the within-task Spearman rank correlation ( ρ) between predicted and observed scores. For page set U, let XU = ( f (xU 
+
+> i
+
+)) i∈I denote the potentially transformed feature vectors for observations indexed by I, where 
+
+f is learned during training when required by the estimator and otherwise equals id. We denote the within-task Spearman correlation between observed scores and model predictions by ρ(XU), so ρ(XU) − ρ(Y W) compares predictive performance between representations X and Y for page sets U, W ∈ { A, C, S}. Out-of-fold predictions are scored separately within each task. The four task-specific Spearman correlations are weighted equally and subsequently averaged across repeats and, for neural models, random seeds. Each task must have at least 30 valid ratings. For T1 and T2, Spearman correlation is also computed on predictions pooled across tasks. Comparing pooled and within-task correlations indicates whether apparent predictive performance may partly reflect between-task score differences rather than the ability to rank students within tasks. 
+
+## 3.5 RQ-specific contrasts and statistical inference 
+
+Evaluating the predictive contribution of structural information requires matched non-structural input features and data splits, plus structure-agnostic baselines (Errica et al., 2020). Accordingly, each contrast in our study holds the estimator or architecture, observations, and data splits fixed, varying only the representational component under evaluation. 5The primary RQ2–RQ4 analyses use page set C and the same eligible student-task observations. For RQ2, we compare the content representation C C, the written-response representation W , and their concatenation C C + W , where + denotes feature concatenation rather than vector addition. For student-task observation i, the feature vectors are cC 
+
+> i
+
+, wi, and [cC 
+
+> i
+
+, wi],respectively. The fixed-length representations for RQ3 and RQ4 cumulatively combine feature components: 
+
+C C −→ C C + V C −→ C C + V C + OC −→ C C + V C + OC + G C . (2) The exploratory increment from C C to C C + V C establishes the order-invariant baseline for structural comparisons. The next two increments add observed visit order (RQ3) and relational information (RQ4), respectively. Each contrast uses the same eligible observations for both compared specifications. 
+
+RQ1–RQ2: document and response content. RQ2 compares consulted pages with written responses; RQ1 is addressed descriptively and by secondary contrasts. The primary contrasts assess consulted-page predictive performance, ρ(C C), and its increment beyond written-response features, ρ(C C + W ) − ρ(W ). Positive increments indicate improvement; negative increments indicate deterioration. Secondary contrasts assess the written-response increment, ρ(C C + W ) − ρ(C C), and the direct performance difference, ρ(C C) − ρ(W ). Because written-response features and ratings derive from the same text, their association may partly reflect shared-source overlap. 
+
+RQ3: consultation order. We denote the permutation-control representation level by eOU and its feature vector by ˜ oU 
+
+> i
+
+. We compare C C + V C + OC against the order-invariant baseline C C + V C and permutation control C C + V C + eOC. Evidence that observed consultation order adds predictive value requires positive differences in both comparisons. We also use exploratory matched neural ablations to assess consultation-order effects in graph and sequence models. Comparisons across fixed-length, graph, and GRU models are descriptive benchmarks because architectures and input representations differ. 
+
+RQ4: relational organization. We denote the permutation-control representation level by eG U and its vector by ˜ gU 
+
+> i
+
+. We compare C C + V C + OC + G C with the order-sensitive baseline C C + V C + OC and the permutation-control specification 
+
+C C + V C + OC + eG C. Evidence that relational organization adds predictive value requires positive differences in both comparisons. Exploratory matched graph ablations compare relational, temporal, and randomized-relation graphs with the same message-passing network. 
+
+Inference. We define a specification contrast as the difference in mean within-task Spearman correlations between predictor specifications evaluated on identical held-out observations. Confidence intervals use a student-cluster percentile bootstrap (Efron & Tibshirani, 1993); contrasts are tested by paired permutations within students, and individual correlations by permuting ratings within tasks. For RQ3 and RQ4, we use conjunction tests (logical AND tests): the null hypothesis states that at least one of the two component effects is non-positive, whereas the alternative requires both to be positive. The first component tests incremental predictive value relative to the preceding baseline. The second tests whether the observed representation outperforms its matched permutation or randomization control, distinguishing structural contributions from gains due merely to additional features. Logged events do not explain the processes generating them, nor does predictive value establish their interpretation. We therefore do not interpret order and relational features as specific cognitive strategies but test whether observed structural information adds predictive value beyond matched controls. The conjunction p-value is the larger component p-value if both estimated effects are positive, and 1 otherwise (Berger, 1982). RQ2 uses separate tests because its two quantities address distinct estimands: whether consulted-page content predicts performance and whether it adds predictive information beyond the written response. Neither claim is conditional on the other. We use paired student-cluster bootstraps to assess differences between evaluation tiers and the pooling gap , defined as the difference between pooled and within-task Spearman correlations. A separate family of twelve one-sided tests assesses whether predictive performance in T1 or T2 exceeds that in T3 by more than 0 .05. These tests cover the consulted-page representation 
+
+C C and the order-invariant baseline C C + V C.
+
+Prespecified primary families. The prespecified primary tests use page set C, Tier 3, Coh-Metrix features, random forests, and three outcomes: DIRQ , TaSFC , and COH . RQ2 comprises six tests: ρ(C C) > 0 and ρ(C C + W ) − ρ(W ) > 0, each evaluated for all three outcomes. RQ3 and RQ4 each comprise three outcome-specific conjunction tests. We apply Holm correction (Holm, 1979) separately within each research-question family, using the conjunction p-values rather than their individual component p-values. Exploratory tests are corrected for multiple comparisons within their prespecified groups and 6Initial rated-response sample 664 student-task obser-vations • 520 students           
+
+> Separate rating-only audit
+> 644 responses with a valid score; 144 students with two tasks; 136 scored on both
+> Recorded page visits 544 observations • 435 students 120 without recorded visits
+> Eligible under the all-page set A
+> 532 observations • 427 students 12 with fewer than two analyzable pages
+> All-page analysis population A532 observations; 427 students FM 199, GS 122, HS 92, TP 119 519 scored
+> Primary analysis population C527 observations; 424 students FM 194, GS 122, HS 92, TP 119 514 scored (190, 120, 86, 118)
+> Exploratory population S344 observations; 296 students Search engine results pages 335 scored all retained pages at least two analyzable search-result pages at least two analyzable content pages
+
+Figure 1. Sample flow. The rating-only audit includes all validly rated responses. Eligibility requires at least two analyzable pages from the respective page set. A = C ∪ S, C ∩ S = /0, partitions all preprocessed retained pages into content pages ( C) and SERPs ( S). Scored observations include all three primary outcomes and enter model fitting and evaluation. page sets. We also report source-wide Benjamini–Hochberg-adjusted p-values descriptively, not for confirmatory inference. We define narrow hypothesis families matching research questions and prespecified contrasts. The confirmatory analysis includes twelve tests in three families; the largest family overall contains 47 tests. 
+
+# 4 Results 
+
+## 4.1 Analysis sample and process-data coverage 
+
+Figure 1 shows the selection of student-task observations. Of 664 rated responses, 544 from 435 students had at least one recorded page visit; 532 had at least two analyzable pages. Page set C yields 527 eligible observations from 424 students at three German universities; 514 have valid scores on all three primary outcomes, with at least 86 scored observations per task. The prespecified criteria for C were met: the smallest task had 92 eligible observations, and 474 of 527 trajectories (90%) contained at least three pages. Two-page trajectories, with structurally zero relational contrast, comprised 10.1% of eligible observations in C and 1.9% in A.Of the sources students named in their responses, 76% matched recorded visits with analyzable text, whereas 15% came from sessions without recorded visits. 
+
+## 4.2 Criterion audit: rating variability and cross-task consistency 
+
+Before evaluating the models, we assess between-student variation in criterion ratings and the stability of relative performance across tasks. This rating-only audit (see Section 3.2) preceded the frozen validation run. Cross-task rank-order consistency (the extent to which students maintained their relative standing across the two tasks they completed) varied substantially across the three primary outcomes (Figure 2). Of 520 students with rated responses, 144 completed two tasks, yielding 136 student-level pairs with valid scores for cross-task analysis. We apply Holm correction to the three outcome-specific p-values. Significant positive cross-task correlations were observed for DIRQ (ρ = 0.38, 95% CI 
+
+[0.24 , 0.51 ], pHolm < 0.001) and COH (ρ = 0.30, 95% CI [0.13 , 0.44 ], pHolm = 0.001). By contrast, the cross-task correlation for TaSFC was smaller and not statistically significant ( ρ = 0.11, 95% CI [−0.07 , 0.28 ], pHolm = 0.204). Across the six 70.0 0.1 0.2 0.3 0.4 0.5DIRQ ( n = 136) TaSFC ( n = 136) COH ( n = 136) Overall ( n = 136) Response fulfillment ( n = 136) Source-reference use ( n = 136) Spearman correlation of a student’s two within-task ranks Figure 2. Cross-task rank-order consistency of rating outcomes and criteria. Points show Spearman correlations between task-specific score ranks for 136 students with valid scores on both tasks (of 144 completing two tasks). Ranks are based on all valid responses per task; error bars show 95% student-level bootstrap confidence intervals. Task pairs are ordered alphabetically, not chronologically. DIRQ , TaSFC , and COH are primary outcomes; Overall, response fulfillment, and source-reference use are additional measures.  
+
+> Table 1.
+
+Restricted-maximum-likelihood variance components for the three primary outcomes and two additional criteria (response fulfillment and source-reference use), expressed as percentages of total variance. Brackets show post hoc 95% profile-likelihood confidence intervals for non-residual components. The rater component is particularly uncertain: six raters contributed, four providing 88% of ratings. Estimates sum to approximately 100%, subject to rounding.                                   
+
+> Outcome Student Student ×task Rater Rater ×task Residual
+> DIRQ 23 [14, 29] 23 [17, 30] 9 [0, 60] 8 [3, 29] 37
+> TaSFC 8 [0, 20] 64 [53, 69] 2 [0, 16] 5 [2, 14] 21
+> COH 19 [11, 24] 14 [8, 21] 19 [6, 87] 3 [1, 10] 45 Response fulfillment 6 [0, 12] 20 [14, 27] 0 [0, 11] 15 [8, 35] 59 Source-reference use 36 [23, 44] 43 [34, 51] 1 [0, 21] <1 [0, 2] 20
+
+task pairs, correlations for DIRQ and COH were consistently positive, although those for DIRQ ranged from +0.07 to +0.57. In contrast, TaSFC correlations were negative for two task pairs. With only 17–27 students per task pair, these imprecise correlations illustrate cross-task heterogeneity rather than establish pair-specific consistency. Failure to reject the null hypothesis does not establish that the association is zero. The 95% confidence interval ( [−0.07 , 0.28 ]) includes both zero and 0 .25, a value within the range estimated for COH . Thus, the data do not distinguish the absence of cross-task consistency from a moderately positive association. The evidence for TaSFC ’s cross-task consistency is therefore inconclusive. Stronger evidence of TaSFC ’s lower cross-task consistency comes from the variance decomposition below: at least half the variance reflects student-by-task interactions, while stable between-student variance is not significantly different from zero. The variance decomposition helps explain these differences (Table 1). With only 136 students scored on two tasks, separating stable student from student-by-task variance is particularly uncertain. Despite the uncertainty, TaSFC shows a pronounced difference between its student-by-task interaction variance (64%) and student variance (8%), suggesting that TaSFC scores depend substantially more on the particular student-task combination than on stable between-student differences. By contrast, DIRQ and COH have similar estimated student variance shares (23% and 19%, respectively). Because each student completed each task only once, the student-by-task interaction component confounds task-specific and occasion-specific variation. This student-by-task/occasion variation indicates limited cross-task consistency in 
+
+TaSFC , without distinguishing task-sampling from occasion effects. Stable between-student variation is established for DIRQ 
+
+and COH , potentially supporting cross-task transfer, but not for TaSFC . However, the stable components cannot be ranked across outcomes: TaSFC ’s interval reaches 20%, near DIRQ ’s estimate of 23%. Rater components were the least precise estimates; among the primary outcomes, only COH showed a significant rater main effect (19%, p = 0.001). A COR validation study likewise found substantial person-by-task variance and small rater effects (Nagel et al., 2022), while task-sampling effects are documented in other performance assessments (Shavelson et al., 1993). Our findings agree for TaSFC and DIRQ , whose rater main effects are not significant, but differ for COH , whose effect is significant. However, the limited number of raters makes these estimates highly uncertain. The implication depends on the intended interpretation. 8Table 2. Twelve prespecified primary tests for page set C at Tier 3, using Coh-Metrix features and random forests (527 eligible observations; 514 with complete ratings). Intervals are 95% student-cluster bootstrap confidence intervals; pHolm values are adjusted within research-question families. Conjunction tests have no single effect size; component estimates and intervals appear in Table 3. Primary claim Outcome Estimate 95% CI p pHolm 
+
+ρ(C C) DIRQ −0.079 [−0.170, 0.011] 0.959 1.000 
+
+TaSFC −0.027 [−0.121, 0.070] 0.718 1.000 
+
+COH −0.039 [−0.128, 0.045] 0.788 1.000 
+
+ρ(C C + W ) − ρ(W ) DIRQ −0.043 [−0.102, 0.012] 0.184 1.000 
+
+TaSFC −0.049 [−0.138, 0.040] 0.332 1.000 
+
+COH −0.019 [−0.062, 0.026] 0.431 1.000 Order conjunction DIRQ 1.000 1.000 
+
+TaSFC 0.268 0.803 
+
+COH 1.000 1.000 Relation conjunction DIRQ 1.000 1.000 
+
+TaSFC 1.000 1.000 
+
+COH 0.568 1.000 Student-by-task variation contributes to task-specific performance but limits its interpretation as a task-general student attribute. For TaSFC , stable between-student variance is estimated at 8% (95% CI [0%, 20%]), leaving a potentially substantial task-general component unconfirmed. Single-task generalizability coefficients with three raters were 0 .39 for DIRQ , 0 .40 for COH ,and 0 .10 for TaSFC (Cronbach et al., 1972). Four tasks would raise DIRQ and COH to 0 .70, whereas TaSFC would require about 22; these projections assume a stable between-student component, established only for DIRQ and COH .A post-hoc analysis showed that response length correlated within tasks with COH (ρ = 0.34), source-reference use (0 .27), response fulfillment (0 .11), and DIRQ (0 .39), but barely with the 32 factual-correctness criteria (median 0 .03). Adjusting for 17 response-level Coh-Metrix indices left correlations with COH and DIRQ unchanged (0 .337 and 0 .393), but competence and rater sensitivity to length cannot be disentangled. Two implications follow for the predictive analyses. First, Tier 3 provides a meaningful test of whether models trained on other tasks can predict DIRQ and COH on a held-out task, for which stable between-student variation is established. Second, 
+
+TaSFC ’s stable between-student component is not distinguishable from zero, limiting its task-general interpretation and complicating Tier 3 evaluation. Nevertheless, held-out task traces may still support prediction of task-specific TaSFC . Weak correlations may thus reflect limitations of the predictors, the outcome criterion, or both. 
+
+## 4.3 Prespecified primary families 
+
+None of the twelve prespecified primary tests survived Holm correction (Table 2); the smallest adjusted p-value was 0 .803. These tests used Tier 3, Coh-Metrix features, random forests, and content-page set C. However, results outside this setting were not uniformly near zero: at Tier 3, sentence embeddings of the same pages showed a positive association with DIRQ 
+
+(Section 4.6). Non-significance does not establish absence of an effect. Post hoc, one-sided 95% upper bounds were at most 0 .16 for six RQ2 contrasts and 0 .05–0 .16 for twelve conjunction components; a replication would have approximately 80% power to detect a correlation of 0 .13 or an increment of 0 .08 in a single unadjusted test. For RQ2, the seventeen Coh-Metrix indices of consulted content pages showed no significant within-task predictive performance on held-out tasks. Within-task correlations for C C were −0.079 for DIRQ , −0.027 for TaSFC , and −0.039 for 
+
+COH , with all 95% confidence intervals including zero (Figure 3). Written-response features performed better ( ρ = 0.320, 0.126, and 0 .310, respectively), with all correlations significant before correction. Adding consulted-page features to written-response features yielded no improvement: ρ(C C + W ) − ρ(W ) was −0.043, −0.049, and −0.019, respectively. Conversely, adding written-response features to consulted-page features improved prediction for DIRQ (0 .356) and COH (0 .330), both 
+
+pHolm = 0.001 in the exploratory family. The improvement was smaller for TaSFC (0 .103, pHolm = 0.105). The larger contrast for outcomes assessing written responses suggests shared-source overlap (Section 3.5), not additional predictive information from consulted-page content. For RQ3, no order conjunction test was significant (Table 3). Only TaSFC showed a significant gain from adding observed order to the order-invariant baseline (0 .098, p = 0.008), but not over the permutation control (0 .031, p = 0.268). The 9Table 3. Component contrasts for order and relational conjunction tests in C at Tier 3, using Coh-Metrix features and random forests. Conjunctions require both components to be positive; the joint p-value equals the larger component p-value if both are positive, and 1 otherwise. Order vs. unordered compares C C + V C + OC with C C + V C; order vs. permutations uses 
+
+C C + V C + eOC as control. Relations beyond content and order compares C C + V C + OC + G C with C C + V C + OC; observed vs. randomized relations uses C C + V C + OC + eG C as control. Intervals are 95% student-cluster bootstrap confidence intervals; component p-values are unadjusted.                                                                  
+
+> RQ Outcome Component ∆ρ95% CI p
+> RQ3 DIRQ Order vs. unordered −0.032 [−0.092, +0.028] 0.396 Order vs. permutations −0.032 [−0.099, +0.040] 0.426 RQ3 TaSFC Order vs. unordered +0.098 [+0.025, +0.166] 0.008 Order vs. permutations +0.031 [−0.024, +0.085] 0.268 RQ3 COH Order vs. unordered −0.035 [−0.112, +0.041] 0.413 Order vs. permutations −0.037 [−0.118, +0.046] 0.380 RQ4 DIRQ Relations beyond content and order +0.017 [−0.038, +0.075] 0.594 Observed vs. randomized relations −0.031 [−0.070, +0.003] 0.100 RQ4 TaSFC Relations beyond content and order −0.033 [−0.087, +0.020] 0.301 Observed vs. randomized relations −0.026 [−0.056, +0.002] 0.095 RQ4 COH Relations beyond content and order +0.017 [−0.036, +0.072] 0.568 Observed vs. randomized relations +0.041 [−0.003, +0.083] 0.073
+
+conjunction was therefore not significant ( p = 0.268). Thus, the TaSFC gain cannot be attributed specifically to observed consultation order. For DIRQ and COH , both component estimates were negative. For RQ4, no relational conjunction test was significant. The largest positive component was for COH against randomized relations ( ∆ρ = 0.041, p = 0.073), versus only 0 .017 ( p = 0.568) against the content-and-order baseline. No other component contrast had a positive estimate exceeding 0 .02. Secondary and exploratory outcomes showed similar results in the primary setting. None of the 24 trace-representation correlations for Overall, the two DIRQ facets, and task-standardized outcomes survived correction; the largest was 0 .091 for Overall with observed order ( pHolm = 0.386). No conjunction was significant (minimum adjusted p = 0.902). However, sentence embeddings yielded significant correlations with task-standardized DIRQ (Section 4.6): ρ = 0.138 for the order-invariant baseline and 0 .139 for the full representation (both pHolm = 0.024). Results in page sets A and S resembled those in 
+
+C, and excluding an unusually severe COH rater changed within-task correlations by at most 0 .02. Across both feature sources (792 exploratory conjunction tests each), only three conjunctions survived correction, all relational and for source referencing in A at Tiers 1–2; none occurred at Tier 3. 
+
+## 4.4 Incremental predictive information and the validation tiers 
+
+Because all research questions used identical observations within C, the four fixed-vector specifications form a progression of increasingly complex representations (Figure 4). At Tier 3, two increments, one for DIRQ and one for TaSFC , were statistically significant before correction; across all three tiers, six increments met this criterion. Adding visit descriptors increased DIRQ ’s correlation by 0 .098 (95% CI [0.013 , 0.181 ], p = 0.025), narrowly missing Holm significance ( pHolm = 0.051). Adding order-sensitive features increased TaSFC ’s correlation by 0 .098 ( p = 0.008, exploratory pHolm = 0.017). As reported in Section 4.3, the corresponding conjunction was not significant. Relational increments remained within ±0.05 across outcomes and tiers. For RQ5, performance did not decline monotonically from Tier 1 to Tier 3. None of the 36 tier comparisons for the four trace representations survived correction. Five other comparisons were significant, all for DIRQ : written-response and combined document-response features performed better at Tier 3 than at Tier 1 (differences −0.090, pHolm = 0.014, and 
+
+−0.102, pHolm = 0.008) or Tier 2 ( −0.093 and −0.107, both pHolm = 0.008). Permuted-order features also differed between Tiers 1 and 2 (0 .040, pHolm = 0.048). None of twelve prespecified overstatement tests supported a Tier 1 or Tier 2 advantage over Tier 3 exceeding 0 .05 (maximum observed difference 0 .062, all p ≥ 0.41). Thus, less restrictive splits showed no evidence of systematically inflated within-task correlations for trace representations. 
+
+## 4.5 Pooling gaps 
+
+Previous correlations averaged within-task student rankings; pooling predictions and ratings across tasks instead reveals associations attributable to task differences. The pooling gap measures this difference without changing predictions, repeats, or 10 0.00 0.20 0.40 
+
+C C
+
+WC C+W
+
+Spearman ρ
+
+> Absolute representation
+
+DIRQ 
+
+0.00 0.20 0.40 Spearman ρ
+
+TaSFC 
+
+0.00 0.20 0.40 Spearman ρ
+
+COH 
+
+−0.40 0.00 0.40 
+
+C C+W − WC C+W − C C
+
+C C − W
+
+Change in ρ
+
+> Paired contrast
+
+−0.40 0.00 0.40 Change in ρ
+
+−0.40 0.00 0.40 Change in ρ
+
+T1 T2 T3                        
+
+> T3 Holm p, primary family, content pages (C): DIRQ CC=1.000, CC+W−W=1.000; TaSFC CC=1.000, CC+W−W=1.000; COH CC=1.000, CC+W−W=1.000 Figure 3.
+
+RQ1–RQ2 results for content-page set C. The upper panel shows within-task Spearman correlations for consulted-page content ( C C), written-response features ( W ), and their concatenation ( C C + W ) across three validation tiers. The lower panel shows paired correlation differences, positive when the first representation performs better. Error bars indicate 95% student-cluster bootstrap confidence intervals. Primary Tier 3 quantities are ρ(C C) and ρ(C C + W ) − ρ(W ); other comparisons are exploratory. seeds (Figure 5). This prespecified exploratory comparison covers Tiers 1 and 2 and lies outside the confirmatory families. For page content ( C C) with random forests at Tier 1, the pooling gaps were 0 .400 for TaSFC , 0 .197 for COH , and 0 .154 for 
+
+DIRQ . Comparable gaps occurred at Tier 2 and across fixed-vector specifications. Across both tiers, estimators, specifications, and unstandardized outcomes in C, 525 of 576 Coh-Metrix pooling gaps were significantly positive after correction (median 0.169). The pooling gaps were smaller for written-response features: 0 .132 for TaSFC , 0 .059 for DIRQ , and 0 .056 for COH .These features describe the rated product rather than browsing traces. At Tier 1, consulted-page content yielded pooled versus within-task correlations of 0 .415 versus 0 .015 for TaSFC , 0 .126 versus −0.029 for DIRQ , and 0 .150 versus −0.047 for COH .These gaps suggest that task differences contributed more to pooled associations than within-task student ranking. As expected once task-level outcome differences are removed, training and evaluating on within-task standardized outcomes reduced the median pooling gap from 0 .169 to 0 .008. None of the 144 Coh-Metrix pooling gaps remained significantly positive after correction. For page content ( C C) at Tier 1, the gap fell from 0 .400 to 0 .024 for TaSFC and from 0 .154 to 0 .001 for 
+
+DIRQ . By contrast, the Tier 3 within-task correlation for written-response predictions of DIRQ remained nearly unchanged (0 .320 vs. 0 .327; Table S12). Standardization removed task-level differences in outcome means and variances while preserving within-task rankings. 
+
+## 4.6 The second feature source and the neural models 
+
+For DIRQ , sentence embeddings generally outperformed Coh-Metrix features (Figure 6). At Tier 3 in C, embedding-based trace correlations ranged from ρ = 0.09 to 0 .15, versus −0.079 to 0 .019 for Coh-Metrix. The full specification, C C + V C + OC + G C,reached ρ = 0.150 (95% CI [0.056 , 0.230 ], pHolm = 0.024). Consulted-page content ( C C) alone reached ρ = 0.102 (95% CI [0.015 , 0.182 ], p = 0.014, pHolm = 0.115). Combining consulted-page content with written-response features yielded 
+
+ρ = 0.182 ( pHolm = 0.006), versus 0 .174 for responses alone. The 0 .008 increment provides little evidence of additional predictive information from consulted pages. The embedding advantage was confined to DIRQ : the full specification yielded 
+
+−0.014 for TaSFC and 0 .008 for COH , with similarly small Coh-Metrix estimates. Embedding correlations of 0 .09–0 .15 bracket the approximately 0 .13 detectable with 80% power in the primary analysis. Thus, both feature sources are compatible 11 C C       
+
+> CC+VC
+> CC+VC+OC
+> CC+VC+OC+GC
+
+−0.10.00.1Within-task Spearman  ρ DIRQ         
+
+> CC
+> CC+VC
+> CC+VC+OC
+> CC+VC+OC+GC
+
+−0.10.00.10.2
+
+TaSFC         
+
+> CC
+> CC+VC
+> CC+VC+OC
+> CC+VC+OC+GC
+
+−0.10.00.1
+
+COH     
+
+> +VC+OC+GC
+
+−0.20.00.20.4    
+
+> p = 0.042
+> p = 0.761
+> p = 0.929
+> p = 0.218
+> p = 0.236
+> p = 0.653
+> p = 0.025
+> p = 0.396
+> p = 0.594
+> Change in  ρ when added
+> +VC+OC+GC
+
+−0.20.00.2    
+
+> p = 0.169
+> p = 0.022
+> p = 0.370
+> p = 0.559
+> p = 0.006
+> p = 0.023
+> p = 0.711
+> p = 0.008
+> p = 0.301
+> +VC+OC+GC
+
+−0.20.00.2
+
+> p = 0.228
+> p = 0.316
+> p = 0.807
+> p = 0.440
+> p = 0.260
+> p = 0.654
+> p = 0.976
+> p = 0.413
+> p = 0.568
+
+T1 T2 T3 Figure 4. Incremental predictive information for page set C across four cumulative specifications: content, visit descriptors, order-sensitive features, and relational features. The upper panel shows within-task Spearman correlations across three validation tiers. The lower panel shows successive correlation increments and unadjusted permutation p-values; Holm-adjusted values appear in the text. All specifications use identical student-task observations within each outcome. with a modest association captured more effectively by embeddings. Across 6 192 within-task correlations, all values above 0 .4 involved written responses; trace-only correlations peaked at 0.246 (0 .223 at Tier 3), with similar distributions for observed structures and matched controls. With embeddings, TaSFC 
+
+correlations of 0 .16–0 .31 at Tiers 1–2 dropped to −0.01–0 .10 at Tier 3 (Table S6); the two highest trace-only correlations (0 .246 and 0 .227 for task-standardized TaSFC ) fell to −0.019 and 0 .003, respectively. 
+
+# 5 Discussion 
+
+We investigated whether consulted-page content, visit order, and relational organization predict ratings of students’ written responses. This required within-task prediction, transfer to unseen tasks, and, for structural features, gains over matched permutation controls. Each analysis yielded a distinct finding. Across 576 configurations at Tiers 1 and 2, pooled correlations exceeded within-task correlations by a median of 0 .169. The criterion audit qualified null findings: TaSFC ’s stable between-student variance was only 8% and not distinguishable from zero, making null results less informative than for DIRQ or 
+
+COH . Finally, permutation controls tested whether predictive gains reflected observed order or relational structure rather than additional features. The prespecified results provide little support for incremental predictive contributions. At Tier 3, Coh-Metrix features of consulted-page content showed no significant within-task association with performance, and neither structural conjunction test was significant. For TaSFC , observed-order features improved prediction over the order-invariant baseline ( ∆ρ = 0.098, exploratory pHolm = 0.017), but not significantly over permuted order ( ∆ρ = 0.031, p = 0.268), leaving the conjunction non-significant. The prespecified embedding sensitivity analysis yielded small, significant positive correlations with DIRQ , but matched comparisons did not establish contributions from observed order or relational structure. Thus, absolute predictive associations did not establish incremental value from specific aspects of consultation behavior. 12 C C
+
+> C C+V C
+> C C+V C+OC
+> C C+V C+OC+G C
+
+0.20.4      
+
+> ** ** ** ** ** ** ** **
+> Coh-Metrix
+> pooled  − within-task  ρ
+
+DIRQ     
+
+> C C
+> C C+V C
+> C C+V C+OC
+> C C+V C+OC+G C
+> ** ** ** ** ** ** ** **
+
+TaSFC      
+
+> C C
+> C C+V C
+> C C+V C+OC
+> C C+V C+OC+G C
+> ** ** ** ** ** ** ** **
+
+COH 
+
+> C C
+> C C+V C
+> C C+V C+OC
+> C C+V C+OC+G C
+
+0.20.4                  
+
+> ** ** ** ** ** ** ** **
+> Embeddings
+> pooled  − within-task  ρ
+> C C
+> C C+V C
+> C C+V C+OC
+> C C+V C+OC+G C
+> ** ** ** ** ** ** ** **
+> C C
+> C C+V C
+> C C+V C+OC
+> C C+V C+OC+G C
+> ** ** ** ** ** ** ** **
+
+How much of a pooled correlation comes from separating tasks 
+
+T1 T2 Figure 5. Pooling gaps for page set C at Tiers 1–2, defined as pooled minus within-task Spearman correlations from identical out-of-fold predictions. Both feature sources, four cumulative specifications, and three primary outcomes are shown. Error bars show 95% student-cluster bootstrap confidence intervals. Positive gaps indicate stronger pooled associations, consistent with contributions from task-level differences. 
+
+## 5.1 What a pooled correlation measures 
+
+At Tier 3, the primary Coh-Metrix–random-forest specification yielded within-task correlations of −0.079 for DIRQ , −0.027 for TaSFC , and −0.039 for COH , all with confidence intervals including zero. This does not rule out predictive associations: post-hoc sensitivity analysis suggests correlations below 0 .13 would often go undetected in individual unadjusted tests, with still lower power after Holm correction. Pooling predictions across tasks yielded substantially higher correlations than within-task evaluation. Across 576 Coh-Metrix configurations in C, 525 pooling gaps were significantly positive after correction (median 0 .169). Because configurations share observations, this indicates robustness across analytical choices, not independent replication. For Tier 1 consulted-page content predicting TaSFC , pooled and within-task correlations were 0 .415 and 0 .015, respectively. As expected, task-wise outcome standardization removed the gap (median 0 .008). Thus, task differences contributed substantially to pooled associations, consistent with models capturing task-related variation in traces and ratings without necessarily identifying tasks explicitly. The validation tiers address a different question (RQ5). None of the twelve prespecified overstatement tests established that Tier 1 or Tier 2 outperformed Tier 3 by more than 0 .05. None of the 36 Holm-adjusted tier comparisons for the four observed trace specifications was significant. Written-response features even predicted DIRQ better at Tier 3 than at Tiers 1 and 2. Thus, withholding an entire task does not necessarily reduce within-task correlations. Validation tiers differ in what is withheld, not in a presumed monotonic decline in performance. Why written-response features predicted DIRQ better at Tier 3 remains unclear. 13 −0.15 −0.10 −0.05 0.00 0.05 0.10 0.15 0.20 
+
+C C
+
+C C+V C
+
+C C+V C+OC
+
+C C+V C+OC+G C
+
+GRU, unordered GRU, observed order GNN, set GNN, temporal GNN, relational 
+
+> detectable effect (0.13)
+
+within-task Spearman correlation with DIRQ, Tier 3, page set C
+
+Coh-Metrix Embeddings Figure 6. Within-task Spearman correlations with DIRQ at Tier 3 for page set C, by representation and feature source, with 95% student-cluster bootstrap confidence intervals. The shaded band marks effects below the approximate 80%-power detection threshold ( |ρ| < 0.13). The horizontal line separates random-forest fixed-vector specifications from neural models. Matched contrasts show no significant incremental contribution from observed order or relational structure. 
+
+## 5.2 What the criterion audit implies 
+
+Non-significant predictions may reflect weak predictors, an unstable criterion, or both, particularly for TaSFC . Student-by-task variation accounted for 64% of TaSFC variance (95% profile-likelihood interval: 53%–69%), without distinguishing task from occasion effects. Stable between-student variance was 8% (95% interval: 0%–20%), and relative generalizability for one task rated by three raters was 0 .10. 
+
+TaSFC may still be predictable on a held-out task, but the audit limits its interpretation as a stable, task-general attribute. Its four non-significant tests are therefore less informative about task-general predictive validity than those for DIRQ and COH .Stable between-student variance was 23% for DIRQ and 19% for COH , with single-task generalizability coefficients of 0 .39 and 0.40, respectively. Both components differed significantly from zero, but their magnitudes cannot be compared precisely given the confidence intervals and few repeated students. For DIRQ , student-by-task variance was also 23%, leaving the relative contributions uncertain. Thus, non-significant DIRQ and COH results more strongly, though still cautiously, constrain the task-general predictive value of the tested trace representations. Rater effects warrant similar caution. Estimated rater variance was 2% for TaSFC and 19% for COH , but both estimates are imprecise given six raters with unequal workloads. Systematic rater severity differences were established for COH , without evidence that the effects differ significantly between outcomes. 
+
+## 5.3 Where positive associations appeared 
+
+Sentence embeddings yielded the strongest trace-based associations with performance. At Tier 3, the full fixed-vector specification correlated with DIRQ at ρ = 0.150, significant after correction; seven of eight neural specifications were also significant. However, five were unordered baselines or randomized controls, some outperforming their observed counterparts. No matched fixed-vector, graph, or sequence comparison established significant gains from observed order or relational structure. Thus, embeddings predicted DIRQ without identifying which trace aspects contributed. Comparable evidence was absent for TaSFC and COH .Written-response features showed the strongest within-task association with DIRQ (ρ = 0.320). Adding Coh-Metrix page features did not improve prediction beyond the written response alone. Because features and ratings derived from the same written text, this association does not establish predictive value for the preceding browsing process. The rated response contained performance-related information beyond the seventeen Coh-Metrix indices. Within tasks, response length correlated with DIRQ (ρ = 0.391) and COH (ρ = 0.338), remaining nearly unchanged after controlling for these indices (0 .393 and 0 .337). Length was not among the indices. These associations do not establish that length contributed 14 to the response model’s predictive performance. 
+
+## 5.4 Implications for trace-based assessment 
+
+The findings support five recommendations for evaluating trace-based assessments. First, report pooled and within-task performance from identical out-of-fold predictions when multiple tasks are involved. Their difference indicates the contribution of between-task variation without constituting an additive decomposition. This extends concerns about aggregated metrics in learning analytics (Arizmendi et al., 2023; Gardner & Brooks, 2018) by highlighting task boundaries as an evaluation choice. Second, claims of transfer to unseen tasks require evaluation on tasks excluded from training. Our study tests transfer across tasks within one multisite assessment, whereas earlier work examined transfer across institutions using a shared instrument (Xu et al., 2026). These designs address distinct generalization boundaries. Positive embedding-based associations with DIRQ 
+
+indicate cross-task predictive transfer, but matched comparisons established no additional contribution from observed order or relational structure. Third, claims about order and relational structure require controls that reorganize the same events while preserving content and model class. Sequence-performance associations alone do not establish order-specific predictive information (Yu et al., 2025). In the present study, several observed-order models correlated positively with DIRQ , but shuffled or randomized controls performed similarly, with no significant structural advantage after correction. Fourth, assessment tasks and session contents must be documented to interpret browsing traces as evidence about students. Task prompts constrain consulted pages, written responses, and evaluation criteria. Search-results pages, content pages, and responses capture distinct aspects of this process. Trace interpretations must therefore account for both the task and the underlying page set. Finally, model evaluation cannot compensate for a criterion lacking task-general validity. Task-general interpretation requires stable between-student differences, which the criterion audit did not establish for TaSFC . Single-task prediction therefore cannot validate TaSFC as a task-general attribute, and averaging across tasks improves generalizability only if such stability exists. 
+
+## 5.5 Limitations and future directions 
+
+This retrospective study evaluates one multisite assessment without prospective or external validation. The final plan was fixed before modeling corrected data but informed by earlier analyses, precluding independent preregistration. Tier 3 holds out each of four tasks in turn, the smallest containing 86 scored observations. Moreover, the inferential intervals resample students rather than tasks and therefore do not quantify uncertainty arising from the selection of these four tasks. Holding out different tasks leaves 337–441 scored training observations, confounding task identity with training-set size. Thus, transfer findings apply to the studied tasks, not an unrestricted population of future tasks. The primary analysis includes only student-task observations with at least two analyzable content pages. Students consulting fewer than two pages may differ in information seeking or performance but lacked eligible browsing traces. Ratings, however, did not differ systematically between responses with and without at least two analyzable pages (mean DIRQ 0.609 vs. 0.594, 
+
+TaSFC 0.457 vs. 0.469, COH 0.655 vs. 0.649). None of the twelve task-wise comparisons approached significance (all 
+
+p ≥ 0.135). Of eligible traces, 10% contained exactly two pages, for which RQ3 captures only visit direction and the RQ4 observed-versus-randomized contrast is structurally zero. Thus, RQ3 and RQ4 estimate average increments including traces with limited or no structural variation. URL-based page classification makes content pages a proxy for documents. Coh-Metrix indices use a German adaptation; topic, genre, and emotion classifiers were not validated on these pages. The representations omit queries, dwell times, within-page reading, source credibility, and task-specific relevance. Thus, non-significant findings concern the tested representations and effect sizes, not browsing traces generally. The criterion audit includes only 136 students assessed once on each of two tasks, limiting evidence of stable between-student variance, particularly for TaSFC .The study covers four tasks, one assessment framework and construct, three universities, and one national context. This reflects the context dependence reported by Gaˇ sevi´ c et al. (2016), who found varying trace-feature contributions across nine courses. Predictive value depends on recorded behavior, performance measures, and training contexts. Replication should therefore vary tasks, frameworks, institutions, and populations, not merely algorithms. A key objective for future research is to develop representations that generalize across tasks while remaining sensitive to meaningful differences between students. Future studies could compare selected with available sources or model alignment between consulted content and task demands, capturing information seeking on a common, task-relative scale. However, 15 features must retain consistent meanings and comparable predictive relationships across tasks. This requires diverse tasks, repeated student observations, and explicit tests of cross-task comparability and transfer. 
+
+## 5.6 Conclusion 
+
+Our study shows that high correlations between browsing traces and performance may largely reflect differences between tasks rather than between students within tasks. Across 576 configurations, pooled correlations exceeded within-task correlations by a median of 0 .169. This suggests models captured task-related differences without necessarily recognizing task identity. On held-out tasks, Coh-Metrix page features showed no reliable within-task prediction, nor did observed order or relational structure add significant predictive value. Observed-order features improved TaSFC prediction over the unordered baseline but not over permuted order, precluding attribution to the actual consultation sequence. Sentence embeddings yielded modest correlations with DIRQ (approximately 0 .15), unlike Coh-Metrix features. However, unordered and randomized controls showed similar associations, with no significant structural advantage. Thus, traces predicted DIRQ modestly, but the responsible features remain unidentified. In the primary analysis, written-response features showed the strongest within-task association with DIRQ (ρ = 0.32). Because predictors and ratings derive from the same text, this does not independently implicate browsing behavior. Non-significant results do not rule out predictive value in browsing traces or their structure. Power for small associations was limited, stable between-student variance was not established for TaSFC , short traces constrained structural comparisons, and transfer involved only four tasks. Three evaluation checks distinguished apparent performance from generalizable predictive information. Comparing pooled and within-task correlations revealed the contribution of task differences. Criterion audits checked whether stable between-student variation supported task-general interpretations. Matched controls tested whether observed order or relational structure added predictive value beyond reorganized traces. These findings have implications beyond the present assessment: predicting ratings, distinguishing students within tasks, generalizing to unseen tasks, and identifying the predictive contribution of specific trace properties are distinct achievements that require distinct evidence. 
+
+# Ethical Considerations 
+
+This study uses students’ browsing histories and written responses to model performance on online critical reasoning tasks. Because these data may reveal sensitive information about students’ behavior and achievement, their collection and use require informed consent, privacy safeguards, and secure data handling. We also note that models trained on such data may reproduce existing biases and may not generalize across prompts, student populations, or educational settings. Accordingly, we do not consider these models appropriate for high-stakes decisions about individual students, and any educational use should remain low-stakes and subject to human oversight. Finally, because browsing behavior is only an indirect proxy for reading and reasoning, model outputs should not be interpreted as direct evidence of students’ comprehension strategies or cognitive states. 
+
+# Declaration of Conflicting Interest 
+
+The author(s) declared no potential conflicts of interest with respect to the research, authorship, and/or publication of this article. 
+
+# References 
+
+Arizmendi, C. J., Bernacki, M. L., Rakovi´ c, M., Plumley, R. D., Urban, C. J., Panter, A. T., Greene, J. A., & Gates, K. M. (2023). Predicting student outcomes using digital logs of learning behaviors: Review, current standards, and suggestions for future work. Behavior Research Methods , 55 (6), 3026–3054. https://doi.org/10.3758/s13428-022-01939-9 Berger, R. L. (1982). Multiparameter hypothesis testing and acceptance sampling. Technometrics , 24 (4), 295–300. https: //doi.org/10.1080/00401706.1982.10487790 Breiman, L. (2001). Random forests. Machine Learning , 45 (1), 5–32. https://doi.org/10.1023/A:1010933404324 Brennan, R. L. (2001). Generalizability theory . Springer. https://doi.org/10.1007/978-1-4757-3456-0 16 Cho, K., van Merri¨ enboer, B., Gulcehre, C., Bahdanau, D., Bougares, F., Schwenk, H., & Bengio, Y. (2014). Learning phrase representations using RNN encoder–decoder for statistical machine translation. In A. Moschitti, B. Pang, & W. Daelemans (Eds.), Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP) (pp. 1724–1734). Association for Computational Linguistics. https://doi.org/10.3115/v1/D14-1179 Cronbach, L. J., Gleser, G. C., Nanda, H., & Rajaratnam, N. (1972). The dependability of behavioral measurements: Theory of generalizability for scores and profiles . John Wiley & Sons. Efron, B., & Tibshirani, R. J. (1993). An introduction to the bootstrap . Chapman & Hall. https://doi.org/10.1007/978-1-4899-4541-9 Errica, F., Podda, M., Bacciu, D., & Micheli, A. (2020). A fair comparison of graph neural networks for graph classification. 
+
+Proceedings of the 8th International Conference on Learning Representations (ICLR) . https://openreview.net/forum? id=HygDF6NFPB Facione, P. A. (1990). Critical thinking: A statement of expert consensus for purposes of educational assessment and instruction. Research findings and recommendations (The Delphi Report No. ED315423). American Philosophical Association. https://eric.ed.gov/?id=ED315423 Gardner, J., & Brooks, C. (2018). Evaluating predictive models of student success: Closing the methodological gap. Journal of Learning Analytics , 5(2), 105–125. https://doi.org/10.18608/jla.2018.52.7 Gaˇ sevi´ c, D., Dawson, S., Rogers, T., & Gasevic, D. (2016). Learning analytics should not promote one size fits all: The effects of instructional conditions in predicting academic success. The Internet and Higher Education , 28 , 68–84. https://doi.org/10.1016/j.iheduc.2015.10.002 Gilmer, J., Schoenholz, S. S., Riley, P. F., Vinyals, O., & Dahl, G. E. (2017). Neural message passing for quantum chemistry. 
+
+Proceedings of the 34th International Conference on Machine Learning , 70 , 1263–1272. https://proceedings.mlr.press/ v70/gilmer17a.html Graesser, A. C., McNamara, D. S., Louwerse, M. M., & Cai, Z. (2004). Coh-Metrix: Analysis of text on cohesion and language. 
+
+Behavior Research Methods, Instruments, & Computers , 36 (2), 193–202. https://doi.org/10.3758/BF03195564 Hartig, J., Drake, P., Illmann, J., K¨ ohler, C., Kohmer, A., & Stroganova, A. (2026). Rating procedures to evaluate generic critical online reasoning in an open Internet environment. Zeitschrift f¨ ur Erziehungswissenschaft , 29 (1), 19–44. https://doi.org/10.1007/s11618-025-01365-5 Holm, S. (1979). A simple sequentially rejective multiple test procedure. Scandinavian Journal of Statistics , 6(2), 65–70. https://www.jstor.org/stable/4615733 Katz, I. R. (2007). Testing information literacy in digital environments: ETS’s iSkills assessment. Information Technology and Libraries , 26 (3), 3–12. https://doi.org/10.6017/ital.v26i3.3271 Koh, P. W., Sagawa, S., Marklund, H., Xie, S. M., Zhang, M., Balsubramani, A., Hu, W., Yasunaga, M., Phillips, R. L., Gao, I., Lee, T., David, E., Stavness, I., Guo, W., Earnshaw, B., Haque, I., Beery, S. M., Leskovec, J., Kundaje, A., . . . Liang, P. (2021). WILDS: A benchmark of in-the-wild distribution shifts. In M. Meila & T. Zhang (Eds.), 
+
+Proceedings of the 38th International Conference on Machine Learning (pp. 5637–5664, Vol. 139). PMLR. https: //proceedings.mlr.press/v139/koh21a.html List, A., & Alexander, P. A. (2019). Toward an integrated framework of multiple text use. Educational Psychologist , 54 (1), 20–39. https://doi.org/10.1080/00461520.2018.1505514 McNamara, D. S., Graesser, A. C., McCarthy, P. M., & Cai, Z. (2014). Automated evaluation of text and discourse with Coh-Metrix . Cambridge University Press. https://doi.org/10.1017/CBO9780511894664 Molerov, D., Zlatkin-Troitschanskaia, O., Nagel, M.-T., Br¨ uckner, S., Schmidt, S., & Shavelson, R. J. (2020). Assessing university students’ critical online reasoning ability: A conceptual and assessment framework with preliminary evidence. Frontiers in Education , 5, 577843. https://doi.org/10.3389/feduc.2020.577843 Nagel, M.-T., & Zlatkin-Troitschanskaia, O. (2025). The competence to deal critically with online information among economics education students and teacher trainees in economics: Implications for teacher training. Empirical Research in Vocational Education and Training , 17 (1), 11. https://doi.org/10.1186/s40461-025-00186-4 Nagel, M.-T., Zlatkin-Troitschanskaia, O., & Fischer, J. (2022). Validation of newly developed tasks for the assessment of generic critical online reasoning (cor) of university students and graduates. Frontiers in Education , 7, 914857. https://doi.org/10.3389/feduc.2022.914857 Reimers, N., & Gurevych, I. (2019). Sentence-BERT: Sentence embeddings using siamese BERT-networks. Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing (EMNLP-IJCNLP) , 3982–3992. https://doi.org/10.18653/v1/D19-1410 Reimers, N., & Gurevych, I. (2020). Making monolingual sentence embeddings multilingual using knowledge distillation. 
+
+Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP) , 4512–4525. https://doi.org/10.18653/v1/2020.emnlp-main.365 17 Roberts, D. R., Bahn, V., Ciuti, S., Boyce, M. S., Elith, J., Guillera-Arroita, G., Hauenstein, S., Lahoz-Monfort, J. J., Schr¨ oder, B., Thuiller, W., Warton, D. I., Wintle, B. A., Hartig, F., & Dormann, C. F. (2017). Cross-validation strategies for data with temporal, spatial, hierarchical, or phylogenetic structure. Ecography , 40 (8), 913–929. https://doi.org/10.1111/ ecog.02881 Rouet, J.-F., & Britt, M. A. (2011). Relevance processes in multiple document comprehension. In M. T. McCrudden, J. P. Magliano, & G. Schraw (Eds.), Text relevance and learning from text (pp. 19–52). Information Age Publishing. https://doi.org/10.1108/978-1-61735-531-820251003 Schmidt, S., Zlatkin-Troitschanskaia, O., Roeper, J., Klose, V., Weber, M., B¨ ultmann, A.-K., & Br¨ uckner, S. (2020). Un-dergraduate students’ critical online reasoning—process mining analysis. Frontiers in Psychology , 11 , 576273. https://doi.org/10.3389/fpsyg.2020.576273 Shavelson, R. J., Baxter, G. P., & Gao, X. (1993). Sampling variability of performance assessments. Journal of Educational Measurement , 30 (3), 215–232. https://doi.org/10.1111/j.1745-3984.1993.tb00424.x Sparks, J. R., Katz, I. R., & Beile, P. M. (2016). Assessing digital information literacy in higher education: A review of existing frameworks and assessments with recommendations for next-generation assessment. ETS Research Report Series ,
+
+2016 (2), 1–33. https://doi.org/10.1002/ets2.12118 Tenison, C., & Sparks, J. R. (2023). Combining cognitive theory and data driven approaches to examine students’ search behaviors in simulated digital environments. Large-scale Assessments in Education , 11 , 28. https://doi.org/10.1186/ s40536-023-00164-w Van Damme, D., & Zahner, D. (Eds.). (2022). Does higher education teach students to think critically? OECD Publishing. https://doi.org/10.1787/cc9fa6aa-en Wang, K. D., Cock, J. M., K¨ aser, T., & Bumbacher, E. (2023). A systematic review of empirical studies using log data from open-ended learning environments to measure science and engineering practices. British Journal of Educational Technology , 54 (1), 192–221. https://doi.org/10.1111/bjet.13289 Xu, A., Zhang, I., Blake, A. B., & Stigler, J. W. (2026). Modelability as a strategy for improving the generalizability and scalability of predictive models. Journal of Learning Analytics , 13 (1), 89–109. https://doi.org/10.18608/jla.2026.9099 Yu, L., Halpin, P. F., Bernacki, M. L., Ren, S., Plumley, R. D., & Greene, J. A. (2025). Interpreting predictive learning sequences in a college math course through a self-regulated learning framework. Journal of Learning Analytics , 12 (3), 66–86. https://doi.org/10.18608/jla.2025.8865 18 Supplementary Material 
+
+## Data reconstruction and trace audit 
+
+During task completion, page openings were logged and the text of each opened page was captured. The capture could store several versions of the text associated with one visit. Each visit received the largest usable version, and the latest version when several were equally large, because late captures were sometimes partial loads or consent overlays. Pages captured without a separate opening event were inserted at their first capture time. Assessment-platform pages, browser-internal and non-web addresses, and search-engine click-through redirects were removed. Successive openings of the same URL within two seconds were treated as one load, whereas later returns were retained as revisits; dwell time was not used. The 50-word minimum for analyzable texts (Section 3.1) is not required by Coh-Metrix; in our data, shorter captures often consisted of navigation fragments or isolated sentences, for which adjacent-sentence indices are undefined (Graesser et al., 2004). Named-source URLs were matched to visits at page or site level after resolving search-engine redirects, removing protocols, leading www. or m., query strings, and trailing slashes, and lower-casing the host and path. Topic, genre, and emotion labels were assigned with classla/multilingual-IPTC-news-topic-classifier , classla/xlm-roberta-base-multilingual-text-genre-classifier , and MilaNLProc/xlm-emo-t , respectively. 
+
+Audit procedures. The audit tracked student-task observations at successive stages of data processing, from rater scores and process observables to eligibility and feature extraction, while examining page coverage and named-source recovery. A named source was classified as opened if its corresponding page appeared in the same student-task session, and as analyzed if its textual content was included in the analysis. The audit used outcome data solely to determine the availability of rater scores for each observation. Among pages with recorded visits and captured text, 94% were in German, compared with 89% of content pages with captured text. Content pages were longer than SERPs (median: 759 vs. 220 words; Table S8). Most sessions with recorded visits had at least three content pages with analyzable text (474 of 544 sessions; median 5). We also assessed whether sources cited in students’ responses matched recorded page visits. Of these sources, 76% matched recorded visits with analyzable text and 8% matched visits without it. Fewer than 2% lacked matching visits despite available traces, while 15% came from sessions without recorded visits (percentages rounded; Figure S1). 
+
+## Representation and model details 
+
+Short sequences constrain what the order and relational representations can express. For a two-page sequence, the trajectory consists of a single step, so order information is limited to its direction. The sole page pair is necessarily adjacent, leaving no distinction between adjacent and non-adjacent pairs. Consequently, if the relational features are invariant under swapping the two pages, gU 
+
+> i
+
+= ˜gU 
+
+> i
+
+. The RQ3 and RQ4 estimates therefore include both trajectories with richer structural information and those with limited or absent structural contrasts. Section 4.1 reports the prevalence of two-page sequences. Random Forest regression used 300 trees, a minimum leaf size of 5, and the square root of the feature count at each split. Radial-basis support-vector regression used C = 1, ε = 0.1, and the library-default γ, with the target standardized within the training fold. Partial least-squares regression used two components. The graph backbone comprised a node encoder, two rounds of edge-conditioned message passing with gated updates, and concatenated mean and maximum readouts followed by V . The GRU used one layer and its final state was concatenated with V . Both neural models used hidden dimension 32, learning rate .01, at most 50 epochs, and early stopping with patience 10 on a student-disjoint validation subset. An estimator was labeled degenerate for a tier–source–outcome combination when more than 10% of its block-level Spearman correlations were undefined. Neural fits used three named seeds and ran in parallel on CPU. A one-fold benchmark gave identical CPU and GPU predictions, and parallel-versus-serial numerical differences were negligible relative to between-seed variability. Software versions, device, fit time, parameter count, and seed variability were retained in the run manifests. In neural analyses, individual visits are represented as sequence elements or graph nodes containing the scaled page feature vector and, where applicable, normalized visit position. Temporal edges connect successive visits, whereas relational graphs connect all ordered pairs of visits, with temporal adjacency, shared annotations, and cosine similarity encoded as edge attributes. The neural readout produces a hidden-state vector hU 
+
+> i
+
+, which is concatenated with the order-invariant visit descriptors vU 
+
+> i
+
+before 19 0% 20% 40% 60% 80% 100% Share of sessions FM (201) GS (127) HS (94) TP (122) All (544)         
+
+> 13% 86% 89% 85% 89% 87%
+> (a) Content pages per session
+> 0123+
+> 0% 20% 40% 60% 80% 100% Share of named source URLs FM (501) GS (364) HS (298) TP (346) All (1509)
+> 80% 75% 67% 78% 76% 16% 22% 14% 15%
+> (b) What became of the named sources
+> opened, text analysed opened, no analysable text not opened no recorded visit in the session
+
+Figure S1. Trace audit. FM, GS, HS, and TP denote the four tasks: health risks from cell-phone towers, poisoning from a traditional German dish, mosquito-bite treatment with heat sticks, and Tetra Pak recyclability; All combines them. (a) Content pages with analyzable text per session and task; parentheses give the sessions with a recorded visit. (b) Source URLs named in the answers, classified as opened and analyzed, opened without analyzable text, not opened, or belonging to a session without a recorded visit; parentheses give the number of named URLs. prediction, ensuring that aggregate visit characteristics remain available independently of the learned sequential or relational representation. For RQ4, we perform matched graph ablations to assess the incremental predictive contribution of relational information while controlling for differences in neural architecture. These ablations use a shared message-passing backbone (Gilmer et al., 2017), while the sequence benchmark for RQ3 uses a single-layer gated recurrent unit (GRU) (Cho et al., 2014). 2
+
+Temporal graph models are compared with set-based graph models and graph models with shuffled visit order. An observed-order GRU is compared with a GRU receiving a single fixed permutation of each visit sequence and an order-averaged GRU trained using eight fixed random permutations per sequence and evaluated by averaging predictions over 32 permutations. The order-averaged GRU reduces sensitivity to the particular visit order but is not strictly permutation-invariant. The neural models also yielded positive predictive correlations with DIRQ using both feature sources. At Tier 3 in page set 
+
+C, all graph and sequence models produced positive within-task correlations with DIRQ . With Coh-Metrix features, estimates ranged from 0 .058 to 0 .118. The highest estimate was obtained by a shuffled-temporal control ( pHolm = 0.057), while the best non-randomized specification was the set-based graph model ( ρ = 0.118, pHolm = 0.090), which uses neither observed order nor relational structure. With sentence embeddings, estimates ranged from 0 .101 to 0 .145, and seven of the eight neural specifications yielded significant positive correlations after correction. The observed-order GRU achieved the highest correlation (ρ = 0.145, 95% CI [0.074 , 0.212 ], pHolm = 0.006), compared with 0 .128 for its order-invariant counterpart and 0 .100 for the shuffled control. For TaSFC and COH , no neural-model correlation was significant with either feature source, and no estimate exceeded 0 .067. These correlations quantify absolute predictive performance rather than incremental contributions attributable to observed consultation order or relational structure. No matched graph or sequence contrast was statistically significant after correction for either feature source. The smallest Holm-adjusted p-value was 0 .155, for a contrast in which the temporal graph model performed worse than its set-based control ( ∆ρ = −0.033). The largest individual contrast was observed for COH with sentence embeddings, where the observed-order GRU outperformed its order-invariant counterpart by ∆ρ = 0.048 ( p = 0.087). However, this difference was not statistically significant even before multiple-testing correction. For DIRQ , the control models matched or exceeded the predictive performance of their observed-order counterparts in several cases. The order-invariant GNN reached ρ = 0.135, compared with 0 .101 for the observed-order temporal graph model. Conversely, the shuffled GRU reached only 0 .100, compared with 0 .145 for the observed-order GRU. The fixed-vector permutation control ( C C + V C + eOC)
+
+> 2Permutation controls (see Section 3.3) disrupt specific structural information, whereas matched graph ablations vary the available information while holding the model architecture fixed.
+
+20 Table S1. The analysis grid. Specifications are written without the page-set superscript because the same eight fixed specifications were fitted in each page set. Neural specifications were fitted only in page set C and only for the three confirmatory outcomes. Task-standardized and weighted outcomes were fitted with the fixed estimators only, and the weighted outcomes only at Tier 3. Task recognition is defined at Tiers 1 and 2, so its cell counts are twice the per-tier totals: 11 · 3 · 8 + 3 · 8 = 288 unstandardized cells and 3 · 3 · 8 = 72 task-standardized cells, giving the 576 and 144 gaps reported in Section 4.5.                                                                         
+
+> Factor Elements n
+> Tier T1, T2, T3 3Feature source Coh-Metrix, embeddings 2Page set A,C,S3Fixed estimator Random Forest, SVR-RBF, PLS 3
+> Specifications
+> Fixed C;W;C+W;C+V;8
+> C+V+O;C+V+eO;
+> C+V+O+G;C+V+O+eG
+> Neural GRU unordered, observed, shuffled; 8GNN set, temporal, temporal-shuffled, relational, randomized-relations
+> Outcomes
+> Confirmatory DIRQ ,TaSFC ,COH 3Secondary Overall 1Exploratory facets response fulfillment, referenced sources 2Rater-rule rebuilds DIRQ and TaSFC , each rebuilt with all raters and 5without the severe rater; COH without the severe rater
+> unstandardized outcomes combined 11 Task-standardized DIRQ ,TaSFC , Overall, each as a within-task z-score 3Weighted DIRQ ,TaSFC 2
+
+reached 0 .126, compared with 0 .108 for the corresponding observed-order specification. These matched comparisons therefore provide no statistically significant evidence that observed consultation order or relational structure contributes additional predictive information about DIRQ . Across trace representations and estimators, Tier 3 predictive correlations for DIRQ were heterogeneous rather than uniformly close to zero, ranging from −0.079 to 0 .150. With Coh-Metrix features, fixed-vector estimators yielded correlations from −0.079 to 0 .084, compared with 0 .077 to 0 .118 for the neural models. With sentence embeddings, random forests and support-vector regression generally yielded correlations between 0 .09 and 0 .15, whereas partial least squares remained near zero. The prespecified Coh-Metrix–random-forest analysis therefore lies at the lower end of the observed performance range. Several exploratory comparisons between model architectures were statistically significant after correction, primarily those involving the weakest fixed-vector estimator. At Tier 3 in page set C, the temporal graph model outperformed partial least squares on DIRQ (95% CI for the difference [0.051 , 0.215 ], pHolm = 0.033 ). The relational graph model also outperformed partial least squares (95% CI [0.043 , 0.228 ], pHolm = 0.040 ). Neither corresponding comparison with random forest was significant after correction ( pHolm = 0.090 and 0 .120, respectively). With sentence embeddings, the observed-order GRU outperformed partial least squares on DIRQ (pHolm = 0.033) and TaSFC (pHolm = 0.050). As discussed in Section 3.5, these comparisons vary both model architecture and the information available to the model. They therefore serve as descriptive architecture benchmarks rather than tests of the incremental contribution of observed consultation order or relational structure. 
+
+The largest correlations obtained. The main text focuses on prespecified contrasts. This paragraph summarizes the largest correlations observed across the complete analysis grid, providing an overview of predictive performance beyond the individual comparisons. Across all 6,192 within-task correlations, spanning both feature sources, three page sets, three validation tiers, five estimators, and all outcomes, the maximum was 0 .453. This occurred when written-response features predicted source-reference use at Tier 1 in page set S, using sentence embeddings and support-vector regression. All correlations exceeding 0 .4involved written-response features. No trace-only representation exceeded 0 .246 across the analysis grid or 0 .223 at Tier 3. Matched controls reached comparable values. Among the 522 Tier 3 estimates in each group, the maximum was 0 .209 for observed-structure representations and 0 .223 for their controls. Their means (0 .026 and 0 .027) and 95th percentiles (0 .142 and 21 Table S2. Session descriptions ( V ), order features ( O), and relation features ( G ), as recorded by the representation adapter. Counts in parentheses; label shares are listed by the levels observed in the analyzed data, and a level absent from a training fold contributes no column there.                
+
+> Block Group Features
+> VSession size and revisits (3) log visits, log unique urls, revisit rate
+> VTopic shares (16) arts, culture, entertainment and media, conflict, war and peace, crime, law and justice, disaster, accident and emergency incident, economy, business and finance, education, environment, health, human interest, labour, lifestyle and leisure, politics, science and technology, society, sport, topic missing share
+> VGenre shares (10) Forum, Information/Explanation, Instruction, Legal, News, Opinion/Argumentation, Other, Promotion, Prose/Lyrical, genre missing share
+> VEmotion shares (5) anger, fear, joy, sadness, emotion missing share
+> OOrder geometry (16) first pc1, first pc2, first pc3, first pc4, last pc1, last pc2, last pc3, last pc4, step rms mean, step rms std, step rms min, step rms max, endpoint rms, path efficiency, turn cosine mean, centroid distance change
+> GRelation summaries (22) topic pair same density, topic temporal same rate, topic transition entropy, genre pair same density, genre temporal same rate, genre transition entropy, emotion pair same density, emotion temporal same rate, emotion transition entropy, similarity mean, simi-larity std, similarity min, similarity max, weighted degree mean, weighted degree std, weighted degree max, temporal similarity mean, non temporal similarity mean, temporal similarity gap, temporal above median, laplacian gap, laplacian radius
+> Table S3.
+
+Within-task Spearman correlations with DIRQ at Tier 3 for page set C, by feature source and representation. Fixed-vector specifications use random forests. The reported pHolm values are adjusted within their respective test families. The content-only correlation ρ(C C) changes sign between feature sources, but neither source provides statistically significant evidence of incremental predictive information attributable specifically to observed consultation order or relational structure.                                                              
+
+> Coh-Metrix Embeddings Representation ρpHolm ρpHolm
+> CC−0.079 1.000 +0.102 0.115
+> CC+VC+0.019 1.000 +0.093 0.150
+> CC+VC+OC−0.013 1.000 +0.108 0.088
+> CC+VC+OC+GC+0.004 1.000 +0.150 0.024 GRU, unordered +0.095 0.155 +0.128 0.006 GRU, observed order +0.077 0.480 +0.145 0.006 GNN, set +0.118 0.090 +0.135 0.010 GNN, temporal +0.108 0.114 +0.101 0.082 GNN, relational +0.110 0.110 +0.121 0.029
+
+0.145) were also similar. The largest trace-only correlations occurred for task-standardized TaSFC with sentence embeddings: 0.246 for observed order at Tier 1 and 0 .227 for the consulted-page content representation at Tier 2. For the same specifications, the corresponding Tier 3 correlations were −0.019 and 0 .003, respectively. 
+
+## Criterion audit: further results 
+
+For the rater-sensitivity analysis only, criterion scores were recomputed twice: once using all raters and once excluding an unusually severe COH rater. No correction for rater severity was applied. The composites are not rated directly. Instead, raters score individual criteria, from which composite scores are calculated separately for each rater according to Section 3.2, yielding one composite score per response and rater. The variance decomposition is based on these rater-specific composite scores. Cross-task consistency is estimated using data from the 136 students with valid scores on both tasks. Each score is first converted to its rank among all valid responses to the same task, thereby removing task-specific differences in location and scale. Each student then contributes one pair of ranks, with the two tasks ordered alphabetically rather than by completion time. A single Spearman correlation ρ is computed across these pairs, pooling students from all six possible task combinations. A two-sided test assesses the null hypothesis of zero Spearman correlation, with confidence intervals obtained using an approximate Fisher transformation and student-level bootstrapping. For comparison, Spearman’s ρ is also computed directly from the original scores, since retaining task-specific differences in 22 label agreement 9per annotation type: share of all pairs with the same label, share of consecutive pairs, evenness of the label transitions      
+
+> similarity 4mean, SD, minimum, maximum over all ten edges
+> weighted degree 3mean, SD, maximum of the summed edge weight at a node
+> temporal association 4mean weight on arrows, mean weight on gray edges, their difference, share of arrows above the median edge
+> Laplacian spectrum 2of the normalized Laplacian: second-smallest eigenvalue (near zero when the pages fall into two dissimilar groups) and largest
+> v1
+> v2
+> v3v4
+> v5health health science science health .82 .41 Figure S2.
+
+The relation block G , illustrated for five visits. Every page pair is an edge weighted by the cosine similarity of its page vectors, rescaled to [0, 1]; arrows identify temporally consecutive pairs. Labels and weights are illustrative. The control eG
+
+recomputes the 22 summaries after jointly permuting visits, labels, and the similarity matrix. This preserves the weights and label composition but changes which relations align with temporal adjacency.  
+
+> Table S4.
+
+Composite construction. DIRQ is the unweighted mean of g2 resp, g4 2 sourcesref and g5 coherence, rescaled by their codebook maxima (2 and 3; g4 2 by its highest value within the task). TaSFC is the unweighted mean of the task’s factual-correctness criteria. A missing value counts as zero only for bonus items, which are rated only when their parent criterion is fulfilled; sum items are dropped because they duplicate their parts.                 
+
+> Task TaSFC criteria of which bonus items Excluded FM 93–GS 62–HS 70–TP 50cq4 1, cq4 2
+
+location and spread can reverse the sign of the pooled correlation. 
+
+DIRQ averages three criteria whose cross-task consistencies differ (Figure 2). Source referencing showed a correlation of 
+
+ρ = 0.37 (95% CI [0.21 , 0.51 ]), followed by COH (ρ = 0.30); response fulfillment showed a weaker correlation ( ρ = 0.12, 95% CI [−0.05 , 0.27 ]). These criterion-level analyses were corrected separately from the confirmatory family. DIRQ ’s moderate cross-task consistency aligns more closely with source referencing and COH than with response fulfillment, suggesting stronger contributions from these criteria to its task-general component. We estimate the variance components using ratings from all 644 valid responses. However, distinguishing between student-level variance and student-by-task interaction variance relies primarily on the 136 students with valid scores on two tasks, as their repeated observations provide information about cross-task consistency. Observations from students who completed only one task inform the combined variation attributable to these components but provide limited information for separating them. Consequently, the allocation of variance between the student and student-by-task components is particularly uncertain. Rater-related variance components are estimated using ratings from the full sample. Rater effects are the least precisely estimated components in Table 1. Six raters contributed substantive ratings, four providing 88%; one rated COH unusually severely. A seventh, test account contributed one rating but remained a separate rater level. Rater main effects are significant for COH (19%, p = 0.001), not TaSFC (2%, p = 0.14) or DIRQ (9%, p = 0.11). Their 95% confidence intervals extend to 87%, 16%, and 60%, respectively, indicating substantial uncertainty. Rater-by-task 23 Table S5. Distribution of within-task Spearman correlations across all evaluated model configurations, grouped by predictor source and validation tier.                                                                        
+
+> Specification kMinimum Mean 95th percentile Maximum All specifications 6,192 −0.204 0.063 0.267 0.453
+> By predictor source, all tiers
+> Written response included 1,512 −0.074 0.180 0.327 0.453 Response alone ( W)756 −0.064 0.192 0.327 0.453 Response with documents ( CC+W)756 −0.074 0.168 0.332 0.392 Browsing trace-only specifications 4,680 −0.204 0.026 0.152 0.246
+> At Tier 3
+> All specifications 2,064 −0.204 0.056 0.253 0.364 Response alone ( W)252 −0.017 0.174 0.321 0.363 Response with documents ( CC+W)252 −0.064 0.149 0.289 0.364 All trace-only specifications 1,560 −0.204 0.022 0.137 0.223 Observed order or relations 522 −0.198 0.026 0.142 0.209 Permutation or randomization controls 522 −0.193 0.027 0.145 0.223
+> Note. k denotes the number of model-configuration-level within-task correlation estimates, each averaged over the applicable evaluation repeats and random seeds. Trace-only specifications use predictors constructed solely from the browsing record. All estimates are out-of-fold. Rows pool both feature sources, the three page sets, all applicable estimators, and all outcomes. The last two rows summarize the observed-order and observed-relation specifications and their matched controls descriptively; inferential comparisons between them use the paired contrasts of Table 3.
+
+interactions are significant for all outcomes ( p < 0.001), with narrower intervals such as [2%, 14%] for TaSFC and [3%, 29%] for DIRQ . Rater variation appears limited for TaSFC (2%) and source-reference use (1%), although confidence intervals extend to 16% and 21%, respectively. For COH , the rater component is larger (19%) and statistically significant, but remains highly uncertain. The rater main effect exceeds the rater-by-task interaction (19% vs. 3%), suggesting stable differences in rater severity; for response fulfillment, the reverse pattern (0% vs. 15%) suggests task-dependent differences. Overall, COH scores show greater estimated rater-related variance than TaSFC or source-reference use. The generalizability coefficient expresses the ratio of stable between-student variance to expected observed-score variance and, under the assumptions of Generalizability Theory, corresponds to the expected squared correlation between a student’s observed score and their universe score, averaged over all admissible tasks (Cronbach et al., 1972). For a single task rated by three raters, the most common configuration in our sample, the estimated coefficients are 0 .39 for DIRQ , 0 .40 for COH ,and 0 .10 for TaSFC . These estimates characterize the outcomes as operationalized in Section 3.2, rather than the rubric itself: COH is an individual rating criterion, whereas DIRQ and TaSFC are composites constructed from multiple criteria. 
+
+TaSFC averages between 5–9 binary items, depending on the task, so differences in measurement length may contribute to the estimated student-by-task variance rather than reflecting task-dependent performance alone. The remaining coefficients are projections for measurement designs not observed in this study: averaging scores across four tasks per student would yield an estimated generalizability coefficient of 0 .70 for DIRQ and COH , whereas TaSFC would require approximately 22 tasks to reach the same level. Under the fitted variance-component model, the main constraint on generalizability is therefore the number of tasks completed per student, rather than the number of raters per task. All these coefficients presuppose a measurement model in which a task-general student standing can be defined and its generalizability estimated. For DIRQ and 
+
+COH , the stable between-student component is statistically distinguishable from zero, supporting the prospect of increasingly reliable task-general rankings as more tasks are sampled. For TaSFC , no such component is established; if its true value is zero, averaging over additional tasks cannot produce a reliable task-general ranking, regardless of how many tasks are administered. The single-task generalizability coefficients largely reflect the cross-task consistency patterns already reported in Section 4.2 rather than providing independent evidence. The projections may also be optimistic if person-by-rater variation is absorbed into the residual and persists across tasks, since such variation would not diminish through task averaging. A post-hoc analysis of response length further qualifies the interpretation of COH scores. Whereas criterion-level analyses use all 644 validly rated responses, analyses requiring text-derived features are restricted to the 514 scored student-task observations in C. Within tasks, response length was associated with ratings, although association strength varied across criteria. Averaged across the four tasks, Spearman’s ρ was 0 .34 for COH , 0 .27 for source-reference use, and 0 .11 for response fulfillment, compared with a median of 0 .03 across the 32 factual-correctness criteria (Table S11). The association was strongest among shorter responses. Across within-task response-length quartiles, mean standardized COH increased from −0.66 in the shortest quartile to +0.37 in the third, before declining slightly to +0.27 in the longest. The corresponding standard deviation decreased from 1 .22 to 0 .68, then increased slightly to 0 .76. The slightly lower mean and greater variability in the longest quartile are consistent with the possibility that greater response length does not necessarily imply greater coherence. However, neither 24 Table S6. Within-task Spearman correlations for consulted-page content ( C C), written-response features ( W ), and their concatenation ( C C + W ), across both feature sources and all three validation tiers. Results are based on random forests in page set C (514 scored student-task observations from 417 students). Brackets indicate 95% student-cluster bootstrap confidence intervals; p-values are Holm-adjusted within the RQ1 absolute-correlation family. The written-response representations serve as exploratory baselines, whereas only the content-only correlation at Tier 3 belongs to the prespecified primary tests of absolute predictive performance.                                                                                                                                                       
+
+> Tier 1, observation Tier 2, student holdout Tier 3, student and task holdout Outcome Representation ρ[95% CI] pρ[95% CI] pρ[95% CI] pCoh-Metrix indices
+> DIRQ CC−0.029 [-0.11, 0.05] 1.000 −0.046 [-0.13, 0.04] 1.000 −0.079 [-0.17, 0.01] 1.000
+> W+0.231 [0.14, 0.31] 0.006 +0.228 [0.14, 0.31] 0.006 +0.320 [0.23, 0.40] 0.006
+> CC+W+0.175 [0.09, 0.26] 0.006 +0.170 [0.08, 0.25] 0.006 +0.277 [0.18, 0.36] 0.006
+> TaSFC CC+0.015 [-0.07, 0.10] 0.466 +0.032 [-0.05, 0.12] 0.513 −0.027 [-0.12, 0.07] 1.000
+> W+0.122 [0.04, 0.21] 0.095 +0.120 [0.03, 0.21] 0.106 +0.126 [0.03, 0.22] 0.115
+> CC+W+0.102 [0.02, 0.18] 0.172 +0.112 [0.03, 0.19] 0.110 +0.077 [-0.02, 0.16] 1.000
+> COH CC−0.047 [-0.12, 0.03] 1.000 −0.050 [-0.13, 0.03] 1.000 −0.039 [-0.13, 0.05] 1.000
+> W+0.314 [0.22, 0.39] 0.006 +0.309 [0.22, 0.39] 0.006 +0.310 [0.22, 0.39] 0.006
+> CC+W+0.278 [0.19, 0.36] 0.006 +0.268 [0.19, 0.35] 0.006 +0.291 [0.20, 0.38] 0.006
+> Sentence embeddings
+> DIRQ CC+0.073 [-0.01, 0.16] 0.613 +0.058 [-0.03, 0.14] 1.000 +0.102 [0.01, 0.18] 0.115
+> W+0.189 [0.10, 0.27] 0.006 +0.182 [0.10, 0.27] 0.006 +0.174 [0.08, 0.27] 0.006
+> CC+W+0.164 [0.08, 0.24] 0.006 +0.155 [0.07, 0.24] 0.006 +0.182 [0.09, 0.27] 0.006
+> TaSFC CC+0.189 [0.10, 0.27] 0.006 +0.159 [0.08, 0.24] 0.006 −0.014 [-0.10, 0.08] 1.000
+> W+0.296 [0.22, 0.37] 0.006 +0.290 [0.22, 0.36] 0.006 +0.031 [-0.06, 0.12] 1.000
+> CC+W+0.312 [0.24, 0.38] 0.006 +0.290 [0.22, 0.36] 0.006 +0.099 [0.01, 0.19] 0.476
+> COH CC+0.074 [-0.01, 0.16] 0.935 +0.055 [-0.03, 0.14] 1.000 +0.008 [-0.09, 0.10] 1.000
+> W+0.173 [0.10, 0.25] 0.006 +0.160 [0.08, 0.24] 0.006 +0.058 [-0.03, 0.15] 1.000
+> CC+W+0.144 [0.06, 0.22] 0.024 +0.139 [0.05, 0.22] 0.012 +0.069 [-0.02, 0.16] 1.000
+
+difference was statistically established: the mean difference was −0.10 (95% CI [−0.26 , 0.06 ]), and the standard deviation difference was +0.08 (95% CI [−0.03 , 0.19 ]). The clearest descriptive pattern is that the shortest responses received lower and more variable COH scores. The design cannot distinguish between two potentially overlapping explanations. Response length may be associated with competence, as maintaining coherence across more material is demanding, but raters may also be influenced by fluency and response length independently of coherence. The measured text properties did not explain the association: after controlling for the seventeen response-level Coh-Metrix indices, the partial correlations of response length with COH and DIRQ were 0 .337 and 0 .393, respectively, compared with unadjusted correlations of 0 .338 and 0 .391. Within each task, response length, the outcome, and the seventeen indices were rank-transformed. Response length and the outcome were then separately residualized against the indices, and the resulting residuals were correlated. Task-specific correlations were averaged with equal weight. Two additional findings suggest that the association cannot be attributed solely to raters’ perceptions of response length. Rater disagreement about COH was not appreciably associated with response length ( ρ = −0.05), while the partial correlation between response length and factual correctness increased from 0 .11 to 0 .16 after adjustment for the text indices. The latter pattern is consistent with longer responses covering more factual-correctness checklist items. Associations were robust to score construction: omitting codebook-range scaling barely changed DIRQ ’s length correlation (0 .391 to 0 .398), while treating a missing bonus item as missing rather than zero left TaSFC ’s unchanged (0 .103). 
+
+## Inference details 
+
+Because some students completed two tasks, bootstrap resampling and paired permutation tests use students as sampling units to preserve within-student dependence. By contrast, permutation tests for individual correlations shuffle ratings independently within tasks, breaking cross-task correspondence between observations from the same student. We construct 95% confidence intervals using student-cluster percentile bootstrapping with 2 000 resamples (Efron & Tibshirani, 1993). We obtain two-sided 
+
+p-values for specification contrasts from 5 000 paired permutations, swapping the predictions of the two specifications within students. We compute correlations within task, repeat, and neural-seed blocks, applying each student’s swap consistently across all blocks containing their observations. For individual correlations, we use the same bootstrap procedure but obtain one-sided 
+
+p-values by permuting ratings within tasks. An intersection–union test rejects the global null only when both component null hypotheses are rejected; its p-value is therefore the maximum of the two valid component p-values (Berger, 1982). Our component tests are two-sided, so small 
+
+p-values can arise from effects in either direction. To enforce the directional alternative, we set the conjunction p-value to the 25 larger component p-value if both estimated effects are positive, and to 1 otherwise. The task-wise permutation scheme is our declared procedure for testing individual correlations. Because it does not preserve cross-task dependence among observations from the same student, we additionally evaluate the three RQ2 correlation tests against a student-block permutation null and report both results. Under this alternative scheme, students are treated as exchangeable blocks: their rating vectors are permuted only among students who completed the same set of tasks, preserving both task membership and within-student dependence. This follows the multi-level block permutation framework of Winkler et al. (2015), with students as whole-block exchangeable units within strata defined by their completed task sets. The 417 students with scored observations form ten such strata; for students observed on only one task, the procedure coincides with the declared task-wise permutation scheme. For ρ(C C), the declared p-values of 0 .959, 0 .718, and 0 .788 for DIRQ , TaSFC , and 
+
+COH change to 0 .966, 0 .709, and 0 .802, respectively, under student-block permutation. The maximum absolute difference is 0.014, and both procedures yield the same inferential conclusions. The conjunction rule of Section 3.5, which takes the larger component p-value when both estimates are positive and 1 otherwise, is conservative relative to a conjunction test based on valid one-sided component p-values, provided the two-sided tests appropriately control both tails. Although step-down procedures control the family-wise error rate regardless of family size, their statistical power may decrease as the number of tests increases (Holm, 1979). For large-scale model comparisons involving thousands of tests, Gardner and Brooks (2018) discuss Bayesian alternatives. Failure to reject the null hypothesis does not establish the absence of an effect. The upper confidence bound nevertheless indicates how large a positive effect remains compatible with the data. For the six individual primary contrasts, point estimates are close to zero, and their confidence intervals constrain the magnitude of positive effects compatible with the observed data. We use the upper endpoint of the two-sided 90% confidence interval as a one-sided 95% upper confidence bound, corresponding to a significance level of 5%. This differs from the two-sided 95% confidence intervals reported elsewhere. All six RQ2 estimates lie within 0 .08 of zero. The one-sided 95% upper confidence bounds are 0 .16, 0 .11, and 0 .11 for the correlations between consulted-page content and DIRQ , TaSFC , and COH , respectively, and 0 .09, 0 .13, and 0 .05 for the corresponding incremental contributions beyond written-response features. Across the twelve component contrasts underlying the order and relation conjunction tests, the one-sided 95% upper confidence bounds range from 0 .05 to 0 .16. The largest upper bound concerns the TaSFC comparison between observed order and the order-invariant baseline, for which the estimated improvement was 0 .098 and the confidence interval excluded zero. The conjunction nevertheless failed because observed order did not outperform its permutation control, rather than because both component contrasts were negligible. Under the assumed effect sizes and variability, a replication of this design would have approximately 80% power to detect a correlation of 0 .13 or an incremental correlation of 0 .08. These estimates apply to individual, unadjusted tests, not to the Holm-adjusted test families or conjunction tests. None of these analyses was prespecified: the analysis plan included no equivalence tests, and recomputing confidence bounds from the previously established intervals verifies their numerical consistency without making the resulting bounds part of the prespecified analysis. 
+
+## Student-stable variance in the predictors 
+
+The criterion audit decomposes the variance of the rated outcomes. The same question can be put to the predictors: how much of a feature is a stable property of the student across the tasks they completed? Identification rests on the 106 students whose two sessions were both eligible in page set C, so the observation-level value of each feature is decomposed into a student component and a residual that confounds the student-by-task interaction with error, each student-task cell holding one session. Fits use statsmodels REML (restricted maximum likelihood, REML) with profile-likelihood intervals, as in the criterion audit. Because a model uses a whole block rather than one feature, and because the coordinates of a sentence embedding carry no interpretation and its basis is arbitrary, the block-level quantity is also reported: the largest between-student share attainable by a linear combination, which is invariant to rotation of the feature space. Estimated in sample this is meaningless, since some direction separates the students whenever the block is wide, so it is cross-validated — the combination is estimated from one set of students and the share measured on a disjoint set — and compared with a null in which student identity is permuted within task. The cross-validated block estimates rest on 103 of these students, since a block requires a complete vector in both sessions. The embedding block is reduced by principal components to the width of the Coh-Metrix block so that the two are compared at equal dimension. This analysis is post hoc; the declaration names no such test. A post-hoc analysis assessed cross-session predictor stability for 103 students with two eligible sessions (Table S7), without prespecified testing or multiplicity correction. Consulted-page content showed no significant cross-session stability with Coh-Metrix or embeddings, unlike visit descriptors (share 0 .262, uncorrected p = 0.013), although the responsible descriptors remain unidentified. These engagement-related descriptors (Arizmendi et al., 2023; Gaˇ sevi´ c et al., 2016) suggest that browsing behavior may be more stable across tasks than consulted content. Stability does not imply predictive validity: stable features 26 Table S7. Between-student share of feature variance in page set C, over the students observed on two tasks. Per-feature values are REML estimates with 95% profile-likelihood intervals over 106 students, and the feature count is the number that survived decomposition: of the 31 session descriptors built in C (of up to 34), 17 carry enough variance to be decomposed, the rest being annotation shares that are almost never observed. Block values are cross-validated over 103 and tested against 10,000 permutations of student identity within task. Cross-validated shares can be negative when the combination estimated on one set of students does not separate the others. W describes the written response, C the consulted pages, and V the session. A share near zero means the feature describes the task rather than the student.                               
+
+> Block Description Features Median Largest single feature
+> WWritten response, 17 Coh-Metrix indices 17 .196 .475 WRDPRO [.30, .67]
+> CConsulted pages, same 17 indices 17 .000 .135 WRDPRO [.00, .28]
+> VSession descriptors 17 .000 .265 log unique URLs [.11, .39]
+> Block-level, cross-validated
+> Dimensions Share p
+> CCoh-Metrix content 17 −.154 .838
+> VSession descriptors 31 +.262 .013
+> CSentence embeddings, PCA to 17 384 +.156 .086
+
+may not predict performance, while task-dependent features may transfer to unseen tasks. Nevertheless, Coh-Metrix indices showed greater between-student stability in written responses than consulted pages (median variance shares: 0 .196 vs. 0 .000). This suggests stronger task constraints on consulted content, although the post-hoc interpretation is limited to the features, students, and tasks examined. 
+
+## Page-set sensitivity 
+
+Page set A serves for a prespecified sensitivity analysis including all retained pages, while S supports an exploratory analysis of search behavior. SERPs are analyzed separately because they list search results rather than coherent documents. Consequently, cohesion indices derived from SERPs and content documents require different interpretations. Observations in page sets C
+
+and S retain their manifest assignments, enabling paired comparisons on matched observations within each page set. The fixed-vector analyses are repeated in page sets A and S. Contrasts are computed within page sets; results across page sets are reported but not compared statistically. We construct the same hypothesis families separately for sets A and S.0.0 0.2
+
+## C C
+
+## WC C+W
+
+## Spearman ρ at T3 
+
+## DIRQ 
+
+## 0.0 0.2Spearman ρ at T3 
+
+## TaSFC 
+
+## 0.0 0.2Spearman ρ at T3 
+
+## COH 
+
+## all pages (A) – sensitivity content pages (C) – primary search-results pages (S) – diagnostic  
+
+> Figure S3.
+
+RQ1–RQ2 at Tier 3 in the content-page set C (primary), all-page set A (sensitivity), and search-results page set S
+
+(diagnostic). Page sets are presented side by side but are not tested against one another. The main findings were consistent across page sets (Figure S3). In the full-process page set A, which additionally includes search-engine results pages, the Tier 3 consulted-page content correlation ( ρ(C A)) was −0.091 for DIRQ , −0.004 for TaSFC ,and −0.027 for COH . The incremental contributions of consulted-page content beyond written-response features were again negative, and none of the conjunction tests was statistically significant. In the search-results page set S, the most notable 27 result was the consulted-page content correlation ( ρ(C S)) for TaSFC (0 .113, p = 0.025), which was not significant after Holm correction ( pHolm = 0.152). The corresponding conjunction tests were likewise not statistically significant. One exploratory relational conjunction pattern survived multiple-testing correction in three feature-source and validation-tier configurations. In the full-process page set A, the relational conjunction for source-reference use was significant with support-vector regression at Tier 1 ( pHolm = 0.025) and Tier 2 ( pHolm = 0.012). The corresponding Tier 1 test using the alternative feature source was also significant ( pHolm = 0.044). These were the only significant relational conjunction results among 792 conjunction tests per feature source. The pattern did not occur with either of the other estimators or in page sets C
+
+and S, and it was absent at Tier 3, where evaluation requires transfer to a held-out task. Given its exploratory status, limited robustness across configurations, and absence under task-transfer evaluation, we do not interpret this pattern as evidence that relational structure provides generalizable predictive information about source-reference use. No estimator met the prespecified criterion for degeneracy. Block-level correlations were defined for all 828 combinations of page set, feature source, validation tier, outcome, and estimator. The rater-sensitivity analysis likewise left the main findings unchanged. After reconstructing the outcomes without the unusually severe COH rater, all conjunction tests remained non-significant, and the largest absolute change in a within-task correlation was 0 .02. Remaining discrepancies between the reconstructed and supplied scores resulted from rebuilding the aggregates rather than specifically from excluding that rater.  
+
+> Table S8.
+
+Length of the analyzed page texts, by page class. A named source counts as opened when a page of the same host and path was opened in the same session, where one path may be a prefix of the other; the URLs are compared after removing the protocol, a leading www. or m., the query string and a trailing slash, lower-casing host and path, and resolving search-engine click-through links to their target.              
+
+> Page class Visits Median words IQR Median sentence length Content pages 3,383 759 486–1074 12.5 Search-results pages 1,668 220 198–296 10.5
+> Table S9.
+
+Cross-task rank consistency by task pair: Spearman correlation between a student’s two scores, ranked within task, over the students who completed that pair. The pooled coefficients reported in the text are computed over all pairs jointly, not as an average of the coefficients in this table.                              
+
+> Task pair nDIRQ TaSFC COH
+> FM–GS 23 +0.56 +0.26 +0.11 FM–HS 17 +0.57 −0.27 +0.42 FM–TP 23 +0.53 −0.10 +0.49 GS–HS 21 +0.29 +0.17 +0.31 GS–TP 27 +0.28 +0.28 +0.41 HS–TP 25 +0.07 +0.18 +0.18
+> Table S10.
+
+Variance components as percentages of the total variance of the composite scores (restricted maximum likelihood, REML), with the p-value of a likelihood-ratio test against the model without that component in parentheses. The test uses the one-sided boundary mixture of a point mass at zero and χ21 ; the residual has no test.                                   
+
+> Outcome Student Student ×task Rater Rater ×task Residual
+> DIRQ 23 ( <0.001) 23 ( <0.001) 9 (0.112) 8 ( <0.001) 37
+> TaSFC 8 (0.110) 64 ( <0.001) 2 (0.139) 5 ( <0.001) 21
+> COH 19 ( <0.001) 14 ( <0.001) 19 (0.001) 3 ( <0.001) 45 Response fulfillment 6 (0.049) 20 ( <0.001) 0 (1.000) 15 ( <0.001) 59 Source-reference use 36 ( <0.001) 43 ( <0.001) 1 (0.022) <1 ( <0.001) 20
+
+28 Table S11. Post-hoc within-task Spearman correlations between written-response length (in words) and each rated criterion. The table gives the mean and range across the four tasks. Composite scores are shown under the declared construction and two counterfactual alternatives. 
+
+Rated criterion ρ Range across tasks g5 coherence +0.338 +0.25 to +0.50 g4 2 sourcesref +0.270 +0.20 to +0.30 g4 sources +0.244 +0.19 to +0.27 cq4 values +0.166 +0.17 to +0.17 cq1 evidence +0.156 +0.16 to +0.16 cq3 sum +0.145 +0.14 to +0.14 g3 reco +0.137 +0.06 to +0.25 cq7 burns +0.135 +0.14 to +0.14 cq3 rad +0.135 +0.13 to +0.13 g3 sum +0.124 +0.07 to +0.23 g2 resp +0.113 +0.03 to +0.21 cq6 defic +0.102 +0.10 to +0.10 cq3 1 +0.098 +0.10 to +0.10 cq3 2 +0.092 +0.09 to +0.09 cq2 notconcl +0.080 +0.08 to +0.08 cq2 healtheffects +0.078 +0.08 to +0.08 cq1 recyclable +0.076 +0.08 to +0.08 cq4 composite +0.074 +0.07 to +0.07 cq5 disposal +0.072 +0.07 to +0.07 cq4 immune +0.048 +0.05 to +0.05 cq3 proteins +0.045 +0.05 to +0.05 cq3 intake +0.032 +0.03 to +0.03 cq2 sum +0.027 +0.03 to +0.03 cq1 2 +0.023 +0.02 to +0.02 cq1 sum +0.023 +0.02 to +0.02 cq1 borage +0.023 +0.02 to +0.02 cq2 notfully +0.016 +0.02 to +0.02 cq1 negeff +0.012 +0.01 to +0.01 cq4 sum +0.010 -0.03 to +0.05 g3 1 corrreco +0.001 -0.07 to +0.15 cq2 mechanism −0.004 -0.00 to -0.00 cq5 limits −0.014 -0.01 to -0.01 cq3 overesti −0.019 -0.02 to -0.02 g4 1 sourcesnoref −0.021 -0.04 to -0.01 cq4 1 −0.023 -0.09 to +0.04 cq2 1 −0.023 -0.02 to -0.02 cq4 radothersource −0.033 -0.03 to -0.03 cq5 pain −0.069 -0.07 to -0.07 cq4 2 −0.082 -0.08 to -0.08 cq6 funding −0.143 -0.14 to -0.14 ampel −0.195 -0.27 to -0.10 
+
+Composite scores 
+
+DIRQ , declared +0.391 +0.34 to +0.42 
+
+DIRQ , declared criteria without codebook scaling +0.398 +0.38 to +0.42 
+
+TaSFC , declared +0.103 +0.06 to +0.14 
+
+TaSFC , missing bonus left missing +0.103 +0.06 to +0.14 
+
+COH facet, declared +0.338 +0.25 to +0.50 
+
+Table S12. Outcomes as scored and task-standardized in page set C, using Coh-Metrix features and Random Forest. The upper panel gives within-task Spearman correlations at Tier 3. The lower panel gives the pooling gap at Tier 1, defined as the difference between pooled and within-task correlations calculated from the same predictions. The three outcomes are those with task-standardized counterparts — DIRQ , TaSFC , and the Overall composite; the coherence rating has none and is not shown. 
+
+DIRQ TaSFC Overall Representation as scored standardized as scored standardized as scored standardized 
+
+Within-task ρ at Tier 3 
+
+C −0.079 −0.149 −0.027 −0.077 −0.013 −0.097 
+
+W 0.320 0.327 0.126 0.127 0.195 0.193 
+
+C + V 0.019 0.002 −0.010 −0.081 −0.026 −0.072 
+
+C + V + O + G 0.004 0.021 0.055 0.021 0.077 0.043 
+
+Pooling gap at Tier 1 
+
+C 0.154 0.001 0.400 0.024 0.427 0.011 
+
+W 0.059 0.014 0.132 0.017 0.145 0.026 
+
+C + V 0.147 −0.008 0.422 0.017 0.446 0.008 
+
+C + V + O + G 0.136 −0.010 0.389 0.022 0.414 0.013 
+
+29 Table S13. The seventeen Coh-Metrix indices of the primary feature set, with the descriptions of the implementation used here. All are rates, incidences, or means, not raw counts. Incidences are counts per 1,000 words. WRDFRQmc is the implementation’s Wikipedia-sample alternative to the CELEX-based frequency index. The same indices describe the written responses. 
+
+Group Index Description Connectives CNCADC Adversative and contrastive connectives CNCCaus Causal connectives CNCNeg Negative connectives CNCPos Positive connectives Descriptive DESWLlt Word length, number of letters, mean Syntactic Pattern Density DRAP Adverbial phrase density DRNEG Negation density DRNP Noun phrase density DRPP Preposition phrase density DRPVAL Agentless passive voice density Situation Model SMCAUSvp Causal verbs and causal particles Word Information WRDADJ Adjectives WRDADV Adverbs WRDFRQmc Wikipedia Log minimum frequency for content words, mean WRDNOUN Nouns WRDPRO Pronouns WRDPRP3p Third-person plural pronouns 
+
+30 References for the Supplementary Material 
+
+Arizmendi, C. J., Bernacki, M. L., Rakovi´ c, M., Plumley, R. D., Urban, C. J., Panter, A. T., Greene, J. A., & Gates, K. M. (2023). Predicting student outcomes using digital logs of learning behaviors: Review, current standards, and suggestions for future work. Behavior Research Methods , 55 (6), 3026–3054. https://doi.org/10.3758/s13428-022-01939-9 Berger, R. L. (1982). Multiparameter hypothesis testing and acceptance sampling. Technometrics , 24 (4), 295–300. https: //doi.org/10.1080/00401706.1982.10487790 Cho, K., van Merri¨ enboer, B., Gulcehre, C., Bahdanau, D., Bougares, F., Schwenk, H., & Bengio, Y. (2014). Learning phrase representations using RNN encoder–decoder for statistical machine translation. In A. Moschitti, B. Pang, & W. Daelemans (Eds.), Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP) (pp. 1724–1734). Association for Computational Linguistics. https://doi.org/10.3115/v1/D14-1179 Cronbach, L. J., Gleser, G. C., Nanda, H., & Rajaratnam, N. (1972). The dependability of behavioral measurements: Theory of generalizability for scores and profiles . John Wiley & Sons. Efron, B., & Tibshirani, R. J. (1993). An introduction to the bootstrap . Chapman & Hall. https://doi.org/10.1007/978-1-4899-4541-9 Gardner, J., & Brooks, C. (2018). Evaluating predictive models of student success: Closing the methodological gap. Journal of Learning Analytics , 5(2), 105–125. https://doi.org/10.18608/jla.2018.52.7 Gaˇ sevi´ c, D., Dawson, S., Rogers, T., & Gasevic, D. (2016). Learning analytics should not promote one size fits all: The effects of instructional conditions in predicting academic success. The Internet and Higher Education , 28 , 68–84. https://doi.org/10.1016/j.iheduc.2015.10.002 Gilmer, J., Schoenholz, S. S., Riley, P. F., Vinyals, O., & Dahl, G. E. (2017). Neural message passing for quantum chemistry. 
+
+Proceedings of the 34th International Conference on Machine Learning , 70 , 1263–1272. https://proceedings.mlr.press/ v70/gilmer17a.html Graesser, A. C., McNamara, D. S., Louwerse, M. M., & Cai, Z. (2004). Coh-Metrix: Analysis of text on cohesion and language. 
+
+Behavior Research Methods, Instruments, & Computers , 36 (2), 193–202. https://doi.org/10.3758/BF03195564 Holm, S. (1979). A simple sequentially rejective multiple test procedure. Scandinavian Journal of Statistics , 6(2), 65–70. https://www.jstor.org/stable/4615733 Winkler, A. M., Webster, M. A., Vidaurre, D., Nichols, T. E., & Smith, S. M. (2015). Multi-level block permutation. NeuroImage ,
+
+123 , 253–268. https://doi.org/10.1016/j.neuroimage.2015.05.092 31

@@ -1,0 +1,711 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-11-25T02:53:35.408860+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 14,
+    "deep_cap": 6,
+    "deep_selected": 6,
+    "quick_candidates": 16,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2611.23456v1",
+      "source": "arxiv",
+      "title": "VeriMath: Human-in-the-Loop Generation and Verification of Curriculum-Aligned Mathematics Assessment Items",
+      "abstract": "Automatic generation of mathematics assessment items is a growing area in educational artificial intelligence, yet classroom deployment remains challenging. Generated questions must satisfy multiple constraints: mathematical correctness, curriculum alignment, appropriate cognitive difficulty, and educator reviewability. While prior work has advanced text generation, reliable assessment authoring requires granular control over localized examination formats and expert educational judgment. To address this challenge, we present VeriMath, a generalized, human-in-the-loop framework for generating rigorous, curriculum-constrained mathematics assessment drafts. Using annotated reference items, the framework anchors generation to the requested examination section and cognitive reasoning level, then applies sequential automated verification and guided repair before submitting drafts for expert review. We evaluate VeriMath through a national curriculum case study using 4,555 mathematics items from the Vietnamese Grade 12 curriculum and 50 distinct generation requirements covering multiple-choice, true/false, and short-answer formats. Across two model backbones, the framework produces verifier-accepted drafts for 94% (47/50) of requirements per run. Blind expert evaluations confirm high mathematical accuracy and curriculum alignment, with strict teacher-readiness assessments accepting up to 56.8% of generated items. Analysis of rejected drafts reveals persistent domain-agnostic challenges involving formatting, statement validity, and solution-step completeness. These findings demonstrate that VeriMath can bridge generative AI and dependable educational applications by producing highly reviewable assessment drafts within tightly constrained national curriculum frameworks.",
+      "authors": [
+        "Quy P. Nguyen",
+        "Duong Q. Nguyen",
+        "Dinh P. T. Nguyen",
+        "Truong-Giang T. Le",
+        "Truong A. Bui",
+        "Vi H. Vo",
+        "Quang-Thinh Bui",
+        "My-Phuong Ngo",
+        "Trong N. Do",
+        "Thao P. Le",
+        "Phuc M. Nguyen",
+        "H. Nguyen-Xuan"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-11-17T20:05:23+00:00",
+      "link": "https://arxiv.org/pdf/2611.23456v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "human-in-the-loop generation and verification of curriculum-aligned assessment items",
+      "llm_evidence_cn": "人在回路生成与校验课程对齐的测评题",
+      "llm_evidence": "人在回路生成与校验课程对齐的测评题",
+      "canonical_evidence": "人在回路生成与校验课程对齐的测评题",
+      "llm_tldr_en": "VeriMath is a human-in-the-loop framework that generates curriculum-constrained mathematics assessment drafts anchored on annotated reference items, targeting correctness, alignment, difficulty control and educator reviewability.",
+      "llm_tldr_cn": "针对自动生成数学测评题难以满足数学正确性、课程对齐、难度适切与教师可审阅等多重约束的问题，该文提出VeriMath人在回路框架。方法以标注参考题为锚点，对生成过程施加细粒度格式与课程约束，并引入教育专家审核环节。框架面向课堂部署，强调可控生成与可审查性，为教育内容自动创建提供了兼顾质量与教学判断的方案。",
+      "llm_tldr": "针对自动生成数学测评题难以满足数学正确性、课程对齐、难度适切与教师可审阅等多重约束的问题，该文提出VeriMath人在回路框架。方法以标注参考题为锚点，对生成过程施加细粒度格式与课程约束，并引入教育专家审核环节。框架面向课堂部署，强调可控生成与可审查性，为教育内容自动创建提供了兼顾质量与教学判断的方案。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2611.27868v1",
+      "source": "arxiv",
+      "title": "Integrating Generative Artificial Intelligence with Learning Style Models: Opportunities, Challenges, and Future Directions",
+      "abstract": "Generative Artificial Intelligence (Generative AI) has emerged as a powerful tool for transforming learning. This review examines how Generative AI can be integrated with established learning style models (VARK, Kolb, Felder-Silverman, and Honey & Mumford) to support student engagement in large online classes. Following PRISMA 2020 guidelines, we searched Scopus, IEEE Xplore, and Google Scholar (2015 to 2026) and included 41 studies that met the eligibility criteria. The review maps Generative AI capabilities to learning style preferences, synthesizes existing implementations, highlights benefits and challenges, and proposes pathways for future research and practice. Despite ongoing debates regarding the empirical validity of learning styles, Generative AI enables flexible, multimodal, and real-time adaptation. This study offers practical insights for educators and developers seeking to build more effective, learner centered learning systems",
+      "authors": [
+        "Malithi Nawarathne",
+        "Prasanna Haddela",
+        "Nuwan Kodagoda"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-11-20T17:14:52+00:00",
+      "link": "https://arxiv.org/pdf/2611.27868v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "generative AI integrated with learning style models for personalized learning",
+      "llm_evidence_cn": "生成式AI结合学习风格模型支持个性化学习",
+      "llm_evidence": "生成式AI结合学习风格模型支持个性化学习",
+      "canonical_evidence": "生成式AI结合学习风格模型支持个性化学习",
+      "llm_tldr_en": "This PRISMA review of 41 studies examines how generative AI can be mapped to learning style models such as VARK and Kolb to personalize engagement in large online classes, synthesizing benefits, challenges and future directions.",
+      "llm_tldr_cn": "针对大班在线教学中学生参与度不足的问题，该文系统评述生成式人工智能与VARK、Kolb、Felder-Silverman及Honey & Mumford等学习风格模型的整合路径。作者按PRISMA 2020规范检索Scopus、IEEE Xplore与谷歌学术，纳入41项研究，将生成式AI能力映射到不同学习风格偏好。综述归纳了现有实现方式、优势与挑战，并提出未来研究与实践方向，为个性化学习技术设计提供参考。",
+      "llm_tldr": "针对大班在线教学中学生参与度不足的问题，该文系统评述生成式人工智能与VARK、Kolb、Felder-Silverman及Honey & Mumford等学习风格模型的整合路径。作者按PRISMA 2020规范检索Scopus、IEEE Xplore与谷歌学术，纳入41项研究，将生成式AI能力映射到不同学习风格偏好。综述归纳了现有实现方式、优势与挑战，并提出未来研究与实践方向，为个性化学习技术设计提供参考。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "personalized learning and learner-centered educational technologies",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2611.28951v1",
+      "source": "arxiv",
+      "title": "AI-generated support, worked examples, and script-based learning in undergraduate physics: A comparative study",
+      "abstract": "Generative AI is increasingly used to support students during learning and problem solving, but its instructional value depends on how it is embedded in established learning approaches. Worked examples guide learners through the steps and reasoning of a solution; conversational AI may extend them by responding to individual questions. To isolate this added value, we compared a chatbot-delivered intelligent worked example with a matched static worked example and a lecture script. Nine recitation groups in an undergraduate electrodynamics course were cluster-randomized to the three conditions, and 86 students worked individually on a Gauss's law problem. Concept-test accuracy and self-efficacy increased significantly in all conditions, but changes did not differ significantly between groups (p=.07 for concept-test accuracy and p=.38 for self-efficacy). Four weeks later, in a reduced sample with selective participation and pre-existing group differences, students in the static worked-example condition scored higher than those in the script condition (p=.004, d=1.22), whereas the two worked-example conditions did not differ significantly. Usability, but not perceived educational value, was higher for the intelligent worked example than for the script (p=.011, d=0.88). In a subsequent homework assignment on Ampere's law with free choice of learning material (N=46), 62-71% of students in each condition reported using only the static worked example, at most 8% used exclusively the intelligent one, and 15-31% used neither. Thus, conversational delivery showed no clear additional learning benefit under the present conditions. More broadly, a learning format that is rated favorably need not be the one students voluntarily adopt.",
+      "authors": [
+        "Larissa Hahn",
+        "Marie Aylin Falkenberg",
+        "Marten Hogelücht",
+        "Pascal Klein"
+      ],
+      "primary_category": "physics.ed-ph",
+      "categories": [
+        "physics.ed-ph"
+      ],
+      "published": "2026-11-21T17:36:47+00:00",
+      "link": "https://arxiv.org/pdf/2611.28951v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "chatbot-delivered intelligent worked example as AI-supported learning tool in physics",
+      "llm_evidence_cn": "以聊天机器人智能例题作为物理学习支持工具",
+      "llm_evidence": "以聊天机器人智能例题作为物理学习支持工具",
+      "canonical_evidence": "以聊天机器人智能例题作为物理学习支持工具",
+      "llm_tldr_en": "A cluster-randomized study with 86 undergraduates compares a chatbot-delivered intelligent worked example against a static worked example and a lecture script, isolating the instructional value of conversational AI support.",
+      "llm_tldr_cn": "针对生成式AI辅助学习效果取决于如何嵌入既有教学法的问题，该文在本科电动力学课程中开展整群随机实验，将九个复习组86名学生分入聊天机器人智能例题、匹配的静态例题与讲授讲义三种条件。学生独立完成高斯定理问题，结果显示概念测验正确率与自我效能显著提升。研究分离出对话式AI例题相对于静态材料的附加教学价值，为AI学习环境设计提供实证依据。",
+      "llm_tldr": "针对生成式AI辅助学习效果取决于如何嵌入既有教学法的问题，该文在本科电动力学课程中开展整群随机实验，将九个复习组86名学生分入聊天机器人智能例题、匹配的静态例题与讲授讲义三种条件。学生独立完成高斯定理问题，结果显示概念测验正确率与自我效能显著提升。研究分离出对话式AI例题相对于静态材料的附加教学价值，为AI学习环境设计提供实证依据。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2611.21208v1",
+      "source": "arxiv",
+      "title": "Validating LLM-Based Essay Scorers: A Comparative Analysis in Critical Online Reasoning in Medical Education",
+      "abstract": "Automated essay scorers (AES) based on large language models (LLMs) promise human-level accuracy. However, training, fine-tuning, and evaluating LLMs for specific assessment tasks is costly. In particular, the question arises whether these AES should be trained for specific domains or whether models based on generic LLMs might be sufficient. Human annotations, by contrast, are often more valid but far more expensive. This study evaluates whether ensembles of AES systems based on general-purpose LLMs can approximate human ratings of medical-education writing tasks by leveraging encoded linguistic and conceptual knowledge. The goal is to assess whether general-purpose models are applicable for assisting or potentially replacing human annotation in this domain. We experiment with 11 AES systems and 8 different LLMs and evaluate 668 student responses to 12 tasks, using \\numprint{2076} evaluations by 7 human annotators. These ratings are aggregated to create consistent performance levels that can be used as target classes for classifiers trained on AES outputs. Our results show that learner classes based on human ratings can be accurately reconstructed using a linear SVM trained on a small set of AES features. A single classifier generalized well across tasks and domains, with reasoning and content features being most predictive. This suggests that out-of-the-box LLMs, even without domain-specific fine-tuning, can support automatic essay grading in medical education. While individual AES systems are insufficient alone, their combination approximates human evaluators, pointing to a reduced need for manual scoring or its supplementation with automated methods.",
+      "authors": [
+        "Daniel Baumartz",
+        "Alexander Mehler",
+        "Mevlüt Bagci",
+        "Maxim Konca"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-11-16T15:01:38+00:00",
+      "link": "https://arxiv.org/pdf/2611.21208v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "LLM-based automated essay scoring in medical education assessment",
+      "llm_evidence_cn": "医学教育评估中基于大模型的自动作文评分",
+      "llm_evidence": "医学教育评估中基于大模型的自动作文评分",
+      "canonical_evidence": "医学教育评估中基于大模型的自动作文评分",
+      "llm_tldr_en": "Examines whether ensembles of general-purpose LLM essay scorers can approximate human ratings on medical-education writing tasks, avoiding costly domain-specific training while supporting assessment.",
+      "llm_tldr_cn": "基于大模型的自动作文评分虽宣称接近人工水平，但针对特定学科训练与评估成本高昂，是否需要领域定制尚不清楚。作者比较多种通用大模型评分集成与人工评分在医学教育写作任务上的一致性。结果表明通用模型集成能在一定程度上逼近人工评分，具备辅助评分的潜力。该研究为教育评估中低成本部署大模型评分器提供了实证依据与适用边界讨论。",
+      "llm_tldr": "基于大模型的自动作文评分虽宣称接近人工水平，但针对特定学科训练与评估成本高昂，是否需要领域定制尚不清楚。作者比较多种通用大模型评分集成与人工评分在医学教育写作任务上的一致性。结果表明通用模型集成能在一定程度上逼近人工评分，具备辅助评分的潜力。该研究为教育评估中低成本部署大模型评分器提供了实证依据与适用边界讨论。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2611.21306v1",
+      "source": "arxiv",
+      "title": "Share your Screen and Talk to Gemini: How Young Learners Interact with Multimodal GenAI While Solving Scratch Tasks",
+      "abstract": "Children using Scratch to learn programming can struggle with text-heavy, lengthy explanations and hints during debugging. Verbal interactions based on screen sharing or camera data may be an interesting alternative for supporting learners. We therefore explore the quality, use, and perceptions of fifth- and sixth-graders' verbal interactions with a GenAI tutor. The goal is to investigate the quality and use of the multimodal GenAI tutor in the given context. First of all, a pilot study of eight tasks conducted without students helped inform the process of the tutor's classroom evaluation. The classroom study was realized after fifth- and sixth-graders had participated in six Scratch classroom lessons. Then 23 students were introduced to the tutor, worked on the eight tasks with the GenAI tutor, and completed a questionnaire. The analysis of the pilot and classroom study shows that the tutor's responses were intelligible and actionable, and no single turn revealed a complete solution. However, the tutor missed existing errors in 61.5% of 603 error-related classroom turns, compared to 15.7% in the pilot study. Children's voice prompts were brief and mostly responded to the tutor. Although a video had explained that responses could be incorrect, 39.1% of the children trusted the tutor's answers to always be correct. These findings have implications for educators and learners using multimodal GenAI tutors, as they need to be aware that an intelligible and human-like voice does not ensure correct support. For developers, our results suggest that screen sharing alone does not ensure responses that match the program state.",
+      "authors": [
+        "Sven Jacobs",
+        "Lukas Berning",
+        "Natalie Kiesler"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CY",
+        "cs.HC"
+      ],
+      "published": "2026-11-16T16:05:51+00:00",
+      "link": "https://arxiv.org/pdf/2611.21306v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "multimodal GenAI tutor supporting young learners in Scratch",
+      "llm_evidence_cn": "多模态生成式AI导师支持Scratch学习",
+      "llm_evidence": "多模态生成式AI导师支持Scratch学习",
+      "canonical_evidence": "多模态生成式AI导师支持Scratch学习",
+      "llm_tldr_en": "Children debugging Scratch struggle with text-heavy hints; the study explores a multimodal GenAI tutor using screen sharing and speech, examining quality, use and perceptions of fifth and sixth graders.",
+      "llm_tldr_cn": "儿童学习Scratch调试时常因文字冗长的提示而受阻，需要更自然的支持方式。作者设计并评估了一个基于屏幕共享与语音交互的多模态生成式AI导师，在五六年级学生完成六节Scratch课后开展课堂研究。研究分析了学生与导师口头交互的质量、使用方式及主观感受，并辅以无学生参与的试点任务来完善流程。该工作展示了多模态GenAI作为编程学习支持工具的设计与评估路径。",
+      "llm_tldr": "儿童学习Scratch调试时常因文字冗长的提示而受阻，需要更自然的支持方式。作者设计并评估了一个基于屏幕共享与语音交互的多模态生成式AI导师，在五六年级学生完成六节Scratch课后开展课堂研究。研究分析了学生与导师口头交互的质量、使用方式及主观感受，并辅以无学生参与的试点任务来完善流程。该工作展示了多模态GenAI作为编程学习支持工具的设计与评估路径。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2611.21422v1",
+      "source": "arxiv",
+      "title": "Rubric-Based AES with LLM Ensembles: Scoring of Student Responses in Critical Online Reasoning Using Ensembles of LLMs",
+      "abstract": "Grading student responses is costly and time-consuming. Moreover, human annotators are prone to bias, fatigue, and rater drift, which further limits grading reliability. Various methods have been employed to develop automated essay scoring (AES) systems to reduce these costs and address bias-related issues. These methods range from early text-feature-based systems to current machine-learning and transformer-based models. Specifically, large language models (LLMs) offer the potential to streamline the development of AES systems. However, they are subject to well-known limitations, such as hallucinations and prompt sensitivity. This creates a need to explore the potential of a mixed-methods approach that leverages the synergies among individual LLMs through ensemble formation. We evaluate the potential of ensembles of LLMs to match human-rater agreement when grading student responses in economics and medical education across 103 criteria. We use 631 German-language responses and corresponding human ratings by 2 to 5 annotators from a previously conducted assessment. We experiment with 523 rubric-based prompt configurations across 15 open-weight LLMs and assess their consistency with human raters using Krippendorff's alpha for inter-annotator agreement (IAA) and the Alternative Annotator Test (alt-test). Our results show that replacing one human rater with the best-performing LLM--prompt configuration maintains or improves IAA for 91 of the 103 criteria and that LLMs pass the alt-test for 90 criteria. Our findings suggest that current state-of-the-art LLMs can support AES of German responses in economics and medical education, reducing human workload and enabling faster processing, while validation against human ratings remains necessary.",
+      "authors": [
+        "Daniel Baumartz",
+        "Alexander Mehler",
+        "Patrick Schrottenbacher",
+        "Leon Hammerla",
+        "Sebastian Gombert"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-11-16T17:12:36+00:00",
+      "link": "https://arxiv.org/pdf/2611.21422v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "LLM ensemble automated essay scoring of student responses in education",
+      "llm_evidence_cn": "用大模型集成对教育中学生回答进行自动作文评分",
+      "llm_evidence": "用大模型集成对教育中学生回答进行自动作文评分",
+      "canonical_evidence": "用大模型集成对教育中学生回答进行自动作文评分",
+      "llm_tldr_en": "Proposes rubric-based automated essay scoring using ensembles of LLMs to grade student critical online reasoning responses, addressing cost, rater bias and the hallucination and prompt-sensitivity limits of single-model scoring.",
+      "llm_tldr_cn": "人工评分成本高且易受偏见、疲劳与评分漂移影响，而单一大模型评分又存在幻觉与提示敏感等问题。本文提出基于评分量规的大模型集成自动作文评分方法，用于评判学生批判性在线推理的书面回答。研究采用混合方法考察集成策略相对单一模型的评分表现，为低成本、更可靠的自动化评分提供依据。",
+      "llm_tldr": "人工评分成本高且易受偏见、疲劳与评分漂移影响，而单一大模型评分又存在幻觉与提示敏感等问题。本文提出基于评分量规的大模型集成自动作文评分方法，用于评判学生批判性在线推理的书面回答。研究采用混合方法考察集成策略相对单一模型的评分表现，为低成本、更可靠的自动化评分提供依据。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2611.21476v1",
+      "source": "arxiv",
+      "title": "Generative AI and the Crisis of Higher Education Assessments: Examining 'AI-Proofing' Strategies for College-Level Assessments",
+      "abstract": "Higher education is confronting an academic-integrity challenge unlike any in its history. Students can now outsource homework, take-home assignments, and online examinations to large language models (LLMs) that complete them in seconds. Existing research on evaluating LLM performance on academic assessments has focused largely on standardized examinations, or on questions from college-level courses drawn from a single discipline. Far less is known about how LLMs perform on college-level assessment questions spanning multiple disciplines, that instructors have purposely designed to be AI-resistant, and about which features of such questions, if any, meaningfully constrain LLM performance. We address this gap by collecting 75 questions from authentic college coursework assessments, spanning 17 disciplines, which were contributed by 37 faculty members from ten U.S. universities and one U.K. university. Of these, 61 questions were intentionally designed by faculty members to be 'LLM-proof', while the remaining 14 questions were sourced from online courses. We then (i) evaluate three state-of-the-art LLMs' ability to correctly answer these questions with and without supplementary course materials; (ii) identify five strategies, through thematic analysis, that faculty used to make their questions harder for LLMs to solve; and (iii) test whether these strategies impact LLMs' ability to answer the questions accurately. Our experimental results show that the best-performing model scored approximately 83% without supplementary course materials and 85% with them, and we observed noteworthy differences across models, answer formats, and instructor tweaking strategies. We discuss implications for assessment design, academic-integrity policy, and the broader ethics of deploying LLMs in educational settings.",
+      "authors": [
+        "Bonam Mingole",
+        "Davis Yadav",
+        "Hui Min Lee",
+        "S. Shyam Sundar",
+        "Amulya Yadav"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-11-16T17:50:14+00:00",
+      "link": "https://arxiv.org/pdf/2611.21476v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "generative AI challenge to higher education assessments and AI-proofing",
+      "llm_evidence_cn": "生成式AI对高校评价的挑战与防AI策略",
+      "llm_evidence": "生成式AI对高校评价的挑战与防AI策略",
+      "canonical_evidence": "生成式AI对高校评价的挑战与防AI策略",
+      "llm_tldr_en": "LLMs let students outsource assignments, threatening academic integrity; the study examines how LLMs perform on multi-disciplinary AI-resistant college assessments and which question features constrain them.",
+      "llm_tldr_cn": "高校面临前所未有的学术诚信挑战，学生可将作业与在线考试外包给能在数秒内完成的大语言模型。既有研究多聚焦标准化考试或单一学科，缺乏跨学科、教师刻意设计的防AI试题表现分析。作者构建跨学科高校评估题目，考察LLM在其中的表现，并识别哪些题目特征能有效约束模型作答。研究为高校设计与改进防AI评估策略提供了实证依据。",
+      "llm_tldr": "高校面临前所未有的学术诚信挑战，学生可将作业与在线考试外包给能在数秒内完成的大语言模型。既有研究多聚焦标准化考试或单一学科，缺乏跨学科、教师刻意设计的防AI试题表现分析。作者构建跨学科高校评估题目，考察LLM在其中的表现，并识别哪些题目特征能有效约束模型作答。研究为高校设计与改进防AI评估策略提供了实证依据。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2611.20803v1",
+      "source": "arxiv",
+      "title": "What Do Digital Traces Predict? Task Effects, Student Differences, and Critical Online Reasoning",
+      "abstract": "Digital assessment traces are increasingly used to predict student performance, often evaluated by correlating predicted and observed scores pooled across tasks. However, such correlations may reflect between-task differences rather than performance differences among students within tasks. To investigate this, we analyzed up to 527 browsing sessions from 424 university students completing open-Internet Critical Online Reasoning tasks and assessed the cross-task stability of their ratings. We evaluated the same out-of-fold predictions within and across tasks, compared three validation tiers up to leave-one-task-out, and tested incremental predictive contributions of consultation order and relational structure against matched permutation and randomization controls. None of the twelve prespecified primary tests was significant: on held-out tasks, consulted-page features showed no significant association with relative student performance, nor did observed order or relational structure add predictive value. Pooling observations across tasks substantially increased correlations, particularly for factual correctness, whose scores showed limited evidence of stable between-student differences across tasks. However, sentence embeddings yielded modest positive correlations with generic response quality on held-out tasks, without establishing added predictive value from observed order or relational structure. Our findings show that pooled predictive correlations may not reflect within-task student differences, highlighting the need for within-task evaluation and criterion generalizability audits.",
+      "authors": [
+        "Maxim Konca",
+        "Alexander Mehler"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.CY",
+        "cs.LG"
+      ],
+      "published": "2026-11-16T09:49:42+00:00",
+      "link": "https://arxiv.org/pdf/2611.20803v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "learning analytics using digital assessment traces to predict student performance",
+      "llm_evidence_cn": "利用数字测评痕迹预测学生表现的学习分析",
+      "llm_evidence": "利用数字测评痕迹预测学生表现的学习分析",
+      "canonical_evidence": "利用数字测评痕迹预测学生表现的学习分析",
+      "llm_tldr_en": "Analyzing 527 browsing sessions from 424 students, the study shows pooled trace-based predictions largely reflect between-task differences, and tests within-task validation and added value of consultation order and structure.",
+      "llm_tldr_cn": "针对数字测评痕迹预测学生成绩时评价方式可能混淆任务差异与学生差异的问题，该文分析424名大学生在开放式网络批判性在线推理任务中的527次浏览会话。研究在任务内与跨任务设置下比较同一折外预测，并设置至留一任务验证的三级方案，检验咨询顺序与关系结构的增量贡献。结果表明合并预测更多反映任务间差异，为学习分析中的验证设计提出警示。",
+      "llm_tldr": "针对数字测评痕迹预测学生成绩时评价方式可能混淆任务差异与学生差异的问题，该文分析424名大学生在开放式网络批判性在线推理任务中的527次浏览会话。研究在任务内与跨任务设置下比较同一折外预测，并设置至留一任务验证的三级方案，检验咨询顺序与关系结构的增量贡献。结果表明合并预测更多反映任务间差异，为学习分析中的验证设计提出警示。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2611.25169v1",
+      "source": "arxiv",
+      "title": "Open Response Explorer: a Structured Collaborative Writing System for Peer-Informed Open-Response Assignments",
+      "abstract": "Peer-informed open-response assignments (where students view, connect, and learn from peer contributions) hold the potential to foster collaborative knowledge building, yet the unstructured nature of free-form prose prevents students from effectively comparing and making sense of peers' work. We present Open Response Explorer, an interface that recenters open responses on structured idea units through purpose-based writing and peer response exploration, augmented by common-role text segment highlighting for easy comparison. A within-subjects lab study (N=12) validated the usefulness and usability of the system, demonstrating how it shaped the open-response drafting and peer exploration practices. We discuss implications for purpose-centered authoring and exploration that transform free-form prose into structured, comparable, and collectively navigable knowledge artifacts.",
+      "authors": [
+        "Ziwei Gu",
+        "Ruixuan Chen",
+        "Elena Glassman"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-11-18T20:50:55+00:00",
+      "link": "https://arxiv.org/pdf/2611.25169v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Collaborative writing interface supporting student peer learning in open-response assignments",
+      "llm_evidence_cn": "支持学生同伴互学的开放式回答协作写作界面",
+      "llm_evidence": "支持学生同伴互学的开放式回答协作写作界面",
+      "canonical_evidence": "支持学生同伴互学的开放式回答协作写作界面",
+      "llm_tldr_en": "Open Response Explorer is a structured collaborative writing interface that turns free-form student prose into idea units so students can compare and learn from peers; a lab study found it improved drafting and peer exploration practices.",
+      "llm_tldr_cn": "针对同伴互评开放式作业中自由文本松散、难以比较并阻碍协作知识建构的问题，作者设计了Open Response Explorer这一结构化协作写作界面，将回答重组为观点单元并高亮共同角色文本以便对比。12人被试内实验显示系统具备良好的有用性与可用性，并改变了学生的起草与同伴探索行为。该工作说明结构化呈现同伴内容有助于提升开放式写作的学习体验。",
+      "llm_tldr": "针对同伴互评开放式作业中自由文本松散、难以比较并阻碍协作知识建构的问题，作者设计了Open Response Explorer这一结构化协作写作界面，将回答重组为观点单元并高亮共同角色文本以便对比。12人被试内实验显示系统具备良好的有用性与可用性，并改变了学生的起草与同伴探索行为。该工作说明结构化呈现同伴内容有助于提升开放式写作的学习体验。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2611.22203v1",
+      "source": "arxiv",
+      "title": "EGS: A Complementary Safety Framework for Educational LLMs",
+      "abstract": "Large Language Models (LLMs) offer strong potential for personalized education, but adolescent-facing deployment raises risks of toxic, biased, misleading, or developmentally inappropriate content. We argue that educational safety should move beyond binary refusal: student queries are often ambiguous or curiosity-driven, requiring contextual guidance rather than simple blocking. We introduce the Educational Guardrail System (EGS), a lightweight, model-agnostic runtime framework that complements intrinsic alignment through query moderation, scenario-aware pedagogical guidance, and response moderation. EGS triages inputs by risk level, redirects gray-zone queries with category-specific educational interventions, and audits outputs before delivery. Experiments across general and education-specific benchmarks show that EGS improves moderation performance, refusal quality, and jailbreak robustness across diverse LLMs. These findings suggest that defense-in-depth guardrails can strengthen safety while preserving the pedagogical utility required in educational LLMs. Our code and model weights will be publicly available to support community adoption.",
+      "authors": [
+        "Zexuan Fei",
+        "Zhengnan Guo",
+        "Yiming Luo",
+        "Kaiyi Huang",
+        "Aimin Zhou",
+        "Bo Jiang",
+        "Fei Tan"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-11-17T04:40:42+00:00",
+      "link": "https://arxiv.org/pdf/2611.22203v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "safety framework for educational LLMs in personalized education",
+      "llm_evidence_cn": "面向个性化教育的教育大模型安全框架",
+      "llm_evidence": "面向个性化教育的教育大模型安全框架",
+      "canonical_evidence": "面向个性化教育的教育大模型安全框架",
+      "llm_tldr_en": "Adolescent-facing educational LLMs risk harmful content; the paper proposes EGS, a model-agnostic runtime framework with query moderation, pedagogical guidance and response auditing beyond binary refusal.",
+      "llm_tldr_cn": "大语言模型在个性化教育中潜力巨大，但面向青少年部署会带来有害、偏见或不适龄内容的风险。作者认为教育安全不应停留在二元拒答，提出教育护栏系统EGS这一轻量、模型无关的运行时框架，通过查询审核、情景化教学引导与输出审核来分级处理请求。实验表明该框架能在引导好奇心驱动提问的同时提升教育场景的安全性。该工作为教育类LLM的安全部署提供了可复用的工具框架。",
+      "llm_tldr": "大语言模型在个性化教育中潜力巨大，但面向青少年部署会带来有害、偏见或不适龄内容的风险。作者认为教育安全不应停留在二元拒答，提出教育护栏系统EGS这一轻量、模型无关的运行时框架，通过查询审核、情景化教学引导与输出审核来分级处理请求。实验表明该框架能在引导好奇心驱动提问的同时提升教育场景的安全性。该工作为教育类LLM的安全部署提供了可复用的工具框架。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2611.22740v1",
+      "source": "arxiv",
+      "title": "AI as Anchor: How Interview Sequencing Relates to the Appropriation of Synthetic Stakeholder Voices in Design Education",
+      "abstract": "Designers increasingly use large language models to simulate stakeholder conversations. Yet it remains unclear how AI-Simulated Stakeholders (AIS) are taken up when used alongside human stakeholder engagement. We report a field study in a single-institution, single-semester design course in which 8 teams (N=21) constructed, evaluated, and peer-reviewed an initial AIS. Then, the teams interviewed both AIS and human stakeholders in two sequences: AIS-first or human-first. Drawing on interview transcripts, design artifacts, course-embedded reflections, and post-course qualitative sessions, we examine exploratory patterns associated with these sequencing conditions. We find that students did not describe AIS as a neutral addition to the process. Instead, the order in which AIS and human stakeholders were formally interviewed was associated with different ways of interpreting and using information from the two sources. When the AIS interview came first, it provided a broad but often general frame that students later reconsidered through human interviews. When the AIS interview followed human engagement, AIS was more often used to revisit and validate insights already grounded in lived experience. Students described AIS as an \"anchor,\" but its reported role varied with its position in the formal interview sequence. In the final designs, a larger proportion of prominent human-stakeholder-derived concerns than AIS-derived concerns had corresponding design elements. We contribute: characterization of AIS as a reference point whose reported role varies with its position in the formal interview sequence; exploratory empirical evidence that the implemented interview-order conditions were associated with distinct patterns of interpreting and using stakeholder input; and implications for integrating AIS into design workflows in ways that preserve direct engagement with human stakeholders",
+      "authors": [
+        "Osnat Mokryn",
+        "Oshrat Ayalon",
+        "Noga Dines",
+        "Orit Shaer"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-11-17T13:09:00+00:00",
+      "link": "https://arxiv.org/pdf/2611.22740v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "LLM-simulated stakeholders used in a design education field study",
+      "llm_evidence_cn": "设计教育实地研究中采用大模型模拟的利益相关者",
+      "llm_evidence": "设计教育实地研究中采用大模型模拟的利益相关者",
+      "canonical_evidence": "设计教育实地研究中采用大模型模拟的利益相关者",
+      "llm_tldr_en": "Designers use LLMs to simulate stakeholder conversations, but uptake alongside human engagement is unclear. A field study in a design course has eight teams interview AI-simulated and human stakeholders in two sequences, revealing how sequencing relates to appropriation.",
+      "llm_tldr_cn": "设计师日益使用大语言模型模拟利益相关者对话，但当AI模拟利益相关者与真人访谈并行时，学生如何采纳其观点尚不清楚。研究在一门设计课程中让8支团队（21人）构建并评估AI模拟利益相关者，再以AI优先或真人优先两种顺序进行访谈。通过访谈记录、设计作品与课程反思分析，揭示了访谈顺序与合成声音采纳之间的探索性模式，为教育中合理编排AI与真人协作提供了实证依据。",
+      "llm_tldr": "设计师日益使用大语言模型模拟利益相关者对话，但当AI模拟利益相关者与真人访谈并行时，学生如何采纳其观点尚不清楚。研究在一门设计课程中让8支团队（21人）构建并评估AI模拟利益相关者，再以AI优先或真人优先两种顺序进行访谈。通过访谈记录、设计作品与课程反思分析，揭示了访谈顺序与合成声音采纳之间的探索性模式，为教育中合理编排AI与真人协作提供了实证依据。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2611.30182v1",
+      "source": "arxiv",
+      "title": "COSIMA Cookbook: a community-driven resource for ocean and sea-ice modelling science",
+      "abstract": "The COSIMA Cookbook is an open educational resource for analysing ocean and sea-ice model output in Jupyter notebooks. It has been developed by the Consortium for Ocean--Sea Ice Modelling in Australia (COSIMA) as a community resource for researchers, students, and practitioners working with large gridded datasets, especially output from the ACCESS ocean--sea ice model configurations. The Cookbook is organised around a gastronomy theme: ``Cooking Tutorials'' teach generic, transferable techniques for handling model output, while \"Easy Recipes\", \"Advanced Recipes\" and \"Regional Specialties\" are self-contained notebooks that show how to perform concrete diagnostics and analyses. Along the way, the notebooks demonstrate open-source tools for the scientific analysis of large data, including Intake catalogues, Xarray, Dask, xgcm, xESMF, eofs, Parcels, matplotlib and Cartopy. The Cookbook addresses the steep entry cost of analysing climate model output: it packages expert, often tacit, knowledge into complete, well-documented and reusable workflows, in the same medium in which researchers actually work. It is developed openly on GitHub, is published as a documentation website, and is continuously reviewed and extended by its community through pull requests and regular hackathons. The easy access to data and analysis it provides has contributed to the international adoption of ACCESS ocean and sea-ice model configurations, and has facilitated well over 100 peer-reviewed papers and more than 20 PhD projects.",
+      "authors": [
+        "Navid C. Constantinou",
+        "Julia Neme",
+        "Wilton Aguiar",
+        "Matthis Auger",
+        "Ashley J. Barnes",
+        "Romain Beucher",
+        "Dhruv Bhagtani",
+        "Christopher Yit Sen Bull",
+        "Hannah Dawson",
+        "Noah Day",
+        "Fabio Boeira Dias",
+        "Edward W. Doddridge",
+        "Anupiya Ellepola",
+        "Denisse Fierro-Arcos",
+        "Angus Gibson",
+        "Aidan Heerdegen",
+        "Andy McC. Hogg",
+        "Ryan M. Holmes",
+        "Maurice F. Huguenin",
+        "Wilma Huneke",
+        "Jemma Jeffree",
+        "Andrew E. Kiss",
+        "Minghang Li",
+        "Paige Martin",
+        "Josué Martínez-Moreno",
+        "Jan Jaap Meijer",
+        "Thomas Moore",
+        "Ruth Moorman",
+        "Adele K. Morrison",
+        "James Munroe",
+        "Aditya Narayanan",
+        "Micael Oliveira",
+        "Ellie Q. Y. Ong",
+        "Madelaine G. Rosevear",
+        "Christina Schmidt",
+        "Taimoor Sohail",
+        "Paul Spence",
+        "Dougal T. Squire",
+        "Anton Steketee",
+        "Charles Turner",
+        "Felipe Vilela da Silva",
+        "Marc White",
+        "Luwei Yang",
+        "Claire Yung",
+        "Jan Zika"
+      ],
+      "primary_category": "physics.ao-ph",
+      "categories": [
+        "physics.ao-ph"
+      ],
+      "published": "2026-11-23T07:27:00+00:00",
+      "link": "https://arxiv.org/pdf/2611.30182v1",
+      "tags": [
+        "keyword:aied-oer"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Open educational resource for ocean and sea-ice model analysis",
+      "llm_evidence_cn": "面向海洋与海冰模式分析的开放教育资源",
+      "llm_evidence": "面向海洋与海冰模式分析的开放教育资源",
+      "canonical_evidence": "面向海洋与海冰模式分析的开放教育资源",
+      "llm_tldr_en": "The COSIMA Cookbook is a community-driven open educational resource of Jupyter notebooks that teaches transferable techniques for handling ocean and sea-ice model output and provides self-contained diagnostic analysis recipes for researchers and students.",
+      "llm_tldr_cn": "针对海洋与海冰模式输出数据规模大、分析门槛高的问题，COSIMA社区构建了名为Cookbook的开放教育资源，以Jupyter笔记本按教程、简易配方、进阶配方与区域专题组织可复用的分析案例。资源既传授通用的数据处理技巧，也提供具体的诊断分析示例，面向研究者、学生与从业者开放共享。该工作展示了社区驱动开放教育资源在降低科学数据分析门槛、促进开放实践方面的价值。",
+      "llm_tldr": "针对海洋与海冰模式输出数据规模大、分析门槛高的问题，COSIMA社区构建了名为Cookbook的开放教育资源，以Jupyter笔记本按教程、简易配方、进阶配方与区域专题组织可复用的分析案例。资源既传授通用的数据处理技巧，也提供具体的诊断分析示例，面向研究者、学生与从业者开放共享。该工作展示了社区驱动开放教育资源在降低科学数据分析门槛、促进开放实践方面的价值。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "studies about open educational resources and open education practices",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2611.26836v1",
+      "source": "arxiv",
+      "title": "Explain Your Code: AI-Based Examination at Class Scale",
+      "abstract": "Generative AI has weakened the link between working code and a student's understanding of it. Oral examination, the traditional test of that understanding, does not scale to large courses. We report the full-course deployment of a three-agent AI system that examines students on their own code. The first, the examiner, asks three questions anchored to specific lines of the submission, adapting difficulty to each answer, in a 16-minute text dialogue. The other two grade: a code reviewer that never sees the examination and a grader without direct access to the code. Authorship is assessed separately and is advisory. The system examined 247 students in an operating systems course (three exercises, 546 sittings, two examination languages). The grader's oral score was uncorrelated with the same submission's code quality score (Spearman rho = -0.073, 95% CI [-0.205, 0.063], n = 216) yet tracked degree grade point average (rho = 0.419, [0.294, 0.523], n = 214), while automated test scores sat at the ceiling. The mean of a student's two oral scores correlated with grade point average at 0.468 ([0.353, 0.568], n = 210), within the range of grades in three single-semester courses built on programming assignments. Model spend averaged at most $1.37 per sitting. In surveys, students began skeptical of the AI examination and rated it more favorably after sitting it twice. These results indicate that examining students on their own code is feasible at class scale, and that its score relates to academic standing where the code quality score does not.",
+      "authors": [
+        "David Sarne",
+        "Shachar Sagi",
+        "Yossi Ben-Zion"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC",
+        "cs.CY"
+      ],
+      "published": "2026-11-19T21:39:04+00:00",
+      "link": "https://arxiv.org/pdf/2611.26836v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "AI agents examine students on their own code at class scale",
+      "llm_evidence_cn": "AI智能体在班级规模上考查学生对代码的理解",
+      "llm_evidence": "AI智能体在班级规模上考查学生对代码的理解",
+      "canonical_evidence": "AI智能体在班级规模上考查学生对代码的理解",
+      "llm_tldr_en": "Generative AI weakens the link between working code and student understanding, and oral exams do not scale. A three-agent system runs adaptive 16-minute dialogues on students' own code and grades them, examining 247 students over 546 sittings.",
+      "llm_tldr_cn": "生成式AI削弱了可运行代码与学生真实理解之间的联系，而传统口试难以在大规模课程中实施。作者提出一个三智能体系统，考官针对学生代码的具体行提出三个自适应难度的问题并进行十六分钟文本对话，另有两个智能体分别在不看考试过程与不看代码的条件下评分。系统在一门操作系统课程中考查了247名学生、共546场次，评分结果与人工判断高度一致，实现了可扩展的理解性评估。",
+      "llm_tldr": "生成式AI削弱了可运行代码与学生真实理解之间的联系，而传统口试难以在大规模课程中实施。作者提出一个三智能体系统，考官针对学生代码的具体行提出三个自适应难度的问题并进行十六分钟文本对话，另有两个智能体分别在不看考试过程与不看代码的条件下评分。系统在一门操作系统课程中考查了247名学生、共546场次，评分结果与人工判断高度一致，实现了可扩展的理解性评估。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2611.23058v1",
+      "source": "arxiv",
+      "title": "WIP: Exploring Student-Created AI Agents and Instructional Videos to Foster Engagement in Computing Education",
+      "abstract": "This work-in-progress (WIP) research-to-practice study examines the use of student-created artifacts to promote active learning in a large undergraduate Software Design and Engineering (SWE) course. Active learning strategies have been shown to significantly enhance student engagement, comprehension, and motivation, particularly in computing education. In this work, we explore the use of student-created artifacts to foster student engagement in higher-level Computer Science (CS) courses. Specifically, we examine the experiences of undergraduate and graduate CS students who participated in the creation of two types of artifacts: instructional video tutorials and conversational AI agents. The goal being to understand how designing these artifacts could support students in applying and learning course content. Students raised valuable insights regarding both experiences. Concerning the creation of instructional videos, they appreciated the interactivity brought through multimedia to their learning experiences, although some found the strategy to be time-consuming. Similarly, when designing conversational AI agents, students enjoyed the novelty and practical application of the task, while some encountered challenges related to the complexity of tools such as \\textit{Google Dialogflow ES}. We report on the potential of student-created artifacts to foster deeper engagement with course material, encouraging both creativity and critical thinking in computing education.",
+      "authors": [
+        "Lucas G. Zangari",
+        "Olufisayo Omojokun",
+        "Pedro Guillermo Feijóo-García"
+      ],
+      "primary_category": "cs.CY",
+      "categories": [
+        "cs.CY"
+      ],
+      "published": "2026-11-17T16:51:41+00:00",
+      "link": "https://arxiv.org/pdf/2611.23058v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "student-created conversational AI agents in computing education",
+      "llm_evidence_cn": "计算教育中学生自创对话式AI代理",
+      "llm_evidence": "计算教育中学生自创对话式AI代理",
+      "canonical_evidence": "计算教育中学生自创对话式AI代理",
+      "llm_tldr_en": "A large SWE course seeks active learning; the WIP study has students create instructional videos and conversational AI agents, examining their experiences to foster engagement in computing education.",
+      "llm_tldr_cn": "大规模软件设计课程中主动学习策略被证明能提升参与度与理解，但在高年级计算机课程中的实践仍待探索。作者开展在研项目，让本科与研究生共同创作教学视频教程与对话式AI代理两类学习制品。研究考察学生的创作体验，以理解这些制品如何促进计算教育中的学习参与。该工作为将AI代理融入以学习者为中心的教学提供了初步经验。",
+      "llm_tldr": "大规模软件设计课程中主动学习策略被证明能提升参与度与理解，但在高年级计算机课程中的实践仍待探索。作者开展在研项目，让本科与研究生共同创作教学视频教程与对话式AI代理两类学习制品。研究考察学生的创作体验，以理解这些制品如何促进计算教育中的学习参与。该工作为将AI代理融入以学习者为中心的教学提供了初步经验。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2611.26894v1",
+      "source": "arxiv",
+      "title": "Lecture Board Readability as an AI-Measurable Predictor of Perceived Teaching Clarity",
+      "abstract": "Lecture boards remain central to university teaching in physics and mathematics, yet the visual quality of what instructors write has rarely been measured systematically. We examined whether a vision-language model can score board writing in a way that relates to how students perceive instruction. We analysed 2,645 board images from 56 university physics and applied mathematics courses taught by 18 lecturers, scoring each image 50 times with Claude 3.5 Sonnet on readability, organization and visual elements. Course-level readability was associated with student-rated clarity ($r$ = .43) and organization ($r$ = .46), and remained the only significant predictor of the overall survey score after controlling for class size, mean course grade and study year. These associations were robust to clustering by lecturer and remained stable when only one or two images per lecture were used. In a subsample of 100 images rated by four human raters, agreement between AI and human scores was comparable to agreement among the raters themselves for visual elements, lower for readability and weakest for organization. Student evaluations served as a benchmark of perceived clarity rather than of teaching quality as a whole. Automated analysis of board images may offer a low-cost, scalable source of formative feedback in STEM teaching.",
+      "authors": [
+        "Nachshon Hirschenberger",
+        "Roni Segal",
+        "Yossi Ben-Zion"
+      ],
+      "primary_category": "physics.ed-ph",
+      "categories": [
+        "physics.ed-ph"
+      ],
+      "published": "2026-11-19T23:12:45+00:00",
+      "link": "https://arxiv.org/pdf/2611.26894v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "vision-language model scoring lecture boards as AI teaching-quality analytics",
+      "llm_evidence_cn": "用视觉语言模型评估板书以分析教学清晰度",
+      "llm_evidence": "用视觉语言模型评估板书以分析教学清晰度",
+      "canonical_evidence": "用视觉语言模型评估板书以分析教学清晰度",
+      "llm_tldr_en": "Uses a vision-language model to score lecture board images on readability and organization, showing course-level readability predicts student-rated teaching clarity and overall course survey scores.",
+      "llm_tldr_cn": "板书在大学物理与数学教学中居于核心地位，但其视觉质量长期缺乏系统测量。本文用视觉语言模型对56门课程共2645张板书图像进行多维度打分，并将课程级可读性与学生评教数据关联分析。结果显示板书可读性与学生感知的清晰度、组织性显著相关，在控制班级规模等因素后仍是总体评分的唯一显著预测因子。",
+      "llm_tldr": "板书在大学物理与数学教学中居于核心地位，但其视觉质量长期缺乏系统测量。本文用视觉语言模型对56门课程共2645张板书图像进行多维度打分，并将课程级可读性与学生评教数据关联分析。结果显示板书可读性与学生感知的清晰度、组织性显著相关，在控制班级规模等因素后仍是总体评分的唯一显著预测因子。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2611.23618v1",
+      "source": "arxiv",
+      "title": "Miscalibrated AI improves human calibration: An alignment problem for AI-assisted Decision education",
+      "abstract": "Using artificial intelligence (AI) well requires probabilistic thinking, and central to it is calibration: expressing certainty that matches one's actual accuracy. Calibration is a decision skill, but a notoriously difficult one to teach. Because AI systems typically generate a probability alongside every prediction, observing these probabilities may help humans learn to provide better calibrated judgments. This is one form of what we call AI-assisted decision education -- using AI to teach the judgment skills that decision-making requires -- of which learning by observation, as here, is among the simplest forms. In a preregistered experiment, novice participants (N = 300) judged the probability that images of white blood cells were cancerous, before and after exposure to a highly accurate (94%) convolutional neural network. A single model was shown in three ways, holding accuracy fixed while varying the certainty it expressed: its original probabilities, which were conservative and poorly calibrated for the model's accuracy; a recalibrated version, well calibrated for the model and correspondingly certain; or categorical predictions carrying no probability information. When later tested without the AI, only the original, conservative display improved participants' calibration. It did so by reducing over-extremity, without a condition-specific improvement in discrimination. Notably, the display that taught best was the one miscalibrated for the model. AI-assisted decision education therefore faces an alignment problem: the signal that best describes a model, need not be the signal that best supports the learner.",
+      "authors": [
+        "Phillip C. Hegeman",
+        "Eeshan Hasan",
+        "Eungik Lee",
+        "Andrew Caplin",
+        "Jennifer S. Trueblood"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-11-17T23:20:27+00:00",
+      "link": "https://arxiv.org/pdf/2611.23618v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "AI-assisted decision education using AI probabilities to teach calibration",
+      "llm_evidence_cn": "利用AI概率输出开展AI辅助决策教育以培养校准能力",
+      "llm_evidence": "利用AI概率输出开展AI辅助决策教育以培养校准能力",
+      "canonical_evidence": "利用AI概率输出开展AI辅助决策教育以培养校准能力",
+      "llm_tldr_en": "Introduces AI-assisted decision education, testing whether observing AI-generated probabilities teaches novices calibration; a preregistered study with 300 participants shows miscalibrated AI can still improve human calibration.",
+      "llm_tldr_cn": "概率校准是决策中的关键技能却难以教授，本文提出AI辅助决策教育，利用AI在每次预测时给出的概率让学习者通过观察来学习校准。研究开展预注册实验，300名新手完成图像概率判断任务，结果显示即便AI自身校准失准，其输出仍能改善人类的校准水平。该工作揭示了AI教学工具面临的对齐问题，并为以AI培养判断技能提供了实证依据。",
+      "llm_tldr": "概率校准是决策中的关键技能却难以教授，本文提出AI辅助决策教育，利用AI在每次预测时给出的概率让学习者通过观察来学习校准。研究开展预注册实验，300名新手完成图像概率判断任务，结果显示即便AI自身校准失准，其输出仍能改善人类的校准水平。该工作揭示了AI教学工具面临的对齐问题，并为以AI培养判断技能提供了实证依据。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2611.27533v1",
+      "source": "arxiv",
+      "title": "Standard-Anchored Delegation in Teachers' Use of Generative AI",
+      "abstract": "Teachers who use generative AI must decide which parts of their work to hand over, while they remain accountable for what reaches students. We studied these decisions in Punjab, Pakistan, through a qualitatively driven mixed-methods study. We interviewed 13 teachers from government, private, NGO and vocational institutions, four administrators and one student, and coded each teacher's position on twelve educational tasks. Nine teachers accepted AI drafts or substantial assistance with lesson planning, but none accepted AI-drafted learning objectives, and eleven did not use AI to encourage or emotionally support students. Teachers who would accept AI marking required that the model be given a rubric or marking criteria. Building on assessment research and HCI work on verifiability, we call this pattern standard-anchored delegation: teachers handed a component of a task to AI when a standard outside the model, such as a textbook or rubric, defined a correct output and the teacher could apply that standard to the result. Having a standard was not always enough. Several government-school teachers did not use AI to mark quizzes even though the quizzes had answer keys, because they expected students to look for evidence of the teacher's effort. Checking AI output required subject knowledge and time, and private schools gave teachers more support for this than government schools did. Participants also read disclosure of AI use as a statement about whether the teacher had reviewed the work. We propose that teacher-facing AI tools ask for the relevant standard before generating and show each output beside it, and that schools account for the time that checking takes.",
+      "authors": [
+        "Muhammad Saleh Farooq",
+        "Muhammad Ahmad Khan",
+        "Muhammad Jon Raza"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC",
+        "cs.CY"
+      ],
+      "published": "2026-11-20T12:29:14+00:00",
+      "link": "https://arxiv.org/pdf/2611.27533v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "teachers delegating tasks to generative AI in lesson planning and marking",
+      "llm_evidence_cn": "教师将备课与批改任务委托给生成式AI",
+      "llm_evidence": "教师将备课与批改任务委托给生成式AI",
+      "canonical_evidence": "教师将备课与批改任务委托给生成式AI",
+      "llm_tldr_en": "A mixed-methods study in Punjab interviews teachers and administrators to examine which educational tasks they delegate to generative AI, finding selective acceptance of AI drafts but firm boundaries on objectives and emotional support.",
+      "llm_tldr_cn": "针对教师使用生成式AI时如何划定委托边界、又须对学生负责的问题，该文在巴基斯坦旁遮普省开展质性主导的混合方法研究，访谈13名教师、4名管理者与1名学生，并对12项教学任务逐项编码。结果显示九名教师接受AI起草或辅助备课，但无人接受AI拟定学习目标，多数不用于情感支持，接受AI评分者要求提供评分标准。研究为教学场景中的人机分工与责任设计提供依据。",
+      "llm_tldr": "针对教师使用生成式AI时如何划定委托边界、又须对学生负责的问题，该文在巴基斯坦旁遮普省开展质性主导的混合方法研究，访谈13名教师、4名管理者与1名学生，并对12项教学任务逐项编码。结果显示九名教师接受AI起草或辅助备课，但无人接受AI拟定学习目标，多数不用于情感支持，接受AI评分者要求提供评分标准。研究为教学场景中的人机分工与责任设计提供依据。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    }
+  ]
+}

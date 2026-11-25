@@ -1,0 +1,114 @@
+Title: WIP: Exploring Student-Created AI Agents and Instructional Videos to Foster Engagement in Computing Education
+
+URL Source: https://arxiv.org/pdf/2611.23058v1
+
+Published Time: Wed, 18 Nov 2026 03:38:34 GMT
+
+Number of Pages: 4
+
+Markdown Content:
+# WIP: Exploring Student-Created AI Agents and Instructional Videos to Foster Engagement in Computing Education 
+
+Lucas G. Zangari 
+
+School of Computing Instruction Georgia Institute of Technology 
+
+Atlanta, GA, USA lzangari3@gatech.edu 
+
+Olufisayo Omojokun 
+
+School of Computing Instruction Georgia Institute of Technology 
+
+Atlanta, GA, USA omojokun@cc.gatech.edu 
+
+Pedro Guillermo Feij´ oo-Garc´ ıa §
+
+School of Computing Instruction Georgia Institute of Technology 
+
+Atlanta, GA, USA pfeijoogarcia@gatech.edu 
+
+Abstract —This work-in-progress (WIP) research-to-practice study examines the use of student-created artifacts to promote active learning in a large undergraduate Software Design and Engineering (SWE) course. Active learning strategies have been shown to significantly enhance student engagement, comprehen-sion, and motivation, particularly in computing education. In this work, we explore the use of student-created artifacts to foster student engagement in higher-level Computer Science (CS) courses. Specifically, we examine the experiences of undergradu-ate and graduate CS students who participated in the creation of two types of artifacts: instructional video tutorials and conver-sational AI agents. The goal being to understand how designing these artifacts could support students in applying and learning course content. Students raised valuable insights regarding both experiences. Concerning the creation of instructional videos, they appreciated the interactivity brought through multimedia to their learning experiences, although some found the strategy to be time-consuming. Similarly, when designing conversational AI agents, students enjoyed the novelty and practical application of the task, while some encountered challenges related to the complexity of tools such as Google Dialogflow ES . We report on the potential of student-created artifacts to foster deeper engagement with course material, encouraging both creativity and critical thinking in computing education. 
+
+Index Terms —Student-created artifacts, instructional videos, active learning, Computing Education, large-scale education 
+
+I. I NTRODUCTION 
+
+Promoting active learning in the Computer Science (CS) classroom has been seen to increase student engagement and foster positive learning experiences [1]–[5]. Recent research has increasingly emphasized the importance of metacogni-tive and communicative skills within technical disciplines such as software engineering. Traditional assessments often emphasize correctness over comprehension, which can lead to surface learning strategies and short-term memorization. Student-created artifacts offer a promising avenue for address-ing these needs by engaging students in both the technical and communicative aspects of software design in computing education. 
+
+> §
+
+Corresponding author 
+
+Considering the benefits of active learning in computing education, the challenges observed when instructing higher-level courses in computing, and the current trends of artificial intelligence (AI) in computing education (which use AI tools as passive actors), we considered complementing the students’ learning processes by having them design their AI agents for a change. We consider active learning to be optimal when students take action that involves the creation of material that guides them toward learning by teaching. Thus, this Work-in-Progress (WIP) Research-to-Practice Study investigates the efficacy of student-created artifacts as learning tools in a large undergraduate Software Design and Engineering (SWE) course, when the student acts as the designer of multimedia (videos) and intelligent conversational agents to support their learning experiences. We proposed a learner-centered take-home activity that asked students to deliver student-created artifacts to help a fellow student learn the course content [1]–[5]. The assessment had students create two different artifact types: a conversa-tional AI agent (an interactive artifact) and two instructional video tutorials (non-interactive artifacts). We had students from two Summer 2024 courses participate: 1) an introductory course in Software Design and Engineering , and 2) a cross-listed senior-level (undergraduate and graduate) course on 
+
+User Interface Software Design . Both courses were offered by the College of Computing of the Georgia Institute of Technology. We report insights based on students’ perceptions of learn-ing and the use of student-created artifacts to support students’ learning and motivation in higher-level computing courses. II. B ACKGROUND 
+
+The use of student-created artifacts and active learning strategies have been prevalent in the Computer Science Ed-ucation (CS Ed) community. Active learning has been applied through classroom discussions, online lab environments, group work, learner-generated content [5]–[8], and have also been introduced and evaluated in large computing course formats [9]. The state of affairs is clear: Active learning strategies offer arXiv:2611.23058v1 [cs.CY] 17 Nov 2026 students across the board better learning opportunities when compared to surface learning strategies [7], with the promotion of structured interactions that bring students from passive to active participants in learning. One such way that educators have aided in the active learning push is through student-created artifacts [1], [2], [5], [8]. Students in this learning strategy create videos, explanation documents, and other materials that help bridge the gap between online and physical environments [1]. Past work has even explored the numerical differences in active versus surface learning, finding that students in active learning outperform their surface learning counterparts on exams and course failure rates [7]. Content creation as well as student-created artifacts have become powerful tools for active learning educators. Past work shows that no matter the STEM corner, these approaches yield numerous benefits for students measured and perceived learning [1], [3], [8], [9]. In CS Ed, past work has delved into active learning applications for the transition between abstract and tangible. Student-created artifacts have been shown to work well with physical media, allowing students to visualize component parts that would otherwise be difficult [2]. To further bridge this gap, peer-to-peer teaching can be employed to yield a wider net of benefit as student-created artifacts are shared and discussed among students [5], [8], [9]. These aforementioned active learning strategies illustrate the concept of learning-by-design, the sole purpose of which is allowing students to create artifacts that communicate ideas. Past work has agreed that these approaches encourage metacognition and critical thinking. When these effects meet the needs of software engineering and applied computing, the consequences are valuable for both the fields and the students [10]. When these tools are paired with immediate feedback and collaboration, the use of interactive technologies takes this approach one step further, ensuring an active learning environment [6]. When looking at the big picture, it’s clear that student-generated content, ranging from communicative videos to interactive systems, can support an elevated engagement with course concepts. The implications of this can help students not only reinforce their own learning but also foster a deeper connection to their learning process. III. I NTERVENTION 
+
+The strategy was proposed for two high-level Computer Science (CS) courses in summer 2024. We report data from 19 college CS students (out of 43 students in total–44% of par-ticipation) who shared their perceptions discussing how much they learned from designing each student-created artifact. The strategy was implemented during the final take-home assessments in both courses. The strategy and data collection were approved by the Institutional Review Board (IRB) of the Georgia Institute of Technology. The first course was an undergraduate introductory course in software design and engineering. The students then responded to four tasks: 1) First Task - Individual doing: The students created a video in which they shared, navigated, and explained a mind map they had to create to explain topics in software design and engineering. 2) Second Task - Individual doing: The students created a voice-recorded PowerPoint presentation explaining three design patterns. The Factory, Decorator, and Visitor Design Patterns. 3) Third Task - Individual doing: The students followed a tutorial provided for them to learn Google Dialogflow ES (a tool to build conversational AI agents) [11]. 4) Fourth Task - Team-based doing: The students created a conversational AI agent to help explain three software design patterns: Strategy, Composite, and Observer de-sign patterns. For the second class, a cross-listed course (i.e., graduate and undergraduate) on principles of user interface software, students responded to three tasks instead: 1) First Task - Individual doing: The students read achapter on Interface Architecture, created a mind map, and created a video where they shared, navigated, and explained the mind map. 2) Second Task - Individual doing: The students read two chapters. The first on accessibility and the second on 
+
+principles of visual design in user experience (UX). They then created a voice-recorded PowerPoint presenta-tion in which they described both readings and analyzed the relationship between both topics. 3) Third Task - Team-based doing: The students were asked to use Google Dialogflow ES [11] to create a conver-sational agent that helped them explain an academic paper on Human-Computer Interaction with regard to its contribution, research questions, methods, findings, etc. We asked students to share their perceptions of learning when creating their AI agents and instructional videos, in addition to their insights on what they liked and disliked about creating those artifacts. We used Qualtrics to gather student input. Students’ perceptions of learning were gathered using the questionnaire and method proposed by Diemer et al. [6]. For each type of student-created artifact (video or AI agent), the questionnaire featured six 7-point Likert scales–the word “artifact* ” is used in this manuscript to indicate “video” or 
+
+“conversational agent.” 
+
+1) “Creating my artifact* helped me apply course content to solve problems.” 2) “Creating my artifact* helped me learn the course content.” 3) “Creating my artifact* helped me me connect ideas in new ways.” 4) “Creating my artifact* helped me participate in the course in ways that enhanced my learning.” 5) “Creating my artifact* helped me develop confidence in the subject area.” 6) “Creating my artifact* helped me develop skills that apply to my academic career and/or professional devel-opment.” The students’ insights were collected via open-ended ques-tions concerning what they liked and disliked about creating their artifacts* :1) “Share what you liked about creating an artifact* to learn course concepts.” 2) “Share what you disliked about creating an artifact* to learn course concepts.” IV. F INDINGS 
+
+Students in both courses reported high levels of perceived learning for both types of artifacts we asked them to create– (Videos : Avg = 5.43, SD = 1.56 ; AI agents : Avg = 5.59, SD = 1.25 ). Moreover, detailing the students’ responses to the 7-point Likert scale for the statement, ”Creating my conversational agent helped me learn the course content,” we observed that they found creating conversational AI agents to explain their topics helpful to learn course content: 57.9% (n=11) students agreed with scores of six and seven. The students’ voices raised interesting insights about their experiences. Concerning the creation of instructional videos, the students appreciated the interactivity the strategy posed:  
+
+> •
+
+“I enjoyed that this gave me a real-world skill.” [P09]  
+
+> •
+
+“The experience felt a lot more interactive than other final exams.” [P03]  
+
+> •
+
+“It’s interactive and real-time.” [P01] Also, some of them suggested the strategy to be lengthy and time-consuming:  
+
+> •
+
+“It was a bit lengthy, maybe it should have been released a little earlier.” [P02]  
+
+> •
+
+“Sometimes it feels easier to just present on a Zoom call as opposed to recording a video.” [P03] Regarding the design of their conversational AI agents, students enjoyed the novelty and practical application of the task:  
+
+> •
+
+“I really liked that I learned something completely new that I didn’t even know existed.” [P04]  
+
+> •
+
+“Creating the conversational agent definitely gets you thinking like a researcher. It was also gave me practice creating a conversational agent without following the tutorial.” [P05]  
+
+> •
+
+“The conversational agent was a unique and interesting approach to apply course content.” [P12]  
+
+> •
+
+“I enjoyed learning about conversational agents.” [P08] Furthermore, some encountered challenges related to the complexity of using Google Dialogflow ES [11] and the steps required to train their AI agents:  
+
+> •
+
+“Debugging was sometimes a pain as students were not familiar with DialogFlow.” [P03]  
+
+> •
+
+“I disliked training the agent.” [P10]  
+
+> •
+
+“Conversational agents often take you in circles and do not give you great or accurate answers.” [P01] V. D ISCUSSION 
+
+Our work contributes insights into the potential of student-created artifacts to foster deeper engagement with course material, encouraging both creativity and critical thinking in computing education. Students in both courses reported high levels of perceived learning for both types of artifacts we asked them to create (Videos: Avg = 5.43, SD = 1.56; AI agents: Avg = 5.59, SD = 1.25). In addition, the students found the creation of AI instructional agents effective in learning course content: 57. 9% (n = 11) the students agreed with scores of six and seven. The students’ voices also raised interesting insights about their experiences. For example, they enjoyed the novelty and practical application of the task concerning the design of their AI instructional agents. Overall, the creation of both artifacts (videos and AI agents) brought positive perceptions among students. In particular, the idea of designing conversational AI agents was found to be unique and novel, suggesting that Human-Centered AI can be actively integrated into computing education with students going beyond the use of AI agents by being their designers. This study highlights the potential of student-created ar-tifacts to foster engagement, creativity, and critical thinking in computing education. Both instructional strategies were well received, with AI agent design standing out as a unique and promising approach. Our findings suggest that Human-Centered AI can be actively integrated into computing educa-tion, shifting students from AI users to AI designers. Future work will explore this strategy at a large scale, navigating the CS curricula from early to senior courses to assess its effectiveness in computing and broader STEM education. VI. L IMITATIONS 
+
+This pilot study has several limitations that shape both the scope of our conclusions and future research implications. Firstly, the study’s sample size drew from two small com-puting courses. This smaller sample size, alongside volun-tary participation can limit these findings from being ap-plied to broader undergraduate CS course contexts, especially fall/spring high enrollment seasons. Future iterations will focus on implementing these strategies in large-scale settings, improving the overall student experience and allowing for better statistical reliability. Secondly, this exploratory study was conducted in the absence of a traditional control group. While students did report high levels of perceived learning, we will strive in future iterations to plot these findings to more traditional end-of-course assessments. Thus, this study may require additional iterations before coming to decisive conclusion regarding student-created artifacts being more or less effective than tradi-tional instructive methods. Future work will hinge on including comparison conditions to assess the relative effectiveness of these interventions. Thirdly, the instructional strategies in this study utilized overlapping interventions, limiting our ability isolate the direct impacts from each. Measuring comparative effectiveness was not a direct goal of this study, and as such, we are limited in our ability to differentiate factors related to students’ reflections on each artifact type. Fourthly, we acknowledge that this work did not mention certain aspects of an experimental study such as research ques-tions and theoretical frameworks. This work communicates early findings from work that is in progress and still evolving on its methods and approaches. Future iterations will ensure to incorporate more robust experimental components, and include these elements to better communicate research claims and aims. Finally, though students reported positive responses regard-ing artifact-based assessments, we are limited in differentiating whether it was the assessments being authentic learning tasks or novel means of assessment that led to these findings. The framing of these interventions in future work will emphasize the pedagogical motivations as well use iterative feedback cycles to further explore student motivations. VII. F UTURE DIRECTIONS 
+
+Future research will explore the use of student-created AI in other computing-related formats, considering curric-ula oriented towards software, hardware, and with aims on different skills: communication, programming, etc. Moreover, we will explore the role of students’ situational factors and demographics concerning the effectiveness and acceptance of strategies like this. Next directions will extend the study toward large course formats in CS Ed, evaluating the impact of the strategy in students’ learning outcomes and understanding of course concepts. The experience reported in this manuscript refers to student satisfaction and engagement. Future steps will explore how students’ perceived learning relates to their factual learning of course topics, and evaluate the role of strategies like ours in students’ professional development as well as their self-efficacy. VIII. C ONCLUSIONS 
+
+This work-in-progress (WIP) research-to-practice study of-fers valuable insights into how student-created artifacts can foster deeper engagement with course material, promoting cre-ativity and critical thinking in computing education. Students reported high levels of perceived learning for both instructional videos and AI agents, with particularly strong responses to-ward the AI design strategy. The creation of these artifacts not only supported their understanding of the content but also introduced elements of novelty and relevance that students found motivating. Particularly, the majority of students rated the AI activity with scores of six and seven, indicating its effectiveness in reinforcing course concepts. Their reflections underscored the value of designing AI agents as a practical and engaging learning experience. In general, the positive perceptions shared by the students suggest a strong potential to use human-centered AI as a pedagogical strategy. The unique aspect of allowing students to act as AI designers, rather than passive AI users, opens promising directions for enhancing learning in computing disciplines. This shift encourages student agency and a more active role in the creation of educational technologies. Future research may expand the implementation of this strategy across different levels of the computing curriculum, exploring its impact not only in computing, but also in broader STEM education contexts. ACKNOWLEDGMENTS 
+
+This material is based upon work supported by the National Science Foundation under Grant No. 2434428. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation. The authors acknowledge the use of Grammarly and ChatGPT-4o, an AI-based language model developed by Ope-nAI, for spell checking, grammar, and editing assistance. Both tools were used to refine the language and enhance the manuscript’s clarity. No content, figures, or images were generated by AI for this work. REFERENCES [1] J. S. Arzaga, “Student-created versus youtube videos: Which type is more effective in enhancing biology learning in a virtual classroom?”

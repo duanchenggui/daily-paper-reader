@@ -1,0 +1,563 @@
+Title: VeriMath: Human-in-the-Loop Generation and Verification of Curriculum-Aligned Mathematics Assessment Items
+
+URL Source: https://arxiv.org/pdf/2611.23456v1
+
+Published Time: Thu, 19 Nov 2026 01:16:35 GMT
+
+Number of Pages: 27
+
+Markdown Content:
+# VeriMath: Human-in-the-Loop Generation and Verification of Curriculum-Aligned Mathematics Assessment Items 
+
+Quy P. Nguyen ∗1 , Duong Q. Nguyen 1, Dinh P. T. Nguyen 2, Truong-Giang T. Le 3, Truong A. Bui 3, Vi H. Vo 4, Quang-Thinh Bui 5, My-Phuong Ngo 6, Trong N. Do 1, Thao P. Le 7,Phuc M. Nguyen 8, H. Nguyen-Xuan †1,9 
+
+> 1
+
+Center for AI Research, VinUniversity, Ho Chi Minh City, Viet Nam 
+
+> 2
+
+An Lao High School, Gia Lai, Viet Nam 
+
+> 3
+
+Chu Van An High School for Gifted Students, Gia Lai, Viet Nam 
+
+> 4
+
+FPT Play, Ho Chi Minh City, Viet Nam 
+
+> 5
+
+Applied Mathematics and Data Science (AMaDaS) Research Group, Tien Giang University, Dong Thap, Viet Nam 
+
+> 6
+
+Tien Giang High School for the Gifted, Dong Thap, Viet Nam 
+
+> 7
+
+Department of Mathematics and Statistics, Quy Nhon University, Quy Nhon City, Viet Nam 
+
+> 8
+
+College of Electro-mechanics, Construction and Agro-forestry of Central Vietnam, Gia Lai, Viet Nam 
+
+> 9
+
+College of Engineering and Computer Science, VinUniversity, Hanoi, Viet Nam 
+
+Abstract 
+
+Automatic generation of mathematics assessment items is a growing area in educational arti-ficial intelligence, yet classroom deployment remains challenging. Generated questions must sat-isfy multiple constraints: mathematical correctness, curriculum alignment, appropriate cognitive difficulty, and educator reviewability. While prior work has advanced text generation, reliable assessment authoring requires granular control over localized examination formats and expert educational judgment. To address this challenge, we present VeriMath, a generalized, human-in-the-loop framework for generating rigorous, curriculum-constrained mathematics assessment drafts. Using annotated reference items, the framework anchors generation to the requested ex-amination section and cognitive reasoning level, then applies sequential automated verification and guided repair before submitting drafts for expert review. We evaluate VeriMath through a national curriculum case study using 4,555 mathematics items from the Vietnamese Grade 12 curriculum and 50 distinct generation requirements covering multiple-choice, true/false, and short-answer formats. Across two model backbones, the framework produces verifier-accepted drafts for 94% (47/50) of requirements per run. Blind expert evaluations confirm high mathe-matical accuracy and curriculum alignment, with strict teacher-readiness assessments accepting up to 56.8% of generated items. Analysis of rejected drafts reveals persistent domain-agnostic challenges involving formatting, statement validity, and solution-step completeness. These find-ings demonstrate that VeriMath can bridge generative AI and dependable educational appli-cations by producing highly reviewable assessment drafts within tightly constrained national curriculum frameworks. 
+
+Keywords: Automatic question generation · curriculum-aligned assessment · educational artifi-cial intelligence · human-in-the-loop systems · large language models · mathematics assessment 
+
+> ∗
+
+First author. Email: quy.np@vinuni.edu.vn 
+
+> †
+
+Corresponding author. Email: hung.nx2@vinuni.edu.vn 
+
+1arXiv:2611.23456v1 [cs.AI] 17 Nov 2026 1 Introduction 
+
+Mathematics assessment items are central to classroom practice, formative feedback and examina-tion preparation. They connect curriculum objectives, cognitive demand, response format, scoring evidence and learner interpretation. Educational taxonomies and item-writing guidelines show that assessment quality depends on alignment among learning goals, task demands and scoring decisions, not only on grammatical clarity (Anderson et al., 2001; Haladyna et al., 2002). In mathematics ed-ucation, this alignment is especially demanding because a problem statement, its representations, its solution path and its answer format must remain mathematically coherent for the intended learners (Verschaffel et al., 2020). Automatic question generation has long been studied as a way to reduce the cost of creat-ing learning and assessment material. Systematic reviews describe a broad literature that in-cludes template-based, rule-based, semantic and neural methods for educational question gener-ation (Kurdi et al., 2020). Recent instructional design research identifies pedagogical alignment and content reliability as persistent concerns in authoring supported by artificial intelligence (AI) (Kibar & Ilgaz, 2026). In mathematics, early and intermediate systems generated personalized or constrained word problems from structured specifications, equations, topics and context constraints (Polozov et al., 2015; Z. Wang et al., 2021; Zhou & Huang, 2019). More recent retrieval-based and memory-based approaches improve relevance and diversity by reusing related examples while pre-serving generation flexibility (W. Qin et al., 2024). Large language models (LLMs) extend this line of work because they can produce fluent ex-planations, adapt content to learner contexts and support educational content creation at scale. Research on large language models in education emphasizes opportunities for personalization and teacher support, but also stresses the need for critical checking, pedagogical grounding and human oversight (Kasneci et al., 2023). At the assessment-authoring level, Cassano et al. (2026) embed item-writing criteria in prompts for transcript-based multiple-choice question generation and evalu-ate outputs through instructors’ judgments. These findings establish evidence-informed validation and human judgment as necessary quality controls for educational use. Mathematics-specific studies further use generative models to create contextualized and per-sonalized word problems grounded in authentic contexts (Utami et al., 2024). Teacher-evaluated systems such as MATHWELL and EDUMATH show that solvability and answer accuracy do not by themselves ensure educational appropriateness or standards alignment (Christ et al., 2024, 2026). These developments motivate moving from isolated prompt outputs toward authoring workflows in which generation, verification and expert judgment are explicitly connected. The problem studied here is curriculum-constrained mathematics assessment item authoring. Given a target grade, curriculum learning outcome, assessment schema, response constraints and cognitive or difficulty specification, the goal is to generate an original item draft with a correct solution and usable metadata. The draft must be mathematically valid, aligned with the intended learning outcome, matched to the requested level, structurally compatible with the target item format, L ATEX-compilable and sufficiently novel with respect to prior assessment material. This formulation is broader than ordinary math word problem generation because it treats an item as an assessment artifact that must be ready for professional review. Existing methods leave several limitations for this setting. The instructional-design review emphasizes practitioner judgment, while the transcript-based question-generation study illustrates quality-constrained authoring and instructor evaluation (Cassano et al., 2026; Kibar & Ilgaz, 2026). For curriculum-constrained mathematics assessment, the corresponding design problem is to con-nect local outcomes, assessment schemas, difficulty conventions, solution verification, novelty and teacher readiness within one workflow. Template and symbolic systems can enforce structure, but 2they often provide limited linguistic and mathematical diversity. Neural and large language model-based systems improve fluency and variation, but they may still produce hidden assumptions, invalid official answers, ambiguous wording, curriculum mismatches or near copies of familiar items (Christ et al., 2024; Utami et al., 2024; Z. Wang et al., 2021). Synthetic mathematical data pipelines such as MathGenie, MetaMath, WizardMath and OpenMathInstruct 2 demonstrate the value of generated mathematics data for training reasoning models, but their primary evaluation target is often downstream solver performance rather than teacher readiness for classroom or examination use (Lu et al., 2024; Luo et al., 2025; Toshniwal et al., 2025; Yu et al., 2024). These limitations motivate three research questions: (RQ1) Can large language models generate structurally complete mathematics assessment drafts under explicit curriculum, format and level constraints? (RQ2) Can a context-specific teacher-annotated corpus provide useful anchors for difficulty and style without encouraging surface reuse? (RQ3) How large is the remaining gap between automated verification and teacher judgments of readiness? These questions are important because educational deployment requires more than fluent generation. It requires a workflow that makes generated items controllable, inspectable and open to expert rejection. VeriMath addresses these questions through a configurable human-in-the-loop authoring frame-work for mathematics assessment drafts. A deployment supplies its assessment schemas, curriculum outcomes, cognitive or difficulty conventions, response constraints, annotated reference corpus and expert-review rubric. The framework retrieves reference items that match the requested schema and level specification. These references guide style, format and reasoning depth, while the generated item must remain original. A generator then produces a complete draft, and repeated verification checks mathematical correctness, requirement alignment, answer consistency and structural valid-ity. When verification fails, the failure report is used to revise the draft under the same requirement. The final output is not treated as an official examination item; it is a candidate for teacher review. The framework is therefore defined independently of any particular national curriculum, whereas each deployment is configured with context-specific educational resources and conventions. We instantiate and evaluate it through a Vietnamese Grade 12 national-curriculum case study. The reference corpus contains 4,555 teacher-annotated national and practice examination questions, and the experimental requirement set covers multiple-choice, true-or-false and short-answer formats. Two large language model backbones are evaluated through full-pipeline diagnostics and blind expert review. The central empirical issue is the difference between automated acceptance and teacher readiness, because this difference indicates which defects still require expert assessment judgment after automated verification. The study provides evidence from this single curriculum context rather than a cross-country validation. The main contributions are as follows: • A curriculum-constrained formulation of mathematics assessment item authoring in which assessment schemas, learning outcomes, cognitive or difficulty specifications, response con-straints and curriculum metadata are supplied by the deployment context. • A configurable human-in-the-loop framework that combines context-specific difficulty anchor-ing with repeated verifier-guided revision before a draft is accepted for expert review. • A national-curriculum case-study instantiation using a 4,555-item Vietnamese Grade 12 math-ematics corpus annotated by teachers for assessment schema and cognitive or difficulty level. • An empirical evaluation of this instantiation with two large language model backbones, includ-ing automated acceptance, runtime and token cost, embedding-based novelty, blind expert review and expert-marked error categories. 3Table 1: Positioning of VeriMath Relative to Major Lines of Mathematics Item Generation 
+
+Research line Representative work Main technical idea Strengths and remaining gap 
+
+Structured genera-tion Polozov et al. (2015) Generate problems from structured specifications, mathematical models or student relevant contexts. Strong control over formal structure, but limited variation and weak sup-port for local examination formats. Neural word prob-lem generation Zhou and Huang (2019), Z. Wang et al. (2021), Ni-yarepola et al. (2022) Condition generation on equations, topics, contexts or language resources. Improves fluency and diversity, but does not fully address curriculum metadata, item schema validity or ex-pert readiness. Pedagogically guided educational authoring Cassano et al. (2026); Kibar and Ilgaz (2026) Connect AI-assisted design with pedagogical review and explicit item-writing crite-ria. Provides an instructional-design and assessment-authoring basis; VeriMath examines these concerns in curriculum-constrained mathematics. Planning and re-trieval L. Qin et al. (2023); W. Qin et al. (2024), Cheng et al. (2025) Use structure planning, memory retrieval or ques-tion planning to guide generation. Improves controllability, yet generated outputs still require stronger review for mathematical validity and assess-ment use. Teacher evaluated generation Christ et al. (2024, 2026), Utami et al. (2024) Use teacher labels, stan-dards or authentic contexts as educational quality sig-nals. Connects generation to pedagogy, but many systems focus on word problems rather than national examination item schemas. Verification and evaluation Cobbe et al. (2021), Light-man et al. (2024), Liu et al. (2023), Zheng et al. (2023) Use verifier models, process feedback or model based rubrics to screen generated reasoning. Scales diagnostic review, but auto-matic judgment remains an imperfect substitute for expert educational as-sessment. 
+
+VeriMath This study Combine context-specific difficulty anchors, repeated verifier guided revision and blind teacher review. Targets curriculum constrained assess-ment drafts with configurable schemas and explicit level, novelty and readi-ness evidence. 
+
+• An analysis of the readiness gap between automated verification and teacher judgment, iden-tifying remaining failure modes and the continuing need for human oversight in constrained educational generation. 
+
+# 2 Related Work 
+
+Research on automated mathematics item creation has developed along three connected directions. The first direction studies automatic question generation and mathematical word problem gener-ation. It moves from structured generation and knowledge sources toward neural generation with stronger mathematical constraints. The second direction uses large language models for control-lable educational content generation, where teacher annotations, standards and authentic contexts become central quality signals. The third direction studies verification and evaluation, including reasoning verifiers, synthetic mathematical data pipelines and model as judge rubrics. VeriMath draws from all three directions, but it targets a stricter authoring problem in which local curricu-lum metadata, item format, difficulty anchoring, novelty and teacher readiness must be considered together. Table 1 summarizes how VeriMath is positioned relative to major methodological lines in mathematics item generation. 42.1 Automatic Question Generation and Mathematical Word Problem Gener-ation 
+
+Automatic question generation has long been studied as an educational technology for producing learning objects, practice questions and assessment material. Kurdi et al. (2020) provide a broad foundation for educational question generation and show that evaluation practices vary across domains and generation settings. Within instructional design, Kibar and Ilgaz (2026) synthesize 28 studies and identify content reliability, pedagogical alignment and practitioner judgment as central considerations. In mathematics education, the generated item must also preserve conceptual coherence, valid representations and solvable structure (Verschaffel et al., 2020). General assessment research further shows that item quality depends on alignment among objectives, cognitive demand, response format and scoring interpretation (Anderson et al., 2001; Haladyna et al., 2002). These foundations motivate treating mathematical item generation as an assessment authoring problem rather than a surface text generation problem. Early mathematical word problem generation emphasized explicit control. Polozov et al. (2015) generate personalized word problems from structured specifications, mathematical models and stu-dent relevant contexts. This type of method is attractive because it exposes variables and con-straints to the author. Its main limitation is that hand designed structures restrict linguistic variety and make adaptation to complex examination formats costly. Neural generation increases diversity but introduces new validity challenges. Zhou and Huang (2019) generate mathematical word problems from equations and topics using a neural model with a fusion mechanism and an entity consistency objective. Z. Wang et al. (2021) improve problem generation with mathematical consistency and context constraints. Niyarepola et al. (2022) extend the task to multilingual generation, showing that language resources matter for broader educational access. Qin et al. introduce structure planning and knowledge enhancement to improve logical coherence (2023), and later use disentangled memory retrieval to retrieve related logical and scenario descriptions for generation (2024). These works establish important methods for controlling mathematical content, but they mainly focus on word problem quality rather than complete assessment artifacts. Recent work also connects question generation with instructors’ evaluation of usable assess-ment material. Cassano et al. (2026) build a transcript-based multiple-choice question workflow around item-writing guidelines and report a mixed-methods evaluation with seven instructors and 257 questions. Remaining relevance and wording issues illustrate why structural compliance alone is insufficient. Their study concerns video-based materials rather than national-curriculum mathe-matics. VeriMath focuses on the latter setting through teacher-annotated anchors, explicit schemas, iterative verification and repair, novelty screening and blind expert review. 
+
+2.2 Controllable and Teacher Evaluated Educational Generation 
+
+Large language models broaden the design space because they can generate fluent explanations, adapt wording to educational contexts and support authoring at scale. At the same time, education focused studies emphasize that generative artificial intelligence requires human oversight, pedagog-ical design and careful integration with teacher judgment (Kasneci et al., 2023). This perspective is important for mathematics assessment because a fluent generated question may still be misaligned with the intended learning outcome or unfair for the target learners. Recent work therefore moves from generic generation toward controllable and teacher evaluated generation. Utami et al. (2024) study contextualized and personalized mathematical word problem generation in authentic contexts and examine its influence on geometry learning. MATHWELL 5uses teacher annotations to target solvability, answer accuracy and educational appropriateness for mathematics word problems (Christ et al., 2024). EDUMATH extends this direction toward standards aligned and customized educational word problems with expert and model based evalu-ation (Christ et al., 2026). These systems show that educational quality must be evaluated with pedagogical criteria, not only answer correctness. Another line improves controllability through planning, collaboration and difficulty manipula-tion. Cheng et al. (2025) formulate educational mathematical question generation as a planning problem with reflection over objectives. Karbasi et al. (2025) use a collaborative multi agent frame-work to refine generated math problems under criteria such as clarity, relevance, answerability and difficulty matching. SAND Math generates novel mathematics problems and modifies their diffi-culty for synthetic training data construction (Manem et al., 2025). These approaches are method-ologically close to VeriMath because they introduce intermediate control signals. VeriMath differs by using context-specific teacher annotated difficulty anchors, enforcing configurable assessment schemas and measuring readiness through blind expert review. 
+
+2.3 Verification, Synthetic Data and Evaluation 
+
+Verification is a central issue because mathematical outputs can look plausible while containing in-valid assumptions, wrong answers or incomplete solutions. Chain of thought prompting encourages intermediate reasoning, and self consistency aggregates multiple reasoning paths to improve answer reliability (X. Wang et al., 2023; Wei et al., 2022). Cobbe et al. (2021) show that trained verifiers can rank candidate solutions for grade school mathematics problems. Lightman et al. (2024) show that process supervision can provide feedback at intermediate reasoning steps and improve mathe-matical reasoning reliability. These studies focus mainly on solving or judging solutions. VeriMath adapts the verification idea to item authoring, where the object under review includes the problem statement, answer, solution, metadata and format. Generated mathematics is also used to train stronger reasoning models. MetaMath bootstraps mathematical questions for large language model training (Yu et al., 2024). WizardMath uses reinforced instruction evolution for mathematical reasoning (Luo et al., 2025). MathGenie uses question back translation and rationale based verification when constructing synthetic data (Lu et al., 2024). OpenMathInstruct 2 scales open mathematical instruction data, while MathFusion combines mathematical instructions across sources to improve problem solving (Pei et al., 2025; Toshniwal et al., 2025). These methods demonstrate the value of generated mathematics data, but their primary success criterion is downstream solver performance. Assessment item authoring requires a different criterion, namely whether a teacher can safely review and deploy the generated item. Finally, model based evaluation offers scalable diagnostics but remains limited for educational readiness. G Eval uses large language models with generated evaluation steps and form based scoring for natural language generation quality (Liu et al., 2023). Zheng et al. (2023) study model as judge evaluation and document useful agreement with human preferences as well as biases such as position, verbosity and self enhancement effects. These findings motivate using automated diagnostics cautiously. VeriMath therefore reports verifier acceptance and operational metrics, but treats blind expert review as the primary evidence for educational readiness. 6Table 2: Assessment Schemas Used in the Vietnamese Case-Study Instantiation              
+
+> Case-study code s
+> Item format Required output Level specification
+> 1Multiple choice One stem, four answer options, one cor-rect label and a detailed solution. One level from Table 3. 2True or false cluster One shared stem, four statements, four binary labels and a detailed solution for all statements. Four entry profile
+> L= ( ℓ1, ℓ 2, ℓ 3, ℓ 4). 3Short answer One stem, one numeric final answer and a detailed solution, with rounding instruc-tions when needed. One level from Table 3.
+
+# 3 Task and Dataset 
+
+3.1 Task Formulation and Output Schema 
+
+Let R = ( s, o, L, q, m ) denote an item generation requirement. The variable s ∈ S identifies an assessment schema from a set S defined by the deployment context, o is the curriculum learning outcome or standard, L is the context-specific cognitive or difficulty specification, q contains re-sponse constraints such as answer type and language and m contains curriculum metadata such as grade, subject, chapter and lesson section. Neither S nor the taxonomy underlying L is fixed by the VeriMath architecture. A deployment supplies its schema definitions and operational level conventions as part of the framework configuration. Given R and a reference corpus Dref , the goal is to generate an assessment draft X = ( P, S, M ), where P is the problem statement, S is the solution and official answer and M is the generated metadata. The tuple X should be mathematically correct, aligned with o, matched to L, valid under the requested assessment schema and sufficiently novel with respect to Dref . The output is treated as a teacher reviewable draft rather than a final examination artifact. In the Vietnamese Grade 12 case-study instantiation, SVN = {1, 2, 3} uses three schema iden-tifiers mapped to the item formats summarized in Table 2. The multiple-choice and short-answer schemas use a single level, while the true-or-false cluster schema uses L = ( ℓ1, ℓ 2, ℓ 3, ℓ 4) because it contains four independently judged statements. The response structure for this instantiation is determined by s and enforced by the generation and verification process described in Section 4. These three schemas are the configuration evaluated in this study, not a universal schema set required by VeriMath. 
+
+3.2 Reference Corpus, Annotation and Difficulty Levels 
+
+The case-study reference corpus Dref contains 4,555 mathematics problems collected from Viet-namese national and practice examination sources. Mathematics teachers annotated each item with its assessment schema and cognitive or difficulty level. The corpus is used to select difficulty anchors, estimate novelty by maximum embedding similarity and define the expected distribution of topics and formats. To reduce leakage risk, anchors are used only as format and difficulty references, while generated items are checked for novelty against the full corpus. The annotation protocol is designed as a two stage process: initial labeling followed by se-nior teacher adjudication of disagreements. Discussion focuses on the minimum reasoning depth 7Table 3: Teacher-Annotated Cognitive/Difficulty Levels in the Vietnamese Case Study     
+
+> Level Definition
+> Recognition Direct formula or concept recall with at most one reasoning step. Comprehension Requires interpretation and combination of known concepts. Application Requires multi step reasoning or a non routine strategy.
+
+Table 4: Subject Distribution of the Grade 12 Requirement Set       
+
+> Curriculum subject Slots Share
+> Calculus/statistics 67 83.8% Geometry 13 16.2%
+
+needed to solve the item rather than on surface complexity. The resulting labels are teacher opera-tional categories for anchor selection and level matching. They are not treated as psychometrically calibrated item difficulty parameters. VeriMath does not require a universal difficulty taxonomy; it assumes that each deployment supplies an operational specification for L and compatible corpus annotations. In the Vietnamese case study, we use one variable for both cognitive level and practice-examination difficulty. This reflects the local authoring setting, where perceived difficulty depends on reasoning depth, item format and examination convention. The three levels used in this instantiation are defined in Table 3. For expert evaluation, generated items are reviewed under a blind protocol. Mathematics educators rate each item using four criteria: mathematical correctness and answer consistency, alignment with the assigned learning outcome, match to the required cognitive or difficulty level and clarity or readiness for examination use. Correctness and alignment are recorded as pass or fail labels. Level match and clarity are scored on a 1 to 5 scale. Generation source, model identity and process traces are hidden from reviewers. 
+
+3.3 Requirement Set and Evaluation Dimensions 
+
+The experimental requirements are constructed from the Vietnamese Grade 12 mathematics cur-riculum, with emphasis on learning outcomes relevant to the national high school graduation ex-amination. Each requirement specifies one of the case-study assessment schemas, a curriculum learning outcome, a cognitive or difficulty level and topic metadata. The study is restricted to Grade 12 because this grade is most directly aligned with the examination setting considered here. The requirement set contains 50 items sampled with a fixed schema ratio of 6:2:2: 30 multiple choice items, 10 true or false clusters and 10 short answer items. The single outcome schemas in Table 2 each represent one curriculum learning outcome. The true or false cluster schema in Table 2 represents four learning outcome positions because every cluster contains four independent statements. Therefore, the 50 items collectively represent 80 curriculum learning outcome slots. The set contains 32 Recognition, 24 Comprehension and 24 Application slots. Table 4 summarizes the subject distribution. Fig. 1 shows the topic block distribution over these slots. Table 5 summarizes the corpus and experimental pools. Evaluation separates operational validity from teacher readiness. Operational diagnostics mea-sure whether the pipeline can produce a structurally complete and verifier accepted item draft under R. Novelty measures dissimilarity from Dref using maximum embedding similarity. Teacher 80 20 40 60 Vectors and coordinates in space Integral calculus and applications Planes, lines, and spheres in space Grouped-data statistics Conditional probability and Bayes rule Function analysis and graph sketching 47.5% (38) 15.0% (12) 13.8% (11) 7.5% (6) 11.2% (9) 5.0% (4) 
+
+Share of learning-outcome slots (%)  
+
+> Calculus/statistics Geometry
+
+Figure 1: Topic-block distribution of the Grade 12 requirement set. Bars report the share of the 80 learning-outcome slots, with slot counts shown in parentheses Table 5: Dataset Statistics 
+
+Data split or pool Total s = 1 s = 2 s = 3 Reference corpus Dref 4,555 2,988 449 1,118 Experiment requirements 50 30 10 10 Experiment learning outcome slots 80 30 40 10 
+
+readiness is assessed separately through blind expert review. This separation prevents automatic acceptance or novelty scores from being interpreted as substitutes for educational quality. 
+
+# 4 Methodology 
+
+Using the task notation from Section 3.1, VeriMath generates teacher reviewable mathematics assessment drafts under curriculum, schema and difficulty constraints supplied by the deployment context. It contains two main inference time components: Difficulty Anchoring, described in Section 4.1, and a Consecutive Verification Mechanism (CVM), described in Section 4.2. Fig. 2 summarizes the framework. 
+
+4.1 Difficulty Anchoring and Candidate Generation 
+
+Given a requirement R = ( s, o, L, q, m ) with s ∈ S , VeriMath selects k anchor problems 
+
+BR = {b1, . . . , b k}
+
+from Dref . Anchor selection begins by filtering problems with the same assessment schema s and a compatible level specification L, according to the rules supplied for the deployment. In the Vietnamese case-study instantiation, compatibility for the single-level schemas in Table 2 means the same level. For the true-or-false cluster schema, the selector uses three deterministic tiers over the four-entry profile L: exact profile matching, same level-distribution matching and required-level-presence matching. The last tier requires an anchor to contain each level that appears in the target profile at least once. If no tier yields enough anchors, the requirement is rejected rather than using a weaker schema-only search. 9Input Requirements       
+
+> - Format Type (1, 2, 3)
+> - Learning Objective
+> - Cognitive Levels Item Bank
+> /DB
+> Hard Filter
+> (Format + Cognitive Level)
+> nBaseline Problems
+> (Difficult Anchors)
+> LLM Generator
+> (Qwen Model)
+> Initial Draft
+> (Problem + Solution)
+> Self-Improvement
+> (Internal Reflection)
+> Verifier Agent
+> Compile & Fix
+> Final Problem
+> Rewrite
+> (using Feedback)
+> Pass
+> Criteria?
+> Passed m
+> Consecutive
+> times?
+> 1. Initialization & Retrieval Module Fail No Pass Yes k max rewrites 2.Join Generation Module 3. Iterative Verification Module 4. Output
+
+Figure 2: Overview of the VeriMath framework. Difficulty Anchoring selects schema- and level-matched reference items, while CVM repeatedly verifies and repairs a candidate before acceptance The selected anchors are not copied into the generated question. They provide examples of expected format, reasoning depth and examination style. The generator Mgen receives R and BR
+
+and produces an initial candidate 
+
+X0 = ( P0, S 0, M 0)following the output schema associated with s. A self improvement step then checks the candidate for mathematical mistakes, formatting issues and mismatches with L. The resulting candidate 
+
+Xcand = ( Pcand , S cand , M cand ) is sent to CVM. The generator, verifier and corrector use different role prompts. The generator acts as an examination item writer. The verifier acts as a strict mathematics teacher and reviewer. The corrector revises an item only after receiving a detailed failure trace. For the true or false cluster schema in Table 2, both generator and verifier receive the four entry level profile L, and the verifier is instructed to reject an item if any statement fails to match its required level. 
+
+Representative generator prompt. 
+
+You are an expert mathematics assessment item writer. Generate one original mathematics problem that satisfies the required educational competencies and follows the specified struc-tural format. The problem must test the required competency, be objectively gradable, be mathematically correct, match the reasoning depth of the provided anchor problems and avoid paraphrasing those anchors. Use valid L ATEX syntax, avoid ambiguous wording and return one valid JSON object following the specified assessment schema. 
+
+The corresponding user message specifies the curriculum learning outcome, the selected difficulty anchor problems and the instruction to generate a new original problem that matches the reasoning depth of the anchors while remaining precise and unambiguous. 
+
+4.1.1 Requirement Output Examples With Anchors 
+
+The following examples come from the Vietnamese case-study instantiation and show the observable requirement output behavior of the generator without intermediate verifier and correction steps. In each case, the requirement specifies an assessment schema, target level and learning outcome. 10 Anchors are positive references for format and reasoning depth, but negative references for content reuse. 
+
+Multiple choice example. The requirement uses the s = 1 schema in Table 2. It asks for one multiple choice item with four answer options, one correct label and a detailed solution. The target level is Recognition and the knowledge point is the basic substitution method. One retrieved multiple choice anchor asks for the definition of an antiderivative, with four answer options and a short deterministic solution. This calibrates the output to a low level calculus multiple choice item, but the generated item targets substitution rather than paraphrasing the definition question. The generated item asks students to compute 
+
+∫ 10
+
+(2 x + 1) ex2+x dx 
+
+using the substitution method. The answer options are: A. e2 − 1; B. e − 1; C. ( e2 − 1) /2; D. 
+
+ex2+x∣∣10.
+
+Answer. A. 
+
+Solution. Let u = x2 + x, so du = (2 x + 1) dx . When x = 0, u = 0; when x = 1, u = 2. Therefore ∫ 10
+
+(2 x + 1) ex2+x dx =
+
+∫ 20
+
+eu du = eu∣∣20 = e2 − 1.
+
+True or false cluster example. The requirement uses the s = 2 schema in Table 2. It asks for one common stem, four true or false statements and a detailed solution for all statements. The target topic is geometry, specifically sphere equations in space. One retrieved true or false cluster anchor describes motion in Oxyz and a danger region modeled by a sphere. It supplies the clustered statement structure and intended geometry difficulty. The generated item changes the context to a static sphere equation and asks about center, radius, expansion and inside or on sphere tests. The generated item gives the sphere (x − 1) 2 + ( y + 2) 2 + ( z − 3) 2 = 25 and asks whether the following statements are true or false: (a) the center is (1 , −2, 3) and the radius is 5; (b) if M (6 , −2, 3) lies on the sphere, then the distance from M to the center is 5; (c) the general equation is x2 + y2 + z2 − 2x + 4 y − 6z + 1 = 0; and (d) the point N (2 , −1, 4) lies inside the sphere. The labels are True, True, False and True, respectively. 
+
+Solution. From the standard form, the center is I(1 , −2, 3) and the radius is R = 5. For 
+
+M (6 , −2, 3), IM = 5, so statement (b) is true. Expanding the sphere gives 
+
+x2 + y2 + z2 − 2x + 4 y − 6z − 11 = 0 ,
+
+so statement (c) is false. Finally, IN = √3 < 5, so N lies inside the sphere and statement (d) is true. 
+
+4.2 Consecutive Verification and Repair 
+
+CVM reduces the risk that an invalid question is accepted after a single verification pass. A verifier role Mver reviews the generated question by solving it, checking the official answer and solution and verifying that it satisfies the requirement R. In the main configuration, the verifier is separated from the generator by different prompts and decoding settings, but it is not a completely different model family. 11 Algorithm 1. VeriMath Inference With Consecutive Verification 
+
+1 Input: requirement R, corpus Dref , anchor count k, pass threshold N , repair limit T .2 Select anchors BR ← SelectAnchors( R, Dref , k ). 3 Generate initial candidate ( P, S, M ) ← M gen (R, B R). 4 Self-improve ( P, S, M ) using the schema associated with s.5 Set passes ← 0 and repairs ← 0. 6 while passes < N and repairs < T do 
+
+7 (d, E ) ← M ver (P, S, M, R ). 8 if d = pass then passes ← passes + 1. 9 else revise ( P, S, M ) ← M gen (R, B R, E ); set passes ← 0 and repairs ← repairs + 1. 10 end while .11 if passes = N then return accepted tuple ( P, S, M ); otherwise return rejected sam-ple. 
+
+A question is accepted only if it passes N = 3 verification checks in a row. Formally, let Xt = ( Pt, S t, M t) denote the candidate item tuple at verification step t, with initial counter c0 = 0. At each step, the verifier returns (dt, E t) = Mver (Xt, R ), (1) where dt ∈ { pass , fail } is the verifier decision and Et is the failure trace. CVM then updates the consecutive pass counter as 
+
+ct =
+
+{ct−1 + 1 , dt = pass ,
+
+0, dt = fail . (2) If the verifier fails the candidate, the next candidate is repaired using the failure trace: 
+
+Xt+1 =
+
+{Xt, dt = pass ,
+
+Mgen (R, B R, E t), dt = fail . (3) The candidate is accepted only when ct = N before the repair budget T is exhausted; otherwise, the requirement is returned as a rejected sample. This formulation makes explicit that CVM is a stateful verification and repair process in which any failed check resets the acceptance trajectory. If a check fails, the verifier returns a failure trace E that explains the error and the reason for rejection. The generator then revises the question using this feedback while keeping the original requirement unchanged. Algorithm 1 summarizes the process. CVM requires repeated successful verification, making acceptance less dependent on one favor-able verifier decision. It also turns failed verification traces into revision feedback, allowing the system to fix unclear statements, incorrect answers, formatting problems and difficulty level mis-matches before rejecting a candidate. In all reported experiments, a candidate receives at most three verifier guided repair attempts. 
+
+Representative verifier prompt. 
+
+You are an expert mathematician and a strict mathematics teacher. Verify the provided math-ematical problem rigorously. A problem is correct only if every step is justified. Act as a verifier, not as an exam setter. Do not fix errors. Classify issues as incorrect problem or an-swer, ill-posed or ambiguous problem, or formal/language/formatting issue. End with either 
+
+IS_CORRECT: TRUE or IS_CORRECT: FALSE .
+
+Representative corrector prompt. 
+
+Below is a bug report from a verifier. Revise the problem to address it. Preserve the original requirement unless the verifier identifies the requirement interpretation as the source of failure. 
+
+12 Table 6: Verifier-Guided Revision Trace for a Generated Item 
+
+Step Decision or output Relevant content 
+
+Init Candidate generated Stem transforms y = f (x) = x3 by horizontal compression, vertical stretch, reflection over the x-axis and a shift right by 1. It asks for the 
+
+x-coordinate where the tangent is horizontal. Answer: 1. Self-improve Candidate rewritten The candidate changes to a horizontal stretch by 3, vertical compression by 1 /2, reflection over the y-axis and upward shift by 2. It asks for slope 
+
+−3 but reports answer 2. Verify 1 IS_CORRECT: FALSE The verifier derives h(x) = −x3/54 + 2 and h′(x) = −x2/18. Solving 
+
+h′(x) = −3 gives x = ±3√6, so the official answer 2 is invalid. Correct 1 Candidate rewritten The corrected candidate uses horizontal stretch by 2, vertical compres-sion by 1 /2, reflection over the y-axis and upward shift by 1. It derives 
+
+h(x) = −x3/16 + 1 but reports answer 0.5. Verify 2 IS_CORRECT: FALSE The verifier accepts the transformation and derivative but rejects the answer: h′(x) = −3 gives x = ±4, not 0.5. Correct 2 Candidate rewritten The candidate reports answer −4, but the stem still has no extra con-dition, so both x = 4 and x = −4 satisfy the slope condition. Verify 3 IS_CORRECT: FALSE The verifier rejects the item as incomplete because the official answer omits the valid solution x = 4. Correct 3 Candidate rewritten The stem adds the condition x < 0, preserving the same transformation and slope requirement. The final answer becomes −4. Verify 4 IS_CORRECT: TRUE First successful verification pass. The verifier checks the graph trans-formations, derivative and condition x < 0. Verify 5 IS_CORRECT: TRUE Second consecutive successful verification pass. Verify 6 IS_CORRECT: TRUE Third consecutive successful verification pass. The item is accepted by CVM. 
+
+4.2.1 Worked Example of Verifier-Guided Revision 
+
+This example uses the s = 3 short-answer schema from the Vietnamese case-study configuration in Table 2, with Application level and the learning outcome “graph transformations.” Three same-schema and same-level anchors are used only to calibrate format and reasoning depth. The trace in Table 6 focuses on the generated candidate, verifier feedback and subsequent revisions. The final accepted item can be rendered in English as follows. 
+
+Stem. The graph of y = h(x) is obtained from the graph of y = f (x) = x3 by applying a horizontal stretch by factor 2, a vertical compression by factor 1 /2, reflection over the y-axis and an upward shift by 1 unit. Determine the x-coordinate of the point where the tangent to the graph of h(x) has slope −3 and x < 0. 
+
+Answer. −4. 
+
+Solution outline. Since 
+
+h(x) = 12 f
+
+(
+
+− x
+
+2
+
+)
+
++ 1 = − x3
+
+16 + 1 ,
+
+we have h′(x) = −3x2/16. Setting h′(x) = −3 gives x2 = 16, so x = ±4. The condition x < 0selects x = −4. 
+
+# 5 Experiments 
+
+The experiments instantiate VeriMath in the Vietnamese Grade 12 setting and address two ques-tions aligned with its intended use as an assessment-authoring support tool. First, can the end-to-end framework produce structurally complete, novel, verifier-accepted drafts under the curriculum and format constraints of this case study? Second, do human teachers judge those drafts as ready for educational use? The first question is answered through the diagnostics in Section 5.2. The second is answered through the expert review and failure analysis in Sections 5.3 and 5.5. 13 5.1 Experimental Setup 
+
+5.1.1 Models and Decoding 
+
+The generation pipeline is evaluated with two backbones: Qwen3-8B and gpt-oss-20b . Within each backbone run, the same underlying model is used for generation, self-improvement, verification and correction, but each step uses a different role prompt. Thus, the verifier is a separately prompted role rather than an independent model family. Question generation uses random sampling with temperature 1.0. CVM requires three consecutive verifier approvals and allows up to three verifier-guided correction attempts before rejection. After verification, a separate L ATEX formatting pass is applied with up to three repair attempts. Novelty is measured by comparing each generated question with all 4,555 questions in the reference dataset using a multilingual sentence-embedding model. An automated LLM-judge route was also explored as a separate diagnostic role, but it is not used as primary readiness evidence in this study. The judge prompt asks the model to evaluate exactly four dimensions on a [0 , 1] scale: requirement alignment, level fidelity, language fluency and mathematical accuracy. It explicitly defines level fidelity as matching the requested teacher-annotated cognitive/difficulty level and requests valid JavaScript Object Notation (JSON) with those four keys and a brief feedback field. 
+
+5.1.2 Data and Splits 
+
+The teacher annotated reference corpus contains 4,555 questions and is divided by exam source into an anchor set and a separate evaluation set. This split helps reduce overlap from highly similar practice questions. Experimental requirements are created independently from the Grade 12 curriculum. Each backbone is evaluated on the same 50 requirements with the schema ratio defined in Section 3.3. After expanding the four statements in each true or false cluster from Table 2, the requirement set contains 80 learning-outcome slots: 67 from calculus/statistics and 13 from geometry. The historical dataset is used only for anchoring and novelty measurement, not for training the backbone models. 
+
+5.1.3 Scope of Empirical Claims 
+
+This study reports end-to-end full-pipeline runs and completed expert-review records. It does not report controlled baseline or ablation experiments. Therefore, the acceptance rates should not be interpreted as causal evidence for the independent contribution of Difficulty Anchoring, self-improvement, CVM, or formatting repair. The component-level claims in this paper are limited to their designed roles and to qualitative traces of verifier-guided revision. Claims about edu-cational readiness are based on blind expert review rather than on automated verifier decisions. All reported empirical evidence pertains to the Vietnamese Grade 12 instantiation and does not establish performance transfer across curricula or countries. 
+
+5.1.4 Metrics 
+
+The quantitative diagnostics report accepted outputs, embedding-based novelty, verifier-call counts, verifier-guided repair calls, runtime and token usage. Novelty is calculated as Nov( P ) = 1 − max 
+
+> b∈D ref
+
+vP · vb
+
+∥vP ∥∥ vb∥ . (4) 14 Table 7: Full-Pipeline Diagnostics for the Reported Backbones 
+
+Backbone Accepted Acceptance Novelty ↑
+
+Verifier calls/item Repairs/item 
+
+Qwen3-8B 47/50 94.0% 0.813 3.85 0.70 
+
+gpt-oss-20b 47/50 94.0% 0.787 3.53 0.34 
+
+Table 8: Runtime and Token Cost of the Full Pipeline 
+
+Backbone Mean time/item Median time/item Input tok./item Output tok./item Total tok./item Recorded tok. 
+
+Qwen3-8B 136.1 s 91.4 s 10,547 11,111 21,659 1,125,879 
+
+gpt-oss-20b 468.0 s 318.7 s 11,425 13,588 25,012 1,175,581 
+
+Table 9: Runtime and Token Cost by Examination Schema 
+
+Backbone Schema Accepted/ recorded Mean time Median time Input tok. Output tok. Total tok. 
+
+Qwen3-8B s = 1 29/30 125.8 s 83.4 s 9,372 10,625 19,997 
+
+Qwen3-8B s = 2 8/9 162.3 s 105.2 s 15,175 11,085 26,260 
+
+Qwen3-8B s = 3 10/10 145.3 s 130.1 s 10,255 12,542 22,798 
+
+gpt-oss-20b s = 1 30/30 367.3 s 309.3 s 9,744 12,541 22,285 
+
+gpt-oss-20b s = 2 7/10 941.2 s 659.0 s 19,265 19,304 38,569 
+
+gpt-oss-20b s = 3 10/10 438.9 s 290.2 s 10,979 12,727 23,705 
+
+Table 10: Token and Duration Breakdown by Pipeline Step 
+
+Backbone Step Calls Mean sec./call Total sec. Mean tok./call Tok./item 
+
+Qwen3-8B Initial generation 47 27.0 1,267.1 4,678 4,678 
+
+Qwen3-8B Self-improvement 47 22.0 1,033.8 4,560 4,560 
+
+Qwen3-8B Verification 171 12.6 2,157.9 2,276 8,280 
+
+Qwen3-8B Verifier-guided correction 27 46.3 1,250.8 5,887 3,382 
+
+Qwen3-8B LATEX formatting repair 7 38.9 272.2 5,093 759 
+
+gpt-oss-20b Initial generation 47 107.2 5,036.8 6,108 6,108 
+
+gpt-oss-20b Self-improvement 47 58.5 2,748.2 5,531 5,531 
+
+gpt-oss-20b Verification 166 16.2 2,688.7 2,690 9,500 
+
+gpt-oss-20b Verifier-guided correction 16 63.0 1,008.0 6,941 2,363 
+
+gpt-oss-20b LATEX formatting repair 10 97.8 978.1 7,097 1,510 
+
+where vP and vb are sentence embeddings of the generated problem and reference item b, respec-tively. These operational metrics are interpreted as production and review-cost indicators. The primary item-quality measure is the expert-readiness decision defined by the four-criterion teacher rubric. 
+
+5.2 Pipeline Diagnostics 
+
+Table 7 reports full-pipeline diagnostics for the two backbones. Accepted outputs are items that complete generation, self-improvement, CVM verification and final formatting. Novelty is averaged over accepted outputs. Verifier and repair calls are normalized by accepted output to make the inference cost of CVM visible. Tables 8, 9 and 10 report runtime and token usage from the same traces. Full item runtime is wall-clock time for a generated item, while step duration is the duration recorded for individual LLM calls. Fig. 3 summarizes the step-level token and duration profile. 15 Qwen/Qwen3-8B gpt-oss-20b 0 2, 500 5, 000 7, 500 10 , 000 LaTeX repair Correct Verify Self-improve Initial gen. 759 3, 382 8, 280 4, 560 4, 678 1, 510 2, 363 9, 500 5, 531 6, 108 
+
+Tokens per accepted item 
+
+(a) Token cost                   
+
+> 01,000 2,000 3,000 4,000 5,000 LaTeX repair Correct Verify Self-improve Initial gen. 272 1,251 2,158 1,034 1,267 978 1,008 2,689 2,748 5,037
+
+Recorded seconds 
+
+(b) Recorded duration 
+
+Figure 3: Pipeline cost by processing step for accepted outputs. Panel (a) reports token cost normalized per accepted item; Panel (b) reports aggregate recorded duration. Paired points within a row compare the two models The operational results show that both backbones can complete most curriculum-constrained requirements under the full framework. However, the numbers in Table 7 should be read as draft-production diagnostics, not as teacher-readiness scores. Table 9 follows the schema notation from Table 2; the recorded denominator denotes items with complete runtime and token traces for that schema. The cost tables also show that repeated verification is a substantial part of the authoring workflow. This cost may be acceptable for producing reviewable item drafts, but it is too high for uncontrolled mass generation without a teacher-facing selection interface. 16 Table 11: Blind Expert Review Under the Four-Criterion Teacher Rubric                      
+
+> Model Reviewed items Expert pass ↑Correct. ↑Align. ↑Level ↑Clarity ↑
+> Qwen3-8B 44 56.8% 95.5% 95.5% 3.83 4.10
+> gpt-oss-20b 39 56.4% 93.6% 94.9% 3.64 3.69
+
+5.3 Human Readiness Evaluation 
+
+The expert evaluation follows the blind protocol described in Section 3.2. Mathematics educators review generated items without seeing the generation source, model identity or process traces. They rate each item on four criteria. Mathematical correctness and answer consistency are recorded as one binary label, and alignment with the assigned learning outcome is recorded as another binary label. Match to the required cognitive or difficulty level and clarity or readiness for examination use are scored on a 1 to 5 scale. A generated item passes expert review when correctness and alignment both pass and the level match and clarity scores are both at least 4. When multiple ratings are available, the reported score is the average of independent ratings. Reviewers also mark error flags for wrong answer, invalid problem statement, multiple valid answers, missing or incorrect solution step, wrong learning outcome, too easy, too hard, ambiguous or missing condition and formatting or formula error. Fig. 4 separates binary criteria from 1 to 5 rating criteria. The intended review pool is the 50-item requirement set for each reported generation backbone. The quantitative analysis below uses completed expert-review records: 44 items for Qwen3-8B and 39 items for gpt-oss-20b . Each reviewer sees the problem statement, official answer, solution, requested schema value s, target curriculum learning outcome and requested cognitive or difficulty level. A reference question from the historical corpus may be shown for difficulty, format and novelty calibration. Table 11 is the central quality result. Correctness and curriculum alignment are high, but expert pass rates are much lower because readiness also requires level fit and clear exam-style presentation. The difference between the 94.0% verifier-accepted rate and the approximately 56% expert-pass rate shows that CVM is useful as a screening and repair mechanism, but automatic verification is not sufficient for final educational use. VeriMath should therefore be deployed as a draft authoring aid with a human quality gate, not as an autonomous examination generator. The expert labels also provide a human reference for future judge calibration. In this paper, they are reported directly rather than converted into automated-judge agreement claims. 
+
+5.4 Novelty and Leakage Checks 
+
+Embedding-based novelty may fail to detect reused templates, especially when a generated item changes only numerical values while keeping the same story and solution method as an anchor. The present paper therefore reports embedding novelty only as a pipeline diagnostic. We do not treat the novelty scores as a complete leakage audit. For assessment authoring, a teacher-facing system should also support nearest-neighbor inspection, symbolic-template comparison and manual review of any generated item whose solution structure is close to a historical question. 
+
+5.5 Expert Failure Analysis and Design Implications 
+
+Failure analysis uses the error flags recorded in the expert rubric. Table 12 summarizes the flags observed in reviewed items. 17 Qwen/Qwen3-8B gpt-oss-20b 50 60 70 80 90 100 Alignment Correctness Expert pass 95 .595 .556 .894 .993 .656 .4    
+
+> Pass rate (%)
+> (a) Binary expert criteria
+> 12345Clarity Level match 4.10 3.83 3.69 3.64
+> Mean score (1–5)
+> (b) Ordinal expert criteria
+
+Figure 4: Expert-review outcomes for Qwen/Qwen3-8B and gpt-oss-20b. Binary criteria are shown as pass rates; ordinal criteria are shown as mean ratings on a 1–5 scale. Paired points within a row compare the two models The counts in Table 12 sum to 32 marked flags, and shares are calculated over this flag total rather than over reviewed items. The failure profile gives three design implications for assessment-authoring technology. First, invalid problem statements are more frequent than explicit wrong-answer flags, so future user interfaces should help teachers inspect assumptions, domains and uniqueness conditions before considering an item ready. Second, formatting and formula errors remain visible to teachers even after a L ATEX repair pass, suggesting that mathematical rendering checks should be integrated with human preview. Third, wrong learning outcome and difficulty-mismatch flags show that solver-style verification cannot fully judge curriculum appropriateness; teacher review is needed to decide whether an item tests the intended concept at the intended level. 18 Table 12: Expert-Marked Error Flags in Reviewed Generated Items 
+
+Error flag Count Share 
+
+Invalid problem statement 14 43.8% Formatting or formula error 5 15.6% Missing or incorrect solution step 3 9.4% Wrong learning outcome 2 6.2% Too hard 2 6.2% Ambiguous or missing condition 2 6.2% Wrong answer 2 6.2% Multiple valid answers 1 3.1% Too easy 1 3.1% 
+
+5.5.1 Examples From Expert-Reviewed Items 
+
+The examples below are English renderings of reviewed Vietnamese items. They show how the rubric separates mathematical validity, curriculum alignment, difficulty match and clarity. 
+
+gpt-oss-20b pass example. This item uses the s = 1 multiple choice schema in Table 2 and targets basic exponential and power-function integration at Recognition level. The generated item gives f ′(x) = 3 x2 + 4 ex and f (0) = 1, then asks students to compute ∫ 20 f (x) dx . The answer options are A. 4 e2 − 6; B. 4 e2 − 2; C. 4 e2 + 6; D. 4 e2 + 2. The official answer is A. Integrating f ′(x) gives f (x) = x3 + 4 ex + C. Since f (0) = 1, C = −3, so f (x) = x3 + 4 ex − 3. Therefore 
+
+∫ 20
+
+f (x) dx =
+
+[ x4
+
+4 + 4 ex − 3x
+
+]20
+
+= 4 e2 − 6.
+
+Two reviewers rated the item as correct and aligned, with level score 4.0 and clarity score 4.0; the expert decision is pass. 
+
+gpt-oss-20b fail example. This item uses the s = 1 multiple choice schema in Table 2 and targets the general equation of a plane in coordinate geometry at Comprehension level. The generated item asks for the plane P passing through M (1 , −2, 3) and containing the line 
+
+x
+
+2 = y
+
+−1 = z
+
+4 .
+
+The answer options include A. 5 x − 2y − 3z = 0, B. 5 x + 2 y + 3 z = 0, C. −5x + 2 y + 3 z = 0 and D. 5 x − 2y + 3 z = 0, with A marked as the official answer. The solution uses direction vector ⃗u = (2 , −1, 4), point P 0 = (0 , 0, 0) and ⃗v = −−−→
+
+M P 0 = ( −1, 2, −3), then computes ⃗n =⃗u ×⃗v = ( −5, 2, 3). Using point M gives −5( x − 1) + 2( y + 2) + 3( z − 3) = 0, or 5 x − 2y − 3z = 0. Two reviewers rated the item as mathematically correct and aligned, with level score 4.5, but clarity score 2.0; the expert decision is fail. Marked issues include formatting/formula error and missing or incorrect solution step. One reviewer noted that the vector-product presentation does not match standard high-school curriculum treatment. 
+
+Qwen3-8B pass example. This item uses the s = 1 multiple choice schema in Table 2 and targets finding the maximum or minimum of a function on a closed interval at Recognition level. The generated item asks for the maximum value of f (x) = x3 − 3x2 + 4 on [0 , 3], with answer options A. 4; B. 0; C. −2; D. 1. 
+
+19 (a) Welcome page (b) Problem solving page 
+
+(c) Problem generation page (d) Exam synthesis page Figure 5: Interfaces of the Vietnamese case-study digital mathematics learning platform. The platform includes modules for problem solving, item generation and exam synthesis, while the present study evaluates the curriculum-constrained item-authoring component                   
+
+> The official answer is A. Since f′(x) = 3 x2−6x, the critical points in the interval are x= 0 and x= 2. Evaluating the function at x= 0 ,2,3 gives f(0) = 4, f(2) = 0 and f(3) = 4. The maximum value is 4. One reviewer rated the item as correct and aligned, with level score 5.0 and clarity score 5.0; the expert decision is pass.
+
+# 6 Discussion 
+
+6.1 Position Within a Digital Transformation Platform 
+
+VeriMath can serve as a curriculum-constrained item-authoring and verification layer within broader digital assessment environments. In such environments, generated drafts can feed teacher-managed workflows for question-bank construction, test assembly, delivery, scoring and revision. This role follows the broader educational principle that generative artificial intelligence should remain con-nected to pedagogical grounding and teacher judgment (Kasneci et al., 2023; Kibar & Ilgaz, 2026). In the present Vietnamese implementation, this layer is integrated into a broader web platform that supports teachers and students preparing for the national high school graduation examination in mathematics. The long-term goal of this implementation is a connected educational environment in which teachers can create assessment items, assemble tests, deploy examinations to their classes, collect student responses, apply automatic grading and inspect critiques of generated items and student solutions. Such an environment forms a closed workflow from item authoring, test delivery and automatic scoring to diagnosis, feedback and teacher revision. Figure 5 illustrates the platform modules. This implementation is an example of deployment in one national context; the present 20 study evaluates the item-authoring component rather than the platform as a whole. 
+
+6.2 Strengths and Validation Evidence 
+
+A main strength of the study is that it formulates generation as curriculum constrained assessment authoring rather than open ended text production. Each draft is required to satisfy a specified item format, curriculum learning outcome, cognitive or difficulty level, mathematical answer, solution explanation, novelty condition and teacher review requirement. This framing is important because mathematics items are pedagogical and assessment artifacts, not only fluent linguistic outputs (Verschaffel et al., 2020). This design focus is consistent with the instructional-alignment concerns identified by Kibar and Ilgaz (2026). A second strength is the explicit separation between reusable authoring mechanisms and local adaptation resources. By design, what changes across educational systems is not the anchoring, verification and repair architecture itself, but the curriculum metadata, assessment schemas, dif-ficulty conventions, reference corpus and expert rubric supplied to it. In the Vietnamese Grade 12 case study, the 4,555 item teacher annotated corpus provides examples of notation, topic dis-tribution, assessment schemas and difficulty conventions. Difficulty Anchoring uses this corpus to condition generation on nearby items without treating the anchors as templates to copy. CVM then requires repeated successful verification and uses failure traces for repair before a draft is accepted. This design makes the pipeline more auditable than a single prompt based generator because each accepted item can be linked to its requirement, retrieved anchors, verifier decisions and repair history. The case study demonstrates this adaptation mechanism in one context; it does not establish equivalent performance in other educational systems. The validation within this case study is deliberately multi layer. The same 50 requirements are tested with two model backbones, and both runs produce verifier accepted drafts for 47 require-ments. Operational diagnostics report acceptance, token cost, runtime, verifier calls and repair calls, while embedding based novelty checks examine similarity to the reference corpus. Most im-portantly, blind expert review evaluates mathematical correctness, curriculum alignment, difficulty match, clarity and final readiness under a teacher rubric. The results show high correctness and alignment, but only about 56% of completed review records satisfy the full readiness criterion. This gap is a useful result rather than only a weakness: it shows that automated verification can improve reviewability, but professional educational judgment remains necessary before classroom or exam-ination use. The need for expert checks also accords with the relevance and wording limitations reported by Cassano et al. (2026). The evaluation settings and rubrics differ, so these findings are a design comparison rather than a direct performance benchmark. 
+
+6.3 Quality Gaps and Current Boundaries 
+
+The remaining errors clarify what the current system does not yet solve. The most frequent expert marked issue is an invalid problem statement. This can occur when a draft has fluent wording and plausible formulas but still lacks a necessary condition, describes an impossible configuration or fails to guarantee a unique answer. Formula and formatting issues also remain because mathematical notation is sensitive to rendering, symbol placement and local examination conventions. Missing or incorrect solution steps indicate that a model may reach the intended answer while presenting reasoning that is incomplete, mathematically unjustified or unsuitable for the expected high school method. Several validity boundaries should therefore be recognized. First, the Recognition, Compre-hension and Application labels are teacher operational categories used in the studied examination 21 setting. They are not calibrated psychometric item parameters. Second, the verifier uses a separate role and prompt, but it is not a fully independent assessment authority. Verifier acceptance should be treated as evidence of improved reviewability, not as proof of mathematical or pedagogical readi-ness. Third, the empirical evaluation is limited to Vietnamese Grade 12 mathematics and the three assessment schemas in Table 2. Adapting VeriMath to another educational system would require replacing or contextualizing the curriculum metadata, schema definitions, anchor corpus, difficulty conventions, annotation protocol and expert rubric. The architecture permits such configuration, but whether comparable performance transfers across grades, subjects or countries remains an empirical question. The empirical evaluation also has practical limits. It does not include controlled ablation experiments that isolate the individual effects of Difficulty Anchoring, self-improvement, CVM or formatting repair. It does not compare the method against retrieval only, prompt only or teacher authored baselines under the same review protocol. Expert review is a strength because it is blind and rubric based, but the number of completed review records is still limited. The study also does not measure student learning gains, test equating, long term teacher workload reduction or performance in official high stakes examinations. For these reasons, the current system should be used for teacher reviewed draft generation and practice material authoring, not for autonomous official test production. 
+
+6.4 Future Research Directions 
+
+Future work should strengthen both the research method and the platform function. On the methodological side, controlled ablations can quantify the separate contributions of anchoring, repeated verification, repair prompts and novelty checks. Independent verifier model families, symbolic checks for answer uniqueness, rendering based formula inspection and template leakage detection can make automated review more reliable. On the empirical side, larger expert panels and classroom pilots can evaluate whether the platform reduces teacher workload, improves feedback quality and supports student preparation. The platform should also evolve from item authoring to a fuller digital assessment environment. Teachers should be able to select topics, assemble tests, deploy them directly to a class, receive automatic grading and inspect intelligent critique for both item quality and student responses. Teacher edits, rejection reasons and student performance logs can then become evidence for future corpus refinement and adaptive practice. This direction supports a closed educational ecosystem in which generation, testing, grading and evaluation inform one another while teachers retain final pedagogical authority. Another important direction is specialized research for gifted students and advanced mathemat-ical reasoning. Future corpora can select distinct topics, competition styles and examination types for higher difficulty settings, including topic focused tests, school team selection tests and advanced practice examinations. Recent multimodal benchmarks such as MathNet show the value of large, diverse collections for mathematical reasoning and retrieval across topics, languages and visual for-mats (Alshammari et al., 2026). In the Vietnamese setting, this line can guide the development of more challenging assessments and computer based learning environments that go beyond routine national examination preparation. 
+
+# 7 Conclusion 
+
+This paper presented VeriMath, a configurable human-in-the-loop framework for curriculum-constrained mathematics assessment authoring. The framework separates shared authoring and 22 verification mechanisms from the assessment schemas, curriculum outcomes, difficulty conventions, reference corpus and expert rubric supplied by a deployment context. It combines teacher annotated difficulty anchors with consecutive verification and verifier guided repair, producing drafts for professional review rather than treating model outputs as final assessment items. We instantiated the framework through a Vietnamese Grade 12 national-curriculum case study using 4,555 teacher annotated reference items and 50 generation requirements. With both evaluated backbones, 47 of 50 requirements reached verifier acceptance. Blind expert review showed high rates of mathematical correctness and curriculum alignment, while 56.8% and 56.4% of completed review records satisfied the strict readiness rubric. The main remaining failures involved invalid problem statements, formula or formatting problems and incomplete or incorrect solution steps. These findings clarify both the value and the boundary of automated verification: it can improve the quality and reviewability of generated assessment drafts, but it cannot replace expert teacher judgment. The broader implication is that responsible artificial intelligence for mathematics assessment should be designed as a teacher-supported authoring environment rather than an autonomous examination generator. The Vietnamese case study supports the feasibility of combining context-specific anchors with repeated verification and repair in one tightly constrained curriculum setting. It does not establish cross-country generalization. Instead, the framework provides a basis for adaptation by making local educational constraints explicit and configurable, while preserving traceability and professional oversight. Future work should focus on the failure modes identified by expert review. Stronger checks for statement validity, answer uniqueness, mathematical rendering and solution completeness are necessary because many errors are subtle and pedagogically consequential. Controlled ablation studies should measure the individual contributions of anchoring, self improvement, verification and repair. Evaluations with independently constructed corpora, schemas and expert rubrics from other grades, subjects and educational systems are needed to test empirical transfer while keeping educational validity as the central requirement. 
+
+# References 
+
+Alshammari, S., Wen, K., Zainal, A., Hamilton, M., Safaei, N., Albarakati, S., . . . Torralba, A. (2026). Mathnet: A global multimodal benchmark for mathematical reasoning and retrieval. 
+
+The fourteenth international conference on learning representations. Retrieved from https:// openreview.net/forum?id=zPvdG1Va5Q 
+
+Anderson, L.W., Krathwohl, D.R., Airasian, P.W., Cruikshank, K.A., Mayer, R.E., Pintrich, P.R., . . . Wittrock, M.C. (2001). A taxonomy for learning, teaching, and assessing: A revision of bloom’s taxonomy of educational objectives . Longman. Cassano, G., Ebbert, D., Mirriahi, N., Di Blas, N. (2026). Instructors’ perceptions of a large language model framework for generating automated multiple-choice questions from video transcripts. Educational Technology Research and Development , , https://doi.org/10 .1007/s11423-026-10646-7 (Advance online publication) Cheng, C., Huang, Z., Zhao, G., Guo, Y., Lin, X., Wu, J., . . . Wang, S. (2025, July). From objectives to questions: A planning-based framework for educational mathematical question generation. W. Che, J. Nabende, E. Shutova, & M.T. Pilehvar (Eds.), Proceedings of the 63rd 
+
+23 annual meeting of the association for computational linguistics (volume 1: Long papers) (pp. 12836–12856). Vienna, Austria: Association for Computational Linguistics. Retrieved from 
+
+https://doi.org/10.18653/v1/2025.acl-long.628 
+
+Christ, B.R., Kropko, J., Hartvigsen, T. (2024, November). MATHWELL: Generating educational math word problems using teacher annotations. Y. Al-Onaizan, M. Bansal, & Y.-N. Chen (Eds.), Findings of the association for computational linguistics: Emnlp 2024 (pp. 11914– 11938). Miami, Florida, USA: Association for Computational Linguistics. Retrieved from 
+
+https://doi.org/10.18653/v1/2024.findings-emnlp.696 
+
+Christ, B.R., Molitz, P., LeBlond, B., Gottesman, Z., Kropko, J., Hartvigsen, T. (2026, July). EDUMATH: Generating standards-aligned educational math word problems. M. Liakata, V.P. Moreira, J. Zhang, & D. Jurgens (Eds.), Proceedings of the 64th annual meeting of the Association for Computational Linguistics (volume 1: Long papers) (pp. 42611–42643). San Diego, California, United States: Association for Computational Linguistics. Retrieved from 
+
+https://doi.org/10.18653/v1/2026.acl-long.1973 
+
+Cobbe, K., Kosaraju, V., Bavarian, M., Chen, M., Jun, H., Kaiser, L., . . . Schulman, J. (2021). Training verifiers to solve math word problems. arXiv preprint arXiv:2110.14168 , , https:// doi.org/10.48550/arXiv.2110.14168 arXiv:2110.14168 [cs.LG] Haladyna, T.M., Downing, S.M., Rodriguez, M.C. (2002). A review of multiple-choice item-writing guidelines for classroom assessment. Applied Measurement in Education , 15 (3), 309–333, 
+
+https://doi.org/10.1207/S15324818AME1503_5 
+
+Karbasi, K., Hong, K., Samadi, M.A., Pottie, G. (2025, July). Multi-agent collaborative framework for math problem generation. C. Mills, G. Alexandron, D. Taibi, G.L. Bosco, & L. Paque-tte (Eds.), Proceedings of the 18th international conference on educational data mining (pp. 613–618). Palermo, Italy: International Educational Data Mining Society. Retrieved from 
+
+https://doi.org/10.5281/zenodo.15870246 
+
+Kasneci, E., Sessler, K., Küchemann, S., Bannert, M., Dementieva, D., Fischer, F., . . . Kasneci, G. (2023). Chatgpt for good? on opportunities and challenges of large language models for education. Learning and Individual Differences , 103 , 102274, https://doi.org/10.1016/ j.lindif.2023.102274 
+
+Kibar, P.N., & Ilgaz, H. (2026). The intersection of artificial intelligence and instructional design practice: a systematic review. Educational Technology Research and Development , 74 (4), 1989–2015, https://doi.org/10.1007/s11423-026-10624-z 
+
+Kurdi, G., Leo, J., Parsia, B., Sattler, U., Al-Emari, S. (2020). A systematic review of automatic question generation for educational purposes. International Journal of Artificial Intelligence in Education , 30 (1), 121–204, https://doi.org/10.1007/s40593-019-00186-y 
+
+Lightman, H., Kosaraju, V., Burda, Y., Edwards, H., Baker, B., Lee, T., . . . Cobbe, K. (2024). 24 Let’s verify step by step. The twelfth international conference on learning representations. 
+
+Retrieved from https://openreview.net/forum?id=v8L0pN6EOi 
+
+Liu, Y., Iter, D., Xu, Y., Wang, S., Xu, R., Zhu, C. (2023, December). G-eval: NLG evaluation using gpt-4 with better human alignment. H. Bouamor, J. Pino, & K. Bali (Eds.), Proceedings of the 2023 conference on empirical methods in natural language processing (pp. 2511–2522). Singapore: Association for Computational Linguistics. Retrieved from https://doi.org/ 10.18653/v1/2023.emnlp-main.153 
+
+Lu, Z., Zhou, A., Ren, H., Wang, K., Shi, W., Pan, J., . . . Li, H. (2024, August). MathGe-nie: Generating synthetic data with question back-translation for enhancing mathematical reasoning of LLMs. L.-W. Ku, A. Martins, & V. Srikumar (Eds.), Proceedings of the 62nd annual meeting of the association for computational linguistics (volume 1: Long papers) (pp. 2732–2747). Bangkok, Thailand: Association for Computational Linguistics. Retrieved from 
+
+https://doi.org/10.18653/v1/2024.acl-long.151 
+
+Luo, H., Sun, Q., Xu, C., Zhao, P., Lou, J.-G., Tao, C., . . . Zhang, D. (2025). Wizardmath: Empowering mathematical reasoning for large language models via reinforced evol-instruct. 
+
+The thirteenth international conference on learning representations. Retrieved from https:// openreview.net/forum?id=mMPMHWOdOy 
+
+Manem, C., Brahma, P.P., Mishra, P., Liu, Z., Barsoum, E. (2025). SAND-Math: Using LLMs to generate novel, difficult and useful mathematics questions and answers. Neurips 2025 workshop on mathematical ai (math-ai). Retrieved from https://doi.org/10.48550/arXiv .2507.20527 
+
+Niyarepola, K., Athapaththu, D., Ekanayake, S., Ranathunga, S. (2022, July). Math word problem generation with multilingual language models. S. Shaikh, T. Ferreira, & A. Stent (Eds.), 
+
+Proceedings of the 15th international conference on natural language generation (pp. 144– 155). Waterville, Maine, USA and virtual meeting: Association for Computational Linguistics. Retrieved from https://doi.org/10.18653/v1/2022.inlg-main.12 
+
+Pei, Q., Wu, L., Pan, Z., Li, Y., Lin, H., Ming, C., . . . Yan, R. (2025, July). MathFusion: Enhancing mathematical problem-solving of LLM through instruction fusion. W. Che, J. Nabende, E. Shutova, & M.T. Pilehvar (Eds.), Proceedings of the 63rd annual meeting of the association for computational linguistics (volume 1: Long papers) (pp. 7400–7420). Vienna, Austria: Association for Computational Linguistics. Retrieved from https://doi.org/10.18653/v1/ 2025.acl-long.367 
+
+Polozov, O., O’Rourke, E., Smith, A.M., Zettlemoyer, L., Gulwani, S., Popovic, Z. (2015). Personal-ized mathematical word problem generation. Proceedings of the 24th international conference on artificial intelligence (pp. 381–388). AAAI Press. Qin, L., Liu, J., Huang, Z., Zhang, K., Liu, Q., Jin, B., Chen, E. (2023). A mathematical word problem generator with structure planning and knowledge enhancement. Proceedings of the 46th international acm sigir conference on research and development in information retrieval 
+
+(pp. 1750–1754). New York, NY, USA: Association for Computing Machinery. Retrieved from https://doi.org/10.1145/3539618.3591937 
+
+25 Qin, W., Wang, X., Hu, Z., Wang, L., Lan, Y., Hong, R. (2024, March). Math word problem generation via disentangled memory retrieval. ACM Trans. Knowl. Discov. Data , 18 (5), , 
+
+https://doi.org/10.1145/3639569 
+
+Toshniwal, S., Du, W., Moshkov, I., Kisacanin, B., Ayrapetyan, A., Gitman, I. (2025). Openmathinstruct-2: Accelerating ai for math with massive open-source instruction data. Y. Yue, A. Garg, N. Peng, F. Sha, & R. Yu (Eds.), International conference on learn-ing representations (Vol. 2025, pp. 19243–19275). Retrieved from https://proceedings .iclr .cc/paper _files/paper/2025/file/302ce0673c00aee2cf84bb43d0117553 -Paper -Conference.pdf 
+
+Utami, I.Q., Hwang, W.-Y., Hariyanti, U. (2024). Contextualized and personalized math word problem generation in authentic contexts using generative pre-trained transformer and its influences on geometry learning. Journal of Educational Computing Research , 62 (6), 1604– 1639, https://doi.org/10.1177/07356331241249225 
+
+Verschaffel, L., Schukajlow, S., Star, J., Van Dooren, W. (2020, 04). Word problems in mathematics education: a survey. ZDM , 52 , 1-16, https://doi.org/10.1007/s11858-020-01130-4 
+
+Wang, X., Wei, J., Schuurmans, D., Le, Q.V., Chi, E.H., Narang, S., . . . Zhou, D. (2023). Self-consistency improves chain of thought reasoning in language models. The eleventh interna-tional conference on learning representations. Retrieved from https://openreview.net/ forum?id=1PL1NIMMrw 
+
+Wang, Z., Lan, A., Baraniuk, R. (2021, November). Math word problem generation with math-ematical consistency and problem context constraints. M.-F. Moens, X. Huang, L. Specia, & S.W.-t. Yih (Eds.), Proceedings of the 2021 conference on empirical methods in natural language processing (pp. 5986–5999). Online and Punta Cana, Dominican Republic: As-sociation for Computational Linguistics. Retrieved from https://doi.org/10.18653/v1/ 2021.emnlp-main.484 
+
+Wei, J., Wang, X., Schuurmans, D., Bosma, M., Ichter, B., Xia, F., . . . Zhou, D. (2022). Chain-of-thought prompting elicits reasoning in large language models. S. Koyejo, S. Mohamed, A. Agarwal, D. Belgrave, K. Cho, & A. Oh (Eds.), Advances in neu-ral information processing systems (Vol. 35, pp. 24824–24837). Curran Associates, Inc. Retrieved from https :// proceedings .neurips .cc / paper _files / paper / 2022 / file / 9d5609613524ecf4f15af0f7b31abca4-Paper-Conference.pdf 
+
+Yu, L., Jiang, W., Shi, H., YU, J., Liu, Z., Zhang, Y., . . . Liu, W. (2024). Metamath: Boot-strap your own mathematical questions for large language models. The twelfth interna-tional conference on learning representations. Retrieved from https://openreview.net/ forum?id=N8N0hgNDRt 
+
+Zheng, L., Chiang, W.-L., Sheng, Y., Zhuang, S., Wu, Z., Zhuang, Y., . . . Stoica, I. (2023). Judging llm-as-a-judge with mt-bench and chatbot arena. A. Oh, T. Nau-mann, A. Globerson, K. Saenko, M. Hardt, & S. Levine (Eds.), Advances in neu-
+
+26 ral information processing systems (Vol. 36, pp. 46595–46623). Curran Associates, Inc. Retrieved from https :// proceedings .neurips .cc / paper _files / paper / 2023 / file / 91f18a1287b398d378ef22505bf41832-Paper-Datasets_and_Benchmarks.pdf 
+
+Zhou, Q., & Huang, D. (2019, October–November). Towards generating math word problems from equations and topics. K. van Deemter, C. Lin, & H. Takamura (Eds.), Proceedings of the 12th international conference on natural language generation (pp. 494–503). Tokyo, Japan: Association for Computational Linguistics. Retrieved from https://doi.org/10.18653/v1/ W19-8661 
+
+27
