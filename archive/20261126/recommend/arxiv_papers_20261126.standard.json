@@ -1,0 +1,533 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-11-26T02:56:02.346638+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 6,
+    "deep_cap": 6,
+    "deep_selected": 6,
+    "quick_candidates": 7,
+    "quick_skim_target": 11,
+    "quick_selected": 7
+  },
+  "deep_dive": [
+    {
+      "id": "2611.28293v1",
+      "source": "arxiv",
+      "title": "Feedback-Driven Prompt Refinement for Educational AI: Affective Trajectory Estimation and Bloom's Taxonomy Classification",
+      "abstract": "Contribution: This study has shown that a shared prompt-refinement procedure, guided by distinct affective and cognitive feedback signals, can improve held-out reference agreement and multi-label classification while reducing affective-generation variability without executor parameter updates. Background: Industry 4.0 has increased demand for personalized technical education across interconnected computing and engineering domains, while prompt sensitivity and generation variability have complicated dependable interpretation of instructional dialogue and learning outcomes. Research Questions: The study has examined whether task-specific feedback can improve affective-reference agreement, generation consistency, and cognitive classification without updating executor parameters. Methodology: A secondary language model has revised executor prompts using executor-output discrepancies against model-generated affective references for four dialogues and annotated Bloom labels for 70 learning outcomes; separate sets of 100 EduTalk conversations and 1,000 outcomes have supported held-out comparisons. Small refinement sets, unvalidated affective references, and absent learner-outcome measures have constrained interpretation. Findings: Affective mean absolute error has decreased from 0.742 to 0.702 and mean generation standard deviation from 0.307 to 0.238, while Bloom micro-F1 has increased from 0.687 to 0.893 and exact-match subset accuracy from 0.418 to 0.636. These findings have supported prompt refinement as a candidate approach for developing adaptive technical instruction, while its effects on workforce learning remain to be established.",
+      "authors": [
+        "Josh Dean",
+        "Karan Patel",
+        "Gaurangi Raul",
+        "Yu-Zheng Lin",
+        "Jesus Pacheco",
+        "Sicong Shao",
+        "Shalaka Satam",
+        "Soheil Salehi",
+        "Pratik Satam"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.CY",
+        "cs.HC",
+        "cs.LG"
+      ],
+      "published": "2026-11-20T20:20:32+00:00",
+      "link": "https://arxiv.org/pdf/2611.28293v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "educational AI with personalized technical education and Bloom taxonomy classification",
+      "llm_evidence_cn": "面向个性化技术教育的教育AI与布鲁姆分类",
+      "llm_evidence": "面向个性化技术教育的教育AI与布鲁姆分类",
+      "canonical_evidence": "面向个性化技术教育的教育AI与布鲁姆分类",
+      "llm_tldr_en": "Shows that a shared feedback-driven prompt-refinement procedure, guided by affective and cognitive signals, improves reference agreement and multi-label Bloom taxonomy classification in educational AI dialogue without updating executor parameters.",
+      "llm_tldr_cn": "该文针对工业4.0背景下个性化技术教育需求上升、而提示敏感性与生成波动影响教学对话解读的问题。作者提出由情感与认知两类反馈信号引导的共享提示精炼流程，用于情感轨迹估计与布鲁姆分类的多标签判定。实验表明该方法提升了留出参考的一致性与分类表现，并降低了情感生成的波动且无需更新执行器参数。其贡献在于为教育AI提供可复用的提示优化与学习结果解读方法。",
+      "llm_tldr": "该文针对工业4.0背景下个性化技术教育需求上升、而提示敏感性与生成波动影响教学对话解读的问题。作者提出由情感与认知两类反馈信号引导的共享提示精炼流程，用于情感轨迹估计与布鲁姆分类的多标签判定。实验表明该方法提升了留出参考的一致性与分类表现，并降低了情感生成的波动且无需更新执行器参数。其贡献在于为教育AI提供可复用的提示优化与学习结果解读方法。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2611.30163v1",
+      "source": "arxiv",
+      "title": "ReVAgent: Multi-Agent Reasoning-Intensive Video Generation",
+      "abstract": "A central challenge in generating instructional videos for reasoning-intensive topics is to show how and why the state changes at each step. Even when an animation renders successfully, the depicted object relationships and state transitions can conflict with the explanation, making the reasoning difficult to follow. We present ReVAgent, a multi-agent framework that solves a problem, generates keyframes for its explanation, and synthesizes an instructional video. The agents share the execution record of a solution program, reuse intermediate results and constructions in the scenes, and check rendered keyframes to guide revisions to the solution or the scenes. We also introduce a multidimensional rubric for assessing whether generated videos present the problem clearly, organize the steps coherently, and use visuals to explain the reasoning. We calibrate a multimodal judge using human ratings and apply it to instructional videos for mathematics and algorithms. In the evaluated samples, ReVAgent presents multi-step reasoning coherently and uses diagrams to show how key operations lead to subsequent states.",
+      "authors": [
+        "Yehui Yang",
+        "Jing Fan",
+        "Jun Hu",
+        "Shangyao Chen",
+        "Jinhua Bian",
+        "Song Wang",
+        "Ruize Han"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-11-23T07:11:19+00:00",
+      "link": "https://arxiv.org/pdf/2611.30163v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "multi-agent framework for instructional video generation",
+      "llm_evidence_cn": "面向教学视频生成的多智能体框架",
+      "llm_evidence": "面向教学视频生成的多智能体框架",
+      "canonical_evidence": "面向教学视频生成的多智能体框架",
+      "llm_tldr_en": "Presents ReVAgent, a multi-agent framework that solves reasoning-intensive problems, generates explanation keyframes, and synthesizes instructional videos with shared execution records and keyframe checks, plus a rubric for evaluating explanation clarity.",
+      "llm_tldr_cn": "面向推理密集型主题生成教学视频时，动画即使渲染成功，也可能出现对象关系与状态变化同讲解不一致的问题，使推理难以跟随。该文提出ReVAgent多智能体框架，先求解问题并生成解释关键帧，再共享解题程序执行记录、复用中间结果并检查渲染关键帧以迭代修正。研究还引入多维评分量表评估生成视频是否清晰呈现问题与推理步骤。该工作将生成式AI用于教学视频内容创建，为可验证的教育内容生成提供了方法。",
+      "llm_tldr": "面向推理密集型主题生成教学视频时，动画即使渲染成功，也可能出现对象关系与状态变化同讲解不一致的问题，使推理难以跟随。该文提出ReVAgent多智能体框架，先求解问题并生成解释关键帧，再共享解题程序执行记录、复用中间结果并检查渲染关键帧以迭代修正。研究还引入多维评分量表评估生成视频是否清晰呈现问题与推理步骤。该工作将生成式AI用于教学视频内容创建，为可验证的教育内容生成提供了方法。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2611.30559v1",
+      "source": "arxiv",
+      "title": "Learning What to Change: State-Verified Reinforcement Learning for Educational Agents",
+      "abstract": "Persistent tutoring agents do more than answer questions: they manage course files, practice records, and learner profiles that govern future lessons. In such stateful settings, knowing what to teach does not guarantee knowing what to change. We identify a pervasive failure mode, content-state decoupling, where agents deliver pedagogically sound responses while silently corrupting workspace state through unwarranted updates, missed prerequisites, or unintended side effects. Text-level judges overlook these state errors, whereas isolated tool-call checks break down because whether a write action is valid depends jointly on the learner request, prior state, and execution order. We propose State-Verified Reinforcement Learning, which supervises online policy optimization directly through verifiable workspace transitions. Within isolated sandboxes that snapshot state around every tool call, a deterministic verifier audits tool effects, workflow ordering, and native auto-sync side effects, pairing graded partial credit with a hard gate that zeroes episode reward upon any critical violation. Whenever no critical violation occurs, an evidence-grounded judge scores actual saved artifacts rather than agent claims. We pair 1,000 verifiable training instances with an independently authored, human-reviewed evaluation benchmark of 60 tasks spanning 11 educational categories and 16 native tools. After online GRPO training, Qwen3.8-27B raises category-weighted strict success on our benchmark from 51.47% to 80.74% (+29.27 points), cutting content-pass-only execution failures from 45.6% to 13.7% and required state-check failures from 63 to 1 across 180 trials. The resulting policy outperforms seven reference baselines by over 20 points while reducing output tokens by 17-39% across seven of eight external benchmarks without regressing on general reasoning or tool use.",
+      "authors": [
+        "Shengyao Wang",
+        "Siyuan Su",
+        "Siyu Song",
+        "Mengsong Wu",
+        "Yiming Luo",
+        "Wenbo Wu",
+        "Hao Hao",
+        "Aimin Zhou"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-11-23T12:04:31+00:00",
+      "link": "https://arxiv.org/pdf/2611.30559v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "stateful tutoring agents and learner profiles",
+      "llm_evidence_cn": "有状态辅导智能体与学习者档案",
+      "llm_evidence": "有状态辅导智能体与学习者档案",
+      "canonical_evidence": "有状态辅导智能体与学习者档案",
+      "llm_tldr_en": "Persistent tutoring agents manage course files and learner profiles but may silently corrupt workspace state. The authors propose State-Verified Reinforcement Learning to judge write actions against learner request, prior state and order.",
+      "llm_tldr_cn": "持续运行的辅导智能体不仅答疑，还要维护课程文件与学习者档案，但常出现内容与状态脱钩的错误，悄悄破坏工作区状态。作者提出状态验证强化学习，将写操作是否合法与学习者请求、先前状态和执行顺序联合判定。实验表明文本级评判会忽略此类状态错误，而该方法能更可靠地识别并纠正它们。该工作为教育智能体的状态安全管理提供了新方法。",
+      "llm_tldr": "持续运行的辅导智能体不仅答疑，还要维护课程文件与学习者档案，但常出现内容与状态脱钩的错误，悄悄破坏工作区状态。作者提出状态验证强化学习，将写操作是否合法与学习者请求、先前状态和执行顺序联合判定。实验表明文本级评判会忽略此类状态错误，而该方法能更可靠地识别并纠正它们。该工作为教育智能体的状态安全管理提供了新方法。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2611.31573v1",
+      "source": "arxiv",
+      "title": "The Paradox of Agency-Preserving AI: Negotiating Learner Agency in Layered Human-AI Interactions",
+      "abstract": "Generative AI is increasingly used by learners in cognitively demanding tasks, but its capacity to provide immediate solutions raises concerns about decreased learner agency. Meta-level AI systems that provide reflective and metacognitive scaffolding have emerged as a promising approach to supporting learners' self-regulation. However, these systems introduce a fundamental paradox: AI intended to preserve learner agency can itself constrain that agency by regulating when, how, and why learners should reflect. To investigate this challenge, we conducted a co-design workshop with 18 students engaged in programming and academic writing tasks using ChatGPT extended with ChatWise, a meta-level AI system providing self-regulated learning-aligned feedback. Drawing on 185 prompt-feedback entries, 174 written reflections, and participants' design artifacts (17 storyboards and 5 group design proposals), we identified four interconnected design tensions: assistance vs reflection, immediate intervention vs space for self-regulation, visibility vs attention competition, and system adaptation vs user control. The study contributes a multidimensional account of learner agency that includes task, cognitive, and interaction agency, along with empirically grounded interaction-design mechanisms to negotiate these tensions.",
+      "authors": [
+        "Yueling Fan",
+        "Jacqueline Wong",
+        "Olov Engwall",
+        "Olga Viberg"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC",
+        "cs.AI",
+        "cs.MA"
+      ],
+      "published": "2026-11-23T21:15:09+00:00",
+      "link": "https://arxiv.org/pdf/2611.31573v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "learner agency and metacognitive scaffolding in human-AI learning interactions",
+      "llm_evidence_cn": "人机学习交互中的学习者能动性与元认知支架",
+      "llm_evidence": "人机学习交互中的学习者能动性与元认知支架",
+      "canonical_evidence": "人机学习交互中的学习者能动性与元认知支架",
+      "llm_tldr_en": "Explores the paradox that agency-preserving meta-level generative AI scaffolding can itself constrain learner agency, via a co-design workshop with 18 students using ChatGPT extended with ChatWise for programming and writing tasks.",
+      "llm_tldr_cn": "该文关注生成式AI虽能即时给出答案却可能削弱学习者能动性的问题，而提供反思与元认知支架的元层AI系统被认为是解决途径。作者指出此类系统存在悖论：旨在保护能动性的AI会通过规定反思时机与方式而限制能动性。研究通过18名学生的协同设计工作坊，在编程与学术写作任务中使用经ChatWise扩展的ChatGPT展开考察。结果揭示了人机分层交互中协商学习者能动性的关键张力，为设计以学习者为中心的AI支架提供了启示。",
+      "llm_tldr": "该文关注生成式AI虽能即时给出答案却可能削弱学习者能动性的问题，而提供反思与元认知支架的元层AI系统被认为是解决途径。作者指出此类系统存在悖论：旨在保护能动性的AI会通过规定反思时机与方式而限制能动性。研究通过18名学生的协同设计工作坊，在编程与学术写作任务中使用经ChatWise扩展的ChatGPT展开考察。结果揭示了人机分层交互中协商学习者能动性的关键张力，为设计以学习者为中心的AI支架提供了启示。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "personalized learning and learner-centered educational technologies",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2611.31899v1",
+      "source": "arxiv",
+      "title": "Beyond Average Gains: Probing the Equity--Vulnerability Tension in Structured Visual AI for Learning",
+      "abstract": "Open-ended conversational AI requires learners to formulate questions, organize learning paths, and track changing problem states. Structured visual interfaces may ease these demands, but higher average ratings do not establish that support is experienced consistently across learner backgrounds and devices. We conducted a randomized study of graph-algorithm learning, comparing VisualCodeChat (VCC), which combines predefined learning stages, conversational explanations, and dynamic algorithm visualizations, with a standard text-based chatbot. We analyzed 282 post-task questionnaires from university students. In unadjusted comparisons, VCC received significantly higher usability and perceived effectiveness ratings. We detected no significant between-condition differences in efficiency, satisfaction, or post-use emotion. Exploratory within-condition analyses identified differences associated with prior chatbot experience: infrequent users reported lower adoption and learning-management ratings in the standard AI condition, while uncomfortable prior chatbot experiences were associated with lower interaction and layout ratings in the VCC condition. These findings suggest that improving the average interaction experience is only part of making AI-supported learning inclusive. Future evaluations should examine whether learners with different prior experiences can obtain guidance, recover from difficulties, and demonstrate understanding independently across devices.",
+      "authors": [
+        "Mingyuan Li",
+        "Duan Wang",
+        "Erick Purwanto",
+        "Yihong Wang"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-11-24T03:57:30+00:00",
+      "link": "https://arxiv.org/pdf/2611.31899v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "randomized study of structured visual conversational AI for learning",
+      "llm_evidence_cn": "结构化视觉对话式AI学习的随机实验研究",
+      "llm_evidence": "结构化视觉对话式AI学习的随机实验研究",
+      "canonical_evidence": "结构化视觉对话式AI学习的随机实验研究",
+      "llm_tldr_en": "Studies structured visual conversational AI for learning through a randomized graph-algorithm experiment comparing VisualCodeChat with a text chatbot; finds higher average usability but reveals an equity-vulnerability tension across learner backgrounds and devices.",
+      "llm_tldr_cn": "开放对话式AI要求学习者自行提问、组织路径并跟踪问题状态，结构化视觉界面可能降低这些负担，但平均评分无法反映不同学习者是否一致受益。该文以图算法学习开展随机实验，比较融合预设阶段、对话解释与动态可视化的VisualCodeChat和文本聊天机器人。基于282份问卷，VCC在可用性与感知有效性上显著更高，但分析揭示公平—脆弱性张力。研究提醒教育AI评估应超越平均增益，关注学习者背景与设备差异。",
+      "llm_tldr": "开放对话式AI要求学习者自行提问、组织路径并跟踪问题状态，结构化视觉界面可能降低这些负担，但平均评分无法反映不同学习者是否一致受益。该文以图算法学习开展随机实验，比较融合预设阶段、对话解释与动态可视化的VisualCodeChat和文本聊天机器人。基于282份问卷，VCC在可用性与感知有效性上显著更高，但分析揭示公平—脆弱性张力。研究提醒教育AI评估应超越平均增益，关注学习者背景与设备差异。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2611.32377v1",
+      "source": "arxiv",
+      "title": "Found in Translation: Five Entry Points to Translate AI Literacy Frameworks in the Design of Educational Materials",
+      "abstract": "While there is a plethora of AI literacy and informatics frameworks, in practice it is difficult for designers of educational materials and educators to decide where to start and how to use these in learning activities. At the same time, recent reviews show that despite the fact that most frameworks emphasize the socio-technical nature of AI, in practice interventions tend to center on preparing learners to use AI. To address these issues, we ask: How can multiple stakeholders negotiate and translate AI literacy framework ideas into common language that can be used to design introductory learning materials for primary school children, teachers and parents? We introduce five entry points into AI literacy that were developed from a computational empowerment perspective through a participatory design process involving primary teacher educators, curricular designers, media producers, and researchers. We present three vignettes that illustrate how the entry points were generative in the design of learning activities, learning tools and media content for school and home. This paper contributes an account of the participatory development of five entry points that serve as generative and negotiable resources for designing educational materials.",
+      "authors": [
+        "Luis Morales-Navarro",
+        "Karl-Emil K. Bilstrup",
+        "Mille Skovhus Lunding",
+        "Luke Connelly",
+        "Ane V. Jensen",
+        "Maja Dybboe",
+        "Yasmin B. Kafai",
+        "Marianne Graves Petersen",
+        "Ole Sejer Iversen"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-11-24T10:44:06+00:00",
+      "link": "https://arxiv.org/pdf/2611.32377v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "translating AI literacy frameworks into educational materials design",
+      "llm_evidence_cn": "将AI素养框架转化为教学材料设计",
+      "llm_evidence": "将AI素养框架转化为教学材料设计",
+      "canonical_evidence": "将AI素养框架转化为教学材料设计",
+      "llm_tldr_en": "Addresses the difficulty educators face in applying numerous AI literacy frameworks by proposing five entry points that help stakeholders translate framework ideas into introductory learning materials for primary school children, teachers and parents.",
+      "llm_tldr_cn": "面对众多AI素养与信息学框架，教学材料设计者和教师难以判断从何入手并落地到学习活动。作者提出AI素养的五个切入点，帮助多方利益相关者协商并把框架理念转译为共同语言，用于为小学生、教师和家长设计入门学习材料。研究强调超越单纯教学习者使用AI，转向社会技术层面的素养培养。该工作为AI教育内容开发提供了可操作的转化路径。",
+      "llm_tldr": "面对众多AI素养与信息学框架，教学材料设计者和教师难以判断从何入手并落地到学习活动。作者提出AI素养的五个切入点，帮助多方利益相关者协商并把框架理念转译为共同语言，用于为小学生、教师和家长设计入门学习材料。研究强调超越单纯教学习者使用AI，转向社会技术层面的素养培养。该工作为AI教育内容开发提供了可操作的转化路径。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2611.25294v1",
+      "source": "arxiv",
+      "title": "Modeling Learner-Technology Interaction Through Multilevel Gaze Transition Dynamics to Inform Usability in Online Learning",
+      "abstract": "Gaze data provide fine-grained evidence of how learners engage with instructional content and interface elements, complementing conventional usability evaluation methods. However, eye-tracking analyses often examine within-slide visual attention and across-slide navigation separately, limiting understanding of learner interaction throughout extended learning experiences. This exploratory multi-method study integrated area-of-interest transitions, gaze entropy, slide-level navigation, and network-based representations to analyze seven eye-tracking recordings of high school students interacting with an AI-supported online biology lesson, complemented by three post-intervention focus groups. Results showed individual differences in within-slide gaze allocation and switching patterns. Learners followed shared navigation pathways but differed in revisiting and immediate return behaviors. The focus group findings highlighted positive perceptions of interactive materials and AI-generated feedback, alongside usability concerns related to navigation, interface clarity, and assessment guidance. Together, these outcomes show how integrating multilevel gaze analytics with learner perspectives can provide complementary evidence for identifying interaction trends relevant to usability evaluation. Future research should test this approach with larger, more diverse samples and examine relationships among gaze patterns, usability, and learning outcomes.",
+      "authors": [
+        "Yueqi Weng",
+        "Jie \"Jennifer\" Lu",
+        "fan Yang"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-11-18T23:42:04+00:00",
+      "link": "https://arxiv.org/pdf/2611.25294v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "multilevel gaze transition analysis of learners in AI-supported online learning",
+      "llm_evidence_cn": "AI支持在线学习中学习者多层级注视转移分析",
+      "llm_evidence": "AI支持在线学习中学习者多层级注视转移分析",
+      "canonical_evidence": "AI支持在线学习中学习者多层级注视转移分析",
+      "llm_tldr_en": "This study models learner-technology interaction by integrating gaze transitions, entropy, navigation and network representations to inform usability in AI-supported online learning.",
+      "llm_tldr_cn": "现有眼动分析常将幻灯片内视觉注意与跨页导航割裂考察，难以刻画完整学习过程。作者整合兴趣区转移、注视熵、幻灯片级导航与网络表示，分析高中生在AI支持的在线生物课中的七段眼动记录，并结合三次焦点小组访谈。结果显示多层级注视动态能揭示学习者与教学内容及界面元素的交互模式。该研究为AI支持在线学习环境的学习分析与可用性评估提供了新方法。",
+      "llm_tldr": "现有眼动分析常将幻灯片内视觉注意与跨页导航割裂考察，难以刻画完整学习过程。作者整合兴趣区转移、注视熵、幻灯片级导航与网络表示，分析高中生在AI支持的在线生物课中的七段眼动记录，并结合三次焦点小组访谈。结果显示多层级注视动态能揭示学习者与教学内容及界面元素的交互模式。该研究为AI支持在线学习环境的学习分析与可用性评估提供了新方法。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2611.23795v1",
+      "source": "arxiv",
+      "title": "A Dual-SOM Learner Model of Instructional Efficiency within Cognitive Load Theory",
+      "abstract": "This paper presents a novel methodological framework, integrating a dual self-organising map (SOM) neural network architecture with Cognitive Load Theory (CLT), for assessing instructional efficiency within learning environments. By representing curriculum content as a directed acyclic graph of topic dependencies, the proposed model captures collective learning behaviour across two core dimensions: academic performance and subjective/introspective mental effort. During SOM training, representative data sets of successful learner trajectories are compressed into two topologically ordered, identically structured neural networks: PSOM (performance space) and ESOM (mental effort space). By pairing these behavioural maps, the model serves as a decision-support tool that enables instructors to simultaneously pinpoint structural instructional design defects, such as hidden topic prerequisites, and evaluate collective cognitive load profiles. The implementation and performance of the PSOM component (and, by extension, its symmetrical twin, ESOM) is linked to an earlier modelling study employing a SOM with identical structure and encoding semantics situated in the same domain (i.e., a learning environment). This paper combines the study of behavioural phenomena with theoretical work on human cognitive architecture via SOM neurocomputational cognitive behavioural modelling.",
+      "authors": [
+        "Spyridon Revithis"
+      ],
+      "primary_category": "q-bio.NC",
+      "categories": [
+        "q-bio.NC",
+        "cs.CY",
+        "cs.NE"
+      ],
+      "published": "2026-11-18T04:00:21+00:00",
+      "link": "https://arxiv.org/pdf/2611.23795v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "learner modelling with self-organising maps for learning analytics of instructional efficiency",
+      "llm_evidence_cn": "用自组织映射进行学习者建模，用于教学效率的学习分析",
+      "llm_evidence": "用自组织映射进行学习者建模，用于教学效率的学习分析",
+      "canonical_evidence": "用自组织映射进行学习者建模，用于教学效率的学习分析",
+      "llm_tldr_en": "A dual self-organising map framework models learner performance and mental effort as paired topological maps over a curriculum dependency graph, enabling interpretable assessment of instructional efficiency.",
+      "llm_tldr_cn": "评估教学效率需兼顾学习成绩与主观心理努力，传统方法难以刻画二者的集体学习行为。作者提出双自组织映射框架，把课程内容建模为有向无环图，分别训练表现空间与心理努力空间两个结构相同的网络。配对的行为图谱能够刻画学习者的典型轨迹并评估教学效率。该工作将认知负荷理论与神经网络建模结合，为学习分析和教学效率评估提供了可解释的新方法。",
+      "llm_tldr": "评估教学效率需兼顾学习成绩与主观心理努力，传统方法难以刻画二者的集体学习行为。作者提出双自组织映射框架，把课程内容建模为有向无环图，分别训练表现空间与心理努力空间两个结构相同的网络。配对的行为图谱能够刻画学习者的典型轨迹并评估教学效率。该工作将认知负荷理论与神经网络建模结合，为学习分析和教学效率评估提供了可解释的新方法。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2611.32266v1",
+      "source": "arxiv",
+      "title": "Unjamming Deferrals: Supporting Students Through JAMN Bot, a Mobile RAG-Grounded Policy Assistant",
+      "abstract": "In some educational institutions, workflows such as the exam deferral process can be slow, inconvenient, and inconsistent, which creates the need to implement novel digital systems. This paper presents Schedulater, a mobile app for managing university exam deferrals. JAMN Bot is a Large Language Model (LLM)-powered chatbot integrated into Schedulater that provides context-aware support to help users understand the deferral process. The system features a Retrieval-Augmented Generation (RAG) pipeline using Ollama (Llama 3.2 3B) for self-hosted inference which enables policy-grounded responses without sacrificing privacy. We evaluate the system using a 43-item benchmark spanning Exam Deferral, Privacy, Scheduling, Cross-Policy, and Adversarial & Out-of-Scope questions, and report inter-rater agreement among our human evaluators alongside retrieval hit-rate metrics. Subsequently, we utilize an LLM-as-a-judge approach with GPT-5.4, revealing slight-to-moderate alignment with our raters that improves with answer quality, and check the ranking against a panel including Gemini 3.5 Flash and Qwen3.5 397B. The results of our study display trade-offs between open-weight and frontier models, as well as LLM-human evaluation alignment with answer quality. Schedulater demonstrates the feasibility of integrating lightweight LLMs into university administrative workflows with structured retrieval.",
+      "authors": [
+        "Mark Farinas",
+        "Alesandra Garcia",
+        "Maria Reyes",
+        "Jethro Nueva",
+        "Nawaf Qureshi",
+        "Mahmoud Elsaadany",
+        "Shokry Shamseldin"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.CY",
+        "cs.IR"
+      ],
+      "published": "2026-11-24T09:37:55+00:00",
+      "link": "https://arxiv.org/pdf/2611.32266v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "LLM-powered RAG chatbot supporting students in a university mobile app",
+      "llm_evidence_cn": "面向学生服务的LLM检索增强聊天机器人教育工具",
+      "llm_evidence": "面向学生服务的LLM检索增强聊天机器人教育工具",
+      "canonical_evidence": "面向学生服务的LLM检索增强聊天机器人教育工具",
+      "llm_tldr_en": "Exam deferral workflows are slow and inconsistent; the authors build Schedulater, a mobile app with JAMN Bot, an LLM chatbot using a self-hosted Ollama RAG pipeline. A 43-item benchmark across deferral, privacy and scheduling policies evaluates policy-grounded, privacy-preserving student support.",
+      "llm_tldr_cn": "针对高校考试延期流程缓慢、不便且信息不一致的问题，作者开发了Schedulater移动应用，并集成名为JAMN Bot的大语言模型聊天机器人，采用基于Ollama本地自托管推理的检索增强生成流程提供有政策依据的回答。系统通过覆盖延期、隐私、排课与跨政策的43项基准进行评估。结果表明自托管RAG可在不牺牲隐私的前提下提供上下文感知支持，为学生服务数字化提供了可行方案。",
+      "llm_tldr": "针对高校考试延期流程缓慢、不便且信息不一致的问题，作者开发了Schedulater移动应用，并集成名为JAMN Bot的大语言模型聊天机器人，采用基于Ollama本地自托管推理的检索增强生成流程提供有政策依据的回答。系统通过覆盖延期、隐私、排课与跨政策的43项基准进行评估。结果表明自托管RAG可在不牺牲隐私的前提下提供上下文感知支持，为学生服务数字化提供了可行方案。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2611.26799v1",
+      "source": "arxiv",
+      "title": "Trajectories Through Parsons Problems: Making Student Difficulty Patterns Visible to Instructors",
+      "abstract": "Existing Parsons problem tools primarily focus on correctness, indicating whether a student solved a problem, but providing limited visibility into the underlying problem-solving process. Without that visibility, instructors cannot see which blocks caused repeated confusion or which distractors were consistently selected. We introduce Pulla, a Parsons problem tool that instruments programming assignments to capture fine-grained interaction data. We examine what these behavioral traces make visible to instructors, namely how long students take on a problem and how many moves they make, which recurring errors the distractors expose and how the class arrives at them, whether those errors follow a student from one problem to the next, and which students complete the whole assignment without a single error.",
+      "authors": [
+        "Daniel Prol",
+        "Juho Leinonen",
+        "Arto Hellas",
+        "Saleh Alkhamees",
+        "Amin Alipour"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC",
+        "cs.CY"
+      ],
+      "published": "2026-11-19T20:42:33+00:00",
+      "link": "https://arxiv.org/pdf/2611.26799v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "instrumented Parsons problem tool giving instructors process-level learning analytics",
+      "llm_evidence_cn": "为教师提供过程性学习分析的帕森斯问题工具",
+      "llm_evidence": "为教师提供过程性学习分析的帕森斯问题工具",
+      "canonical_evidence": "为教师提供过程性学习分析的帕森斯问题工具",
+      "llm_tldr_en": "Parsons problem tools report only correctness; Pulla instruments assignments to capture fine-grained interaction traces. Traces reveal time on task, move counts, recurring distractor errors and error persistence, giving instructors process-level learning analytics.",
+      "llm_tldr_cn": "针对帕森斯问题工具只报告对错、教师无法看到学生解题过程的问题，作者开发了Pulla工具，对编程作业进行埋点以采集学生拖拽交互的细粒度行为数据。分析表明这些轨迹能显示每题耗时、移动次数、干扰项暴露的反复错误以及错误是否跨题延续。该工作为教师提供过程性学习分析视角，支持更有针对性的教学干预与反馈设计。",
+      "llm_tldr": "针对帕森斯问题工具只报告对错、教师无法看到学生解题过程的问题，作者开发了Pulla工具，对编程作业进行埋点以采集学生拖拽交互的细粒度行为数据。分析表明这些轨迹能显示每题耗时、移动次数、干扰项暴露的反复错误以及错误是否跨题延续。该工作为教师提供过程性学习分析视角，支持更有针对性的教学干预与反馈设计。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2611.27799v1",
+      "source": "arxiv",
+      "title": "ChildAI-Gov: An Evidence-Linked AI System for Assessing EdTech Policies Against Children's Digital Rights",
+      "abstract": "We present ChildAI-Gov, an explainable AI system for assessing whether education-technology (EdTech) policies respect children's digital rights. Generative AI is reaching children's education faster than its governance can keep pace, yet checking a tool against children's rights remains manual, expert-dependent, and slow. We propose the Child Rights Impact Score (CRIS), an evidence-linked measure across five dimensions: safety, privacy, transparency, autonomy, and non-discrimination. ChildAI-Gov reads an EdTech tool's privacy or AI policy and scores each dimension by combining a large-language-model judgement (gpt-4o-mini) with a deterministic rule check. A retrieval-augmented generation (RAG) component grounds every score in the governing provisions, retrieved from a curated knowledge base of children's rights frameworks (the EU AI Act, UNICEF guidance, and others), so each score is tied to the evidence behind it and an auditor can trace which provision it rests on. We also construct AIPolicy-EdTech, a dataset of 57 real EdTech policies. On it, the five dimensions cohered as a single measure (Cronbach's alpha = 0.79), and grounding made scoring stricter while preserving rankings; an ungrounded baseline was far more lenient, passing nearly half the policies where ChildAI-Gov passed none. It offers evidence-linked decision support on documented commitments, not observation of real-world behaviour or determinations of legal compliance.",
+      "authors": [
+        "Naveen Sigalapalli",
+        "Huizhi Liang",
+        "Clara Crivellaro"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-11-20T16:30:05+00:00",
+      "link": "https://arxiv.org/pdf/2611.27799v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "explainable AI system assessing EdTech policies for children's digital rights",
+      "llm_evidence_cn": "可解释AI系统评估教育科技政策与儿童数字权利",
+      "llm_evidence": "可解释AI系统评估教育科技政策与儿童数字权利",
+      "canonical_evidence": "可解释AI系统评估教育科技政策与儿童数字权利",
+      "llm_tldr_en": "ChildAI-Gov is an explainable AI system that uses LLM judgement plus rule checks and retrieval-augmented grounding to score EdTech policies against children's digital rights.",
+      "llm_tldr_cn": "生成式AI进入儿童教育快于治理能力，而人工核查教育科技政策是否尊重儿童权利耗时且依赖专家。作者提出ChildAI-Gov系统与五维度儿童权利影响评分CRIS，结合大语言模型判断、确定性规则校验与检索增强生成给出可溯源结论。系统可自动读取教育科技工具的隐私或AI政策并逐项打分。该工作为教育领域AI治理与合规评估提供了可解释的自动化工具。",
+      "llm_tldr": "生成式AI进入儿童教育快于治理能力，而人工核查教育科技政策是否尊重儿童权利耗时且依赖专家。作者提出ChildAI-Gov系统与五维度儿童权利影响评分CRIS，结合大语言模型判断、确定性规则校验与检索增强生成给出可溯源结论。系统可自动读取教育科技工具的隐私或AI政策并逐项打分。该工作为教育领域AI治理与合规评估提供了可解释的自动化工具。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2611.28565v1",
+      "source": "arxiv",
+      "title": "Beyond Unit Tests: Path-Aware Rubric-Guided LLM Autograding of Notebooks",
+      "abstract": "Jupyter notebooks support open-ended, multi-step assessments in which students build one logical flow across interdependent steps, combining code, written analysis, and generated outputs such as plots. These reflect authentic scientific practice but are hard to grade consistently, since students may make different yet equally valid choices at each step, so a later answer can only be judged in light of the choices a student made earlier. We present an LLM-based autograder for such flow-structured notebook questions. It generates a rubric from a reference solution, then applies a softening pass that relaxes criteria tied to the reference so legitimate alternative paths are not penalized. Each question group is graded in a single model call, so later answers are judged against the student's own earlier choices, using question-type tags and schema-constrained, low-temperature outputs. Evidence is scored multimodally: code, text, numerical outputs, and figures from code cells. We deployed the tool in a machine-learning course, integrated with Gradescope, with a pre-submission format check and prompt-injection defenses, and evaluate it both in that live course and against archived submissions graded by staff in earlier terms. We report agreement, cross-model variance, cost, student perceptions, and injection resilience. With low-temperature models, agreement with human scores is often strong, including on the open-ended items the design specifically targets, while run-to-run stability depends sharply on the model's temperature support.",
+      "authors": [
+        "Salman Hajizada",
+        "Mohammed Yusuf Ansari",
+        "Gianni Di Caro"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-11-21T04:45:40+00:00",
+      "link": "https://arxiv.org/pdf/2611.28565v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "LLM-based autograding of student notebooks in educational assessment",
+      "llm_evidence_cn": "基于LLM的学生笔记本自动评分教育评估",
+      "llm_evidence": "基于LLM的学生笔记本自动评分教育评估",
+      "canonical_evidence": "基于LLM的学生笔记本自动评分教育评估",
+      "llm_tldr_en": "Presents an LLM autograder for open-ended, multi-step Jupyter notebook assessments that builds a rubric from a reference solution and relaxes path-specific criteria so valid alternative student solutions are not penalized.",
+      "llm_tldr_cn": "该文针对开放式多步骤Jupyter笔记本作业难以一致评分的问题，因为学生各步骤的合理选择会影响后续答案评判。作者提出基于大语言模型的自动评分器，先从参考解答生成评分量规，再通过软化处理放宽与参考绑定的标准以避免惩罚合理替代路径，并将每个题组放在一次模型调用中评分以兼顾前后依赖。实验表明该方法能在保持一致性的同时认可多样化解法，为真实科学实践类作业的AI辅助评估提供了可行方案。",
+      "llm_tldr": "该文针对开放式多步骤Jupyter笔记本作业难以一致评分的问题，因为学生各步骤的合理选择会影响后续答案评判。作者提出基于大语言模型的自动评分器，先从参考解答生成评分量规，再通过软化处理放宽与参考绑定的标准以避免惩罚合理替代路径，并将每个题组放在一次模型调用中评分以兼顾前后依赖。实验表明该方法能在保持一致性的同时认可多样化解法，为真实科学实践类作业的AI辅助评估提供了可行方案。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2611.32211v1",
+      "source": "arxiv",
+      "title": "ArEssays: Towards Robust Arabic Handwritten Text Understanding in Educational Settings",
+      "abstract": "Automated understanding of handwritten Arabic student essays remains challenging due to script complexity and high variability   in children's writing. We introduce ArEssays, a large-scale dataset of authentic essays from primary to secondary students   across Egypt, with both verbatim transcriptions and linguistically corrected versions. We benchmark 34 vision-language and OCR   models, including fine-tuned systems, and find large performance gaps on real student handwriting. We release the dataset,   training pipelines, and results to support research in Arabic OCR, document understanding, and educational NLP.",
+      "authors": [
+        "Hamdy Mubarak",
+        "Anas Madkoor",
+        "Ehsaneddin Asgari",
+        "Majd Hawasly"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.CV"
+      ],
+      "published": "2026-11-24T08:55:56+00:00",
+      "link": "https://arxiv.org/pdf/2611.32211v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "benchmarking vision-language and OCR models on student handwritten essays",
+      "llm_evidence_cn": "在学生手写作文上评测视觉语言与OCR模型",
+      "llm_evidence": "在学生手写作文上评测视觉语言与OCR模型",
+      "canonical_evidence": "在学生手写作文上评测视觉语言与OCR模型",
+      "llm_tldr_en": "ArEssays introduces a large-scale dataset of authentic Arabic student handwritten essays and benchmarks 34 vision-language and OCR models, revealing large gaps in real educational handwriting.",
+      "llm_tldr_cn": "阿拉伯语学生手写作文因书写复杂、儿童笔迹差异大而难以自动理解。作者构建了覆盖埃及中小学真实作文的大规模数据集ArEssays，包含逐字转写与语言校正两个版本，并系统评测了34个视觉语言与OCR模型。结果显示现有模型在真实学生笔迹上存在明显性能差距。该数据集与训练流程的公开为阿拉伯语OCR、文档理解与教育自然语言处理研究提供了基础资源。",
+      "llm_tldr": "阿拉伯语学生手写作文因书写复杂、儿童笔迹差异大而难以自动理解。作者构建了覆盖埃及中小学真实作文的大规模数据集ArEssays，包含逐字转写与语言校正两个版本，并系统评测了34个视觉语言与OCR模型。结果显示现有模型在真实学生笔迹上存在明显性能差距。该数据集与训练流程的公开为阿拉伯语OCR、文档理解与教育自然语言处理研究提供了基础资源。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

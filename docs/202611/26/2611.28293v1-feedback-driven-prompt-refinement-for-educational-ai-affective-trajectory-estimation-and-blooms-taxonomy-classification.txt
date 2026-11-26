@@ -1,0 +1,387 @@
+Title: Feedback-Driven Prompt Refinement for Educational AI: Affective Trajectory Estimation and Bloom's Taxonomy Classification
+
+URL Source: https://arxiv.org/pdf/2611.28293v1
+
+Published Time: Tue, 24 Nov 2026 01:20:40 GMT
+
+Number of Pages: 10
+
+Markdown Content:
+> IEEE TRANSACTIONS ON EDUCATION 1
+
+# Feedback-Driven Prompt Refinement for Educational AI: Affective Trajectory Estimation and Bloom’s Taxonomy Classification 
+
+Josh Dean , Member, IEEE ; Karan Patel; Gaurangi Raul; Yu-Zheng Lin , Member, IEEE; Jesus Pacheco ;Sicong Shao , Member IEEE; Shalaka Satam ; Soheil Salehi , Senior Member, IEEE; Pratik Satam 
+
+Abstract —Contribution: This study has shown that a shared prompt-refinement procedure, guided by distinct affective and cognitive feedback signals, can improve held-out reference agree-ment and multi-label classification while reducing affective-generation variability without executor parameter updates. 
+
+Background: Industry 4.0 has increased demand for person-alized technical education across interconnected computing and engineering domains, while prompt sensitivity and generation variability have complicated dependable interpretation of instruc-tional dialogue and learning outcomes. 
+
+Research Questions: The study has examined whether task-specific feedback can improve affective-reference agreement, gen-eration consistency, and cognitive classification without updating executor parameters. 
+
+Methodology: A secondary language model has revised execu-tor prompts using executor-output discrepancies against model-generated affective references for four dialogues and annotated Bloom labels for 70 learning outcomes; separate sets of 100 EduTalk conversations and 1,000 outcomes have supported held-out comparisons. Small refinement sets, unvalidated affective ref-erences, and absent learner-outcome measures have constrained interpretation. 
+
+Findings: Affective mean absolute error has decreased from 0.742 to 0.702 and mean generation standard deviation from 0.307 to 0.238, while Bloom micro-F1 has increased from 0.687 to 0.893 and exact-match subset accuracy from 0.418 to 0.636. These findings have supported prompt refinement as a candidate approach for developing adaptive technical instruction, while its effects on workforce learning remain to be established. 
+
+Index Terms —Adaptive education, affective trajectory estima-tion, Bloom’s Taxonomy, Industry 4.0, large language models, prompt optimization, workforce education 
+
+I. I NTRODUCTION 
+
+# THE Fourth Industrial Revolution integrates cloud infras-tructure, Internet of Things (IoT) networks, and smart manufacturing into cyber-physical environments [1] that re-quire workers to connect knowledge across networking, sys-tems programming, embedded systems, and other interde-pendent domains. Industry 4.0 systems become more tightly coupled. Workforce education must accommodate varied prior preparation and learning pace while helping learners apply technical concepts across authentic contexts [2]. Adaptive educational systems therefore need to coordinate instructional-content access, course-specific knowledge, learner-state repre-sentations, and language-model-mediated response generation. Prior evaluations have examined complementary functions that inform such architectures. Slide-based instructional assistance supported on-demand explanation, course-document retrieval grounded tutoring responses in domain materials, and dialogue analyses represented affective and cognitive learner states [3], [4], [5]. These findings motivate the integrated architecture presented here, while the current evaluation tests prompt refinement separately on held-out tasks. A focused question remained whether systematic prompt refinement improved a fixed executor’s behavior across distinct pedagogical objec-tives, including continuous affective estimation and structured cognitive classification. In Industry 4.0 workforce education, the need to connect technical knowledge with equipment operation, fault diagnosis, and system-level reasoning has mo-tivated instructional approaches sensitive to both the cognitive demands of learning objectives and the difficulties learners express in dialogue. Although large language models have expanded opportunities to interpret these complementary di-mensions, sensitivity to instructional wording and variability across generations have raised questions about the dependabil-ity of the resulting analyses. These concerns have motivated the present investigation of prompt refinement as a means of strengthening dialogue-based affective estimation and cogni-tive classification within the broader development of adaptive technical education. This study has evaluated a shared prompt-refinement pro-cedure for utterance-level affective trajectory alignment and multi-label Bloom’s Taxonomy classification, using task-specific feedback to revise executor instructions without up-dating model parameters. Separate refinement and held-out sets have supported comparisons between initial and selected prompts, with model-generated trajectories supplying affec-tive references and annotated learning outcomes supplying cognitive targets. The findings have indicated improved ref-erence agreement, classification performance, and affective-generation consistency; the study has not assessed student learning, retention, or achievement. Evaluating these com-plementary tasks within one framework has characterized the potential and evidentiary limits of prompt refinement for adaptive technical education. II. R ELATED WORK 
+
+Research on adaptive educational systems has treated personalization as coordination among instructional content, learner-state estimates, and tutoring behavior in response to individual needs and contexts [6]. Large language models (LLMs) have broadened opportunities for on-demand explana-tion and feedback, while raising questions about educational use [7], learner-state reliability, and control of model behavior without retraining. Earlier work has combined digital-twin environments, retrieval-assisted tutoring, and zero-shot dialogue sentiment analysis [8], while subsequent developments have specified arXiv:2611.28293v1 [cs.AI] 20 Nov 2026 IEEE TRANSACTIONS ON EDUCATION 2
+
+retrieval-grounded tutoring through RAG-PRISM [3] and an emotion-aware PRISM architecture integrating dialogue, digital-twin observations, sentiment analysis, and knowledge-augmented guidance [9]. These developments have motivated coordinated consideration of affective and cognitive informa-tion; the present study has evaluated prompt refinement on separately defined tasks. Supporting studies have examined slide-based explanation, course-document retrieval, and equipment reconstruction as complementary foundations for adaptive technical learning. An instructional assistant has simplified slide content in a live course, with perceived-usefulness and single-slide processing comparisons supporting feasibility rather than learning gains or course-wide efficiency [5]. RAG-PRISM has evaluated re-trieval and answer quality on generated and perturbed queries [3]; Table I retains the reconciled retrieval count and reported answer scores, whose verification has been limited by inconsis-tent published tabulations. Alhamadah et al. have reconstructed industrial equipment from consumer-device imagery, LiDAR scans, and 3D processing, comparing dimensions against man-ual measurements [10]. These findings have informed the conceptual architecture in Fig. 1, while their interventions and outcomes have remained separate from the present prompt-refinement experiments. 
+
+A. Affective and Cognitive Learner-State Modeling 
+
+Adaptive instruction depends on representations of both cognitive objectives and affective change over an interaction. Bloom’s Taxonomy provides a framework for describing the cognitive complexity of learning objectives [11]. Affective modeling, in turn, has represented utterance-level states as trajectories whose variation can be analyzed across repeated model inferences. The present study brought these comple-mentary tasks into a common prompt-refinement evaluation. LLM-MC-Affect modeled utterance-level affect as a latent distribution, used repeated stochastic inferences to estimate central tendency and dispersion, and derived dyadic inter-action indicators from sequential cross-correlation, estimated lag, and trajectory slopes [4]. Its evaluation compared six LLMs, used 20 Monte Carlo samples per dialogue turn, and examined temperature sensitivity and instructional interaction patterns. The analyses showed that mean trajectories remained comparatively stable as decoding temperature changed, while estimated dispersion increased, and that model families dif-fered in their ability to represent affective turning points. This work therefore showed how affective ambiguity and interpersonal coupling can be analyzed beyond deterministic sentiment labels. At the same time, its controlled case studies used a simulated instructional-dialogue dataset. Its variance measure may conflate linguistic ambiguity with model and decoding effects, and its cross-correlation indicators did not es-tablish causal influence or alignment with human-rated affect. Those qualifications were especially relevant when model-derived affective estimates were reused as feedback signals for adaptive systems. Related research on reputation analysis has distinguished sentiment expressed in text from the text’s implications for a target entity, demonstrating that negative sentiment can coexist with positive reputation polarity [12]. This distinction provides a useful conceptual caution for educational affect modeling, where agreement with a polarity reference has not independently established the validity of an inferred learner state. 
+
+B. Behavioral Representation Across Domains 
+
+Outside education, behavioral monitoring has used reference models and complementary observations to interpret system activity. A multi-level Bluetooth intrusion-detection system has represented protocol activity through observation flows and n-grams to distinguish normal from abnormal behavior [13]. At the same time, multi-layer anomaly detection has combined system, process, and network observations in a shared repre-sentation [14]. These studies provide methodological analogies for reference-based evaluation and contextual representation. However, they do not establish educational validity or the effectiveness of prompt refinement. 
+
+C. Automated Prompt Optimization and the Present Study 
+
+Research on prompt sensitivity has shown that meaning-preserving changes in prompt formatting can affect language-model performance in few-shot evaluations [15], raising methodological questions about the dependability of results from a single prompt presentation. For educational classifi-cations and dialogue-based estimates, this evidence has moti-vated attention to prompt presentation alongside task-specific instruction design. However, the present study has compared initial and selected prompts without isolating sensitivity to formatting or other presentation features. Prompt engineering often relies on manual trial and error. In contrast, automated approaches treat natural-language instruc-tions as candidates that can be generated, tested, and refined against task-specific feedback. Automatic Prompt Engineer and Optimization by PROmpting (OPRO) have used language models to generate and evaluate candidate instructions with-out updating executor parameters [16], [17]. Self-Refine has instead used iterative self-feedback to revise generated outputs, providing a related feedback mechanism rather than an equiv-alent prompt-optimization procedure [18]. These approaches have informed feedback-guided refinement, although their ob-jectives and evaluation settings have not necessarily reflected the pedagogical criteria and learner-context constraints of adaptive education. Education-oriented post-training has used authentic learning data to shape model behavior [19]. Course-specific knowledge provision supplies external evidence at inference time. At the same time, prompt-level refinement remained complementary because it targeted how an executor interpreted task instructions and feedback without changing model parameters or requiring the prompt itself to encode all domain knowledge. Related research on generative digital twins has adapted LLM-based forecasts by updating structured observation windows and aggregating repeated predictions without task-specific parameter training [20]. DDD-GenDT identifies adaptive prompt optimization as a future direction. This study examined feedback-driven instruction revision for IEEE TRANSACTIONS ON EDUCATION 3                      
+
+> TABLE I EDUCATIONAL EVIDENCE FOR ADAPTIVE -I NSTRUCTION FUNCTIONS AND THE PRESENT EVALUATION
+> Architectural function Evidence informing the architecture or evaluated here Scope of that evidence
+> Instructional-content ac-cess In a live technical course, 42 student responses yielded a mean usefulness rating of 7.83/10. A one-slide comparison reported 392 versus 1,105 input tokens for text-based versus image-based processing, with visual processing stronger on visually dense slides [5]. Perceived usefulness and a single-slide com-parison supported feasibility. Neither mea-sured learning gains nor system-wide cost. Course-knowledge grounding An immersive tutoring prototype combined learner context with course-document retrieval. It retrieved supporting material for 10 of 11 queries (90.9%). Table IV in RAG-PRISM reported GPT-4 relevancy of 0.933 and faithfulness of 1.000 [3]. Small-query, model-judged summaries. Con-flicting published tabulations limit verification. These measures do not establish learner out-comes or the efficacy of prompt refinement. Learner-state representa-tion The present study used the EduTalk dataset of approximately 1,280 teacher–student dialogues and evaluated prompt-refined sentiment trajec-tory estimates on held-out conversations. Dialogue-based affect estimation provided a candidate state signal. It did not establish that sentiment estimates are human-validated or that adaptation improves learning.
+
+educational tasks, with industrial forecasting remaining aseparate application requiring evaluation. Prior research on immersive technical learning, course-grounded tutoring, and dialogue-based learner modeling has provided complementary foundations for adaptive Industry 4.0 workforce education, linking access to technical knowledge with contextual interpretation of instructional interactions [9], [3], [4]. These developments have motivated investigation of the model behavior underlying two educational functions: esti-mating affective trajectories during dialogue and characterizing the cognitive demands of learning outcomes across intercon-nected technical domains. In this context, the present study examined a shared prompt-refinement procedure using distinct feedback signals: model-generated references for affective estimation and annotated labels for multi-label Bloom’s Tax-onomy classification. Held-out evaluation assessed reference agreement, classification performance, and generation vari-ability, providing task-level evidence relevant to developing adaptive technical instruction while leaving the relationship between these improvements and workforce learning outcomes open to subsequent investigation. III. M ETHODOLOGY 
+
+This study has examined whether a shared feedback-driven prompt-refinement procedure improves affective tra-jectory estimation and cognitive classification while executor parameters remain fixed. Initial and selected prompts have been compared on held-out measures of reference agreement, classification performance, and generation variability. Prior educational studies have informed the broader architecture, but their datasets, interventions, and outcomes have not been pooled with the present experiments. The design has evaluated model behavior rather than instructional efficacy or learner achievement. 
+
+A. Integrated Adaptive-Learning Architecture 
+
+Figure 1 synthesizes instructional-content preparation, course-knowledge access, learner-state representation, and context-sensitive response generation. The experiments have evaluated only the model-level prompt-refinement loop, repre-sented by dashed feedback components; content preparation, knowledge access, and platform delivery have supplied ar-chitectural context without being integrated or experimentally evaluated here. The interconnected demands of Industry 4.0 workforce education have motivated the selection of two complementary analytical tasks within this architecture: affective trajectory estimation, which represents sentiment as an instructional di-alogue unfolds, and multi-label cognitive classification, which characterizes the demands articulated in learning outcomes. For equipment operation, fault diagnosis, and system-level rea-soning, these representations could inform how instructional support responds to expressed difficulty and how learning objectives combine multiple cognitive processes. The ex-perimental design has therefore examined whether a shared prompt-refinement procedure can improve these underlying analyses through distinct feedback signals, establishing a basis for subsequent investigation of their contribution to adaptive technical instruction. PRISM has provided a conceptual precedent for com-bining learner dialogue and digital-twin observations with sentiment analysis and knowledge-augmented guidance [9]. Photogrammetry-derived equipment models could supply vi-sual context [10], while generative digital-twin methods have represented evolving process behavior from structured obser-vations [20]. A proposed semiconductor-training extension of PRISM describes equipment-specific exercises in fabrication procedures, operation, and troubleshooting [21]. These exam-ples identify potential deployment contexts. Their integration with the refinement loop and their educational effectiveness are outside the scope of this evaluation. Algorithm 1, adapted from prior work [3], specifies how learner context, retrieved course material, and response eval-uation could connect within the architecture. Its retrieval and tutoring stages were not executed in the present experiments. 
+
+B. Problem Formulation and Task Definitions 
+
+Let x denote an educational input, Pt the executor prompt at refinement iteration t, and f (Pt, x ; ω) the executor response under decoding randomness ω. The study sought prompts that improved task-specific empirical performance on refine-ment data, without assuming an explicit global objective or a guarantee that successive revisions converged. In the affective task, a dialogue comprised an ordered sequence of utterances c = ( u1, . . . , u n), and the executor assigned each utterance a score si ∈ [0 , 5] , where lower values denoted more positive sentiment, higher values denoted more negative IEEE TRANSACTIONS ON EDUCATION 4 
+
+> Learning activity
+> Course material, learner turns, and interaction traces
+> Content and knowledge context
+> Text or visual input; relevant course excerpts
+> Learner-state representation
+> Affective trajectory and cognitive objective profile
+> Executor model
+> Current prompt, course context, and learner-state cues
+> Instructional response
+> Context-sensitive explanation or feedback
+> Task evaluation
+> Reference trajectories or annotated labels; task-specific metrics
+> Prompt refiner
+> Uses observed discrepancies to propose an updated prompt Fig. 1. Conceptual synthesis of adaptive educational functions and the prompt-refinement loop. Content preparation and course-grounding functions were informed by prior technical-learning systems [3], [5], while dialogue analyses informed learner-state representations [4]. The present experiments evaluated the dashed model-level refinement loop on affective and cognitive tasks. They did not evaluate integration with a course platform, a deployed retrieval service, or student learning outcomes.
+
+Algorithm 1 Retrieval-grounded adaptive tutoring (adapted from [3]) 
+
+Require: Course documents D; learner interaction ut and history Ht; sentiment estimator g; retriever r; language model f ; synthetic query set Qs; manually curated query set Qm.
+
+Ensure: Grounded instructional response at and retrieval/generation evaluation results.  
+
+> 1:
+
+Parse D into passages and construct a searchable vector index using document embeddings.  
+
+> 2:
+
+st ← g(Ht, u t) {Estimate learner affect/context from the interaction } 
+
+> 3:
+
+qt ← FORM QUERY (ut, H t, s t) 
+
+> 4:
+
+Ct ← RETRIEVE TOP K(qt, r (D))  
+
+> 5:
+
+at ← f (COMPOSE (qt, s t, C t)) {Generate a response grounded in retrieved course passages } 
+
+> 6:
+
+for all Q ∈ { Qs, Q m} do  
+
+> 7:
+
+Retrieve passages for each query in Q and compare rankings with its reference passage  
+
+> 8:
+
+Compute document Hit Rate and Mean Reciprocal Rank (MRR)  
+
+> 9:
+
+Generate answers and assess source faithfulness and query relevancy  
+
+> 10:
+
+end for  
+
+> 11:
+
+return at and the retrieval/generation evaluation results sentiment, and 2.5 represented a neutral baseline. For trajec-tory analysis, the scores were mapped to [−1, 1] according to zi = 1 − 2( si/5) and collected as z = (z1, . . . , z n).A deterministic LLM-generated trajectory yref served as the refinement and evaluation reference, providing a reproducible target but not independently validated human affect labels. For cognitive classification, each learning outcome x was paired with a six-dimensional binary label vector y ∈ { 0, 1}6,whose entries represented the annotated presence or absence of the six Bloom’s Taxonomy levels; the executor generated a corresponding prediction ˆy.
+
+C. Closed-Loop Iterative Refinement 
+
+At each iteration, the executor processed refinement inputs using the current prompt, after which the refiner received the prompt and a structured description of the observed discrep-ancy and proposed a revised prompt. The update was repre-sented as Pt+1 = g(It, P t), where g denoted the refiner and It
+
+the task-specific feedback; no executor weights were updated. For the affective task, feedback comprised the dialogue, the mean trajectory estimated from repeated executor generations, and the deterministic reference trajectory, Iaff  
+
+> t
+
+= ( c, ¯yt, y ref ),with ¯yt = K−1 PKk=1 f (Pt, c ; ωk), where K denotes the num-ber of independent executor generations used to estimate the mean trajectory. The refiner used differences between ¯yt and 
+
+yref to revise the instruction, thereby targeting reference align-ment while repeated generations exposed variation attributable to stochastic decoding. For cognitive classification, feedback comprised the refinement examples on which predictions dis-agreed with labels, Icog  
+
+> t
+
+= Et = {(xi, ˆyi,t , y i) : ˆ yi,t ̸ = yi};the refiner used these error instances to clarify the prompt’s classification criteria and output requirements. Algorithms 2 and 3 specified the two task-specific feedback loops evaluated in this study. Here, T and K denote the configured upper bound on refinement rounds and the number of executor generations used to estimate each mean affective trajectory, respectively. We selected the best candidate using the task-specific refinement-set metric, mean absolute error for tra-jectory alignment and micro-F1 for multi-label classification, while held-out examples remained outside prompt revision and selection. Retaining the best observed candidate provided a selection rule, but did not constitute evidence of convergence or monotonic improvement across updates. Figure 3 illustrates affective feedback within one refinement cycle, whereas Algorithm 3 specifies the distinct labeled-error feedback used for cognitive classification. Neither representa-tion establishes convergence across iterations. 
+
+D. Refiner-System Instructions 
+
+The following meta-prompts guided the refiner’s revisions of executor instructions. The Bloom procedure supplied dis-crepant labeled examples, whereas the affective procedure supplied dialogue, mean predicted trajectory, and reference trajectory; these meta-prompts were distinct from the executor prompts being revised. IEEE TRANSACTIONS ON EDUCATION 5
+
+Fig. 2. Prompt-refinement workflow evaluated in this study. The affective procedure compared executor trajectories with a deterministic reference, and the cognitive procedure used discrepant predictions to guide prompt revision. 
+
+Fig. 3. Example of a single affective prompt-refinement iteration. The executor’s response is compared with a deterministic reference, and the observed discrepancy informs the refiner’s update to the executor prompt. The corresponding cognitive-task feedback uses discrepant labeled examples, as specified in Algorithm 3. IEEE TRANSACTIONS ON EDUCATION 6
+
+Algorithm 2 Affective trajectory prompt refinement 
+
+Require: Initial prompt P0, refinement dialogues C, executor 
+
+f , refiner g, deterministic reference model r, repeated-run count K, iteration bound T .
+
+Ensure: Best prompt P ∗ observed during refinement.  
+
+> 1:
+
+P ∗ ← P0; m∗ ← +∞ 
+
+> 2:
+
+for all c ∈ C do  
+
+> 3:
+
+yref (c) ← r(c) 
+
+> 4:
+
+end for  
+
+> 5:
+
+for t = 0 to T − 1 do  
+
+> 6:
+
+for all c ∈ C do  
+
+> 7:
+
+Generate K trajectories with f (Pt, c ) and compute their mean ¯yt(c) 
+
+> 8:
+
+Form feedback Iaff  
+
+> t
+
+(c) = ( c, ¯yt(c), y ref (c))  
+
+> 9:
+
+end for  
+
+> 10:
+
+Compute mt, the refinement-set MAE between ¯yt(c)
+
+and yref (c) over C 
+
+> 11:
+
+if mt < m ∗ then  
+
+> 12:
+
+P ∗ ← Pt; m∗ ← mt 
+
+> 13:
+
+end if  
+
+> 14:
+
+Pt+1 ← g({Iaff  
+
+> t
+
+(c) : c ∈ C} , P t) 
+
+> 15:
+
+end for  
+
+> 16:
+
+return P ∗
+
+Algorithm 3 Multi-label Bloom taxonomy prompt refinement 
+
+Require: Initial prompt P0, labeled refinement data D pro-cessed in partitions, executor f , refiner g, iteration bound 
+
+T .
+
+Ensure: Best prompt P ∗ observed during refinement.  
+
+> 1:
+
+P ∗ ← P0; F ∗ ← −∞  
+
+> 2:
+
+for t = 0 to T − 1 do  
+
+> 3:
+
+Et ← ∅ ; collect predictions and labels across refinement partitions  
+
+> 4:
+
+Generate multi-label predictions ˆyi,t with f (Pt, x i) for each (xi, y i) ∈ D  
+
+> 5:
+
+Compute aggregate micro-F1 Ft and collect errors Et =
+
+{(xi, ˆyi,t , y i) : ˆ yi,t ̸ = yi} 
+
+> 6:
+
+if Ft > F ∗ then  
+
+> 7:
+
+P ∗ ← Pt; F ∗ ← Ft 
+
+> 8:
+
+end if  
+
+> 9:
+
+Pt+1 ← g(Et, P t) 
+
+> 10:
+
+end for  
+
+> 11:
+
+return P ∗
+
+Bloom’s Taxonomy classification refiner 
+
+You are a prompt optimizer for a Bloom’s Taxonomy multi-label classifier. You will be given: the current system prompt used by the classifier LLM; and learning outcomes for which the classifier’s majority-vote prediction does not match ground truth, with both the predicted and ground-truth binary label vectors shown. Goal: revise the prompt to improve multi-label Bloom’s Taxonomy classification. Encourage the model to consider all applicable levels and avoid over- or under-prediction. Make changes that gener-alize; do not overfit to the specific examples shown. Rules: output only the revised system prompt, with no explanation, preamble, or commentary; preserve the output JSON format exactly, with an array of results containing id and labels fields, and ensure that labels lists all applicable Bloom’s levels; content may be restructured, added, or removed. 
+
+Sentiment-trajectory refiner 
+
+You are a prompt optimizer. You will be given the current system prompt used by a sentiment-analysis LLM, the user input it is meant to process, the mean sentiment score it produced per utterance index, and the target scores (ground truth) per utterance index. Goal: revise the prompt so future runs produce scores closer to the target. Make changes that gen-eralize; do not overfit to this single input. Rules: output only the revised system prompt, with no explanation or preamble; you may restructure, add, or remove content; preserve the JSON format instructions exactly. 
+
+E. Data and Experimental Design 
+
+The affective task used EduTalk, approximately 1,280 teacher–student dialogues annotated for conversation-level bi-nary sentiment [8]; the present trajectory task instead used utterance-level model-generated references. The cognitive task used multi-label learning outcomes from the dataset reported by Li et al. [22]. Table II specifies the models, tempera-tures, refinement and evaluation sample sizes, feedback, and measures. Both tasks were evaluated zero-shot without task-specific fine-tuning, and held-out examples supplied no refine-ment feedback. Four affective refinement conversations did not overlap with the 100 test conversations, while 1,000 Bloom outcomes were reserved separately from the 70 refinement examples. The records do not specify sampling procedures, Bloom refinement-partition sizes, label frequencies, or split-generation methods; consequently, interpretation remains lim-ited to the reported samples. Section III-D preserves the refiner instructions, and the table note identifies remaining replication limits. 
+
+F. Evaluation Measures 
+
+For the affective task, the mean executor prediction across repeated generations supplied the trajectory used to calculate mean absolute error (MAE) against the deterministic LLM-generated reference; average standard deviation across held-out conversations summarized generation variability. For cog-nitive classification, we averaged predictions across repeated executor runs. Micro-F1 across the six Bloom’s Taxonomy labels served as the primary measure, subset accuracy required an exact match across all labels for an outcome, and stan-dard deviation summarized run-to-run variability. The reported measures therefore captured reference agreement, multi-label IEEE TRANSACTIONS ON EDUCATION 7
+
+> TABLE II EXPERIMENTAL CONFIGURATIONS FOR THE AFFECTIVE AND COGNITIVE PROMPT -REFINEMENT TASKS .
+
+Task Models and refinement feedback Data and evaluation 
+
+Affective trajectory alignment Phi-4 executor and Trinity-Large-Preview refiner (tem-perature 0.7); Nemotron-3-Nano-30B-A3B deterministic reference (temperature 0.0). Feedback comprised each dialogue, the mean trajectory over repeated executor generations, and the reference trajectory. Four conversations informed refinement; a separate, non-overlapping set of 100 conversations supported held-out evaluation. Outcomes included mean absolute error against the reference and mean output standard deviation across repeated generations. Bloom’s Taxonomy multi-label classification GPT-OSS-120B executor and Trinity-Large-Preview re-finer (temperature 0.7). Feedback comprised refinement examples for which the predicted label vector differed from the annotated vector. Seventy labeled examples were processed in sequential refinement partitions; 1,000 separate outcomes sup-ported held-out evaluation. Outcomes included micro-F1 and exact-match subset accuracy across six labels.           
+
+> Both tasks were evaluated zero-shot without task-specific fine-tuning, and held-out examples did not supply refiner feedback. The full held-out evaluation did not report its repeated-generation count, and it did not specify the refinement-round bound. We denote these quantities by Kand
+> T. The case figures show ten inference attempts for two selected dialogues, but the record does not establish that this count was used for the full evaluation. Model-service revisions and access dates, random seeds, decoding settings beyond temperature, retry rules, a detailed prompt-selection tie-break, and exact initial and selected executor prompts were also unavailable, limiting exact replication. Section III-D provides the refiner meta-prompts. TABLE III SENTIMENT TRAJECTORY ALIGNMENT PERFORMANCE ON THE
+> HELD -O UT SET (N= 100 CONVERSATIONS )
+
+Metric Baseline Optimized MAE 0.742 0.702 
+
+Mean generation SD ( σ) 0.307 0.238 
+
+classification performance, and output variability; the affective reference did not constitute independent human ground truth, and neither task measured instructional efficacy, retention, or achievement. IV. E XPERIMENTAL RESULTS AND ANALYSIS 
+
+The evaluation has examined two analytical functions rel-evant to adaptive Industry 4.0 workforce education. It repre-sents sentiment across instructional dialogue and characterizes the cognitive demands of learning outcomes. Comparisons between initial and selected prompts have assessed whether feedback-driven refinement improves reference agreement, classification performance, and generation consistency on held-out inputs, providing evidence about the model behavior underlying these functions. Although equipment operation, fault diagnosis, and system-level reasoning have motivated their potential application, the evaluated dialogues and learning outcomes have supported task-level analysis rather than direct assessment of workforce training. 
+
+A. Sentiment Trajectory Alignment Results 
+
+On a held-out test split of 100 non-overlapping student dialogues from the EduTalk Sentiment Dataset, the optimized prompt Popt reduced the Mean Absolute Error (MAE) relative to the deterministic reference trajectory from 0.742 to 0.702, representing a 5.39% relative error reduction. Simultaneously, the average standard deviation ( σ) across independent stochas-tic decoding runs decreased from 0.307 to 0.238, representing a 22.48% reduction in output variability. Table III summarizes these quantitative metrics. Lower MAE indicated closer agree-ment with the deterministic Nemotron reference, rather than independently validated affective accuracy. Lower generation standard deviation indicated greater consistency, not uncer-tainty about a learner’s true affect. These aggregate measures did not establish reliable detection of particular emotional transitions or improved instructional decisions. 
+
+B. Case-Based Affective-Trajectory Analysis 
+
+Two selected EduTalk dialogues provided case-based evi-dence of the trajectory patterns and run-to-run variation sum-marized by the aggregate results. In the Cold War exchange, the mean sentiment estimates for the student and teacher declined together; in the French Revolution exchange, the student trajectory shifted from negative to positive during the narrative-oriented interaction. Shaded regions show standard deviations across ten repeated sentiment-analysis attempts for each dialogue. These repeated generations characterize output variability and are distinct from prompt-refinement iterations. The cases provide descriptive context for the affective task. However, they do not add independent observations to the held-out sample or establish that the instructional strategy caused the observed changes or improved learning. These history-based dialogues have illustrated the affective-analysis procedure in general educational interactions. Their relevance to Industry 4.0 instruction rests on the proposed analytical function, while their validity for equipment-specific dialogue and technical troubleshooting remains to be established. 
+
+C. Bloom’s Taxonomy Multi-Label Classification Results 
+
+For the multi-label cognitive taxonomy classification task evaluated on a held-out test split of 1,000 learning outcome statements, the optimized prompt Popt achieved a micro-F1 score of 0.893 compared with 0.687 for the baseline prompt 
+
+P0, representing an absolute improvement of 0.206 (a 30.00% relative increase). Concurrently, subset exact-match accuracy increased from 0.418 to 0.636, representing an absolute im-provement of 0.218 (a 52.15% relative increase). Table IV presents these classification metrics. The increases in micro-F1 and subset accuracy were consistent with improved multi-label performance on the held-out outcomes. These aggregate measures, however, did not identify which Bloom levels or error types accounted for the change, and the present analysis IEEE TRANSACTIONS ON EDUCATION 8
+
+Fig. 4. Estimated sentiment trajectories across successive utterances in a Cold War instructional dialogue. Curves show student, teacher, and combined mean scores; shaded bands indicate standard deviations across ten repeated inference attempts. These are model-generated sentiment estimates, with positive values indicating more positive sentiment. 
+
+Fig. 5. Estimated sentiment trajectories across successive utterances in a French Revolution instructional dialogue. The student’s mean trajectory shifts from negative to positive during the exchange; shaded bands indicate standard deviations across ten repeated inference attempts. The observed pattern does not establish an instructional effect. TABLE IV MULTI -L ABEL BLOOM CLASSIFICATION PERFORMANCE ON THE 
+
+HELD -O UT SET (N = 1 ,000 OUTCOMES )
+
+Metric Baseline Optimized Micro-F1 0.687 0.893 
+
+Subset accuracy 0.418 0.636 
+
+did not isolate the contribution of individual prompt revisions. Accordingly, the results supported an association between the selected prompt and higher held-out scores under this evaluation protocol, rather than a causal claim about particular criteria or a general claim of error mitigation across technical learning tasks. 
+
+D. Iteration Evidence and Interpretation 
+
+The results have established endpoint comparisons rather than a convergence trajectory: no per-iteration performance series was available to identify monotonic improvement, con-vergence timing, or stable plateaus. Figure 6 compares initial and selected Bloom prompts, while Figs. 4 and 5 characterize inference variability for selected dialogues. Their ten repeated generations do not represent ten prompt-refinement rounds. V. D ISCUSSION 
+
+The held-out comparisons have shown closer agreement with a model-generated affective reference, lower affective-generation variability, and higher multi-label Bloom classifi-cation scores following prompt refinement without executor parameter updates. These findings have supported endpoint IEEE TRANSACTIONS ON EDUCATION 9 
+
+> Fig. 6. Initial and optimized prompt performance for multi-label Bloom classification on the held-out set of 1,000 learning outcomes. The left panel reports micro-F1; the right panel displays per-label F1 values reported for the evaluated outcomes. The figure supports descriptive comparison and does not provide additional independently collected observations.
+
+improvements across two educational analyses, while leaving human-valid affect estimation and educational effectiveness unresolved. 
+
+A. Interpretation in Relation to Prompt Optimization Litera-ture 
+
+The endpoint improvements have been consistent with the model-generated search and feedback-guided revision mech-anisms of APE, OPRO, and Self-Refine [16], [17], [18]. However, the study has not compared optimizers, expert-authored prompts, or fine-tuning, or isolated individual prompt changes; relative superiority and the causes of improvement therefore remain unresolved. Course-grounded immersive tu-toring [3] has addressed access to domain evidence, whereas the present loop has targeted interpretation of task instructions and feedback. Their integration remains a hypothesis for future evaluation. 
+
+B. Cost and Measurement Scope 
+
+Refinement has required additional executor and refiner calls, but timing and token-cost measurements were insuf-ficient to quantify overhead or assess real-time suitability. Findings from a separate slide-processing pipeline do not quantify refinement costs [5]. Future evaluations should report end-to-end latency, token use, and prompt-update frequency alongside task performance. 
+
+C. Validity of Model-Generated and Annotated Targets 
+
+The affective task used a deterministic Nemotron refer-ence, making the comparison reproducible. This use of a fixed reference differs from LLM-MC-Affect’s use of re-peated inferences to characterize trajectory variation [4]. Nei-ther approach provides objective or human-validated ground truth. The measured reduction in error therefore indicated closer agreement with that reference, not improved diagnosis of learners’ emotional states. Reduced generation variability indicates greater output consistency but does not establish improved affective validity. Because repeated-inference dis-persion may reflect both model stochasticity and meaningful interpretive ambiguity, future evaluation should test whether prompt refinement preserves disagreement observed among human raters [4]. The Bloom task used labels associated with Li et al.’s learning-outcome dataset. Li et al. reported coding by a trained annotator and independent review of 30% of the objectives, with Cohen’s κ increasing from 0.63 to 0.80 after label revision [22]. These source-level checks support annota-tion provenance but do not independently establish the validity or label distribution of the subset evaluated here. Follow-up studies should use expert review, multiple human raters, inter-rater agreement, and subgroup error analyses before using either signal to support consequential instructional decisions. Exploratory research on agent-generated textual artifacts has combined model-assisted interpretation with subsequent human verification while acknowledging influences from prompts, model providers, and human intervention [23]. These methodological limits reinforce the need to independently validate educational interpretations before using model-derived signals to guide instruction. 
+
+D. Implications for Adaptive Education 
+
+Affective signals and adaptive prompts may eventually support responsive instruction, but the present experiments measured model outputs rather than learner engagement, per-sistence, retention, or equitable outcomes. An earlier PPE-training pilot has reported higher task hit rates and shorter completion times with adaptive difficulty, although unequal participant groups and repeated observations have limited causal interpretation [8]. Prior work situated personalized tutoring and technical instruction within educational contexts [3], [4], [5], but neither those studies nor the present of-fline evaluation established that sentiment-based adaptation improves learning. Such use would require learner-centered validation, transparent instructor oversight, and assessment of IEEE TRANSACTIONS ON EDUCATION 10 
+
+differential errors before affective inference informed instruc-tional decisions. 
+
+E. Limitations and Future Research 
+
+The evidence has remained limited to endpoint comparisons on fixed held-out sets and small refinement samples, without independent repetitions of the full optimization procedure, random-seed analyses, confidence intervals, or inferential tests. Generation standard deviation has not supplied a confidence interval for the measured improvement, and neither human validation of affect estimates nor learner outcomes has been assessed. Follow-up studies should log each prompt update, model version, prompt, sampling decision, decoding setting, and call budget, and report independently repeated opti-mization runs with confidence intervals. Comparisons with expert-authored prompts and established optimizers should use matched token and latency budgets. Human-rated affect with agreement statistics, audited Bloom annotations and per-class errors, and supervised laboratory pilots measuring task completion and learner feedback should precede adequately powered multi-site studies of retention and transfer. VI. C ONCLUSION 
+
+Feedback-driven prompt refinement has improved measured performance without executor parameter updates: across 100 EduTalk conversations, reference-based sentiment MAE has decreased from 0.742 to 0.702 and generation standard devi-ation from 0.307 to 0.238; across 1,000 learning outcomes, Bloom micro-F1 has increased from 0.687 to 0.893 and subset accuracy from 0.418 to 0.636. These task-level findings have complemented course-grounded educational architectures [3] without establishing human-valid affect recognition, opti-mization convergence, or learning gains. Human validation, optimizer comparisons, and supervised learner studies remain necessary to determine whether these analytical improvements support adaptive Industry 4.0 workforce education. REFERENCES [1] E. A. Lee, “Cps foundations,” in Proceedings of the 47th design automation conference , 2010, pp. 737–742. [2] P. Satam, C. Philipp, S. Shao, and S. Salehi, “Cps-tr: An online training platform to address fourth industrial revolution workforce needs,” in 
+
+2023 IEEE Integrated STEM Education Conference (ISEC) . IEEE, 2023, pp. 271–276. [3] G. Raul, Y.-Z. Lin, K. Patel, B. P.-J. Shih, M. W. Redondo, B. S. Latibari, J. Pacheco, S. Salehi, and P. Satam, “Rag-prism: A personalized, rapid, and immersive skill mastery framework with adaptive retrieval-augmented tutoring,” in 2025 IEEE Frontiers in Education Conference (FIE) . IEEE, 2025, pp. 1–9. [4] Y.-Z. Lin, B. P.-J. Shih, J. P. M. Encinas, E. V. Achom, K. Patel, J. H. Pacheco, S. Shao, J. Dass, S. Salehi, and P. Satam, “Llm-mc-affect: Llm-based monte carlo modeling of affective trajectories and latent ambiguity for interpersonal dynamic insight,” in Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , 2026, pp. 27 984–28 000. [5] K. Patel, Y.-Z. Lin, G. Raul, B. P.-J. Shih, M. W. Redondo, B. S. Latibari, J. Pacheco, S. Salehi, and P. Satam, “Integrating generative ai into cybersecurity education: A study of ocr and multimodal llm-assisted instruction,” in 2025 IEEE Frontiers in Education Conference (FIE) . IEEE, 2025, pp. 1–9. [6] E. Du Plooy, D. Casteleijn, and D. Franzsen, “Personalized adaptive learning in higher education: A scoping review of key characteristics and impact on academic performance and engagement,” Heliyon , vol. 10, no. 21, 2024. [7] E. Kasneci, K. Seßler, S. K¨ uchemann, M. Bannert, D. Dementieva, F. Fischer, U. Gasser, G. Groh, S. G¨ unnemann, E. H¨ ullermeier et al. ,“Chatgpt for good? on opportunities and challenges of large language models for education,” Learning and individual differences , vol. 103, p. 102274, 2023. [8] Y.-Z. Lin, K. Patal, A. H. Alhamadah, S. Ghimire, M. W. Redondo, D. R. V. Corona, J. Pacheco, S. Salehi, and P. Satam, “Personalized education with generative ai and digital twins: Vr, rag, and zero-shot sentiment analysis for industry 4.0 workforce development,” 2025. [9] Y.-Z. Lin, K. Patel, A. H. J. Alhamadah, B. P.-J. Shih, M. W. Redondo, D. R. V. Corona, B. S. Latibari, J. Pacheco, S. Salehi, and P. Satam, “Prism: A personalized, rapid, and immersive skill mastery framework for personalizing experiential learning through generative ai,” in Gener-ative AI in Higher Education Assessment: Theory, Practice, and Ethical Implications . Springer, 2025, pp. 45–69. [10] A. Alhamadah, M. Mamun, H. Harms, M. Redondo, Y.-Z. Lin, J. Pacheco, S. Salehi, and P. Satam, “Photogrammetry for digital twin-ning industry 4.0 (i4) systems,” in 2024 IEEE/ACS 21st International Conference on Computer Systems and Applications (AICCSA) . IEEE, 2024, pp. 1–6. [11] D. R. Krathwohl, “A revision of bloom’s taxonomy: An overview,” 
+
+Theory into practice , vol. 41, no. 4, pp. 212–218, 2002. [12] M. W. U. Rahman, S. Shao, P. Satam, S. Hariri, C. Padilla, Z. Taylor, and C. Nevarez, “A bert-based deep learning approach for reputation analysis in social media,” in 2022 IEEE/ACS 19th International Conference on Computer Systems and Applications (AICCSA) . IEEE, 2022, pp. 1–8. [13] S. Satam, P. Satam, and S. Hariri, “Multi-level bluetooth intrusion detection system,” in 2020 IEEE/ACS 17th international conference on computer systems and applications (AICCSA) . IEEE, 2020, pp. 1–8. [14] S. Shao, P. Satam, S. Satam, K. Al-Awady, G. Ditzler, S. Hariri, and C. Tunc, “Multi-layer mapping of cyberspace for intrusion detection,” in 2021 IEEE/ACS 18th International Conference on Computer Systems and Applications (AICCSA) . IEEE, 2021, pp. 1–8. [15] M. Sclar, Y. Choi, Y. Tsvetkov, and A. Suhr, “Quantifying language models’ sensitivity to spurious features in prompt design or: How i learned to start worrying about prompt formatting,” in International Conference on Learning Representations , vol. 2024, 2024, pp. 25 055– 25 083. [16] Y. Zhou, A. I. Muresanu, Z. Han, K. Paster, S. Pitis, H. Chan, and J. Ba, “Large language models are human-level prompt engineers,” 2022. [17] C. Yang, X. Wang, Y. Lu, H. Liu, Q. V. Le, D. Zhou, and X. Chen, “Large language models as optimizers,” in International Conference on Learning Representations , vol. 2024, 2024, pp. 12 028–12 068. [18] A. Madaan, N. Tandon, P. Gupta, S. Hallinan, L. Gao, S. Wiegreffe, U. Alon, N. Dziri, S. Prabhumoye, Y. Yang et al. , “Self-refine: Iterative refinement with self-feedback,” vol. 36, 2023, pp. 46 534–46 594. [19] J. Perczel, J. Chow, and D. Demszky, “Teachlm: Post-training llms for education using authentic learning data,” 2025. [20] Y.-Z. Lin, Q. Shi, Z. Yang, B. S. Latibari, S. Satam, S. Shao, S. Salehi, and P. Satam, “Ddd-gendt: Dynamic data-driven generative digital twin framework,” IEEE Transactions on Artificial Intelligence , vol. 7, no. 4, pp. 2171–2185, 2026. [21] J. P. M. Encinas, Y.-Z. Lin, B. P.-J. Shih, J. Dean, A. Minh Nguyen, A. Namjoshi, A. H. J. Alhamadah, S. Satam, J. Pacheco, S. Salehi et al. ,“Photogrammetry-enabled digital twins for semiconductor education and workforce development,” in Proceedings of the Great Lakes Symposium on VLSI 2026 , 2026, pp. 606–610. [22] Y. Li, M. Rakovic, B. X. Poh, D. Gasevic, and G. Chen, “Automatic classification of learning objectives based on bloom’s taxonomy,” in 
+
+Proceedings of the 15th International Conference on Educational Data Mining , 2022, p. 530. [23] Y.-Z. Lin, B. P.-J. Shih, H.-Y. A. Chien, S. Satam, J. H. Pacheco, N. Kaabouch, S. Shao, S. Salehi, and P. Satam, “Exploring silicon-based societies: An early study of the moltbook agent community,” 2026.

@@ -1,0 +1,217 @@
+{
+  "date": "20261126",
+  "date_label": "",
+  "generated_at": "2026-11-26 03:00:13 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2611.28293v1",
+      "route": "202611/26/2611.28293v1-feedback-driven-prompt-refinement-for-educational-ai-affective-trajectory-estimation-and-blooms-taxonomy-classification",
+      "title": "Feedback-Driven Prompt Refinement for Educational AI: Affective Trajectory Estimation and Bloom's Taxonomy Classification",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向个性化技术教育的教育AI与布鲁姆分类",
+      "first_seen_at": "2026-11-26 03:00:13 UTC",
+      "updated_at": "2026-11-26 03:00:13 UTC"
+    },
+    {
+      "paper_id": "2611.30163v1",
+      "route": "202611/26/2611.30163v1-revagent-multi-agent-reasoning-intensive-video-generation",
+      "title": "ReVAgent: Multi-Agent Reasoning-Intensive Video Generation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向教学视频生成的多智能体框架",
+      "first_seen_at": "2026-11-26 03:00:13 UTC",
+      "updated_at": "2026-11-26 03:00:13 UTC"
+    },
+    {
+      "paper_id": "2611.30559v1",
+      "route": "202611/26/2611.30559v1-learning-what-to-change-state-verified-reinforcement-learning-for-educational-agents",
+      "title": "Learning What to Change: State-Verified Reinforcement Learning for Educational Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "有状态辅导智能体与学习者档案",
+      "first_seen_at": "2026-11-26 03:00:13 UTC",
+      "updated_at": "2026-11-26 03:00:13 UTC"
+    },
+    {
+      "paper_id": "2611.31573v1",
+      "route": "202611/26/2611.31573v1-the-paradox-of-agency-preserving-ai-negotiating-learner-agency-in-layered-human-ai-interactions",
+      "title": "The Paradox of Agency-Preserving AI: Negotiating Learner Agency in Layered Human-AI Interactions",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "人机学习交互中的学习者能动性与元认知支架",
+      "first_seen_at": "2026-11-26 03:00:13 UTC",
+      "updated_at": "2026-11-26 03:00:13 UTC"
+    },
+    {
+      "paper_id": "2611.31899v1",
+      "route": "202611/26/2611.31899v1-beyond-average-gains-probing-the-equity--vulnerability-tension-in-structured-visual-ai-for-learning",
+      "title": "Beyond Average Gains: Probing the Equity--Vulnerability Tension in Structured Visual AI for Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "结构化视觉对话式AI学习的随机实验研究",
+      "first_seen_at": "2026-11-26 03:00:13 UTC",
+      "updated_at": "2026-11-26 03:00:13 UTC"
+    },
+    {
+      "paper_id": "2611.32377v1",
+      "route": "202611/26/2611.32377v1-found-in-translation-five-entry-points-to-translate-ai-literacy-frameworks-in-the-design-of-educational-materials",
+      "title": "Found in Translation: Five Entry Points to Translate AI Literacy Frameworks in the Design of Educational Materials",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "将AI素养框架转化为教学材料设计",
+      "first_seen_at": "2026-11-26 03:00:13 UTC",
+      "updated_at": "2026-11-26 03:00:13 UTC"
+    },
+    {
+      "paper_id": "2611.25294v1",
+      "route": "202611/26/2611.25294v1-modeling-learner-technology-interaction-through-multilevel-gaze-transition-dynamics-to-inform-usability-in-online-learning",
+      "title": "Modeling Learner-Technology Interaction Through Multilevel Gaze Transition Dynamics to Inform Usability in Online Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "AI支持在线学习中学习者多层级注视转移分析",
+      "first_seen_at": "2026-11-26 03:00:13 UTC",
+      "updated_at": "2026-11-26 03:00:13 UTC"
+    },
+    {
+      "paper_id": "2611.32266v1",
+      "route": "202611/26/2611.32266v1-unjamming-deferrals-supporting-students-through-jamn-bot-a-mobile-rag-grounded-policy-assistant",
+      "title": "Unjamming Deferrals: Supporting Students Through JAMN Bot, a Mobile RAG-Grounded Policy Assistant",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向学生服务的LLM检索增强聊天机器人教育工具",
+      "first_seen_at": "2026-11-26 03:00:13 UTC",
+      "updated_at": "2026-11-26 03:00:13 UTC"
+    },
+    {
+      "paper_id": "2611.23795v1",
+      "route": "202611/26/2611.23795v1-a-dual-som-learner-model-of-instructional-efficiency-within-cognitive-load-theory",
+      "title": "A Dual-SOM Learner Model of Instructional Efficiency within Cognitive Load Theory",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "用自组织映射进行学习者建模，用于教学效率的学习分析",
+      "first_seen_at": "2026-11-26 03:00:13 UTC",
+      "updated_at": "2026-11-26 03:00:13 UTC"
+    },
+    {
+      "paper_id": "2611.26799v1",
+      "route": "202611/26/2611.26799v1-trajectories-through-parsons-problems-making-student-difficulty-patterns-visible-to-instructors",
+      "title": "Trajectories Through Parsons Problems: Making Student Difficulty Patterns Visible to Instructors",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "为教师提供过程性学习分析的帕森斯问题工具",
+      "first_seen_at": "2026-11-26 03:00:13 UTC",
+      "updated_at": "2026-11-26 03:00:13 UTC"
+    },
+    {
+      "paper_id": "2611.27799v1",
+      "route": "202611/26/2611.27799v1-childai-gov-an-evidence-linked-ai-system-for-assessing-edtech-policies-against-childrens-digital-rights",
+      "title": "ChildAI-Gov: An Evidence-Linked AI System for Assessing EdTech Policies Against Children's Digital Rights",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "可解释AI系统评估教育科技政策与儿童数字权利",
+      "first_seen_at": "2026-11-26 03:00:13 UTC",
+      "updated_at": "2026-11-26 03:00:13 UTC"
+    },
+    {
+      "paper_id": "2611.28565v1",
+      "route": "202611/26/2611.28565v1-beyond-unit-tests-path-aware-rubric-guided-llm-autograding-of-notebooks",
+      "title": "Beyond Unit Tests: Path-Aware Rubric-Guided LLM Autograding of Notebooks",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "基于LLM的学生笔记本自动评分教育评估",
+      "first_seen_at": "2026-11-26 03:00:13 UTC",
+      "updated_at": "2026-11-26 03:00:13 UTC"
+    },
+    {
+      "paper_id": "2611.32211v1",
+      "route": "202611/26/2611.32211v1-aressays-towards-robust-arabic-handwritten-text-understanding-in-educational-settings",
+      "title": "ArEssays: Towards Robust Arabic Handwritten Text Understanding in Educational Settings",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "在学生手写作文上评测视觉语言与OCR模型",
+      "first_seen_at": "2026-11-26 03:00:13 UTC",
+      "updated_at": "2026-11-26 03:00:13 UTC"
+    }
+  ]
+}

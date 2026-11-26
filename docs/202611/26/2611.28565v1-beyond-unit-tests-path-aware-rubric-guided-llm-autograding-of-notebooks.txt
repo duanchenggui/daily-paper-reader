@@ -1,0 +1,213 @@
+Title: Beyond Unit Tests: Path-Aware Rubric-Guided LLM Autograding of Notebooks
+
+URL Source: https://arxiv.org/pdf/2611.28565v1
+
+Published Time: Tue, 24 Nov 2026 01:47:37 GMT
+
+Number of Pages: 6
+
+Markdown Content:
+# Beyond Unit Tests: Path-Aware Rubric-Guided LLM Autograding of Notebooks 
+
+Salman Hajizada 
+
+Carnegie Mellon University in Qatar 
+
+Doha, Qatar 
+
+Mohammed Yusuf Ansari 
+
+Carnegie Mellon University in Qatar 
+
+Doha, Qatar 
+
+Gianni Di Caro 
+
+Carnegie Mellon University in Qatar 
+
+Doha, Qatar 
+
+Abstract —Jupyter notebooks support open-ended, multi-step assessments in which students build one logical flow across interdependent steps, combining code, written analysis, and generated outputs such as plots. These reflect authentic scientific practice but are hard to grade consistently, since students may make different yet equally valid choices at each step, so a later answer can only be judged in light of the choices a student made earlier. We present an LLM-based autograder for such flow-structured notebook questions. It generates a rubric from a reference solution, then applies a softening pass that relaxes criteria tied to the reference so legitimate alternative paths are not penalized. Each question group is graded in a single model call, so later answers are judged against the student’s own earlier choices, using question-type tags and schema-constrained, low-temperature outputs. Evidence is scored multimodally: code, text, numerical outputs, and figures from code cells. We deployed the tool in a machine-learning course, integrated with Grade-scope, with a pre-submission format check and prompt-injection defenses, and evaluate it both in that live course and against archived submissions graded by staff in earlier terms. We report agreement, cross-model variance, cost, student perceptions, and injection resilience. With low-temperature models, agreement with human scores is often strong, including on the open-ended items the design specifically targets, while run-to-run stability depends sharply on the model’s temperature support. 
+
+Index Terms —Automated grading, large language models, Jupyter notebooks, multimodal assessment, prompt injection. 
+
+I. I NTRODUCTION 
+
+Automated grading has long been standard in large program-ming courses. Enrollments grew, hand-checking code became expensive [1], and code suits machine checking well: run the submission, compare what it produces against what it should, assign points. Computational coursework has since spread well past programming courses. Students in machine learning, data science, statistics, and engineering now work mostly in Jupyter notebooks , where prose, equations, code, printed output, and figures sit in one document and are produced together. A notebook records not only what a student computed, but how they got there and what they made of it. That opens up a different kind of assignment . Rather than asking for a function that passes tests, an instructor can ask a student to take a problem from raw data to a defended conclusion: inspect the data, choose a model, fit it, plot what happened, and argue whether the result is any good. Most notebook assignments stop well short of this: sequences of independent cells with deterministic outputs, which is the part conventional autograders handle. The ones that use the whole 
+
+Question Type Evidence Q1: Remove one input feature (e.g., number of bedrooms) and justify the choice 
+
+analysis Rationale and choice 
+
+Q2: Retrain without that feature and report the change in error 
+
+mixed Code, metric, plots 
+
+Q3: Compare the original and the reduced models 
+
+open-ended Interpretation tied to Q1–Q2 
+
+Fig. 1: Simple running example : three linked notebook ques-tions, with question-type tags and the evidence each produces. format tend to be graded by hand, and grading cost is a large part of why they stay rare. We call these assignments flow-structured . Three things set them apart from single-answer items. The evidence is mixed and interleaved: prose, derivations, code, and figures appear in the combination the task calls for. Dependencies are irregular, since a question may rest on any subset of the cells above it rather than the preceding one, so a cell cannot be judged out of context. And there is no single right answer: students take different routes in solving the notebook questions. Figure 1 shows an example we return to throughout. Q1 asks a student to remove an input feature of their choosing, Q2 to retrain and report how the error moved, and Q3 to interpret the difference. Several features are defensible in Q1, and once one is chosen the right answer to Q3 follows from it. Correctness depends on the student’s own run, so the same analysis can be right in one notebook and wrong in another. The tools built for notebook courses do not cover this. nbgrader combines automatic checks on code with manual grading of everything else [2], leaving the figures, written analysis, and reasoning that runs across cells to the instructor. Automating it raises three problems existing tools leave open. An instructor’s intent has to become a rubric that rewards a good answer even when it arrives by an unexpected route. Each question has to be assembled with the earlier cells it depends on, and its mixed evidence judged against the student’s own numbers rather than a fixed key. And the result has to run on a live class, which means treating submissions as untrusted input, keeping a person in the loop before grades go out, and delivering scores through the platform the course already uses. We describe a workflow built for flow-structured notebooks and report what happened when we ran it in a course. Our 
+
+contributions can be summarized as follows: 
+
+Accepted for publication at IEEE TALE 2026. © 2026 IEEE. Personal use of this material is permitted. Permission from IEEE must be obtained for all other uses, in any current or future media, including reprinting/republishing this material for advertising or promotional purposes, creating new collective works, for resale or redistribution to servers or lists, or reuse of any copyrighted component of this work in other works. arXiv:2611.28565v1 [cs.AI] 21 Nov 2026 1) Rubrics for branching solution paths. The system writes per-question rubrics from a reference solution, then runs a softening pass that loosens criteria tied too closely to the reference, so equivalent processing, plotting, and modeling choices still earn credit. 2) Context-aware, multimodal grading of notebook flows. Dependent questions are graded together in one call (a question group ), so later code, results, figures, and prose are weighed against the student’s earlier choices, and a mismatch between a stated choice and later work can be flagged. Figures reach a vision-capable model alongside the markdown, code, and output. Instructor-supplied question-type tags tell rubric generation and grading what evidence each subtask should produce. 3) A deployable, evaluated end-to-end workflow. The system pairs schema-constrained grading output with a pre-submission format check, untrusted-input hard-ening [3], [4], resumable runs that record per-question provenance, an instructor review interface, and Grade-scope export, and we evaluate it in classroom use rather than on a static benchmark. As far as we know, this is the first framework with live-course deployment of rubric-guided LLM autograding that treats a notebook as a dependent flow rather than a set of independent items, and that reports stability, agreement, cost, and injection resilience for the system actually in use. We discuss related work (Section II), describe the design (Section III), deployment in a machine learning course (Sec-tion IV), and lessons for practitioners (Section V). II. R ELATED WORK 
+
+Autograding for notebooks. Conventional notebook tooling automates what unit tests can reach. nbgrader runs instructor-written checks against code cells and leaves free-response work to manual grading [2], a sensible division of labor as long as the free-response part stays small. In flow-structured assignments it does not. LLM-based systems have begun to push past that line, and two are close to our setting. PyEvalAI grades Jupyter notebooks with a local model and a tutor in the loop [5]; Saez et al. benchmark several LLMs on student notebooks and find that even strong models overlook details that change a grade [6]. Both score a notebook question by question, leaving open the case where one answer can only be judged in light of another the same student gave earlier. 
+
+LLM grading of code assignments. Work on programming submissions is further along. JorGPT compares model families and calibration strategies [7], BeGrading fine-tunes smaller models for code feedback [8], and Lewis and Chen summarize code before mapping it onto a rubric [9]. Nagakalyani et al. propose a fine-tuned Code Llama assistant whose rubric rat-ings TAs accept or override, cutting grading time by 24% [10]. Chiang et al. show related risks at course scale (format failures, prompt hacking) in a 1,000+ student NLP class [11]. Those settings still grade text or source as text; a notebook also has student-generated figures, outputs that depend on earlier cells, and prose about both. 
+
+Rubrics, open-ended answers, and reliability. Open-ended grading is hard because no single output defines correct-ness. Pecuchova et al. evaluate LLMs on open-ended higher-education responses and find that model choice largely de-termines whether the result is deployable [12]. A rubric makes such grading auditable without making it easy: Yang and Gulbahar use synthetic rubric-based data to show that even detailed rubrics leave AI and human scores apart [13]. Reliability work adds that raw scores cannot be taken at face value; Korthals et al.’s SURE framework combines self-consistency with selective human review, cutting workload while keeping uncertain cases in front of a grader [14]. We read rubric design, score stability, and selective review as three views of one problem, and evaluate all three for the pipeline we deployed rather than treating reliability as a separate claim. 
+
+Prompt injection. Student text is untrusted input, and the attack surface is by now well documented. Liu et al. for-malize prompt-injection attacks and defenses [3]; Cai exam-ines education-specific attacks, among them rubric mirroring, where a submission recites the grading criteria back at the model [4]; Milani et al. show that hidden text in a submission can move an LLM-assisted grade [15]; and EvalHack pushes answer-side attacks further with stealth Unicode payloads [16]. This work reports what defeats a grader in isolation, and says less about how the same defenses hold up inside a pipeline that must also parse, score, review, and export. 
+
+Where this work sits. No prior system combines all of these: grading questions together so earlier choices inform later ones, reading student-generated figures with a vision model, loosening a synthesized rubric to admit paths the reference never took, and treating injection defense as one stage of a deployed workflow rather than a problem studied on its own. III. S YSTEM DESIGN 
+
+As Section I set out, the grader must handle mixed notebook evidence, score dependent questions together, and credit valid paths the reference did not take. Deployment adds a fourth requirement: harden untrusted submissions, keep an instructor in the loop, and ship scores through the course LMS. We walk the pipeline below, returning to Figure 1. 
+
+A. Pipeline Overview 
+
+Figure 2 shows the stages. Rubric generation runs once per assignment ; gathering, parsing, and grading run once per student , with each call covering a question group. Instructor effort sits at two checkpoints, rubric review before grading and result review before release, and everything else is automatic. The instructor supplies four inputs: the assignment notebook 
+
+students receive, a reference solution , the student submissions ,and a configuration file giving regex patterns that locate 
+
+question boundaries in markdown cells, question-type tags in cell metadata, and the grouping of questions. 
+
+B. Ingestion 
+
+Before the deadline, students can run their notebook against a separate Gradescope autograder that checks only whether student submissions reference solution Gather Parse Sanitize & delimit Rubric generation Softening pass Rubric review Grade  
+
+> one call per question group
+> Result review Export
+> once per student once per assignment per-question evidence rubric Gradescope ZIP
+
+Fig. 2: Pipeline overview. The left lane runs once per student, the right once per assignment, and the two converge at grading. Shaded boxes are instructor checkpoints. it parses and contains the expected questions; a student who deleted the markdown header introducing Q2 finds out then rather than after grades are computed. After the deadline, the gather step unpacks the Gradescope export into one notebook per student, matches notebooks to students via the submission metadata, and copies them into an assignment-scoped workspace, flagging anything missing or duplicated. 
+
+C. Parsing Notebook Evidence 
+
+Parsing turns a flat cell sequence into typed evidence per question, so later stages see prose, code, output, and figures as labeled objects rather than one undifferentiated document. For each question the parser stores the question ID, mark-down, code, and captured output, figures included. Notebook cells share one execution state, so a captured output reflects everything run above it; keeping outputs as submitted pre-serves the student’s execution trace that grading is later judged against. In the running example, Q1 holds the feature-choice rationale, Q2 the retraining code with the error metric it printed and the plot it drew, and Q3 the comparison write-up. Each question also carries a type tag naming the evidence to expect: code (source and execution results), plot (a generated figure and its visual properties), analysis (ex-planatory reasoning), open-ended (justified interpretation or design choice), exact (a specific value or string), and mixed 
+
+(multiple types, the default). The running example uses three: Q1 is analysis , grading a justification rather than an output; Q2 is mixed , producing code, a metric, and a figure at once; and Q3 is open-ended , since many interpretations are defensible and which is correct depends on Q1 and Q2. The tags feed both rubric generation and grading. 
+
+D. Rubric Generation and Softening 
+
+Rubric generation starts from the instructor’s reference solution but has to produce something assignment-specific rather than implementation-specific. For the running example, that means credit for a reasonable feature-removal rationale in Q1, a correct retraining procedure and accurate error reporting in Q2, and a Q3 comparison consistent with whichever feature the student actually dropped. One model call per question group produces the rubric, using a structured-output schema [17]. The prompt combines a rubric-authoring instruction, the reference solution for each question in the group, and the question-type instructions. The model returns per question a list of criteria, each with a description and a point deduction. Point totals are fixed by the assignment; deductions must sum to the total, and the pipeline rescales them when they do not. Deductions from a fixed total keep the model from inflat-ing point values, but push rubrics toward enumerable faults. Open-ended items such as Q3 suffer most, since their failure modes are harder to list than those of a retraining procedure. Section V returns to this. A softening pass makes a second call that keeps the criteria and point allocations but generalizes anything tied to the reference implementation. Criteria drawn from the reference tend to demand the specific thing the reference did: remove the number of bedrooms, preprocess with StandardScaler ,report this error value. Softening rewrites them to accept any coherently justified feature choice, any equivalent preprocess-ing, and results consistent with the student’s own run. The pass runs by default and can be turned off per assignment. Rubric review is the first instructor checkpoint (Figure 2). Staff inspect and edit the softened rubric before any grading call, and the final rubric hash is stored with every graded question so feedback traces back to the exact rubric used. 
+
+E. Rubric-Guided Grading 
+
+Each student is graded separately, and each question group is evaluated in one model call containing every question in it, so the model sees dependent questions together and can weigh later work against the student’s earlier choices instead of treating each answer as self-contained. Grouping trades context against prompt size: a group has to be large enough to hold the dependencies and small enough that the model attends to each question, so instructors group questions that share a data or modeling decision, typically two to four. Each prompt pairs the student’s evidence with the match-ing rubric. That evidence is student-authored and therefore untrusted, so it is sanitized and wrapped in delimiters the student cannot forge before it enters the prompt (Section III-F). The reference solution is left out by default, since the rubric already carries the expected behavior; including it would push the model toward reproducing one implementation when other paths are valid. Where a question includes plots, as Q2 does, a vision-capable model receives the figures as images alongside the markdown, code, and captured output. The model returns, per question, a score, feedback tied to rubric criteria, a confidence level (low, medium, or high), and a requires_review flag, all under a structured-output schema [17]. This avoids extracting scores from free-form text [11]. Invalid or incomplete output is retried a bounded number of times; when retries run out the question is flagged 
+
+requires_review rather than dropped. Grouping is what lets the grader catch a student who justifies removing the number of bedrooms in Q1 but drops Fig. 3: Instructor Review tab. Staff can move through ques-tions, inspect rendered notebook evidence, review rubric feed-back, and save or regrade before exporting to Gradescope. floor area in Q2, credit an unconventional but defensible Q1 choice carried correctly through Q2 and Q3, and count a mistake propagated consistently across the three questions once rather than three times, the way a human grader would. An autograder seeing Q2 alone can ask only whether some model was retrained and some error reported. Results are saved incrementally, so an interrupted run re-sumes without regrading finished submissions. Each graded question records the model, rubric hash, and timestamp, and the run summary aggregates token usage. 
+
+F. Safety Guardrails 
+
+Students write the text the grader reads. In the running example, Q1 and Q3 are free-form markdown a student could use to address the model directly. The system therefore defends on both sides of the call. Before the prompt goes out, student text is delimited, Unicode normalized, and format, control, and bidirectional characters used in stealth injection stripped; student copies of the boundary markers are replaced with inert characters so a submission cannot forge the structure the grader depends on. After the response, output is constrained to a fixed JSON schema and scores clamped to the valid range, so a payload that survives sanitization and sways the model still cannot yield a malformed or out-of-range grade. Detected stealth Unicode sets requires_review . Section IV-F tests these defenses on a synthetic HW2 red-team benchmark. 
+
+G. Instructor Review and Export 
+
+Review is the second instructor checkpoint, and no score reaches a student without passing through it. Staff see a stu-dent queue, per-question navigation, parsed evidence, rubric-grounded scores and feedback, model confidence, and review flags (Figure 3), and can edit or regrade individual questions before release. The confidence labels keep the checkpoint tractable at class scale: low-confidence Q3 scores can be triaged first, since open-ended interpretation is where the grader is least reliable. After review, the system exports an Excel workbook and a Gradescope autograder ZIP, published once the instructor uploads it and releases grades. IV. D EPLOYMENT AND EVALUATION 
+
+We evaluate the system in two settings. In the live deploy-ment, it graded four notebook assessments in a Spring 2026 machine learning course. For agreement evidence beyond one cohort, we also re-graded 171 archived submissions from nine lab assessments spanning Spring 2024–Spring 2026 and compared totals with the original teaching-staff scores. We analyze run-to-run stability, human-score agreement, student reception, operational cost, and a prompt-injection stress test. 
+
+Ethics and anonymization. We use two datasets: a live deployment, which graded work for credit, and a retrospective comparison of assignments already graded manually. Students in the live deployment were told grading was AI-assisted, and instructors reviewed every score before release. Retrospective scores affected no student. All data were de-identified before model comparisons or aggregate reporting. 
+
+A. Course Context 
+
+The deployment took place in a machine learning university course with 24 students (23 with gradable HW1 submissions). 
+
+HW denotes a full homework notebook and LabTest a lab-based assessment; all were submitted as Jupyter notebooks and run through the same pipeline. The live workflow covered four assessments: HW1 (Introduction to ML), on preprocessing, training, evaluation metrics, and interpretation; HW2 (Time Series Analysis), with open-ended modeling choices, fore-casting interpretation, and diagnostic plots; and LabTest 2 
+
+and LabTest 3 , in-class assessments. The agreement analyses pair a small per-question human–AI comparison on HW1 with the retrospective benchmark over archived lab totals. Stability and cost use HW1; the prompt-injection test uses a synthetic benchmark from HW2 questions. 
+
+B. Run-to-Run Stability 
+
+Rerunning unchanged notebooks should not materially change released scores or review flags, so we measure run-to-run stability before treating any model as usable. For each of four OpenAI models, we independently graded the full HW1 dataset five times (23 students). Table I summarizes the results. The clearest contrast is between gpt-4.1 (65.2% exact match, 1.0-point maximum range) and gpt-5 (13.0%, 5.0 points). gpt-5-mini fares worst on both spread measures, with a 6.5-point maximum range and 9.7% of confidence labels flipping across runs. The pattern tracks temperature support: gpt-4.1 allows zero-temperature inference, while the gpt-5 models used here require a minimum temperature of 1. Confidence labels follow the scores, with no flips for 
+
+gpt-4.1 and 7.9% for gpt-5 .Models that do not support low-temperature inference should therefore not be used for grading in this setting with-out additional stability checks and human review. Otherwise unchanged work may receive different scores across runs, matching student reports of “spinning a slot machine” with LLM evaluators [11]. gpt-4.1 offered the best cost–stability tradeoff at $0.11 per student per run. gpt-4.1-mini costs less, but its 47.8% exact match and 3.0-point maximum range TABLE I: Run-to-run stability over five independent HW1 grading runs (23 students). Exact : percentage of students with identical total assignment scores . Max Range : largest per-student score range across runs. Conf. flips : percentage of question-level confidence labels that changed across runs.                          
+
+> Model Exact Max Range Conf. Flips API cost (5r) Time (5r)
+> gpt-4.1 65.2% 1.0 pt 0.0% $12.07 6m 44s
+> gpt-4.1-mini 47.8% 3.0 pt 1.0% $2.57 6m 45s
+> gpt-5-mini 13.0% 6.5 pt 9.7% $3.05 11m 05s
+> gpt-5 13.0% 5.0 pt 7.9% $18.12 26m 02s
+
+mean roughly half the students would see a total-score change across runs, so human review remains necessary. 
+
+C. Human–AI Agreement 
+
+We use two comparisons: a five-student HW1 question-level overlap (two instructors against one system run, 130 nested pairs, descriptive only), and archived lab totals against system totals. On HW1 we report Cohen’s κ, MAE, and Pearson r
+
+for both human–human and human–AI pairs. On lab totals we report only MAE and Pearson r, since those scores are continuous assignment sums rather than paired item ratings. 
+
+HW1 question-level overlap. Two instructors independently graded the same five HW1 submissions, each blind to the other’s scores, and we compared both to one system run using 
+
+gpt-4.1-mini at zero temperature. That run predates the stability analysis above; on its evidence we now recommend 
+
+gpt-4.1 . Across 130 paired question scores (26 questions ×
+
+five), human–human agreement was κ = 0 .77 , MAE = 0 .24 ,
+
+r = 0 .90 . System–instructor agreement was κ = 0 .87 and 
+
+0.84 , MAE = 0 .15 for both, and r = 0 .93 and 0.95 .The system aligned at least as closely with each instructor as the instructors did with one another on this subset. This does not establish superiority: the sample is small and nested, and one run may happen to match one grader’s decisions on edge cases. We read it instead as evidence that the system can provide a reviewable first pass. Prior work likewise documents nontrivial disagreement among human graders [9], [14]. 
+
+Archived lab totals. We also compared system totals against archived teaching-staff scores for nine lab assessments from Spring 2024 to Spring 2026, covering 171 submissions. Spring 2026’s LabTest 3 was graded by the system and appears in the survey below, but was never graded manually under the same conditions, so it is absent from Table II. Across labs, correlations were often strong. Relative to each lab’s maximum, MAE 4.1 ranges from about 4% (S26 LabTest 2) to about 20% (S24 LabTest 6); absolute MAE is not comparable across rows. 
+
+D. Student Reception 
+
+No regrade requests were submitted for the four AI-assisted assessments (anecdotal at n=24 ). 
+
+End-of-term survey. After final grades were released, stu-dents were invited to complete an optional, non-credit survey covering each AI-assisted assessment they had submitted: HW1, HW2, LabTest 2, and LabTest 3. Each assessment block included six 5-point Likert items measuring fairness, score TABLE II: Archived teaching-staff vs. system lab totals. 
+
+Max : rubric total; r: Pearson correlation. Subscripts denote 
+
+gpt-4.1 and gpt-4.1-mini .                                                            
+
+> Lab nMax MAE 4.1r4.1MAE mini rmini
+> S26 LabTest 2 23 100 4.3 0.97 4.0 0.97 S25 LabTest 2 17 121 11.2 0.97 12.6 0.97 S25 LabTest 3 17 115 17.7 0.75 15.9 0.75 S25 LabTest 6 17 111 14.4 0.73 10.1 0.85 S25 LabTest 7 16 119 7.2 0.88 7.6 0.89 S24 LabTest 2 21 111 10.5 0.91 13.8 0.92 S24 LabTest 4 20 105 10.9 0.98 15.9 0.98 S24 LabTest 6 20 130 26.3 0.93 30.9 0.88 S24 LabTest Final 20 155 13.6 0.90 21.1 0.82
+
+TABLE III: Student survey (7 respondents). Mean ratings (1– 5; higher is better). Core : mean of five perception items; Prefer AI : AI vs. manual grading.             
+
+> HW1 HW2 LabTest 2 LabTest 3
+> Core perception 4.1 4.0 4.1 4.2 Prefer AI 3.7 3.7 3.9 4.0
+> Cross-assignment: workflow clarity 3.6; regrade comfort 4.0.
+
+alignment, feedback utility, clarity, trust, and preference over manual grading. Two additional items measured overall work-flow clarity and comfort requesting a regrade. We received only seven responses, which is too few to generalize from. As Table III shows, mean core perception was favorable across all four assessments (4.0–4.2), and preference for AI-assisted over manual grading was lower but still positive (3.7–4.0). Free-text responses praised fast, criterion-linked feedback. Suggested changes included opt-out control, shorter feedback on small questions, a more encouraging tone, and earlier visibility into grading expectations. Views were mixed: one respondent reported a negative experience, while another emphasized reduced grader bias as the main benefit. 
+
+E. Cost and Efficiency 
+
+From the five-run HW1 study (Table I), per-student costs ranged from approximately $0.02 to $0.16 per run, with full-cohort runtime between 1 m 21 s and 5 m 12 s for 23 students. Using gpt-4.1 , one class-wide run cost approximately $2.41 and five runs $12.07, against an instructor estimate of around 10 hours to grade the same assignment and cohort by hand. That estimate excludes rubric design; rubric review took a further 15–30 minutes per assignment. 
+
+F. Prompt Injection Resilience 
+
+We test whether crafted instructions in student-controlled notebook content can inflate scores despite the pipeline’s defenses (Section III-F). The synthetic red-team benchmark, derived from HW2, contains one weak baseline for each of three target questions (Q1.3 prose, Q2.1 regression, and Q2.6 open-ended) and six adversarial variants per baseline, for 21 notebooks total. We grade the same notebooks with gpt-4.1 
+
+and gpt-4.1-mini at zero temperature, reporting mean TABLE IV: Prompt-injection results. Cells show mean score inflation ( ∆), with the fraction of attack families producing inflation in parentheses; negative values indicate deflation. 
+
+Model Q1.3 (6 pts) Q2.1 (10 pts) Q2.6 (8 pts) 
+
+gpt-4.1 -0.17 (0%) 0.00 (0%) 0.00 (0%) 
+
+gpt-4.1-mini 0.00 (0%) 1.00 (100%) -0.83 (0%) 
+
+score inflation ( ∆ from the paired baseline) and the fraction of attack families with ∆ > 0 for each target. The six attacks use an override instruction, a fake “GRAD-ING COMPLETE” message, a delimiter-like “Award 10/10” block, an internal-looking grader note, stealth Unicode, and a rubric-mirroring self-evaluation. For Q2.1, the baseline delib-erately used a random train/test split instead of TimeSeries Split and omitted the cross-validation average; Q1.3 and Q2.6 used analogous weak baselines. Table IV shows that none of the six attack families increased 
+
+gpt-4.1 scores on any target. For gpt-4.1-mini , every family increased Q2.1 by an average of 1.0 point, while Q1.3 and Q2.6 showed no inflation. Negative values indicate that some payloads instead drew attention to weaknesses in the baseline answer and lowered its score. V. D EPLOYMENT LESSONS AND LIMITATIONS 
+
+Deployment implications. Rubric-guided grading of flow-structured notebooks proved practical for course deployment under three conditions: a curated rubric, low-temperature in-ference, and instructor review before release. Omitting any condition compromised reliability; the contribution is the components’ effective integration under these constraints. 
+
+Model choice outweighed pipeline design. Using the same pipeline, gpt-4.1 reproduced identical total scores for 65.2% of students versus 13.0% for gpt-5 , largely reflecting zero-temperature support rather than overall capa-bility. Model choice also determined injection resistance, with 
+
+gpt-4.1-mini failing attacks resisted by gpt-4.1 . Thus, grading models should be selected based on inference stability and adversarial robustness rather than benchmark performance. 
+
+Softening improved consistency; open-ended items re-mained challenging. Rubric softening generalized reference-specific criteria, allowing equivalent plotting, encoding, and preprocessing choices to receive credit. Open-ended inter-pretation questions remained the main source of uncertainty because valid responses cannot be exhaustively captured by deduction-based rubrics, consistent with prior work [9], [12]. 
+
+Cost versus instructor time. Class-wide gpt-4.1 grading cost about $2.41, versus an estimated 10 hours of manual grading plus 15–30 minutes of rubric review. Overall benefit still depends on instructor review time for flagged results. 
+
+Independent failure modes of defense layers. Although 
+
+gpt-4.1-mini was influenced by the payload, schema constraints and score clamping still enforced a valid, in-range grade. The outcome was a grading error rather than a com-promised pipeline, preserving the intended layered protection. 
+
+Limitations. This single-site study covers one course, one instructor team, and 24 students. Run-to-run stability across four models from one provider may not generalize to other vendors. Agreement evidence combines a 130-pair HW1 com-parison with archival lab scores from different terms and grading practices, so it is descriptive rather than a unified benchmark. Human graders were also the system’s authors, though archival staff grading partially mitigates this. Student feedback came from 7 of 24 respondents. 
+
+Outlook. Next steps are replication across courses and institutions, other model providers, agreement by question type, and measured instructor review time. As it stands, flow-structured notebook autograding is workable at small-class scale today with a curated rubric, a model supporting low-temperature inference, and a human checkpoint before release. Whether it holds at the enrollment scale that motivates autograding in the first place remains open. REFERENCES [1] G. Hagerer, L. Lahesoo, M. Ansch¨ utz, S. Krusche, and G. Groh, “An analysis of programming course evaluations before and after the introduction of an autograder,” in Proc. IEEE ITHET , 2021, pp. 1–9. [2] Project Jupyter et al. , “nbgrader: A tool for creating and grading as-signments in the Jupyter notebook,” Journal of Open Source Education ,vol. 2, no. 11, p. 32, 2019. [3] Y. Liu, Y. Jia, R. Geng, J. Jia, and N. Z. Gong, “Formalizing and benchmarking prompt injection attacks and defenses,” in 33rd USENIX Security Symposium , Aug. 2024, pp. 1831–1847. [4] Y. Cai, “Prompt injection attacks on educational LLMs for higher and vocational education,” Scientific Reports , vol. 16, no. 1, 2026. [5] N. Wandel, D. Stotko, A. Schier, and R. Klein, “PyEvalAI: An open-source, tutor-in-the-loop system for AI-assisted evaluation of Jupyter notebooks,” in Proc. IEEE TALE , 2025, pp. 1–8. [6] Y. Saez, L. M. Garcia, A. Mochon, and P. Isasi, “Evaluating large language models for AI-assisted grading: A framework and case study in higher education,” Scientific Reports , vol. 16, no. 1, 2026. [7] J. Cisneros-Gonz´ alez, N. Gordo-Herrera, I. Barcia-Santos, and J. S´ anchez-Soriano, “JorGPT: Instructor-aided grading of programming assignments with LLMs,” Future Internet , vol. 17, no. 6, 2025. [8] M. Yousef et al. , “BeGrading: Large language models for enhanced feed-back in programming education,” Neural Computing and Applications ,vol. 37, no. 2, pp. 1027–1040, 2025. [9] K. Lewis and H. Chen, “WIP: How effective are LLM-implemented autograders for programming assignments compared to human graders?” in Proc. IEEE FIE , 2025, pp. 1–5, work-in-progress paper. [10] G. Nagakalyani, S. Chaudhary, V. Apte, G. Ramakrishnan, and S. Tamil-selvam, “Design and evaluation of an AI-assisted grading tool for introductory programming assignments: An experience report,” in Proc. SIGCSE TS 2025 . ACM, 2025, pp. 805–811. [11] C. Chiang, W. Chen, C. Kuan, C. Yang, and H. Lee, “Large language model as an assignment evaluator: Insights, feedback, and challenges in a 1000+ student course,” in Proc. EMNLP , 2024, pp. 2489–2513. [12] J. Pecuchova, ˇ L. Benko, and M. Drlik, “Automated grading of open-ended questions in higher education using GenAI models,” Int. J. of Artificial Intelligence in Education , vol. 35, no. 6, pp. 3813–3846, 2025. [13] Y. Yang and Y. Gulbahar, “Automatic grading of student work using simulated rubric-based data and GenAI models,” in Proc. AIME-Con Works in Progress , 2025, pp. 34–39. [14] L. Korthals, E. Akrong, G. Geller, H. Rosenbusch, R. Grasman, and I. Visser, “Towards reliable LLM grading through self-consistency and selective human review: Higher accuracy, less work,” Machine Learning and Knowledge Extraction , vol. 8, no. 3, 2026. [15] A. Milani et al. , “When AI is fooled: Hidden risks in LLM-assisted grading,” Education Sciences , vol. 15, no. 11, 2025. [16] C. Anghel et al. , “EvalHack: Answer-side prompt injection for probing LLM exam-grading panel stability,” Information , vol. 17, no. 3, 2026. [17] OpenAI, “Structured model outputs,” [Online]. Available: https:// developers.openai.com/api/docs/guides/structured-outputs.

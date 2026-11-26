@@ -1,0 +1,406 @@
+Title: ReVAgent: Multi-Agent Reasoning-Intensive Video Generation
+
+URL Source: https://arxiv.org/pdf/2611.30163v1
+
+Published Time: Tue, 24 Nov 2026 04:41:53 GMT
+
+Number of Pages: 10
+
+Markdown Content:
+# ReVAgent: Multi-Agent Reasoning-Intensive Video Generation 
+
+## Yehui Yang 1,2 Jing Fan 3 Jun Hu 2 Shangyao Chen 2
+
+## Jinhua Bian 2 Song Wang 2 Ruize Han 2* 
+
+> 1
+
+Shenzhen University, Shenzhen, China 
+
+> 2
+
+Shenzhen University of Advanced Technology, Shenzhen, China 
+
+> 3
+
+Yunnan Minzu University, Kunming, China 
+
+## Abstract 
+
+A central challenge in generating instructional videos for reasoning-intensive topics is to show how and why the state changes at each step. Even when an animation renders suc-cessfully, the depicted object relationships and state transi-tions can conflict with the explanation, making the reason-ing difficult to follow. We present ReVAgent, a multi-agent framework that solves a problem, generates keyframes for its explanation, and synthesizes an instructional video. The agents share the execution record of a solution program, reuse intermediate results and constructions in the scenes, and check rendered keyframes to guide revisions to the so-lution or the scenes. We also introduce a multidimensional rubric for assessing whether generated videos present the problem clearly, organize the steps coherently, and use vi-suals to explain the reasoning. We calibrate a multimodal judge using human ratings and apply it to instructional videos for mathematics and algorithms. In the evaluated samples, ReVAgent presents multi-step reasoning coher-ently and uses diagrams to show how key operations lead to subsequent states. 
+
+## 1. Introduction 
+
+Video generation has advanced rapidly in recent years, yet generating reasoning-intensive videos remains challeng-ing. For example, generating logically coherent educational videos for mathematics and algorithms requires turning so-lution steps and their rationale into visual explanations that help learners understand how a solution is reached step by step. Let’s consider Kruskal’s minimum spanning tree al-gorithm. At each step, the video should preserve the input graph and edge weights, distinguish accepted edges, and show a new edge being accepted only if it joins two different components. Such logical coherence requires each scene’s quantities, symbols, and object relations to match the cor-
+
+> *Corresponding author.
+
+responding solution step, and changes between scenes to reflect the computations, constructions, or algorithmic op-erations being explained. On one hand, general-purpose video generation mod-els [1, 2] can synthesize coherent videos from text or ref-erence images. In videos that teach mathematics or algo-rithms, however, numbers, operators, and geometric rela-tions carry information about the solution, so an error in a single visual element can change the meaning of the expla-nation. As Fig. 1(a) illustrates, even with reference images for the first and last frames, video generation models [3] can omit mathematical symbols or deform objects in intermedi-ate frames. Such errors can cause the visuals to diverge from the corresponding solution steps, making it difficult for these models to reliably depict multi-step reasoning in instructional videos. On the other hand, code-driven approaches offer a promising way to keep symbols and graphics accurate throughout a solution while providing explicit control over what is shown and how it changes. These approaches pro-vide this control through programmatic rendering [4], using animation tools such as Manim [5] to draw formulas and graphics from explicit specifications. Advances in large lan-guage models (LLMs) enable agents in Code2Video [6] and TheoremExplainAgent [7] to plan explanations and write executable animation scripts [8]. Even when scripts run successfully, rendered object relations may conflict with a solution step [7, 9]. In Fig. 1(b), two trapezoids described as forming a parallelogram still leave a gap where they should meet. Even with a correct solution, agents must reimple-ment its object relations and state changes in animation code. This additional translation makes visual control de-pendent on code implementation, limiting how fully agents can use their reasoning to organize and adapt visual expla-nations. To advance reasoning-intensive video generation with logically coherent visual explanations, we propose ReVAgent, a multi-agent framework for logically coherent 1arXiv:2611.30163v1 [cs.AI] 23 Nov 2026 (a) Video generation models (b) Agent-based code generation           
+
+> </>
+> f(x) = 0
+> 123
+> Prompt Video model Frames Agent team Animation code Frames Executed reasoning Bound scenes Frames
+> Evidence + frame review
+> Implicit intermediate states Control through code Explicit step–scene binding
+> Solving an equation
+
+2x + 3 = 7 
+
+2 = 4   
+
+> Subtract 3, then divide by 2.
+> Missing symbol
+> Swap the first two entries Shape distortion
+> Sec 2: Rearranging the Shapes
+> Duplicate the trapezoid. Rotate it 180 degrees. Place it next to original.
+> Forms a parallelogram.
+> New base is 14.
+> Claim–diagram mismatch
+> Visual Mathematics 05 / 06
+> Construct and verify the circumcircle
+> O(4,2)
+> Center the circle at O with radius OA. Points B and C lie on the circle.
+
+OA = OB = OC   
+
+> O = (4, 2), r² = 10
+> Geometry agrees with computed values
+> Read the diagram, then follow the equations.
+> Symbols and objects may lose consistency Executable code can depict wrong relations Reasoning stays linked to visual explanation
+
+(c) ReVAgent (Ours) Figure 1. Approaches and challenges in logically coherent educational video generation. (a) Conventional video generation models synthesize frames directly and can omit symbols or distort objects in intermediate frames. (b) Code-driven agents control visuals through animation scripts, but the rendered relations between objects can conflict with the explanation even when the scripts execute successfully. (c) ReVAgent uses a three-stage pipeline from a textual solution to keyframes and then to video. Its agents reuse solution outputs to construct scenes, check the resulting keyframes, and provide feedback for revision to align formulas, graphics, and their changes with the solution steps. 
+
+educational video generation. ReVAgent stores the inter-mediate states and mathematical constructions produced by the solution program in a shared record and uses them as the basis for scene construction (Fig. 1(c)). The visual agent directly reuses these results to plan the explanation order, organize formulas and graphics, and choose what to highlight, reducing the need to reimplement mathematical relations in animation code. A unified renderer converts scene specifications into video, providing explicit control over symbols, graphics, and their changes. The verification agent checks the rendered keyframes against the original problem and solution record to assess their agreement with the corresponding reasoning steps, and routes detected issues to the responsible agent for revision. Figure 2 shows selected frames from ReVAgent videos on the shoelace formula and Kruskal’s algorithm. We evaluate ReVAgent on mathematical and algorithmic tasks by comparing it with state-of-the-art general-purpose and code-driven video generation methods. On the re-ported video subsets, ReVAgent obtains competitive scores on video quality and semantic metrics and ranks highest among the compared generation methods on all six instruc-tional dimensions assessed by the human-calibrated judge. Our main contributions are as follows. 1. Staged, controllable generation for reasoning-intensive videos. We propose a staged framework from solutions through keyframes to video. Structured scene specifications and a unified renderer explicitly control formulas, graphics, and their changes at each solution step, reducing symbol omissions and object distortions in direct video synthesis. 2. Reasoning-visual coordination through shared solu-tion records. Shared solution records connect solving, scene planning, and frame verification. The visual agent directly reuses computed results and geometric construc-tions, reducing the need to reimplement mathematical relations in animation code. Frame verification routes detected issues to the responsible agents for revision, im-proving consistency between visuals and solution steps. 3. Multidimensional instructional evaluation. We de-fine criteria including step coherence, reasoning clarity, and visual helpfulness, and calibrate a multimodal judge with human ratings. 
+
+## 2. Related Work 
+
+General-purpose video generation. Large-scale video generation models have extended synthesis to longer clips and multi-shot sequences [10–12], with text or reference images guiding the output [13, 14]. Sora [15] demonstrates generation across a range of durations, resolutions, and as-pect ratios, and Seedance 1.0 [1] supports multi-shot gen-eration from text or images. Open-weight models such as Wan [2] and CogVideoX [16] provide publicly available im-plementations for comparative study [17, 18]. Mathemati-cal and algorithmic instruction also requires that formulas, relations between depicted objects, and state changes across scenes agree with the corresponding solution steps. This requirement motivates code-driven approaches that specify visual elements and their changes explicitly [6]. 2(a) Polygon area with the shoelace formula       
+
+> Vertex order (5 s) Edge term (25 s) Final area (55 s)
+> (b) Minimum spanning tree with Kruskal’s algorithm
+> Order edges by weight (5 s) Merge components (25 s) Final spanning tree (55 s)
+> Figure 2. Selected frames from ReVAgent videos. (a) In the shoelace-formula video, the vertex coordinates are preserved and the edge used in the current calculation is highlighted. (b) The Kruskal video highlights the edge that merges two components and shows the final minimum spanning tree with its total weight.
+
+Code-driven educational video generation. Animation libraries such as Manim [5] let authors write scripts that specify the layout, transformations, and timing of formu-las and graphics. As large language models (LLMs) gained the ability to write these scripts from instructional content, agent-based systems began to divide the work into plan-ning, code generation, and revision after rendering. Theore-mExplainAgent [7] plans theorem explanations and imple-ments them as Manim animations. Code2Video [6] turns lecture content into storyboards and uses visual feedback to refine the rendered layout. VisualEDU [19] uses code and visual feedback to generate step-by-step explanations of mathematical problems. LASEV [20] coordinates so-lution, illustration, and narration agents, with the illustra-tion agent generating code from a reviewed textual solu-tion. For algorithm visualization, ALGOGEN [21] renders execution traces emitted by generated trackers. SGA [9] extracts scene graphs from animation code to detect spatial conflicts. ReVAgent links instructional scenes to executed solution steps, directly reuses selected geometric construc-tions produced by the solver, and uses the same solution evidence to review the rendered keyframes. 
+
+## 3. Method 
+
+3.1. Problem Formulation and Overview 
+
+Given a problem q, our goal is to generate an educational video V whose explanations, formulas, and graphics follow the steps of its solution. The input q includes the problem statement, its conditions and numerical data, and any pro-vided diagrams or presentation requirements. Figure 3 summarizes ReVAgent. In Problem Solving , a solver agent generates a program and executes it to obtain a solution record T . In Visual Explanation , a visual agent uses T to plan an ordered scene sequence S, from which a fixed renderer produces keyframes I. In Video Synthesis ,the renderer composes the scenes into a candidate video eV .
+
+q Asolve 
+
+−−−−→ 
+
+> Exec
+
+T Avisual 
+
+−−−−→
+
+> Rimage
+
+(S, I ) M
+
+−−−−→
+
+> Encode
+
+eV . (1) The visual agent reuses computed graphics and coordinates; the verifier checks frames against the corresponding so-lution steps, enabling reasoning–visual alignment across agents. In Verification and Refinement , the verifier reviews each candidate’s keyframes I alongside q, T , and S. A pass-ing candidate becomes V . When the verifier identifies de-fects, it sends them to the agent responsible for revision. 
+
+3.2. Executable Logical Reasoning 
+
+The solver agent chooses a strategy for q and expresses it as a program P . The executor runs P on the numerical data supplied in q and collects the returned solution record T .
+
+P = Asolve (q), T = ( y, τ, W ) = Exec( P ; q). (2) The answer y contains the requested quantities. The trace 
+
+τ records step identifiers, explanations, and intermediate computational states. The evidence W stores computed checks and any geometric constructions returned by the pro-gram, including their coordinates and primitive parameters. The visual agent can reuse these constructions directly. The 3(a) Executable Logical Reasoning           
+
+> Input qSolver Agent T= ( y,τ,W)
+> A(1,1), B(7,1)
+> C(3,5)
+> Find Oand r2
+
+P 
+
+> Choose strategy
+> Construct P
+
+yτWA BC                            
+
+> O=(4,2)
+> r2=10
+> x=4
+> y=−½ x+4
+> Shared record T
+> (b) Reasoning-Grounded Visual Planning
+> Visual Agent Scenes SKeyframes I
+> Input: q,T
+> Reuse computed W
+> Bind to step τk
+> S= { sk}
+> Bisectors →O
+> I= { Ik}
+> O=(4,2)
+> r2=10
+> OABCOABC
+> OABC
+> Match each scene to its solution step
+> (c) Controlled Scene-to-Video Rendering
+> Agent-defined scenes S
+> Objects Emphasis Order
+> 123
+> Fixed updates & rendering ℳ,ℛimage
+> unFk,n ,Ck
+> Encode Candidate
+> Ṽ
+> x=4 O=(4,2) r2=10
+> (d) Verification and Refinement
+> Revise
+> Issues + repair suggestions
+
+ℰ                          
+
+> Verification Agent
+> Math cmGraphics cgText ct
+> Accept
+> cm=cg=ct= 1
+> ℰ=∅Output Video V
+> Check reasoning ↔ graphics at step k
+> Exec
+> (P;q)q,T
+> ℛimage
+> I,T
+> Inputs: q,T,S,I
+> Not passed Passed
+> cm= 0 cm= 1 , rejected
+
+Figure 3. ReVAgent framework illustrated with a circumcircle problem. (a) Given A(1 , 1) , B(7 , 1) , and C(3 , 5) , the solver computes 
+
+x = 4 and y = − 12 x + 4 as the perpendicular bisectors of AB and AC , respectively. They intersect at O = (4 , 2) , with OA 2 = OB 2 =
+
+OC 2 = 10 . The execution record T = ( y, τ, W ) stores the answer y = (4 , 2, 10) and the constructions. (b) The visual agent reuses the stored bisectors and circle to illustrate how the circumcenter is found. (c) The renderer composes the scenes into a candidate video. (d) The verifier checks the rendered keyframes against the problem, execution record, and scene specifications before acceptance and routes defects for repair. 
+
+verifier assesses the mathematical validity of the answer, step claims, and constructions against q.
+
+3.3. Reasoning-Grounded Visual Planning 
+
+The visual agent organizes the explanation into an ordered sequence S = ( s1, . . . , s K ).
+
+sk = ( bk, e k, ϕ k, Ok, Hk), Hk ⊆ O k, (3) Here, bk identifies the corresponding step in τ , ek and ϕk
+
+specify the instructional text and formula, and Ok and Hk
+
+denote the visible and highlighted objects, respectively. The step identifier lets the verifier compare the scene with its corresponding computational state. The visual agent can select constructions from the exe-cution record and add explanatory objects. 
+
+Ok = Oexec  
+
+> k
+
+∪ O gen  
+
+> k
+
+, Oexec  
+
+> k
+
+⊆ O (W ). (4) Here, O(W ) is the set of primitives stored in W . The system resolves each construction reference by copying its primitives with their original coordinates and geomet-ric parameters. The visual agent controls which objects are shown and highlighted, and the verifier also checks the newly generated objects. For each scene, the fixed renderer produces a keyframe Ik = Rimage (ek, ϕ k, Ok, Hk), yield-ing I = ( I1, . . . , I K ).
+
+3.4. Controlled Scene-to-Video Rendering 
+
+We use a custom scene renderer that draws graphics, in-structional text, and formulas according to each scene spec-ification and highlights the designated objects. It produces one keyframe per scene for verification and renders and en-codes the video frames in scene order as an MP4 video. At normalized time un ∈ [0 , 1] , the update operator 
+
+M applies predefined motion rules to supported dynamic primitives and leaves static primitives unchanged. The n-th frame of scene k is 
+
+Fk,n = Rimage (ek, ϕ k, {M (o, u n) : o ∈ O k}, Hk) . (5) The renderer holds each scene on screen for reading and concatenates the resulting clips Ck in scene order. It en-codes the candidate as eV = Encode( C1∥ · · · ∥ CK ). En-coding and decoding checks assess file validity. The verifier uses the associated rendered keyframes for content review. 
+
+3.5. Verification and Refinement 
+
+The verification agent receives the original problem, ex-ecution record, scene specifications, and all rendered keyframes. 
+
+(cm, c g , c t, E) = Averify (q, T, S, I ). (6) The agent assesses mathematical correctness ( cm), whether the rendered graphics depict the corresponding reasoning steps ( cg ), and whether the student-facing text is readable (ct). It records defects and their locations in E. Acceptance requires all three binary checks to pass and the issue list to be empty. 
+
+a = 1[cm = cg = ct = 1 ∧ E = ∅] . (7) A single factual recheck may reassess the reasons for rejec-tion using the same evidence, keyframes, and acceptance criterion. On rejection, the system sends the reported issues and repair suggestions to the solver agent if cm = 0 and to the visual agent otherwise. Revising the solution regenerates 4T and its dependent scenes, keyframes, and video. Revis-ing the scenes retains T and regenerates the visual outputs. The verifier reviews the regenerated keyframes. Execution, scene validation, and rendering failures return to the stage responsible for the failure. The loop returns the first candidate that meets the review criteria and allows up to R = 3 revisions. If no candidate passes within this budget, the system returns the candidate video that best meets the review criteria, together with its review status. 
+
+## 4. Evaluation 
+
+We use fixed automatic metrics to assess video quality and semantic relevance, and propose a multidimensional in-structional evaluation rubric. Based on this rubric, we cali-brate the prompt of a multimodal judge using human ratings to assess perceived instructional quality and viewers’ self-reported understanding. 
+
+4.1. Video Quality and Semantic Evaluation 
+
+We use imaging quality (IQ), aesthetic quality (AQ), motion smoothness (MS), and text–video similarity (CLIP-T) to as-sess the image quality, visual aesthetics, motion continuity, and task-related semantic relevance of generated videos. IQ and AQ use the corresponding image-quality and aes-thetic evaluation models from VBench [22]. For sampled frames {Fi}Ki=1 from a video V , the scores are defined as 
+
+IQ( V ) = 1100 K
+
+> K
+
+X
+
+> i=1
+
+gIQ (Fi),
+
+AQ( V ) = 110 K
+
+> K
+
+X
+
+> i=1
+
+gAQ (Fi),
+
+(8) where gIQ is the MUSIQ-SPAQ image-quality scorer and 
+
+gAQ is the aesthetic scorer based on CLIP image features. MS measures motion smoothness by comparing an inter-mediate frame predicted from its neighboring frames with the observed frame: 
+
+MS( V ) = 1 − 1255 J
+
+> J
+
+X
+
+> j=1
+
+MAE( Mj , A(Lj , R j )) , (9) where (Lj , M j , R j ) is a consecutive frame triplet, A de-notes the AMT-S interpolation model, and MAE is the mean absolute pixel error. CLIP-T measures semantic relevance through the simi-larity between video-frame and task-description features: 
+
+CLIP -T( V, q ) = 1
+
+K
+
+> K
+
+X
+
+> i=1
+
+cos( fimg (Fi), f txt (q)) , (10) where q is the task description, and fimg and ftxt are the CLIP image and text encoders, respectively [23].                   
+
+> Table 1. Multimodal judge agreement with human ratings. Scores and MAE use a 100-point scale. Split Human LLM MAE ↓Spearman ↑
+> Calibration 90.34 90.58 4.26 0.394 Validation 88.84 90.58 3.76 0.654 Test 89.32 90.80 4.48 0.640
+
+In implementation, IQ, AQ, and CLIP-T use 32 uni-formly sampled frames per video, while MS is computed on the original frame sequence; higher scores indicate bet-ter performance for all four metrics. 
+
+4.2. Human-Calibrated Instructional Evaluation 
+
+A human-calibrated multimodal judge evaluates videos from the learner’s perspective across six dimensions on a five-point scale. Legibility and problem clarity assess readable visual information and clear problem conditions and goals; visual helpfulness and self-reported understand-ing reflect how graphics support comprehension and view-ers’ subjective understanding. Step coherence and reason-ing clarity assess how solution steps connect and why key steps are taken, emphasizing clear, coherent presentation of the solution process and its rationale in reasoning-intensive videos. Human and judge scores are reported on a 100-point scale ( ×20 ). The human evaluation set comprises 60 generated videos and ten online teaching videos, with 1,577 valid video-level rating records collected from 45 raters. All 45 raters were students taking a data structures and algorithms course. For video v and dimension d, we use the mean opinion score across raters [24] as the human evaluation target: 
+
+MOS v,d = 1
+
+nv,d nv,d 
+
+X
+
+> i=1
+
+ri,v,d , (11) where ri,v,d is the score assigned by rater i, and nv,d is the corresponding number of valid ratings. To align the judge with the human rating scale, we par-tition the videos by problem family into 38 calibration samples, 12 development samples, and 20 held-out vali-dation samples, with no problem family shared across the sets. Calibration refines the prompt using rubric descrip-tions, representative human-rated examples, domain statis-tics, and feedback on prediction errors. The final prompt and judge configuration are selected based on development-set performance. This process does not update model pa-rameters. The calibrated judge predicts the six human mean scores from the problem statement and video frames, and provides supporting visual evidence. Once frozen, the same judge is applied to videos from all methods and the online teach-ing references. In implementation, we uniformly sample 24 frames per video and use the same prompt and scoring rules. 5Table 2. Video quality and semantic comparison. Higher is better; bold /underline mark best/second-best. Backbone denotes the generation LLM (—: not applicable). 
+
+Type Method Backbone IQ ↑ AQ ↑ MS ↑ CLIP-T ↑
+
+Video generation models Wan2.1-T2V 1.3B [2] — 0.714006 0.309320 0.987537 0.194899 LTX-2.5 22B [25] — 0.512101 0.337238 0.991867 0.203191 Wan2.2-T2V 27B [26] — 0.700417 0.352059 0.993164 0.227803 MiniMax H3-33B [27] — 0.620894 0.397049 0.993396 0.262174 Agent-based code generation Direct Manim Qwen3.5-4B 0.350465 0.280453 0.997504 0.228532 Direct Manim Qwen3.8-27B 0.410902 0.365424 0.995869 0.271676 Code2Video [6] Qwen3.5-4B 0.269708 0.306969 0.997356 0.223261 Code2Video [6] Qwen3.8-27B 0.349767 0.353048 0.998347 0.246425 VisualEDU [19] Qwen3.5-4B 0.384004 0.267534 0.996292 0.171941 VisualEDU [19] Qwen3.8-27B 0.378880 0.367361 0.995259 0.256650 ManimAgent [28] Qwen3.5-4B 0.343152 0.305705 0.997420 0.239756 ManimAgent [28] Qwen3.8-27B 0.365310 0.351190 0.997301 0.260913 Our method ReVAgent Qwen3.5-4B 0.619047 0.462111 0.996861 0.233369 
+
+ReVAgent Qwen3.8-27B 0.691707 0.577807 0.996936 0.273723 
+
+Table 3. Human-calibrated instructional comparison. Frozen judge predictions on a 100-point scale. Higher is better; bold /underline mark best/second-best among generation methods. 
+
+Type Method Backbone Legibility ↑
+
+Problem Clarity ↑
+
+Step Coherence ↑
+
+Reasoning Clarity ↑
+
+Visual Helpfulness ↑
+
+Self-reported Understanding ↑
+
+Video generation models Wan2.1-T2V 1.3B [2] — 25.60 22.04 21.84 20.54 22.62 21.22 LTX-2.5 22B [25] — 38.32 36.42 30.42 25.98 31.12 27.88 Wan2.2-T2V 27B [26] — 49.78 38.28 37.48 30.04 39.48 32.76 MiniMax H3-33B [27] — 55.60 59.22 49.00 40.66 47.36 47.12 Agent-based code generation Direct Manim Qwen3.5-4B 76.33 72.67 58.33 54.00 56.00 59.00 Direct Manim Qwen3.8-27B 89.92 90.90 86.78 82.10 83.56 84.96 Code2Video [6] Qwen3.5-4B 81.33 85.33 71.67 69.25 65.75 72.33 Code2Video [6] Qwen3.8-27B 90.70 91.40 86.56 82.48 84.24 85.12 VisualEDU [19] Qwen3.5-4B 84.00 90.00 76.00 72.00 68.00 78.00 VisualEDU [19] Qwen3.8-27B 89.48 88.32 83.02 76.60 80.54 80.98 ManimAgent [28] Qwen3.5-4B 74.38 71.28 63.83 59.88 57.85 63.45 ManimAgent [28] Qwen3.8-27B 90.68 88.50 83.04 78.30 81.60 81.96 Our method ReVAgent Qwen3.5-4B 93.62 92.15 89.23 86.15 82.31 87.62 
+
+ReVAgent Qwen3.8-27B 95.32 93.64 92.12 88.40 90.10 89.56 
+
+## 5. Experiments 
+
+We evaluate ReVAgent on mathematical and algorithmic in-structional video generation tasks. Combining video qual-ity and semantic evaluation with human-calibrated instruc-tional evaluation, we compare the instructional quality, vi-sual quality, and semantic relevance of videos generated by different methods. We also use qualitative examples to an-alyze reasoning steps and visual explanations, and ablation studies to examine the roles of the solver, visual, and verifi-cation agents. 
+
+5.1. Experimental Setup 
+
+The planned comparison uses a shared set of 100 tasks, in-cluding 50 mathematical and 50 algorithmic tasks. We com-pare ReVAgent with four video generation models, Wan2.1-T2V 1.3B, Wan2.2-T2V 27B [26], MiniMax H3-33B, and LTX-2.5 22B [25], as well as Direct Manim, Code2Video, VisualEDU, and ManimAgent. Code-based methods and ReVAgent use Qwen3.8-27B and Qwen3.5-4B backbones. On shared tasks, methods receive the same problems, input data, and instructional requirements. The four text-to-video models use the same fixed 100 English-language tasks. All methods are evaluated with the same automatic metrics and frozen human-calibrated judge. 
+
+5.2. Video Quality and Semantic Comparison 
+
+Among the video samples reported in Table 2, the 27B ReVAgent configuration shows its largest lead over the baselines in aesthetic quality (AQ), scoring 0.578 and ex-ceeding the strongest baseline, MiniMax H3-33B, by 0.181. ReVAgent also ranks first in task-related semantic relevance (CLIP-T), edging out Direct Manim, the strongest code-based baseline on this metric, by 0.002. Both methods use code to explicitly specify and render formulas, diagrams, and labels. This can help preserve task-specific content that direct pixel generation may distort or omit. The pixel-based baselines in the table obtain lower CLIP-T scores. 6Wan2.1 and Wan2.2 achieve the two highest imag-ing quality (IQ) scores, illustrating the advantage pixel-based generators can have in low-level frame quality. ReVAgent remains close to both, trailing them by only 0.022 and 0.009, respectively. On motion smoothness (MS), ReVAgent trails the best-scoring method, Code2Video, by only 0.0014. Section 5.3 further examines formula legi-bility, the coherence of reasoning steps, and how well di-agrams support the explanation. 
+
+5.3. Human-Calibrated Instructional Comparison 
+
+Table 3 shows that the 27B ReVAgent configuration achieves the highest scores across all six evaluation dimen-sions in the reported video subsets, with a six-dimensional average of 91.52. Its step coherence, reasoning clarity, and visual helpfulness scores reach 92.12, 88.40, and 90.10, ex-ceeding Code2Video by 5.56, 5.92, and 5.86 points, respec-tively. These results indicate favorable organization of rea-soning steps, presentation of supporting explanations, and correspondence between diagrams and instructional content within the evaluated samples. Wan2.1 and Wan2.2 have the two highest reported IQ values and six-dimensional judge means of 22.30 and 37.98, respectively. MiniMax H3-33B and LTX-2.5 22B obtain six-dimensional means of 49.83 and 31.69, respectively, both well below ReVAgent’s 91.52. Although some code-based baselines score close to ReVAgent on legibility and problem clarity, their rendered outputs still differ in how they position labels relative to di-agrams and organize content on screen. The next section uses a common Heron’s formula task to examine how these differences affect the reader’s ability to follow the deriva-tion. 
+
+5.4. Visualization Analysis 
+
+Figure 4 compares nine methods on the same Heron’s for-mula task at 95% video progress. The pixel-based text-to-video models exhibit errors in mathematical notation and geometry. Wan2.1 and Wan2.2 obtain the two highest imag-ing quality (IQ) scores, yet some text and numbers in the Wan2.1 frame are difficult to read, and Wan2.2 misspells the semiperimeter label and depicts a curved outline in place of the triangle. MiniMax H3-33B renders unrelated coordinate curves with malformed labels. LTX-2.5 22B shows two cir-cular outlines and an incomplete list of side lengths. These errors make it difficult to connect the visuals to the problem statement and the calculation steps. The code-based baselines show the correct area, but some labels and layouts make the frames harder to read. Code2Video places the side lengths near the vertices, leav-ing viewers to infer which length belongs to each edge. Di-rect Manim has overlapping titles, while VisualEDU places some labels away from the corresponding diagram ele-ments, displays low-contrast formulas, and clips content at the bottom of the frame. For beginners, these issues make it harder to interpret the labels and follow the derivation, reducing the videos’ suitability as standalone teaching ma-terial for a wider audience. ReVAgent presents the explanation and diagram in sep-arate areas of the frame and retains the original triangle, all three side labels, the semiperimeter, and the area in the final view. The differences in layout, contrast, and label placement are consistent with the aesthetic quality (AQ) re-sults in Sec. 5.2, where ReVAgent scores 0.578 and the best code-based baseline scores 0.367. 
+
+5.5. Generation Efficiency 
+
+We measure generation efficiency as generation time per minute of output video, computed by dividing total genera-tion time by total actual playback duration. Timing covers inference, rendering or encoding, and the method’s own re-visions. ReVAgent takes 5.42 minutes per minute of video, compared with 19.92 minutes for Direct Manim, or about 27% of its time. VisualEDU and ManimAgent take 92.56 and 48.18 minutes, respectively. ReVAgent has a lower gen-eration time per minute of video than all four Manim base-lines (Figure 5(b)). Our method reuses a fixed renderer and organizes execution results into structured scenes, avoiding the need to generate and debug a complete animation pro-gram for each problem. LTX-2.5 22B takes 5.32 minutes per minute of video, while its six instructional quality scores range from 25.98 to 38.32, with low step coherence and rea-soning clarity. The qualitative analysis and quality evaluation show that longer generation time does not necessarily lead to better instructional presentation. Wan2.2 and MiniMax H3-33B take longer to generate videos than ReVAgent, yet their videos still exhibit errors in mathematical notation and di-agrams that deviate from the problem. LTX-2.5 22B is slightly faster, but its low step coherence and reasoning clar-ity indicate that fast visual generation alone is insufficient for a clear instructional explanation. ReVAgent achieves higher instructional quality scores while maintaining a low generation cost, providing a better balance between genera-tion efficiency and instructional quality. 
+
+5.6. Agent Ablations 
+
+We ablate four agents on the same 20 tasks with Qwen3.5-4B (Figure 5(a)). Fixed reference solutions replace the solver; Qwen-Image generates keyframes from the prob-lem and steps; RIFE interpolates the original keyframes; and removing the reviewer disables visual review and feed-back. Full leads all six dimensions. Removing the solver and reviewer lowers reasoning clarity by 57.2% and 46.8%, respectively. Replacing the keyframe agent lowers legibil-ity by 30.3%. RIFE retains 91.7 legibility but 38.4% lower 7(a) Wan2.1-T2V 1.3B 
+
+> (b) LTX-2.5 22B
+> (c) Wan2.2-T2V 27B
+> (d) MiniMax H3-33B
+> (e) Direct Manim
+> (f) Code2Video
+> (g) VisualEDU
+> (h) ManimAgent
+> (i)  ReVAgent (Ours)
+
+Figure 4. Comparison of visualization results. All nine methods address the same Heron’s formula task with side lengths 3, 4, and 5. The panels show full frames at 95% of each video. Panels (a–d) show video generation models, (e–h) show code-based baselines, and (i) shows ReVAgent. Legibility Problem clarity Step coherence Reasoning clarity Visual helpfulness Self-report underst. 
+
+> Full
+> w/o Solver w/o Keyframe w/o Video w/o Review
+
+93.3 92.3 89.7 85.3 82.9 87.4 
+
+92.0 77.7 38.8 36.5 40.1 41.8 65.0 79.3 63.3 57.4 53.9 62.3 91.7 79.2 52.5 48.8 52.2 53.8 91.3 82.1 49.6 45.4 50.1 51.1     
+
+> 050 100 150 200
+> LTX-2.5 22B
+> ReVAgent
+> Direct Manim Wan2.1-T2V 1.3B Kandinsky 6.0 29B ManimAgent MiniMax H3-33B VisualEDU Code2Video Wan2.2-T2V 27B 5.32
+> 5.42
+> 19.92 20.27 46.84 48.18 59.76 92.56 150.85 193.61
+
+(a) Agent ablations (b) Generation time 
+
+Figure 5. Agent ablations and generation time. (a) Six-dimensional quality scores with Qwen3.5-4B. (b) Generation time analysis. 
+
+self-reported understanding, suggesting that smooth inter-polation alone cannot preserve reasoning continuity. 
+
+Table 4. Reasoning–visual alignment. Complete: valid for-mat/rendering and correct four-stage geometry/state with original labels. Condition Complete ↑ Mean output tokens ↓
+
+Use per-step graphics 20/20 1033 Rewrite drawing commands 15/20 2981 No diagram–step links 11/20 1156 Final answer + input figure 3/20 2685 
+
+To examine errors introduced when correct solutions be-come instructional graphics, we use 20 verified program-matic solutions and their per-step construction coordinates in a separate controlled study with Qwen3.5-4B, without re-view. Reuse and rewriting receive identical data; construc-tion catalogs are shuffled. Direct use omits fewer input la-bels and reduces output tokens by 65.3% (Table 4). Remov-ing construction–step links or supplying only the final an-swer and input figure makes intermediate stages less consis-tent. These results support our cross-agent reasoning–visual alignment: reusing the solver’s constructions at the cor-responding explanation steps reduces omissions and stage mismatches. This criterion directly checks the correctness of graphics and states at each stage, and the results support our method’s ability to preserve consistency between inter-mediate reasoning states and their visual representations in reasoning-intensive instructional video generation. 86. Conclusion 
+
+We introduced ReVAgent, a multi-agent framework for generating instructional videos for mathematics and algo-rithms. ReVAgent uses a shared program execution record to build instructional scenes and verify rendered keyframes, linking formulas, diagrams, and state changes to specific solution steps. We also developed a six-dimensional rubric for instructional quality and used human ratings to cali-brate a multimodal judge. On the evaluated video samples, ReVAgent achieved the highest aesthetic quality score and ranked first among the compared generation methods on all six dimensions assessed by the judge, including step coher-ence, reasoning clarity, and visual helpfulness. Executable reasoning thus supports coherent visual explanations. 
+
+## LLM Usage Statement 
+
+In our experiments, ReVAgent uses the models identified as Qwen3.8-27B and Qwen3.5-4B for problem solving, scene planning, and keyframe verification. The code-generation baselines are evaluated with the same backbones, while the video generation baselines use their respective pretrained models. For human-calibrated instructional evaluation, we calibrate a prompt for the frozen Qwen3.8-27B judge using human ratings, then apply the fixed prompt to score videos on six dimensions of instructional quality. We use OpenAI Codex to assist with manuscript writ-ing, literature search, citation verification, and code devel-opment. The code supports running experiments, aggregat-ing results, revising selected diagrams, and adjusting L ATEX layout. The authors take responsibility for all submitted content. 
+
+## References 
+
+[1] Yu Gao, Haoyuan Guo, Tuyen Hoang, Weilin Huang, Lu Jiang, Fangyuan Kong, Huixia Li, Jiashi Li, Liang Li, Xi-aojie Li, Xunsong Li, Yifu Li, Shanchuan Lin, Zhijie Lin, Jiawei Liu, Shu Liu, Xiaonan Nie, Zhiwu Qing, Yuxi Ren, Li Sun, Zhi Tian, Rui Wang, Sen Wang, Guoqiang Wei, Guohong Wu, Jie Wu, Ruiqi Xia, Fei Xiao, Xuefeng Xiao, Jiangqiao Yan, Ceyuan Yang, Jianchao Yang, Runkai Yang, Tao Yang, Yihang Yang, Zilyu Ye, Xuejiao Zeng, Yan Zeng, Heng Zhang, Yang Zhao, Xiaozheng Zheng, Peihao Zhu, Jiaxin Zou, and Feilong Zuo. Seedance 1.0: Exploring the boundaries of video generation models. arXiv preprint arXiv:2506.09113 , 2025. [2] Team Wan, Ang Wang, Baole Ai, Bin Wen, Chaojie Mao, Chen-Wei Xie, Di Chen, Feiwu Yu, Haiming Zhao, Jianx-iao Yang, Jianyuan Zeng, Jiayu Wang, Jingfeng Zhang, Jin-gren Zhou, Jinkai Wang, Jixuan Chen, Kai Zhu, Kang Zhao, Keyu Yan, Lianghua Huang, Mengyang Feng, Ningyi Zhang, Pandeng Li, Pingyu Wu, Ruihang Chu, Ruili Feng, Shiwei Zhang, Siyang Sun, Tao Fang, Tianxing Wang, Tianyi Gui, Tingyu Weng, Tong Shen, Wei Lin, Wei Wang, Wei Wang, Wenmeng Zhou, Wente Wang, Wenting Shen, Wenyuan Yu, Xianzhong Shi, Xiaoming Huang, Xin Xu, Yan Kou, Yangyu Lv, Yifei Li, Yijing Liu, Yiming Wang, Yingya Zhang, Yi-tong Huang, Yong Li, You Wu, Yu Liu, Yulin Pan, Yun Zheng, Yuntao Hong, Yupeng Shi, Yutong Feng, Zeyinzi Jiang, Zhen Han, Zhi-Fan Wu, and Ziyu Liu. Wan: Open and advanced large-scale video generative models. arXiv preprint arXiv:2503.20314 , 2025. [3] Zeyinzi Jiang, Zhen Han, Chaojie Mao, Jingfeng Zhang, Yulin Pan, and Yu Liu. VACE: All-in-one video creation and editing. In Proceedings of the IEEE/CVF International Con-ference on Computer Vision (ICCV) , pages 17191–17202, 2025. [4] Jingxuan Wei, Cheng Tan, Qi Chen, Gaowei Wu, Siyuan Li, Zhangyang Gao, Linzhuang Sun, Bihui Yu, and Ruifeng Guo. From words to structured visuals: A benchmark and framework for text-to-diagram generation and editing. In 
+
+Proceedings of the IEEE/CVF Conference on Computer Vi-sion and Pattern Recognition (CVPR) , pages 13315–13325, 2025. [5] Vitor R. Coluci. Animac ¸ ˜ oes de conceitos da teoria de er-ros usando Manim/Python. Revista Brasileira de Ensino de F´ ısica , 44:e20210239, 2022. [6] Yanzhe Chen, Kevin Qinghong Lin, and Mike Zheng Shou. Code2Video: A code-centric paradigm for educational video creation. In Proceedings of the 43rd International Con-ference on Machine Learning , pages 15370–15396. PMLR, 2026. [7] Max Ku, Cheuk Hei Chong, Jonathan Leung, Krish Shah, Alvin Yu, and Wenhu Chen. TheoremExplainAgent: To-wards video-based multimodal explanations for LLM theo-rem understanding. In Proceedings of the 63rd Annual Meet-ing of the Association for Computational Linguistics (Volume 1: Long Papers) , pages 6663–6684, 2025. [8] Jingwei Liu, Ling Yang, Hao Luo, Fan Wang, Hongyan Li, and Mengdi Wang. Preacher: Paper-to-video agentic system. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) , pages 17129–17139, 2025. [9] Jhon Lopez, Carlos Hinojosa, and Bernard Ghanem. SGA: Plug & play geometric verification for educational video syn-thesis. In Findings of the Association for Computational Lin-guistics: EMNLP 2026 , pages 9533–9549, 2026. [10] Yuwei Guo, Ceyuan Yang, Ziyan Yang, Zhibei Ma, Zhijie Lin, Zhenheng Yang, Dahua Lin, and Lu Jiang. Long context tuning for video generation. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) , pages 17281–17291, 2025. [11] Ozgur Kara, Krishna Kumar Singh, Feng Liu, Duygu Cey-lan, James M. Rehg, and Tobias Hinz. ShotAdapter: Text-to-multi-shot video generation with diffusion models. In Pro-ceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pages 28405–28415, 2025. [12] Yihao Meng, Hao Ouyang, Yue Yu, Qiuyu Wang, Wen Wang, Ka Leong Cheng, Hanlin Wang, Shuailei Ma, Yix-uan Li, Cheng Chen, Yanhong Zeng, Xing Zhu, Yujun Shen, and Huamin Qu. HoloCine: Holistic generation of cine-matic multi-shot long video narratives. In Proceedings of 
+
+9the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pages 461–471, 2026. [13] Zongyu Lin, Wei Liu, Chen Chen, Jiasen Lu, Wenze Hu, Tsu-Jui Fu, Jesse Allardice, Zhengfeng Lai, Liangchen Song, Bowen Zhang, Cha Chen, Yiran Fei, Lezhi Li, Yinfei Yang, Yizhou Sun, and Kai-Wei Chang. STIV: Scalable text and image conditioned video generation. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) , pages 16249–16259, 2025. [14] Peixuan Zhang, Zijian Jia, Kaiqi Liu, Shuchen Weng, Si Li, and Boxin Shi. STAGE: Storyboard-anchored genera-tion for cinematic multi-shot narrative. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pages 659–669, 2026. [15] Tim Brooks, Bill Peebles, Connor Holmes, Will DePue, Yufei Guo, Li Jing, David Schnurr, Joe Taylor, Troy Luh-man, Eric Luhman, Clarence Ng, Ricky Wang, and Aditya Ramesh. Video generation models as world simulators. Technical report, OpenAI, 2024. [16] Zhuoyi Yang, Jiayan Teng, Wendi Zheng, Ming Ding, Shiyu Huang, Jiazheng Xu, Yuanming Yang, Wenyi Hong, Xiao-han Zhang, Guanyu Feng, Da Yin, Yuxuan Zhang, Weihan Wang, Yean Cheng, Bin Xu, Xiaotao Gu, Yuxiao Dong, and Jie Tang. CogVideoX: Text-to-video diffusion models with an expert transformer. In International Conference on Learn-ing Representations , pages 83048–83077, 2025. [17] Shuai Yang, Wei Huang, Ruihang Chu, Yicheng Xiao, Yuyang Zhao, Xianbang Wang, Muyang Li, Enze Xie, Ying-cong Chen, Yao Lu, Song Han, and Yukang Chen. LongLive: Real-time interactive long video generation. In International Conference on Learning Representations , pages 90037– 90059, 2026. [18] Xun Huang, Zhengqi Li, Guande He, Mingyuan Zhou, and Eli Shechtman. Self forcing: Bridging the train-test gap in autoregressive video diffusion. In Advances in Neural Infor-mation Processing Systems , pages 167283–167308, 2025. [19] Hao Chen, Tianyu Shi, Pengran Huang, Zeyuan Li, Jiahui Pan, Qianglong Chen, and Lewei He. VisualEDU: A bench-mark for assessing coding and visual comprehension through educational problem-solving video generation. In Findings of the Association for Computational Linguistics: EMNLP 2025 , pages 16363–16394, Suzhou, China, 2025. Associa-tion for Computational Linguistics. [20] Lingyong Yan, Jiulong Wu, Dong Xie, Weixian Shi, Deguo Xia, and Jizhou Huang. Beyond end-to-end video models: An LLM-based multi-agent system for educational video generation. In Proceedings of the 32nd ACM SIGKDD Con-ference on Knowledge Discovery and Data Mining V.2 , pages 8369–8378, 2026. [21] Kunpeng Liao, Yuexiao Ma, Yisheng Lin, Hualin Zeng, Xi-awu Zheng, and Rongrong Ji. ALGOGEN: Tool-generated verifiable traces for reliable algorithm visualization. In Find-ings of the Association for Computational Linguistics: ACL 2026 , pages 3168–3189, 2026. [22] Ziqi Huang, Yinan He, Jiashuo Yu, Fan Zhang, Chenyang Si, Yuming Jiang, Yuanhan Zhang, Tianxing Wu, Qingyang Jin, Nattapol Chanpaisit, Yaohui Wang, Xinyuan Chen, Limin Wang, Dahua Lin, Yu Qiao, and Ziwei Liu. VBench: Com-prehensive benchmark suite for video generative models. In 
+
+Proceedings of the IEEE/CVF Conference on Computer Vi-sion and Pattern Recognition , pages 21807–21818, 2024. [23] Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, Gretchen Krueger, and Ilya Sutskever. Learning transferable visual models from natural language supervision. In Proceedings of the 38th International Conference on Machine Learning ,pages 8748–8763. PMLR, 2021. [24] Jiarui Wang, Huiyu Duan, Guangtao Zhai, Juntong Wang, and Xiongkuo Min. AIGV-Assessor: Benchmarking and evaluating the perceptual quality of text-to-video generation with LMM. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pages 18869–18880, 2025. [25] Lightricks. LTX-2.5: Official model card and checkpoints. Hugging Face model card, 2026. [26] Wan Team. Wan2.2-T2V-A14B-Diffusers model card. Hug-ging Face model card, 2025. [27] MiniMax. MiniMax H3 model card. Hugging Face model card, 2026. [28] Wenjia Jiang, Zongyuan Cai, Yuanhang Shao, Chenru Wang, Boyan Han, Zhixue Song, Keyu Chen, Shengwei An, Xu Yang, and Zhou Yang. ManimAgent: Self-evolving multi-modal agents for visual education. In Proceedings of the 2026 Conference on Empirical Methods in Natural Lan-guage Processing , pages 57798–57822, Budapest, Hungary, 2026. Association for Computational Linguistics. 
+
+10

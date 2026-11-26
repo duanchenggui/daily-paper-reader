@@ -1,0 +1,962 @@
+Found in Translation: Five Entry Points to Translate AI Literacy Frameworks
+in the Design of Educational Materials
+Luis Morales-Navarro,1 Karl-Emil K. Bilstrup,1, 2 Mille Skovhus Lunding,1 Luke Connelly,1 Ane V.
+Jensen,1 Maja Dybboe,1 Yasmin B. Kafai,3 Marianne Graves Petersen,1 Ole Sejer Iversen1
+1Aarhus University, Aarhus, Denmark
+2University of Copenhagen, Copenhagen, Denmark
+3University of Pennsylvania, Philadelphia, USA
+luismn@cc.au.dk; keb@di.ku.dk; milledsk@cs.au.dk; luke@cs.au.dk; av@cc.au.dk; dybboe@cs.au.dk; kafai@upenn.edu;
+mgraves@cs.au.dk; oiversen@cc.au.dk
+Abstract
+While there is a plethora of AI literacy and informatics frame-
+works, in practice it is difficult for designers of educational
+materials and educators to decide where to start and how to use
+these in learning activities. At the same time, recent reviews
+show that despite the fact that most frameworks emphasize
+the socio-technical nature of AI, in practice interventions tend
+to center on preparing learners to use AI. To address these
+issues, we ask: How can multiple stakeholders negotiate and
+translate AI literacy framework ideas into common language
+that can be used to design introductory learning materials for
+primary school children, teachers and parents? We introduce
+five entry points into AI literacy that were developed from
+a computational empowerment perspective through a partic-
+ipatory design process involving primary teacher educators,
+curricular designers, media producers, and researchers. We
+present three vignettes that illustrate how the entry points
+were generative in the design of learning activities, learning
+tools and media content for school and home. This paper con-
+tributes an account of the participatory development of five
+entry points that serve as generative and negotiable resources
+for designing educational materials.
+Introduction
+As artificial intelligence continues being integrated into ev-
+eryday life and society at large, increasing attention has been
+given to young people’s AI literacy in order for them to
+“to navigate the presence of AI in daily life and to develop
+skills to use it ethically and creatively” (OECD and European
+Union 2026). Within the AAAI community, efforts guided
+by the five big ideas (Touretzky et al. 2019) have highlighted
+the need to support everyone from children to older adults
+in developing AI literacy (Xu et al. 2026; Kasinidou et al.
+2026). However, many AI literacy efforts, particularly in re-
+lation to generative AI, fundamentally lack a critical and
+reflective stance towards technology (Gu and Ericson 2025).
+Furthermore, many efforts center on supporting people to
+learn how to use AI (Kalantzis and Cope 2025), lacking an
+agenda of empowering children to understand and participate
+in AI and make informed decisions about their relationships
+to technology.
+We build on the ideas of computational empowerment
+(CE) (Iversen, Smith, and Dindler 2018) to argue that chil-
+dren should go beyond learning how to use AI. Computa-
+Copyright © 2027, Association for the Advancement of Artificial
+Intelligence (www.aaai.org). All rights reserved.
+tional empowerment was born out of the Scandinavian partic-
+ipatory design tradition as a response to computational think-
+ing efforts that focused on coding. Centered on children’s
+lived experiences, computational empowerment is “the pro-
+cess in which children, as individuals and groups, develop
+the skills, insights and reflexivity needed to understand dig-
+ital technology and its effect on their lives and society at
+large, and their capacity to engage critically, curiously and
+constructively with the construction and deconstruction of
+technology” (Iversen, Smith, and Dindler 2018). Approach-
+ing AI literacy from a CE perspective shifts the focus from
+learning how to use AI and conceptual understanding of AI
+to providing children with opportunities to participate in the
+development and evaluation of AI systems.
+While AI literacy frameworks and broader computing ed-
+ucation frameworks (e.g., the EU Informatics for All frame-
+work (Caspersen et al. 2022)) are helpful in guiding the
+content of AI literacy interventions, in practice it is difficult
+for the designers of educational materials and educators to
+decide where to start (Yang et al. 2026). As Casal-Otero et al.
+(2023) show, enacting frameworks in learning activities re-
+mains a challenge, as these are rarely adapted to the specific
+contexts of school. Designers of learning materials indeed
+can be overwhelmed in choosing among frameworks. To ad-
+dress this issue, in this paper, we ask: How can multiple
+stakeholders negotiate and translate AI literacy frame-
+work ideas into common language that can be used to de-
+sign introductory learning materials for primary school
+children, teachers and parents? We introduce five entry
+points into AI literacy that were developed through a par-
+ticipatory design process involving diverse stakeholders, in-
+cluding researchers, teacher educators, curricular designers,
+and media producers. We define entry points as conceptually
+grounded starting points for the design of AI literacy mate-
+rials. This paper shows how these co-designed entry points
+supported different actors to maintain a shared, generative
+foundation while designing diverse AI literacy materials.
+To illustrate how the entry points can guide AI literacy
+efforts, we present three vignettes that demonstrate how we
+have used them in the processes of designing learning ma-
+terials, writing screenplays for a children’s TV show, and
+creating learning activities for parents and children. Based
+on these vignettes and our broader experiences from the
+arXiv:2611.32377v1  [cs.HC]  24 Nov 2026
+
+
+Figure 1: Participatory design process diagram
+project, we discuss how the entry points facilitated translat-
+ing framework ideas and using these in the design of learning
+materials. We contribute entry points that support bridging
+the gap between AI literacy and informatics frameworks and
+the design of educational materials and, in addition, serve
+as shared reference points in collaborative design processes.
+We stress entry points as being generative statements that are
+plastic and negotiated by stakeholders. Moreover, the five
+specific entry points offer a starting point for AI literacy
+from a computational empowerment perspective.
+AI Literacy and Computational Empowerment
+AI literacy continues to gain traction and attention from ed-
+ucators and policymakers with little agreement on what it
+means (Grover 2024). A recent definition from the OECD
+and European Union (2026), wherein this research is con-
+ducted, states:
+“AI literacy represents the technical knowledge,
+durable skills and future-ready attitudes required to
+thrive in a world influenced by AI. It enables learners
+to engage, create with, manage and shape AI, while
+critically evaluating its benefits, risks and ethical im-
+plications.”
+Such a definition puts value on both technical and socio-
+ethical aspects of AI. This is not a surprise since most AI
+literacy frameworks, from the five big ideas (Touretzky et al.
+2019), to the United Kingdom’s SEAME framework (Waite
+and Garside 2023), to Long and Magerko’s (2020) compe-
+tencies and the UNESCO framework (Miao, Shiohira, and
+Lao 2024), emphasize socio-ethical aspects of AI. However,
+a recent review of the literature shows that AI literacy in-
+terventions centered around generative AI lack a critical and
+reflective stance towards technology (Gu and Ericson 2025).
+Oftentimes, such interventions also lack a technical stance
+towards technology, centering on preparing young people
+to use AI tools rather than to understand how AI systems
+work (Kalantzis and Cope 2025). Furthermore, while literacy
+frameworks are useful in guiding AI education efforts, there
+is little evidence of how these are put into action. One exam-
+ple of an approach that does focus on practice is Vartiainen
+and Tedre (2025) who articulate a pedagogical approach to
+introduce AI literacy ideas in K-12.
+Whereas policymakers around the world continue to de-
+bate how to prepare young people for a present and future
+with AI by introducing AI literacy and to discuss which
+frameworks to adopt, enacting frameworks can be a chal-
+lenge. Researchers have documented that such enactment can
+be difficult due to knowledge gaps between framework au-
+thors and designers of learning materials and educators (Yang
+et al. 2026) and lack of clear guidance that accounts for local
+contexts (Casal-Otero et al. 2023; Mutawa and Sruthi 2025).
+AI literacy interventions for primary school children also
+face challenges as frameworks tend to emphasize concepts
+that are applicable for older children, centering on middle
+school and high school (Yeter, Yang, and Sturgess 2024).
+Furthermore, the wide range of concepts and applications
+can be overwhelming for teachers and designers to grasp and
+make decisions about where to start.
+Beyond the challenge of where to start, we argue that we
+should critically consider what the goals of such literacy ef-
+forts are and how distinct interventions support such goals.
+AI literacy in the broadest sense includes important skills
+and competences needed for a contemporary labor market,
+including knowing how to use and operate AI systems. How-
+ever, learning job skills and how to use AI cannot truly pre-
+pare learners to fully participate and make decisions about
+the role of AI in their lives. A computational empowerment
+approach centers on how children develop understanding of
+the technologies they encounter in their everyday lives, trans-
+formative agency to participate in a socio-technical world,
+and critical hope to imagine better futures. CE is fostered
+through construction and deconstruction activities in which
+learners are protagonists or the “main agents” in designing
+and evaluating systems (Iversen, Smith, and Dindler 2017).
+We argue that CE has a lot to offer in guiding AI literacy in-
+terventions. First, CE centers on children’s lived experiences,
+making connections to the everyday interactions that chil-
+dren have with AI. Second, CE addresses both technical and
+socio-ethical aspects of computing through the construction
+and deconstruction of technology. Third, CE is expansive,
+going beyond learning in the classroom. In this paper, we
+describe an AI literacy project that aims to support children,
+teachers and parents in learning about AI at home and in
+school through learning activities, learning tools and media
+content. In particular, we center on how different stakeholders
+negotiated and translated ideas from frameworks into entry
+points that could facilitate the use of framework concepts
+in the design of introductory learning materials for primary
+school children, teachers and parents.
+
+
+Participatory Design Process
+This paper describes an ongoing participatory design (PD)
+process within the Ultra:Bytes project, from which the five
+entry points have emerged. Ultra:Bytes is a multi-partner
+project that aims to strengthen AI literacy among K-6 chil-
+dren in Denmark. It brings together a national public-service
+media company; a teacher education college supporting ed-
+ucators, schools, and municipalities with teacher education;
+a private foundation supporting STEM education research
+and young people’s motivation in STEM; and two interdisci-
+plinary research groups, one based in Northern Europe and
+one in the Northeastern United States, with expertise in AI,
+participatory design, and learning sciences.
+The decision to organize this work through PD follows
+the project’s computational empowerment orientation. CE is
+rooted in PD because it connects understanding technology
+with the capacity to question and shape it (Iversen, Smith,
+and Dindler 2018). In this project, this principle also applies
+to the professionals who design the media content, learning
+technologies, and learning activities through which children
+and their teachers and parents encounter AI. Following Bød-
+ker (2003), participation was not treated as simply introduc-
+ing these stakeholders to new AI concepts. The aim in the
+project is to enable them to understand AI and AI literacy
+well enough to question our shared AI conceptions and de-
+cide how AI literacy frameworks should inform their own
+work. We therefore considered stakeholder ownership of the
+entry points necessary for them to have a meaningful frame
+for developing AI literacy learning materials throughout the
+project.
+Before the first partner workshop, the European research
+team compared the Five Big Ideas in AI (Touretzky et al.
+2019), the AI literacy competencies proposed by Long and
+Magerko (2020), and the 11 core topic areas of the Infor-
+matics Reference Framework for School (Caspersen et al.
+2022). This comparison identified conceptual overlaps and
+produced a set of provisional topic areas for AI literacy in K-6
+education. With a CE lens in our work, we prioritized top-
+ics that connected technical and socio-ethical perspectives
+and could be related to children’s everyday experiences with
+AI. The European and US-based research teams then con-
+solidated and refined these topics through a series of online
+workshops.
+At the initial partner PD workshop, the researchers pre-
+sented the provisional topic areas as starting points for dis-
+cussion, not as a fixed specification of what the project
+should produce. Media producers, teacher educators, and
+learning-technology designers examined the topics from the
+perspective of their own professional practices. They consid-
+ered how each topic might be expressed through narratives
+and streaming content, learning tools, or facilitated learn-
+ing activities for K-6 children. The discussion did more than
+translate predefined AI concepts into different formats: the
+stakeholders’ questions, priorities, and practical experience
+also changed how the topics were worded, emphasized, and
+related to one another. The first working formulations of the
+entry points emerged through this exchange between the re-
+searchers’ provisional topics and the stakeholders’ expertise.
+These formulations were then used in subsequent workshops
+and development activities. Table 1 shows how the resulting
+entry points developed from this process can be traced back
+to the three frameworks.
+As partners used the entry points to develop media con-
+tent, learning technologies, and educational activities, am-
+biguities and different interpretations prompted further ne-
+gotiation within the research teams and between researchers
+and stakeholders. Through this process, the entry points took
+their current form and came to function as flexible and com-
+mon objects (Star 1989): recognizable across stakeholders,
+yet adaptable to each professional practice. Because partners
+could adjust rather than simply receive the entry points, it
+supported coordination and shared ownership. Consequently,
+the entry points became both products and means of ongoing
+negotiation in the project. This became apparent in a map-
+ping exercise in which different stakeholders mapped how
+they adapted and adopted the entry points to use them in the
+design of learning materials.
+In the following sections, we first present the five entry
+points in their current form and then show how they have
+been used in ongoing design work. We do not argue that these
+five entry points alone are sufficient to foster AI literacy or
+that they constitute a universal framework. Our contribution
+is an account of how these entry points, negotiated with pro-
+fessional expertise and kept open to revision, can support the
+collaborative development of materials for K-6 children with
+an emphasis on computational empowerment. The plasticity
+of the entry points is central to this role. It enables design-
+ers, media professionals, researchers and teacher educators
+to have a shared generative starting point to foster AI literacy.
+Five Entry Points
+Here we describe these five entry points, provide examples
+from existing research on CE, and highlight their relationship
+to existing frameworks.
+Data is created
+Data are representations that are created to describe phenom-
+ena in the world. This entry point centers on data as an artifact
+that is actively produced by humans. Children use AI sys-
+tems when playing games, learning, and listening to music;
+however, their interactions with data are often obscured, and
+data is often framed as something that is passively collected
+instead of actively created. Within CE, this entry point has
+been previously explored, for example, by having learners
+produce and analyze personally meaningful music data and
+cocreate playlists while critically reflecting on data practices
+(Liu et al. 2026). Other work has involved learners in ex-
+amining the datasets of faulty AI systems (Moilanen et al.
+2026). As Hardy, Dixon, and Hsi (2020) argued, engaging
+learners in producing data for personally relevant purposes
+can support them to develop their agency. This entry point
+relates to Big Idea 3, Competencies 12 and 13, and the Data
+and Information core topic of the EU’s framework.
+AI systems make predictions
+This entry point refers to how AI systems make predictions
+based on patterns identified in the data on which they are
+
+
+Entry point
+Five Big Ideas
+(Touretzky et al. 2019)
+AI Competences
+(Long and Magerko 2020)
+Informatics Reference
+Framework Topics
+(Caspersen et al. 2022)
+Data created
+3. Learning
+12. Learning from Data
+13. Critically Interpreting
+Data
+Data and information
+AI systems make
+predictions
+3. Learning
+9. ML Steps
+12. Learning from Data
+Modeling and simulation
+Anthropomorphism in
+AI systems
+4. Interaction
+5. Impact
+5. AI’s Strengths and
+Weaknesses
+16. Ethics
+Human-machine interaction
+AI as a design material
+10. Human Role in AI
+Digital creativity
+Intentionality in AI
+systems
+10. Human Role in AI
+Responsibility and
+Empowerment
+Table 1: Entry Points and Related Frameworks
+trained. While children interact with AI systems daily, often-
+times outputs are perceived as deterministic and trustworthy.
+Yet it is important for children to understand that outputs are
+predictions made based on prior data. Work in CE has ex-
+plored this entry point by having learners create datasets and
+train models (Bilstrup et al. 2022b), exploring how Markov
+chains make predictions (Connelly et al. 2026), and analyz-
+ing the outputs of generative AI systems (Morales-Navarro
+et al. 2025). In these activities, learners engage with the non-
+deterministic nature of AI and develop some understanding
+about how data quality shapes the outputs of AI systems.
+This entry point relates to Big Idea 3, Competencies 9 and
+12, and the Modeling and Simulation core topic.
+Anthropomorphism in AI systems
+Anthropomorphism refers to the tendency to attribute human
+characteristics, such as empathy, intention, and understand-
+ing, to AI. This occurs even though AI systems compute pre-
+dictions are based on data, and cannot think or understand in
+the same way humans do. Yet, recent studies show that peo-
+ple increasingly perceive AI systems as human-like (Cheng
+et al. 2026). Chatbot interfaces and consumer products that
+target children (e.g., AI toys such as Curio) replicate decep-
+tive human-like characteristics. While anthropomorphism
+has not been widely addressed in CE literature, research
+shows that it is pervasive in the design of interfaces for
+children (Madushika Jayathilake and Ma 2026) and it has
+been argued to contribute to misunderstandings and obstruct
+students’ learning about AI if not addressed in learning ac-
+tivities (Whyte, Kirby, and Sentance 2024). This entry point
+relates to Competency 10 and the human-machine interaction
+topic of the EU’s framework.
+AI as a design material
+AI as a design material refers to how AI systems are designed
+by humans. While children engage with AI systems, these
+may be perceived as autonomous, intelligent, and/or magi-
+cal. We argue that learners can participate in designing AI
+systems by creating and modifying them, defining what mod-
+els should make predictions about, designing datasets, and
+choosing parameters, as well as designing the interfaces that
+people use to interact with AI. Within CE, research shows
+that framing AI as a design material can support learners
+to understand the possibilities and limitations of AI (Bil-
+strup et al. 2022b; Kahila et al. 2026). Several studies show
+that when learners participate in designing AI systems, their
+perceptions shift from seeing these as autonomous to under-
+standing them as human-designed artifacts (Druga and Ko
+2021; Morales-Navarro et al. 2026). This entry point relates
+to Competency 10 and the Digital Creativity topic of the
+EU’s framework.
+Intentionality in AI systems
+Intentionality concerns the choices, values, and purposes that
+humans embed in AI technologies through design. This en-
+try point highlights that AI is therefore not neutral; rather, it
+reflects the intentions and priorities from which these tech-
+nologies are created. Children encounter technology at home
+and in school, and adults often have opinions about it. How-
+ever, the intentions and values behind how such technologies
+were designed are not always clear for children and the adults
+around them. CE research has involved learners in reflecting
+on the values and ethical stances embedded within AI sys-
+tems (Bilstrup, Kaspersen, and Petersen 2020), this work
+has also highlighted how considering values and intention-
+ality should be part of the process of designing AI systems
+(Bilstrup et al. 2022a). Other research has engaged learners
+in reflecting on the real-world consequences of such design
+decisions (Hilke et al. 2026). This entry point relates to Com-
+petency 10 and the Responsibility and Empowerment topic
+of the EU’s framework.
+The relationship between entry points
+The five entry points share a human-centered socio-technical
+perspective on AI that highlights the role of humans as de-
+signers of AI systems and producers of data that make de-
+
+
+Figure 2: Examples of the entry points used by different
+stakeholders to create a learning tool, a tv show, and a learn-
+ing activity
+cisions and embed values and intentions into AI systems.
+This is not a coincidence since computational empowerment
+research has a commitment to making transparent how tech-
+nology “is constructed and the consequences that it has”
+(Dindler et al. 2022). The entry points are nonhierarchical in
+that any of them could be used as a starting point in the design
+of educational materials. They are also non-exclusive; edu-
+cational materials can address one or more of them. These
+are starting points for design, so it is even possible to arrive
+at similar activities from different entry points.
+Vignettes
+We use narrative vignettes (Erickson 2012) to portray how
+the entry points are enacted in the context of the project.
+The vignettes were iteratively developed in four steps: the
+authors identified focal episodes in the participatory design
+process, gathered transcripts and documents of such events,
+collaboratively discussed the entry points enacted, and wrote
+the vignettes.
+Vignette 1: Designing a Learning Tool for School
+As AI literacy has not been formally introduced into Den-
+mark’s K-6 curriculum, teacher educators have limited ex-
+isting resources for introducing AI. In particular, a group of
+educators designing learning activities for children aged 10-
+12 wanted to create activities to foster understanding of how
+chatbots are designed and generate outputs. They wanted
+these activities to relate to the everyday experiences that
+children may have with commercial chatbots. The resources
+available were either too black-boxed or too complex for K-
+6 students. The educators wanted a new learning tool that
+could close this gap and provide some transparency into how
+chatbots work. In particular, they wanted a tool that could
+make transparent that data is created and that AI systems
+make predictions. Using those starting points, the challenge
+was addressed in a collaboration with researchers through
+the design of Chat:Bytes (see Figure 2). Chat:Bytes was de-
+veloped by researchers but iteratively evaluated with teacher
+educators to assess how the entry points were manifested into
+the design.
+From a technical perspective, Chat:Bytes combines a se-
+lection of classic NLP techniques (whitespace tokenisation,
+TF-IDF scoring, Markov Chains) and packages them into a
+chat interface that allows users to prompt and receive ex-
+plainable responses. In deciding the features of the tool the
+educators and researchers agreed that Chat:Bytes should be
+designed to highlight how data is created and how it in-
+fluences the answers that chatbots provide. Chat:Bytes was
+created to use only a small dataset of around 100 sentences.
+The interface made the dataset visible and explorable so that
+students could directly see how training data influences the
+answers of Chat:Bytes. The explorable dataset and data vi-
+sualization of the predictions made by the chatbot increased
+transparency and made the entry point AI systems make
+predictions tangible. Furthermore, the content of the dataset
+represented controversial views, for example, that cats are
+better pets than dogs, to enable discussions about how the
+data created for an AI system can have implications in the
+outputs users encounter.
+As the tool developed, the design team wondered if this
+was an opportunity to support learners in engaging with AI
+as a design material. This led the team to brainstorm how
+the tool could support learners to modify the chatbot and
+embed their own intentions. To allow students to influence
+the design of Chat:Bytes, the interface was designed so that
+students could add new sentences to the training data and
+thereby influence the chatbot to answer differently about spe-
+cific topics or add data about new topics to enable Chat:Bytes
+to provide meaningful answers. By allowing students to add
+additional training data to Chat:Bytes, it also enabled them
+to embed their own intentions. For example, in a design
+meeting, Thomas, a teacher educator, showed how he could
+change the intention of the chatbot by adding training data
+that included negative opinions about cats and positive opin-
+ions about dogs. In this vignette, we showed how working
+together teacher educators and researchers used the entry
+points as starting points to design a tool and learning activi-
+ties around it.
+Vignette 2: Creating Media Content for the Home
+The Danish Broadcasting Corporation (DR), a partner in
+the project, decided to create 12 8-minute episodes of a TV
+show targeting children ages 7 to 11 called Bablo. This is a
+fictional live-action TV show that happens in a library where
+children encounter problems and go on adventures. Bablo
+is not explicitly about AI, each episode has a hidden “AI
+message” such that it can be used in classrooms to discuss
+that message.
+A managing editor at the media company used the en-
+try points, for instance anthropomorphism in AI systems,
+
+
+and data is created, to draft a set of messages about AI
+that were discussed and iterated together with researchers.
+The screenwriters then wrote initial drafts for possible sto-
+rylines. These storylines were also reviewed by researchers
+who provided feedback before the screenwriters wrote them
+into full-fledged screenplays for the episodes. Below we pro-
+vide examples from two screenplays to demonstrate how the
+entry points supported the writing process.
+In the first example episode, the idea was to provide chil-
+dren with a story about anthropomorphism. In this episode
+Malini is playing with Sally’s stuffed toy, LotteAxel. Lot-
+teAxel is described by the children as being upset by this.
+At the end of the episode, Sally admits that it may be her
+feelings, and not LotteAxel’s, that are getting hurt. In the
+episode, Mailini gets very concerned. Sally then explains
+that “It’s just a game [...] LotteAxel doesn’t actually have
+feelings, you know. She’s just a stuffed animal.” Sally is sur-
+prised by this, as Mailini always talked about the stuffed toy
+as if it were a human with feelings. The episode was written
+to convey that humans have a tendency to anthropomor-
+phize non-humans by giving them human traits. It highlights
+how Sally attributes human feelings to the toy to serve as
+a conversation starter in the classroom about how humans
+anthropomorphize toys and, with the guidance of teachers,
+make connections to how humans give human-like charac-
+teristics to AI systems.
+In a second example episode, the producer, researchers and
+screenplay writers agreed to highlight how data is created
+and how, in creating datasets, designers embed their own
+intentionality. In this episode Bo and Sally are very bored
+when Sally’s bigger sister, Anna, brings an old gumball ma-
+chine that is full of game suggestions written on post-its.
+However, Bo and Sally do not enjoy the games because the
+machine is filled up with Anna’s favorite games. At the end
+of the episode, Bo and Sally realize they can add their own
+post-it notes to the gum machine. This show, without explic-
+itly addressing AI, was designed to be used in the classroom
+to reflect on how data is created.
+Vignette 3: Designing a Recommendation System
+Learning Activity Bridging School and Home
+contexts
+At the same time as the broadcasting company screenwrit-
+ers were writing the episodes described above, the educa-
+tors started creating learning activities that could be used
+at school and at home. By using the data is created, and
+AI systems make predictions entry points, the educators
+came up with an idea about an activity around an unfair
+machine, where the output from the machine would favor
+specific users. They explained that with such a machine,
+children could reflect on how the data used by the machine
+was created and how data influenced the suggestions made by
+the system. The educators developed this idea into an activity
+where lower elementary school children would pick a game
+from a physical box in the classroom, which only contained
+games that were mainly played when their grandparents were
+children. In the activity the children then had to redesign the
+game into something they would like to play. The educators
+brought this idea to a workshop with researchers; there, dif-
+ferent stakeholders discussed the potential of bridging this
+idea with the episode from the media company described in
+Vignette 2, as these both involved recommendation systems.
+In this meeting the educators and researchers brainstormed
+that a food recommendation system could potentially be used
+as an activity that could bridge the school and home contexts.
+Researchers then built a web app that showed how recom-
+mendation systems make predictions based on existing data.
+The app was designed to recommend food and games using
+an initial dataset skewed towards adults’ ideas of what good
+games and food are. It was designed so that children and their
+parents could add new food and game ideas to the dataset and
+delete data points. They could also add the same idea several
+times to the dataset to increase the probability of getting a
+certain food or game recommended.
+The analogue activity and the web app were designed to
+bridge what children learn at school and at home. The plan is
+that children will first use the analogue version of the activity
+at school, then transition to the web app to modify the data
+to their own interests. Then they can bring it home and show
+what they have made to their parents and potentially trick
+them with a recommendation system they have designed with
+their own data and intentions. This vignette illustrates how
+diverse stakeholders used the entry points to design activities
+that complement each other and that can bridge what happens
+at school and at home.
+Discussion
+In this paper, we asked: How can multiple stakeholders
+negotiate and translate AI literacy framework ideas into
+common language that can be used to design introductory
+learning materials for primary school children, teachers,
+and parents? Our experience suggests that one way of ad-
+dressing this challenge is through the development of entry
+points. We reported on how the conceptually grounded entry
+points became generative starting points developed through
+a participatory process that translated ideas from existing AI
+literacy and informatics frameworks into shared reference
+points for the design of educational materials.
+Despite the fact that there are numerous frameworks to
+guide AI literacy efforts, educators and designers often strug-
+gle to translate these frameworks into practice (Yang et al.
+2026). The five entry points suggested in this project provided
+a shared vocabulary that teacher educators, media producers,
+curricular designers, and researchers could use in their de-
+sign processes. Rather than prescribing learning objectives,
+the entry points enabled stakeholders to develop different
+manifestations of AI literacy ideas across learning tools, ed-
+ucational activities, and media content. Our three vignettes
+illustrate this generativity: the same entry points informed
+the design of an explainable chatbot, narratives for children’s
+television, and recommendation-system activities connect-
+ing school and home.
+Translating Frameworks
+The need for entry points arises from a distinction between
+specifying what matters for AI literacy and supporting ed-
+ucational designers in deciding where and how to begin.
+
+
+Existing frameworks provide rich accounts of competencies,
+concepts, and areas of knowledge. Yet, as discussed earlier,
+the frameworks themselves do not resolve the problem of
+applying them. Frameworks may remain difficult to translate
+into concrete educational practice because of knowledge gaps
+between framework authors, designers, and teacher trainers,
+insufficient guidance for local contexts, and the breadth and
+complexity of the concepts involved.
+Entry points address the translation of AI frameworks into
+the process of designing new educational materials. They do
+not replace the AI frameworks, reduce them to a new tax-
+onomy, nor provide another comprehensive account of what
+children should learn about AI. Instead, they offer a layer of
+translation between frameworks and actual design practices.
+We made this distinction visible in Table 1, where each entry
+point can be traced to Touretzky et al.’s (2019) big ideas,
+Long and Magerko’s (2020) framework and the EU’s Infor-
+matics Reference Framework (Caspersen et al. 2023). Entry
+points therefore represent a deliberate reduction in compre-
+hensiveness in exchange for generativity and actionability.
+They make selected ideas available as starting points around
+which educational materials can be imagined, discussed, de-
+signed and ultimately implemented.
+This translational function was particularly important from
+our outset of computational empowerment (CE). As argued
+earlier, computational empowerment shifts attention from
+learning to use AI towards supporting children to understand,
+question, construct, deconstruct, and ultimately participate in
+shaping contemporary technologies.
+The entry points preserve this CE orientation in a form that
+can inform design. Data is created directs attention towards
+human practices involved in producing representations of the
+world; AI systems make predictions foregrounds the proba-
+bilistic rather than deterministic character of AI outputs; an-
+thropomorphism in AI systems opens questions about how
+interfaces shape human understandings of machine agency;
+AI as a design material positions AI as something that hu-
+mans can construct and modify; and intentionality in AI
+systems foregrounds the values, choices, and purposes em-
+bedded through design.
+A Participatory Approach
+The entry points cannot be separated from the process
+through which they were produced. These were not derived
+by researchers from existing frameworks and subsequently
+handed to practitioners for implementation. Although re-
+searchers initially compared existing AI frameworks and rec-
+ommendations and identified provisional topic areas, these
+topics were explicitly introduced into the participatory de-
+sign process as starting points rather than fixed specifications.
+Teacher trainers, media producers, and learning-technology
+designers subsequently interpreted them from within their re-
+spective professional practices, and their questions and con-
+cerns shaped how the entry points were articulated.
+In respect to this process, the entry points should conse-
+quently be understood as both products of participation and
+infrastructures for continued participation. This distinction
+matters. From a computational empowerment perspective,
+participation was not conceived as consulting practitioners
+about a framework already determined by researchers. Con-
+sistent with the Scandinavian PD tradition (Bødker 2003;
+Bødker et al. 2022) underpinning computational empower-
+ment, stakeholders need sufficient ownership to question re-
+searchers’ assumptions about AI literacy and determine how
+framework concepts should inform their professional work.
+Limitations
+Our paper has several limitations. First, the contribution of
+the entry points concerns the design process, not the ef-
+fectiveness of the resulting materials. The three vignettes
+demonstrate how teacher educators, media creators and re-
+searchers used the entry points to create educational mate-
+rials. They do not demonstrate that the entry points them-
+selves support children’s AI literacy, nor do they establish
+that teachers or parents will interpret the resulting materi-
+als as intended. We cannot claim that these five entry points
+are sufficient to foster AI literacy or CE among learners, a
+limitation consistent with the scope we established when in-
+troducing them. Future research should follow the materials
+to investigate how teachers, children, and parents appropriate
+them.
+A second limitation concerns the cultural and institutional
+conditions under which the entry points emerged. CE itself is
+rooted in the Scandinavian participatory design tradition, and
+the PD process reported here similarly assumes that profes-
+sional stakeholders should have meaningful opportunities to
+question concepts, negotiate priorities, and shape the result-
+ing educational agenda. These conditions are not culturally
+or institutionally neutral. Rather than treating this as a prob-
+lem to be resolved through prescriptive standards, it raises
+an important question for future research: Which aspects of
+entry points can travel across contexts, and which need to be
+renegotiated locally?
+Finally, we cannot claim that the five entry points are ex-
+haustive or universally applicable. Rather, they should be
+understood as situated outcomes of the particular partici-
+patory process through which they emerged. Their formu-
+lation reflects the specific stakeholders, practices, and con-
+cerns brought together in this project. In our case compu-
+tational empowerment heavily influenced the development
+of the entry points. Other PD processes, involving different
+stakeholders or situated in different contexts, may lead to the
+development of different entry points.
+Contribution
+Despite these limitations, our contribution extends beyond
+the five specific entry points presented in this paper. We
+reported on how PD can provide a process for translating
+comprehensive AI literacy frameworks into generative and
+negotiable resources for designing educational materials. For
+researchers, entry points offer a way of bridging frameworks
+and situated design practice without prescribing how frame-
+works should be put into action. Thus, rather than adopting
+our five entry points as a fixed set, we invite researchers to
+consider how and what entry points they might collabora-
+tively develop together with their partners.
+
+
+Acknowledgments
+We are grateful to our partners at the Danish Broadcasting
+Corporation (DR), Center for Undervisningsmidler (CFU),
+and LIFE Fonden. This work was possible through the gener-
+ous support of the Novo Nordisk Foundation and the Villum
+Foundation.
+References
+Bilstrup, K.-E. K.; Kaspersen, M. H.; Assent, I.; Enni, S.;
+and Petersen, M. G. 2022a. From Demo to Design in Teach-
+ing Machine Learning. In Proceedings of the 2022 ACM
+Conference on Fairness, Accountability, and Transparency,
+FAccT ’22, 2168–2178. New York, NY, USA: Association
+for Computing Machinery. ISBN 9781450393522.
+Bilstrup, K.-E. K.; Kaspersen, M. H.; and Petersen, M. G.
+2020. Staging Reflections on Ethical Dilemmas in Machine
+Learning: A Card-Based Design Workshop for High School
+Students. In Proceedings of the 2020 ACM Designing Inter-
+active Systems Conference, DIS ’20, 1211–1222. New York,
+NY, USA: Association for Computing Machinery.
+ISBN
+9781450369749.
+Bilstrup, K.-E. K.; Kaspersen, M. H.; Sørensen, M.-L. S. K.;
+and Petersen, M. G. 2022b. Opportunities and Challenges
+of Teaching Machine Learning as a Design Material with
+the micro:bit. In Adjunct Proceedings of the 2022 Nordic
+Human-Computer Interaction Conference, NordiCHI ’22
+Adjunct. New York, NY, USA: Association for Computing
+Machinery. ISBN 9781450394482.
+Bødker, S. 2003. A for alternatives. Scand. J. Inf. Syst.,
+15(1): 87–89.
+Bødker, S.; Dindler, C.; Iversen, O. S.; and Smith, R. C.
+2022. Participatory Design. Synthesis Lectures on Human-
+Centered Informatics. Springer Cham, 1 edition. ISBN 978-
+3-031-01107-8.
+Casal-Otero,
+L.;
+Catala,
+A.;
+Fernández-Morante,
+C.;
+Taboada, M.; Cebreiro, B.; and Barro, S. 2023. AI liter-
+acy in K-12: a systematic literature review. International
+journal of STEM education, 10(1): 29.
+Caspersen, M.; Gal-Ezer, J.; McGettrick, A.; and Nardelli,
+E. 2023.
+Informatics Education for School: A European
+Initiative. ACM Inroads, 14(1): 49–53.
+Caspersen, M. E.; Diethelm, I.; Gal-Ezer, J.; McGettrick,
+A.; Nardelli, E.; Passey, D.; Rovan, B.; and Webb, M. 2022.
+The Informatics Reference Framework for School. Technical
+report, Informatics for All Coalition.
+Cheng, M.; Lee, A. Y.; Rapuano, K.; Niederhoffer, K.; Lieb-
+scher, A.; and Hancock, J. 2026. Metaphors of AI indicate
+that people increasingly perceive AI as warm and human-
+like. Communications Psychology, 4(1): 8.
+Connelly, L.; Graves Petersen, M.; Høholt Kaspersen, M.;
+Musaeus, L. H.; and Bilstrup, K.-E. K. 2026. Addressing the
+NLP in the Classroom: Empowering High School Teachers
+through Participatory Design of Hands-on NLP Activities.
+In Proceedings of the 25th Annual ACM Interaction Design
+and Children Conference, IDC ’26, 688–702. New York,
+NY, USA: Association for Computing Machinery.
+ISBN
+9798400722837.
+Dindler, C.; Iversen, O. S.; Caspersen, M. E.; and Smith,
+R. C. 2022. Computational empowerment. Computational
+thinking education in K–12: Artificial intelligence literacy
+and physical computing, 121–139.
+Druga, S.; and Ko, A. J. 2021. How do children’s percep-
+tions of machine intelligence change when training and cod-
+ing smart programs?
+In Proceedings of the 20th Annual
+ACM Interaction Design and Children Conference, IDC ’21,
+49–61. New York, NY, USA: Association for Computing
+Machinery. ISBN 9781450384520.
+Erickson, F. 2012. Qualitative Research Methods for Science
+Education. In Fraser, B.; Tobin, K.; and McRobbie, C., eds.,
+Second International Handbook of Science Education, vol-
+ume 24 of Springer International Handbooks of Education,
+1451–1465. Dordrecht: Springer.
+Grover, S. 2024. Teaching AI to K-12 Learners: Lessons,
+Issues, and Guidance.
+In Proceedings of the 55th ACM
+Technical Symposium on Computer Science Education V. 1,
+SIGCSE 2024, 422–428. New York, NY, USA: Association
+for Computing Machinery. ISBN 9798400704239.
+Gu, X. L.; and Ericson, B. J. 2025. AI Literacy in K-12 and
+Higher Education in the Wake of Generative AI: An Integra-
+tive Review. In Proceedings of the 2025 ACM Conference on
+International Computing Education Research V.1, ICER ’25,
+125–140. New York, NY, USA: Association for Computing
+Machinery. ISBN 9798400713408.
+Hardy, L.; Dixon, C.; and Hsi, S. 2020. From data collectors
+to data producers: Shifting students’ relationship to data.
+Journal of the Learning Sciences, 29(1): 104–126.
+Hilke, O.; Pope, N.; Kahila, J.; Vartiainen, H.; Roos, T.;
+Parkki, T.; and Tedre, M. 2026. Breakable Machine: AK–12
+classroom game for transformative AI literacy through spoof-
+ing and explainable AI (XAI). In Proceedings of the AAAI
+Conference on Artificial Intelligence, volume 40, 40762–
+40770.
+Iversen, O. S.; Smith, R. C.; and Dindler, C. 2017. Child as
+Protagonist: Expanding the Role of Children in Participatory
+Design. In Proceedings of the 2017 Conference on Inter-
+action Design and Children, IDC ’17, 27–37. New York,
+NY, USA: Association for Computing Machinery.
+ISBN
+9781450349215.
+Iversen, O. S.; Smith, R. C.; and Dindler, C. 2018. From
+computational thinking to computational empowerment: a
+21st century PD agenda. In Proceedings of the 15th Partici-
+patory Design Conference: Full Papers - Volume 1, PDC ’18.
+New York, NY, USA: Association for Computing Machinery.
+ISBN 9781450363716.
+Kahila, J.; Vartiainen, H.; Pope, N.; and Tedre, M. 2026.
+Engaging young minds in AI through co-designing and mak-
+ing their own AI-Driven Apps in the classroom. In Social
+robots and artificial intelligence in education: Integrating AI
+in K-12 and higher education, 187–210. Springer.
+Kalantzis, M.; and Cope, B. 2025. Literacy in the time of
+Artificial Intelligence. Reading Research Quarterly, 60(1):
+e591.
+
+
+Kasinidou, M.; Kleanthous, S.; Otterbacher, J.; and Christo-
+forou, E. 2026. Educating the Public in Artificial Intelli-
+gence: Insights from a Large-Scale Course. In Proceedings
+of the AAAI Conference on Artificial Intelligence, volume 40,
+40617–40625.
+Liu, Y.-Y.; Dybboe, M.; Ellemose, J.; Bjerrum, J. B.;
+Musaeus, L. H.; Dindler, C.; and Iversen, O. S. 2026. "Let’s
+talk about data": Co-Designing Critical Data Literacy Tools
+for K-12 Education through Dialogic Learning. In Proceed-
+ings of the 2026 CHI Conference on Human Factors in Com-
+puting Systems, CHI ’26. New York, NY, USA: Association
+for Computing Machinery. ISBN 9798400722783.
+Long, D.; and Magerko, B. 2020.
+What is AI Literacy?
+Competencies and Design Considerations. In Proceedings
+of the 2020 CHI Conference on Human Factors in Computing
+Systems, CHI ’20, 1–16. New York, NY, USA: Association
+for Computing Machinery. ISBN 9781450367080.
+Madushika Jayathilake, H.; and Ma, R. 2026. Anthropo-
+morphism in Children’s Interactions with LLM-Based Chat-
+bots: A Systematic Review of Drivers and Outcomes. In
+Proceedings of the 25th Annual ACM Interaction Design
+and Children Conference, IDC ’26, 520–536. New York,
+NY, USA: Association for Computing Machinery.
+ISBN
+9798400722837.
+Miao, F.; Shiohira, K.; and Lao, N. 2024.
+AI Compe-
+tency Framework for Students. UNESCO. ISBN 978-92-
+3-100709-5. Licence: CC BY-SA 3.0 IGO.
+Moilanen, M.; Hilke, O.; Kahila, J.; Parkki, T.; Silvennoinen,
+E.; Pope, N.; and Tedre, M. 2026. Learning Machine Learn-
+ing Through Deconstructing (X)AI Systems in K–12 Educa-
+tion. In 2026 IEEE Global Engineering Education Confer-
+ence (EDUCON), 1–5.
+Morales-Navarro, L.; Gan, M. A.; Yu, E.; Vogelstein, L.;
+Kafai, Y.; and Metaxa, D. 2025. Learning AI Auditing: A
+Case Study of Teenagers Auditing a Generative AI Model.
+Proc. ACM Hum.-Comput. Interact., 9(7).
+Morales-Navarro, L.; Noh, D. J.; Servat, L.; Netting, C.;
+Kafai, Y.; and Metaxa, D. 2026. Building to Understand: Ex-
+amining Teens’ Technical and Socio-Ethical Pieces of Under-
+standing in the Construction of Small Generative Language
+Models. In Proceedings of the 25th Annual ACM Interac-
+tion Design and Children Conference, IDC ’26, 262–280.
+New York, NY, USA: Association for Computing Machin-
+ery. ISBN 9798400722837.
+Mutawa, A.; and Sruthi, S. 2025. UNESCO’s AI competency
+framework: Challenges and opportunities in educational set-
+tings. Impacts of Generative AI on the Future of Research
+and Education, 75–96.
+OECD; and European Union. 2026. Empowering learners
+for the age of AI: An AI literacy framework for primary and
+secondary education. Technical report, OECD Publishing,
+Paris.
+Star, S. L. 1989. The structure of ill-structured solutions:
+Boundary objects and heterogeneous distributed problem
+solving. In Distributed artificial intelligence, 37–54. Else-
+vier.
+Touretzky, D.; Gardner-McCune, C.; Martin, F.; and See-
+horn, D. 2019. Envisioning AI for K-12: What should every
+child know about AI? In Proceedings of the AAAI conference
+on artificial intelligence, volume 33, 9795–9799.
+Vartiainen, H.; and Tedre, M. 2025. The CEDE Model: A
+Learning-Sciences Based Approach for Critical and Trans-
+formative K–12 AI Education. In Proceedings of the 25th
+Koli Calling International Conference on Computing Edu-
+cation Research, Koli Calling ’25. New York, NY, USA: As-
+sociation for Computing Machinery. ISBN 9798400715990.
+Waite, J.; and Garside, B. 2023. From ethics to engines,
+framing AI literacy (including algorithm literacy and data
+literacy) through the SEAME framework.
+Raspberry Pi
+Computing Education Research Centre, Cambridge United
+Kingdom.
+Whyte, R.; Kirby, D.; and Sentance, S. 2024. Secondary Stu-
+dents’ Emerging Conceptions of AI: Understanding AI Ap-
+plications, Models, Engines and Implications. In Proceed-
+ings of the 2024 Conference on United Kingdom & Ireland
+Computing Education Research, UKICER ’24. New York,
+NY, USA: Association for Computing Machinery.
+ISBN
+9798400711770.
+Xu, Z.; Procko, K.; Munje, M.; Patterson, K.; Sabatini, L.;
+Biswas, J.; and Stone, P. 2026.
+The essentials of AI for
+life and society: A full-scale AI literacy course accessible
+to all. In Proceedings of the AAAI Conference on Artificial
+Intelligence, volume 40, 40730–40736.
+Yang, H.; Rachmatullah, A.; Alozie, N.; Capan, S.; and Cao,
+Q. 2026. A systematic review mapping of AI literacy pro-
+gression in K–12. Journal for STEM Education Research,
+1–32.
+Yeter, I. H.; Yang, W.; and Sturgess, J. B. 2024. Global initia-
+tives and challenges in integrating artificial intelligence liter-
+acy in elementary education: Mapping policies and empirical
+literature. Future in Educational Research, 2(4): 382–402.

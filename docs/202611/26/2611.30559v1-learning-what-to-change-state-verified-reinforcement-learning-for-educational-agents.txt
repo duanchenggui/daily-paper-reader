@@ -1,0 +1,454 @@
+Title: Learning What to Change: State-Verified Reinforcement Learning for Educational Agents
+
+URL Source: https://arxiv.org/pdf/2611.30559v1
+
+Published Time: Tue, 24 Nov 2026 05:22:05 GMT
+
+Number of Pages: 13
+
+Markdown Content:
+# Learning What to Change: State-Verified Reinforcement Learning for Educational Agents 
+
+Shengyao Wang 1 Siyuan Su 1 Siyu Song 1 Mengsong Wu 1
+
+Yiming Luo 1 Wenbo Wu 1 Hao Hao 1 Aimin Zhou 1,2 
+
+> 1
+
+Shanghai Institute of AI for Education, East China Normal University 
+
+> 2
+
+Shanghai Innovation Institute 
+
+Abstract 
+
+Persistent tutoring agents do more than answer questions: they manage course files, practice records, and learner profiles that govern fu-ture lessons. In such stateful settings, know-ing what to teach does not guarantee knowing what to change. We identify a pervasive failure mode, content–state decoupling , where agents deliver pedagogically sound responses while silently corrupting workspace state through un-warranted updates, missed prerequisites, or un-intended side effects. Text-level judges over-look these state errors, whereas isolated tool-call checks break down because whether a write action is valid depends jointly on the learner request, prior state, and execution order. We propose State-Verified Reinforcement Learn-ing , which supervises online policy optimiza-tion directly through verifiable workspace tran-sitions. Within isolated sandboxes that snap-shot state around every tool call, a determin-istic verifier audits tool effects, workflow or-dering, and native auto-sync side effects, pair-ing graded partial credit with a hard gate that zeroes episode reward upon any critical viola-tion. Whenever no critical violation occurs, an evidence-grounded judge scores actual saved artifacts rather than agent claims. We pair 1,000 verifiable training instances with an in-dependently authored, human-reviewed evalu-ation benchmark of 60 tasks spanning 11 ed-ucational categories and 16 native tools. Af-ter online GRPO training, Qwen3.8-27B raises category-weighted strict success on our bench-mark from 51.47% to 80.74% (+29.27 points), cutting content-pass-only execution failures from 45.6% to 13.7% and required state-check failures from 63 to 1 across 180 trials. The resulting policy outperforms seven reference baselines by over 20 points while reducing out-put tokens by 17–39% across seven of eight external benchmarks without regressing on gen-eral reasoning or tool use. 
+
+1 Introduction 
+
+Personal learning assistants have moved beyond single-turn question answering. Persistent tutoring systems maintain longitudinal student workspaces spanning course materials, exercise banks, learner mastery profiles, event logs, knowledge wikis, ses-sion histories, and study reminders. In such en-vironments, every write operation alters durable state that governs later sessions: when a student returns next week, a mastery record should reflect problems the student actually solved rather than worked examples written by the tutor. Delivering a clear lesson is therefore only half the task; the agent must also decide what to change—and what to leave untouched. Reinforcement learning (RL) has driven strong gains for tool-using agents in math, coding, and search, where supervision largely reduces to veri-fying a final answer (Jin et al., 2025; Feng et al., 2026; Qian et al., 2025). Stateful tutoring breaks this assumption. A tutoring request admits many valid explanations or study plans, yet enforces strict invariants on which workspace records may change and in what order. Evaluating Qwen3.8-27B across 180 restored workspace trials reveals a pervasive failure mode we term content–state decoupling 
+
+(Figure 1a). In a representative explanation task, a student asks for help with conditional probabil-ity and a self-check handout. The model saves a clear, accurate handout that passes content assess-ment, but then logs a learning event, triggering an automatic learner-profile update even though the student submitted no work. Across all 180 trials, 169 (93.9%) pass content assessment, yet 77 of those 169 (45.6%) fail strict completion because of unauthorized profile edits, skipped prerequisites, or unintended side effects. Neither response-level judges nor isolated tool-call rules can close this gap. For example, the same event-logging operation records valid progress after 1arXiv:2611.30559v1 [cs.AI] 23 Nov 2026 a new submission, corrupts the learner profile dur-ing a concept explanation (Figure 1a), and double-counts evidence when the attempt is already on file. Whether an action should be rewarded therefore de-pends jointly on the request q, the initial workspace 
+
+s0, the order of events in trajectory τ , and the final workspace sT .We address content–state decoupling with State-Verified Reinforcement Learning , grounding pol-icy optimization directly in verifiable workspace transitions. Each rollout runs in an isolated sand-box restored from s0 with 16 native tools and a scripted learner, capturing workspace state snap-shots around every tool call. Against a private task contract, a deterministic verifier audits target tool effects and workflow ordering while replay-ing native auto-sync rules to separate authorized runtime updates from critical violations, such as unsupported mastery edits, duplicate attempts, or writes to protected files. When no critical violation occurs, an independent judge scores pedagogical quality directly from saved artifacts and tool re-turns rather than agent claims, requiring explicit evidence citations. We combine these signals into a hard-gated terminal reward for group-relative pol-icy optimization (GRPO): graded execution and content scores preserve partial credit across valid rollouts, while any critical violation zeroes episode reward so fluent prose never offsets state corrup-tion. To support both training and evaluation over the same 16-tool runtime, we pair 1,000 verifi-able training instances with I NNO BENCH , a human-reviewed benchmark of 60 independently authored tasks spanning 11 educational categories. Online GRPO training from Qwen3.8-27B raises category-weighted strict success from 51.47% to 80.74% (+29.27 points), reduces required state-check fail-ures from 63 to 1 across 180 trials, and outper-forms seven reference baselines by over 20 points. Category-level results (Figure 1b) show the largest gains where state preservation and execution order are decisive: explanation rises from 13/30 to 30/30, practice reuse from 3/15 to 15/15, and clarification and planning from 0/21 to 16/21, while selective, evidence-conditioned profile updates in diagnostic feedback (12/30) remain more challenging than re-straint. Across eight unseen external benchmarks, the trained policy maintains general reasoning and tool-use performance while reducing output tokens by 17–39% on seven suites. Our main contributions are: • We identify and quantify content–state decou-pling in stateful tutoring agents: across evalu-ated baselines, strong reasoning and tool-use capabilities still leave strict completion at or below 60.20%, and 45.6% of content-passing Qwen3.8-27B trials fail state or workflow ver-ification. • We propose State-Verified Reinforcement Learning , combining workspace state snap-shots, native auto-sync replay, a hard-gated terminal reward, and evidence-grounded con-tent judging to supervise online GRPO. • We construct 1,000 verifiable training in-stances alongside I NNO BENCH , a human-reviewed benchmark of 60 tasks over 16 native tools; online GRPO training raises category-weighted strict success by +29.27 points, cuts required state-check failures from 63 to 1, and cuts output tokens by 17–39% on seven of eight external benchmarks without reasoning or tool-use regression. 
+
+2 Related Work 
+
+RL for Tool-Using Agents. Interleaving reason-ing with tool calls enables agents to adapt to live en-vironment observations (Yao et al., 2023). Search-R1, ReTool, and ToolRL train search and tool-use policies from interaction outcomes (Jin et al., 2025; Feng et al., 2026; Qian et al., 2025), while GiGPO extends credit assignment across both episode and step levels (Feng et al., 2025). For open-ended tasks without exact ground truth, ArenaRL (Zhang et al., 2026) replaces noisy pointwise LLM scores with process-aware pairwise tournaments. Stateful tutoring raises a complementary supervision prob-lem: even when pedagogical quality can be judged reliably, persistent workspaces enforce hard state invariants conditioned on s0 and prior tool returns. We therefore couple deterministic state verification with GRPO (Shao et al., 2024) to supervise both teaching quality and state integrity. 
+
+Executable and Stateful Benchmarks. App-World checks programmatic state transitions and unintended side effects across applications (Trivedi et al., 2024), while τ -bench and τ 2-bench evaluate policy compliance and multi-trial consistency in in-teractive workflows (Yao et al., 2025; Barres et al., 2025). Agentic Rubrics further ties executable ver-ification criteria to heterogeneous execution evi-dence (Chen et al., 2026). Educational workspaces place open-ended teaching artifacts and strict state invariants inside the same interaction. Building on 2(a) Correct handout, unsupported profile update  
+
+> Learner request
+> Explain conditional probability. Add a self-check.
+> Agent
+> Requested handout saved
+> Worked example and self-check
+> Unsupported profile update
+> auto-sync
+> Log learning event Profile updated
+> No student work justified the update.
+
+45.6% 77 of 169 content-passing trials     
+
+> failed strict execution.
+> (b) Strict success by task category (%)
+> Qwen3.8-27B Qwen3.8-27B-SVRL
+> Explanation
+> 43.3 / 100 Diagnostic
+> 40 / 40
+> Practice creation
+> 100 / 95.2
+> Planning
+> 0 / 76.2
+> Practice reuse
+> 20 / 100
+> History recall
+> 86.7 / 86.7
+> Knowledge retrieval
+> 86.7 / 100
+> Doc. revision
+> 33.3 / 58.3
+> Archival
+> 11.1 / 100
+> Profile update
+> 100 / 66.7
+> Scheduling
+> 100 / 66.7
+> Category-weighted success 51.47% → 80.74%
+
+Figure 1: (a) Content–state decoupling in stateful tutoring. On a representative explanation task (Appendix B), Qwen3.8-27B saves an accurate handout that passes content assessment, yet logs a learning event and triggers an automatic profile update without a student submission. Across 180 Qwen3.8-27B trials, 77 of 169 content passes (45.6%) fail strict execution. (b) Strict success across all 11 educational task categories. State-Verified RL lifts category-weighted strict success from 51.47% to 80.74%, reaching 100% on four categories and raising clarification and planning from 0% to 76.2%. 
+
+this state-based approach, we pair I NNO BENCH 
+
+with 1,000 verifiable training instances, bringing state verification from evaluation into online RL. 
+
+LLM Tutoring Agents. MathDial and MathTu-torBench evaluate pedagogical dialogue quality (Macina et al., 2023, 2025), while SocraticLM and TutorRL optimize multi-turn teaching guidance within single problem-solving sessions (Liu et al., 2024; Dinucu-Jianu et al., 2025). Unlike stateless tutoring dialogues, personal learning agents such as Inno Agent maintain and mutate persistent lay-ered memory across sessions (Hao et al., 2026), requiring joint optimization of pedagogical quality and workspace state integrity. 
+
+3 Problem Formulation 
+
+3.1 Stateful Educational Trajectories 
+
+We formulate each persistent tutoring task as a tu-ple (q, s 0, C), comprising a learner request q, a restorable initial workspace s0, and a private veri-fication contract C. Each workspace state st main-tains five persistent stores: workspace files, an L1 learner profile (tracking concept mastery, confi-dence, stability, misconceptions, and preferences), an append-only learning-event log, retrieval mem-ory (an L2 knowledge wiki and L3 session history), and scheduled reminders. Interacting over a 16-tool interface T and a learner simulator, policy πθ
+
+generates a multi-turn trajectory 
+
+τ = [ z1, a 1, o 1, . . . , z K , a K , o K , y ], (1) where zk, ak, ok, and y denote reasoning, actions (tool calls or clarification questions), returned ob-servations, and the final response, respectively. Across tool executions, these actions induce a se-quence of workspace states s0 → s1 → · · · → sT ,terminating in final workspace sT . Rather than pre-scribing a single fixed tool sequence, C specifies target state outcomes and invariants, allowing dis-tinct valid explanations, document structures, or error-recovery steps to satisfy the task. We define strict task success as the conjunction of pedagogical quality and operational compliance: 
+
+S(τ ) = B(τ ) · V (τ ), (2) where B(τ ) ∈ { 0, 1} indicates that the episode passes independent content assessment, and 
+
+V (τ ) ∈ { 0, 1} indicates that it terminates normally within resource budgets, satisfies all mandatory checks, and incurs zero critical violations. 
+
+3.2 Why Content- and Call-Only Rewards Fail 
+
+Base-policy rollouts expose three failure modes of conventional rewards in persistent workspaces: 1. Content scores mask state corruption. The base policy satisfies B(τ ) = 1 on 169/180 trials (93.9%) yet reaches S(τ ) = 1 on only 92 (51.1%), with 63 failing a required state check and 84 triggering a side-effect viola-tion. Because a text-only judge already scores nearly 94% of rollouts near ceiling, group-relative updates lose discriminative signal against silent record corruption. 2. Action validity depends on (q, s 0, τ ). Iso-lated tool-call rules fail because the same write operation changes validity with context and timing. Logging a learning event is re-quired after a new submission, unauthorized during an explanation (where native sync mu-tates mastery), and a duplicate violation if the same attempt is already recorded in s0.Likewise, saving a study plan before elicit-ing goals and daily budgets violates workflow 3order even if the file reads well. 3. Partial progress and state corruption are asymmetric. A study plan that satisfies two of three requirements still provides useful learn-ing signal over an empty rollout, whereas silently inflating mastery, duplicating an at-tempt, or overwriting a protected file corrupts durable learner state regardless of clarity. A reliable reward must therefore verify three properties across (s0, τ, s T ): whether the requested artifacts and updates were realized, whether prereq-uisites were gathered before committing writes, and whether protected records remained untouched. 
+
+4 State-Verified Reinforcement Learning 
+
+Figure 2 provides an overview of our training pipeline. To supervise both pedagogical quality and workspace integrity, State-Verified RL inte-grates four components: isolated sandbox rollouts with workspace state snapshots, deterministic state and workflow verification with native auto-sync replay, a hard-gated terminal reward with evidence-grounded judging, and online GRPO. 
+
+4.1 Isolated Sandboxed Rollouts and Snapshots 
+
+For each task, we spawn G=8 isolated rollouts from identical copies of s0 inside the workspace runtime, preserving deployment tool schemas and memory-update behavior. The policy interacts with 16 native tools across five functional groups: file I/O (3), learner memory and profiles (5), L2 wiki and L3 history retrieval (3), learner clarification (1), and reminder management (4); full tool speci-fications appear in Appendix C. Within a four-turn interaction budget, a scripted learner responds to both structured and natural-language clarification requests and issues fixed follow-ups without reveal-ing hidden contract criteria. Before execution, after every tool call, and upon termination, the sandbox records state snapshots of all persistent workspace stores alongside the ordered event trace, capturing even transient mutations that are later overwritten. 
+
+4.2 State, Workflow, and Auto-Sync Verification 
+
+Against the private verification contract C, a deter-ministic verifier computes three structured signals from the recorded snapshots and event trace with-out prescribing a single rigid tool sequence: 
+
+Tool-Effect Score T (τ ) ∈ [0 , 1] . T (τ ) mea-sures the equal-weighted pass rate across contract-specified operational goals, including reading re-quired source files (merging segmented reads), writ-ing valid target artifacts, linking existing exercises, archiving into the L2 wiki with provenance, updat-ing requested preference fields, and applying exact reminder edits. Header-only reads, empty writes, and unverified agent claims receive no credit. 
+
+Workflow-Order Score P (τ ) ∈ [0 , 1] . P (τ )
+
+measures the equal-weighted pass rate across tem-poral and structural invariants: reading source ma-terials before writing or archiving, eliciting miss-ing learner constraints before drafting a study plan, inspecting history before logging an attempt, en-forcing unique attempt records, validating saved artifacts, and terminating normally within budget. Policies may recover from failed intermediate tool calls and still achieve P (τ )=1 .
+
+Native Auto-Sync Replay and Critical Gate 
+
+C(τ ) ∈ { 0, 1}. In the native runtime, logging a learning event automatically updates system-managed profile fields such as evidence links and timestamps. Directly editing the learner profile before logging the same event can double-count ev-idence, whereas authorized automatic updates trig-gered by a valid event should not be penalized. Our verifier therefore replays the native auto-sync rules over the captured snapshots to reconstruct expected system-managed states, isolating policy-induced edits from runtime synchronization. The binary gate triggers ( C(τ )=1 ) if any snapshot reveals: (1) a modification to a protected workspace file, (2) an unauthorized L2 wiki or reminder change, (3) an unrequested learning event or duplicate attempt record, (4) an explicit, unsupported update to mas-tery, confidence, or stability, or (5) an unauthorized profile or preference edit. 
+
+4.3 Evidence-Grounded Judge and Hard-Gated Reward 
+
+When C(τ )=0 , an independent LLM judge evalu-ates pedagogical quality without access to verifier outputs. Rather than relying on what the agent claims to have done, the judge inspects the con-versation alongside the saved workspace and L2 wiki artifacts, final learner-profile, event-log, and reminder states, and tool returns, each indexed with a unique evidence identifier. It scores correctness (w1=0 .50 ), completeness ( w2=0 .25 ), grounding (w3=0 .15 ), and clarity ( w4=0 .10 ) on a 0–4 scale while citing valid identifiers from this evidence bundle (invalid citations trigger up to three retries), yielding J(τ ) = 14
+
+P4 
+
+> m=1
+
+wm score m(τ ) ∈ [0 , 1] .We combine deterministic verification and con-4(1) Task inputs                   
+
+> Request q
+> Three-day plan No reminders
+> Initial state s0
+> Files, reminders
+> Contract 
+> Verifier only
+> (2) Eight isolated rollouts
+> 27B policy πθ
+> 16 native tools
+> Each rollout starts from s0
+> τ1τ2τ3τ4
+> τ5τ6τ7τ8
+> Snapshot after each tool call
+> Example trajectory τ8
+> Agent asks
+> Learning goal? Time per day?
+> Learner replies
+> Histograms vs. bars 35 min/day
+> Save plan
+> Three-day study plan
+> sTPlan saved Reminders unchanged
+> (3) Terminal reward
+> Check each rollout for violations
+> Replay auto-sync on snapshots
+> Critical violation ( Ci= 1 )
+
+Ri = 0                
+
+> No critical violation ( Ci= 0 )
+> Deterministic verifier LLM judge
+> 0.35 Ti
+> Tool effects
+> 0.35 Pi
+> Workflow order
+> 0.30 Ji
+> Content quality
+> Ri=++
+> (4) Online GRPO
+> Episode-level update
+> Updated policy
+> Next rollout group
+> Policy-token loss
+> Learner & tool tokens masked
+> Group advantages ̂
+> Ai= ( Ri−̄ R)/( sR+ 10 −6 )R₁ R₈
+
+Figure 2: Overview of State-Verified Reinforcement Learning. (1) Each task pairs a learner request q and an initial workspace 
+
+s0 with a private verification contract C specifying target effects, workflow order, and protected state. (2) Policy πθ samples 
+
+G=8 isolated rollouts from identical copies of s0 over 16 native tools, recording workspace state snapshots ( s0 → · · · → sT )around every tool call. (3) A deterministic verifier scores tool effects Ti and workflow order Pi, and detects critical violations 
+
+Ci via native auto-sync replay; when Ci=0 , an evidence-grounded judge inspects saved artifacts and tool returns to compute 
+
+Ji, yielding the hard-gated terminal reward Ri. (4) Online GRPO normalizes rewards within each group and updates only policy-generated tokens while masking tool observations and learner turns. 
+
+tent assessment into a hard-gated terminal reward: 
+
+R(τ ) = (1 − C(τ )) 0.35 T (τ ) + 0 .35 P (τ )+ 0 .30 J(τ ). (3) When C(τ )=0 , the 70/30 balance between graded execution checks ( 0.35 T (τ )+0 .35 P (τ )) and con-tent quality ( 0.30 J(τ )) preserves reward discrim-ination across partially successful rollouts. When 
+
+C(τ )=1 , the gate zeroes R(τ ) and bypasses con-tent evaluation, ensuring fluent responses never offset state corruption while avoiding unneces-sary judge calls. Episodes affected by runtime or snapshot-capture errors are excluded from policy updates rather than assigned fallback scores. 
+
+4.4 Online Group-Relative Policy Optimization 
+
+We optimize policy πθ directly from the base model using synchronous online GRPO (Shao et al., 2024) without an SFT warm-up stage. For each task, we sample G=8 rollouts from identical copies of s0
+
+and compute a single group-normalized advantage per episode, independent of turn count: 
+
+bAi =
+
+(
+
+0, sR = 0 ,
+
+(Ri − ¯R)/(sR + 10 −6), sR > 0, (4) where ¯R and sR denote the group mean and sample standard deviation of {Ri}Gi=1 . Every policy-generated token in τi receives advantage 
+
+bAi, whereas tool observations and learner turns are masked from the loss (Figure 2, Stage 4). Each optimization step processes four task groups (32 episodes) at a learning rate of 10 −6 for 250 up-dates, with both KL regularization and entropy co-efficients set to zero (Appendix C). 
+
+5 Training Suite and InnoBench 
+
+We pair 1,000 verifiable training instances with INNO BENCH , a human-authored benchmark of 60 tasks operating over the same 16-tool workspace runtime (Table 1). 
+
+Verifiable Training Suite (1,000 Instances). The training suite comprises 1,000 tasks organized into 396 source groups across 36 topics in mathematics, programming, science, and study planning. Each instance separates public inputs ( q, s 0) and scripted learner facts from private verification checks and rule-derived reference answers. To train both multi-turn adaptability and restraint, 320 instances in-clude a fixed learner follow-up, while clarification tasks mix underspecified requests with fully speci-fied prompts that penalize unnecessary questions. 
+
+INNO BENCH (60 Tasks). INNO BENCH consists of 60 independently authored tasks matching the 11-category training distribution, spanning mathe-matics (20), programming (16), science (15), and study planning (9), with a worked example in Appendix A. Twenty tasks include fixed learner follow-ups, and five of the seven clarification tasks withhold essential constraints upfront. Three hu-man reviewers inspected all 60 tasks and audited model execution traces. We evaluate the final checkpoint after the fixed 250-update schedule on I NNO BENCH alongside eight unseen external benchmarks. 
+
+Evaluation Protocol. Each model runs three tri-als per task from restored copies of s0 under uni-5Task Category Train Eval Wt. Interaction Primary State & Workflow Invariant                                                                
+
+> Explanation 160 10 16% Single-turn Deliver grounded lesson; preserve profile & mastery Diagnostic feedback 160 10 16% Follow-up Read history before logging; unique attempt records Practice creation 120 712% Single-turn Read sources first; save valid target exercise file Clarification & planning 120 712% Clarify (5/7) Elicit goal & budget before writing; keep reminders intact Practice reuse 80 58% Follow-up Link existing practice; forbid creating new files History recall 80 58% Follow-up Cite latest L3 session; no unrequested reminders Knowledge retrieval 80 58% Single-turn Query L2 wiki first; preserve workspace & profile Document revision 60 46% Single-turn Read draft first; edit target path, protect other files Knowledge archival 60 36% Single-turn Read source before L2 archive; preserve provenance Profile update 40 24% Single-turn Update requested preferences; keep other fields intact Scheduling 40 24% Single-turn Apply exact reminder edits; keep other reminders intact
+> Total 1,000 60 100% 320 / 20 Shared 16-tool runtime (Math, Prog., Sci., Planning) Table 1: Taxonomy of the 1,000 verifiable training instances and the 60-task I NNO BENCH benchmark. Category weights match training proportions; Interaction reports the number of follow-up tasks (320 in training / 20 in I NNO BENCH ), and five of seven clarification tasks withhold constraints upfront.
+
+form execution limits (16,384 generated tokens, 24 turns, 30 tool calls, and a 300-second timeout). Strict task success requires S(τ )=1 (Equation 2), using DeepSeek-V4.1-Flash-1017 as the indepen-dent content judge. Our primary metric is category-weighted strict success: 
+
+Score = 
+
+> 11
+
+X
+
+> c=1
+
+wc · 1
+
+|Dc|
+
+X
+
+> x∈Dc
+
+¯S(x), (5) where wc denotes the training proportion of cat-egory c, Dc its task subset in I NNO BENCH , and 
+
+¯S(x) the three-trial mean strict success on task x.We additionally report unweighted trial passes (out of 180) and All-3 consistency (tasks passing all three trials, out of 60). 
+
+6 Experiments 
+
+6.1 Experimental Setup 
+
+We compare Qwen3.8-27B against Qwen3.8-27B-SVRL (trained with State-Verified RL), InnoSpark 3.1 (a prior educational model), and five open-weight reference models: GLM-4.7-Flash, Muse Glimmer 30B High, Gemma 4 26B-A4B Thinking, GPT-OSS-20B High, and OmniEdu-27B (Liang et al., 2026). All I NNO BENCH evaluations use determinis-tic decoding (temperature 0, top-p 1) under a unified sandbox runtime, with DeepSeek-V4.1-Flash-1017 serving as the content judge (reasoning mode enabled, 32,768-token budget). We estimate paired 95% confidence intervals between Qwen3.8-27B and Qwen3.8-27B-SVRL via 10,000 stratified within-category bootstrap resamples, keeping each task’s three trials grouped. To assess out-of-domain generalization and non-regression, we evaluate all eight models across eight external benchmarks: AIME 2026, MATH-500 (Lightman et al., 2024), GPQA Diamond (Rein et al., 2024), Olympiad-Bench (He et al., 2024), IFEval (Zhou et al., 2023), IFBench (Pyatkin et al., 2025), BFCL-v4 (Patil et al., 2025), and τ 2-bench Telecom (Barres et al., 2025). Paired differences between Qwen3.8-27B and Qwen3.8-27B-SVRL on these external suites are tested using exact two-sided McNemar tests with Holm correction (Appendix D). 
+
+6.2 Main Results on InnoBench 
+
+Table 2 compares all eight models across nine suites; Table 3 breaks down Qwen3.8-27B vs. Qwen3.8-27B-SVRL on I NNO BENCH .
+
+Closing Content–State Decoupling. State-Verified RL lifts category-weighted strict success from 51.47% to 80.74% (+29.27 percentage points; paired 95% CI [21 .80 , 36 .64] ), increasing strict trial passes from 92/180 to 145/180 and All-3 consistency from 23/60 to 42/60 while reducing zero-pass tasks (0/3) from 21/60 to 6/60. Meanwhile, content pass rates remain virtually unchanged: Qwen3.8-27B passes 169/180 trials (93.9%), and Qwen3.8-27B-SVRL passes 168/179 judged trials (93.9%, as the single unjudged trial already failed an objective diagnostic check). Nearly the entire 29-point gain comes from cutting 
+
+content-pass-only execution failures from 77/169 (45.6%) to 23/168 (13.7%): Qwen3.8-27B knew what to teach; State-Verified RL teaches what to change. 
+
+Cross-Model Positioning. Across all eight mod-els (Table 2), Qwen3.8-27B-SVRL (80.74%) out-performs the strongest external baseline, Gemma 4 26B-A4B Thinking (60.20%), by over 20 points, followed by Muse Glimmer 30B High (55.20%), InnoSpark 3.1 (53.07%), Qwen3.8-27B (51.47%), OmniEdu-27B (51.18%), GPT-OSS-20B High (43.58%), and GLM-4.7-Flash (39.21%). Neither strong tool use nor domain rea-soning alone ensures stateful compliance: GLM-4.7-Flash leads both BFCL-v4 (56.38%) and τ 2-6Reasoning Instruction Interactive Agent Tasks Model AIME MATH GPQA Olym. IFEval IFBench BFCL τ 2-Tel. INNO BENCH 
+
+Items 30 500 198 236 541 300 800 114 60 ×3
+
+Open-Weight Reference Models 
+
+GLM-4.7-Flash 60.00 91.40 47.47 36.44 75.79 45.33 56.38 96.49 39.21 Muse Glimmer 30B High 76.67 94.80 82.83 34.75 92.79 72.67 34.50 89.47 55.20 Gemma 4 26B-A4B Thinking 76.67 87.80 51.01 18.64 74.68 44.33 54.38 45.61 60.20 GPT-OSS-20B High 23.33 75.40 35.35 11.02 14.60 13.33 20.75 29.82 43.58 OmniEdu-27B 86.67 98.00 79.80 50.42 83.73 54.00 49.00 60.53 51.18 
+
+Qwen3.8-27B & Educational Models 
+
+Qwen3.8-27B 83.33 98.00 82.83 46.61 88.54 64.67 50.88 89.47 51.47 InnoSpark 3.1 86.67 98.00 84.34 47.46 90.20 65.00 50.50 89.47 53.07 
+
+Qwen3.8-27B-SVRL (Ours) 86.67 98.20 86.87 49.15 89.46 64.00 54.50 87.72 80.74 
+
+Table 2: Comparison of eight models across nine benchmarks (%). Single-response suites use a 32,768-token budget; GPQA denotes GPQA Diamond, Olym. denotes OlympiadBench, IFEval and IFBench use strict prompt-level scoring, BFCL denotes BFCL-v4, τ 2-Tel. denotes τ 2-bench Telecom, and I NNO BENCH reports category-weighted strict success. Bold values indicate column maxima.                               
+
+> Metric Qwen3.8-27B +SVRL ∆
+> Weighted strict success (%) 51.47 80.74 +29.27
+> Strict passes (of 180) 92 145 +53 All-3 consistency (of 60) 23 42 +19 0/3 consistent failures (of 60) 21 6−15 Content pass (judged) 169/180 168/179 0.0 pp Content-pass-only failures 77/169 23/168 −31.9 pp Required state failures 63/180 1/180 −34.4 pp Side-effect failures 84/180 18/180 −36.7 pp Artifact check failures 4/84 6/84 +2.4 pp
+
+Table 3: Paired comparison between Qwen3.8-27B and Qwen3.8-27B-SVRL (+SVRL) on I NNO BENCH (60 tasks 
+
+× 3 trials). The paired 95% bootstrap confidence interval for the category-weighted strict gain is [21 .80 , 36 .64] percentage points. One Qwen3.8-27B-SVRL trial was unjudged after an objective check failure. 
+
+bench Telecom (96.49%) yet scores 39.21% on I N-
+
+NO BENCH , while OmniEdu-27B leads Olympiad-Bench (50.42%) yet matches Qwen3.8-27B on I N-
+
+NO BENCH (51.18%). 
+
+6.3 Behavioral and Error Analysis 
+
+Figure 3 decomposes the 29.27-point gain. Matched by task and trial (Figure 3a), 64 Qwen3.8-27B failures turn into strict passes under Qwen3.8-27B-SVRL against 11 regressions, while 81 tri-als pass and 24 fail under both models. Required state-check failures drop sharply from 63/180 (35.0%) to 1/180 (0.6%), and side-effect failures fall from 84/180 (46.7%) to 18/180 (10.0%) (Fig-ure 3c), whereas artifact-check failures change only marginally (from 4/84 to 6/84). Across the 11 task categories (Figure 1b; Table 4, Appendix A), four clear patterns emerge: (i) State preservation and non-duplication reach 100% : Ex-planation (13/30 to 30/30), Practice Reuse (3/15 to 15/15), Knowledge Archival (1/9 to 9/9), and Knowledge Retrieval (13/15 to 15/15). (ii) Prereq-uisite ordering recovers from zero : Clarification and Planning rises from 0/21 to 16/21 (+76.2 per-centage points), and Document Revision improves from 4/12 to 7/12. (iii) Small write-only categories show mild caution : Profile Update and Scheduling (six trials each) dip slightly from 6/6 to 4/6. (iv) Di-agnostic feedback stays flat at 12/30 (Section 6.5). 
+
+6.4 Training Dynamics, Conciseness, and Generalization 
+
+Figure 4a tracks training progression across all 250 online GRPO updates from Qwen3.8-27B. With graded partial credit sustaining intra-group vari-ance from the first update, mean on-policy reward climbs from 0.557 (first 20 updates) to 0.984 (last 20), and training success rises from 44.53% to 94.53%. The three scheduled checkpoints that com-pleted full 180-trial periodic evaluation (under non-reasoning judging) follow the same curve without interpolation: 52.26% (step 10), 78.24% (240), and 80.03% (250; Table 5, Appendix C). State-Verified RL also substantially shortens pol-icy responses: mean per-turn response length falls by 58.3% (from 738 to 308 tokens; Figure 4b). This conciseness transfers out of domain (Figure 4c; Ta-ble 8): Qwen3.8-27B-SVRL reduces mean output tokens on seven of the eight unseen benchmarks, including −39 .3% on BFCL-v4 (from 4,142 to 2,516), −39 .0% on τ 2-bench Telecom (from 7,058 to 4,304), −27 .0% on OlympiadBench, −25 .9% 
+
+on GPQA Diamond, −23 .9% on AIME 2026, 
+
+−20 .5% on IFBench, and −17 .0% on MATH-500, with only a +2 .0% change on IFEval. Crucially, this conciseness comes without capa-bility regression (Table 2): Qwen3.8-27B-SVRL ranks first (or tied) on AIME 2026, MATH-500, and GPQA Diamond (second on OlympiadBench behind OmniEdu-27B) and improves across all four BFCL-v4 subsets (50.88% to 54.50%, unadjusted 
+
+p=0 .021 ; Table 6), while matching Qwen3.8-27B on τ 2-bench Telecom (100/114 vs. 102/114, 
+
+p=0 .815 ), IFEval, and IFBench (smallest Holm-7(a) Paired strict passes               
+
+> 180 matched trials Net +53
+> 090 180
+> 92
+> Base
+> +64
+> Gained
+> −11
+> Lost
+> 145
+> SVRL
+> 81 passed both · 24 failed both
+> (b) Three-trial consistency
+> Base SVRL
+> Tasks
+> 020 40
+> 21 6
+> 0/3
+> 95
+> 1/3
+> 77
+> 2/3
+> 23 42
+> 3/3 Strict passes per task (60 tasks)
+> (c) Verification failures
+> Base SVRL
+> After content pass 77/169 23/168 Required state 63/180 1/180 Side effect 84/180 18/180 Artifact 4/84 6/84
+> Bar scale 0–50% of eligible trials
+
+Figure 3: Behavioral shift after State-Verified RL on I NNO BENCH (60 tasks × 3 trials; Base: Qwen3.8-27B, SVRL: Qwen3.8-27B-SVRL). (a) Matched-trial comparison: 64 Qwen3.8-27B failures flip to strict passes under Qwen3.8-27B-SVRL against 11 regressions (net +53). (b) Three-trial consistency: All-3 tasks rise from 23 to 42 while 0/3 failures fall from 21 to 6. 
+
+(c) Failure rates by verification check: required state-check failures drop from 63/180 to 1/180, and side-effect failures drop from 84/180 to 18/180. (a) On-policy training                            
+
+> Reward Success
+> 00.5 11125 250
+> GRPO update
+> Full-suite periodic evaluation
+> (b) Response length
+> Policy tokens per turn
+> 0500 1k 1125 250
+> GRPO update
+> First / last 20 updates: 738 / 308
+> (c) External benchmarks
+> Benchmark Δ tokens (%) Δ score −40 −20 0
+> BFCL-v4 −39.3 +3.62
+> τ²-bench Tel. −39.0 −1.75
+> OlympiadBench −27.0 +2.54
+> GPQA Diamond −25.9 +4.04
+> AIME 2026 −23.9 +3.33
+> IFBench −20.5 −0.67
+> MATH-500 −17.0 +0.20
+> IFEval +2.0 +0.92
+> Token change (%)
+
+Figure 4: Training dynamics across 250 online GRPO updates and out-of-domain generalization. (a) On-policy reward and training success (raw values and 10-update moving averages) climb steadily from Qwen3.8-27B; diamonds mark the three completed full-suite periodic evaluations without interpolation. (b) Mean per-turn policy response length decreases by 58.3% (from 738 to 308 tokens). (c) Output token change (%) and paired accuracy difference ( ∆ score, in percentage points) from Qwen3.8-27B to Qwen3.8-27B-SVRL across eight unseen benchmarks: Qwen3.8-27B-SVRL reduces output tokens by 17–39% on seven suites without capability regression. 
+
+adjusted p=0 .172 ; Table 7, Appendix D). 
+
+6.5 Case Study: Restraint vs. Selective Diagnosis 
+
+To understand why Qwen3.8-27B-SVRL reaches 30/30 on Explanation yet remains at 12/30 on Di-agnostic Feedback, we examine paired trajectories on a representative diagnostic task (Appendix B), in which a student revisits a Python submission that miscounted duplicate elements by using a set. Qwen3.8-27B-SVRL reads the workspace notes, accurately explains why a Python set discards mul-tiplicities, and proceeds to log a learning event and directly update the learner profile. However, be-cause it modifies the profile without first inspecting prior learner context, it triggers profile-mutation and learner-state violations. On the identical trial, InnoSpark 3.1 retrieves prior learner context before logging the event and updating the profile, passing every verification check. This contrast highlights a structural limitation of episode-level RL. Explanation and reuse tasks reward blanket restraint , which a terminal hard gate teaches rapidly (reducing required state-check failures from 63 to 1), whereas follow-up diag-nosis requires selective, context-conditioned edits .Broadcasting a single episode advantage bAi uni-formly across all turns makes separating grounded inspect-then-update sequences from ungrounded edits harder than suppressing writes. 
+
+7 Conclusion 
+
+In persistent tutoring workspaces, delivering clear instruction and maintaining trustworthy learner records are distinct capabilities. We identified and quantified content–state decoupling in stateful tu-toring agents—where 45.6% of content-passing trials from Qwen3.8-27B still fail state or workflow verification—and demonstrated that State-Verified RL substantially closes this gap. Through on-line GRPO supervised by workspace state snap-shots, workflow verification, native auto-sync re-play, a hard-gated terminal reward, and evidence-grounded content judging, Qwen3.8-27B-SVRL raises category-weighted strict success on I N-
+
+NO BENCH from 51.47% to 80.74%, reduces re-quired state-check failures from 63 to 1 across 180 trials, and cuts output tokens by 17–39% on seven of eight external benchmarks without regressing on general reasoning or tool use. More broadly, our findings show that verifiable state transitions provide a scalable supervision signal for building trustworthy, persistent agents beyond single-turn interaction. 8Limitations 
+
+While State-Verified RL substantially improves stateful tutoring reliability, our study has several scope boundaries that motivate future work. First, our experiments focus on training the full State-Verified RL objective on a single 27B backbone; systematic ablations across individual reward com-ponents ( T , P , J, and C) and evaluations across broader model scales remain valuable extensions. Second, scripted learners enable controlled, repro-ducible cross-model comparisons from identical initial workspaces, whereas measuring long-term learning gains requires longitudinal studies with real students. Finally, while episode-level GRPO advantages rapidly instill state preservation and workflow ordering, tasks requiring selective multi-field profile updates (such as diagnostic feedback) may benefit further from finer-grained, turn-level credit assignment. 
+
+Ethics and Reproducibility 
+
+All training instances and I NNO BENCH tasks are constructed with synthetic learner personas, synthetic requests, and restorable sandboxed workspaces, containing no real student data or personally identifiable information. To ensure au-ditability and reproducibility, each evaluation run logs task identifiers, random seeds, trial indices, tool-call traces, workspace state snapshots, and content-judge outputs; decoding settings, training hyperparameters, and full evaluation details are documented in Appendix C. Generative AI tools were used solely to assist with literature discov-ery, manuscript editing, and figure preparation; all experimental results and statistical tests were man-ually verified against the raw evaluation logs. 
+
+References 
+
+Victor Barres, Honghua Dong, Soham Ray, Xujie Si, and Karthik Narasimhan. 2025. τ 2-Bench: Evaluat-ing conversational agents in a dual-control environ-ment. arXiv preprint arXiv:2506.07982 .Shunian Chen, Rui Yu, Zhengyang Tang, Yuhao Du, Zejian Xie, Songxin Zhang, and Benyou Wang. 2026. Agentic Rubrics: Interfacing agents with heteroge-neous environments using executable rubrics. In Pro-ceedings of the 2026 Conference on Empirical Meth-ods in Natural Language Processing . Association for Computational Linguistics. David Dinucu-Jianu, Jakub Macina, Nico Daheim, Ido Hakimi, Iryna Gurevych, and Mrinmaya Sachan. 2025. From problem-solving to teaching problem-solving: Aligning LLMs with pedagogy using re-inforcement learning. In Proceedings of the 2025 Conference on Empirical Methods in Natural Lan-guage Processing , pages 272–292. Association for Computational Linguistics. Jiazhan Feng, Shijue Huang, Xingwei Qu, Ge Zhang, Yujia Qin, Baoquan Zhong, Chengquan Jiang, Jinxin Chi, and Wanjun Zhong. 2026. ReTool: Reinforce-ment learning for strategic tool use in LLMs. In 
+
+International Conference on Learning Representa-tions .Lang Feng, Zhenghai Xue, Tingcong Liu, and Bo An. 2025. Group-in-group policy optimization for LLM agent training. In Advances in Neural Information Processing Systems , volume 38. Hao Hao, Ye Lu, Ruotong Yang, Yongheng Guo, and Aimin Zhou. 2026. Inno Agent: An open-source personal learning agent with layered memory, educa-tional post-training, and local deployment. Technical report. Project repository. Chaoqun He, Renjie Luo, Yuzhuo Bai, Shengding Hu, Zhen Thai, Junhao Shen, Jinyi Hu, Xu Han, Yujie Huang, Yuxiang Zhang, Jie Liu, Lei Qi, Zhiyuan Liu, and Maosong Sun. 2024. OlympiadBench: A challenging benchmark for promoting AGI with olympiad-level bilingual multimodal scientific prob-lems. In Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Vol-ume 1: Long Papers) , pages 3828–3850. Association for Computational Linguistics. Bowen Jin, Hansi Zeng, Zhenrui Yue, Jinsung Yoon, Sercan Arik, Dong Wang, Hamed Zamani, and Jiawei Han. 2025. Search-R1: Training LLMs to reason and leverage search engines with reinforcement learning. In Conference on Language Modeling .Hao Liang, Qihan Lin, Meiyi Qiang, Linzhuang Sun, Hengyi Feng, Mingrui Chen, Sizhe Qiu, and Wen-tao Zhang. 2026. OmniEdu: Open foundation models for learning and teaching. arXiv preprint arXiv:2609.23088 .Hunter Lightman, Vineet Kosaraju, Yura Burda, Harri Edwards, Bowen Baker, Teddy Lee, Jan Leike, John Schulman, Ilya Sutskever, and Karl Cobbe. 2024. Let’s verify step by step. In International Conference on Learning Representations .Jiayu Liu, Zhenya Huang, Tong Xiao, Jing Sha, Jinze Wu, Qi Liu, Shijin Wang, and Enhong Chen. 2024. SocraticLM: Exploring Socratic personalized teach-ing with large language models. In Advances in Neural Information Processing Systems , volume 37, pages 85693–85721. Jakub Macina, Nico Daheim, Sankalan Chowdhury, Tan-may Sinha, Manu Kapur, Iryna Gurevych, and Mrin-maya Sachan. 2023. MathDial: A dialogue tutoring dataset with rich pedagogical properties grounded in math reasoning problems. In Findings of the Associ-ation for Computational Linguistics: EMNLP 2023 ,pages 5602–5621. Association for Computational Linguistics. 
+
+9Jakub Macina, Nico Daheim, Ido Hakimi, Manu Ka-pur, Iryna Gurevych, and Mrinmaya Sachan. 2025. MathTutorBench: A benchmark for measuring open-ended pedagogical capabilities of LLM tutors. In 
+
+Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing , pages 204– 221. Association for Computational Linguistics. Shishir G Patil, Huanzhi Mao, Fanjia Yan, Char-lie Cheng-Jie Ji, Vishnu Suresh, Ion Stoica, and Joseph E. Gonzalez. 2025. The Berkeley function calling leaderboard (BFCL): From tool use to agentic evaluation of large language models. In Proceedings of the 42nd International Conference on Machine Learning , volume 267 of Proceedings of Machine Learning Research , pages 48371–48392. PMLR. Valentina Pyatkin, Saumya Malik, Victoria Graf, Hamish Ivison, Shengyi Huang, Pradeep Dasigi, Nathan Lambert, and Hanna Hajishirzi. 2025. Gen-eralizing verifiable instruction following. In Ad-vances in Neural Information Processing Systems ,volume 38. Cheng Qian, Emre Can Acikgoz, Qi He, Hongru Wang, Xiusi Chen, Dilek Hakkani-Tur, Gokhan Tur, and Heng Ji. 2025. ToolRL: Reward is all tool learning needs. In Advances in Neural Information Process-ing Systems , volume 38. David Rein, Betty Li Hou, Asa Cooper Stickland, Jack-son Petty, Richard Yuanzhe Pang, Julien Dirani, Ju-lian Michael, and Samuel R. Bowman. 2024. GPQA: A graduate-level Google-proof Q&A benchmark. In 
+
+Conference on Language Modeling .Zhihong Shao, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Xiao Bi, Haowei Zhang, Mingchuan Zhang, Y. K. Li, Y. Wu, and Daya Guo. 2024. DeepSeekMath: Pushing the limits of mathematical reasoning in open language models. arXiv preprint arXiv:2402.03300 .Harsh Trivedi, Tushar Khot, Mareike Hartmann, Ruskin Manku, Vinty Dong, Edward Li, Shashank Gupta, Ashish Sabharwal, and Niranjan Balasubramanian. 2024. AppWorld: A controllable world of apps and people for benchmarking interactive coding agents. In Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , pages 16022–16076. Association for Computational Linguistics. Shunyu Yao, Noah Shinn, Pedram Razavi, and Karthik Narasimhan. 2025. τ -bench: A benchmark for tool-agent-user interaction in real-world domains. In In-ternational Conference on Learning Representations .Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, and Yuan Cao. 2023. ReAct: Synergizing reasoning and acting in language models. In International Conference on Learning Representations .Qiang Zhang, Boli Chen, Fanrui Zhang, Ruixue Ding, Shihang Wang, Qiuchen Wang, Yinfeng Huang, Hao-nan Zhang, Rongxiang Zhu, Xin Li, Houquan Zhou, Pengjun Xie, Kaipeng Zhang, Jingren Zhou, and Ji-awei Liu. 2026. ArenaRL: Scaling RL for open-ended agents via tournament-based relative ranking. In Proceedings of the 43rd International Conference on Machine Learning , volume 306 of Proceedings of Machine Learning Research , pages 154568–154598. PMLR. Jeffrey Zhou, Tianjian Lu, Swaroop Mishra, Sid-dhartha Brahma, Sujoy Basu, Yi Luan, Denny Zhou, and Le Hou. 2023. Instruction-following evalu-ation for large language models. arXiv preprint arXiv:2311.07911 .
+
+10 A Task Coverage and a Worked Planning Example 
+
+The verifiable training suite contains 1,000 instances drawn from 396 source groups across 36 topics, including 320 instances with a fixed learner follow-up. The 60 I NNO BENCH tasks span mathematics (20), programming (16), science (15), and study planning (9), with 20 tasks including a fixed learner follow-up. Among the seven clarification and planning tasks, five withhold essential constraints in the initial prompt and two provide all constraints upfront. Table 4 reports the exact category weights and per-category strict pass counts for Qwen3.8-27B and Qwen3.8-27B-SVRL; categories containing two tasks contribute six trials per model.                                                                            
+
+> Category Tasks Weight (%) Qwen3.8-27B Qwen3.8-27B-SVRL ∆(pp)
+> Explanation 10 16 13/30 (43.3%) 30/30 (100.0%) +56.7 Diagnostic feedback 10 16 12/30 (40.0%) 12/30 (40.0%) 0.0 Practice creation 712 21/21 (100.0%) 20/21 (95.2%) −4.8 Clarification and planning 712 0/21 (0.0%) 16/21 (76.2%) +76.2 Practice reuse 583/15 (20.0%) 15/15 (100.0%) +80.0 History recall 5813/15 (86.7%) 13/15 (86.7%) 0.0 Knowledge retrieval 5813/15 (86.7%) 15/15 (100.0%) +13.3 Document revision 464/12 (33.3%) 7/12 (58.3%) +25.0 Knowledge archival 361/9 (11.1%) 9/9 (100.0%) +88.9 Profile update 246/6 (100.0%) 4/6 (66.7%) −33.3 Scheduling 246/6 (100.0%) 4/6 (66.7%) −33.3
+> Unweighted total / Weighted score 60 100 92/180 (51.47%) 145/180 (80.74%) +29.27
+> Table 4: Category-level strict pass counts (passes/trials) for Qwen3.8-27B and Qwen3.8-27B-SVRL on I NNO BENCH . Each restored task is evaluated over three independent trials.
+
+Worked Planning Example. A learner asks for a three-day review plan on statistical charts, requests that the agent save the plan to a file, and explicitly prohibits creating reminders. The initial prompt omits both the specific learning goal and the daily time budget. When prompted via either a structured clarification request or a direct natural-language question, the scripted learner specifies that they want to distinguish histograms from bar charts and have 35 minutes per day. The deterministic verifier checks that: (i) the agent elicits both missing constraints before saving the plan, (ii) the saved artifact exists at the target path, (iii) scheduled reminders remain unchanged from s0, and (iv) the planned review is not prematurely logged as completed learning evidence. The content judge independently evaluates whether the saved file addresses the clarified goal and fits within the 35-minute daily budget. 
+
+B Paired Case Studies 
+
+Case 1: Explaining Conditional Probability. Figure 1a summarizes a representative Qwen3.8-27B trajectory on an explanation task. The model reads the instructional materials twice, saves an accurate worked example and self-check handout, and then logs a learning event for concept explanation. The write operation succeeds and triggers native automatic synchronization of the learner profile. Although the content judge awards full credit to the handout, the deterministic verifier flags the resulting knowledge-state mutation because no student submission justified updating the profile. 
+
+Case 2: Revisiting a Programming Diagnosis. In a representative diagnostic follow-up task, the learner revisits a previously submitted solution involving Python sets that miscounted duplicate elements. Qwen3.8-27B-SVRL reads the course material, accurately explains why a Python set discards duplicate element frequencies, and proceeds to log a learning event and directly update the learner profile. The verifier flags both profile-mutation and learner-state violations because the edit was performed without consulting prior learner records. On the exact same task and trial, InnoSpark 3.1 retrieves prior learner context before logging the event and updating the profile, passing all required checks. Both trajectories invoke the same two write operations; task success depends on grounding those updates in prior workspace state. 
+
+C Training and Evaluation Configuration 
+
+RL Training Setup. Online GRPO training initializes from Qwen3.8-27B across 8 GPUs (tensor parallelism 4, pipeline parallelism 2, data parallelism 1, with CPU optimizer offloading) using a learn-11 ing rate of 10 −6, random seed 17, and zero KL-regularization and entropy coefficients. Each of the 250 updates samples four task groups of G=8 episodes (32 trajectories per step). Training rollouts allow a 32,768-token context window, up to 16,384 generated tokens, 40 model calls, and 32 tool calls, with the scripted learner supporting up to four interaction turns. All training rollouts and I N-
+
+> NO
+
+BENCH evaluations expose the same 16 native workspace tools: file I/O ( read , write , edit ), learner memory and profiles ( get_learner_context , record_learning_event , update_ learner_profile , patch_learner_profile , review_learner_profile ), knowledge and history retrieval ( l2_query , l2_archive , l3_recall ), learner clarification ( ask_user_ question ), and reminder management ( create_scheduled_job , list_scheduled_jobs ,
+
+update_scheduled_job , delete_scheduled_job ). Episodes with unavailable or invalid re-ward feedback are excluded from policy updates rather than assigned fallback scores. 
+
+InnoBench Evaluation Protocol. All main-text I NNO BENCH comparisons are conducted under a unified sandboxed evaluation runtime. Each trial restores the fixed initial workspace s0 and enforces cumulative episode budgets of 16,384 generated tokens, 24 assistant turns, 30 tool calls, and 300 seconds. All models decode deterministically at temperature 0 and top-p 1 under their native serving configurations. DeepSeek-V4.1-Flash-1017 serves as the content judge with reasoning mode enabled and a 32,768-token request budget. All eight evaluated models use native function calling under this unified interface. Across all eight models, there are 1,440 distinct model–task–trial records with complete strict outcomes. Twenty-three episodes lack a completed content judgment (six exceeded an execution budget, 13 failed a mandatory objective check, and four timed out), each of which independently constitutes a strict failure. Reported content pass rates exclude unjudged episodes from the denominator: Qwen3.8-27B passes 169/180 judged trials, and Qwen3.8-27B-SVRL passes 168/179 judged trials (its single unjudged trial failed an objective diagnostic check). 
+
+Training Dynamics and Periodic Checkpoints. Comparing the first 20 against the last 20 training updates across the 250-step run, mean on-policy episode reward rises from 0.557 to 0.984, logged training success increases from 44.53% to 94.53%, and mean per-turn policy response length decreases from 738 to 308 tokens. Table 5 reports the three completed full-suite periodic evaluations (180 trials each, scored under non-reasoning judging), whereas the final comparisons in Tables 2 and 3 use the unified reasoning-enabled evaluation protocol.                   
+
+> Updates Weighted (%) Strict (%) Exec. (%) Quality (/100)
+> 10 52.26 52.22 54.44 98.02 240 78.24 78.89 82.22 95.52 250 80.03 80.56 82.78 94.65 Table 5: Completed full-suite periodic evaluations during online GRPO training (60 tasks ×3 trials each, without interpolation). Periodic evaluations use non-reasoning judging, whereas Table 3 reports final results under the unified reasoning-enabled protocol.
+
+D External Benchmark Protocols and Statistical Tests 
+
+Benchmark Protocols. The six single-response benchmarks evaluate one response per item under a 32,768-token generation budget. IFEval (541 prompts) and IFBench (300 prompts) use strict prompt-level scoring; GPQA uses the 198-item Diamond split; OlympiadBench evaluates 236 English text physics problems with full context using the official symbolic grader; AIME 2026 (30 items) and MATH-500 (500 items) use exact mathematical equivalence. Under a fixed generation allowance, failing to terminate within budget yields an empty final answer (for example, GPT-OSS-20B High exhausts the budget on 447/541 IFEval prompts and 239/300 IFBench prompts). For BFCL-v4, we evaluate 200 tasks from each of four multi-turn subsets (800 tasks in total; Table 6) using official prompts, native checkers, and a 20-step limit. For τ 2-bench Telecom (114 tasks), all models use native function calling and interact with the same Qwen3.8-27B user simulator under the official environment reward, with limits of 100 steps and 10 tool errors. 12 BFCL-v4 Multi-Turn Subset Qwen3.8-27B Qwen3.8-27B-SVRL ∆ (pp) 
+
+Base tasks 141/200 147/200 +3.00 Long context 102/200 113/200 +5.50 Missing function 82/200 89/200 +3.50 Missing parameter 82/200 87/200 +2.50 
+
+Combined (4 subsets) 407/800 (50.88%) 436/800 (54.50%) +3.62 
+
+Table 6: BFCL-v4 multi-turn breakdown (200 tasks per subset). Qwen3.8-27B-SVRL improves performance across all four subsets. 
+
+Paired Statistical Tests and Token Usage. Each external benchmark evaluates Qwen3.8-27B and Qwen3.8-27B-SVRL on identical items with one attempt per item. Table 7 reports discordant counts, unadjusted 95% percentile intervals from 20,000 paired bootstrap resamples (seed 42), exact two-sided McNemar p-values, and Holm-adjusted p-values across the eight-benchmark family. Table 8 reports mean output tokens per task for Qwen3.8-27B and Qwen3.8-27B-SVRL (including reasoning tokens when returned by the serving stack and excluding user-simulator tokens). 
+
+Benchmark Qwen3.8-27B only SVRL only 95% CI ( ∆ pp) p pHolm 
+
+BFCL-v4 ( N =800 ) 60 89 [+0 .63 , +6 .63] 0.021 0.172 
+
+τ 2-bench Telecom ( N =114 ) 10 8 [−8.77 , +5 .26] 0.815 1.000 IFEval ( N =541 ) 17 22 [−1.29 , +3 .14] 0.522 1.000 IFBench ( N =300 ) 26 24 [−5.33 , +4 .00] 0.888 1.000 AIME 2026 ( N =30 ) 1 2 [−6.67 , +16 .67] 1.000 1.000 MATH-500 ( N =500 ) 3 4 [−0.80 , +1 .20] 1.000 1.000 GPQA Diamond ( N =198 ) 3 11 [+0 .51 , +8 .08] 0.057 0.402 OlympiadBench ( N =236 ) 10 16 [−1.69 , +6 .78] 0.327 1.000 Table 7: Paired comparison between Qwen3.8-27B and Qwen3.8-27B-SVRL across all eight external benchmarks. Qwen3.8-27B only and SVRL only count discordant items passed exclusively by one model. Confidence intervals use 20,000 paired bootstrap resamples (seed 42); p denotes exact two-sided McNemar p-values, and pHolm denotes Holm-adjusted values across the eight-benchmark family. 
+
+Benchmark Paired N Qwen3.8-27B Qwen3.8-27B-SVRL Change (%) 
+
+BFCL-v4 800 4,142 2,516 −39.3% 
+
+τ 2-bench Telecom 113 7,058 4,304 −39.0% IFEval 541 2,358 2,404 +2.0% IFBench 300 8,506 6,766 −20.5% AIME 2026 30 16,254 12,367 −23.9% MATH-500 500 1,942 1,611 −17.0% GPQA Diamond 198 10,561 7,821 −25.9% OlympiadBench 236 13,100 9,557 −27.0% Table 8: Mean output tokens per task for Qwen3.8-27B and Qwen3.8-27B-SVRL (including unsuccessful items and returned reasoning tokens, excluding user-simulator tokens). On τ 2-bench Telecom, 113 tasks retain complete paired trajectories; success counts include the 114th task whose Qwen3.8-27B failure has no recoverable dialogue. 
+
+13

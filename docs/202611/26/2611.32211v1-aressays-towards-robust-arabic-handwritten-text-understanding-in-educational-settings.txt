@@ -1,0 +1,463 @@
+Title: ArEssays: Towards Robust Arabic Handwritten Text Understanding in Educational Settings
+
+URL Source: https://arxiv.org/pdf/2611.32211v1
+
+Published Time: Wed, 25 Nov 2026 02:38:07 GMT
+
+Number of Pages: 17
+
+Markdown Content:
+# ArEssays: Towards Robust Arabic Handwritten Text Understanding in Educational Settings 
+
+Hamdy Mubarak, Anas Madkoor, Ehsaneddin Asgari, Majd Hawasly 
+
+Qatar Computing Research Institute, Hamad Bin Khalifa University, Doha, Qatar 
+
+{hmubarak,amadkoor,easgari,mhawasly}@hbku.edu.qa 
+
+Abstract 
+
+Automated understanding of handwritten Arabic student essays remains challeng-ing due to script complexity and high vari-ability in children’s writing. We intro-duce ArEssays , a large-scale dataset of au-thentic essays from primary to secondary students across Egypt, with both verba-tim transcriptions and linguistically cor-rected versions. We benchmark 34 vision-language and OCR models, including fine-tuned systems, and find large performance gaps on real student handwriting. We re-lease the dataset, training pipelines, and results to support research in Arabic OCR, document understanding, and educational NLP. 
+
+1 Introduction 
+
+Robust Handwritten Text Recognition (HTR) is essential for educational AI systems for grading, learning analytics, and language analysis. While Vision–Language Models (VLMs) perform well on printed and adult written English text, Arabic handwriting especially children’s evolving script remains challenging (Nacar et al., 2025; Hennara et al., 2025; Ayadi et al., 2025). This limits scal-able educational technology in Arabic speaking contexts. Arabic student handwriting combines intrinsic script complexity with developmental noise. Ara-bic is cursive and position-dependent through lig-atures and dotting ( I’jam ); children further intro-duce unstable baselines, inconsistent sizing, erratic diacritics, and irregular spacing. Classroom data also includes mobile-phone capture artifacts, varied writing tools, different paper types, and erasures. Consequently, OCR systems trained on synthetic, printed, or adult handwriting (Heakl et al., 2025b; Mahmoud et al., 2014) often fail on authentic stu-dent prose through attention drift, character substi-tutions, and linguistic hallucinations. Existing children’s Arabic HTR efforts (Alher-aki et al., 2022; Durayhim et al., 2023; Alwagdani and Jaha, 2023; Alshehri, 2025) are restricted to 
+
+isolated character recognition under largely con-trolled acquisition conditions, with a single tran-scription target per sample. They therefore cannot characterize how modern VLMs behave on multi-paragraph essays, where ligature distortions, base-line drift, orthographic variability, and developmen-tal spelling errors interact. ArEssays introduced in this paper fills this gap. The shift to multi-paragraph, multi-grade essays exposes a methodological subtlety: when ground truth contains orthographic noise that pretrained models tend to smooth away, standard Word/Character Error Rate becomes ambiguous. A model may lower CER by correcting the student rather than transcribing faithfully. For educational applications, this distinction should be explicit, which we address through paired verbatim and 
+
+linguistically corrected ground truth. 
+
+Contributions. Our contributions in this work are: (I) One of the largest known Arabic children’s writ-ing collections, with grade-stratified essays from Grades 4 through 12 written under naturally oc-curring classroom conditions. (II) A dual ground-truth annotation protocol provid-ing both verbatim and linguistically corrected 
+
+targets, enabling a clean separation of visual transcription from grammatical correction. (III) A detailed analysis of morphological and syntac-tic development, as well as error patterns, across students at different educational stages. (IV) A comprehensive benchmark of thirty-four 
+
+models: general-purpose VLMs, document-specialized OCR engines, Arabic-specialized systems, and our own fine-tuned baselines. 1arXiv:2611.32211v1 [cs.CL] 24 Nov 2026 (V) A two-stage Low-Rank Adaptation (LoRA) training recipe that decouples visual specializa-tion from linguistic regularization, with public adapters at three parameter scales. (VI) A detailed error analysis correlating Charac-ter/Word Error Rates with educational stage, handwriting clarity, and visual-noise strata, sur-facing actionable findings for Arabic educa-tional AI. Code, data, and trained recipes will be released for academic use. 
+
+2 Related Work 
+
+Arabic Handwritten Character and Text Recog-nition. Arabic HTR has evolved from Ga-bor/SIFT/HMM pipelines (El-Hajj et al., 2005; Mohamad et al., 2009; Elzobi et al., 2012; Rabi et al., 2018) to CNN classifiers for isolated char-acters (Younis and abdullah khateeb, 2017; Alt-waijry and Al-Turaiki, 2020; Wagaa et al., 2022; Kamal et al., 2022; Attar, 2025), CNN, BiL-STM/ConvLSTM, and CTC sequence models (Eltay et al., 2020; Gader and Echi, 2022; Dahbali et al., 2024), and Transformer recognizers (Kassem et al., 2021, 2022; Momeni and BabaAli, 2023; Chan et al., 2024). End-to-end Arabic document OCR pipelines (Mosbah et al., 2024; Waly et al., 2024, 2025) and broad surveys (Lorigo and Govin-daraju, 2006; Balaha et al., 2020; Alrobah and Al-bahli, 2022; Khayati et al., 2024; Kasem et al., 2023) document this trajectory. All of these sys-tems are trained predominantly on printed, histori-cal, or adult sources, leaving authentic classroom data largely uncovered. 
+
+Arabic Handwriting Corpora and the Children Gap. KHATT (Mahmoud et al., 2014) remains the canonical paragraph-level adult benchmark; Muharaf (Saeed et al., 2024) and HICMA (Is-mail et al., 2023) target cursive and calligraphic manuscripts; ADBase/MADBase (El-Sherif and Abdelazeem, 2007) support digit recognition. The few studies addressing children’s Arabic handwrit-ing (Alheraki et al., 2022; Durayhim et al., 2023; Alwagdani and Jaha, 2023; Alshehri, 2025; Qedear et al., 2024) are confined to isolated characters 
+
+under controlled conditions, with a single transcrip-tion target. CER-HV (Al-Azzawi et al., 2026) fur-ther motivates human-in-the-loop curation for Ara-bic HTR. To our knowledge, no prior public bench-mark targets multi-paragraph essay-level handwrit-ing from Arabic school children across grade bands with paired verbatim and corrected ground truth, the gap that ArEssays fills. 
+
+Vision-Language Models for Arabic Document Intelligence. End-to-end Arabic document under-standing is now dominated by multimodal LLMs and VLMs. Qalam (Bhatia et al., 2024) intro-duced an Arabic-tailored multimodal LLM; KITAB (Heakl et al., 2025b), Baseer (Hennara et al., 2025), and SARD (Nacar et al., 2025) provide benchmarks and Arabic-adapted backbones; community efforts such as Qari-OCR (Wasfy et al., 2025) and AIN (Heakl et al., 2025a) extend the Qwen-VL fam-ily with synthetic Arabic OCR data. While these systems achieve strong results on printed and adult-produced material, their robustness on authentic in-the-wild educational handwriting is largely un-characterized, the evaluation gap that ArEssays directly addresses. 
+
+Educational NLP and Learner-Language Anal-ysis. Beyond pure recognition, our work relates to Arabic educational NLP, including the ZAE-BUC writer corpus (Habash and Palfreyman, 2022), Arabic Automated Essay Scoring systems using synthetic data and CEFR-aligned error modeling (Qwaider et al., 2025), and Arabic Grammatical Er-ror Correction methods based on noisy learner text (Alhafni and Habash, 2025). However, these ap-proaches assume clean typed transcriptions, which is unrealistic for handwritten input. Our dual-annotation framework explicitly separates verbatim transcription from linguistic correction, bridging OCR and downstream educational NLP and en-abling end-to-end handwritten Arabic AES, GEC, and learner-language analysis. 
+
+3 Corpus Construction 
+
+3.1 Data Collection 
+
+To construct the corpus, we collaborated with two school teachers in Egypt who coordinated the data collection process. These teachers subsequently re-cruited eight additional teachers from five Egyptian governorates from differnt geographical regions to ensure diversity in handwriting styles, educational backgrounds, and regional writing variations. Prior to participation, parental consent was ob-tained for all participating students (Details in 8). The collection protocol was designed to preserve natural handwriting conditions while maintaining consistency across contributors. Students from grades 4 (G4) through 12 (G12) were asked to handwrite an essay on one of 15 general-domain topics. The topics were intention-2ally selected to be broad, age-appropriate, and fa-miliar to students from different educational levels in order to encourage free-form writing and natural language production. Most students contributed a single essay, typically consisting of approximately one handwritten page. To ensure authentic writing conditions, students wrote their essays in the pres-ence of their teachers without using digital devices, spelling correction systems, or AI-based writing assistants. After completion, teachers captured the essays using mobile phone cameras under naturally occurring classroom and home conditions, result-ing in realistic variation in lighting, resolution, ori-entation, and image quality. In the current release, we publicly provide 800 essays along with their associated annotations and metadata. Details of the corpus collection and post processing steps can be found in the Appendix C. 
+
+3.2 Annotation and Text Processing 
+
+Each essay was manually processed by four expert Arabic linguists through multiple annotation stages. • Line-Level Transcription : The handwritten es-says were first transcribed line-by-line while pre-serving the original line boundaries appearing in the image. This alignment enables research on handwritten OCR, line segmentation, and multi-modal text-image alignment. • Text Correction : A corrected version of each essay was subsequently produced by expert lin-guists. The correction process focused on fixing spelling, orthographic, and punctuation errors while preserving the student’s intended meaning and writing style as much as possible. • Sentence-Level Segmentation : In addition to the line-level transcription, linguists created a sentence-segmented version of each essay in which text was reorganized into complete se-mantic sentences rather than image-based line boundaries. This representation supports down-stream NLP tasks such as language modeling, ed-ucational assessment, OCR post-correction, and syntactic analysis. 
+
+3.3 Metadata 
+
+Each essay is accompanied by a set of metadata fields, including: student grade level (Grades 4–12), gender, essay title, governorate, and anonymized student and teacher information to protect privacy. 
+
+3.4 Image Quality Assessment 
+
+Because handwriting legibility and image quality substantially affect OCR performance, all essays were independently evaluated by two linguists us-ing three quality dimensions. The average inter-annotator agreement across the quality dimensions was approximately 80%. Disagreements were re-solved through consolidation discussions. The qual-ity measures are defined as follows: 
+
+I. Legibility : This criterion evaluates the readabil-ity of the handwriting itself and serves as the most important quality factor. Ratings: 3-Very clear handwriting, 2-Legible with moderate effort, and 1-Difficult to read. 
+
+II. Visual Noise : This criterion captures the presence of artifacts such as corrections, strike-throughs, decorations, smudges, background clut-ter, and additional markings. Ratings: 3-Clean image, 2-Some visual noise, and 1-Heavy visual noise. 
+
+III. Image Quality : This criterion evaluates tech-nical image characteristics including sharpness, brightness, contrast, and resolution. Ratings: 3-High-quality image, 2-Medium quality, and 1-Low or blurry image. 
+
+3.5 Corpus Statistics                                     
+
+> Target Attribute Values %
+> Student Stage Primary (G4-G6) 22 Preparatory (G7-G9) 47 Secondary (G10-G12) 31 Student Gender Female 57 Male 32 Unspecified 11 Student Government Giza (GC, Center) 22 Cairo (GC, Center) 12 Qalyubia (GC, Center) 10 Damietta (North East) 43 Qena (UE, South) 13 Image Handwritten Very clear 26 clarity Legible with effort 56 Hard to read 18 Image Visual noise Clean 26 Some noise 60 Heavy noise 14 Image Quality High 6Medium 79 Low/blurry 15
+> Table 1: Corpus Statistics. Number of essays = 800. GC: Greater Cairo, UE: Upper Egypt.
+
+Figure 1 shows a sample of the essays with its metadata. Other samples with different quality measures can be found in the Appendix (Figures 14 and 15). Figure 2 shows the number of essays by grade while Figure 3 shows the gender distribution of students by school stage, and Figure 16 in the appendix shows the top 10 essay topics. 3Figure 1: Sample essay. Metadata: Government: Giza, Grade: 6, Gender: Male, Handwritten clarity: 2 (Legi-ble with effort), Visual noise: 3 (Clean), Image quality: 2 (Medium), Topic: Hobby. Translation: “I love foot-ball, I love playing it, and I play for the club of greats. This practice helps strengthen both my muscles and . . . ” 
+
+> Figure 2: Distribution of essays by grade
+
+4 Corpus Analysis 
+
+After segmenting the student essays into sentence-level logical units, we performed morphological analysis using CAMeL Tools 1 and syntactic analy-sis using Stanza NLP 2 on the corrected sentences. To analyze writing and OCR-related errors, the original transcription and corrected essay versions were aligned at the word level using Sequence-Matcher from Python’s difflib package. Each aligned word pair was then compared to identify the 
+
+> 1https://github.com/CAMeL-Lab/camel_tools
+> 2https://stanfordnlp.github.io/stanza/
+> Figure 3: Distribution of gender by stage
+> Figure 4: Key metric averages by grade
+
+underlying error category based on character-level differences. For example, substitutions involving Alif ( @) and Hamza ( @@@ ) forms were categorized as Hamza errors , while confusions between Taa Marbouta ( Ë) and Haa ( Ë) were labeled as Taa/Haa errors , and confusions between Yaa ( ¯) and Alif Maqsoura ( ¯) were mapped to Yaa errors . Differ-ences in whitespace usage (e.g., long spacing be-tween letters in a word) were classified as spacing errors , and punctuation mismatches were grouped under punctuation errors . In addition, grammar-related errors were identified through morpholog-ically motivated substitutions, such as confusion between grammatical case and agreement endings (e.g., ‡ vs ·K , or Tanween), which were catego-rized as grammatical errors . Other errors involv-ing missing letters, added letters, letters written in odd shapes or angles (e.g., writing K as k )3, style errors (e.g., using dialectal and informal words), etc. were mapped to Others/Unknown .Figure 4 summarizes the key metric averages by grade while the detailed linguistic statistics and analyses are presented in the following subsections. Figure 18 in the appendix shows an example of error mapping and classification. 
+
+4.1 Linguistic Analysis 
+
+The corpus exhibits substantial linguistic diversity across grades 4–12, capturing developmental varia-tion in Arabic writing proficiency, lexical richness, morphology, syntax, discourse organization, and or-thographic behavior. The handwritten essays were 
+
+> 3Please refer to Figure 1 for examples.
+
+4Figure 5: Type-Token-Ratio (TTR) by grade 
+
+produced under authentic educational conditions, enabling analysis of naturally occurring student writing across primary, preparatory, and secondary educational stages. 
+
+Vocabulary Development: Lexical analysis shows clear progression in vocabulary richness across grades. Primary essays (Grades 4–6, av-erage 69 words/essay) use limited, repetitive vo-cabularies (40–70 unique lemmas; TTR 0.48–0.56) and rely on simple concrete terms. Preparatory essays (Grades 7–9, average 124 words/essay) show moderate growth (80–120 lemmas) with more descriptive language and discourse connec-tives. Secondary essays (Grades 10–12, average 149 words/essay) are lexically richer, often exceed-ing 150 lemmas and including more abstract and domain-specific vocabulary (Figure 5). Average word length also increases from 3.8–4.2 charac-ters in lower grades to over 5 in secondary stages, reflecting higher morphological and semantic com-plexity. 
+
+Morphology: Morphologically, the corpus cap-tures the richness and complexity of Arabic writ-ing through extensive inflectional variation, clitic attachment, and derivational morphology. The corpus contains substantial clitic attachment phe-nomena, with clitic attachment rates exceeding 0.55 in many essays and surpassing 0.80 in some secondary-school samples. These characteristics create substantial challenges for OCR tokenization and downstream Arabic NLP systems. (Figure 6) Nouns constitute the dominant part-of-speech category across all grades, representing 46–52% of total tokens, while verbal usage varies depend-ing on essay topic and educational level. Primary-school essays predominantly contain simple ver-bal constructions and repetitive sentence templates, often relying heavily on present-tense narration. In contrast, secondary-school essays demonstrate more balanced use of past and present tense, richer 
+
+> Figure 6: Number of clitics by grade
+> Figure 7: Parts of Speech (POS) by grade
+
+adjectival modification, and increasingly complex nominal structures (Figure 7). 
+
+Syntax: Syntactic complexity similarly in-creases with grade level. Primary-school essays typically contain short sentences with shallow de-pendency structures, limited subordination, and relatively weak discourse organization. Average sentence lengths in Grades 4–6 are frequently be-low 10–12 tokens per sentence, and many essays contain minimal punctuation and sentence segmen-tation cues. Preparatory-school essays demonstrate noticeable improvement in sentence organization, connective usage, and clause structure. Secondary-school essays, however, frequently contain long multi-clause constructions with deeper dependency trees and more sophisticated argumentative organi-zation. Several Grade 11–12 essays exhibit depen-dency depths exceeding 12 levels and subordinate clause ratios above 0.20. Some essays additionally contain extremely long sentences exceeding 300 tokens due to narrative chaining and inconsistent punctuation behavior. (Figure 8) 
+
+Error Types: The corpus exhibits extensive orthographic and punctuation variation affecting OCR and downstream NLP. Common issues in-clude Hamza omission, Taa Marbouta/Haa confu-5Figure 8: Parse-tree depth by grade 
+
+> Figure 9: Error types by grade
+
+sion, Alif variants, spacing inconsistencies, and missing punctuation, especially in lower grades. Hamza errors persist across all stages, with some secondary essays requiring 30+ corrections. Punc-tuation is often sparse or inconsistent, requiring near-complete restoration. The data also includes segmentation issues such as merged words, irregu-lar spacing, and fused character boundaries, which are challenging for Arabic OCR. Figure 9 shows error distributions by grade, while Figure 17 in the appendix reports error rates from 44% (Grade 4) to 29% (Grade 12). Writing style details are provided in Appendix F. Overall, the corpus integrates linguistic and de-velopmental variation, handwriting diversity, and OCR challenges in a single resource. Its combina-tion of visual noise, orthographic ambiguity, and writing variability makes it useful for Arabic OCR, handwriting recognition, OCR post-correction, edu-cational NLP, multimodal document understanding, and modeling Arabic writing development. 
+
+4.2 Linguistic Correction (Correction OCR) 
+
+The Correction OCR task couples visual text extrac-tion with grammatical error correction (GEC) and orthographic normalization. Given a handwritten image X, the model generates a corrected sequence 
+
+ˆYc aligned with expert-annotated ground truth Yc,which preserves meaning while fixing grammar and orthography (Heakl et al., 2025b). The task evaluates whether models can resolve visual ambi-guities, restore missing diacritics, and normalize dialectal Egyptian Arabic into standard MSA. 
+
+4.3 Layout Segmentation 
+
+Document layout analysis and line level segmen-tation remain critical bottlenecks for continuous paragraph processing. In this benchmark, the ob-jective is to localize and isolate individual text lines and word bounding structures within full page unconstrained essay images. Given an im-age X ∈ RH×W ×C , models must predict bound-ing polygons or horizontal segmentation masks 
+
+S = {s1, s 2, . . . , s m} mapping to consecutive tex-tual lines. This task is quantified using Intersection over Union (IoU) metrics. It explicitly benchmarks a model’s structural resilience against non standard-ized ruled paper lines, irregular vertical line drift, inter line word bleeding, and heavy erasures or crossings out characteristic of school age writers (Ayadi et al., 2025). 
+
+4.4 End-to-End Paragraph Recognition 
+
+The End-to-End Paragraph Recognition task is a full-page benchmark for educational document un-derstanding. Unlike line- or word-level settings (e.g., KHATT (Mahmoud et al., 2014)), models process entire multi-paragraph pages, requiring reading-order inference, layout understanding, and robustness to noise. Outputs are evaluated as full-page transcripts in markdown or plain text, with CER/WER computed over 100–400 words/page. 
+
+5 Models 
+
+To characterize children’s Arabic essay recogni-tion, we benchmark 34 models across two groups: (1) off-the-shelf systems evaluated under a unified zero-shot, prompt-conditioned protocol, and (2) our domain-adapted models trained via a two-stage LoRA recipe (§5.2). 
+
+5.1 Benchmarked Models 
+
+All baselines use deterministic decoding with an identical task prompt (§H) to ensure exact repro-ducibility. 6General-Purpose VLMs. We evaluate leading families to study multimodal scaling on authen-tic handwritten Arabic: Qwen2.5-VL (Bai et al., 2025) and Qwen3-VL (Qwen Team, 2025) across 2B–4B, 7B–8B, 32B, and MoE scales (30B-A3B, 235B-A22B); Gemma-3 (Gemma Team, 2025) at 4B, 12B, scales; and Gemma-4 4 at 26B-A4B-it and 31B-it scales. This sweep isolates capacity, architecture, and pretraining language prior effects. 
+
+Document-Specialized OCRs. We evaluate layout-aware frameworks trained under dense supervision: olmOCR (7B-Preview, 2-7B) (Poznanski et al., 2025); PaddleOCR-VL (base, v1.5) (PaddleOCR Team, 2025); dots.ocr (Li et al., 2025), which couples layout with sequence structures; and Zhipu AI’s GLM-OCR (V Team, Zhipu AI and Tsinghua University, 2025). 
+
+Arabic-Specialized Models. We test models op-timized for Arabic script properties: Baseer (Hen-nara et al., 2025) (3B, SLERP-interpolated LoRA); 
+
+Qari-OCR (v0.3-2B, v0.4-4B) (Wasfy et al., 2025), fine-tuned on diacritized text lines; AIN-7B (Heakl et al., 2025a) (3.6M bilingual samples); QCRI’s Fa-nar (Oryx configuration) (Team et al., 2025); and 
+
+Ketaba-OCR-LoRA (Hassan et al., 2026) from NakbaNLP 2026. 
+
+5.2 Domain-Adapted Fine-Tuned Models 
+
+To map performance headroom, we apply a two-stage LoRA recipe to Baseer (3B) , Qwen3-VL-4B ,and Gemma-4 (27B MoE) . Projection layers of all Transformer blocks are adapted in bfloat16 under a cosine schedule. Dev-set validated checkpoints and hyperparameters are detailed in §I. 
+
+Stage 1: Target-Domain Specialization (v1). 
+
+Models are fine-tuned on ArEssays training split with high-capacity LoRA weights and aggressive augmentations, adapting the vision encoder to the irregular strokes, erratic spacing, and varying align-ments of child handwriting (Table 7). 
+
+Stage 2: Curricular Regularization (v2). To mitigate catastrophic forgetting and stabilize vi-sual layouts, Stage-1 weights are merged into the base. New lower-rank adapters ( r=32 , scaled-down learning rate) are trained on a heterogeneous corpus blending adult script from KHATT (Mah-moud et al., 2014) and printed text from Books-OCR (Seemorg, 2024), reducing augmentation (0.50 → 0.20 ) to prevent unconstrained text hallu-cinations (Table 8). 
+
+> 4https://deepmind.google/technologies/gemma
+
+Design Rationale. The curriculum explicitly de-couples visual specialization (Stage 1) from lin-guistic regularization (Stage 2). Resolving mor-phological stroke variance prior to anchoring the distribution with broader canonical text distribu-tions suppresses hallucinations, yielding vastly su-perior cross-grade generalization over single-stage alternatives. 
+
+6 Results 
+
+Empirical evaluations reveal critical architectural disparities, underscoring challenges that develop-mental Arabic scripts pose to modern VLMs. Ta-ble 2 summarizes the macro metrics. 
+
+6.1 Macro Leaderboard Performance Exact CER Corrected CER Exact WER Corrected WER    
+
+> 25% 50% 75% 100%
+> Performance Profile by Model Category
+> Dedicated OCR Tool Arabic Specialist General VLM Fine-tuned (ours)
+
+Figure 10: Cross category performance profiles across error metrics. Lower normalized area indicates optimal baseline cross task stability. 
+
+Parameter scaling reduces zero-shot errors, with dense Qwen variants yielding major gains. Con-versely, document-centric layouts like dots_ocr 
+
+or GLM-OCR fail on distorted text lines, proving that handwritten morphic variance requires explicit domain-adaptive mechanisms over standard layout parsing. 
+
+6.2 The ∆CER Performance Gap 
+
+The variance between verbatim transcriptions (exact_cer ) and language-smoothed outputs (corrected_cer ) flags a strong textual prior within open VLMs: 
+
+∆CER = exact_cer_mean − corrected_cer_mean Unadapted architectures like Qwen3.6-35B-A3B exhibit a negative gap ( ∆CER ≈ − 0.07 ). When facing noisy strokes or missing diacritics ( I’jam ), these systems utilize internal auto-regressive distri-butions to output standard literary phrasings, sacri-7ficing literal token accuracy. Document OCR tools track near zero, indicating rigid extraction profiles. 
+
+6.3 Impact of Human Annotated Image Quality Factors Primary Preparatory Secondary   
+
+> School Stage
+> Hard (1) Readable (2) Clear (3)
+> Handwriting Clarity
+> 52.7%
+> n=16
+> 67.0%
+> n=20
+> 50.5%
+> n=8
+> 42.4%
+> n=18
+> 43.6%
+> n=33
+> 43.4%
+> n=33
+> 39.7%
+> n=3
+> 40.5%
+> n=27
+> 44.7%
+> n=18
+> Qwen3.5-4B (FT v1)
+> Primary Preparatory Secondary
+> School Stage
+> Hard (1) Readable (2) Clear (3)
+> 55.6%
+> n=16
+> 56.9%
+> n=20
+> 55.1%
+> n=8
+> 43.5%
+> n=18
+> 47.6%
+> n=33
+> 47.5%
+> n=33
+> 39.1%
+> n=3
+> 45.9%
+> n=27
+> 50.4%
+> n=18
+> Gemma4-26B-A4B (FT v1)
+> 010 20 30 40 50 60 70
+> Exact WER (%)
+> Exact WER: Clarity × School Stage (interaction)
+
+Figure 11: Impact of handwriting clarity and school stage interactions on WER. Low handwriting clarity acts as the primary bottleneck across cohorts. 
+
+Stratifying metrics reveals that handwriting clar-ity governs sequence accuracy: illegible scripts induce severe base model hallucinations, whereas lighting noise causes minimal errors. This con-firms vision encoders tolerate imaging artifacts but struggle with structural character variations. 
+
+6.4 Efficacy of Domain Adapted Fine Tuned Specialists 
+
+Targeted fine-tuning yields immense verbatim cal-ibration. Stage 1 (v1) specialists trained on child data lead the benchmark, where qwen35_4b_v1 
+
+achieves top macro standing (0.1631 Exact CER), followed by gemma4_26b_v1 .Multi-stage regularizers in Stage 2 (v2), combin-ing KHATT adult samples and printed Books-OCR text, introduce a critical regularization tradeoff. While v2 regularizers support standard lines, they degrade specialized resolution on native child writ-ing, increasing qwen35_4b_v2 errors. This high-lights the need for precise curriculum balancing across writer age segments. 
+
+6.5 Developmental Gradient Analysis 
+
+Metrics uncover a clear error gradient tied to motor-spatial development. Primary education scripts (Grades 4 through 6) show peak error density due to unstable baselines and irregular character junc-tions. As text layout and stroke proportions stabi-lize in Preparatory and Secondary cohorts, word and character error tracking exhibits a steady linear reduction. 
+
+7 Experiments 
+
+Using the same evaluation setup and prompts (Ap-pendix H) across the ArEssays dataset partitions G04 (n=8) G04–G06 (n=8) G05 (n=4) G06 (n=17) G07 (n=24) G07–G09 (n=21) G08 (n=24) G09 (n=11) G10 (n=16) G10–G12 (n=15) G11 (n=15) G12 (n=13) 
+
+> Grade
+> 020 40 60 80 100
+> Corrected WER % (lower better)
+> 63.1% 67.5% 76.3% 64.4% 67.6% 59.9% 63.1% 62.7% 61.0% 58.0% 60.5% 67.6% 39.9% 44.2% 39.1% 43.7% 43.4% 38.4% 40.2% 51.0% 41.3% 33.8% 43.6% 47.3%
+> By Grade Level
+> Qwen3.5-4B (FT v1) Gemma4-26B-A4B (FT v1)
+
+Figure 12: Corrected Word Error Rate (WER) across distinct educational tiers on top 2 finetuned models. 
+
+comprising 500 training, 100 development, and 200 testing instances. 
+
+8 Conclusion 
+
+We introduced ArEssays , the first multi-paragraph essay-level corpus of authentic Arabic handwriting produced by school children, with paired verba-tim and linguistically corrected ground truth. Our benchmark of thirty-four state-of-the-art Vision-Language Models, Arabic-specialized systems, and fine-tuned baselines establishes a strong, repro-ducible foundation for Arabic educational docu-ment intelligence and exposes a clear gap between current models and the demands of authentic de-velopmental handwriting. We further introduced a two-stage LoRA recipe that explicitly decouples visual specialization from linguistic regularization, yielding the strongest results on ArEssays at three distinct parameter scales. Beyond the immediate benchmark, our findings highlight a methodological lesson for the wider community: when ground-truth annotation con-tains the very kind of noise that pretrained mod-els implicitly correct, a single error metric is in-sufficient. The dual-annotation framework and 
+
+∆CER analysis introduced here provide a concrete blueprint that we expect to be useful in any educa-tional, dialectal, or historical-text setting where the distinction between what was written and what was meant carries real-world consequence. We release the corpus, training pipelines, evaluation harness, and full benchmark results to support follow-up work on Arabic OCR, educational NLP, and multi-modal language understanding. An extended dis-cussion of the implications of our findings for Ara-bic NLP, educational AI, and multimodal learning is provided in §J. 8Limitations 
+
+Although the proposed corpus provides a large-scale and realistic benchmark for Arabic handwrit-ten student essays, several limitations should be acknowledged. First, the dataset was collected exclusively from students in Egypt and therefore primarily reflects Egyptian educational practices, handwriting conventions, linguistic usage, and so-ciocultural writing patterns. While the corpus in-cludes students from five governorates and covers both male and female students across grades 4–12, the findings may not generalize to other Arabic-speaking countries, dialects, educational systems, demographic groups, or socioeconomic settings. Moreover, the corpus has grade imbalance (Figure 2) and gender imbalance (Figure 3). Consequently, broader conclusions regarding Arabic handwriting, OCR robustness, or educational language develop-ment should be validated through additional studies conducted under different geographical and educa-tional conditions. Second, although the essays were collected un-der naturally occurring school and home conditions using mobile phone cameras, the corpus may still not capture the full range of real-world document variability. Extremely degraded images, severe blur, truncated pages, and highly illegible hand-writing were partially filtered during corpus con-struction to ensure annotation quality and usability. Future releases may include more challenging sam-ples to support robustness evaluation under harsher visual conditions. Third, the corrected versions of the essays were manually produced by expert linguists, and while annotators were instructed to preserve students’ in-tended meaning and writing style, certain normal-ization decisions may introduce subjective bias, particularly in cases involving ambiguous spelling, punctuation, or sentence segmentation. Similarly, sentence-level segmentation in Arabic handwritten text can be inherently ambiguous due to inconsis-tent punctuation and spacing behavior in student writing. Fourth, we acknowledge potential sources of error in the corpus and analysis pipeline. Auto-matic linguistic analysis tools, including CAMeL Tools and Stanza, may introduce morphological and syntactic analysis errors, particularly for noisy handwritten student text. Furthermore, manual tran-scription, correction, and metadata annotation may contain occasional human annotation errors, es-pecially in subjective tasks such as image-quality assessment and handwriting readability evaluation. Fifth, the OCR and vision-language benchmark results reported in this study are dependent on the selected evaluation models, prompts, preprocess-ing decisions, and decoding settings. As OCR and multimodal language models continue to evolve rapidly, benchmark performance may change sub-stantially with future systems. Finally, although the corpus enables analysis of linguistic development across educational stages, the dataset is cross-sectional rather than longitudi-nal. The essays therefore represent different stu-dents at different grade levels rather than tracking the same students over time. As a result, the ob-served developmental trends should be interpreted cautiously. 
+
+Ethical Considerations 
+
+This work involves handwritten essays produced by school students and therefore raises important ethical and privacy considerations. Prior to par-ticipation, parental consent was obtained for all participating students (sample in Figure 13). The data collection process was coordinated through school teachers, and participation was voluntary. To protect participant privacy, all released data were anonymized. The corpus does not contain per-sonally identifying information about students, and anonymized identifiers were used for both students and teachers. Metadata associated with the released corpus is limited to non-identifying attributes such as educational grade, gender, and governorate. The essays were collected under natural educa-tional conditions in which students wrote by hand without the use of digital devices, spell checkers, or AI-based writing assistants. Teachers captured the essays using mobile phone cameras to simulate realistic classroom and home acquisition settings commonly encountered in Arabic OCR applica-tions. The handwritten essays were manually tran-scribed and corrected by expert linguists. The cor-rection process focused on fixing spelling, ortho-graphic, and punctuation errors while preserving the students’ intended meaning and writing style as much as possible. Because educational writing may contain developmental language patterns and non-standard forms, annotators were instructed to avoid excessive rewriting or stylistic normalization. Participants were compensated fairly for their time and effort. Students received approximately 9Figure 13: Parental Consent Form. Parents or legal guardians provided informed consent for students to participate in collecting handwritten Arabic essays for research on Arabic NLP, handwriting recognition, and educational technologies. Participation was voluntary and had no impact on students’ academic assessment. Collected data included essay images and transcrip-tions, grade level, and optional demographic informa-tion. Essays were manually reviewed to remove per-sonally identifiable information, and participants were assigned anonymous IDs. Original data were securely stored with access restricted to the research team. An anonymized version of the dataset may be publicly re-leased for research purposes. Parents could withdraw consent before the dataset’s publication. 
+
+USD 10 per essay, while teachers were compen-sated at a rate above typical local annotation and educational task rates for coordinating collection and image acquisition activities. We intentionally adopted compensation practices designed to avoid exploitative data collection conditions. The released corpus, benchmark code, and evalu-ation results will be shared for research purposes to support reproducibility and future work in Arabic OCR, educational NLP, and multimodal language understanding. However, we acknowledge that handwriting datasets involving minors may still carry potential privacy risks despite anonymization. Accordingly, the dataset is intended strictly for aca-demic and research use, and users are expected to follow responsible data usage practices. 
+
+Using AI Tools: We used ChatGPT solely for language refinement and improving the clarity of the manuscript writing. It was not used for generat-ing scientific content, creating datasets, producing annotations, or generating experimental results. In addition, Claude Code was used to assist in im-plementing Python scripts for data analysis and visualization. All analysis functions and process-ing steps were independently verified through unit testing before generating the reported tables and figures. 
+
+References 
+
+Sana Al-Azzawi, Elisa Barney, and Marcus Liwicki. 2026. CER-HV: A human-in-the-loop framework for cleaning datasets applied to Arabic-script HTR. 
+
+arXiv preprint arXiv:2601.16713 .Bashar Alhafni and Nizar Habash. 2025. Enhancing text editing for grammatical error correction: Arabic as a case study. arXiv preprint arXiv:2503.00985 .Mais Alheraki, Rawan N. Al-Matham, and H. Al-Khalifa. 2022. Handwritten arabic character recogni-tion for children writing using convolutional neural network and stroke identification. Human-Centric Intelligent Systems , 3:147 – 159. Naseem Alrobah and Saleh Albahli. 2022. Arabic handwritten recognition using deep learning: A sur-vey. Arabian Journal for Science and Engineering ,47:9943 – 9963. Helala Alshehri. 2025. Image-based recognition of children’s handwritten arabic characters using a confidence-weighted stacking ensemble. Sensors (Basel, Switzerland) , 25. Najwa Altwaijry and Isra M. Al-Turaiki. 2020. Arabic handwriting recognition system using convolutional neural network. Neural Computing and Applications ,33:2249 – 2261. Maram Saleh Alwagdani and E. S. Jaha. 2023. Deep learning-based child handwritten arabic character recognition and handwriting discrimination. Sensors (Basel, Switzerland) , 23. E. Attar. 2025. Deep convolutional neural network for isolated arabic handwritten character recognition: de-sign, evaluation, and comparative study. Scientific Reports , 15. Manel Ayadi, Nesrine Masmoudi, Latifa Almuqren, Hadeel Saeed Alshahrani, and Raneem Oudah Aljo-hani. 2025. Designing a novel cnn–lstm-based model for arabic handwritten character recognition for the visually impaired person. Journal of Disability Re-search , 4(1). Shuai Bai, Keqin Chen, Xuejing Liu, Jialin Wang, Wen-bin Ge, Sibo Song, Kai Dang, Peng Wang, Shi-jie Wang, Jun Tang, Humen Zhong, Yuanzhi Zhu, 
+
+10 Mingkun Yang, Zhaohai Li, Jianqiang Wan, Pengfei Wang, Wei Ding, Zheren Fu, Yiheng Xu, Jiabo Ye, Xi Zhang, Tianbao Xie, Zesen Cheng, Hang Zhang, Zhibo Yang, Haiyang Xu, and Junyang Lin. 2025. Qwen2.5-VL technical report. arXiv preprint arXiv:2502.13923 .H. M. Balaha, H. Ali, and M. Badawy. 2020. Auto-matic recognition of handwritten arabic characters: a comprehensive review. Neural Computing and Ap-plications , 33:3011 – 3034. Gagan Bhatia, El Moatez Billah Nagoudi, Fakhraddin Alwajih, and M. Abdul-Mageed. 2024. Qalam: A multimodal llm for arabic optical character and hand-writing recognition. ArXiv , abs/2407.13559. Adrian Chan, Anupam Mijar, Mehreen Saeed, Chau-Wai Wong, and Akram Khater. 2024. HATFormer: Historic handwritten Arabic text recognition with transformers. arXiv preprint arXiv:2410.02179 .Mohamed Dahbali, Noureddine Aboutabit, and Nidal Lamghari. 2024. A hybrid model for arabic script recognition based on cnn-cbam and blstm. Jordanian Journal of Computers and Information Technology .Anfal Bin Durayhim, Amani A. Al-Ajlan, Isra M. Al-Turaiki, and Najwa Altwaijry. 2023. Towards ac-curate children’s arabic handwriting recognition via deep learning. Applied Sciences .Ramy El-Hajj, Laurence Likforman-Sulem, and C. Mok-bel. 2005. Arabic handwriting recognition using baseline dependant features and hidden markov mod-eling. Eighth International Conference on Document Analysis and Recognition (ICDAR’05) , pages 893– 897 Vol. 2. E. El-Sherif and S. Abdelazeem. 2007. A two-stage system for arabic handwritten digit recognition tested on a new large database. In International Conference on Artificial Intelligence and Pattern Recognition .Mohamed Eltay, A. Zidouri, and Irfan Ahmad. 2020. Exploring deep learning approaches to recognize handwritten arabic texts. IEEE Access , 8:89882– 89898. Moftah Elzobi, A. Al-Hamadi, Anwar Saeed, and Laslo Dings. 2012. Arabic handwriting recognition us-ing gabor wavelet transform and svm. 2012 IEEE 11th International Conference on Signal Processing ,3:2154–2158. Takwa Ben Aïcha Gader and A. Echi. 2022. Attention-based cnn-convlstm for handwritten arabic word ex-traction. ELCVIA Electronic Letters on Computer Vision and Image Analysis .Gemma Team. 2025. Gemma 3 technical report. arXiv preprint arXiv:2503.19786 .Nizar Habash and David Palfreyman. 2022. ZAEBUC: An annotated Arabic-English bilingual writer corpus. In Proceedings of the Thirteenth Language Resources and Evaluation Conference (LREC) , pages 79–88, Marseille, France. European Language Resources Association. B. Hassan et al. 2026. Ketaba-ocr-lora: Adaptable vision-language baselines for historical and regional arabic manuscripts. In Proceedings of the 1st Workshop on Language Technology for Historical and Challenging Scripts (NakbaNLP) , pages 112– 125. Arab Center for Research and Policy Stud-ies (ACRPS AI). Code: https://github.com/ HasanBGit/Ketaba-OCR-LoRA , Weights: https:// huggingface.co/HassanB4/Ketaba-OCR-LoRA .Ahmed Heakl, Sara Ghaboura, Omkar Thawkar, Fa-had Shahbaz Khan, Hisham Cholakkal, Rao Muham-mad Anwer, and Salman Khan. 2025a. AIN: The Arabic INclusive large multimodal model. arXiv preprint arXiv:2502.00094 .Ahmed Heakl, Abdullah Sohail, Mukul Ranjan, Ra-nia Hossam, Ghazi Shazan Ahmad, Mohamed El-Geish, Omar Maher, Zhiqiang Shen, Fahad Khan, and Salman Khan. 2025b. KITAB-Bench: Acomprehensive multi-domain benchmark for Arabic OCR and document understanding. arXiv preprint arXiv:2502.14949 .Khalil Hennara, Muhammad Hreden, Mohamed Mo-tasim Hamed, Ahmad Bastati, Zeina Aldallal, Sara Chrouf, and Safwan AlModhayan. 2025. Baseer: A vision-language model for arabic document-to-markdown ocr. arXiv preprint arXiv:2509.18174 .Anis Ismail, Zena Kamel, and R. Mahmoud. 2023. Hicma: The handwriting identification for calligra-phy and manuscripts in arabic dataset. In ARABIC-NLP .M. Kamal, Fairuz Shaiara, Chowdhury Mohammad Ab-dullah, Sabbir Ahmed, Tasnim Ahmed, and M. H. Kabir. 2022. Huruf: An application for arabic hand-written character recognition using deep learning. 
+
+2022 25th International Conference on Computer and Information Technology (ICCIT) , pages 1131– 1136. Mahmoud Salaheldin Kasem, Mohamed Mahmoud, and H. Kang. 2023. Advancements and challenges in ara-bic optical character recognition: A comprehensive survey. ACM Computing Surveys , 58:1 – 37. Aly M. Kassem, Omar Mohamed, Ali Ashraf, Ahmed Elbehery, Salma J. Ahmed, Ghada Khoriba, and A. Ghoneim. 2021. Ocformer: A transformer-based model for arabic handwritten text recognition. 2021 International Mobile, Intelligent, and Ubiquitous Computing Conference (MIUCC) , pages 182–186. Aly M. Kassem, Omar Mohamed, Ali Ashraf, Ahmed Elbehery, Salma J. Ahmed, Anas Salah, and A. Ghoneim. 2022. An end-to-end ocr framework for robust arabic-handwriting recognition using a novel transformers-based model and an innovative 270 million-words multi-font corpus of classical ara-bic with diacritics. ArXiv , abs/2208.11484. 
+
+11 Mohsine El Khayati, Ismail Kich, and Y. Taouil. 2024. Cnn-based methods for offline arabic handwriting recognition: A review. Neural Processing Letters ,56. Yumeng Li, Guang Yang, Hao Liu, Bowen Wang, and Colin Zhang. 2025. dots.ocr: Multilingual document layout parsing in a single vision-language model. 
+
+arXiv preprint arXiv:2512.02498 .Liana M. Lorigo and V. Govindaraju. 2006. Offline ara-bic handwriting recognition: a survey. IEEE Transac-tions on Pattern Analysis and Machine Intelligence ,28:712–724. Sabri A. Mahmoud, Irfan Ahmad, Wasfi G. Al-Khatib, Mohammad Alshayeb, Mohammad Tanvir Parvez, Volker Märgner, and Gernot A. Fink. 2014. Khatt: An open arabic offline handwritten text database. Pat-tern Recognition , 47(3):1096–1112. Ramy Al-Hajj Mohamad, Laurence Likforman-Sulem, and C. Mokbel. 2009. Combining slanted-frame clas-sifiers for improved hmm-based arabic handwriting recognition. IEEE Transactions on Pattern Analysis and Machine Intelligence , 31:1165–1177. Saleh Momeni and B. BabaAli. 2023. A transformer-based approach for arabic offline handwritten text recognition. Signal, Image and Video Processing ,18:3053 – 3062. Lamia Mosbah, Ikram Moalla, T. Hamdani, Bilel Neji, T. Beyrouthy, and A. M. Alimi. 2024. Adocrnet: A deep learning ocr for arabic documents recognition. 
+
+IEEE Access , 12:55620–55631. Omer Nacar, Yasser Al-Habashi, Serry Sibaee, Adel Ammar, and Wadii Boulila. 2025. Sard: A large-scale synthetic arabic ocr dataset for book-style text recognition. arXiv preprint arXiv:2505.24600 .PaddleOCR Team. 2025. PaddleOCR-VL: Boosting multilingual document parsing via a 0.9B ultra-compact vision-language model. arXiv preprint arXiv:2510.14528 .Jake Poznanski, Jon Borchardt, Jason Dunkelberger, Regan Huff, Daniel Lin, Aman Rangapur, Christo-pher Wilhelm, Kyle Lo, and Luca Soldaini. 2025. olmOCR: Unlocking trillions of tokens in PDFs with vision language models. arXiv preprint arXiv:2502.18443 .Aseel Qedear, Aldanh AlMatrafy, Athary Al-Sowat, Abrar Saigh, and Asmaa Alayed. 2024. Real-time air-writing recognition for arabic letters using deep learning. Sensors (Basel, Switzerland) , 24. Chatrine Qwaider, Bashar Alhafni, Kirill Chirkunov, Nizar Habash, and Ted Briscoe. 2025. Enhancing Arabic automated essay scoring with synthetic data and error injection. In Proceedings of the 20th Work-shop on Innovative Use of NLP for Building Edu-cational Applications (BEA 2025) , pages 549–563, Vienna, Austria. Association for Computational Lin-guistics. Qwen Team. 2025. Qwen3-VL technical report. arXiv preprint arXiv:2511.21631 .M. Rabi, M. AMROUCH, and Z. Mahani. 2018. Recog-nition of cursive arabic handwritten text using em-bedded training based on hidden markov models. 
+
+Int. J. Pattern Recognit. Artif. Intell. , 32:1860007:1– 1860007:19. Mehreen Saeed, Adrian Chan, Anupam Mijar, Joseph Moukarzel, Georges Habchi, Carlos Younes, Amin Elias, Chau-Wai Wong, and Akram Khater. 2024. Muharaf: Manuscripts of handwritten arabic dataset for cursive text recognition. ArXiv , abs/2406.09630. Seemorg. 2024. books-ocr: A large-scale dataset for Arabic document optical character recog-nition. https://huggingface.co/datasets/ seemorg/books-ocr . Accessed: May 2026. Fanar Team, Ummar Abbas, Mohammad Shahmeer Ah-mad, Firoj Alam, Enes Altinisik, Ehsannedin Asgari, Yazan Boshmaf, Sabri Boughorbel, Sanjay Chawla, Shammur Chowdhury, et al. 2025. Fanar: An arabic-centric multimodal generative ai platform. arXiv preprint arXiv:2501.13944 .V Team, Zhipu AI and Tsinghua University. 2025. GLM-4.1V-Thinking: Towards versatile multimodal reasoning with scalable reinforcement learning. 
+
+arXiv preprint arXiv:2507.01006 .Nesrine Wagaa, H. Kallel, and N. Mellouli. 2022. Im-proved arabic alphabet characters classification using convolutional neural networks (cnn). Computational Intelligence and Neuroscience , 2022. Alhossien Waly, Bassant Tarek, Ali Feteha, Rewan Yehia, Gasser Amr, and Ahmed Fares. 2024. Arabic handwritten document ocr solution with binarization and adaptive scale fusion detection. 2024 6th Novel Intelligent and Leading Emerging Sciences Confer-ence (NILES) , pages 316–319. Alhossien Waly, Bassant Tarek, Ali Feteha, Rewan Yehia, Gasser Amr, Walid Gomaa, and Ahmed Fares. 2025. Invizo: Arabic handwritten docu-ment optical character recognition solution. ArXiv ,abs/2502.05277. Ahmed Wasfy, Omer Nacar, Abdelakreem Elkhateb, Mahmoud Reda, Omar Elshehy, Adel Ammar, and Wadii Boulila. 2025. QARI-OCR: High-fidelity Arabic text recognition through multimodal large language model adaptation. arXiv preprint arXiv:2506.02295 .K. Younis and abdullah khateeb. 2017. Arabic hand-written character recognition based on deep convo-lutional neural networks. In Jordanian Journal of Computers and Information Technology (JJCIT) .
+
+12 Table 2: Official Macro Evaluation Leaderboard on the ACHOB Test Split (WER Metrics with Heatmap Gradient). 
+
+Model Identifier Category Exact WER Corrected WER 
+
+Specialized Document OCR Engines 
+
+olmOCR-2-7B-1025 OCR Tool 74.0% 70.4% PaddleOCR-VL-1.5 OCR Tool 101.7% 94.2% olmOCR-7B-0225-preview OCR Tool 91.5% 102.5% PaddleOCR-VL OCR Tool 115.6% 126.0% dots_ocr OCR Tool 121.3% 112.1% GLM-OCR OCR Tool 115.4% 160.8% 
+
+General Vision-Language Models 
+
+Qwen3.6-35B-A3B Gen VLM 54.6% 52.3% Qwen3.5-35B-A3B Gen VLM 59.7% 58.1% gemma-4-31B-it Gen VLM 60.1% 59.1% Qwen3.5-27B Gen VLM 64.5% 63.1% Qwen3.6-27B Gen VLM 68.7% 66.1% Qwen3.5-9B Gen VLM 66.2% 68.1% gemma-4-26B-A4B-it Gen VLM 76.0% 74.1% Qwen3.5-4B Gen VLM 81.8% 80.1% Qwen3-VL-8B-Instruct Gen VLM 92.9% 91.5% Qwen2.5-VL-3B-Instruct Gen VLM 97.7% 101.2% gemma-3-12b-it Gen VLM 96.7% 112.1% gemma-3-4b-it Gen VLM 113.6% 122.1% Qwen3.5-2B Gen VLM 125.4% 135.1% Qwen3-VL-4B-Instruct Gen VLM 128.1% 141.2% Qwen3-VL-2B-Instruct Gen VLM 129.3% 138.1% Qwen2.5-VL-7B-Instruct Gen VLM 135.2% 154.1% 
+
+Arabic Regional Specialists 
+
+Ketaba-OCR-LoRA Arabic Spec 88.1% 89.6% FanarOryx Arabic Spec 105.4% 123.1% Baseer__Nakba Arabic Spec 102.5% 115.4% Qari-OCR-0.4.0-VL-4B-Instruct Arabic Spec 109.8% 118.5% Qari-OCR-v0.3-VL-2B-Instruct Arabic Spec 110.4% 121.4% AIN Arabic Spec 119.9% 146.9% 
+
+Domain-Adapted Fine-Tuned (Ours) 
+
+Qwen3.5-4B (FT Stage 1 - v1) Fine-Tuned 46.9% 41.9% Gemma4-26B-A4B (FT Stage 1 - v1) Fine-Tuned 49.2% 64.3% 
+
+Baseer-Nakba (FT Stage 1 - v1) Fine-Tuned 51.0% 69.1% Qwen3.5-4B (FT Stage 2 - v2) Fine-Tuned 107.2% 99.0% Gemma4-26B-A4B (FT Stage 2 - v2) Fine-Tuned 86.8% 114.5% Baseer-Nakba (FT Stage 2 - v2) Fine-Tuned 99.4% 122.8% 
+
+13 Figure 14: Sample easy essay. Metadata: Government: Giza, Grade: 6, Gender: Female, Handwritten clarity: 3 (Very clean handwritten), Visual noise: 3 (Clean), Image quality: 3 (High), Topic: Technology. 
+
+> Figure 15: Sample hard essay. Metadata: Government: Damietta, Grade: 12, Gender: Male, Handwritten clar-ity: 1 (Hard to read), Visual noise: 1 (Heavy noise), Image quality: 1 (Low/blurry), Topic: Homeland.
+
+A Samples 
+
+Figures 14 and 15 show samples of the essays with highest and lowest measures for handwritten clarity, noise, and image quality. 
+
+B Top Essay Topics 
+
+Figure 16 shows the top 10 essay topics by stage. 
+
+C Corpus Collection Details 
+
+participating students are from grades 4 (G4) through 12 (G12) as students from lower primary grades (e.g., Grades 1–3) typically produce iso-lated words or short phrases rather than complete handwritten essays. Participants in the corpus building were compen-sated for their time and effort. Students received approximately USD 10 per essay, while teachers were compensated at a rate of USD 8 per hour for coordination, collection, and scanning activities. In addition, Expert linguists were compensated at a rate of USD 8 per hour of linguistic annotations. Compensation rates were intentionally set above typical local annotation and educational task rates 
+
+> Figure 16: Top 10 essay topics by stage
+
+to ensure fair participation and sustained engage-ment throughout the project. All teachers and lin-guists are native Arabs from Egypt with experience ranging between 20-30 years. In total, the collection process produced 1,200 handwritten essays. In the current release, we pub-licly provide 800 essays along with their associated annotations and metadata. The remaining essays were excluded from the current release after man-ual quality assessment due to factors such as: low image resolution, poor lighting conditions, exces-sive visual artifacts, or highly illegible handwriting. Rather than discarding these difficult samples permanently, we plan to include many of them (with annotations and metadata) in future releases as part of a challenging benchmark for robust Ara-bic OCR and vision-language systems operating under realistic degradation conditions. The collection process took around three months while the annotation processes (transcription, cor-rection, metadata enrichment, quality control) took seven months. 
+
+C.1 Post-processing 
+
+Handwritten student essays were manually post-processed using the CamScanner application to improve image usability while preserving the origi-nal handwriting content. The processing pipeline included automatic perspective correction, rotation and angle adjustment, background cropping, and re-moval of surrounding non-document objects such as desks and classroom artifacts. This step was necessary because essays were captured using mo-bile phone cameras under natural classroom condi-tions, resulting in substantial variation in orienta-tion, framing, and background clutter. 
+
+D Error Rate 
+
+Figure 17 shows error rate by grade. 14 Figure 17: Error rate by grade 
+
+Figure 18: Example of error mapping and classification 
+
+E Error Mapping 
+
+Figure 18 shows an example after aligning original words and corrected words. Right is the transcribed essay image, and left is the corrected text. Errors are colored and classified into Taa/Haa, punctua-tion, and Hamza errors. 
+
+F Writing style Analysis 
+
+The essays reveal naturally occurring educational and sociolinguistic writing patterns. Lower-grade students frequently rely on memorized narra-tive templates and repetitive introductory expres-sions, while secondary-school students demon-strate greater rhetorical variation, thematic orga-nization, and discourse coherence. Formulaic ex-pressions such as religious quotations, standard-ized openings, and memorized concluding phrases occur frequently across educational stages, reflect-ing authentic Egyptian school-writing conventions. The progression from simple narrative writing in primary school to more descriptive and argumen-tative writing in secondary school highlights the corpus’s value for studying Arabic writing devel-opment under realistic educational conditions. 
+
+G Experimental Setup 
+
+Experimental Setup. All training and experiments were conducted on a machine with the specifica-tions detailed in Table 3. A total of approximately 98 GPU hours were utilized across all six training runs (three models × two stages). Stage 1 runs were brief (0.3–1.8 hours each), while Stage 2 runs were substantially longer, averaging approximately 32 hours per model, with individual runs ranging from 19 to 50 hours.     
+
+> CPU INTEL(R) XEON(R) PLATINUM 8568Y
+> GPU Nvidia H200-141GB
+> Memory 512GB
+> OS Ubuntu 20.04.5 LTS
+
+Table 3: Specification of machine used for training and experiments 
+
+H Benchmark Evaluation Prompt and Decoding Settings 
+
+For all benchmarked off-the-shelf systems de-scribed in §5.1, we adopt a single fixed prompt and a unified set of decoding parameters to ensure a fair, reproducible zero-shot comparison across model families. The exact prompt template and decoding configuration used at evaluation time are reproduced in this appendix. Zero-Shot Transcription Prompt —Qwen3.5-4B (Test159 / Article0468) 
+
+System Message: 
+
+You are an OCR engine. Output ONLY the text visible in the image. Do not think, reason, or add explanations. 
+
+User Message (Exact OCR task): 
+
+Transcribe the handwritten Arabic text in this image exactly as it appears, character by character, word by word. Do NOT correct any spelling or grammar mistakes. Output ONLY the transcribed text. 
+
+Input Image: 
+
+Ground Truth:           
+
+> ΩÀ ºQÆ™JÀ ëÓE @ AJÎ - - .’ŒÇ” ¯B hÒ JÆ” ÈK. Ò JÀ@ H . AK. ‡ @ ˙Ê™K –CæÀ@ @ YÎ -.A KÒ ØÒ” AK. A Jª ·J”Ò÷œ@ ˙Œ´  IKAø ËCíÀ@ ‡@ . H . ÒK YÀ@ È<À@
+> Model Output (Qwen3.5-4B):
+> ΩÀ QÆ™JÀ ëÓE@ AJÎ - - .’ŒÇ” ¯B hÒ JÆ” ÈK. Ò JÀ@ H . AK. ‡ @ ˙Ê™K –CæÀ@ @ YÎ -.A KÒ ØÒ” AK. A Jª ·J”Ò÷œ@ ˙Œ´  IKAø ËCíÀ@ ‡@ . H . ÒK YÀ@ È<À@
+> Scores: Exact CER: 0.0625 Exact WER: 0.1818
+
+The corresponding decoding parameters applied uniformly to every benchmarked checkpoint are listed in Table 4. Where a model exposes addi-tional task-specific switches (e.g., dedicated OCR 15 Decoding parameterValue      
+
+> Decoding strategy Greedy search ( do_sample=False )Max new tokens 1,024 Repetition penalty model-specific †
+> Beam size 1Random seed N/A (deterministic) Image preprocessing Resize to max resolution, RGB convert Max image resolutionmodel-specific †
+
+Table 4: Common decoding parameters used across all benchmarked models (§5.1). †Per-model overrides are listed in Table 5. 
+
+or layout modes), the exact values used are reported in Table 5. 
+
+I Fine-Tuning Hyperparameters 
+
+This appendix details the full set of optimization and adaptation hyperparameters used in the two-stage LoRA recipe described in §5.2. Table 6 lists settings shared across all runs. Table 7 reports Stage 1 (Target-Domain Specialization, v1 ) and Table 8 reports Stage 2 (Curricular Regularization, 
+
+v2 ), both broken down per base architecture.            
+
+> Setting Value
+> Optimizer AdamW (fused) Precision bfloat16 LR scheduler cosine with warm-up Warm-up ratio 0.05 Weight decay 0.05 Gradient clipping 1.0 (max norm) LoRA target modules all linear projection layers LoRA dropout 0.05 Max sequence length 1,024 tokens Random seed 42
+
+Table 6: Common training settings shared across all fine-tuning runs (Stage 1 and Stage 2, all architectures). Max image resolution varies per architecture and is listed in Tables 7–8. 
+
+J Extended Discussion and Implications 
+
+Our benchmark surfaces three findings whose im-plications extend beyond Arabic Handwritten Text Recognition. This appendix expands on each of them, referenced from the Conclusion in the main body. 
+
+Implications for Arabic NLP. On authentic chil-dren’s handwriting, broad multimodal scaling alone is not sufficient: the largest non-adapted Vision-Language Models still trail dedicated fine-tuned 3B-scale models by a substantial margin. Targeted, in-domain data dominates parameter count in this regime, echoing observations in low-resource Ara-bic NLP more broadly (Nacar et al., 2025; Hennara et al., 2025). The negative ∆CER exhibited by large general-purpose VLMs further reveals that they conflate visual transcription with implicit lin-guistic correction, silently smoothing developmen-tal orthographic errors towards Modern Standard Arabic. While this behaviour is valuable for down-stream language understanding, it is a hazard for any system whose ground truth is meant to be the 
+
+actually written script, the precise setting our dual-annotation protocol is designed to disentangle. 
+
+Implications for educational AI. Automated ed-ucational technology in Arabic-speaking contexts cannot be built on transcripts that silently correct what students wrote, since these are exactly the sig-nals teachers and learning-analytics systems need to track developmental progress. Our results show that a separation between verbatim and linguis-tically corrected targets is essential for building trustworthy formative-assessment pipelines: ver-batim transcription should drive error analysis and feedback, while corrected transcription supports downstream NLU. The clarity-×-grade stratifica-tion in §6 further indicates that handwriting clarity, not grade level alone, is the principal bottleneck, so investments in image capture, paper standardiza-tion, and lightweight pre-processing in classrooms are likely to yield larger gains than further raw model scaling. 
+
+Implications for multimodal learning. The two-stage LoRA curriculum, Stage 1 visual specializa-tion followed by Stage 2 curricular regularization on KHATT and printed text, yields the strongest models on ArEssays and recovers performance across grade and clarity strata. The explicit de-coupling of visual specialization from linguistic regularization provides a transferable recipe for any multimodal task that combines a narrow visual distribution with a broad linguistic prior. We hy-pothesize the same recipe will be effective in adja-cent settings such as historical Arabic manuscripts, low-resource cursive scripts (Persian, Urdu), and child-produced texts in other languages, and we release our training code, prompts, and adapters to facilitate this line of work. 16 Model Model-specific setting 
+
+Qwen2.5-VL / Qwen3-VL No system prompt; standard greedy generate Qwen3.5 / Qwen3.6 System prompt: “You are an OCR engine. . . ” ; enable_thinking=False 
+
+Gemma-3 family No additional flags; default generate() 
+
+olmOCR rep. penalty=1.15 ; no_repeat_ngram=20 
+
+PaddleOCR-VL Prompt override: “ OCR: ”; rep. penalty=1.15 ; no_repeat_ngram=20 
+
+dots.ocr Layout-JSON prompt; custom KV-cached greedy decode; text extracted from JSON GLM-OCR Prompt override: “ Text Recognition: ”; rep. penalty=1.15 ; no_repeat_ngram=20 
+
+Baseer max_pixels= 644 ×644 ; rep. penalty=1.1 
+
+Qari-OCR rep. penalty=1.1 
+
+AIN max_pixels= 1,280 ×1,280 ; standard greedy Fanar (Oryx) max_pixels= 1,280 ×1,280 ; rep. penalty=1.05 
+
+Ketaba-OCR-LoRA max_pixels= 1,280 ×28 ×28 ; rep. penalty=1.1 
+
+Table 5: Model-specific configuration applied at evaluation time. All other decoding parameters follow Table 4. rep. penalty = repetition penalty; no_repeat_ngram = no_repeat_ngram_size .
+
+Hyperparameter Baseer-3B Qwen3.5-4B Gemma4-26B-A4B 
+
+LoRA rank ( r) 64 64 64 LoRA α 128 128 128 Learning rate 3×10 −5 8×10 −5 2×10 −5
+
+Effective batch size 16 16 16 Per-device batch size 2 1 1Gradient accumulation steps 8 16 16 Number of epochs (max) 15 12 15 Early-stop patience 4 epochs 3 epochs 4 epochs Training steps (actual) 466 351 465 Max image resolution 644 ×644 2,048 ×28 2 px 1,024 ×28 2 px Augmentation probability 0.50 0.50 0.50 Trainable parameters 160.5 M 78.1 M 50.6 M GPU hours ( 1×H100) 0.72 h 1.80 h 0.34 h 
+
+Table 7: Stage 1 ( v1 : Target-Domain Specialization) fine-tuning hyperparameters on the ArEssays training partition. Early stopping halted Baseer at epoch 7 and Qwen3.5 at epoch 6; Gemma4 completed all 15 epochs. See §5.2. 
+
+Hyperparameter Baseer-3B Qwen3.5-4B Gemma4-26B-A4B 
+
+Stage-1 adapter merging yes yes yes LoRA rank ( r) 32 32 16 LoRA α 64 64 32 Learning rate 1×10 −5 5×10 −5 5×10 −6
+
+Effective batch size 16 16 16 Per-device batch size 2 2 2Gradient accumulation steps 8 8 8Number of epochs (max) 5 10 8Training steps (actual) 14,811 6,697 23,611 Training corpus KHATT (Mahmoud et al., 2014) + Books-OCR (Seemorg, 2024) Max image resolution 644 ×644 1,024 ×28 2 px 1,024 ×28 2 px Augmentation probability 0.20 0.20 0.20 Trainable parameters 79.5 M 156.1 M ≈12.7 M GPU hours ( 1×H100) 18.8 h 25.8 h 50.5 h 
+
+Table 8: Stage 2 ( v2 : Curricular Regularization) fine-tuning hyperparameters. Stage-1 adapters are merged into the base weights before training; a fresh lower-rank adapter is then trained on KHATT (Mahmoud et al., 2014) combined with a printed Books-OCR collection (Seemorg, 2024). All three models completed their full epoch budget. See §5.2. 
+
+17
