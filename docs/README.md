@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-11-26</span>
+      <span class="dpr-home-dashboard-kicker">2026-11-27</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 13 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 7 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>7</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>2</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>5</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-11-26 03:00:13 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-11-27 02:47:36 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日精选 13 篇论文，精读 6 篇、速读 7 篇，重点覆盖教育 AI 提示优化与多智能体视频生成。最值得关注的是教育 AI 中基于反馈的提示改进，它用于情感轨迹估计和 Bloom 分类；此外还有 ReVAgent 的多智能体推理密集型视频生成。普通读者可优先阅读这两篇高分论文，再结合速读中的在线学习可用性与政策助手机器人，把握教育 AI 的应用场景。</p>
+<p>2026-11-27 日报精选7篇，精读2篇：LLM模拟低龄学习者的认知保真度与能力泄漏、加拿大理工院校生成式AI指导中编码议题的缺位，均获8.0分。最值得关注两点：AI模拟儿童学习者可能“过度聪明”而失真，以及院校AI政策在编程教学上的沉默；普通读者可优先读这两篇精读，再浏览教育推荐系统离线评估的排序捷径与印尼童书插画文化对齐两篇速读。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -78,12 +78,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">6 篇</strong>
+    <strong class="dpr-home-dashboard-count">2 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Feedback-Driven Prompt Refinement for Educational AI: Affective Trajectory Estimation and Bloom&#x27;s Taxonomy Classification">Feedback-Driven Prompt Refinement for Educational AI: Affective Trajectory Estimation and Bloom&#x27;s Taxonomy Classification</span></li><li><span class="dpr-home-dashboard-paper-title" title="ReVAgent: Multi-Agent Reasoning-Intensive Video Generation">ReVAgent: Multi-Agent Reasoning-Intensive Video Generation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Learning What to Change: State-Verified Reinforcement Learning for Educational Agents">Learning What to Change: State-Verified Reinforcement Learning for Educational Agents</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Too Smart for Its Own Good? Cognitive Fidelity and Competence Leakage in LLM Simulations of Young Learners">Too Smart for Its Own Good? Cognitive Fidelity and Competence Leakage in LLM Simulations of Young Learners</span></li><li><span class="dpr-home-dashboard-paper-title" title="Silent on Code? A Computing Lens on Generative AI Guidance at Canadian Polytechnics and Research Universities">Silent on Code? A Computing Lens on Generative AI Guidance at Canadian Polytechnics and Research Universities</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>6</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>2</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -91,12 +91,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">7 篇</strong>
+    <strong class="dpr-home-dashboard-count">5 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Modeling Learner-Technology Interaction Through Multilevel Gaze Transition Dynamics to Inform Usability in Online Learning">Modeling Learner-Technology Interaction Through Multilevel Gaze Transition Dynamics to Inform Usability in Online Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Unjamming Deferrals: Supporting Students Through JAMN Bot, a Mobile RAG-Grounded Policy Assistant">Unjamming Deferrals: Supporting Students Through JAMN Bot, a Mobile RAG-Grounded Policy Assistant</span></li><li><span class="dpr-home-dashboard-paper-title" title="A Dual-SOM Learner Model of Instructional Efficiency within Cognitive Load Theory">A Dual-SOM Learner Model of Instructional Efficiency within Cognitive Load Theory</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Learning the Platform, Not the Learner: Sequencing Shortcuts in the Offline Evaluation of Educational Recommender Systems and LLM Rankers">Learning the Platform, Not the Learner: Sequencing Shortcuts in the Offline Evaluation of Educational Recommender Systems and LLM Rankers</span></li><li><span class="dpr-home-dashboard-paper-title" title="Designing an Integrated Learning Ecosystem for Introductory Python Programming: Scaffolded Problem Solving, Tablet-Inspired Navigation, and AI-Enhanced Instruction">Designing an Integrated Learning Ecosystem for Introductory Python Programming: Scaffolded Problem Solving, Tablet-Inspired Navigation, and AI-Enhanced Instruction</span></li><li><span class="dpr-home-dashboard-paper-title" title="Can AI Understand Indonesian Children&#x27;s Book Illustrations? Compliance, Safety, and the Cultural Alignment Gap">Can AI Understand Indonesian Children&#x27;s Book Illustrations? Compliance, Safety, and the Cultural Alignment Gap</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>7</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>5</strong></span></div>
 </section>
 </div>
 

@@ -1,0 +1,318 @@
+Title: An Embedded Ergonomic Posture Monitoring and AI-Assisted Home Learning System on a Raspberry Pi 3B Edge Platform
+
+URL Source: https://arxiv.org/pdf/2611.34669v1
+
+Published Time: Thu, 26 Nov 2026 03:36:53 GMT
+
+Number of Pages: 6
+
+Markdown Content:
+# An Embedded Ergonomic Posture Monitoring and AI-Assisted Home Learning System on a Raspberry Pi 3B Edge Platform 
+
+Truyen T. Le ∗, Vinh Dang Ngoc ∗, and Thai Bao Huynh †∗
+
+∗Nguyen Hue High School , Tuy Hoa, Phu Yen, Vietnam Email: letrongtruyenofficial@gmail.com, dnvinh.thpt.nh@daklak.edu.vn 
+
+†University of Information Technology, Vietnam National University Ho Chi Minh City , Ho Chi Minh City, Vietnam Email: 23520105@gm.uit.edu.vn 
+
+> ∗
+
+Corresponding author 
+
+Abstract —During independent home study sessions, students frequently sustain improper sitting postures, accumulate excessive uninterrupted sedentary hours, and experience productivity loss caused by off-task digital media distractions. Furthermore, learners commonly lack real-time pedagogical scaffolding when encountering demanding self-study curricula. To mitigate these interrelated ergonomic and instructional challenges, this paper presents an affordable, privacy-preserving cyber-physical em-bedded system designed specifically for domestic study spaces. Engineered on a single-board computer (Raspberry Pi 3 Model B, 1 GB RAM) paired with a UVC optical camera and a USB condenser microphone, the system executes on-device computer vision utilizing lightweight landmark inference (MediaPipe Pose) and OpenCV to monitor upper-body spatial alignment, sagittal head inclination, and coronal shoulder asymmetry in real time without persisting raw video streams. A deterministic session management finite state machine (FSM) quantifies active study durations, enforces health-compliant rest periods, and detects illicit smartphone usage. Simultaneously, an integrated multimodal artificial intelligence tutoring agent parses voice and text queries via an encrypted API gateway, synthesizing Socratic conceptual hints rather than direct solutions. A lightweight parental web dashboard delivers encrypted session analytics and scheduling configurations. Empirical benchmarks executed on the physical prototype confirm an end-to-end inference latency of 244 –250 ms at a 352 × 288 analysis resolution (sustaining 4.0–4.1 inference frames per second), a trunk-angle estimation error of 4.39 ◦ mean absolute error over 5760 synthetic ground-truth poses, a resident set size of 320 MB, a peak SoC temperature of 58 .0◦C under sustained load, and a total latency of 1.58 s for the offline TTS feedback path, proving high practicality for resource-constrained edge deployment. 
+
+Index Terms —Embedded Systems, Ergonomic Posture Moni-toring, Edge Computing, Computer Vision, MediaPipe Pose, AI Tutor, Socratic Scaffolding, Raspberry Pi. 
+
+I. I NTRODUCTION 
+
+The rapid proliferation of digital pedagogical curricula, remote learning platforms, and self-directed academic en-vironments has fundamentally shifted the locus of primary and secondary education into the home. While digital tools democratize access to academic information, independent study without continuous ergonomic and supervisory oversight introduces severe physical and cognitive vulnerabilities for adolescent students. From a physiological perspective, prolonged seated screen interaction frequently induces musculoskeletal disorders. Sus-tained static flexion of the cervical spine—commonly termed “text neck” syndrome—magnifies compressive forces on cer-vical intervertebral discs, while slouched thoracic kyphosis and asymmetrical lateral pelvic loading induce chronic lower back strain and visual fatigue. Epidemiological assessments confirm that sedentary behavior exceeding uninterrupted 45-minute intervals impairs circulatory dynamics and degrades sustained cognitive attention. Concurrently, unmonitored digital home environments expose students to cognitive fragmentation caused by non-educational mobile devices, gaming applications, and social media notifications. From a supervisory and academic standpoint, modern working parents cannot provide uninterrupted observation during after-school study sessions. Manual parental spot-checks often precipitate familial tension and fail to deliver objective empirical metrics regarding genuine study engagement, break compliance, and ergonomic posture health. Furthermore, when students confront complex mathematical derivations or sci-entific concepts independently, existing commercial search utilities and generative language models often output direct answers immediately. This direct answer delivery short-circuits cognitive struggle, cultivating academic dependency rather than reinforcing analytical problem-solving abilities. To resolve these interconnected ergonomic, supervisory, and instructional challenges, this paper develops an integrated, low-cost cyber-physical system tailored for home learning envi-ronments. The core framework couples localized edge vision inference on an embedded single-board computer (Raspberry Pi 3 Model B) with an interactive, cloud-orchestrated multimodal artificial intelligence tutoring agent. The primary contributions of this paper are summarized as follows:  
+
+> •
+
+Privacy-Preserving Edge Vision Pipeline: A lightweight, on-device pose estimation architecture that evaluates multi-planar ergonomic indices (sagittal trunk flexion, arXiv:2611.34669v1 [cs.AR] 25 Nov 2026 craniovertebral neck tilt, and coronal shoulder asymmetry) in real time while guaranteeing complete video privacy through volatile, in-memory processing.  
+
+> •
+
+Deterministic Ergonomic Session Manager: A fi-nite state machine (FSM) that automatically tracks net academic engagement, coordinates periodic rest breaks aligned with ergonomic health guidelines, and flags off-task mobile screen distractions.  
+
+> •
+
+Socratic Multimodal AI Tutoring Agent: A hybrid conversational agent capable of ingesting speech and text, utilizing structured system prompts to provide step-by-step conceptual scaffolding rather than ready-made solutions, with automatic model-fallback resilience against cloud-side transient failures.  
+
+> •
+
+Comprehensive Embedded Benchmarking: Extensive empirical validation on resource-limited ARM architecture profiling frame rates, geometric estimation accuracy, memory footprint, and thermal dissipation under sustained real-time load on the deployed prototype. II. R ELATED WORK 
+
+A. Ergonomic Posture Tracking Technologies 
+
+Ergonomic monitoring systems traditionally relied on wear-able sensors, including chest straps, electromyography (EMG) patches, and multi-axis Inertial Measurement Units (IMUs) affixed to the spine and cervical vertebrae. While IMUs yield precise kinematic angle measurements, wearable hardware intro-duces significant practical limitations for school-aged children: physical discomfort, skin irritation, recurring calibration drift, and the persistent burden of battery recharging. Consequently, vision-based non-intrusive posture estimation has garnered widespread research interest. Deep convolutional neural network (CNN) architectures such as OpenPose deliver robust multi-person joint coordinates but impose computational demands exceeding the hardware capabilities of standalone edge microprocessors. The introduction of optimized two-stage regression pipelines—notably Google MediaPipe Pose [1]— enables single-person landmark inference on commodity CPU threads. However, deploying such pipelines on embedded pro-cessors like the Broadcom BCM2837 requires strict resolution optimization, algorithmic pipelining, and temporal smoothing to suppress high-frequency spatial jitter. Our deployment quantifies this trade-off empirically: the MediaPipe Pose Lite landmarker exhibits a resolution-independent inference cost of 244 –250 ms per frame on the Cortex-A53, meaning that resolution reduction of the analysis stage—not the capture stage—is the only effective lever for latency reduction. 
+
+B. Sedentary Behavior Guidelines and Focus Management 
+
+The World Health Organization (WHO) and ergonomic bodies emphasize that mitigating sedentary risks requires regular postural alternations and periodic physical activity intervals [2]. Popular digital time management utilities, such as standalone Pomodoro timer applications, depend exclusively on manual self-reporting and lack physical validation of user presence. Prior embedded attempts incorporating ultrasonic or passive infrared (PIR) proximity sensors confirm physical occupancy but remain incapable of discerning whether the learner is engaged in academic tasks, slouching hazardously, or actively distracted by handheld smartphones. 
+
+C. Multimodal Intelligent Tutoring Systems (ITS) 
+
+Intelligent Tutoring Systems have progressed from early rule-based expert systems to contemporary Large Multimodal Models (LMMs). Standard generative AI interfaces, however, tend to hallucinate unverified shortcuts or immediately display finalized answer keys, undermining student perseverance. Pedagogical research proves that Socratic scaffolding—wherein the tutor provides leading clues, clarifies prerequisite axioms, and prompts reflective self-correction—fosters superior con-ceptual retention. Furthermore, hosting high-parameter vision-language models locally on low-cost edge platforms remains computationally unfeasible due to strict RAM and throughput bounds, necessitating a hybrid edge-cloud partitioning scheme. III. S YSTEM ARCHITECTURE AND METHODOLOGY 
+
+A. Hardware Architecture and Embedded Topology 
+
+The hardware foundation is engineered around strict cost efficiency, electrical safety, and low acoustic noise. Fig. 1 illustrates the unified vertical data acquisition and processing topology of the Smart Home Learning station. The physical testbed comprises:  
+
+> •
+
+Single-Board Processing Unit: Raspberry Pi 3 Model B (revision a020d3 ) integrated with a Broadcom BCM2837 SoC (quad-core ARM Cortex-A53, 64-bit, 1400 MHz nominal peak, 905 MiB LPDDR2 unified memory), run-ning Debian GNU/Linux 13 (trixie) with Linux kernel 
+
+6.18 .50 +rpt-rpi-v8 , aarch64 architecture.  
+
+> •
+
+Optical Acquisition Unit: A driverless UVC-compliant USB composite camera (VID:PID 4c4a:4a55 , Jieli Technology) supporting MJPG at discrete resolutions 
+
+1920 ×1080 , 1280 ×720 , 640 ×480 , 640 ×360 , 352 ×288 ,and 320 × 240 . The camera is mounted above the study monitor facing the seated learner.  
+
+> •
+
+Acoustic Interface: A dedicated USB Audio Class condenser microphone exposed as ALSA card 3 ( USB PnP Sound Device: Audio (hw:3,0) ) at a na-tive 44100 Hz sample rate, paired with the Broadcom HDMI output (ALSA card 0, vc4-hdmi ) for speech synthesis and audible posture chimes. Crucially, the USB Audio Class driver permits only one concurrent capture stream; the architecture therefore enforces a mutual-exclusion lock that suspends the background speech recognizer during manual capture tests. 
+
+B. Edge Vision and Ergonomic Metric Extraction 
+
+The video capture thread reads optical frames via OpenCV at the camera’s native MJPG cadence of 25 .7 frames per second, then deterministically rescales every frame to an analysis canvas of 352 × 288 pixels before landmark inference. Video buffers reside solely in volatile system memory (RAM); no frame is ever written to disk. Each analysis frame is fed Sensor Acquisition Layer   
+
+> UVC USB Camera (Jieli 4c4a:4a55, MJPG, 25 .7FPS) USB PnP Condenser Micro-phone ( hw:3,0 ) & HDMI Speaker
+
+Edge Computing Host: Raspberry Pi 3 Model B      
+
+> Volatile Video Pipe: OpenCV Frame Rescaling ( 352 ×288 )
+> MediaPipe Pose Lite: Upper-Body 3D Landmarks Extraction
+> Ergonomic Metric Engine: Trunk Flexion, Neck Tilt, Asymmetry
+
+Deterministic Session Management FSM     
+
+> Real-time State Tracking: Active ,Break ,Away ,Off-Task
+> Asynchronous Phone Detection (EfficientDet-Lite0) & Audible Warning
+
+Cloud Pedagogical AI Gateway (On-Demand)     
+
+> Voice Digitization (ASR) →Context Packaging Socratic Prompt Engine →Gemini 3.8 Flash (multi-model fallback) Text-to-Speech (TTS) Acoustic Synthesis Feedback
+
+Parental Monitoring & Reporting Layer 
+
+> Encrypted Web Dashboard (Flask / SQLite) Aggregated Daily Posture Scores, Study Time, Break Compliance
+> Raw Optical & Audio Stream Spatial Keypoints & Posture Vectors On-Demand Academic Query Trigger Encrypted Telemetry & Interaction Logs
+> Figure 1. System block diagram illustrating the unified vertical data acquisition, edge vision processing, and cloud pedagogical tutoring flow.
+
+into the MediaPipe Pose pipeline, which employs a two-stage detector-tracker topology. The detector identifies the person bounding box, while the landmark regression network predicts 3D coordinates (x, y, z ) for 33 anatomical keypoints normalized within [0 , 1] , together with a metric world landmark set in metres. For seated upper-body ergonomic analysis, our pipeline extracts the subset: 
+
+Psubset = {Pnose , P L_ear , P R_ear , P L_sho , P R_sho , P L_hip , P R_hip }
+
+(1) Three spatial posture parameters are computed. 
+
+1) Trunk Flexion Angle ( θtrunk ): Let the shoulder midpoint 
+
+MS and hip midpoint MH in 2D image coordinates be defined as: 
+
+MS = PL_sho + PR_sho 
+
+2 , MH = PL_hip + PR_hip 
+
+2 (2) The trunk posture vector is constructed as vtrunk = MS − MH .The trunk inclination angle relative to the true vertical reference vector ˆuvert = (0 , −1) T is calculated via the inner product: 
+
+θtrunk = arccos 
+
+( vtrunk · ˆuvert 
+
+∥vtrunk ∥ ∥ ˆuvert ∥
+
+)
+
+(3) Because a camera mounted above the monitor views the learner obliquely downward, the 2D projection systematically overestimates trunk flexion. We therefore compute a metric-space counterpart θ3D 
+
+> trunk
+
+directly from the world landmarks, and reconcile the two estimates with a rejection gate: 
+
+θ3D 
+
+> trunk
+
+← ∅ if ∣∣θ3D 
+
+> trunk
+
+− θ2D
+
+> trunk
+
+∣∣ > 30 ◦ (4) Whenever the 3D estimate is rejected (indicating occlusion-corrupted metric reconstruction), the system falls back to the 2D estimate, and vice versa, guaranteeing a single well-conditioned scalar. Furthermore, if the hip midpoint falls within a 6% 
+
+margin of the frame boundary, or if the hip landmarks carry a visibility below 0.55 , the system enters an upper-body-only 
+
+mode in which the trunk angle is suppressed entirely and only head-drop violations are reported. This boundary guard eliminates the false hunchback alarms that otherwise plague downward-angled deployments. 
+
+2) Craniovertebral Head Tilt Angle ( θhead ): Head slouching and forward neck projection are derived by measuring the 
+
+vertical separation between the ear midpoint and the shoulder line, normalized by the shoulder width so that the metric is invariant to subject distance from the camera. With ear midpoint ME = ( PL_ear + PR_ear )/2 and shoulder width wS =
+
+∥PL_sho − PR_sho ∥2, the normalized head elevation is: 
+
+rhead = yMS − yME
+
+wS
+
+, θhead → violation if rhead < τ (5) with the empirically calibrated droop threshold τ = 0 .18 .An early implementation measured horizontal ear-to-shoulder offset, which misclassified lateral head tilt as forward drooping; the vertical formulation in (5) resolves this ambiguity. 
+
+3) Coronal Shoulder Asymmetry ( ∆hshoulder ): Lateral slouch-ing and spinal tilting are monitored by evaluating the vertical differential between the left and right acromion landmarks: 
+
+∆hshoulder = |yL_sho − yR_sho | (6) To suppress high-frequency mechanical vibration and mea-surement noise, computed instantaneous angles θ(t) are filtered across a rolling temporal FIFO window of K = 8 frames: 
+
+¯θ(t) = 1
+
+K
+
+> K−1
+
+∑
+
+> i=0
+
+θ(t − i) (7) The buffer is explicitly flushed whenever the learner leaves the camera frame, preventing a stale hysteresis state from being reported against a zeroed angle. An ergonomic posture deviation is formally confirmed only when ¯θ(t) exceeds empirically calibrated bounds ( θtrunk >25 ◦ or rhead < 0.18 ) continuously for a persistence threshold 
+
+∆t > 5 seconds, preventing false alerts caused by transient body shifts. Angles beyond 45 ◦ are treated as geometrically suspect (a signature of MediaPipe mis-estimation under partial truncation) and are not escalated to a warning. 
+
+C. Finite State Machine (FSM) Session Engine 
+
+The study session supervisor operates as a deterministic finite state machine governed by continuous sensory inputs. Fig. 2 shows the state transition graph.             
+
+> Active Study
+> (Focus Timer Running)
+> Off-Task Warning
+> (Distraction Alert)
+> Rest Break
+> (Postural Recovery)
+> Away / Inactive
+> (Timer Paused)
+> Phone Detected (∆t > 10 s) Phone Stored
+> Tstudy ≥45 min
+> Trest ≥5min No Landmarks (∆t > 60 s) Landmarks Detected Absence After Warning Student Leaves Desk
+> Figure 2. State transition diagram of the session management finite state machine (UML statechart layout).
+
+The FSM comprises four explicit operating modes: 1) Active Study State: Landmark detection confirms user presence, posture angles remain within compliant ranges, and no disallowed objects are detected. The net focus timer increments monotonically. 2) Rest Break State: Triggered after 45 minutes of accu-mulated study time. The system sounds an audible chime and mutes ergonomic alerts for 5 minutes, prompting physical stretches. 3) Away/Inactive State: Initiated when keypoint tracking is lost for longer than ∆taway = 60 seconds, pausing timers to prevent distorted study metrics. 4) Off-Task Warning State: Driven by an EfficientDet-Lite0 object detector executing in a dedicated background thread on subsampled frames (1 frame every 3 seconds). If a smartphone bounding box overlaps the hand-head interaction zone for ∆tdistract > 10 seconds, an alert sounds and off-task duration accumulates. 
+
+D. Asynchronous Detection and Memory-Bounded Inference 
+
+Running the object detector synchronously on the main inference thread is prohibitively expensive on the Cortex-A53. We therefore decouple the two neural workloads: the MediaPipe Pose landmarker executes in the primary vision thread, while EfficientDet-Lite0 runs inside a dedicated daemon thread that consumes only the most recent submitted RGB frame (an overwrite-on-write single-slot queue). The main loop reads the latest available detection result opportunistically, decoupling detection latency from the posture loop entirely. Measured on the deployed prototype, this asynchronous decoupling reduced the effective end-to-end inference latency from 1100 ms to 
+
+290 ms and raised the sustained vision frame rate from 1.2 to 
+
+2.6 frames per second in the full production pipeline. Memory discipline on a 1 GiB platform is equally critical. The hand-landmark sub-model ( 77 MB resident) is instantiated 
+
+lazily , only after a smartphone bounding box is confirmed at a confidence level exceeding the production threshold of 0.55 ;candidate detections below this threshold are rendered as amber bounding boxes without invoking the model. Furthermore, the model is explicitly released once no smartphone candidate has been observed for 120 seconds. Measured resident set size of the complete application process is 320 MB with 230 MiB of system memory remaining available under sustained operation. 
+
+E. Multimodal Socratic AI Tutoring Agent 
+
+To deliver rigorous academic assistance without generating unsolicited direct answers, the interactive tutoring subsystem employs a hybrid edge-cloud pipeline: 1) Acoustic Query Digitization: The learner activates voice input by uttering the wake-word “assistant voice”. The captured audio is streamed to a cloud ASR engine and converted to text. 2) Context Packaging: The transcribed query is bundled with the current session context (accumulated study time, recent posture alerts, task list) into a compact textual payload. 3) Pedagogical Prompt Orchestration: The payload is packaged with an enforced Socratic system prompt and sent to the Gemini API over TLS:              
+
+> “Tro ly hoc tap -Socratic Vietnamese tutor. Answer accurately, concisely, encourage self-learning; if unsure, clarify.”
+
+4) Resilient Model Dispatch: Because the deployed API key encountered genuine transient cloud conditions— HTTP 503 (sustained high demand on the primary model) and HTTP 429 (quota exhaustion)—the dispatcher implements an ordered fallback chain across four Flash-class variants (3.8 → 3.7 → 3.6 → 3.5), retrying with exponential back-off before descending the chain. This design decouples the tutoring subsystem from any single point of failure. 5) Acoustic Delivery: The returned pedagogical hint is vo-calized through the HDMI output using the edge-tts 
+
+cloud synthesizer, with a fully offline espeak-ng 
+
+Vietnamese voice as deterministic fallback. IV. E XPERIMENTAL EVALUATION AND RESULTS 
+
+A. Experimental Configuration 
+
+The physical testbed was evaluated on the deployed pro-totype, comprising the hardware configuration summarized in Table I. The software stack operated on 64-bit Debian GNU/Linux 13 (trixie) with Linux kernel 6.18 .50 , Python 
+
+3.11 .18 (standalone distribution), OpenCV 4.11 .0, MediaPipe 
+
+0.10 .18 (TFLite backend with XNNPACK CPU delegate), and NumPy 1.26 .4. The MediaPipe Pose Lite checkpoint was executed with a float16 quantization delegate and a single-pose configuration. Table I MEASURED TESTBED CONFIGURATION 
+
+Parameter Measured Value 
+
+SoC Broadcom BCM2837, ARM Cortex-A53 (aarch64) CPU Frequency 1400 MHz (nom. max, unthrottled) System Memory 905 MiB LPDDR2 OS Debian 13 (trixie), kernel 6.18 .50 +rpt-rpi-v8 Python 3.11 .18 , OpenCV 4.11 .0, MediaPipe 0.10 .18 
+
+Pose Model pose_landmarker_lite.task (float16) Detector efficientdet_lite0.tflite (async) Camera Jieli UVC 4c4a:4a55 , MJPG, 25 .7 FPS Analysis 352 × 288 pixels Microphone USB PnP, ALSA hw:3,0 , 44100 Hz Audio Out HDMI vc4-hdmi , ALSA hw:0,0 
+
+B. Edge Vision Throughput and Hardware Profiling 
+
+To quantify the effect of capture resolution on the end-to-end pipeline, we instrumented the deployed system across four standard capture dimensions, measuring frame acquisition, rescaling, and landmark inference separately. Results are presented in Table II.                             
+
+> Table II MEASURED LATENCY BREAKDOWN PER FRAME
+> Stage 320×240 640×480 1280×720 1920×1080
+> Frame Acq. (ms) 3.28 ±0.27.78 ±0.319 .98 ±0.642 .68 ±1.1
+> Rescale (ms) 0.44 ±0.01 9.02 ±0.217 .82 ±0.436 .73 ±0.8
+> Color Conv. (ms) 0.41 ±0.01 0.45 ±0.01 0.41 ±0.01 0.41 ±0.01
+> Pose Infer. (ms) 250 .48 ±12 244 .41 ±11 244 .76 ±11 247 .38 ±12
+> FPS 4.0 4.1 4.1 4.0
+
+Two empirically significant conclusions emerge. First, the landmarker inference cost is resolution-independent across a 6× pixel-count range, since the analysis canvas is fixed at 352 × 288 ; consequently, the achievable inference rate is pinned at approximately 4.0–4.1 FPS by the ARM CPU alone, entirely independent of the capture resolution. Second, the camera natively streams at 25 .7 FPS at every resolution, so the acquisition stage consumes only 0.5–3.2% of the frame budget at 320 × 240 . The full production pipeline—which additionally runs the asynchronous EfficientDet-Lite0 detector, the geometric metric engine, temporal smoothing, and SQLite persistence—sustains a measured 2.6 FPS end-to-end with an overall inference latency of 290 .6 ms. Table III reports the resource-footprint evolution across the design phases, documenting the direct engineering benefit of each optimization. The final configuration sustains a 2.6 FPS vision pipeline, an application resident set size of 320 MB, and a peak SoC temper-ature of 58 .0◦C over an 86 -minute continuous operational soak test. The thermal governor implemented in the firmware reads 
+
+/sys/class/thermal/thermal_zone0/temp every 
+
+20 s and dynamically caps cpufreq/scaling_max_freq 
+
+to 900 MHz or 1400 MHz when the SoC exceeds 80 ◦C, guaranteeing safe operation on a passively cooled enclosure.                            
+
+> Table III RESOURCE FOOTPRINT OPTIMIZATION PHASES
+> Metric Baseline Async Det. Lazy Hand Final
+> FPS 1.2 2.6 2.6 2.6 Latency (ms) 1100 290.6 290.6 275.0 RSS (MB) 728 337 219 320 Temp ( ◦C) 63.4 59.6 56.9 58.0 Avail. Mem (MiB) 61 178 233 230
+
+A compressed RAM swap device ( /dev/zram0 , 904 MiB, zstd) absorbs memory pressure without SD-card wear. 
+
+C. Ergonomic Metric Estimation Fidelity 
+
+The geometric accuracy of the ergonomic metric engine was evaluated against 6240 synthetically generated ground-truth poses spanning trunk angles from 0◦ to 55 ◦, head elevations from 0.05 to 0.35 shoulder-widths, coronal shoulder tilts from 
+
+0◦ to 20 ◦, head yaw from 0◦ to 30 ◦, and three distinct body scales. Each pose was evaluated through the exact production code path analyze_posture( ·), and the estimated trunk angle was compared against the imposed ground truth. Results are summarized in Table IV.   
+
+> Table IV ERGONOMIC METRIC ACCURACY
+
+Metric MAE Median P95 Max 
+
+Trunk Angle (deg) 4.39 5.20 5.70 5.70 Head Elevation 0.0744 0.0740 0.1550 0.1570 
+
+Eval: 5760 valid poses (6240 gen; 0 rej) 
+
+The residual 4.39 ◦ mean absolute error is a direct conse-quence of the geometric reconciliation gate in (4): because the 2D projection under a downward-angled camera systematically overestimates flexion, the estimator selects the metric 3D estimate whenever the two disagree by less than 30 ◦, and the 5.70 ◦ ceiling on the error distribution reflects the exact point at which this selection switches. Notably, 50 .0% of all evaluated poses fall within 5◦ of ground truth. The classification decision layer built upon these metrics uses the empirically calibrated decision boundary θtrunk > 25 ◦,a 5-second persistence requirement, and the upper-body-only suppression guard. The 45 ◦ suspect-angle rejection is essential: poses with θtrunk > 45 ◦ are geometrically implausible for genuine slouching and are instead re-classified as compliant, as MediaPipe produces such values only when the trunk is partially truncated by the frame boundary. 
+
+D. Acoustic Subsystem Latency Analysis 
+
+The acoustic feedback path was profiled on the deployed prototype. Table V presents the measured component latencies. Two acoustic engineering findings are worth highlight-ing. First, the PortAudio abstraction cannot negotiate the vc4-hdmi PCM device on this platform, raising 
+
+PaErrorCode -9994 (sample format not supported) for Table V ACOUSTIC SUBSYSTEM LATENCIES 
+
+Component Latency 
+
+Mic capture (2 s) 2961 ms (window-limited) Offline TTS ( espeak-ng ) 806 ms TTS payload (WAV) 54,910 bytes Cloud TTS ( edge-tts ) ≥ 2700 ms (unavailable) 
+
+Offline TTS total 1.58 s (806 ms + playback) 
+
+every format probe; the architecture therefore resolves output devices by attempting raw ALSA playback ( aplay ) before 
+
+PortAudio, eliminating both the failure mode and the associated ALSA log noise. Second, the USB Audio Class driver admits only one concurrent capture stream; the mutual-exclusion lock and suspend/resume primitives on the background recognizer were required to make manual microphone diagnostics possible at all during live operation. V. P RIVACY , S ECURITY , AND ETHICAL CONSIDERATIONS 
+
+The deployment of optical cameras in private domestic environments necessitates strict privacy-by-design guarantees:  
+
+> •
+
+Ephemeral Video Frame Lifecycle: Optical video buffers are retained exclusively within volatile RAM and overwritten after landmark extraction. No raw images or video streams are written to disk storage or transmitted externally.  
+
+> •
+
+Opt-In Academic Ingestion: Transmission to cloud endpoints occurs only upon explicit wake-word initiation by the learner, carrying only the transcribed query and compact session aggregates.  
+
+> •
+
+Zero-Biometric Parental Summaries: The local web dashboard records only non-biometric numerical aggre-gates (e.g., net study minutes, hourly slouch incidents, break adherence percentages), safeguarding adolescent psychological autonomy.  
+
+> •
+
+Encrypted Transport: All outbound API telemetry transmits through TLS tunnels with standard certificate verification, preventing localized network eavesdropping. API credentials are stored locally and are redacted in all diagnostic surfaces.  
+
+> •
+
+On-Device Operation Degradation: Because all pos-ture inference is fully local, the ergonomic monitoring subsystem—the safety-critical component—continues to operate without network connectivity. VI. C ONCLUSION AND FUTURE WORK 
+
+This paper presented an integrated, low-cost embedded ergonomic posture monitoring and AI-assisted home learning system. By executing real-time lightweight computer vision on a single-board computer (Raspberry Pi 3 Model B, 1 GB RAM), the system successfully evaluates upper-body sitting ergonomics, enforces structured sedentary breaks, and detects off-task device usage while preserving household privacy. Concurrently, an on-demand AI agent provides Socratic peda-gogical scaffolding for complex study problems, with a multi-model fallback chain ensuring continuity under adverse cloud conditions. Empirical benchmarks on the physical prototype demonstrate 4.0–4.1 FPS landmark inference at 244 –250 ms per frame, a trunk-angle estimation error of 4.39 ◦ MAE, a 320 MB application footprint, a peak SoC temperature of 58 .0◦C over an 86 -minute soak test, and a 1.58 s offline TTS turnaround. Future extensions will explore the integration of dedicated edge Neural Processing Units (NPUs), such as the Raspberry Pi AI Kit, to support local execution of quantized Small Vision-Language Models (e.g., Moondream, SmolVLM), eliminating cloud API dependence and delivering a fully self-contained edge learning appliance. A further avenue is the extension of the geometric metric engine with a formally validated multi-session dataset annotated by goniometric reference, enabling the reporting of empirical precision, recall, and confusion matrices across the full ergonomic taxonomy rather than geometric reconstruction error alone. REFERENCES [1] C. Lugaresi et al. , “MediaPipe: A framework for building perception pipelines,” arXiv preprint arXiv:1906.08172 , 2019. [2] World Health Organization, WHO Guidelines on Physical Activity and Sedentary Behaviour , Geneva, Switzerland: World Health Organization, 2020. [3] Raspberry Pi Documentation, “Classic single-board computers: Raspberry Pi 3 Model B specifications,” Raspberry Pi Foundation, 2023. [Online]. Available: https://www.raspberrypi.com/documentation/. [4] G. Bradski, “The OpenCV Library,” Dr. Dobb’s Journal of Software Tools , vol. 25, no. 11, pp. 120–123, 2000. [5] G. Jocher, A. Chaurasia, and J. Qiu, “Ultralytics YOLOv8,” 2023. [Online]. Available: https://github.com/ultralytics/ultralytics. [6] TensorFlow Team, “TensorFlow Lite: ML for mobile and edge devices,” Google Open Source. [Online]. Available: https://www.tensorflow.org/lite.

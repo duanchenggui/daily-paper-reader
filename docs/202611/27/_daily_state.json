@@ -1,0 +1,121 @@
+{
+  "date": "20261127",
+  "date_label": "",
+  "generated_at": "2026-11-27 02:47:36 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2611.34042v1",
+      "route": "202611/27/2611.34042v1-too-smart-for-its-own-good-cognitive-fidelity-and-competence-leakage-in-llm-simulations-of-young-learners",
+      "title": "Too Smart for Its Own Good? Cognitive Fidelity and Competence Leakage in LLM Simulations of Young Learners",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "用于教师培训和辅导的LLM学习者模拟器与认知保真",
+      "first_seen_at": "2026-11-27 02:47:36 UTC",
+      "updated_at": "2026-11-27 02:47:36 UTC"
+    },
+    {
+      "paper_id": "2611.34094v1",
+      "route": "202611/27/2611.34094v1-silent-on-code-a-computing-lens-on-generative-ai-guidance-at-canadian-polytechnics-and-research-universities",
+      "title": "Silent on Code? A Computing Lens on Generative AI Guidance at Canadian Polytechnics and Research Universities",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "对高校生成式AI指导文件的文本分析",
+      "first_seen_at": "2026-11-27 02:47:36 UTC",
+      "updated_at": "2026-11-27 02:47:36 UTC"
+    },
+    {
+      "paper_id": "2611.33240v1",
+      "route": "202611/27/2611.33240v1-learning-the-platform-not-the-learner-sequencing-shortcuts-in-the-offline-evaluation-of-educational-recommender-systems-and-llm-rankers",
+      "title": "Learning the Platform, Not the Learner: Sequencing Shortcuts in the Offline Evaluation of Educational Recommender Systems and LLM Rankers",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向辅导系统与MOOC的教育推荐系统及大模型排序器的离线评估",
+      "first_seen_at": "2026-11-27 02:47:36 UTC",
+      "updated_at": "2026-11-27 02:47:36 UTC"
+    },
+    {
+      "paper_id": "2611.33471v1",
+      "route": "202611/27/2611.33471v1-designing-an-integrated-learning-ecosystem-for-introductory-python-programming-scaffolded-problem-solving-tablet-inspired-navigation-and-ai-enhanced-instruction",
+      "title": "Designing an Integrated Learning Ecosystem for Introductory Python Programming: Scaffolded Problem Solving, Tablet-Inspired Navigation, and AI-Enhanced Instruction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向Python课程的AI增强一体化学习生态系统",
+      "first_seen_at": "2026-11-27 02:47:36 UTC",
+      "updated_at": "2026-11-27 02:47:36 UTC"
+    },
+    {
+      "paper_id": "2611.23887v1",
+      "route": "202611/27/2611.23887v1-can-ai-understand-indonesian-childrens-book-illustrations-compliance-safety-and-the-cultural-alignment-gap",
+      "title": "Can AI Understand Indonesian Children's Book Illustrations? Compliance, Safety, and the Cultural Alignment Gap",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "视觉语言模型评估与生成教育儿童书籍插图",
+      "first_seen_at": "2026-11-27 02:47:36 UTC",
+      "updated_at": "2026-11-27 02:47:36 UTC"
+    },
+    {
+      "paper_id": "2611.34669v1",
+      "route": "202611/27/2611.34669v1-an-embedded-ergonomic-posture-monitoring-and-ai-assisted-home-learning-system-on-a-raspberry-pi-3b-edge-platform",
+      "title": "An Embedded Ergonomic Posture Monitoring and AI-Assisted Home Learning System on a Raspberry Pi 3B Edge Platform",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "具备姿态监测与教学支架的嵌入式AI辅助家庭学习系统",
+      "first_seen_at": "2026-11-27 02:47:36 UTC",
+      "updated_at": "2026-11-27 02:47:36 UTC"
+    },
+    {
+      "paper_id": "2611.34823v1",
+      "route": "202611/27/2611.34823v1-the-linguistic-knowledge-benchmark-do-language-models-know-the-foundations-of-early-grade-literacy",
+      "title": "The Linguistic Knowledge Benchmark: Do Language Models Know the Foundations of Early-Grade Literacy?",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "评测语言模型是否掌握早期读写教学基础知识的基准",
+      "first_seen_at": "2026-11-27 02:47:36 UTC",
+      "updated_at": "2026-11-27 02:47:36 UTC"
+    }
+  ]
+}

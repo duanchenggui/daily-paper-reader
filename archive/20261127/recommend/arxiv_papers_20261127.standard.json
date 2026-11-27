@@ -1,0 +1,280 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-11-27T02:45:19.688435+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 2,
+    "deep_cap": 6,
+    "deep_selected": 2,
+    "quick_candidates": 5,
+    "quick_skim_target": 11,
+    "quick_selected": 5
+  },
+  "deep_dive": [
+    {
+      "id": "2611.34042v1",
+      "source": "arxiv",
+      "title": "Too Smart for Its Own Good? Cognitive Fidelity and Competence Leakage in LLM Simulations of Young Learners",
+      "abstract": "LLM-based interactive learner simulators are increasingly used in educational applications, including teacher training and tutoring system development. A critical requirement for those simulations is cognitive fidelity: the simulated learner should maintain the assigned knowledge, misconceptions, and reasoning procedures throughout interaction. However, LLMs may express knowledge or problem-solving skills beyond the assigned learner's cognitive status, a phenomenon we refer to as competence leakage. In this exploratory study, we examine 3,339 simulated learner utterances from 130 teacher-learner simulator transcripts across three learning scenarios and identify over-competence as a prominent direction of cognitive-profile misalignment during interaction. We then investigate the recurrence of previously observed competence leakage cases under four matched-trigger evaluation protocols, ranging from isolated questioning to multi-turn interactions, across five model configurations. Overall, we observe higher violation recurrence under multi-turn protocols than under isolated question answering. More capable models generally show lower recurrence, whereas increased reasoning effort does not consistently improve cognitive fidelity and is even associated with slightly higher recurrence under multi-turn protocols in our matched-model comparison. These findings provide exploratory evidence of competence leakage phenomena in interactive learner simulation and suggest that single-turn question-answering type of evaluations alone may be insufficient, motivating the development of more systematic and reliable multi-turn protocols for evaluating cognitive fidelity in learner simulation.",
+      "authors": [
+        "Zhen Xu",
+        "Beata Beigman Klebanov",
+        "Jamie N. Mikeska"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-11-25T09:22:32+00:00",
+      "link": "https://arxiv.org/pdf/2611.34042v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "LLM learner simulators for teacher training and tutoring; cognitive fidelity",
+      "llm_evidence_cn": "用于教师培训和辅导的LLM学习者模拟器与认知保真",
+      "llm_evidence": "用于教师培训和辅导的LLM学习者模拟器与认知保真",
+      "canonical_evidence": "用于教师培训和辅导的LLM学习者模拟器与认知保真",
+      "llm_tldr_en": "Examines cognitive fidelity in LLM-based learner simulators for teacher training and tutoring, identifying competence leakage where simulated students exceed assigned knowledge; analyzes 3,339 utterances from 130 transcripts across three scenarios.",
+      "llm_tldr_cn": "针对LLM学习者模拟器在教师培训和辅导系统开发中的认知保真问题，文章提出并考察“能力泄漏”现象，即模拟学习者表现出超出设定认知水平的知识或解题能力。研究分析三个学习场景中130份师生模拟对话的3339条话语，发现过度能力是认知保真偏差的突出方向。该工作为教育用LLM模拟器的可信评估与改进提供依据，对AI教育应用有直接意义。",
+      "llm_tldr": "针对LLM学习者模拟器在教师培训和辅导系统开发中的认知保真问题，文章提出并考察“能力泄漏”现象，即模拟学习者表现出超出设定认知水平的知识或解题能力。研究分析三个学习场景中130份师生模拟对话的3339条话语，发现过度能力是认知保真偏差的突出方向。该工作为教育用LLM模拟器的可信评估与改进提供依据，对AI教育应用有直接意义。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2611.34094v1",
+      "source": "arxiv",
+      "title": "Silent on Code? A Computing Lens on Generative AI Guidance at Canadian Polytechnics and Research Universities",
+      "abstract": "Generative artificial intelligence (GenAI) tools now write, explain, and debug code, which changes how computing students learn and how their work is assessed. Instructors, however, act within institutional guidance written largely with essays in mind. We report a document analysis of the public, institution-level GenAI guidance of the 13 members of Polytechnics Canada and the 15 members of the U15 Group of Canadian Research Universities, retrieved in October 2026. Using a 27-item codebook spanning governance, integrity and assessment, data and legal issues, values, AI literacy, and a computing lens, we find that both sectors leave course-level decisions to instructors, although polytechnics more often prohibit use unless the instructor permits it (8 of 13 vs. 4 of 14), and converge on disclosure, links to academic integrity policy, and, in most institutions, the expectation that programs adapt rules to their discipline. Polytechnics frame GenAI as workforce preparation substantively far more often (7 of 13 vs. 0 of 14), whereas universities more often address assessment redesign. Twelve of 27 institutions with retrievable guidance mention code, but almost always as one output type among many; none names an AI coding assistant or provides substantive code-specific guidance on attribution, assessment, or licensing. Institution-level guidance is thus not silent on code but leaves programming-specific questions largely to programs and instructors. We propose five elements of discipline-level guidance for computing and release our codebook and coded dataset.",
+      "authors": [
+        "Marco Ho",
+        "Michael Pin-Chuan Lin",
+        "Rishva Riteshkumar Amin",
+        "Daniel Chang",
+        "Jeeho Ryoo"
+      ],
+      "primary_category": "cs.CY",
+      "categories": [
+        "cs.CY"
+      ],
+      "published": "2026-11-25T10:02:48+00:00",
+      "link": "https://arxiv.org/pdf/2611.34094v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Document analysis of institutional GenAI guidance in higher education",
+      "llm_evidence_cn": "对高校生成式AI指导文件的文本分析",
+      "llm_evidence": "对高校生成式AI指导文件的文本分析",
+      "canonical_evidence": "对高校生成式AI指导文件的文本分析",
+      "llm_tldr_en": "Analyzes public GenAI guidance from Canadian polytechnics and research universities, finding both leave course-level decisions to instructors while rarely addressing computing-specific issues.",
+      "llm_tldr_cn": "针对生成式AI能编写与调试代码、而高校指导文件多按论文写作场景制定这一问题，研究收集加拿大13所理工学院与15所研究型大学公开的校级GenAI指导文件，用涵盖治理、诚信评估、数据法律、价值观与AI素养的27项编码表进行分析。结果显示两类院校均把课程层面决策留给教师，理工学院更常明令禁止某些用途，但对计算类学科的针对性普遍不足。该研究为高校完善生成式AI教学政策提供了实证依据。",
+      "llm_tldr": "针对生成式AI能编写与调试代码、而高校指导文件多按论文写作场景制定这一问题，研究收集加拿大13所理工学院与15所研究型大学公开的校级GenAI指导文件，用涵盖治理、诚信评估、数据法律、价值观与AI素养的27项编码表进行分析。结果显示两类院校均把课程层面决策留给教师，理工学院更常明令禁止某些用途，但对计算类学科的针对性普遍不足。该研究为高校完善生成式AI教学政策提供了实证依据。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2611.33240v1",
+      "source": "arxiv",
+      "title": "Learning the Platform, Not the Learner: Sequencing Shortcuts in the Offline Evaluation of Educational Recommender Systems and LLM Rankers",
+      "abstract": "Educational recommenders are usually compared offline, by how well they predict the next activity in logs of tutoring systems, learning applications and MOOCs, where the next activity is largely decided by the platform: teachers assign problem sets, tutors draw problems until mastery, engines select questions. On eight public datasets from five platforms, we compare four structural predictors, which use nothing about the learner beyond the last activity, with ten personalised recommenders and with open-weight LLM rankers from 0.5 to 7 billion parameters, under two protocols. The structural predictors reach between 0.81 and 1.00 of the best accuracy of any method (median 0.95), mostly through population transitions rather than the course order; the best personalised recommender is significantly better on five datasets, by 0.007 to 0.102 NDCG@10, and on Eedi in three of four training runs. Every method is far less accurate on steps along transitions never seen in training and on steps chosen by learners. LLM rankers look competent with random negatives but are never much better than a word-matching baseline, and with negatives that are plausible under the course structure they stay close to random or well behind the transition heuristic, whatever their size. In a simulation with known learner needs, the structural share tracks the share of steps decided by the platform, and offline accuracy ranks an oracle of the learners' needs below imitators of the platform. Weighting test steps by how unlikely the structure makes them restores much of the link with usefulness and, on the real data, reveals a significant personalisation signal on seven of the eight datasets. We propose a syllabus-aware evaluation checklist and release a Python package that reports the lift of any recommender over the structure.",
+      "authors": [
+        "Youssef Jdidou"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.CY",
+        "cs.LG"
+      ],
+      "published": "2026-11-24T13:48:16+00:00",
+      "link": "https://arxiv.org/pdf/2611.33240v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "offline evaluation of educational recommenders and LLM rankers in tutoring systems and MOOCs",
+      "llm_evidence_cn": "面向辅导系统与MOOC的教育推荐系统及大模型排序器的离线评估",
+      "llm_evidence": "面向辅导系统与MOOC的教育推荐系统及大模型排序器的离线评估",
+      "canonical_evidence": "面向辅导系统与MOOC的教育推荐系统及大模型排序器的离线评估",
+      "llm_tldr_en": "Compares structural predictors with ten personalised educational recommenders and open-weight LLM rankers on eight datasets, showing platform sequencing shortcuts inflate offline accuracy.",
+      "llm_tldr_cn": "教育推荐系统通常在离线日志上比较预测下一学习活动的能力，但下一步活动往往由平台或教师决定，评估因此被结构性捷径主导。作者在五个平台的八个公开数据集上，将仅依赖上一活动的结构预测器与十种个性化推荐器以及0.5B至7B参数的开源大模型排序器进行对比。结果显示结构预测器可达到最佳方法81%至100%的准确率，中位数为95%。研究提醒教育推荐评估需控制平台排序偏差。",
+      "llm_tldr": "教育推荐系统通常在离线日志上比较预测下一学习活动的能力，但下一步活动往往由平台或教师决定，评估因此被结构性捷径主导。作者在五个平台的八个公开数据集上，将仅依赖上一活动的结构预测器与十种个性化推荐器以及0.5B至7B参数的开源大模型排序器进行对比。结果显示结构预测器可达到最佳方法81%至100%的准确率，中位数为95%。研究提醒教育推荐评估需控制平台排序偏差。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "Studies on intelligent tutoring systems, learning analytics, and adaptive learning in open education.",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2611.23887v1",
+      "source": "arxiv",
+      "title": "Can AI Understand Indonesian Children's Book Illustrations? Compliance, Safety, and the Cultural Alignment Gap",
+      "abstract": "Children's book illustrations carry developmental, pedagogical, and cultural responsibilities that are often formally codified in guidelines. As AI systems begin entering children's publishing pipelines, both as evaluators and as generators, a natural question arises: can they reliably meet the structural, safety, and cultural standards required? We investigate this across three criteria: guideline compliance, safety, and cultural alignment, using Indonesia's Book Leveling Guideline as a government-issued evaluation framework with explicit visual criteria for four reading levels. To understand how well VLMs can identify and apply these guideline criteria, we first evaluate them on real published children's book pages and compare their assessments against a human baseline. To then examine whether AI-generated illustrations meet the same standards, we apply the VLM judge to images produced by two generation models and cross-check them against a subset of human illustrator raters. We find that VLMs are reliable on explicit criteria such as compliance and safety, but fall short on cultural alignment, systematically missing content that human raters flag as culturally inappropriate. AI-generated illustrations show the same blind spot: they satisfy structural and safety criteria but fail to capture implicit cultural details that human raters consistently identify.",
+      "authors": [
+        "Rian Adam Rajagede",
+        "Rochana Prih Hastuti",
+        "Fitri Hasanah Amhar"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-11-18T05:40:06+00:00",
+      "link": "https://arxiv.org/pdf/2611.23887v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "VLM evaluation and generation of educational children's book illustrations",
+      "llm_evidence_cn": "视觉语言模型评估与生成教育儿童书籍插图",
+      "llm_evidence": "视觉语言模型评估与生成教育儿童书籍插图",
+      "canonical_evidence": "视觉语言模型评估与生成教育儿童书籍插图",
+      "llm_tldr_en": "Evaluates whether vision-language models can apply Indonesia's children's book leveling guidelines, assessing compliance, safety, and cultural alignment in AI evaluation and generation of educational illustrations.",
+      "llm_tldr_cn": "针对AI进入儿童出版流程后能否满足教育插图的结构、安全与文化标准的问题，文章以印尼图书分级指南为政府评估框架，考察视觉语言模型识别和应用分级标准的能力。研究从合规性、安全性和文化对齐三方面评估模型在真实与生成儿童书籍插图上的表现，揭示文化对齐差距。该工作为教育内容生成与审核中的AI应用提供评估参考，但未直接讨论OER。",
+      "llm_tldr": "针对AI进入儿童出版流程后能否满足教育插图的结构、安全与文化标准的问题，文章以印尼图书分级指南为政府评估框架，考察视觉语言模型识别和应用分级标准的能力。研究从合规性、安全性和文化对齐三方面评估模型在真实与生成儿童书籍插图上的表现，揭示文化对齐差距。该工作为教育内容生成与审核中的AI应用提供评估参考，但未直接讨论OER。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2611.33471v1",
+      "source": "arxiv",
+      "title": "Designing an Integrated Learning Ecosystem for Introductory Python Programming: Scaffolded Problem Solving, Tablet-Inspired Navigation, and AI-Enhanced Instruction",
+      "abstract": "Introductory programming requires students to represent problems, develop and test programs, debug errors, and apply computational ideas in new contexts. In this paper, we present an artifact-centered design analysis of an integrated learning ecosystem developed for a 16-lab introductory Python course. The analyzed corpus comprises 18 instructional artifacts: the course syllabus, a tablet-inspired homepage, and Labs 1-16. We examined course navigation, problem representation, scaffolding, independent transfer, application development, debugging, AI integration, and assessment. All 15 scaffolded labs shared seven elements: input-processing-output (IPO) reasoning, instructor-guided programming, an independent task, a Google Colab/Gradio extension, debugging support, a task checklist, and submission requirements. Lab 16 departed from this structure as an integrative Pygame-based Hallmark Assignment. The analysis identifies four connected design features: a navigation layer that coordinates multiple tools; two forms of transfer, from guided to independent problems and from console programs to interactive interfaces; distinct roles for instructor-side AI-enhanced communication and student-side AI assistance; and a transition from repeated scaffolds to integrative problem solving. The case also identifies unresolved tensions involving tool fragmentation, accessibility, interface distraction, student authorship, and overreliance on AI. Because student learning outcomes were not examined, we make no claims about instructional effectiveness. Instead, the paper offers a transparent design precedent and identifies priorities for future empirical evaluation. Demo - https://xinxingwu-uk.github.io/COS107_Demo/Homepage/index.html Source codes - https://github.com/xinxingwu-uk/Course_Integrated_Learning_Ecosystem",
+      "authors": [
+        "Xinxing Wu",
+        "Johnathan Rogers"
+      ],
+      "primary_category": "cs.CY",
+      "categories": [
+        "cs.CY",
+        "cs.SE"
+      ],
+      "published": "2026-11-24T21:48:15+00:00",
+      "link": "https://arxiv.org/pdf/2611.33471v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "integrated learning ecosystem with AI-enhanced instruction for Python course",
+      "llm_evidence_cn": "面向Python课程的AI增强一体化学习生态系统",
+      "llm_evidence": "面向Python课程的AI增强一体化学习生态系统",
+      "canonical_evidence": "面向Python课程的AI增强一体化学习生态系统",
+      "llm_tldr_en": "Introductory programming demands problem representation, coding, and debugging support. An artifact-centered analysis of 18 course materials in a 16-lab Python course reveals seven shared scaffolding elements and AI-enhanced instruction design.",
+      "llm_tldr_cn": "入门编程学习需要学生完成问题表征、编码测试与调试等多种活动，单一资源难以支撑。作者以制品为中心分析16个实验的Python课程，考察18份教学材料的导航、支架、迁移、调试与AI整合设计。结果显示15个支架式实验共享输入-处理-输出推理等七个共同要素。研究为AI增强的入门编程学习生态提供了可复用的设计框架。",
+      "llm_tldr": "入门编程学习需要学生完成问题表征、编码测试与调试等多种活动，单一资源难以支撑。作者以制品为中心分析16个实验的Python课程，考察18份教学材料的导航、支架、迁移、调试与AI整合设计。结果显示15个支架式实验共享输入-处理-输出推理等七个共同要素。研究为AI增强的入门编程学习生态提供了可复用的设计框架。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2611.34669v1",
+      "source": "arxiv",
+      "title": "An Embedded Ergonomic Posture Monitoring and AI-Assisted Home Learning System on a Raspberry Pi 3B Edge Platform",
+      "abstract": "During independent home study sessions, students frequently sustain improper sitting postures, accumulate excessive sedentary hours, and experience productivity loss from off-task digital distractions. Furthermore, learners often lack real-time pedagogical scaffolding for demanding self-study curricula. To mitigate these ergonomic and instructional challenges, this paper presents an affordable, privacy-preserving cyber-physical embedded system for domestic study spaces. Engineered on a Raspberry Pi 3 Model B (1 GB RAM) paired with a UVC optical camera and a USB condenser microphone, the system executes on-device computer vision utilizing MediaPipe Pose and OpenCV to monitor upper-body alignment, sagittal head inclination, and coronal shoulder asymmetry in real time without persisting raw video streams. A deterministic finite state machine (FSM) quantifies active study durations, enforces health-compliant rest periods, and detects illicit smartphone usage. Simultaneously, an integrated multimodal AI tutoring agent parses voice and text queries via an encrypted API gateway, synthesizing Socratic conceptual hints rather than direct solutions. A lightweight parental web dashboard delivers encrypted session analytics and scheduling configurations. Empirical benchmarks on the physical prototype confirm an end-to-end inference latency of 244-250 ms at a 352x288 resolution (4.0-4.1 FPS), a trunk-angle estimation error of 4.39 degrees MAE over 5,760 synthetic ground-truth poses, a resident set size of 320 MB, a peak SoC temperature of 58.0 degrees Celsius under sustained load, and a 1.58 s total latency for the offline TTS feedback path, proving high practicality for resource-constrained edge deployment.",
+      "authors": [
+        "Truyen T. Le",
+        "Vinh Dang Ngoc",
+        "Thai Bao Huynh"
+      ],
+      "primary_category": "cs.AR",
+      "categories": [
+        "cs.AR"
+      ],
+      "published": "2026-11-25T16:36:19+00:00",
+      "link": "https://arxiv.org/pdf/2611.34669v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Embedded AI-assisted home learning system with posture monitoring and scaffolding",
+      "llm_evidence_cn": "具备姿态监测与教学支架的嵌入式AI辅助家庭学习系统",
+      "llm_evidence": "具备姿态监测与教学支架的嵌入式AI辅助家庭学习系统",
+      "canonical_evidence": "具备姿态监测与教学支架的嵌入式AI辅助家庭学习系统",
+      "llm_tldr_en": "Presents an affordable Raspberry Pi based system using on-device vision to monitor posture, sedentary time and distractions while providing AI-assisted scaffolding for home study.",
+      "llm_tldr_cn": "针对居家自学中学生坐姿不良、久坐过久、分心以及缺乏实时教学支架的问题，研究设计了一套低成本、保护隐私的嵌入式系统，基于树莓派3B搭配摄像头与麦克风，利用MediaPipe与OpenCV在本地进行姿态与头部对齐监测。系统同时提供AI辅助的学习引导，力图在家庭学习场景中兼顾人体工学与教学支持，为可负担的AI学习环境提供了工程实现参考。",
+      "llm_tldr": "针对居家自学中学生坐姿不良、久坐过久、分心以及缺乏实时教学支架的问题，研究设计了一套低成本、保护隐私的嵌入式系统，基于树莓派3B搭配摄像头与麦克风，利用MediaPipe与OpenCV在本地进行姿态与头部对齐监测。系统同时提供AI辅助的学习引导，力图在家庭学习场景中兼顾人体工学与教学支持，为可负担的AI学习环境提供了工程实现参考。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "AI-supported learning environments and educational tools",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2611.34823v1",
+      "source": "arxiv",
+      "title": "The Linguistic Knowledge Benchmark: Do Language Models Know the Foundations of Early-Grade Literacy?",
+      "abstract": "Many languages of instruction in low- and middle-income countries (LMICs) are poorly represented in the data used to train language models. Before these models can support early-grade literacy in such languages, we need to know whether they hold the linguistic knowledge of each language that literacy teaching relies on. To test this, we present the Linguistic Knowledge Benchmark and the reproducible, largely automated pipeline that turns curriculum documents, teacher guides and pupil books into a vetted question set organised on a fixed grid of nine linguistic domains and seven grade levels. The pipeline combines LLM-driven source survey, feature consolidation, item generation and quality control with an item-selection step inspired by item response theory and a final expert review. We instantiate it for Kiswahili (Kenya; 135 items) and English (United Kingdom; 137 items) and evaluate 121 and 119 models respectively. Frontier models exceed 90% accuracy in both languages, but accuracy falls steeply for smaller and cheaper models, and more so in Kiswahili. The two best models under 10 billion parameters reach 91.7% and 73.0% in English but only 51.9% and 40.7% in Kiswahili, and the mean accuracy of models deployable on mobile and tablet hardware is 47% in English against 24% in Kiswahili. The models most practical for low-resource classrooms are therefore the least capable in the languages they would serve. We release a 20-item sample per language, all pipeline prompts, open-source code, and a public leaderboard. This is the first rung of a three-level evaluation ladder for measuring and generating decodable text to support foundational literacy.",
+      "authors": [
+        "Maxime Lelièvre",
+        "Alasdair Mackintosh",
+        "Dominic Andrews",
+        "Tobias Murray",
+        "Moritz Boos",
+        "Oliver G. B. Garrod"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-11-25T18:07:44+00:00",
+      "link": "https://arxiv.org/pdf/2611.34823v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "benchmark testing whether language models know early-grade literacy foundations",
+      "llm_evidence_cn": "评测语言模型是否掌握早期读写教学基础知识的基准",
+      "llm_evidence": "评测语言模型是否掌握早期读写教学基础知识的基准",
+      "canonical_evidence": "评测语言模型是否掌握早期读写教学基础知识的基准",
+      "llm_tldr_en": "Languages of instruction in LMICs are underrepresented in model training data. The Linguistic Knowledge Benchmark and an automated pipeline turn curriculum documents into a vetted question set across nine linguistic domains and seven grades to test models literacy knowledge.",
+      "llm_tldr_cn": "许多中低收入国家的教学语言在语言模型训练数据中代表性不足，模型能否支撑早期读写教学尚不清楚。作者构建语言知识基准，并设计可复现的自动化流水线，将课程文件、教师指南与学生课本转化为覆盖九大语言领域、七个年级的经审核题目集。该基准与流程为系统评估模型的语言教学知识提供了工具，有助于判断其能否用于早期读写教育。",
+      "llm_tldr": "许多中低收入国家的教学语言在语言模型训练数据中代表性不足，模型能否支撑早期读写教学尚不清楚。作者构建语言知识基准，并设计可复现的自动化流水线，将课程文件、教师指南与学生课本转化为覆盖九大语言领域、七个年级的经审核题目集。该基准与流程为系统评估模型的语言教学知识提供了工具，有助于判断其能否用于早期读写教育。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
