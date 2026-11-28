@@ -1,0 +1,41 @@
+{
+  "date": "20261128",
+  "date_label": "",
+  "generated_at": "2026-11-28 02:24:57 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2611.29698v1",
+      "route": "202611/28/2611.29698v1-managing-uncertainty-in-teacher-vibe-coding-a-comparison-of-teacher-and-expert-workflows",
+      "title": "Managing Uncertainty in Teacher Vibe Coding: A Comparison of Teacher and Expert Workflows",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "教师利用自然语言AI编程创作数字教学制品",
+      "first_seen_at": "2026-11-28 02:24:57 UTC",
+      "updated_at": "2026-11-28 02:24:57 UTC"
+    },
+    {
+      "paper_id": "2611.27579v1",
+      "route": "202611/28/2611.27579v1-adesktop-learning-factory-for-smart-and-resilient-manufacturing-based-on-digital-twin-and-ai",
+      "title": "Adesktop learning factory for smart and resilient manufacturing based on digital twin and AI",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "aied-oer"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向工程教育的开源AI与数字孪生学习工厂",
+      "first_seen_at": "2026-11-28 02:24:57 UTC",
+      "updated_at": "2026-11-28 02:24:57 UTC"
+    }
+  ]
+}

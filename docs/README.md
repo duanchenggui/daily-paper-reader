@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-11-27</span>
+      <span class="dpr-home-dashboard-kicker">2026-11-28</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 7 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 2 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>2</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>5</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>2</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-11-27 02:47:36 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-11-28 02:24:57 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,7 +69,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>2026-11-27 日报精选7篇，精读2篇：LLM模拟低龄学习者的认知保真度与能力泄漏、加拿大理工院校生成式AI指导中编码议题的缺位，均获8.0分。最值得关注两点：AI模拟儿童学习者可能“过度聪明”而失真，以及院校AI政策在编程教学上的沉默；普通读者可优先读这两篇精读，再浏览教育推荐系统离线评估的排序捷径与印尼童书插画文化对齐两篇速读。</p>
+<p>今天速读了 2 篇论文，聚焦教师“氛围编程”中的不确定性管理与数字孪生驱动的智能学习工厂。最值得看的是教师与专家在编程工作流上的差异对比（7.0/10）；其次是数字孪生和 AI 如何支撑有韧性的制造学习。普通读者可先看教师编程那篇，重点比较两类工作流在应对不确定性上的差别。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -78,12 +78,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">2 篇</strong>
+    <strong class="dpr-home-dashboard-count">0 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Too Smart for Its Own Good? Cognitive Fidelity and Competence Leakage in LLM Simulations of Young Learners">Too Smart for Its Own Good? Cognitive Fidelity and Competence Leakage in LLM Simulations of Young Learners</span></li><li><span class="dpr-home-dashboard-paper-title" title="Silent on Code? A Computing Lens on Generative AI Guidance at Canadian Polytechnics and Research Universities">Silent on Code? A Computing Lens on Generative AI Guidance at Canadian Polytechnics and Research Universities</span></li></ul>
+<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>2</strong></span></div>
+
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -91,12 +91,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">5 篇</strong>
+    <strong class="dpr-home-dashboard-count">2 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Learning the Platform, Not the Learner: Sequencing Shortcuts in the Offline Evaluation of Educational Recommender Systems and LLM Rankers">Learning the Platform, Not the Learner: Sequencing Shortcuts in the Offline Evaluation of Educational Recommender Systems and LLM Rankers</span></li><li><span class="dpr-home-dashboard-paper-title" title="Designing an Integrated Learning Ecosystem for Introductory Python Programming: Scaffolded Problem Solving, Tablet-Inspired Navigation, and AI-Enhanced Instruction">Designing an Integrated Learning Ecosystem for Introductory Python Programming: Scaffolded Problem Solving, Tablet-Inspired Navigation, and AI-Enhanced Instruction</span></li><li><span class="dpr-home-dashboard-paper-title" title="Can AI Understand Indonesian Children&#x27;s Book Illustrations? Compliance, Safety, and the Cultural Alignment Gap">Can AI Understand Indonesian Children&#x27;s Book Illustrations? Compliance, Safety, and the Cultural Alignment Gap</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Managing Uncertainty in Teacher Vibe Coding: A Comparison of Teacher and Expert Workflows">Managing Uncertainty in Teacher Vibe Coding: A Comparison of Teacher and Expert Workflows</span></li><li><span class="dpr-home-dashboard-paper-title" title="Adesktop learning factory for smart and resilient manufacturing based on digital twin and AI">Adesktop learning factory for smart and resilient manufacturing based on digital twin and AI</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>5</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">aied-oer <strong>2</strong></span></div>
 </section>
 </div>
 

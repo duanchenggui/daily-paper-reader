@@ -1,0 +1,92 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-11-28T02:24:33.108886+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2611.29698v1",
+      "source": "arxiv",
+      "title": "Managing Uncertainty in Teacher Vibe Coding: A Comparison of Teacher and Expert Workflows",
+      "abstract": "Vibe coding, or natural language software development, enables teachers to become creators of digital teaching artifacts. However, novice educators oftentimes face different barriers. This qualitative study examined the workflows of pre-service teachers, in-service teachers, and expert developers through think-aloud protocols. Findings reveal vibe coding operates through a loop of problem framing, development, and verification governed by uncertainty management. Teachers reduced uncertainty by grounding designs in authentic needs: pre-service teachers drew on pedagogical principles, whereas in-service teachers relied on everyday teaching challenges. Conversely, Experts reduced ambiguity by constraining requirements, decomposing artifacts into testable modules, and automating tests. These differences reveal complementary forms of pedagogical, contextual, and technical expertise. Future work may be about supporting nontechnical teachers in developing reliable and educational applications.",
+      "authors": [
+        "Jiaju Lin",
+        "Ellen Wenting Zou"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-11-22T18:58:19+00:00",
+      "link": "https://arxiv.org/pdf/2611.29698v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "teachers using natural-language AI coding to create digital teaching artifacts",
+      "llm_evidence_cn": "教师利用自然语言AI编程创作数字教学制品",
+      "llm_evidence": "教师利用自然语言AI编程创作数字教学制品",
+      "canonical_evidence": "教师利用自然语言AI编程创作数字教学制品",
+      "llm_tldr_en": "Qualitative think-aloud study comparing pre-service teachers, in-service teachers and expert developers in vibe coding, showing uncertainty management drives teacher workflows.",
+      "llm_tldr_cn": "自然语言氛围编程让教师能自行创作数字教学制品，但新手常遇到不同障碍。作者用有声思维协议比较职前教师、在职教师与专家开发者的工作流程。结果显示氛围编程是问题框定、开发与验证的循环，由不确定性管理驱动，教师依据真实教学需求降低不确定性。研究为支持教师AI编程提供设计启示。",
+      "llm_tldr": "自然语言氛围编程让教师能自行创作数字教学制品，但新手常遇到不同障碍。作者用有声思维协议比较职前教师、在职教师与专家开发者的工作流程。结果显示氛围编程是问题框定、开发与验证的循环，由不确定性管理驱动，教师依据真实教学需求降低不确定性。研究为支持教师AI编程提供设计启示。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "generative artificial intelligence in teaching and educational content creation",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2611.27579v1",
+      "source": "arxiv",
+      "title": "Adesktop learning factory for smart and resilient manufacturing based on digital twin and AI",
+      "abstract": "Learning factories have been increasingly applied in engineering research and education. In this paper, we develop a small-scale, low-cost, fully open-sourced learning factory that leverages AI and digital twins to demonstrate smart and resilient manufacturing. The learning factory consists of an AGV, three robots, two conveyors and their digital twins. Three typical use cases are designed to demonstrate the capabilities of the learning factory, i.e., material sorting through computer vision-based robot control, coordinating AGV, robots and conveyors for assembly, and digital twin-driven predictive maintenance. The results show that the developed learning factory can adequately support the teaching and research activities on digital twins and AI on manufacturing. Its fully open-source architecture and relatively low deployment cost make it an ideal solution for universities and research institutions.",
+      "authors": [
+        "Wenxuan Hu",
+        "Zhuoxuan Cao",
+        "Achraf El Messaoudi",
+        "Peilin Li",
+        "Zhiguo Zeng"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-11-20T13:13:41+00:00",
+      "link": "https://arxiv.org/pdf/2611.27579v1",
+      "tags": [
+        "keyword:aied-oer",
+        "query:aied-oer"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "open-sourced AI and digital twin learning factory for engineering education",
+      "llm_evidence_cn": "面向工程教育的开源AI与数字孪生学习工厂",
+      "llm_evidence": "面向工程教育的开源AI与数字孪生学习工厂",
+      "canonical_evidence": "面向工程教育的开源AI与数字孪生学习工厂",
+      "llm_tldr_en": "A small-scale, low-cost, fully open-source desktop learning factory with an AGV, three robots, conveyors and digital twins uses AI and digital twins to demonstrate smart resilient manufacturing across three use cases, supporting teaching and research.",
+      "llm_tldr_cn": "工程教育中的学习工厂往往成本高、难以复制，限制了其在教学中的推广。作者搭建了一个小型、低成本、完全开源的桌面学习工厂，由AGV、三台机器人、两条传送带及其数字孪生构成，结合AI与数字孪生演示智能韧性制造。研究设计了基于计算机视觉的物料分拣、AGV与机器人协同装配、数字孪生驱动预测性维护三个用例。结果表明该平台能有效支撑数字化制造的教学与科研活动，为工程教育提供可复制的开放实践平台。",
+      "llm_tldr": "工程教育中的学习工厂往往成本高、难以复制，限制了其在教学中的推广。作者搭建了一个小型、低成本、完全开源的桌面学习工厂，由AGV、三台机器人、两条传送带及其数字孪生构成，结合AI与数字孪生演示智能韧性制造。研究设计了基于计算机视觉的物料分拣、AGV与机器人协同装配、数字孪生驱动预测性维护三个用例。结果表明该平台能有效支撑数字化制造的教学与科研活动，为工程教育提供可复制的开放实践平台。",
+      "llm_tags": [
+        "query:aied-oer"
+      ],
+      "matched_query_tag": "query:aied-oer",
+      "matched_query_text": "research on artificial intelligence applications in education and learning",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
